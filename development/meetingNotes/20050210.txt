@@ -1,0 +1,76 @@
+2/10 Agenda:
+
+        Purpose and objectives:
+            discuss status/priorities in WTP Editing with "extended team"
+
+            Invitees:
+            David Williams, lead, models, contentTypes, encoding
+            Jens Lukowski, Innoopract, Germany ... example editor, XML table-graph page
+            Craig Salter, IBM, schema and validation
+            Dave Carlson, xml modeling, in boulder, co
+            Amy Wu, editing in general, preferences, accessibility, NL, icons
+            Phil Avery, JSP's "as you type" validation
+            Nitin Dahyabhai, parsing, editing in general
+
+        EclipseCon:
+            sprint session:
+            topics:
+                overview: WTP, editing
+
+
+        Jens ... can we get example editor into CVS?
+
+        New in M3:
+            "open On" migrated to base support
+
+        XML Validation:
+             unified implementation (based on xerces validation
+             and heuristics to tie to location and offsets
+
+
+===============
+
+Attendees:
+        David, Amy, Nitin, Phil, Jens
+
+
+Notes on M3 Milestone Plan
+
+        JSP taglib -- remove/defer flexible project tie-in
+
+        CSS Validation - Jens will look at
+
+        Folding -- won't complete, maybe work-in-progress
+
+        Documentation, API ... clarify first drafts for M3
+
+        TODO: need to get examples built as part of SDK build
+                (probably an M4 item, may take custom build scripts?
+
+        Jens will create bugzilla with example cheatsheet editor as zip file,
+                to be checked into xml examples
+
+------
+
+
+EclispeCon Sprint Session:
+
+        overview -- philosopfy and goals
+                model manager
+                parsers/models (e.g. not strict XML)
+
+        Jens - cheat sheet editor
+
+        mutipage editors -- Nitin.
+
+        validation and source page validation - ?
+
+        -- adapter factories? too complex for sprint session, and
+           probably want to limit exposure since some behavior is not settled
+
+        breakpoint support? - will not be API
+
+        Snippets view? - does need to be API
+
+
+-- next meeting, look to change time to 11 so 6 hour time diff isn't so great.
