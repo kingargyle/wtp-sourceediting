@@ -13,7 +13,9 @@ package org.eclipse.wst.javascript.ui.views.contentoutline;
 import java.text.Collator;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -36,6 +38,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.wst.javascript.common.ui.ContentElement;
 import org.eclipse.wst.javascript.common.ui.ContentElementComparerImpl;
@@ -218,6 +222,8 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 	private PropertyChangeUpdateActionContributionItem fToggleLinkItem;
 	protected TreeViewer fTreeViewer = null;
 	protected SimpleViewerSelectionManagerImpl fViewerSelectionManager = null;
+	private boolean fContextMenuRegistered = false;
+	private MenuManager fContextMenu = null;
 
 	public JSContentOutlinePage(IDocument document, ISourceViewer sourceViewer) {
 		setDocument(document);
@@ -226,6 +232,13 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 
 	protected void contextMenuAboutToShow(IMenuManager menuManager) {
 		menuManager.add(fDeleteAction);
+		IContributionItem[] items = menuManager.getItems();
+		if (items.length > 0 && items[items.length - 1].getId() != null) {
+			menuManager.insertAfter(items[items.length - 1].getId(), new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+		}
+		else {
+			menuManager.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+		}
 	}
 
 	public void createControl(Composite parent) {
@@ -240,20 +253,16 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		if (fDocument != null)
 			fDocument.addDocumentListener(this);
 
-		MenuManager menuManager = new MenuManager("#popup"); //$NON-NLS-1$
-		menuManager.setRemoveAllWhenShown(true);
-		menuManager.addMenuListener(new IMenuListener() {
+		fContextMenu = new MenuManager("#popup"); //$NON-NLS-1$
+		fContextMenu.setRemoveAllWhenShown(true);
+		fContextMenu.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager menuManager) {
 				contextMenuAboutToShow(menuManager);
 			}
 		});
-		Menu menu = menuManager.createContextMenu(fTreeViewer.getTree());
+		Menu menu = fContextMenu.createContextMenu(fTreeViewer.getTree());
 		fTreeViewer.getTree().setMenu(menu);
-
-		IEditorPart ownerEditor = getSite().getWorkbenchWindow().getActivePage().getActiveEditor();
-		if (ownerEditor != null) {
-			getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + "#outlinecontext", menuManager, this);
-		}
+		registerContextMenu();
 	}
 
 	protected void createTreeViewer(Composite parent) {
@@ -339,6 +348,19 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		return fViewerSelectionManager;
 	}
 
+	void registerContextMenu() {
+		if (!fContextMenuRegistered && getTreeViewer() != null && getTreeViewer().getControl() != null) {
+			IWorkbenchPage page = getSite().getWorkbenchWindow().getActivePage();
+			if (page != null) {
+				IEditorPart ownerEditor = page.getActiveEditor();
+				if (ownerEditor != null) {
+					fContextMenuRegistered = true;
+					getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + "#outlinecontext", fContextMenu, this);
+				}
+			}
+		}
+	}
+
 	public void setActionBars(IActionBars actionBars) {
 		super.setActionBars(actionBars);
 
@@ -361,6 +383,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		actionBars.getMenuManager().add(fToggleLinkItem);
 		actionBars.getMenuManager().add(fShowHierarchyItem);
 		actionBars.getMenuManager().add(fShowVariablesItem);
+
 	}
 
 	public void setDocument(IDocument document) {
