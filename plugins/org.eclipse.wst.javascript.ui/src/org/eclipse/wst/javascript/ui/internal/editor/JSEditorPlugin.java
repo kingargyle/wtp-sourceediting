@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.wst.javascript.ui.internal.editor;
 
-import org.eclipse.core.runtime.IPluginDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.wst.sse.ui.registry.AdapterFactoryRegistry;
 import org.eclipse.wst.sse.ui.registry.AdapterFactoryRegistryImpl;
@@ -21,8 +20,8 @@ public class JSEditorPlugin extends AbstractUIPlugin {
 
 	protected static JSEditorPlugin instance = null;
 
-	public JSEditorPlugin(IPluginDescriptor descriptor) {
-		super(descriptor);
+	public JSEditorPlugin() {
+		super();
 		instance = this;
 	}
 

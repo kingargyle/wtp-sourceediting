@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
@@ -63,7 +62,6 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.ui.ide.IDEActionFactory;
 import org.eclipse.ui.part.IShowInTargetList;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.DefaultRangeIndicator;
 import org.eclipse.ui.texteditor.IAbstractTextEditorHelpContextIds;
@@ -366,7 +364,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * @return IPreferenceStore
 	 */
 	private IPreferenceStore createCombinedPreferenceStore() {
-		IPreferenceStore sseEditorPrefs = ((AbstractUIPlugin) Platform.getPlugin(EditorPlugin.ID)).getPreferenceStore();
+		IPreferenceStore sseEditorPrefs = EditorPlugin.getDefault().getPreferenceStore();
 		IPreferenceStore baseEditorPrefs = EditorsUI.getPreferenceStore();
 		return new ChainedPreferenceStore(new IPreferenceStore[]{sseEditorPrefs, baseEditorPrefs});
 	}

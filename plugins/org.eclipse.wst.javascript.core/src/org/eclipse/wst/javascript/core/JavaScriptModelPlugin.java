@@ -7,72 +7,15 @@
  * 
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     
  *******************************************************************************/
 package org.eclipse.wst.javascript.core;
 
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPluginDescriptor;
-import org.eclipse.core.runtime.Plugin;
+import org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin;
 
 /**
- * The main plugin class to be used in the desktop.
+ * @deprecated use internal JavaScriptModelPlugin
  */
-public class JavaScriptModelPlugin extends Plugin {
-	//The shared instance.
-	private static JavaScriptModelPlugin plugin;
-	//Resource bundle.
-	private ResourceBundle resourceBundle;
+public class JavaScriptModelPlugin extends JavaScriptCorePlugin {
 
-	/**
-	 * The constructor.
-	 */
-	public JavaScriptModelPlugin(IPluginDescriptor descriptor) {
-		super(descriptor);
-		plugin = this;
-		try {
-			resourceBundle = ResourceBundle.getBundle("org.eclipse.wst.javascript.core.JavascriptPluginResources"); //$NON-NLS-1$
-		}
-		catch (MissingResourceException x) {
-			resourceBundle = null;
-		}
-	}
-
-	/**
-	 * Returns the shared instance.
-	 */
-	public static JavaScriptModelPlugin getDefault() {
-		return plugin;
-	}
-
-	/**
-	 * Returns the workspace instance.
-	 */
-	public static IWorkspace getWorkspace() {
-		return ResourcesPlugin.getWorkspace();
-	}
-
-	/**
-	 * Returns the string from the plugin's resource bundle,
-	 * or 'key' if not found.
-	 */
-	public static String getResourceString(String key) {
-		ResourceBundle bundle = JavaScriptModelPlugin.getDefault().getResourceBundle();
-		try {
-			return bundle.getString(key);
-		}
-		catch (MissingResourceException e) {
-			return key;
-		}
-	}
-
-	/**
-	 * Returns the plugin's resource bundle,
-	 */
-	public ResourceBundle getResourceBundle() {
-		return resourceBundle;
-	}
 }
