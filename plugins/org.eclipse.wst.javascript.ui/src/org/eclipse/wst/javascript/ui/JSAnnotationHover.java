@@ -346,7 +346,7 @@ public class JSAnnotationHover implements IAnnotationHover {
 			Object o = e.next();
 			if (o instanceof Annotation) {
 				Annotation a = (Annotation) o;
-				Position position = model.getPosition((Annotation) a);
+				Position position = model.getPosition(a);
 				if (position == null)
 					continue;
 
