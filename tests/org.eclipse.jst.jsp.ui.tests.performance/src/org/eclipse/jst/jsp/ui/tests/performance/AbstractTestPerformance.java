@@ -32,8 +32,8 @@ import org.eclipse.wst.sse.core.IStructuredModel;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.PropagatingAdapter;
 import org.eclipse.wst.sse.core.modelhandler.EmbeddedTypeHandler;
-import org.eclipse.wst.xml.core.document.DOMDocument;
-import org.eclipse.wst.xml.core.document.DOMModel;
+import org.eclipse.wst.xml.core.document.IDOMDocument;
+import org.eclipse.wst.xml.core.document.IDOMModel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -154,8 +154,8 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 	 */
 	protected int countEmbeddedFactories(Document document) {
 		int result = 0;
-		if (document instanceof DOMDocument) {
-			DOMDocument xmlDocument = (DOMDocument) document;
+		if (document instanceof IDOMDocument) {
+			IDOMDocument xmlDocument = (IDOMDocument) document;
 			PageDirectiveAdapter pageDirectiveAdapter = (PageDirectiveAdapter) ((INodeNotifier) xmlDocument).getExistingAdapter(PageDirectiveAdapter.class);
 			if (pageDirectiveAdapter != null) {
 				EmbeddedTypeHandler embeddedHandler = pageDirectiveAdapter.getEmbeddedType();
@@ -198,8 +198,8 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 	 */
 	protected int countPropatingFactories(Document document) {
 		int result = 0;
-		if (document instanceof DOMDocument) {
-			PropagatingAdapter pAdapter = (PropagatingAdapter) ((DOMDocument) document).getAdapterFor(PropagatingAdapter.class);
+		if (document instanceof IDOMDocument) {
+			PropagatingAdapter pAdapter = (PropagatingAdapter) ((IDOMDocument) document).getAdapterFor(PropagatingAdapter.class);
 			result = pAdapter.getAdaptOnCreateFactories().size();
 		}
 		return result;
@@ -238,7 +238,7 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 			startMeasuring();
 			if (testStructuredModel) {
 				model = modelManager.getModelForEdit(filename, inStream, null);
-				document = ((DOMModel) model).getDocument();
+				document = ((IDOMModel) model).getDocument();
 			}
 			else {
 				DocumentProvider provider = new DocumentProvider();

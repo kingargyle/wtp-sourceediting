@@ -50,8 +50,8 @@ import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.ui.extension.IExtendedSimpleEditor;
 import org.eclipse.wst.sse.ui.internal.ViewerSelectionManager;
-import org.eclipse.wst.xml.core.document.DOMElement;
-import org.eclipse.wst.xml.core.document.DOMModel;
+import org.eclipse.wst.xml.core.document.IDOMElement;
+import org.eclipse.wst.xml.core.document.IDOMModel;
 import org.eclipse.wst.xml.ui.internal.tabletree.XMLTableTreeViewer;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -486,12 +486,12 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 		List removalRegions = new ArrayList(2);
 		try {
 			editModel = StructuredModelManager.getModelManager().getExistingModelForRead(editDocument);
-			if (editModel != null && editModel instanceof DOMModel) {
-				Document document = ((DOMModel) editModel).getDocument();
+			if (editModel != null && editModel instanceof IDOMModel) {
+				Document document = ((IDOMModel) editModel).getDocument();
 				// remove meta tags specifying encoding as required by Browser API
 				NodeList metaElements = document.getElementsByTagName(HTML40Namespace.ElementName.META);
 				for (int i = 0; i < metaElements.getLength(); i++) {
-					DOMElement meta = (DOMElement) metaElements.item(i);
+					IDOMElement meta = (IDOMElement) metaElements.item(i);
 					if (insertOffset == 0)
 						insertOffset = meta.getStartOffset();
 					insertOffset = Math.max(0, Math.min(insertOffset, meta.getStartOffset()));
@@ -505,7 +505,7 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 				// remove existing base elements with hrefs so we can add one for the local location
 				NodeList baseElements = document.getElementsByTagName(HTML40Namespace.ElementName.BASE);
 				for (int i = 0; i < baseElements.getLength(); i++) {
-					DOMElement base = (DOMElement) baseElements.item(i);
+					IDOMElement base = (IDOMElement) baseElements.item(i);
 					if (insertOffset == 0)
 						insertOffset = base.getStartOffset();
 					insertOffset = Math.max(0, Math.min(insertOffset, base.getStartOffset()));
@@ -527,10 +527,10 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 			}
 
 			if (insertOffset == 0) {
-				Document document = ((DOMModel) editModel).getDocument();
+				Document document = ((IDOMModel) editModel).getDocument();
 				NodeList headElements = document.getElementsByTagName(HTML40Namespace.ElementName.HEAD);
 				if (headElements.getLength() > 0) {
-					DOMElement head = (DOMElement) headElements.item(0);
+					IDOMElement head = (IDOMElement) headElements.item(0);
 					if (head.getStartStructuredDocumentRegion() != null) {
 						insertOffset = head.getStartStructuredDocumentRegion().getEndOffset();
 					}
