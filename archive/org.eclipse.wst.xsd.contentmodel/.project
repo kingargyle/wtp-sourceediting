@@ -3,13 +3,6 @@
 	<name>org.eclipse.wst.xsd.contentmodel</name>
 	<comment></comment>
 	<projects>
-		<project>com.ibm.base.extensions</project>
-		<project>com.ibm.etools.contentmodel</project>
-		<project>org.eclipse.core.boot</project>
-		<project>org.eclipse.core.runtime</project>
-		<project>org.eclipse.core.runtime.compatibility</project>
-		<project>org.eclipse.emf.ecore</project>
-		<project>org.eclipse.xsd</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -24,11 +17,6 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.pde.SchemaBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>com.ibm.etools.validation.validationbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
