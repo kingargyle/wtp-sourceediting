@@ -35,5 +35,4 @@ public class ContentTypeIdForJavaScript {
 	static String getConstantString() {
 		return "org.eclipse.wst.javascript.core.javascriptsource"; //$NON-NLS-1$
 	}
-
 }
