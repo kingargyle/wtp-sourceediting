@@ -13,7 +13,7 @@ package org.eclipse.wst.xml.examples.cs.ui.views.contentoutline;
 
 
 
-import org.eclipse.wst.sse.core.AdapterFactory;
+import org.eclipse.wst.sse.core.IAdapterFactory;
 import org.eclipse.wst.sse.core.INodeAdapter;
 import org.eclipse.wst.sse.core.INodeNotifier;
 import org.eclipse.wst.sse.ui.views.contentoutline.IJFaceNodeAdapter;
@@ -71,7 +71,7 @@ public class JFaceNodeAdapterFactoryForCS extends JFaceNodeAdapterFactory {
 	}
 
 
-	public AdapterFactory copy() {
+	public IAdapterFactory copy() {
 		return new JFaceNodeAdapterFactoryForCS(this.adapterKey, this.shouldRegisterAdapter);
 	}
 }
