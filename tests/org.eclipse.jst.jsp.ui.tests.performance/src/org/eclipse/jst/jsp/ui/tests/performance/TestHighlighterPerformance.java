@@ -19,7 +19,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jst.jsp.core.internal.text.rules.StructuredTextPartitionerForJSP;
-import org.eclipse.jst.jsp.ui.style.LineStyleProviderForJSP;
+import org.eclipse.jst.jsp.ui.internal.style.LineStyleProviderForJSP;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.test.performance.PerformanceTestCase;
 import org.eclipse.wst.css.core.internal.text.rules.StructuredTextPartitionerForCSS;
