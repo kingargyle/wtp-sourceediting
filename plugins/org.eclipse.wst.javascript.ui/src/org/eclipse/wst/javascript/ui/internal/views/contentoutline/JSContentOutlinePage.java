@@ -52,8 +52,8 @@ import org.eclipse.wst.javascript.ui.internal.editor.SimpleViewerSelectionManage
 import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.ui.edit.util.SharedEditorPluginImageHelper;
 import org.eclipse.wst.sse.ui.internal.ViewerSelectionManager;
-import org.eclipse.wst.sse.ui.views.contentoutline.PropertyChangeUpdateAction;
-import org.eclipse.wst.sse.ui.views.contentoutline.PropertyChangeUpdateActionContributionItem;
+import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateAction;
+import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateActionContributionItem;
 
 public class JSContentOutlinePage extends ContentOutlinePage implements IDocumentListener {
 	protected class SortAction extends PropertyChangeUpdateAction {

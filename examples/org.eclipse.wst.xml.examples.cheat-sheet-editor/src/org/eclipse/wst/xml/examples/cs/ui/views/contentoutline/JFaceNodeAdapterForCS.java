@@ -14,8 +14,8 @@ package org.eclipse.wst.xml.examples.cs.ui.views.contentoutline;
 import java.util.ArrayList;
 
 import org.eclipse.wst.sse.core.IAdapterFactory;
-import org.eclipse.wst.sse.ui.views.contentoutline.IJFaceNodeAdapter;
-import org.eclipse.wst.xml.ui.views.contentoutline.JFaceNodeAdapter;
+import org.eclipse.wst.sse.ui.internal.contentoutline.IJFaceNodeAdapter;
+import org.eclipse.wst.xml.ui.internal.contentoutline.JFaceNodeAdapter;
 import org.w3c.dom.Node;
 
 

@@ -19,8 +19,8 @@ import org.eclipse.wst.sse.core.FactoryRegistry;
 import org.eclipse.wst.sse.core.IAdapterFactory;
 import org.eclipse.wst.sse.core.IStructuredModel;
 import org.eclipse.wst.sse.core.modelhandler.IDocumentTypeHandler;
+import org.eclipse.wst.sse.ui.internal.contentoutline.IJFaceNodeAdapter;
 import org.eclipse.wst.sse.ui.util.Assert;
-import org.eclipse.wst.sse.ui.views.contentoutline.IJFaceNodeAdapter;
 import org.eclipse.wst.xml.core.internal.contentmodel.modelquery.CMDocumentManager;
 import org.eclipse.wst.xml.core.internal.contentmodel.modelquery.ModelQuery;
 import org.eclipse.wst.xml.core.internal.modelquery.ModelQueryUtil;
@@ -28,8 +28,8 @@ import org.eclipse.wst.xml.examples.cs.core.modelhandler.ModelHandlerForCS;
 import org.eclipse.wst.xml.examples.cs.ui.views.contentoutline.JFaceNodeAdapterFactoryForCS;
 import org.eclipse.wst.xml.ui.DOMObserver;
 import org.eclipse.wst.xml.ui.internal.preferences.XMLUIPreferenceNames;
+import org.eclipse.wst.xml.ui.internal.properties.XMLPropertySourceAdapterFactory;
 import org.eclipse.wst.xml.ui.registry.AdapterFactoryProviderForXML;
-import org.eclipse.wst.xml.ui.views.properties.XMLPropertySourceAdapterFactory;
 
 
 /**

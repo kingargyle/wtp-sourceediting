@@ -16,10 +16,10 @@ package org.eclipse.wst.xml.examples.cs.ui.views.contentoutline;
 import org.eclipse.wst.sse.core.IAdapterFactory;
 import org.eclipse.wst.sse.core.INodeAdapter;
 import org.eclipse.wst.sse.core.INodeNotifier;
-import org.eclipse.wst.sse.ui.views.contentoutline.IJFaceNodeAdapter;
+import org.eclipse.wst.sse.ui.internal.contentoutline.IJFaceNodeAdapter;
 import org.eclipse.wst.xml.core.internal.contentmodel.modelquery.ModelQuery;
 import org.eclipse.wst.xml.core.internal.ssemodelquery.ModelQueryAdapter;
-import org.eclipse.wst.xml.ui.views.contentoutline.JFaceNodeAdapterFactory;
+import org.eclipse.wst.xml.ui.internal.contentoutline.JFaceNodeAdapterFactory;
 
 /**
  * An adapter factory to create JFaceNodeAdapters.  Use this
