@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.eclipse.wst.javascript.ui"
+   name="%SSE_JavaScript_Source_Editor.name"
+   version="1.0.0"
+   provider-name="IBM"
+   class="org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin">
+
+   <runtime>
+      <library name="jseditor.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+   <requires>
+      <import plugin="org.eclipse.core.runtime.compatibility"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.wst.sse.ui"/>
+      <import plugin="org.eclipse.wst.sse.core"/>
+      <import plugin="org.eclipse.wst.javascript.core"/>
+      <import plugin="org.eclipse.wst.javascript.common.ui"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.wst.common.encoding"/>
+   </requires>
+
+<!-- define editors -->
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="%JavaScript_Source_Page_Editor.name"
+            icon="icons/sourceEditor.gif"
+            extensions="js"
+            contributorClass="org.eclipse.wst.javascript.ui.actions.ActionContributorJS"
+            class="org.eclipse.wst.javascript.ui.JSEditor"
+            symbolicFontName="org.eclipse.wst.sse.ui.textfont"
+            id="org.eclipse.wst.javascript.ui.JSEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="%JavaScript_Editor.name"
+            default="true"
+            icon="icons/javascript.gif"
+            extensions="js"
+            contributorClass="org.eclipse.wst.javascript.ui.actions.MultiPageEditorActionBarContributorJS"
+            class="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart"
+            symbolicFontName="org.eclipse.wst.sse.ui.textfont"
+            id="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart">
+      </editor>
+   </extension>
+   
+<!-- editor actionsets -->
+   <extension
+         point="org.eclipse.ui.actionSetPartAssociations">
+      <actionSetPartAssociation
+            targetID="org.eclipse.ui.edit.text.actionSet.annotationNavigation">
+         <part
+               id="org.eclipse.wst.javascript.ui.JSEditor">
+         </part>
+         <part
+               id="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart">
+         </part>
+      </actionSetPartAssociation>
+      <actionSetPartAssociation
+            targetID="org.eclipse.ui.NavigateActionSet">
+         <part
+               id="org.eclipse.wst.javascript.ui.JSEditor">
+         </part>
+         <part
+               id="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart">
+         </part>
+      </actionSetPartAssociation>
+   </extension>
+
+<!-- contribute the Edit Preferences action (does not inherit extended editor contributions from StructuredTextEditor) -->
+   <extension
+         point="org.eclipse.wst.sse.ui.extendedEditorActions">
+      <editorContribution
+            targetID="org.eclipse.wst.javascript.ui.JSeditor"
+            id="org.eclipse.wst.javascript.ui.extendedActions">
+         <action
+               popupmenuPath="group.add"
+               class="org.eclipse.wst.sse.ui/org.eclipse.wst.sse.ui.preferences.ui.EditStructuredTextEditorPreferencesAction"
+               id="org.eclipse.wst.sse.ui.preferences.ui.EditStructuredTextEditorPreferencesAction">
+         </action>
+      </editorContribution>
+      <editorContribution
+            targetID="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart.source"
+            id="org.eclipse.wst.javascript.ui.extendedActions">
+         <action
+               popupmenuPath="group.add"
+               class="org.eclipse.wst.sse.ui/org.eclipse.wst.sse.ui.preferences.ui.EditStructuredTextEditorPreferencesAction"
+               id="org.eclipse.wst.sse.ui.preferences.ui.EditStructuredTextEditorPreferencesAction">
+         </action>
+      </editorContribution>
+   </extension>
+
+   <extension
+         point="org.eclipse.wst.sse.ui.extendedconfiguration">
+      <preferencepages
+            preferenceids="org.eclipse.wst.sse.ui.preferences/org.eclipse.wst.sse.javascript.preferences"
+            target="org.eclipse.wst.javascript.core.javascriptsource">
+      </preferencepages>
+   </extension>
+   
+<!-- use a modified annotation model for all JavaScript source files -->
+   <extension
+      point="org.eclipse.core.filebuffers.annotationModelCreation">
+      <factory
+            extensions="js"
+            contentTypeId="org.eclipse.wst.javascript.core.javascriptsource"
+            class="org.eclipse.wst.sse.ui/org.eclipse.wst.sse.ui.StructuredResourceMarkerAnnotationModelFactory">
+      </factory>
+   </extension>
+
+<!-- Drag and drop handling -->
+   <extension
+         point="org.eclipse.wst.sse.ui.dropTargetTransfers">
+      <dropTargetContribution
+            targetID="org.eclipse.wst.javascript.core.javascriptsource"
+            id="org.eclipse.wst.javascript.ui.extendedTransfers">
+         <transfer
+               priority="mid"
+               singleton="true"
+               class="org.eclipse.swt.dnd.FileTransfer"
+               method="getInstance"
+               id="org.eclipse.swt.dnd.FileTransfer">
+         </transfer>
+         <dropAction
+               class="org.eclipse.wst.sse.ui.extension.FileDropAction"
+               transferID="org.eclipse.swt.dnd.FileTransfer"
+               id="org.eclipse.wst.sse.ui.extension.FileDropAction">
+         </dropAction>
+         <transfer
+               priority="low"
+               singleton="true"
+               class="org.eclipse.swt.dnd.TextTransfer"
+               method="getInstance"
+               id="org.eclipse.swt.dnd.TextTransfer">
+         </transfer>
+         <dropAction
+               class="org.eclipse.wst.sse.ui.extension.TextDropAction"
+               transferID="org.eclipse.swt.dnd.TextTransfer"
+               id="org.eclipse.wst.sse.ui.extension.TextDropAction">
+         </dropAction>
+      </dropTargetContribution>
+   </extension>
+
+</plugin>
