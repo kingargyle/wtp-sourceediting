@@ -4,7 +4,7 @@
    id="org.eclipse.wst.javascript.core"
    name="%Structured_Source_JavaScript_Model.name"
    version="1.0.0"
-   provider-name="IBM"
+   provider-name="Eclipse.org"
    class="org.eclipse.wst.javascript.core.JavaScriptModelPlugin">
 
    <runtime>
