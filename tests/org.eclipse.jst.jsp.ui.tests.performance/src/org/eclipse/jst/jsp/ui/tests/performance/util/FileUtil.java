@@ -26,7 +26,7 @@ public class FileUtil {
 	public static String fLineSeparator = System.getProperty("line.separator");
 	public static String fPathSeparator = System.getProperty("path.separator");
 	public static String fFileSeparator = System.getProperty("file.separator");
-	public static String JSP_EDITOR_TESTS_PLUGIN_ID = "org.eclipse.jst.jsp.ui.tests";
+	public static String JSP_EDITOR_TESTS_PLUGIN_ID = "org.eclipse.jst.jsp.ui.tests.performance";
 
 	static File previousResultsDirectory = null;
 	static private String logSubDirectoryPath;
