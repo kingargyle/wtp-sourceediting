@@ -116,7 +116,7 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 							referenceCount--;
 						}
 						if (!tableTreeViewer.getControl().isDisposed()) {
-							model = StructuredModelManager.getInstance().getModelManager().getExistingModelForRead(fSourcePage.getDocumentProvider().getDocument(fSourcePage.getEditorInput()));
+							model = StructuredModelManager.getModelManager().getExistingModelForRead(fSourcePage.getDocumentProvider().getDocument(fSourcePage.getEditorInput()));
 							if (model != null) {
 								referenceCount++;
 								tableTreeViewer.setModel(model);
@@ -485,7 +485,7 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 		int insertOffset = 0;
 		List removalRegions = new ArrayList(2);
 		try {
-			editModel = StructuredModelManager.getInstance().getModelManager().getExistingModelForRead(editDocument);
+			editModel = StructuredModelManager.getModelManager().getExistingModelForRead(editDocument);
 			if (editModel != null && editModel instanceof XMLModel) {
 				Document document = ((XMLModel) editModel).getDocument();
 				// remove meta tags specifying encoding as required by Browser API

@@ -20,18 +20,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Vector;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsp.core.PageDirectiveAdapter;
 import org.eclipse.jst.jsp.core.internal.util.DocumentProvider;
 import org.eclipse.jst.jsp.ui.tests.performance.util.DateUtil;
 import org.eclipse.jst.jsp.ui.tests.performance.util.FileUtil;
 import org.eclipse.test.performance.PerformanceTestCase;
-import org.eclipse.wst.sse.core.IFactoryRegistry;
+import org.eclipse.wst.sse.core.FactoryRegistry;
 import org.eclipse.wst.sse.core.IModelManager;
-import org.eclipse.wst.sse.core.IModelManagerPlugin;
 import org.eclipse.wst.sse.core.INodeNotifier;
 import org.eclipse.wst.sse.core.IStructuredModel;
-import org.eclipse.wst.sse.core.PropagatingAdapter;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.PropagatingAdapter;
 import org.eclipse.wst.sse.core.modelhandler.EmbeddedTypeHandler;
 import org.eclipse.wst.xml.core.document.XMLDocument;
 import org.eclipse.wst.xml.core.document.XMLModel;
@@ -70,25 +69,25 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 
 	protected Runtime fRuntime = Runtime.getRuntime();
 
-	protected int fTrials = 3; //11;//101;
+	protected int fTrials = 3; // 11;//101;
 
 	protected String nl = System.getProperty("line.separator");
 
 	protected double PERCENT_DEVIATION = .05;
 
 	/**
-	 *  
+	 * 
 	 */
 	public AbstractTestPerformance() {
 		super();
 	}
 
-	//	/**
-	//	 * @param name
-	//	 */
-	//	public AbstractTestPerformance(String name) {
-	//		super(name);
-	//	}
+	// /**
+	// * @param name
+	// */
+	// public AbstractTestPerformance(String name) {
+	// super(name);
+	// }
 
 	protected void collectGarbage() {
 		fRuntime.gc();
@@ -106,24 +105,24 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 	protected void compareResults(String filename, long time, long memory) {
 		FileData prev = getPreviousResultsForFile(filename);
 
-		//		System.out.println("current > " + filename + "::" + time + "::" +
+		// System.out.println("current > " + filename + "::" + time + "::" +
 		// memory);
-		//		System.out.println("previous> " + prev.filename + "::" + prev.time
+		// System.out.println("previous> " + prev.filename + "::" + prev.time
 		// + "::" + prev.memory);
 
 		if (prev != null) {
 
 			// another note: currently the test will FAIL even if the memory
 			// usage is 5% BETTER
-			//				 the results should actually still be logged ant the test
+			// the results should actually still be logged ant the test
 			// probably shouldn't fail
-			//				 or maybe it should fail, just to point out that the performance
+			// or maybe it should fail, just to point out that the performance
 			// has
-			//               dramatically improved, then record the new results and use them
+			// dramatically improved, then record the new results and use them
 			// as a baseline
-			//               for future testing...
+			// for future testing...
 
-			//long diffTime = Math.abs(time - prev.time) / time;
+			// long diffTime = Math.abs(time - prev.time) / time;
 			long diffMem = Math.abs(memory - prev.fMemory) / memory;
 
 			// (pa) the problem with checking time is that different
@@ -132,16 +131,16 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 			// systems (w/ other apps running)
 			//
 
-			//            assertTrue(
-			//                "** time isn't within " + PERCENT_DEVIATION*100 + "% of last
+			// assertTrue(
+			// "** time isn't within " + PERCENT_DEVIATION*100 + "% of last
 			// test run >> " + nl +
-			//                "file: " + filename + nl +
-			//                "old: " + prev.time + nl +
-			//                "new: " + time + nl +
-			//                "diff: " + diffTime,
-			//                (diffTime <= PERCENT_DEVIATION));
+			// "file: " + filename + nl +
+			// "old: " + prev.time + nl +
+			// "new: " + time + nl +
+			// "diff: " + diffTime,
+			// (diffTime <= PERCENT_DEVIATION));
 
-			//	assertTrue("** memory usage isn't within " + PERCENT_DEVIATION
+			// assertTrue("** memory usage isn't within " + PERCENT_DEVIATION
 			// * 100 + "% of last test run >> " + nl + "file: " + filename +
 			// nl + "old: " + prev.memory + nl + "new: " + memory + nl +
 			// "diff: " + diffMem, (diffMem <= PERCENT_DEVIATION));
@@ -177,7 +176,7 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 	protected int countFactories(IStructuredModel model) {
 		int result = 0;
 		if (model != null) {
-			IFactoryRegistry reg = model.getFactoryRegistry();
+			FactoryRegistry reg = model.getFactoryRegistry();
 			result = reg.getFactories().size();
 		}
 		return result;
@@ -208,7 +207,7 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 
 	protected void doStructuredModelTest(String filename) throws IOException {
 		int nodeCount = 0;
-		//        int adapterCount = 0;
+		// int adapterCount = 0;
 		int nFactories = 0;
 		int nPropagatingFactories = 0;
 		int nEmbeddedFactories = 0;
@@ -217,8 +216,7 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 		long thisMem = 0;
 		double thisTime = 0;
 
-		IModelManagerPlugin modelManagerPlugin = (IModelManagerPlugin) Platform.getPlugin(IModelManagerPlugin.ID);
-		IModelManager modelManager = modelManagerPlugin.getModelManager();
+		IModelManager modelManager = StructuredModelManager.getModelManager();
 
 		System.out.println();
 		double totalTime = 0;
@@ -236,7 +234,7 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 			}
 
 			long startTime = System.currentTimeMillis();
-			
+
 			startMeasuring();
 			if (testStructuredModel) {
 				model = modelManager.getModelForEdit(filename, inStream, null);
@@ -250,7 +248,7 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 			stopMeasuring();
 			commitMeasurements();
 			assertPerformance();
-			
+
 			long endTime = System.currentTimeMillis();
 
 			long endMem = 0;
@@ -283,8 +281,8 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 				}
 			}
 			markModel(model);
-			//            System.out.println(i + ". Time to create Model: " + thisTime);
-			//            System.out.println(i + ". Memory for Model: " + thisMem);
+			// System.out.println(i + ". Time to create Model: " + thisTime);
+			// System.out.println(i + ". Memory for Model: " + thisMem);
 			if (model != null) {
 				model.releaseFromEdit();
 			}
@@ -304,13 +302,13 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 			printResults(filename, thisTime, thisMem, fTrials, nodeCount, nFactories, nPropagatingFactories, nEmbeddedFactories);
 		}
 
-		//compareResults(filename, aveTime, aveMem);
+		// compareResults(filename, aveTime, aveMem);
 
 		// when do we actually want to save results??
-		//saveNewResults(filename, Long.toString(Math.round(aveTime)),
+		// saveNewResults(filename, Long.toString(Math.round(aveTime)),
 		// Long.toString(Math.round(aveMem)));
 
-		//assertTrue("model could not be created!", model != null);
+		// assertTrue("model could not be created!", model != null);
 
 	}
 
@@ -337,9 +335,10 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 			FileData temp = null;
 			for (int i = fileDataVector.size() - 1; i >= 0; i--) {
 				temp = (FileData) fileDataVector.get(i);
-				if (temp.fFilename.indexOf(filename) > 0) // the first one we
-														  // encounter should
-														  // be the latest
+				if (temp.fFilename.indexOf(filename) > 0) // the first one
+															// we
+				// encounter should
+				// be the latest
 				{
 					results = temp;
 					break;
@@ -363,7 +362,7 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 		System.out.println();
 		System.out.println("          (used " + (nTrials - 1) + " trials)");
 		System.out.println("          (N Nodes == " + nodeCount + ")");
-		//        System.out.println(" (N Adapters == " + adapterCount + ")");
+		// System.out.println(" (N Adapters == " + adapterCount + ")");
 		System.out.println("          (N Factories == " + nFactories + ")");
 		System.out.println("          (N PropagatingFactories == " + nPropagatingFactories + ")");
 		System.out.println("          (N EmbeddedFactories == " + nEmbeddedFactories + ")");

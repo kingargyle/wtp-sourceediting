@@ -14,11 +14,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.test.performance.PerformanceTestCase;
 import org.eclipse.wst.sse.core.IModelManager;
-import org.eclipse.wst.sse.core.IModelManagerPlugin;
 import org.eclipse.wst.sse.core.IStructuredModel;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.text.IStructuredDocument;
 
 /**
@@ -27,7 +26,7 @@ import org.eclipse.wst.sse.core.text.IStructuredDocument;
 public class TestInsertPerformance extends PerformanceTestCase {
 	float total = 0;
 	long thisTime = 0;
-	int nTrials = 3; //11;
+	int nTrials = 3; // 11;
 
 	public TestInsertPerformance(String name) {
 		super(name);
@@ -49,13 +48,12 @@ public class TestInsertPerformance extends PerformanceTestCase {
 	}
 
 	protected void doTestBigTable(int i, String filename) throws IOException {
-		IModelManagerPlugin modelManagerPlugin = (IModelManagerPlugin) Platform.getPlugin(IModelManagerPlugin.ID);
-		IModelManager modelManager = modelManagerPlugin.getModelManager();
+		IModelManager modelManager = StructuredModelManager.getModelManager();
 		// System.out.println();
 		InputStream inStream = getClass().getResourceAsStream(filename);
-		//            // run garbage collection to get a little more consistent times.
-		//            System.gc();
-		//            System.gc();
+		// // run garbage collection to get a little more consistent times.
+		// System.gc();
+		// System.gc();
 		IStructuredModel model = modelManager.getModelForEdit(filename, inStream, null);
 		IStructuredDocument structuredDocument = model.getStructuredDocument();
 		InputStream textStream = getClass().getResourceAsStream("bigTable.txt"); //$NON-NLS-1$
@@ -65,7 +63,7 @@ public class TestInsertPerformance extends PerformanceTestCase {
 		structuredDocument.replaceText(this, 80, 0, tableText);
 		long endTime = System.currentTimeMillis();
 		thisTime = endTime - startTime;
-		//System.out.println(i + ".  Time to insert table text: " + thisTime);
+		// System.out.println(i + ". Time to insert table text: " + thisTime);
 		// String resultingText = structuredDocument.getText();
 		// System.out.println(resultingText);
 		model.releaseFromEdit();
@@ -75,8 +73,8 @@ public class TestInsertPerformance extends PerformanceTestCase {
 	}
 
 	/**
-	 * This method is quick/easy way to read "plain" 
-	 * (ascii) characters from inputstream.
+	 * This method is quick/easy way to read "plain" (ascii) characters from
+	 * inputstream.
 	 */
 	private String readInputStream(InputStreamReader inputStreamReader) throws IOException {
 		int numRead = 0;

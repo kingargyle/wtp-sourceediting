@@ -15,14 +15,13 @@ import java.io.InputStream;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsp.core.PageDirectiveAdapter;
-import org.eclipse.wst.sse.core.IFactoryRegistry;
+import org.eclipse.wst.sse.core.FactoryRegistry;
 import org.eclipse.wst.sse.core.IModelManager;
-import org.eclipse.wst.sse.core.IModelManagerPlugin;
 import org.eclipse.wst.sse.core.INodeNotifier;
 import org.eclipse.wst.sse.core.IStructuredModel;
-import org.eclipse.wst.sse.core.PropagatingAdapter;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.PropagatingAdapter;
 import org.eclipse.wst.sse.core.modelhandler.EmbeddedTypeHandler;
 import org.eclipse.wst.xml.core.document.XMLDocument;
 import org.eclipse.wst.xml.core.document.XMLModel;
@@ -85,8 +84,7 @@ public class TestModelPerformanceOLD extends TestCase {
 		int nPropagatingFactories = 0;
 		int nEmbeddedFactories = 0;
 
-		IModelManagerPlugin modelManagerPlugin = (IModelManagerPlugin) Platform.getPlugin(IModelManagerPlugin.ID);
-		IModelManager modelManager = modelManagerPlugin.getModelManager();
+		IModelManager modelManager = StructuredModelManager.getModelManager();
 		System.out.println();
 		float total = 0;
 		int nTrials = 101;
@@ -171,7 +169,7 @@ public class TestModelPerformanceOLD extends TestCase {
 	 * @return int
 	 */
 	private int countFactories(IStructuredModel model) {
-		IFactoryRegistry reg = model.getFactoryRegistry();
+		FactoryRegistry reg = model.getFactoryRegistry();
 		int result = reg.getFactories().size();
 		return result;
 	}

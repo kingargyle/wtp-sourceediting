@@ -18,8 +18,8 @@ import java.io.InputStream;
 import org.eclipse.jst.jsp.core.internal.parser.JSPSourceParser;
 import org.eclipse.test.performance.PerformanceTestCase;
 import org.eclipse.wst.sse.core.IModelManager;
-import org.eclipse.wst.sse.core.IModelManagerPlugin;
 import org.eclipse.wst.sse.core.IStructuredModel;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.text.IStructuredDocument;
 import org.eclipse.wst.xml.core.internal.parser.XMLSourceParser;
 
@@ -58,6 +58,7 @@ public class TestParserPerformance extends PerformanceTestCase {
 
 	/**
 	 * this test can time how long it takes to parse multiple files.
+	 * 
 	 * @param filename
 	 * @throws IOException
 	 */
@@ -67,17 +68,17 @@ public class TestParserPerformance extends PerformanceTestCase {
 		XMLSourceParser[] parsers = new XMLSourceParser[filenames.length];
 		String[] texts = new String[filenames.length];
 
-		IModelManagerPlugin modelManagerPlugin = (IModelManagerPlugin) org.eclipse.core.runtime.Platform.getPlugin(IModelManagerPlugin.ID);
-		IModelManager modelManager = modelManagerPlugin.getModelManager();
+		IModelManager modelManager = StructuredModelManager.getModelManager();
 
 		for (int k = 0; k < filenames.length; k++) {
 			// create models
 			InputStream inStream = getClass().getResourceAsStream(filenames[k]);
 			IStructuredModel sModel = modelManager.getModelForEdit(filenames[k], inStream, null);
 			IStructuredDocument structuredDocument = sModel.getStructuredDocument();
-			//String structuredDocumentText = structuredDocument.getText();
+			// String structuredDocumentText = structuredDocument.getText();
 			texts[k] = structuredDocument.getText();
-			//XMLSourceParser parser = (XMLSourceParser) structuredDocument.getParser();
+			// XMLSourceParser parser = (XMLSourceParser)
+			// structuredDocument.getParser();
 			parsers[k] = (XMLSourceParser) structuredDocument.getParser();
 			sModel.releaseFromEdit();
 		}
@@ -90,8 +91,8 @@ public class TestParserPerformance extends PerformanceTestCase {
 			rt.gc();
 			long startMem = rt.totalMemory() - rt.freeMemory();
 			long startTime = System.currentTimeMillis();
-			//			parser.reset(structuredDocumentText);
-			//			parser.getNodes();
+			// parser.reset(structuredDocumentText);
+			// parser.getNodes();
 			for (int j = 0; j < filenames.length; j++) {
 				parsers[j].reset(texts[j]);
 				parsers[j].getDocumentRegions();
@@ -107,14 +108,14 @@ public class TestParserPerformance extends PerformanceTestCase {
 				totalMemory += diffMem;
 			}
 
-			//			System.out.println("++ " + i);
-			//			System.out.println("time > " + diffTime);
-			//			System.out.println("mem  > " + diffMem);
+			// System.out.println("++ " + i);
+			// System.out.println("time > " + diffTime);
+			// System.out.println("mem > " + diffMem);
 		}
 		stopMeasuring();
 		commitMeasurements();
 		assertPerformance();
-		
+
 		System.out.println(""); //$NON-NLS-1$
 		System.out.println("---------------------------"); //$NON-NLS-1$
 		System.out.println("XMLParser performance for > "); //$NON-NLS-1$
@@ -138,16 +139,16 @@ public class TestParserPerformance extends PerformanceTestCase {
 		JSPSourceParser[] parsers = new JSPSourceParser[filenames.length];
 		String[] texts = new String[filenames.length];
 
-		IModelManagerPlugin modelManagerPlugin = (IModelManagerPlugin) org.eclipse.core.runtime.Platform.getPlugin(IModelManagerPlugin.ID);
-		IModelManager modelManager = modelManagerPlugin.getModelManager();
+		IModelManager modelManager = StructuredModelManager.getModelManager();
 
 		for (int k = 0; k < filenames.length; k++) {
 			InputStream inStream = getClass().getResourceAsStream(filenames[k]);
 			IStructuredModel sModel = modelManager.getModelForEdit(filenames[k], inStream, null);
 			IStructuredDocument structuredDocument = sModel.getStructuredDocument();
-			//String structuredDocumentText = structuredDocument.getText();
+			// String structuredDocumentText = structuredDocument.getText();
 			texts[k] = structuredDocument.getText();
-			//JSPSourceParser parser = (JSPSourceParser) structuredDocument.getParser();
+			// JSPSourceParser parser = (JSPSourceParser)
+			// structuredDocument.getParser();
 			parsers[k] = (JSPSourceParser) structuredDocument.getParser();
 			sModel.releaseFromEdit();
 		}
@@ -160,8 +161,8 @@ public class TestParserPerformance extends PerformanceTestCase {
 			rt.gc();
 			long startMem = rt.totalMemory() - rt.freeMemory();
 			long startTime = System.currentTimeMillis();
-			//			parser.reset(structuredDocumentText);
-			//			parser.getNodes();
+			// parser.reset(structuredDocumentText);
+			// parser.getNodes();
 			for (int j = 0; j < filenames.length; j++) {
 				parsers[j].reset(texts[j]);
 				parsers[j].getDocumentRegions();
@@ -177,14 +178,14 @@ public class TestParserPerformance extends PerformanceTestCase {
 				totalMemory += diffMem;
 			}
 
-			//			System.out.println("++ " + i);
-			//			System.out.println("time > " + diffTime);
-			//			System.out.println("mem  > " + diffMem);
+			// System.out.println("++ " + i);
+			// System.out.println("time > " + diffTime);
+			// System.out.println("mem > " + diffMem);
 		}
 		stopMeasuring();
 		commitMeasurements();
 		assertPerformance();
-		
+
 		System.out.println(""); //$NON-NLS-1$
 		System.out.println("---------------------------"); //$NON-NLS-1$
 		System.out.println("JSPParser performance for > "); //$NON-NLS-1$

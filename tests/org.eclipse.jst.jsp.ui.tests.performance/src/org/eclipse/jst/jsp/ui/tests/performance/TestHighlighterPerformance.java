@@ -28,8 +28,8 @@ import org.eclipse.wst.html.core.internal.text.rules.StructuredTextPartitionerFo
 import org.eclipse.wst.html.ui.style.LineStyleProviderForHTML;
 import org.eclipse.wst.javascript.common.ui.internal.style.LineStyleProviderForJavaScript;
 import org.eclipse.wst.sse.core.IModelManager;
-import org.eclipse.wst.sse.core.IModelManagerPlugin;
 import org.eclipse.wst.sse.core.IStructuredModel;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.style.Highlighter;
 import org.eclipse.wst.sse.ui.style.IHighlighter;
@@ -42,23 +42,23 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 
 	// (pa)
 	// this flag determines wether or not to test the GA code
-	//true > (the patched old code in com.ibm.sed.style.Highlighter)
+	// true > (the patched old code in com.ibm.sed.style.Highlighter)
 	// otherwise it will try the newer test
-	//false > (the code in com.ibm.sed.structured.style.Highlighter)
+	// false > (the code in com.ibm.sed.structured.style.Highlighter)
 	private boolean fDoGATest = false;
 
 	public TestHighlighterPerformance(String name) {
 		super(name);
 	}
 
-//	public void testAllFiles() throws IOException {
-//		// this just does the whole file line by line
-//		doHighlighterTest("bigStyle.jsp"); //$NON-NLS-1$
-//		doHighlighterTest("testfiles/company300k.jsp"); //$NON-NLS-1$
-//		doHighlighterTest("testfiles/company300k.html"); //$NON-NLS-1$
-//		doHighlighterTest("testfiles/company300k.xml"); //$NON-NLS-1$
-//	}
-	
+	// public void testAllFiles() throws IOException {
+	// // this just does the whole file line by line
+	// doHighlighterTest("bigStyle.jsp"); //$NON-NLS-1$
+	// doHighlighterTest("testfiles/company300k.jsp"); //$NON-NLS-1$
+	// doHighlighterTest("testfiles/company300k.html"); //$NON-NLS-1$
+	// doHighlighterTest("testfiles/company300k.xml"); //$NON-NLS-1$
+	// }
+
 	public void testHighlightBigStyle() throws IOException {
 		startMeasuring();
 		doHighlighterTest("bigStyle.jsp"); //$NON-NLS-1$
@@ -66,7 +66,7 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 		commitMeasurements();
 		assertPerformance();
 	}
-	
+
 	public void testHighlight300kJSP() throws IOException {
 		startMeasuring();
 		doHighlighterTest("testfiles/company300k.jsp"); //$NON-NLS-1$
@@ -74,24 +74,24 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 		commitMeasurements();
 		assertPerformance();
 	}
-	
+
 	// pa_TODO needs to be moved to HTML peroformance plugin
-//	public void testHighlight300kHTML() throws IOException {
-//		startMeasuring();
-//		doHighlighterTest("testfiles/company300k.html"); //$NON-NLS-1$
-//		stopMeasuring();
-//		commitMeasurements();
-//		assertPerformance();
-//	}
+	// public void testHighlight300kHTML() throws IOException {
+	// startMeasuring();
+	// doHighlighterTest("testfiles/company300k.html"); //$NON-NLS-1$
+	// stopMeasuring();
+	// commitMeasurements();
+	// assertPerformance();
+	// }
 
 	// pa_TODO needs to be moved to XML peroformance plugin
-//	public void testHighlight300kXML() throws IOException {
-//		startMeasuring();
-//		doHighlighterTest("testfiles/company300k.xml"); //$NON-NLS-1$
-//		stopMeasuring();
-//		commitMeasurements();
-//		assertPerformance();
-//	}	
+	// public void testHighlight300kXML() throws IOException {
+	// startMeasuring();
+	// doHighlighterTest("testfiles/company300k.xml"); //$NON-NLS-1$
+	// stopMeasuring();
+	// commitMeasurements();
+	// assertPerformance();
+	// }
 
 	protected void doHighlighterTest(String filename) throws IOException {
 		doHighligtherTest(filename, 0);
@@ -99,11 +99,10 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 
 	protected void doHighligtherTest(String filename, int start) throws IOException {
 		// create model
-		IModelManagerPlugin modelManagerPlugin = (IModelManagerPlugin) org.eclipse.core.runtime.Platform.getPlugin(IModelManagerPlugin.ID);
-		IModelManager modelManager = modelManagerPlugin.getModelManager();
+		IModelManager modelManager = StructuredModelManager.getModelManager();
 		InputStream inStream = getClass().getResourceAsStream(filename);
 
-		//TODO_future: seems silly to create a document here, just to get
+		// TODO_future: seems silly to create a document here, just to get
 		// length,
 		// we should refactor that out.
 		IStructuredDocument sDoc = modelManager.createStructuredDocumentFor(filename, inStream, null);
@@ -130,16 +129,15 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 		Runtime rt = Runtime.getRuntime();
 
 		// create model
-		IModelManagerPlugin modelManagerPlugin = (IModelManagerPlugin) org.eclipse.core.runtime.Platform.getPlugin(IModelManagerPlugin.ID);
-		IModelManager modelManager = modelManagerPlugin.getModelManager();
+		IModelManager modelManager = StructuredModelManager.getModelManager();
 		InputStream inStream = getClass().getResourceAsStream(filename);
 		IStructuredModel sModel = null;
 		try {
 			sModel = modelManager.getModelForEdit(filename, inStream, null);
 
-			//		IStructuredDocumentRegion startNode =
+			// IStructuredDocumentRegion startNode =
 			// sModel.getStructuredDocument().getNodeAtCharacterOffset(start);
-			//		IStructuredDocumentRegion endNode =
+			// IStructuredDocumentRegion endNode =
 			// sModel.getStructuredDocument().getNodeAtCharacterOffset(end);
 
 			// ==> // ITypedRegion[] partitions =
@@ -166,7 +164,7 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 				IRegion region = structuredDocument.getLineInformation(i++);
 				StyleRange[] ranges = null;
 
-				//			long totalStartTime = System.currentTimeMillis();
+				// long totalStartTime = System.currentTimeMillis();
 				while (i <= structuredDocument.getLineOfOffset(end)) {
 					lineStart = region.getOffset();
 					lineLength = region.getLength();
@@ -182,17 +180,17 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 					totalMemory += diffMem;
 					totalRanges += ranges.length;
 
-					//				System.out.println("++");
-					//				System.out.println("line number > " + i);
-					//				System.out.println("from > " + lineStart + " length of
+					// System.out.println("++");
+					// System.out.println("line number > " + i);
+					// System.out.println("from > " + lineStart + " length of
 					// > "
 					// + lineLength);
-					//				System.out.println("time > " + diffTime);
-					//				System.out.println("style ranges > " + ranges.length);
-					//				System.out.println("");
+					// System.out.println("time > " + diffTime);
+					// System.out.println("style ranges > " + ranges.length);
+					// System.out.println("");
 					region = structuredDocument.getLineInformation(i++);
 				}
-				//			long totalEndTime = System.currentTimeMillis();
+				// long totalEndTime = System.currentTimeMillis();
 
 				System.out.println(""); //$NON-NLS-1$
 				System.out.println("---------------------------------------"); //$NON-NLS-1$
@@ -201,11 +199,11 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 				System.out.println("total lines >			" + (i - startLine)); //$NON-NLS-1$
 				System.out.println("total time >			" + totalTime); //$NON-NLS-1$
 				System.out.println("total memory >			" + totalMemory); //$NON-NLS-1$
-				//			System.out.println("accurate total time > " + (totalEndTime
+				// System.out.println("accurate total time > " + (totalEndTime
 				// -
 				// totalStartTime));
 				System.out.println("total style ranges  >	" + totalRanges); //$NON-NLS-1$
-				System.out.println("ave time/line >			" + ((double)totalTime / (double)(i - startLine))); //$NON-NLS-1$
+				System.out.println("ave time/line >			" + ((double) totalTime / (double) (i - startLine))); //$NON-NLS-1$
 			}
 			catch (BadLocationException ble) {
 				System.out.println("no region at that line number..."); //$NON-NLS-1$
@@ -225,55 +223,58 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 	 */
 	private IHighlighter getAppropriateHighlighter(String filename) {
 		IHighlighter result = null;
-//		if (filename.endsWith(".html")) { //$NON-NLS-1$
-//			StructuredTextViewerConfiguration configuration = new StructuredTextViewerConfigurationHTML();
-//			result = configuration.getHighlighter(null);
-//		} else 
+		// if (filename.endsWith(".html")) { //$NON-NLS-1$
+		// StructuredTextViewerConfiguration configuration = new
+		// StructuredTextViewerConfigurationHTML();
+		// result = configuration.getHighlighter(null);
+		// } else
 		if (filename.endsWith(".jsp")) { //$NON-NLS-1$
 			result = getHighlighterJSP();
 		}
-//		else if (filename.endsWith(".xml")) { //$NON-NLS-1$
-//			StructuredTextViewerConfiguration configuration = new StructuredTextViewerConfigurationXML();
-//			result = configuration.getHighlighter(null);
-//		} 
+		// else if (filename.endsWith(".xml")) { //$NON-NLS-1$
+		// StructuredTextViewerConfiguration configuration = new
+		// StructuredTextViewerConfigurationXML();
+		// result = configuration.getHighlighter(null);
+		// }
 		return result;
 	}
 
 	/**
 	 * This file should be kept "in snych" with what's in viewer configuration
-	 * It was found the "java" part caused loading of plugins which then 
-	 * would throw exception automatically if workbench UI hadn't been started. 
+	 * It was found the "java" part caused loading of plugins which then would
+	 * throw exception automatically if workbench UI hadn't been started.
 	 */
 	private IHighlighter getHighlighterJSP() {
 		IHighlighter highlighter = new Highlighter();
-	
+
 		if (highlighter != null) {
 			// HTML
 			LineStyleProvider htmlLineStyleProvider = new LineStyleProviderForHTML();
 			highlighter.addProvider(StructuredTextPartitionerForHTML.ST_DEFAULT_HTML, htmlLineStyleProvider);
 			highlighter.addProvider(StructuredTextPartitionerForHTML.ST_HTML_COMMENT, htmlLineStyleProvider);
 			highlighter.addProvider(StructuredTextPartitionerForHTML.ST_HTML_DECLARATION, htmlLineStyleProvider);
-	
+
 			// HTML JavaScript
 			LineStyleProvider jsLineStyleProvider = new LineStyleProviderForJavaScript();
 			highlighter.addProvider(StructuredTextPartitionerForHTML.ST_SCRIPT, jsLineStyleProvider);
-	
+
 			// CSS
 			LineStyleProvider cssLineStyleProvider = new LineStyleProviderForEmbeddedCSS();
 			highlighter.addProvider(StructuredTextPartitionerForCSS.ST_STYLE, cssLineStyleProvider);
-	
+
 			// JSP
 			LineStyleProvider jspLineStyleProvider = new LineStyleProviderForJSP();
 			highlighter.addProvider(StructuredTextPartitionerForJSP.ST_DEFAULT_JSP, jspLineStyleProvider);
 			highlighter.addProvider(StructuredTextPartitionerForJSP.ST_JSP_COMMENT, jspLineStyleProvider);
 			highlighter.addProvider(StructuredTextPartitionerForJSP.ST_JSP_DIRECTIVE, jspLineStyleProvider);
 			highlighter.addProvider(StructuredTextPartitionerForJSP.ST_JSP_CONTENT_DELIMITER, jspLineStyleProvider);
-	
+
 			// JSP Java or JSP JavaScript
-			//highlighter.addProvider(StructuredTextPartitionerForJSP.ST_JSP_CONTENT_JAVA, new LineStyleProviderForJava());
+			// highlighter.addProvider(StructuredTextPartitionerForJSP.ST_JSP_CONTENT_JAVA,
+			// new LineStyleProviderForJava());
 			highlighter.addProvider(StructuredTextPartitionerForJSP.ST_JSP_CONTENT_JAVASCRIPT, new LineStyleProviderForJavaScript());
 		}
-	
+
 		return highlighter;
 	}
 }
