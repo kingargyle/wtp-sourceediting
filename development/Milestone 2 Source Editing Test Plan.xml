@@ -171,7 +171,7 @@
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
-					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
 					<td style="text-align: center">N</td>
 				</tr>
 				<tr>
@@ -193,7 +193,7 @@
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
-					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
 					<td style="text-align: center">N</td>
 				</tr>
 				<tr>
@@ -280,18 +280,9 @@
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">P</td>
 					<td style="text-align: center">P</td>
-					<td style="text-align: center">
-
-						N
-					</td>
-					<td style="text-align: center">
-						N
-
-					</td>
-					<td style="text-align: center">
-
-						N
-					</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
 				</tr>
 				<tr>
 					<td style="text-align: left">Search Participant</td>
@@ -300,14 +291,8 @@
 					<td style="text-align: center">P</td>
 					<td style="text-align: center">P</td>
 					<td style="text-align: center">P</td>
-					<td style="text-align: center">
-
-						N
-					</td>
-					<td style="text-align: center">
-						N
-
-					</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
 				</tr>
 				<tr>
 					<td style="text-align: left">Quick Fix/Assist</td>
@@ -316,14 +301,8 @@
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">N</td>
-					<td style="text-align: center">
-
-						N
-					</td>
-					<td style="text-align: center">
-						N
-
-					</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
 				</tr>
 				<tr>
 					<td style="text-align: left">Property Sheet</td>
@@ -332,14 +311,8 @@
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
-					<td style="text-align: center">
-						Y
-
-					</td>
-					<td style="text-align: center">
-						N
-
-					</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
 				</tr>
 				<tr>
 					<td style="text-align: left">Outline View</td>
@@ -348,10 +321,7 @@
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
-					<td style="text-align: center">
-						Y
-
-					</td>
+					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
 				</tr>
 				<tr>
@@ -366,7 +336,7 @@
 				</tr>
 				<tr>
 					<td style="text-align: left">
-						Annotation Navigation (go to next annotation)
+						Annotation Navigation (go to next/previous annotation)
 					</td>
 					<td style="text-align: center">Y</td>
 					<td style="text-align: center">Y</td>
