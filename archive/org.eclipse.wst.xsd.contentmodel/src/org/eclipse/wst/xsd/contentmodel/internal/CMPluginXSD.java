@@ -25,6 +25,6 @@ public class CMPluginXSD extends Plugin
   public void startup() throws CoreException 
   {
     XSDTypeUtil.initialize();
-    //CMPlugin.getInstance().setInferredGrammarFactory(new InferredGrammarFactoryImpl());
+    //ContentModelManager.getInstance().setInferredGrammarFactory(new InferredGrammarFactoryImpl());
   }
 }
