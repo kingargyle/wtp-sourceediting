@@ -25,6 +25,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -199,17 +200,16 @@ public class XSDImpl
       else
       { 	
       ResourceSet resourceSet = new ResourceSetImpl();
-      // CS : bugzilla bug 1972 ... this line of code attaches a customized
-      // XSDSchemaLocator that utilizes the URIResolver so that it's catalog
-      // aware.
-      //
       resourceSet.getAdapterFactories().add(new XSDSchemaLocatorAdapterFactory());
-      // CS : a temp workaround for bug 1972 until the XSD model fixes 69081
-      //      
-      //resourceSet.setURIConverter(new InternalURIConverter());
+      
+      // CS... why do we need to do this??
       resourceSet.getLoadOptions().put(XSDResourceImpl.XSD_TRACK_LOCATION, Boolean.TRUE);
-      URI uri = createURI(uriString);
-      XSDResourceImpl resource = (XSDResourceImpl) resourceSet.getResource(uri, true);
+            
+      URI uri = createURI(uriString);    
+      XSDResourceImpl resource = (XSDResourceImpl)resourceSet.createResource(URI.createURI("*.xsd"));
+      resource.setURI(uri);
+      resource.load(null);
+      
       xsdSchema = resource.getSchema();
       if (xsdSchema != null)
       {
