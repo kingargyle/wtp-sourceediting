@@ -44,6 +44,15 @@ public class BasicEditorTest extends PerformanceTestCase {
     protected void setUp() throws Exception {
         super.setUp();
         unzipProject();
+        setUpPrefs();
+    }
+    
+    /**
+     * configure preferences exactly how you want them
+     * for this test
+     */
+    protected void setUpPrefs() {
+        // subclasses should implement
     }
     
     protected void tearDown() throws Exception {
