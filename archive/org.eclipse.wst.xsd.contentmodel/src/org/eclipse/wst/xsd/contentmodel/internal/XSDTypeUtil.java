@@ -28,7 +28,7 @@ public class XSDTypeUtil
   {
     defaultValue.put("anySimpleType", null);
     defaultValue.put("anyType", null);
-    defaultValue.put("anyURI", "http://www.ibm.com");
+    defaultValue.put("anyURI", "http://tempuri.org");
     defaultValue.put("base64Binary", "0");
     defaultValue.put("boolean", "true");
     defaultValue.put("byte", "0");
