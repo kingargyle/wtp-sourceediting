@@ -2,9 +2,9 @@
 <?eclipse version="3.0"?>
 <plugin
    id="org.eclipse.wst.javascript.core"
-   name="%Structured_Source_JavaScript_Model.name"
+   name="%pluginName"
    version="1.0.0"
-   provider-name="Eclipse.org"
+   provider-name="%providerName"
    class="org.eclipse.wst.javascript.core.JavaScriptModelPlugin">
 
    <runtime>
