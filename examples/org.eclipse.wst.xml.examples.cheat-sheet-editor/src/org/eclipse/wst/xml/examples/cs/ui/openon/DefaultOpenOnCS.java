@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.wst.sse.core.util.StringUtils;
-import org.eclipse.wst.xml.core.document.XMLAttr;
+import org.eclipse.wst.xml.core.document.DOMAttr;
 import org.eclipse.wst.xml.core.internal.contentmodel.modelquery.ModelQuery;
 import org.eclipse.wst.xml.ui.openon.DefaultOpenOnXML;
 import org.w3c.dom.Attr;
@@ -66,7 +66,7 @@ public class DefaultOpenOnCS extends DefaultOpenOnXML {
 			Attr linkableAtt = getLinkableAttrFromNode(currNode, offset);
 			// found attribute to open on
 			if (linkableAtt != null) {
-				XMLAttr att = (XMLAttr) linkableAtt;
+				DOMAttr att = (DOMAttr) linkableAtt;
 				// do not include quotes in attribute value region
 				int regOffset = att.getValueRegionStartOffset();
 				int regLength = att.getValueRegion().getTextLength();
@@ -92,7 +92,7 @@ public class DefaultOpenOnCS extends DefaultOpenOnXML {
 			Attr linkableAtt = getLinkableAttrFromNode(currNode, offset);
 			// found attribute to open on
 			if (linkableAtt != null) {
-				XMLAttr att = (XMLAttr) linkableAtt;
+				DOMAttr att = (DOMAttr) linkableAtt;
 				// do not include quotes in attribute value region
 				int regOffset = att.getValueRegionStartOffset();
 				int regLength = att.getValueRegion().getTextLength();

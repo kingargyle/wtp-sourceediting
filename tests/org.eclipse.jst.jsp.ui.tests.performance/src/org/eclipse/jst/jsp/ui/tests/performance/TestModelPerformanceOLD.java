@@ -23,8 +23,8 @@ import org.eclipse.wst.sse.core.IStructuredModel;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.PropagatingAdapter;
 import org.eclipse.wst.sse.core.modelhandler.EmbeddedTypeHandler;
-import org.eclipse.wst.xml.core.document.XMLDocument;
-import org.eclipse.wst.xml.core.document.XMLModel;
+import org.eclipse.wst.xml.core.document.DOMDocument;
+import org.eclipse.wst.xml.core.document.DOMModel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -106,7 +106,7 @@ public class TestModelPerformanceOLD extends TestCase {
 			else {
 				// just need to do this statistics gathering 
 				// once, so will put here.
-				Document document = ((XMLModel) model).getDocument();
+				Document document = ((DOMModel) model).getDocument();
 				nodeCount = countNodes(document);
 				// adapterCount = countAdapters(document);
 				nFactories = countFactories(model);
@@ -136,8 +136,8 @@ public class TestModelPerformanceOLD extends TestCase {
 	 */
 	private int countEmbeddedFactories(Document document) {
 		int result = 0;
-		if (document instanceof XMLDocument) {
-			XMLDocument xmlDocument = (XMLDocument) document;
+		if (document instanceof DOMDocument) {
+			DOMDocument xmlDocument = (DOMDocument) document;
 			PageDirectiveAdapter pageDirectiveAdapter = (PageDirectiveAdapter) ((INodeNotifier) xmlDocument).getExistingAdapter(PageDirectiveAdapter.class);
 			if (pageDirectiveAdapter != null) {
 				EmbeddedTypeHandler embeddedHandler = pageDirectiveAdapter.getEmbeddedType();
@@ -156,8 +156,8 @@ public class TestModelPerformanceOLD extends TestCase {
 	 */
 	private int countPropatingFactories(Document document) {
 		int result = 0;
-		if (document instanceof XMLDocument) {
-			PropagatingAdapter pAdapter = (PropagatingAdapter) ((XMLDocument) document).getAdapterFor(PropagatingAdapter.class);
+		if (document instanceof DOMDocument) {
+			PropagatingAdapter pAdapter = (PropagatingAdapter) ((DOMDocument) document).getAdapterFor(PropagatingAdapter.class);
 			result = pAdapter.getAdaptOnCreateFactories().size();
 		}
 		return result;

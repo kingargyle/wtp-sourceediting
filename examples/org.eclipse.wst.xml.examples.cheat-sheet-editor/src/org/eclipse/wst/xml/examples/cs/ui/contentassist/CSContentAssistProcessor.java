@@ -29,7 +29,7 @@ import org.eclipse.wst.sse.core.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.core.text.ITextRegion;
 import org.eclipse.wst.sse.core.text.ITextRegionList;
 import org.eclipse.wst.sse.ui.internal.contentassist.CustomCompletionProposal;
-import org.eclipse.wst.xml.core.document.XMLNode;
+import org.eclipse.wst.xml.core.document.DOMNode;
 import org.eclipse.wst.xml.core.parser.XMLRegionContext;
 import org.eclipse.wst.xml.ui.contentassist.ContentAssistRequest;
 import org.eclipse.wst.xml.ui.contentassist.XMLContentAssistProcessor;
@@ -50,7 +50,7 @@ public class CSContentAssistProcessor extends XMLContentAssistProcessor implemen
 	 * @see org.eclipse.wst.xml.ui.contentassist.AbstractContentAssistProcessor#addAttributeValueProposals(org.eclipse.wst.xml.ui.contentassist.ContentAssistRequest)
 	 */
 	protected void addAttributeValueProposals(ContentAssistRequest contentAssistRequest) {
-		XMLNode node = (XMLNode) contentAssistRequest.getNode();
+		DOMNode node = (DOMNode) contentAssistRequest.getNode();
 
 		// Find the attribute region and name for which this position should have a value proposed
 		IStructuredDocumentRegion open = node.getFirstStructuredDocumentRegion();

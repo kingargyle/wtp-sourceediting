@@ -55,8 +55,8 @@ import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.util.Debug;
 import org.eclipse.wst.sse.core.util.URIResolver;
 import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;
-import org.eclipse.wst.xml.core.document.XMLNode;
-import org.eclipse.wst.xml.core.document.XMLText;
+import org.eclipse.wst.xml.core.document.DOMNode;
+import org.eclipse.wst.xml.core.document.DOMText;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -584,8 +584,8 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 				LexerCacheForJavaScript lc = null;
 				int offNew = documentPosition;
 				if (viewer instanceof StructuredTextViewer) {
-					if ((node != null) && (node instanceof XMLText)) {
-						XMLText ti = (XMLText) node;
+					if ((node != null) && (node instanceof DOMText)) {
+						DOMText ti = (DOMText) node;
 						int offNode = ti.getStartOffset();
 						offNew -= offNode;
 						// todo: do we want to specify "" below or specify that we are just browsing?  We want to say that we're just browsing, but how?
@@ -1807,16 +1807,16 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 
 		// check if tag is closed
 		boolean hasEndTag = true;
-		XMLNode xnode = null;
+		DOMNode xnode = null;
 		String tagName = ""; //$NON-NLS-1$
-		if (indexedNode instanceof XMLNode) {
-			xnode = ((XMLNode) indexedNode);
+		if (indexedNode instanceof DOMNode) {
+			xnode = ((DOMNode) indexedNode);
 			// it's ended already...
 			if (xnode.getEndStructuredDocumentRegion() != null)
 				return null;
-			XMLNode styleNode = null;
+			DOMNode styleNode = null;
 			if (!xnode.getNodeName().equalsIgnoreCase(parentTagName))
-				styleNode = (XMLNode) xnode.getParentNode();
+				styleNode = (DOMNode) xnode.getParentNode();
 			if (styleNode != null) {
 				tagName = styleNode.getNodeName();
 				hasEndTag = (styleNode.getEndStructuredDocumentRegion() != null);
