@@ -16,9 +16,9 @@
       <import plugin="org.eclipse.core.runtime.compatibility"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.wst.common.contentmodel"/>
-      <import plugin="org.eclipse.wst.encoding"/>
       <import plugin="org.eclipse.wst.uriresolver"/>
       <import plugin="org.eclipse.xsd"/>
+      <import plugin="org.eclipse.wst.common.encoding"/>
    </requires>
 
 

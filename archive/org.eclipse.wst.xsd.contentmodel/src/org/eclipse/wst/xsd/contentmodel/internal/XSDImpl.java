@@ -1960,7 +1960,7 @@ public class XSDImpl
      */
     public CMNode getDefinition()
     {
-      return (CMNode) getAdapter(xsdElementDeclaration.getResolvedElementDeclaration());
+      return getAdapter(xsdElementDeclaration.getResolvedElementDeclaration());
     }
 
     /**
@@ -2757,7 +2757,7 @@ public class XSDImpl
     public void visitSimpleTypeDefinition(XSDSimpleTypeDefinition type)
     {
       XSDParticle ctd = type.getComplexType();
-      if (ctd instanceof XSDParticle)
+      if (ctd != null)
         visitParticle(ctd);
     }
 

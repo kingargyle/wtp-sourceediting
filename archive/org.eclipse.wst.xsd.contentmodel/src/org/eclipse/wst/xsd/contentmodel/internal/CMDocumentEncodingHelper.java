@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import org.eclipse.wst.common.contentmodel.CMDocument;
-import org.eclipse.wst.encoding.EncodingHelper;
+import org.eclipse.wst.common.encoding.EncodingHelper;
 
 public class CMDocumentEncodingHelper
 {
@@ -64,8 +64,8 @@ public class CMDocumentEncodingHelper
   private static void updateFromEncodingHelper(InputStream iStream, String[] encodingInfo)
   {
     EncodingHelper encodingHelper = new EncodingHelper(iStream);
-    encodingInfo[0] = encodingHelper.getEncoding() != null ? encodingHelper.getEncoding() : encodingHelper.getDefaultEncoding();
-    encodingInfo[1] = encodingHelper.getEncodingTag() != null ? encodingHelper.getEncodingTag() : encodingHelper.getDefaultEncodingTag();
+    encodingInfo[0] = encodingHelper.getEncoding() != null ? encodingHelper.getEncoding() : EncodingHelper.getDefaultEncoding();
+    encodingInfo[1] = encodingHelper.getEncodingTag() != null ? encodingHelper.getEncodingTag() : EncodingHelper.getDefaultEncodingTag();
   }
 
 
