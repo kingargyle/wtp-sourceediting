@@ -35,6 +35,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.wst.javascript.common.ui.ContentElement;
 import org.eclipse.wst.javascript.common.ui.ContentElementComparerImpl;
@@ -101,9 +102,10 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 			treeViewer.getControl().setVisible(true);
 		}
 	}
-	
+
 	/**
-	 * Structured source files tend to have large/long tree structures. Add a collapse action to help with navigation.
+	 * Structured source files tend to have large/long tree structures. Add a
+	 * collapse action to help with navigation.
 	 */
 	protected class CollapseTreeAction extends Action {
 		private TreeViewer fTreeViewer = null;
@@ -247,6 +249,11 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		});
 		Menu menu = menuManager.createContextMenu(fTreeViewer.getTree());
 		fTreeViewer.getTree().setMenu(menu);
+
+		IEditorPart ownerEditor = getSite().getWorkbenchWindow().getActivePage().getActiveEditor();
+		if (ownerEditor != null) {
+			getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + "#outlinecontext", menuManager, this);
+		}
 	}
 
 	protected void createTreeViewer(Composite parent) {
