@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin
-   id="org.eclipse.wst.xml.examples.cs"
+   id="org.eclipse.wst.xml.examples.cs.ui"
    name="%SSE_CS_Source_Editor.name"
    version="1.0.0"
    provider-name="Eclipse.org"
@@ -13,7 +13,7 @@
       </library>
    </runtime>
    <requires>
-      <!--import plugin="org.eclipse.core.runtime.compatibility"/-->
+      <import plugin="org.eclipse.core.runtime.compatibility"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.views"/>
       <import plugin="org.eclipse.jface.text"/>
@@ -36,31 +36,32 @@
    </requires>
 
 
-   <!--extension
+<!--
+   <extension
          point="org.eclipse.ui.editors">
       <editor
             name="%CS_Source_Page_Editor.name"
             icon="icons/sourceEditor.gif"
             extensions="xml"
-            contributorClass="org.eclipse.wst.xml.ui.ui.actions.ActionContributorXML"
-            class="org.eclipse.wst.cs.ui.StructuredTextEditorCheatSheet"
+            contributorClass="org.eclipse.wst.xml.ui.actions.ActionContributorXML"
+            class="org.eclipse.wst.xml.examples.cs.ui.StructuredTextEditorCheatSheet"
             symbolicFontName="org.eclipse.wst.sse.ui.textfont"
             id="org.eclipse.wst.cs.ui.StructuredTextEditorCheatSheet">
       </editor>
-   </extension-->
+   </extension>
+   -->
    <extension
          point="org.eclipse.core.runtime.contentTypes">
          <content-type
-               file-extensions="xml,xsl,xslt,dadx,wsdl,nst,xmi,xsd,exsd"
+               file-extensions="xml"
                priority="high"
                name="CS Content Type"
                id="cssource"
                base-type="org.eclipse.core.runtime.xml"
 			   default-charset="UTF-8">
-			<describer class="org.eclipse.wst.xml.core.internal.contenttype.ContentDescriberForXML"/>
-       		<!--describer class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber">
+       		   <describer class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber">
         		<parameter name="element" value="cheatsheet"/>
-       		</describer-->
+       		</describer>
 		</content-type>
    </extension>
    <extension
