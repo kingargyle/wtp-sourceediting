@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.test.performance.PerformanceTestCase;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
+import org.eclipse.wst.sse.ui.internal.StructuredTextEditor;
 import org.eclipse.wst.xml.ui.tests.performance.util.FileUtil;
 import org.eclipse.wst.xml.ui.tests.performance.util.ProjectUnzipUtility;
 

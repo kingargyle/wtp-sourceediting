@@ -50,8 +50,8 @@ import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
 import org.eclipse.wst.javascript.ui.internal.editor.SimpleTreeViewer;
 import org.eclipse.wst.javascript.ui.internal.editor.SimpleViewerSelectionManagerImpl;
 import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
-import org.eclipse.wst.sse.ui.ViewerSelectionManager;
 import org.eclipse.wst.sse.ui.edit.util.SharedEditorPluginImageHelper;
+import org.eclipse.wst.sse.ui.internal.ViewerSelectionManager;
 import org.eclipse.wst.sse.ui.views.contentoutline.PropertyChangeUpdateAction;
 import org.eclipse.wst.sse.ui.views.contentoutline.PropertyChangeUpdateActionContributionItem;
 

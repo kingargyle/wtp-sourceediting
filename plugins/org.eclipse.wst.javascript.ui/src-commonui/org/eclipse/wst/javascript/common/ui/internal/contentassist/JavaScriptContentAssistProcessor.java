@@ -54,7 +54,7 @@ import org.eclipse.wst.sse.core.IndexedRegion;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.util.Debug;
 import org.eclipse.wst.sse.core.util.URIResolver;
-import org.eclipse.wst.sse.ui.StructuredTextViewer;
+import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;
 import org.eclipse.wst.xml.core.document.XMLNode;
 import org.eclipse.wst.xml.core.document.XMLText;
 import org.w3c.dom.Document;

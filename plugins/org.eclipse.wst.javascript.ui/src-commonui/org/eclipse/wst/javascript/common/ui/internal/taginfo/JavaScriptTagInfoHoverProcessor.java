@@ -18,7 +18,7 @@ import org.eclipse.wst.javascript.common.ui.internal.Logger;
 import org.eclipse.wst.sse.core.text.IStructuredDocument;
 import org.eclipse.wst.sse.core.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.core.text.ITextRegion;
-import org.eclipse.wst.sse.ui.StructuredTextViewer;
+import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;
 
 /**
  * Provides hover help documentation for javascript code

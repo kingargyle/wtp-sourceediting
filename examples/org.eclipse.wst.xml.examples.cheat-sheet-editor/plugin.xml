@@ -32,7 +32,6 @@
       <import plugin="org.eclipse.jdt.core"/>
    </requires>
 
-
    <extension
          point="org.eclipse.core.runtime.contentTypes">
          <content-type
