@@ -34,8 +34,7 @@
                name="JavaScript Content"
                id="javascriptsource"
                base-type="org.eclipse.core.runtime.text"
-			   default-charset="ISO-8859-1">
-               <!-- TODO: check, what's spec default for javascript? -->
+			   default-charset="US-ASCII">
 		</content-type>
    </extension>
 
