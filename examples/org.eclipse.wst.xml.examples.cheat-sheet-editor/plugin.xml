@@ -13,7 +13,6 @@
       </library>
    </runtime>
    <requires>
-      <import plugin="org.eclipse.core.runtime.compatibility"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.views"/>
       <import plugin="org.eclipse.jface.text"/>
@@ -36,25 +35,11 @@
    </requires>
 
 
-<!--
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            name="%CS_Source_Page_Editor.name"
-            icon="icons/sourceEditor.gif"
-            extensions="xml"
-            contributorClass="org.eclipse.wst.xml.ui.actions.ActionContributorXML"
-            class="org.eclipse.wst.xml.examples.cs.ui.StructuredTextEditorCheatSheet"
-            symbolicFontName="org.eclipse.wst.sse.ui.textfont"
-            id="org.eclipse.wst.cs.ui.StructuredTextEditorCheatSheet">
-      </editor>
-   </extension>
-   -->
    <extension
          point="org.eclipse.core.runtime.contentTypes">
          <content-type
                file-extensions="xml"
-               priority="high"
+               priority="low"
                name="CS Content Type"
                id="cssource"
                base-type="org.eclipse.core.runtime.xml"
@@ -68,8 +53,8 @@
          point="org.eclipse.wst.sse.core.modelHandler">
       <modelHandler
             default="false"
-            class="org.eclipse.wst.cs.core.modelhandler.ModelHandlerForCS"
-            associatedContentTypeId="org.eclipse.wst.cs.ui.cssource"
+            class="org.eclipse.wst.xml.examples.cs.core.modelhandler.ModelHandlerForCS"
+            associatedContentTypeId="org.eclipse.wst.xml.examples.cs.ui.cssource"
             id="org.eclipse.wst.sse.core.handler.cs">
       </modelHandler>
    </extension>
@@ -78,32 +63,32 @@
       <configuration
       		type="textviewerconfiguration"
             class="org.eclipse.wst.xml.examples.cs.ui.StructuredTextViewerConfigurationCS"
-            target="org.eclipse.wst.cs.ui.cssource"/>
+            target="org.eclipse.wst.xml.examples.cs.ui.cssource"/>
       <configuration
       		type="contentoutlineconfiguration"
             class="org.eclipse.wst.xml.ui.views.contentoutline.XMLContentOutlineConfiguration"
-            target="org.eclipse.wst.cs.ui.cssource"/>
+            target="org.eclipse.wst.xml.examples.cs.ui.cssource"/>
       <configuration
       		type="propertysheetconfiguration"
             class="org.eclipse.wst.xml.ui.views.properties.XMLPropertySheetConfiguration"
-            target="org.eclipse.wst.cs.ui.cssource"/>
+            target="org.eclipse.wst.xml.examples.cs.ui.cssource"/>
       <configuration
       		type="spellchecktarget"
             class="org.eclipse.wst.xml.ui.XMLSpellCheckTarget"
-            target="org.eclipse.wst.cs.ui.cssource"/>
+            target="org.eclipse.wst.xml.examples.cs.ui.cssource"/>
       <configuration
       		type="sourceeditingtexttools"
             class="org.eclipse.wst.xml.ui.extensions.XMLSourceEditingTextTools"
-            target="org.eclipse.wst.cs.ui.cssource"/>
+            target="org.eclipse.wst.xml.examples.cs.ui.cssource"/>
       <configuration
       		type="characterpairmatcher"
             class="org.eclipse.wst.xml.ui.text.XMLDocumentRegionEdgeMatcher"
-            target="org.eclipse.wst.cs.ui.cssource"/>
+            target="org.eclipse.wst.xml.examples.cs.ui.cssource"/>
       <configuration
       		type="structuredtextfoldingprovider"
             class="org.eclipse.wst.xml.ui.internal.projection.StructuredTextFoldingProviderXML"
-            target="org.eclipse.wst.cs.ui.cssource"/>
-      <definition
+            target="org.eclipse.wst.xml.examples.cs.ui.cssource"/>
+      <!--definition
       		type="preferencepages"
             value="org.eclipse.wst.sse.ui.preferences.xml"
             target="org.eclipse.core.runtime.xml"/>
@@ -118,12 +103,12 @@
       <definition
       		type="preferencepages"
             value="org.eclipse.wst.sse.ui.preferences.xml.colors"
-            target="org.eclipse.core.runtime.xml"/>
+            target="org.eclipse.core.runtime.xml"/-->
    </extension>
    <extension
          point="org.eclipse.wst.sse.ui.adapterFactoryDescription">
       <adapterFactoryDescription
-            class="org.eclipse.wst.cs.ui.registry.AdapterFactoryProviderForCS">
+            class="org.eclipse.wst.xml.examples.cs.ui.registry.AdapterFactoryProviderForCS">
       </adapterFactoryDescription>
    </extension>
    <!--extension
@@ -132,9 +117,8 @@
             class="org.eclipse.wst.xml.ui.registry.AdapterFactoryProviderForEmbeddedXML">
       </embeddedAdapterFactoryProvider>
    </extension-->
-   <extension
+   <!--extension
          point="org.eclipse.ui.preferencePages">
-<!-- CS PREFERENCE PAGES -->
       <page
             name="%CS_Files.name"
             category="org.eclipse.wst.sse.ui.preferences"
@@ -159,46 +143,5 @@
             class="org.eclipse.wst.xml.ui.preferences.XMLColorPage"
             id="org.eclipse.wst.sse.ui.preferences.cs.colors">
       </page>
-   </extension>
-<!-- Editor actionsets -->
-   <extension
-         point="org.eclipse.ui.actionSetPartAssociations">
-      <actionSetPartAssociation
-            targetID="org.eclipse.ui.edit.text.actionSet.annotationNavigation">
-         <part
-               id="org.eclipse.wst.xml.ui.StructuredTextEditorXML">
-         </part>
-      </actionSetPartAssociation>
-      <actionSetPartAssociation
-            targetID="org.eclipse.ui.NavigateActionSet">
-         <part
-               id="org.eclipse.wst.xml.ui.StructuredTextEditorXML">
-         </part>
-      </actionSetPartAssociation>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-<!-- added to enable "Navigator > Show In" for various views... -->
-      <perspectiveExtension
-            targetID="org.eclipse.wst.xml.XMLPerspective">
-         <showInPart
-               id="org.eclipse.ui.views.ResourceNavigator">
-         </showInPart>
-<!-- add the "navigate" action set (Navigate > Open Resource...) -->
-         <actionSet
-               id="org.eclipse.ui.NavigateActionSet">
-         </actionSet>
-      </perspectiveExtension>
-   </extension>
-<!-- add a default open on action for xml content type -->
-   <!--extension
-         point="org.eclipse.wst.sse.ui.openon">
-      <openon
-            class="org.eclipse.wst.cs.ui.openon.DefaultOpenOnCS"
-            id="org.eclipse.wst.cs.ui.openon.DefaultOpenOnCS">
-         <contenttypeidentifier
-               id="org.eclipse.wst.cs.ui.cssource">
-         </contenttypeidentifier>
-      </openon>
    </extension-->
 </plugin>

@@ -37,7 +37,7 @@ import org.eclipse.wst.xml.ui.views.properties.XMLPropertySourceAdapterFactory;
  */
 public class AdapterFactoryProviderForCS extends AdapterFactoryProviderForXML {
 
-	private final String EDITOR_PLUGIN_ID = "org.eclipse.wst.sse.ui"; // $NON-NLS-1$
+	private final String EDITOR_PLUGIN_ID = "org.eclipse.wst.xml.ui"; // $NON-NLS-1$
 
 	/**
 	 * 
