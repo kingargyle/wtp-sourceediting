@@ -20,9 +20,20 @@ package org.eclipse.wst.javascript.core.contenttype;
 public class ContentTypeIdForJavaScript {
 	/**
 	 * The value of the contenttype id field must match what is specified in
-	 * plugin.xml file. Note: this value is intentially not declared as final,
-	 * so it will not be inlined.
+	 * plugin.xml file. Note: this value is intentially set with default
+	 * protected method so it will not be inlined.
 	 */
-	public static String ContentTypeID_JAVASCRIPT = "org.eclipse.wst.javascript.core.javascriptsource"; //$NON-NLS-1$
+	public final static String ContentTypeID_JAVASCRIPT = getConstantString();
+
+	/**
+	 * Don't allow instantiation.
+	 */
+	private ContentTypeIdForJavaScript() {
+		super();
+	}
+
+	static String getConstantString() {
+		return "org.eclipse.wst.javascript.core.javascriptsource"; //$NON-NLS-1$
+	}
 
 }
