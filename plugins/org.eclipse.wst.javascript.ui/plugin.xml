@@ -80,7 +80,7 @@
       </actionSetPartAssociation>
    </extension>
 
-<!-- contribute the Edit Preferences action (does not inherit extended editor contributions from StructuredTextEditor) -->
+<!-- (base now provides an open preferences dialog in editor so this is no longer needed)
    <extension
          point="org.eclipse.wst.sse.ui.extendedEditorActions">
       <editorContribution
@@ -102,15 +102,7 @@
          </action>
       </editorContribution>
    </extension>
-
-   <extension
-         point="org.eclipse.wst.sse.ui.extendedconfiguration">
-      <definition 
-      		type="preferencepages"
-            value="org.eclipse.wst.sse.ui.preferences/org.eclipse.wst.sse.javascript.preferences"
-            target="org.eclipse.wst.javascript.core.javascriptsource"/>
-   </extension>
-   
+-->
 <!-- use a modified annotation model for all JavaScript source files -->
    <extension
       point="org.eclipse.core.filebuffers.annotationModelCreation">

@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.ui.actions.IToggleBreakpointsTarget;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.Separator;
@@ -99,6 +100,7 @@ import org.eclipse.wst.sse.ui.internal.debug.BreakpointRulerAction;
 import org.eclipse.wst.sse.ui.internal.debug.EditBreakpointAction;
 import org.eclipse.wst.sse.ui.internal.debug.ManageBreakpointAction;
 import org.eclipse.wst.sse.ui.internal.debug.ToggleBreakpointAction;
+import org.eclipse.wst.sse.ui.internal.debug.ToggleBreakpointsTarget;
 import org.eclipse.wst.sse.ui.internal.editor.IHelpContextIds;
 import org.eclipse.wst.sse.ui.internal.extension.BreakpointProviderBuilder;
 import org.eclipse.wst.sse.ui.preferences.CommonEditorPreferenceNames;
@@ -519,6 +521,9 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 		// Navigate action set menu
 		if (IShowInTargetList.class.equals(required))
 			return fShowInTargetListAdapter;
+		if (IToggleBreakpointsTarget.class.equals(required)) {
+			return ToggleBreakpointsTarget.getInstance();
+		}
 		return super.getAdapter(required);
 	}
 
@@ -821,5 +826,45 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 				throw new SourceEditingRuntimeException(exception);
 			}
 		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#collectContextMenuPreferencePages()
+	 */
+	protected String[] collectContextMenuPreferencePages() {
+		List allIds = new ArrayList(0);
+		
+		// get contributed preference pages
+		ExtendedConfigurationBuilder builder = ExtendedConfigurationBuilder.getInstance();
+		String[] configurationIds = getConfigurationPoints();
+		for (int i = 0; i < configurationIds.length; i++) {
+			String[] definitions = builder.getDefinitions("preferencepages", configurationIds[i]); //$NON-NLS-1$
+			for (int j = 0; j < definitions.length; j++) {
+				String someIds = definitions[j];
+				if (someIds != null && someIds.length() > 0) {
+					// supports multiple comma-delimited page IDs in one element 
+					String[] ids = StringUtils.unpack(someIds);
+					for (int k = 0; k < ids.length; k++) {
+						// trim, just to keep things clean
+						String id = ids[k].trim();
+						if (!allIds.contains(id)) {
+							allIds.add(id);
+						}
+					}
+				}
+			}
+		}
+		
+		// add pages contributed by super
+		String[] superPages =  super.collectContextMenuPreferencePages();
+		for (int m = 0; m < superPages.length; m++) {
+			// trim, just to keep things clean
+			String id = superPages[m].trim();
+			if (!allIds.contains(id)) {
+				allIds.add(id);
+			}
+		}
+
+		return (String[]) allIds.toArray(new String[0]);		
 	}
 }
