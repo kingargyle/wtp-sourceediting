@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.wst.dtd.ui</name>
+	<name>org.eclipse.wst.xml.core.tests</name>
 	<comment></comment>
+	<projects>
+		<project>org.eclipse.wst.xml.core</project>
+		<project>org.junit</project>
+	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
