@@ -66,6 +66,7 @@ import org.eclipse.ui.texteditor.DefaultRangeIndicator;
 import org.eclipse.ui.texteditor.IAbstractTextEditorHelpContextIds;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.IElementStateListener;
+import org.eclipse.ui.texteditor.IStatusField;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.IWorkbenchActionDefinitionIds;
@@ -84,6 +85,7 @@ import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.core.util.StringUtils;
 import org.eclipse.wst.sse.ui.StructuredResourceMarkerAnnotationModel;
 import org.eclipse.wst.sse.ui.edit.util.ActionDefinitionIds;
+import org.eclipse.wst.sse.ui.edit.util.StructuredTextEditorActionConstants;
 import org.eclipse.wst.sse.ui.extension.ExtendedConfigurationBuilder;
 import org.eclipse.wst.sse.ui.extension.ExtendedEditorActionBuilder;
 import org.eclipse.wst.sse.ui.extension.ExtendedEditorDropTargetAdapter;
@@ -729,6 +731,28 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 		}
 	}
 
+	protected void updateStatusField(String category) {
+		super.updateStatusField(category);
+
+		if (category == null)
+			return;
+
+		if (StructuredTextEditorActionConstants.STATUS_CATEGORY_OFFSET.equals(category)) {
+			IStatusField field = getStatusField(category);
+			if (field != null) {
+				Point selection = getSourceViewer().getTextWidget().getSelection();
+				int offset1 = widgetOffset2ModelOffset(getSourceViewer(), selection.x);
+				int offset2 = widgetOffset2ModelOffset(getSourceViewer(), selection.y);
+				String text = null;
+				if (offset1 != offset2)
+					text = "[" + offset1 + "-" + offset2 + "]";
+				else
+					text = "[ " + offset1 + " ]";
+				field.setText(text == null ? fErrorLabel : text);
+			}
+		}
+	}
+
 	public IStatus validateEdit(Shell context) {
 		IStatus status = STATUS_OK;
 
@@ -750,6 +774,10 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 				throw new SourceEditingRuntimeException(e);
 			}
 		}
+	}
+	protected void handleCursorPositionChanged() {
+		super.handleCursorPositionChanged();
+		updateStatusField(StructuredTextEditorActionConstants.STATUS_CATEGORY_OFFSET);
 	}
 
 	/*
