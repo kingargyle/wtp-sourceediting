@@ -12,7 +12,6 @@ package org.eclipse.wst.xsd.contentmodel.internal;
 
 import org.eclipse.wst.common.contentmodel.CMDocument;
 import org.eclipse.wst.common.contentmodel.factory.CMDocumentFactory;
-//import com.ibm.etools.contentmodel.util.CMDocumentBuilderRegistry;
 
 /**
  *  This builder handles building .dtd / .xsd grammar files

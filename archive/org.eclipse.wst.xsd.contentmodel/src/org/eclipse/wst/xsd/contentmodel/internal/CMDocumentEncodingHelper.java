@@ -69,7 +69,7 @@ public class CMDocumentEncodingHelper
   }
 
 
-  // This code is taken from com.ibm.etools.xmlutility.uri.URIHelper
+  // This code is taken from org.eclipse.wst.xml.uriresolver.util.URIHelper
   // I didn't want to add this plugin  as a dependency this plugin
   // in order to simplify our xerces dependenies
   protected static final String FILE_PROTOCOL = "file:";

@@ -499,7 +499,7 @@ public class XSDImpl
 
   /**
    * Adapted from public String getPrefix(String ns, boolean withColon) in class
-   * TypesHelper found in com.ibm.etools.xsdeditor plugin.
+   * TypesHelper found in org.eclipse.wst.xsd.editor plugin.
    * 
    * @param schema -
    *          the relevant schema
@@ -2748,7 +2748,7 @@ public class XSDImpl
   }
   /**
    * Note this XSD model visitor differs from the XSD model visitor in
-   * com.ibm.etools.xsdeditor plugin. In visitModelGroup method we call
+   * org.eclipse.wst.xsd.editor plugin. In visitModelGroup method we call
    * getParticles() instead of getContents(). This gathers all of the content of
    * a derived type.
    */
