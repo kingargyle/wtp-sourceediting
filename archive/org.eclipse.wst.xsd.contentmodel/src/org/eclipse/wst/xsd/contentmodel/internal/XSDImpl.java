@@ -1130,7 +1130,7 @@ public class XSDImpl
      */
     public String getAttrName()
     {
-      return xsdAttributeUse.getContent().getName();
+      return xsdAttributeUse.getAttributeDeclaration().getName();
     }
 
     /**
@@ -1190,7 +1190,11 @@ public class XSDImpl
     public Object getNSPrefixQualification()
     {
       String form = null;
-      if (xsdAttributeUse.getContent().isSetForm())
+      if (xsdAttributeUse.getContent() != xsdAttributeUse.getAttributeDeclaration())
+      {
+      	form =  "qualified";
+      }	
+      else if (xsdAttributeUse.getContent().isSetForm())
       {
         form = xsdAttributeUse.getContent().getForm().getName();
       }
