@@ -63,9 +63,7 @@ public class JSSourceViewerConfiguration extends SourceViewerConfiguration {
 		return fContentAssistant;
 	}
 
-	/**
-	 * @see SourceViewerConfiguration#getHoverControlCreator(ISourceViewer)
-	 */
+
 	public IInformationControlCreator getInformationControlCreator(ISourceViewer sourceViewer) {
 		return getInformationControlCreator(sourceViewer, true);
 	}

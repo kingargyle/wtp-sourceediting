@@ -18,7 +18,6 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -69,7 +68,7 @@ public class SimpleViewerSelectionManagerImpl implements ViewerSelectionManager 
 	}
 
 	/**
-	 * @see ISelectionChangedListener#selectionChanged(SelectionChangedEvent)
+	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(SelectionChangedEvent)
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
 		IStructuredSelection selection = (IStructuredSelection) event.getSelection();
@@ -111,7 +110,7 @@ public class SimpleViewerSelectionManagerImpl implements ViewerSelectionManager 
 	 * a List when the user selects an item or items.
 	 * </p>
 	 *
-	 * @param e an event containing information about the selection
+	 * @param event an event containing information about the selection
 	 */
 	public void widgetSelected(SelectionEvent event) {
 	}
@@ -124,7 +123,7 @@ public class SimpleViewerSelectionManagerImpl implements ViewerSelectionManager 
 	 * return in a Text.
 	 * </p>
 	 *
-	 * @param e an event containing information about the default selection
+	 * @param event an event containing information about the default selection
 	 */
 	public void widgetDefaultSelected(SelectionEvent event) {
 	}

@@ -226,9 +226,7 @@ public class JSAnnotationHover implements IAnnotationHover {
 		return buffer.toString();
 	}
 
-	/**
-	 * @see IVerticalRulerHover#getHoverInfo(ISourceViewer, int)
-	 */
+
 	public String getHoverInfo(ISourceViewer sourceViewer, int lineNumber) {
 		IMarker marker = getMarker(sourceViewer, lineNumber);
 		List messages = new ArrayList(marker == null ? 0 : 1);

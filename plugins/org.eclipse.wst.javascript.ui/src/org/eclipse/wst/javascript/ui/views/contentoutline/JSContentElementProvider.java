@@ -24,9 +24,7 @@ import org.eclipse.wst.javascript.ui.ContentElementProvider;
 
 public class JSContentElementProvider implements ContentElementProvider {
 
-	/**
-	 * @see ContentElementProvider#getContentElements()
-	 */
+
 	public List getContentElements(Object inputElement) {
 		List vec = null;
 

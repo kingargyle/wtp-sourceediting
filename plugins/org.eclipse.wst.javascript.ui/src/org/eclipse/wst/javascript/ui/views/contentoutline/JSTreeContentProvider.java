@@ -12,8 +12,6 @@ package org.eclipse.wst.javascript.ui.views.contentoutline;
 
 import java.util.Vector;
 
-import org.eclipse.jface.viewers.IContentProvider;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.wst.javascript.common.ui.ContentElement;
@@ -25,7 +23,7 @@ public class JSTreeContentProvider implements ITreeContentProvider {
 	private ContentElementProvider fContentElementProvider = new JSContentElementProvider();
 
 	/**
-	 * @see IContentProvider#dispose()
+	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
 	public void dispose() {
 	}
@@ -42,7 +40,7 @@ public class JSTreeContentProvider implements ITreeContentProvider {
 	}
 
 	/**
-	 * @see IStructuredContentProvider#getElements(Object inputElement)
+	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(Object inputElement)
 	 */
 	public Object[] getElements(Object inputElement) {
 		return fContentElementProvider.getContentElements(inputElement).toArray();
@@ -63,7 +61,7 @@ public class JSTreeContentProvider implements ITreeContentProvider {
 	}
 
 	/**
-	 * @see IContentProvider#inputChanged(Viewer viewer, Object oldInput, Object newInput)
+	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(Viewer viewer, Object oldInput, Object newInput)
 	 */
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 	}

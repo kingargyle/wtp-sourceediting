@@ -375,7 +375,6 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * Loads the Show In Target IDs from the Extended Configuration extension
 	 * point.
 	 * 
-	 * @return
 	 */
 	protected String[] createShowInTargetIds() {
 		List allIds = new ArrayList(0);
@@ -564,7 +563,6 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * Return the Content Type ID of the input - hardcode for now
 	 * 
 	 * @param element
-	 * @return
 	 */
 	String getInputContentType(Object element) {
 		return "com.ibm.sse.model.javascript.javascriptsource";
