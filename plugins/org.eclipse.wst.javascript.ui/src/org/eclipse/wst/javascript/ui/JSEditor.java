@@ -103,7 +103,7 @@ import org.eclipse.wst.sse.ui.internal.debug.ToggleBreakpointAction;
 import org.eclipse.wst.sse.ui.internal.debug.ToggleBreakpointsTarget;
 import org.eclipse.wst.sse.ui.internal.editor.IHelpContextIds;
 import org.eclipse.wst.sse.ui.internal.extension.BreakpointProviderBuilder;
-import org.eclipse.wst.sse.ui.preferences.CommonEditorPreferenceNames;
+import org.eclipse.wst.sse.ui.internal.preferences.EditorPreferenceNames;
 
 public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	// local adapter
@@ -270,7 +270,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 */
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
 		support.setCharacterPairMatcher(fBracketMatcher);
-		support.setMatchingCharacterPainterPreferenceKeys(CommonEditorPreferenceNames.MATCHING_BRACKETS, CommonEditorPreferenceNames.MATCHING_BRACKETS_COLOR);
+		support.setMatchingCharacterPainterPreferenceKeys(EditorPreferenceNames.MATCHING_BRACKETS, EditorPreferenceNames.MATCHING_BRACKETS_COLOR);
 		// pa_TODO we should inherit values from either the text pref page or
 		// java pref page for annotations
 		super.configureSourceViewerDecorationSupport(support);
@@ -598,7 +598,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 */
 	protected void handlePreferenceStoreChanged(PropertyChangeEvent event) {
 		String property = event.getProperty();
-		if (CommonEditorPreferenceNames.EDITOR_TEXT_HOVER_MODIFIERS.equals(property)) {
+		if (EditorPreferenceNames.EDITOR_TEXT_HOVER_MODIFIERS.equals(property)) {
 			updateHoverBehavior();
 		}
 		super.handlePreferenceStoreChanged(event);
