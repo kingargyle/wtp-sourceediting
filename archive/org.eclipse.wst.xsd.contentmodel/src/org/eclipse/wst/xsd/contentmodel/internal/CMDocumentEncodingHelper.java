@@ -13,7 +13,7 @@ package org.eclipse.wst.xsd.contentmodel.internal;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.eclipse.wst.contentmodel.CMDocument;
+import org.eclipse.wst.common.contentmodel.CMDocument;
 import org.eclipse.wst.encoding.EncodingHelper;
 
 public class CMDocumentEncodingHelper

@@ -15,7 +15,7 @@
    <requires>
       <import plugin="org.eclipse.core.runtime.compatibility"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.wst.contentmodel"/>
+      <import plugin="org.eclipse.wst.common.contentmodel"/>
       <import plugin="org.eclipse.wst.encoding"/>
       <import plugin="org.eclipse.wst.uriresolver"/>
       <import plugin="org.eclipse.xsd"/>
@@ -23,7 +23,7 @@
 
 
    <extension
-         point="org.eclipse.wst.contentmodel.documentFactories">
+         point="org.eclipse.wst.common.contentmodel.documentFactories">
       <factory
             type="xsd"
             class="org.eclipse.wst.xsd.contentmodel.internal.CMDocumentFactoryXSD">
