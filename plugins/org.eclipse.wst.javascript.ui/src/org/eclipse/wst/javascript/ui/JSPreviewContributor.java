@@ -30,7 +30,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.wst.common.encoding.content.IContentTypeIdentifier;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 
 public class JSPreviewContributor {
@@ -72,8 +71,10 @@ public class JSPreviewContributor {
 				Shell shell = ((ToolItem) e.widget).getParent().getShell();
 				IContentType[] contentTypes = new IContentType[2];
 				IContentTypeManager manager = Platform.getContentTypeManager();
-				contentTypes[0] = manager.getContentType(IContentTypeIdentifier.ContentTypeID_HTML);
-				contentTypes[1] = manager.getContentType(IContentTypeIdentifier.ContentTypeID_JSP);
+				// ISSUE: we shouldn't have to depend on HTML and JSP in this
+				// direction?
+				contentTypes[0] = manager.getContentType("org.eclipse.wst.html.core.htmlsource");
+				contentTypes[1] = manager.getContentType("org.eclipse.jst.jsp.core.jspsource");
 				FilteredFileSelectionDialog dialog = new FilteredFileSelectionDialog(shell, contentTypes);
 				IResource resource = fProject;
 				if (resource == null)
@@ -128,8 +129,7 @@ public class JSPreviewContributor {
 		if (resource != null && resource.getType() == IResource.FILE) {
 			String url = "file://" + resource.getLocation(); //$NON-NLS-1$
 			fBrowser.setUrl(url);
-		}
-		else {
+		} else {
 			String editorText = fEditor.getDocument().get();
 			String previewText = "<HTML><BODY><SCRIPT language=\"JavaScript\">" + "<!--" + "\n" + editorText + "\n" + "//-->" + "</SCRIPT></BODY></HTML>"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 			fBrowser.setText(previewText);

@@ -20,10 +20,6 @@
 
    <extension
          point="org.eclipse.team.core.fileTypes">
-      <fileTypes
-            type="text"
-            extension="js">
-      </fileTypes>
    </extension>
    <extension
          point="org.eclipse.core.runtime.contentTypes">

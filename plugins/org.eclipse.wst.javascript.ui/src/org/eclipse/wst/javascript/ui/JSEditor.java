@@ -78,8 +78,8 @@ import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wst.common.encoding.CommonEncodingPreferenceNames;
 import org.eclipse.wst.common.encoding.ContentBasedPreferenceGateway;
-import org.eclipse.wst.common.encoding.content.IContentTypeIdentifier;
 import org.eclipse.wst.javascript.common.ui.internal.JSCommonUIPlugin;
+import org.eclipse.wst.javascript.core.contenttype.ContentTypeIdForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.editor.JavaPairMatcher;
 import org.eclipse.wst.javascript.ui.views.contentoutline.JSContentOutlinePage;
 import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
@@ -569,7 +569,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * @param element
 	 */
 	String getInputContentType(Object element) {
-		return IContentTypeIdentifier.ContentTypeID_JAVASCRIPT; //$NON-NLS-1$
+		return ContentTypeIdForJavaScript.ContentTypeID_JAVASCRIPT; //$NON-NLS-1$
 	}
 
 	protected JSLineStyleListener getLineStyleListener() {
@@ -790,7 +790,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * They should be kept the same.
 	 */
 	private void convertLineDelimiters(IDocument document) throws CoreException {
-		String contentTypeId = IContentTypeIdentifier.ContentTypeID_JAVASCRIPT;
+		String contentTypeId = ContentTypeIdForJavaScript.ContentTypeID_JAVASCRIPT;
 		String endOfLineCode = ContentBasedPreferenceGateway.getPreferencesString(contentTypeId, CommonEncodingPreferenceNames.END_OF_LINE_CODE);
 		// endOfLineCode == null means the content type does not support this function (e.g. DTD)
 		// endOfLineCode == "" means no translation
