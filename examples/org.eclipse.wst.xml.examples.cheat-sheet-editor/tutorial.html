@@ -1,0 +1,149 @@
+<html>
+<head>
+<title>Extending the SSE - Example Cheatsheet Editor</title>
+</head>
+<body>
+
+<h2>SSE principles</h2>
+<p>
+The structured source editor (SSE) framework is content type based. Therefore if you want to
+extend the framework with your own file format you have to define your own content type and its
+model handler. To do this you extend the org.eclipse.core.runtime.contentTypes extension point
+specifying your content type in the id attribute and using org.eclipse.core.runtime.xml as the
+base type. The priority should be set to high so you override the default. In the file
+association element you use your own file extensions or a file name to identify the content type
+of the file. The usage of the extension point should look like the following:
+<pre>
+   &lt;extension point="org.eclipse.core.runtime.contentTypes"&gt;
+         &lt;content-type
+               priority="high"
+               name="CS Content Type"
+               id="cssource"
+               base-type="org.eclipse.core.runtime.xml"
+     		   default-charset="UTF-8"&gt;
+			&lt;describer class="org.eclipse.wst.xml.core.contenttype.ContentDescriberForXML"/&gt;
+		&lt;/content-type&gt;
+        &lt;file-association 
+			content-type="org.eclipse.wst.cs.ui.cssource"
+			file-names="content.xml"/&gt;
+   &lt;/extension&gt;
+</pre>
+
+To use the content type inside of the SSE you have to define a model handler extending the
+org.eclipse.wst.sse.core.modelHandler extension point. The model handler implementation extends
+the class org.eclipse.wst.sse.core.modelhandler.AbstractModelHandler and implements the
+interface org.eclipse.wst.sse.core.modelhandler.IModelHandler. It should set its own id and the
+associated content type id.
+<pre>
+   &lt;extension
+         point="org.eclipse.wst.sse.core.modelHandler"&gt;
+      &lt;modelHandler
+            default="false"
+            class="org.eclipse.wst.cs.core.modelhandler.ModelHandlerForCS"
+            associatedContentTypeId="org.eclipse.wst.cs.ui.cssource"
+            id="org.eclipse.wst.sse.core.handler.cs">
+      &lt;/modelHandler&gt;
+   &lt;/extension&gt;
+</pre>
+
+This is the starting point for all extensions made to the SSE. Now there are several possibilities
+where to built in your own extensions.
+</p>
+
+<h2>Extending the built-in content assist</h2>
+<p>
+In this example we want to provide a custom content assist processor for attribute values.
+To extend the content assist of the XML editor from the SSE you just use the org.eclipse.wst.sse.ui.extendedconfiguration
+extension point and specify your own textviewerconfiguration.
+<pre>
+   &lt;extension point="org.eclipse.wst.sse.ui.extendedconfiguration"&gt;
+      &lt;textviewerconfiguration
+            <b>class="org.eclipse.wst.cs.ui.StructuredTextViewerConfigurationCS"</b>
+            target="org.eclipse.wst.cs.ui.cssource"&gt;
+      &lt;/textviewerconfiguration&gt;
+      &lt;contentoutlineconfiguration
+            class="org.eclipse.wst.xml.ui.views.contentoutline.XMLContentOutlineConfiguration"
+            target="org.eclipse.wst.cs.ui.cssource"&gt;
+      &lt;/contentoutlineconfiguration>
+      &lt;propertysheetconfiguration
+            class="org.eclipse.wst.xml.ui.views.properties.XMLPropertySheetConfiguration"
+            target="org.eclipse.wst.cs.ui.cssource"&gt;
+      &lt;/propertysheetconfiguration&gt;
+      &lt;spellchecktarget
+            class="org.eclipse.wst.xml.ui.XMLSpellCheckTarget"
+            target="org.eclipse.wst.cs.ui.cssource"&gt;
+      &lt;/spellchecktarget&gt;
+      &lt;sourceeditingtexttools
+            class="org.eclipse.wst.xml.ui.extensions.XMLSourceEditingTextTools"
+            target="org.eclipse.wst.cs.ui.cssource"&gt;
+      &lt;/sourceeditingtexttools&gt;
+      &lt;characterpairmatcher
+            class="org.eclipse.wst.xml.ui.text.XMLDocumentRegionEdgeMatcher"
+            target="org.eclipse.wst.cs.ui.cssource"&gt;
+      &lt;/characterpairmatcher&gt;
+      &lt;preferencepages
+            preferenceids="org.eclipse.wst.sse.ui.preferences/org.eclipse.wst.sse.ui.preferences.cs"
+            target="org.eclipse.wst.cs.ui.cssource"&gt;
+      &lt;/preferencepages&gt;
+   &lt;/extension&gt;
+</pre>
+In the configuration you override the getContentAssistant method from StructuredTextViewerConfigurationXML
+and provide your own content assist processor for the partition types StructuredTextPartitioner.ST_DEFAULT_PARTITION
+and StructuredTextPartitionerForXML.ST_DEFAULT_XML.
+<pre>
+	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
+		IContentAssistant ca = super.getContentAssistant(sourceViewer);
+		if (ca != null && ca instanceof ContentAssistant) {
+			ContentAssistant contentAssistant = (ContentAssistant) ca;
+			IContentAssistProcessor xmlContentAssistProcessor = new CSContentAssistProcessor(getEditorPart());
+			IContentAssistProcessor noRegionProcessor = new NoRegionContentAssistProcessor();
+			addContentAssistProcessor(contentAssistant, xmlContentAssistProcessor, StructuredTextPartitioner.ST_DEFAULT_PARTITION);
+			addContentAssistProcessor(contentAssistant, xmlContentAssistProcessor, StructuredTextPartitionerForXML.ST_DEFAULT_XML);
+			addContentAssistProcessor(contentAssistant, noRegionProcessor, StructuredTextPartitioner.ST_UNKNOWN_PARTITION);
+		}
+		return ca;
+	}
+</pre>
+The implementation of the content assist processor overrides addAttributeValueProposals from
+the XMLContentAssistProcessor. The passed ContentAssistRequest stores the match string, the
+corresponding node and structured document region where the cursor is. To get the attribute
+name you have to get the last attribute text region in the structured document region.
+<pre>
+		// Find the attribute region and name for which this position should have a value proposed
+		IStructuredDocumentRegion open = node.getFirstStructuredDocumentRegion();
+		ITextRegionList openRegions = open.getRegions();
+		int i = openRegions.indexOf(contentAssistRequest.getRegion());
+		if (i < 0)
+			return;
+		ITextRegion nameRegion = null;
+		while (i >= 0) {
+			nameRegion = openRegions.get(i--);
+			if (nameRegion.getType() == XMLRegionContext.XML_TAG_ATTRIBUTE_NAME)
+				break;
+		}
+</pre>
+
+To provide your own content assist proposals construct a CustomCompletionProposal and add it
+to the content assist request.
+</p>
+
+<h2>Providing your own outline view</h2>
+<p>
+To change the default outline view you have to provide your own adapter factory provider.
+To register it with the SSE extend the org.eclipse.wst.sse.ui.adapterFactoryDescription extension point.
+<pre>
+   &lt;extension point="org.eclipse.wst.sse.ui.adapterFactoryDescription"&gt;
+      &lt;adapterFactoryDescription class="org.eclipse.wst.cs.ui.registry.AdapterFactoryProviderForCS"/&gt;
+   &lt;/extension&gt;
+</pre>
+The adapter factory provider should add your own adapter factory to the factory registry.
+
+<img src="../test.jpg" />
+</p>
+
+<h2>Using open on</h2>
+<p>
+</p>
+
+</body>
+</html>
