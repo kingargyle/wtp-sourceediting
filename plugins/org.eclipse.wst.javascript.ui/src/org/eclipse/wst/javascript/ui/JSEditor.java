@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -60,7 +61,6 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.editors.text.StorageDocumentProvider;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.help.WorkbenchHelp;
-import org.eclipse.ui.ide.IDEActionFactory;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.DefaultRangeIndicator;
@@ -70,6 +70,7 @@ import org.eclipse.ui.texteditor.IElementStateListener;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.IWorkbenchActionDefinitionIds;
+import org.eclipse.ui.texteditor.MarkerRulerAction;
 import org.eclipse.ui.texteditor.ResourceAction;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.texteditor.TextOperationAction;
@@ -313,7 +314,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 			// StructuredTextEditor Action - add breakpoints
 			IAction breakpointAction = new ToggleBreakpointAction(this, getVerticalRuler());
-			setAction(ActionDefinitionIds.ADD_BREAKPOINTS, breakpointAction);
+			setAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS, breakpointAction);
 			// StructuredTextEditor Action - manage breakpoints
 			breakpointAction = new ManageBreakpointAction(this, getVerticalRuler());
 			setAction(ActionDefinitionIds.MANAGE_BREAKPOINTS, breakpointAction);
@@ -322,13 +323,16 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			setAction(ActionDefinitionIds.EDIT_BREAKPOINTS, breakpointAction);
 
 			// override ruler double click action
-
 			String ext = BreakpointRulerAction.getFileExtension(getEditorInput());
 			if (BreakpointProviderBuilder.getInstance().isAvailable(getInputContentType(getEditorInput()), ext)) {
-				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, getAction(ActionDefinitionIds.ADD_BREAKPOINTS));
+				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, getAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS));
 			}
 			else {
-				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, getAction(IDEActionFactory.BOOKMARK.getId()));
+				// The Default Text Editor uses editorContribution to perform this
+				// mapping, but since it relies on the IEditorSite ID, it can't be
+				// relied on for MultiPageEditorParts. Instead, force the action
+				// registration manually.
+				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new MarkerRulerAction(SSEUIPlugin.getDefault().getResourceBundle(), "Editor.ManageBookmarks.", this, getVerticalRuler(), IMarker.BOOKMARK, true));
 			}
 
 
@@ -563,7 +567,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * @param element
 	 */
 	String getInputContentType(Object element) {
-		return "com.ibm.sse.model.javascript.javascriptsource";
+		return "com.ibm.sse.model.javascript.javascriptsource"; //$NON-NLS-1$
 	}
 
 	protected JSLineStyleListener getLineStyleListener() {
@@ -643,7 +647,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	}
 
 	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
-		menu.add(getAction(ActionDefinitionIds.ADD_BREAKPOINTS));
+		menu.add(getAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS));
 		menu.add(getAction(ActionDefinitionIds.MANAGE_BREAKPOINTS));
 		menu.add(getAction(ActionDefinitionIds.EDIT_BREAKPOINTS));
 		menu.add(new Separator());
