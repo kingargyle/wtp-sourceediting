@@ -13,7 +13,7 @@ public class XMLUIPerformanceTestSuite extends TestSuite {
 		addTest(new TestSuite(BasicPluginTests.class));
         addTest(new TestSuite(OpenEditorTest.class));
         addTest(new TestSuite(FormatTest.class));
-        addTest(new TestSuite(FormatTestWithReconciler.class));
+        addTest(new TestSuite(FormatTestWithReconcilerOnly.class));
         addTest(new TestSuite(ScrollTest.class));
 	}
 	
