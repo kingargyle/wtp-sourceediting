@@ -15,13 +15,13 @@ import junit.framework.TestSuite;
 
 
 
-public class PerformanceTests extends TestSuite {
+public class JSPUIPerformanceTests extends TestSuite {
 	public static Test suite() {
-		return new PerformanceTests();
+		return new JSPUIPerformanceTests();
 	}
 
-	public PerformanceTests() {
-		super("PerformanceTests"); //$NON-NLS-1$
+	public JSPUIPerformanceTests() {
+		super("JSPUIPerformanceTests"); //$NON-NLS-1$
 
 		
 		addTest(new TestSuite(TestInsertPerformance.class, "TestInsertPerformance")); //$NON-NLS-1$

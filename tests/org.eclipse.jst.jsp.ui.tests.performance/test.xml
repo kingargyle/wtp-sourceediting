@@ -29,7 +29,7 @@
     <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
       <property name="data-dir" value="${workspace}"/>
       <property name="plugin-name" value="${plugin-name}"/>
-      <property name="classname" value="org.eclipse.jst.jsp.ui.tests.performance.PerformanceTests"/>
+      <property name="classname" value="org.eclipse.jst.jsp.ui.tests.performance.JSPUIPerformanceTests"/>
 
     </ant>
     
