@@ -10,12 +10,8 @@
  *     Jens Lukowski/Innoopract - initial renaming/restructuring
  *     
  *******************************************************************************/
-package org.eclipse.wst.xml.core.internal.contenttype;
+package org.eclipse.wst.css.tests.encoding.css;
 
-/**
- * @deprecated
- * Use the one from org.eclipse.wst.common.encoding
- */
 
 public interface EncodingParserConstants {
 
@@ -25,10 +21,10 @@ public interface EncodingParserConstants {
 	final String MAX_CHARS_REACHED = "MAX_CHARS_REACHED"; //$NON-NLS-1$
 	final String StringValue = "strval"; //$NON-NLS-1$
 	final String UnDelimitedStringValue = "UnDelimitedStringValue"; //$NON-NLS-1$
-	String UTF16BE = "UTF16BE"; //$NON-NLS-1$
-	String UTF16LE = "UTF16LE"; //$NON-NLS-1$
+	public final String UTF16BE = "UTF16BE"; //$NON-NLS-1$
+	public final String UTF16LE = "UTF16LE"; //$NON-NLS-1$
 
 
-	String UTF83ByteBOM = "UTF83ByteBOM"; //$NON-NLS-1$
+	public final String UTF83ByteBOM = "UTF83ByteBOM"; //$NON-NLS-1$
 
 }
