@@ -564,7 +564,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * @param element
 	 */
 	String getInputContentType(Object element) {
-		return "com.ibm.sse.model.javascript.javascriptsource"; //$NON-NLS-1$
+		return IContentTypeIdentifier.ContentTypeID_JAVASCRIPT; //$NON-NLS-1$
 	}
 
 	protected JSLineStyleListener getLineStyleListener() {
