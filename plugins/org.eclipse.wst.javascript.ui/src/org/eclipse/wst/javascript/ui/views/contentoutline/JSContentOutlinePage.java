@@ -378,7 +378,6 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 
 		actionBars.getToolBarManager().add(fSortItem);
 		actionBars.getToolBarManager().add(collapseAction);
-		actionBars.getToolBarManager().add(fDeleteAction);
 
 		actionBars.getMenuManager().add(fToggleLinkItem);
 		actionBars.getMenuManager().add(fShowHierarchyItem);
