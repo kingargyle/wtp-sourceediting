@@ -166,7 +166,9 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 	 * @return
 	 */
 	private ITextEditor createSourcePage() {
-		return new StructuredTextEditorHTML();
+		StructuredTextEditorHTML editor = new StructuredTextEditorHTML();
+		editor.setEditorPart(this);
+		return editor;
 	}
 
 	/*
