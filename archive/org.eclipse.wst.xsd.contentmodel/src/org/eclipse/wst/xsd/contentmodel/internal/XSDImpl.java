@@ -50,7 +50,7 @@ import org.eclipse.wst.common.contentmodel.basic.CMNamedNodeMapImpl;
 import org.eclipse.wst.common.contentmodel.basic.CMNodeListImpl;
 import org.eclipse.wst.common.contentmodel.util.CMDescriptionBuilder;
 import org.eclipse.wst.common.contentmodel.util.NamespaceInfo;
-import org.eclipse.wst.uriresolver.URIResolverPlugin;
+import org.eclipse.wst.common.uriresolver.URIResolverPlugin;
 import org.eclipse.wst.xsd.contentmodel.internal.util.XSDSchemaLocatorAdapterFactory;
 import org.eclipse.xsd.XSDAnnotation;
 import org.eclipse.xsd.XSDAttributeDeclaration;

@@ -16,7 +16,7 @@ import java.io.InputStream;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.wst.uriresolver.URIResolverPlugin;
+import org.eclipse.wst.common.uriresolver.URIResolverPlugin;
 import org.eclipse.xsd.XSDSchema;
 import org.eclipse.xsd.util.XSDResourceImpl;
 import org.eclipse.xsd.util.XSDSchemaLocator;
