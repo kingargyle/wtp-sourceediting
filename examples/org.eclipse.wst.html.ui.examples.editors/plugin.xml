@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.eclipse.wst.html.ui.examples.editors"
+   name="HTML Editor Examples"
+   version="1.0.0"
+   provider-name="Eclipse.org"
+   class="org.eclipse.wst.html.ui.examples.editors.internal.EditorExamplesPlugin">
+
+   <runtime>
+      <library name="htmleditorexamples.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+     <import plugin="org.eclipse.core.resources"/>
+     <import plugin="org.eclipse.core.runtime"/>
+     <import plugin="org.eclipse.jface.text"/>
+     <import plugin="org.eclipse.ui"/>
+     <import plugin="org.eclipse.ui.editors"/>
+     <import plugin="org.eclipse.ui.workbench.texteditor"/>
+     <import plugin="org.eclipse.wst.html.core"/>
+     <import plugin="org.eclipse.wst.html.ui"/>
+     <import plugin="org.eclipse.wst.sse.core"/>
+     <import plugin="org.eclipse.wst.sse.ui"/>
+     <import plugin="org.eclipse.wst.xml.core"/>
+     <import plugin="org.eclipse.wst.xml.ui"/>
+   </requires>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <!-- sync-on-page-switch editor -->
+      <editor
+            name="Preview HTML Editor Example"
+            default="false"
+            icon="icons/browser_editor.gif"
+            extensions="html, htm, xhtml, jhtml, shtml, shtm, html-ss, wml, wsdl, xml, nst, xmi, dadx"
+            contributorClass="org.eclipse.wst.html.ui.edit.ui.ActionContributorHTML"
+            class="org.eclipse.wst.html.ui.examples.editors.PreviewEditor"
+            symbolicFontName="org.eclipse.wst.sse.ui.textfont"
+            id="org.eclipse.wst.html.ui.examples.editors.PreviewEditor">
+      </editor>
+   </extension>
+   <!-- matching actionsets -->
+   <extension
+         point="org.eclipse.ui.actionSetPartAssociations">
+      <actionSetPartAssociation
+            targetID="org.eclipse.ui.edit.text.actionSet.annotationNavigation">
+         <part
+               id="org.eclipse.wst.html.ui.examples.editors.PreviewEditor">
+         </part>
+      </actionSetPartAssociation>
+      <actionSetPartAssociation
+            targetID="org.eclipse.ui.NavigateActionSet">
+         <part
+               id="org.eclipse.wst.html.ui.examples.editors.PreviewEditor">
+         </part>
+      </actionSetPartAssociation>
+   </extension>
+</plugin>
