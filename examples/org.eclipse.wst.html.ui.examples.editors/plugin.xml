@@ -35,7 +35,7 @@
             name="Preview HTML Editor Example"
             default="false"
             icon="icons/browser_editor.gif"
-            extensions="html, htm, xhtml, jhtml, shtml, shtm, html-ss, wml, wsdl, xml, nst, xmi, dadx"
+            extensions="html, htm, xhtml, jhtml, shtml, shtm, html-ss, wml"
             contributorClass="org.eclipse.wst.html.ui.edit.ui.ActionContributorHTML"
             class="org.eclipse.wst.html.ui.examples.editors.PreviewEditor"
             symbolicFontName="org.eclipse.wst.sse.ui.textfont"
