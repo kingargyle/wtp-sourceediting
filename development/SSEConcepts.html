@@ -7,14 +7,14 @@
 <title>SSEConcepts.html</title>
 </head>
 <body>
-<h1>Concepts in SSE Models</h1>
-<h2>Structured document </h2>
-<p>A structured document (see <i>IStructuredDocument</i>) is a document that is capable of being parsed into semantically meaningful regions (see <i>IStructuredDocumentRegion</i>). These regions are one level higher than tokens, or more precisely text regions (see <i>ITextRegion</i>), but smaller than a complete semantic model unit. For example,  the following text<br />&lt;tagname attribute=&quot;value&quot;&gt; some info &lt;/tagname&gt;
-<br />consist of is 3 structured document regions. <br />&lt;tagname attribute=&quot;value&quot;&gt;<br />    some info <br />
+<h1>Concepts in Structured Source Editing</h1>
+<h2>Structured Document </h2>
+<p>A structured document (see <i>IStructuredDocument</i>) is a document that is capable of being parsed into semantically meaningful regions (see <i>IStructuredDocumentRegion</i>). These regions are one level higher than syntactic tokens, or more precisely text regions (see <i>ITextRegion</i>), but smaller than a complete semantic <i>model</i> unit. For example, the following text<br />&lt;tagname attribute=&quot;value&quot;&gt; some info &lt;/tagname&gt;
+<br />consists of is 3 structured document regions:<br />&lt;tagname attribute=&quot;value&quot;&gt;<br />    some info <br />
 &lt;/tagname&gt;<br />
-<br />When interpreted as XML, it has three semantic units, the Element Node named tagname, the Attribute named attribute and a Text Node of ' some info'. </p>
-<p>The first of the IStructuredDocumentRegions, consists of 8
-ITextRegions, <br />
+<br />When interpreted as XML, it has three semantic units: the Element Node named <i>tagname</i>, the Attribute Node named <i>attribute</i> and a Text Node of <tt> some info</tt>. </p>
+<p>The first of the IStructuredDocumentRegions consists of 8
+ITextRegions:<br />
 &lt;<br />
 tagname<br />
 attribute<br />
@@ -24,12 +24,12 @@ value<br />
 &quot;<br />
 &gt;</p>
 <p>A document is parsed into IStructuredDocumentRegions (and ITextRegions) by a parser (see <i>RegionParser</i>). </p>
-<p>The motivation behind this concept of a document is that the &quot;intermediate level&quot; of document regions form the basis of incremental re-parsing (see <i>IStructuredTextReParser</i>). Typically, only the  document regions &quot;touched&quot; by a change need to be reparsed.  </p>
-<p>When a document is changed, it notifies listeners of the document changed event (see <i>StructuredDocumentEvent</i>) which precisely describes the change in terms of the regions. Typically structured models are one such listner, which knows how to interpret the region types to reparse the semantic representation of the document. </p>
-<h2>StructuredModel </h2>
-<p>A structured model's (see <i>IStructuredModel</i>) most salient feature is that is has as core data a structured doucment. This allows it to use the structured document regions in its own parsing algorithms and data structures. Clients typically can either change the structured model directly, in which case the document is updated appropriately, or update the doucment, in which case the model is updated appropriately. </p>
-<h2>ModelManager</h2>
-<p>Its typically desirable for a model to be shared between various clients, without them needing to be aware of each other. The ModelManger (see <i>IModelManger</i>) serves this role. Some clients desire to share the model and have responsibility to save the model to a resource, if the model is changed. Others clients desire to chare the model and do not care if the changed model is saved or not. Thus, there's two forms of access to a model (currently called 'edit' and 'read', though not great names since either can, technically modify the model). </p>
+<p>The motivation behind this concept of a document is that the &quot;intermediate level&quot; of document regions form the basis of incremental re-parsing (see <i>IStructuredTextReParser</i>). Typically, only the document regions &quot;touched&quot; by a document change need to be updated.  </p>
+<p>When a document is changed, it notifies listeners of the document changed event (see <i>StructuredDocumentEvent</i>) which precisely describes the change in terms of the regions. Typically structured models are one such listener, one which knows how to interpret the region types to reparse the semantic representation of the document. </p>
+<h2>Structured Model </h2>
+<p>A structured model's (see <i>IStructuredModel</i>) most salient feature is that is has, as its core data, a structured document. This allows it to use the structured document regions in its own parsing algorithms and data structures. Clients typically can either change the structured model directly, in which case the structured document is updated appropriately, or update the structured document, in which case the structured model is updated appropriately. </p>
+<h2>Model Manager</h2>
+<p>It is typically desirable for a structured model to be shared between various clients without them being aware of each other. The ModelManager (see <i>IModelManager</i>) serves this role. Some clients desire to share the model and have responsibility to persist changes made to the model. Others clients desire to share the model and do not care whether the changed model is saved or not. Thus, there are two modes of access to a model; they are referred to as <em>edit</em> and <em>read</em> (though not great names since either can, programmatically, modify the structured model). </p>
 <h2>SPI Considerations</h2>
 <p>such as see 'adjust' methods in ITextRegion</p>
 </body>
