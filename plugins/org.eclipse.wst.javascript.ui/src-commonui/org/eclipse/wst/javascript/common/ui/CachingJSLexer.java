@@ -16,7 +16,7 @@ import org.eclipse.wst.javascript.core.jsparser.lexer.LexerException;
 import org.eclipse.wst.javascript.core.jsparser.node.TCommenttok;
 import org.eclipse.wst.javascript.core.jsparser.node.Token;
 
-public class CachingJSLexer extends org.eclipse.wst.javascript.core.jsparser.lexer.LiveLexer {
+class CachingJSLexer extends org.eclipse.wst.javascript.core.jsparser.lexer.LiveLexer {
 
 	protected final LexerCacheForJavaScript cache;
 
