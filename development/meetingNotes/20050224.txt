@@ -1,0 +1,32 @@
+02/24 SSE meeting. 
+
+Attendees:
+        David, Amy, Nitin, Phil, Craig
+        (Jens had given regrets)
+
+
+discussed M3 status. Went over milestone tasks
+detail, Phil agreed to update web pages to show
+"complete", "in progress", etc. Concluded many
+should be "in progress" since we know more work is 
+needed in M4 to complete. 
+
+
+Discussed some M4 planning, set goal of having M4 plan
+updated by or during next meeting in two weeks. 
+Some items mentioned today were:
+
+   1. wsdl has some extension points which logically should 
+   move to XML/SSE extension points. Craig will send details. 
+   2. need to write up and discuss editor-id-associated-with-content-type-ids 
+   proposal. David will write up initial ideas. 
+   3. Overall, everyone recognized need to document APIs, 
+   cleanup code, etc. (All :)
+   4. Craig agreed to debug validation unit test windows failures 
+   at EclipseCon :)
+   
+Offline, Jens communicated he hasn't yet migrated Cheetsheet 
+example to M3, but hopes to during EclipseCon!
+
+Nitin discussed breakpoint providers some, plans to remove "DOM" from 
+API, and move to TextTools object for generality, ability to evolve, etc.
