@@ -1,0 +1,25 @@
+Invitees:
+
+Core team:
+        David Williams
+        Nitin Dahyabhai
+        Phillip Avery
+        Amy Wu
+
+Craig Salter - regrets
+Keith Chong - regrets
+
+Dave Carlson - unknown status
+Jens Lukowski, - regrets
+
+Ted Bashor
+Ted Carroll
+Tim Wagner 
+
+= = = =
+Very brief uneventful meeting, since no one but core team
+and Tim Wagner could make this meeting. 
+
+So, we just educated Tim some on our component, and what 
+typically happens at these meetings :)
+
