@@ -17,7 +17,7 @@ public class OpenEditorTest extends BasicEditorTest {
     
     public void testOpenEditor() {
         
-        int iterations = 5;
+        int iterations = 10;
         
         // warmup runs
         for(int i=0;i<iterations; i++) {
@@ -30,12 +30,15 @@ public class OpenEditorTest extends BasicEditorTest {
         
         // do the test
         // model size important here
-        startMeasuring();    
-        
-        openEditor(new Path(F_SLASH + PROJECT_NAME + F_SLASH + FILE_NAME));
-        runEvents();
-
-        stopMeasuring();
+        for(int i=0;i<iterations; i++) {
+            startMeasuring();    
+            openEditor(new Path(F_SLASH + PROJECT_NAME + F_SLASH + FILE_NAME));
+            runEvents();
+            stopMeasuring();
+            
+            EditorTestHelper.closeAllEditors();
+            runEvents();
+        }
         commitMeasurements();
         assertPerformance();   
     }
