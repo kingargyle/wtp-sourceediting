@@ -13,15 +13,13 @@
 <br />consists of is 3 structured document regions:<br />&lt;tagname attribute=&quot;value&quot;&gt;<br />    some info <br />
 &lt;/tagname&gt;<br />
 <br />When interpreted as XML, it has three semantic units: the Element Node named <i>tagname</i>, the Attribute Node named <i>attribute</i> and a Text Node of <tt> some info</tt>. </p>
-<p>The first of the IStructuredDocumentRegions consists of 8
+<p>The first of the IStructuredDocumentRegions consists of 6
 ITextRegions:<br />
 &lt;<br />
 tagname<br />
 attribute<br />
 =<br />
-&quot;<br />
-value<br />
-&quot;<br />
+&quot;value&quot;<br />
 &gt;</p>
 <p>A document is parsed into IStructuredDocumentRegions (and ITextRegions) by a parser (see <i>RegionParser</i>). </p>
 <p>The motivation behind this concept of a document is that the &quot;intermediate level&quot; of document regions form the basis of incremental re-parsing (see <i>IStructuredTextReParser</i>). Typically, only the document regions &quot;touched&quot; by a document change need to be updated.  </p>
