@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.eclipse.wst.html.ui.tests.performance"
+   name="HTML UI Performance tests Plug-in"
+   version="1.0.0"
+   provider-name="Eclipse.org"
+   class="org.eclipse.wst.html.ui.tests.performance.PerformancePlugin">
+
+   <runtime>
+      <library name="htmluiperformance.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.test.performance"/>
+      <import plugin="org.eclipse.wst.html.core"/>
+      <import plugin="org.eclipse.wst.html.ui"/>
+   </requires>
+
+</plugin>
