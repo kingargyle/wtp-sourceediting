@@ -19,8 +19,8 @@ public abstract class CMNodeImpl extends AdapterImpl implements CMNode
   protected static final String PROPERTY_DOCUMENTATION_SOURCE = "documentationSource";
   protected static final String PROPERTY_DOCUMENTATION_LANGUAGE = "documentationLanguage";
   protected static final String PROPERTY_MOF_NOTIFIER = "key";
-  protected static final String PROPERTY_DEFINITION_INFO = "http://com.ibm.etools/cm/properties/definitionInfo";
-  protected static final String PROPERTY_DEFINITION = "http://com.ibm.etools/cm/properties/definition";
+  protected static final String PROPERTY_DEFINITION_INFO = "http://org.eclipse.wst/cm/properties/definitionInfo";
+  protected static final String PROPERTY_DEFINITION = "http://org.eclipse.wst/cm/properties/definition";
 
   public abstract Object getKey();
 

@@ -103,10 +103,10 @@ public class XSDImpl
    * PROPERTY_NILLABLE PROPERTY_SPEC
    */
   public static final String PROPERTY_CMDOCUMENT = "CMDocument";
-  public static final String PROPERTY_USES_LOCAL_ELEMENT_DECLARATIONS = "http://com.ibm.etools/cm/properties/usesLocalElementDeclarations";
-  public static final String PROPERTY_IS_NAME_SPACE_AWARE = "http://com.ibm.etools/cm/properties/isNameSpaceAware";
-  public static final String PROPERTY_NS_PREFIX_QUALIFICATION = "http://com.ibm.etools/cm/properties/nsPrefixQualification";
-  public static final String PROPERTY_NILLABLE = "http://com.ibm.etools/cm/properties/nillable";
+  public static final String PROPERTY_USES_LOCAL_ELEMENT_DECLARATIONS = "http://org.eclipse.wst/cm/properties/usesLocalElementDeclarations";
+  public static final String PROPERTY_IS_NAME_SPACE_AWARE = "http://org.eclipse.wst/cm/properties/isNameSpaceAware";
+  public static final String PROPERTY_NS_PREFIX_QUALIFICATION = "http://org.eclipse.wst/cm/properties/nsPrefixQualification";
+  public static final String PROPERTY_NILLABLE = "http://org.eclipse.wst/cm/properties/nillable";
   public static final String PROPERTY_SPEC = "spec";
   /*
    * properties common to all CMDocument nodes: PROPERTY_TARGET_NAMESPACE_URI
@@ -114,10 +114,10 @@ public class XSDImpl
    * PROPERTY_ELEMENT_FORM_DEFAULT PROPERTY_ANNOTATION_MAP
    * PROPERTY_ENCODING_INFO
    */
-  public static final String PROPERTY_TARGET_NAMESPACE_URI = "http://com.ibm.etools/cm/properties/targetNamespaceURI";
-  public static final String PROPERTY_IMPORTED_NAMESPACE_INFO = "http://com.ibm.etools/cm/properties/importedNamespaceInfo";
-  public static final String PROPERTY_NAMESPACE_INFO = "http://com.ibm.etools/cm/properties/namespaceInfo";
-  public static final String PROPERTY_ELEMENT_FORM_DEFAULT = "http://com.ibm.etools/cm/properties/elementFormDefault";
+  public static final String PROPERTY_TARGET_NAMESPACE_URI = "http://org.eclipse.wst/cm/properties/targetNamespaceURI";
+  public static final String PROPERTY_IMPORTED_NAMESPACE_INFO = "http://org.eclipse.wst/cm/properties/importedNamespaceInfo";
+  public static final String PROPERTY_NAMESPACE_INFO = "http://org.eclipse.wst/cm/properties/namespaceInfo";
+  public static final String PROPERTY_ELEMENT_FORM_DEFAULT = "http://org.eclipse.wst/cm/properties/elementFormDefault";
   public static final String PROPERTY_ANNOTATION_MAP = "annotationMap";
   public static final String PROPERTY_ENCODING_INFO = "encodingInfo";
   /*
@@ -366,8 +366,8 @@ public class XSDImpl
       List enumerationFacets = ((XSDSimpleTypeDefinition) type).getEnumerationFacets();
       for (Iterator i = enumerationFacets.iterator(); i.hasNext();)
       {
-        XSDEnumerationFacet enum = (XSDEnumerationFacet) i.next();
-        List values = enum.getValue();
+        XSDEnumerationFacet enumFacet = (XSDEnumerationFacet) i.next();
+        List values = enumFacet.getValue();
         for (Iterator j = values.iterator(); j.hasNext();)
         {
           result.add(j.next());
