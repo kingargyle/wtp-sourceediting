@@ -27,16 +27,13 @@ import org.eclipse.wst.sse.ui.registry.embedded.EmbeddedAdapterFactoryRegistryIm
 import org.eclipse.wst.xml.ui.JobStatusLineHelper;
 import org.eclipse.wst.xml.ui.internal.Logger;
 import org.eclipse.wst.xml.ui.internal.preferences.XMLUIPreferenceNames;
-import org.eclipse.wst.xml.ui.templates.TemplateContextTypeXML;
-import org.eclipse.wst.xml.ui.templates.TemplateContextTypeXMLAttribute;
-import org.eclipse.wst.xml.ui.templates.TemplateContextTypeXMLAttributeValue;
-import org.eclipse.wst.xml.ui.templates.TemplateContextTypeXMLTag;
+import org.eclipse.wst.xml.ui.internal.templates.TemplateContextTypeIdsXML;
 
 
 public class CSUIPlugin extends AbstractUIPlugin {
 	public final static String ID = "org.eclipse.wst.xml.examples.cs.ui"; //$NON-NLS-1$
 	protected static CSUIPlugin instance = null;
-	//Resource bundle.
+	// Resource bundle.
 	private ResourceBundle resourceBundle;
 	private static final String KEY_PREFIX = "%"; //$NON-NLS-1$
 	private static final String KEY_DOUBLE_PREFIX = "%%"; //$NON-NLS-1$	
@@ -87,12 +84,13 @@ public class CSUIPlugin extends AbstractUIPlugin {
 	 */
 	public ContextTypeRegistry getTemplateContextRegistry() {
 		if (fContextTypeRegistry == null) {
-			fContextTypeRegistry = new ContributionContextTypeRegistry();
+			ContributionContextTypeRegistry registry = new ContributionContextTypeRegistry();
+			registry.addContextType(TemplateContextTypeIdsXML.ALL);
+			registry.addContextType(TemplateContextTypeIdsXML.TAG);
+			registry.addContextType(TemplateContextTypeIdsXML.ATTRIBUTE);
+			registry.addContextType(TemplateContextTypeIdsXML.ATTRIBUTE_VALUE);
 
-			fContextTypeRegistry.addContextType(new TemplateContextTypeXML());
-			fContextTypeRegistry.addContextType(new TemplateContextTypeXMLTag());
-			fContextTypeRegistry.addContextType(new TemplateContextTypeXMLAttribute());
-			fContextTypeRegistry.addContextType(new TemplateContextTypeXMLAttributeValue());
+			fContextTypeRegistry = registry;
 		}
 
 		return fContextTypeRegistry;
@@ -109,7 +107,8 @@ public class CSUIPlugin extends AbstractUIPlugin {
 
 			try {
 				fTemplateStore.load();
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				Logger.logException(e);
 			}
 		}
@@ -117,8 +116,8 @@ public class CSUIPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns the string from the plugin's resource bundle,
-	 * or 'key' if not found.
+	 * Returns the string from the plugin's resource bundle, or 'key' if not
+	 * found.
 	 */
 	public static String getResourceString(String value) {
 		String s = value.trim();
@@ -133,7 +132,8 @@ public class CSUIPlugin extends AbstractUIPlugin {
 		ResourceBundle bundle = getDefault().getResourceBundle();
 		try {
 			return (bundle != null) ? bundle.getString(key.substring(1)) : key;
-		} catch (MissingResourceException e) {
+		}
+		catch (MissingResourceException e) {
 			return key;
 		}
 	}
@@ -142,7 +142,8 @@ public class CSUIPlugin extends AbstractUIPlugin {
 
 		try {
 			return MessageFormat.format(getResourceString(key), args);
-		} catch (IllegalArgumentException e) {
+		}
+		catch (IllegalArgumentException e) {
 			return getResourceString(key);
 		}
 
@@ -155,7 +156,8 @@ public class CSUIPlugin extends AbstractUIPlugin {
 		try {
 			if (resourceBundle == null)
 				resourceBundle = ResourceBundle.getBundle("org.eclipse.wst.xml.ui.internal.XMLUIPluginResources");
-		} catch (MissingResourceException x) {
+		}
+		catch (MissingResourceException x) {
 			resourceBundle = null;
 		}
 		return resourceBundle;
