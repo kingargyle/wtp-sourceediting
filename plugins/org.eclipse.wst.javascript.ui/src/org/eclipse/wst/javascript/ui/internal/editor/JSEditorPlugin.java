@@ -16,9 +16,6 @@ import org.eclipse.wst.sse.ui.registry.AdapterFactoryRegistry;
 import org.eclipse.wst.sse.ui.registry.AdapterFactoryRegistryImpl;
 import org.eclipse.wst.sse.ui.registry.embedded.EmbeddedAdapterFactoryRegistryImpl;
 
-/**
- * The main plugin class to be used in the desktop.
- */
 public class JSEditorPlugin extends AbstractUIPlugin {
 	public final static String ID = "org.eclipse.wst.javascript.ui"; //$NON-NLS-1$
 
@@ -27,10 +24,6 @@ public class JSEditorPlugin extends AbstractUIPlugin {
 	public JSEditorPlugin(IPluginDescriptor descriptor) {
 		super(descriptor);
 		instance = this;
-
-		// reference the preference store so
-		// initializeDefaultPreferences(IPreferenceStore preferenceStore) is called
-		getPreferenceStore();
 	}
 
 	public static JSEditorPlugin getDefault() {
