@@ -86,7 +86,7 @@
       <factory
             extensions="js"
             contentTypeId="org.eclipse.wst.javascript.core.javascriptsource"
-            class="org.eclipse.wst.sse.ui.internal.StructuredResourceMarkerAnnotationModelFactoryelFactory">
+            class="org.eclipse.wst.sse.ui.internal.StructuredResourceMarkerAnnotationModelFactory">
       </factory>
    </extension>
 
