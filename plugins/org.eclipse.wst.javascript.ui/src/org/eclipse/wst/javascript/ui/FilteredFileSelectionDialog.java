@@ -16,16 +16,15 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.eclipse.wst.javascript.ui.nls.ResourceHandler;
-
+import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 
 public class FilteredFileSelectionDialog extends ElementTreeSelectionDialog {
 	public FilteredFileSelectionDialog(Shell parent, IContentType[] contentTypes) {
 		super(parent, new WorkbenchLabelProvider(), new WorkbenchContentProvider());
 		setShellStyle(SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
 
-		setTitle(ResourceHandler.getString("FilteredFileSelectionDialog.0")); //$NON-NLS-1$
-		setMessage(ResourceHandler.getString("FilteredFileSelectionDialog.1")); //$NON-NLS-1$
+		setTitle(JSEditorPlugin.getResourceString("%FilteredFileSelectionDialog.0")); //$NON-NLS-1$
+		setMessage(JSEditorPlugin.getResourceString("%FilteredFileSelectionDialog.1")); //$NON-NLS-1$
 		setAllowMultiple(false);
 		addFilter(new ContentTypeViewerFilter(contentTypes));
 	}

@@ -77,12 +77,11 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wst.common.encoding.CommonEncodingPreferenceNames;
 import org.eclipse.wst.common.encoding.ContentBasedPreferenceGateway;
 import org.eclipse.wst.common.encoding.content.IContentTypeIdentifier;
-import org.eclipse.wst.javascript.common.ui.nls.ResourceHandler;
+import org.eclipse.wst.javascript.common.ui.internal.JSCommonUIPlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JavaPairMatcher;
 import org.eclipse.wst.javascript.ui.views.contentoutline.JSContentOutlinePage;
 import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.core.util.StringUtils;
-import org.eclipse.wst.sse.ui.EditorPlugin;
 import org.eclipse.wst.sse.ui.StructuredResourceMarkerAnnotationModel;
 import org.eclipse.wst.sse.ui.edit.util.ActionDefinitionIds;
 import org.eclipse.wst.sse.ui.extension.ExtendedConfigurationBuilder;
@@ -93,6 +92,7 @@ import org.eclipse.wst.sse.ui.extension.IExtendedSimpleEditor;
 import org.eclipse.wst.sse.ui.extension.IPopupMenuContributor;
 import org.eclipse.wst.sse.ui.extensions.ConfigurationPointCalculator;
 import org.eclipse.wst.sse.ui.extensions.breakpoint.IExtendedStorageEditorInput;
+import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 import org.eclipse.wst.sse.ui.internal.debug.BreakpointRulerAction;
 import org.eclipse.wst.sse.ui.internal.debug.EditBreakpointAction;
 import org.eclipse.wst.sse.ui.internal.debug.ManageBreakpointAction;
@@ -277,23 +277,23 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 		// override the cut/paste/delete action to make them run on read-only
 		// files
-		ResourceAction action = new TextOperationAction(ResourceHandler.getResourceBundle(), "Editor.Cut.", this, ITextOperationTarget.CUT, true); //$NON-NLS-1$
+		ResourceAction action = new TextOperationAction(JSCommonUIPlugin.getDefault().getResourceBundle(), "Editor.Cut.", this, ITextOperationTarget.CUT, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.CUT_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.CUT);
 		setAction(ITextEditorActionConstants.CUT, action);
 
-		action = new TextOperationAction(ResourceHandler.getResourceBundle(), "Editor.Paste.", this, ITextOperationTarget.PASTE, true); //$NON-NLS-1$
+		action = new TextOperationAction(JSCommonUIPlugin.getDefault().getResourceBundle(), "Editor.Paste.", this, ITextOperationTarget.PASTE, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.PASTE_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.PASTE);
 		setAction(ITextEditorActionConstants.PASTE, action);
 
-		action = new TextOperationAction(ResourceHandler.getResourceBundle(), "Editor.Delete.", this, ITextOperationTarget.DELETE, true); //$NON-NLS-1$
+		action = new TextOperationAction(JSCommonUIPlugin.getDefault().getResourceBundle(), "Editor.Delete.", this, ITextOperationTarget.DELETE, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.DELETE_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.DELETE);
 		setAction(ITextEditorActionConstants.DELETE, action);
 
 		try {
-			ResourceBundle resourceBundle = ResourceHandler.getResourceBundle();
+			ResourceBundle resourceBundle = JSCommonUIPlugin.getDefault().getResourceBundle();
 
 			// override TextEditor's SAVE action
 			// we duplicate the "Save" label, but that's better than depending
@@ -350,7 +350,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			//For error handling test only!!!==========
 		}
 		catch (MissingResourceException exception) {
-			throw new SourceEditingRuntimeException(ResourceHandler.getString("An_error_has_occurred_when_ERROR_")); //$NON-NLS-1$ = ...
+			throw new SourceEditingRuntimeException(JSCommonUIPlugin.getResourceString("%An_error_has_occurred_when_ERROR_")); //$NON-NLS-1$ = ...
 			// ... "An error has occurred when retrieving resources for the
 			// source editor. The Eclipse Workbench installation may have been
 			// corrupted."
@@ -364,7 +364,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * @return IPreferenceStore
 	 */
 	private IPreferenceStore createCombinedPreferenceStore() {
-		IPreferenceStore sseEditorPrefs = EditorPlugin.getDefault().getPreferenceStore();
+		IPreferenceStore sseEditorPrefs = SSEUIPlugin.getDefault().getPreferenceStore();
 		IPreferenceStore baseEditorPrefs = EditorsUI.getPreferenceStore();
 		return new ChainedPreferenceStore(new IPreferenceStore[]{sseEditorPrefs, baseEditorPrefs});
 	}

@@ -25,10 +25,9 @@ import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
-import org.eclipse.wst.javascript.ui.nls.ResourceHandler;
-
 
 public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPropertyListener {
 
@@ -54,7 +53,7 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 	protected void addPreviewPage() {
 		fPreviewPage = new JSPreviewPage(getContainer(), fEditor);
 		fPreviewPageIndex = addPage(fPreviewPage.getControl());
-		setPageText(fPreviewPageIndex, ResourceHandler.getString("Preview")); //$NON-NLS-1$
+		setPageText(fPreviewPageIndex, JSEditorPlugin.getResourceString("%Preview")); //$NON-NLS-1$
 	}
 
 	/**
@@ -66,7 +65,7 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 			fEditor.setEditorPart(this);
 			fEditor.addPropertyListener(this);
 			fSourcePageIndex = addPage(fEditor, getEditorInput());
-			setPageText(fSourcePageIndex, ResourceHandler.getString("Source")); //$NON-NLS-1$
+			setPageText(fSourcePageIndex, JSEditorPlugin.getResourceString("%Source")); //$NON-NLS-1$
 		}
 		catch (PartInitException exception) {
 			// dispose editor

@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.wst.common.encoding.content.IContentTypeIdentifier;
-import org.eclipse.wst.javascript.ui.nls.ResourceHandler;
+import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 
 public class JSPreviewContributor {
 	private ViewForm fViewForm = null;
@@ -65,8 +65,8 @@ public class JSPreviewContributor {
 		ToolBar toolBar = new ToolBar(fPreviewToolBar, SWT.FLAT);
 
 		ToolItem browseButton = new ToolItem(toolBar, SWT.PUSH);
-		browseButton.setText(ResourceHandler.getString("BrowseButtonText")); //$NON-NLS-1$
-		browseButton.setToolTipText(ResourceHandler.getString("BrowseButtonToolTipText")); //$NON-NLS-1$
+		browseButton.setText(JSEditorPlugin.getResourceString("%BrowseButtonText")); //$NON-NLS-1$
+		browseButton.setToolTipText(JSEditorPlugin.getResourceString("%BrowseButtonToolTipText")); //$NON-NLS-1$
 		browseButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				Shell shell = ((ToolItem) e.widget).getParent().getShell();
@@ -97,11 +97,11 @@ public class JSPreviewContributor {
 		topLeft.setLayout(gridLayout);
 
 		CLabel title = new CLabel(topLeft, SWT.NONE);
-		title.setText(ResourceHandler.getString("PreviewPageDropDownLabel")); //$NON-NLS-1$
+		title.setText(JSEditorPlugin.getResourceString("%PreviewPageDropDownLabel")); //$NON-NLS-1$
 		title.setLayoutData(new GridData());
 
 		fCombo = new Combo(topLeft, SWT.DROP_DOWN);
-		String defaultFileName = ResourceHandler.getString("DefaultFileName"); //$NON-NLS-1$
+		String defaultFileName = JSEditorPlugin.getResourceString("%DefaultFileName"); //$NON-NLS-1$
 		fCombo.add(defaultFileName);
 		fCombo.setText(defaultFileName);
 		fCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

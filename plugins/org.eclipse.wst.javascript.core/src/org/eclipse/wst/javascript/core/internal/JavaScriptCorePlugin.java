@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.wst.javascript.core.internal;
 
+import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -25,6 +26,8 @@ public class JavaScriptCorePlugin extends Plugin {
 	private static JavaScriptCorePlugin plugin;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
+	private static final String KEY_PREFIX = "%"; //$NON-NLS-1$
+	private static final String KEY_DOUBLE_PREFIX = "%%"; //$NON-NLS-1$	
 
 	/**
 	 * The constructor.
@@ -32,12 +35,6 @@ public class JavaScriptCorePlugin extends Plugin {
 	public JavaScriptCorePlugin() {
 		super();
 		plugin = this;
-		try {
-			resourceBundle = ResourceBundle.getBundle("org.eclipse.wst.javascript.core.JavascriptPluginResources"); //$NON-NLS-1$
-		}
-		catch (MissingResourceException x) {
-			resourceBundle = null;
-		}
 	}
 
 	/**
@@ -58,20 +55,44 @@ public class JavaScriptCorePlugin extends Plugin {
 	 * Returns the string from the plugin's resource bundle,
 	 * or 'key' if not found.
 	 */
-	public static String getResourceString(String key) {
-		ResourceBundle bundle = JavaScriptCorePlugin.getDefault().getResourceBundle();
+	public static String getResourceString(String value) {
+		String s = value.trim();
+		if (!s.startsWith(KEY_PREFIX, 0))
+			return s;
+		if (s.startsWith(KEY_DOUBLE_PREFIX, 0))
+			return s.substring(1);
+
+		int ix = s.indexOf(' ');
+		String key = ix == -1 ? s : s.substring(0, ix);
+
+		ResourceBundle bundle = getDefault().getResourceBundle();
 		try {
-			return bundle.getString(key);
-		}
-		catch (MissingResourceException e) {
+			return (bundle != null) ? bundle.getString(key.substring(1)) : key;
+		} catch (MissingResourceException e) {
 			return key;
 		}
+	}
+
+	public static String getResourceString(String key, Object[] args) {
+
+		try {
+			return MessageFormat.format(getResourceString(key), args);
+		} catch (IllegalArgumentException e) {
+			return getResourceString(key);
+		}
+
 	}
 
 	/**
 	 * Returns the plugin's resource bundle,
 	 */
 	public ResourceBundle getResourceBundle() {
+		try {
+			if (resourceBundle == null)
+				resourceBundle = ResourceBundle.getBundle("org.eclipse.wst.javascript.core.internal.JavaScriptCorePluginResources");
+		} catch (MissingResourceException x) {
+			resourceBundle = null;
+		}
 		return resourceBundle;
 	}
 }

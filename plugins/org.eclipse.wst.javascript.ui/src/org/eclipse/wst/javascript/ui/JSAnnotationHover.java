@@ -38,7 +38,7 @@ import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.wst.javascript.ui.internal.editor.LineBreakingReader;
 import org.eclipse.wst.javascript.ui.internal.editor.Logger;
 import org.eclipse.wst.sse.core.util.StringUtils;
-import org.eclipse.wst.sse.ui.nls.ResourceHandler;
+import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 
 public class JSAnnotationHover implements IAnnotationHover {
 
@@ -214,7 +214,7 @@ public class JSAnnotationHover implements IAnnotationHover {
 
 		StringBuffer buffer = new StringBuffer();
 		printer.addPageProlog(buffer);
-		printer.addParagraph(buffer, ResourceHandler.getString("Multiple_errors")); //$NON-NLS-1$
+		printer.addParagraph(buffer, SSEUIPlugin.getResourceString("%Multiple_errors")); //$NON-NLS-1$
 
 		printer.startBulletList(buffer);
 		Iterator e = messages.iterator();

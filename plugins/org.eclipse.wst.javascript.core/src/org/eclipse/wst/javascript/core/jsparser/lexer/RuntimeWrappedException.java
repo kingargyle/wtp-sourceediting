@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.wst.javascript.core.jsparser.lexer;
 
-import org.eclipse.wst.javascript.core.jsparser.nls.ResourceHandler;
+import org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin;
 
 /**
  * The PreferenceRuntimeException is often thrown by methods when
@@ -45,7 +45,7 @@ class RuntimeWrappedException extends RuntimeException {
 			String embeddedMessage = originalException.getMessage();
 			embeddedMessage = originalException.getClass().getName() + ": " + originalException.getMessage(); //$NON-NLS-1$
 			// not all exceptions have messages (e.g. many NullPointerException)
-			String originalError = ResourceHandler.getString("RuntimeWrappedException.0"); //$NON-NLS-1$
+			String originalError = JavaScriptCorePlugin.getResourceString("%RuntimeWrappedException.0"); //$NON-NLS-1$
 			if (result == null)
 				result = ""; //$NON-NLS-1$
 			if (embeddedMessage != null)
