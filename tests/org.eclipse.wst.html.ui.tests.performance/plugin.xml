@@ -5,7 +5,7 @@
    name="HTML UI Performance tests Plug-in"
    version="1.0.0"
    provider-name="Eclipse.org"
-   class="org.eclipse.wst.html.ui.tests.performance.PerformancePlugin">
+   class="org.eclipse.wst.html.ui.tests.performance.HTMLUIPerformancePlugin">
 
    <runtime>
       <library name="htmluiperformance.jar">

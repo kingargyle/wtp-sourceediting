@@ -7,16 +7,16 @@ import java.util.*;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class PerformancePlugin extends Plugin {
+public class HTMLUIPerformancePlugin extends Plugin {
 	//The shared instance.
-	private static PerformancePlugin plugin;
+	private static HTMLUIPerformancePlugin plugin;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
 	
 	/**
 	 * The constructor.
 	 */
-	public PerformancePlugin() {
+	public HTMLUIPerformancePlugin() {
 		super();
 		plugin = this;
 	}
@@ -40,7 +40,7 @@ public class PerformancePlugin extends Plugin {
 	/**
 	 * Returns the shared instance.
 	 */
-	public static PerformancePlugin getDefault() {
+	public static HTMLUIPerformancePlugin getDefault() {
 		return plugin;
 	}
 
@@ -49,7 +49,7 @@ public class PerformancePlugin extends Plugin {
 	 * or 'key' if not found.
 	 */
 	public static String getResourceString(String key) {
-		ResourceBundle bundle = PerformancePlugin.getDefault().getResourceBundle();
+		ResourceBundle bundle = HTMLUIPerformancePlugin.getDefault().getResourceBundle();
 		try {
 			return (bundle != null) ? bundle.getString(key) : key;
 		} catch (MissingResourceException e) {

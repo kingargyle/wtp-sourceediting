@@ -9,6 +9,7 @@ import junit.framework.TestSuite;
 public class CSSUIPerformanceTestSuite extends TestSuite {
 	
 	public CSSUIPerformanceTestSuite() {
+		super("CSS UI Performance Test Suite");
 		addTest(new TestSuite(BasicPluginTests.class));
 	}
 	
