@@ -22,7 +22,7 @@ import java.util.Vector;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsp.core.PageDirectiveAdapter;
-import org.eclipse.jst.jsp.core.contentmodel.tld.DocumentProvider;
+import org.eclipse.jst.jsp.core.internal.util.DocumentProvider;
 import org.eclipse.jst.jsp.ui.tests.performance.util.DateUtil;
 import org.eclipse.jst.jsp.ui.tests.performance.util.FileUtil;
 import org.eclipse.test.performance.PerformanceTestCase;
