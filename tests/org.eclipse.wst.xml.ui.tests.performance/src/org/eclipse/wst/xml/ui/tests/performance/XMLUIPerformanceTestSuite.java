@@ -11,6 +11,9 @@ public class XMLUIPerformanceTestSuite extends TestSuite {
 		super("XML UI Performance Tests");
 		
 		addTest(new TestSuite(BasicPluginTests.class));
+        addTest(new TestSuite(OpenEditorTest.class));
+        addTest(new TestSuite(FormatTest.class));
+        addTest(new TestSuite(ScrollTest.class));
 	}
 	
 	public static Test suite() {
