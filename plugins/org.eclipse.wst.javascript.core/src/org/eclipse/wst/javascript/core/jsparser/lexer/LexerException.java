@@ -16,6 +16,11 @@ package org.eclipse.wst.javascript.core.jsparser.lexer;
 
 public class LexerException extends Exception {
 
+	/**
+	 * Default <code>serialVersionUID</code>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public LexerException(String message) {
 		super(message);
 	}

@@ -18,6 +18,11 @@ import org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin;
  * as a runtime exception. 
  */
 class RuntimeWrappedException extends RuntimeException {
+	/**
+	 * Default <code>serialVersionUID</code>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public RuntimeWrappedException(String string) {
 
 		super(string);

@@ -23,6 +23,11 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 public class ViewerSelectionManagerSelectionChangedEvent extends SelectionChangedEvent {
 
 
+	/**
+	 * Default <code>serialVersionUID</code>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ViewerSelectionManagerSelectionChangedEvent(ISelectionProvider source, ISelection selection) {
 		super(source, selection);
 	}
