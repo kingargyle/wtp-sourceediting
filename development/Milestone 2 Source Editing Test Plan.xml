@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../../../wtp.xsl"?>
+<html>
+	<head>
+		<meta name="root" content="../../../../" />
+		<title>WTP Milestone 2 Source Editing Test Plan</title>
+	</head>
+	<body>
+
+		<h1>Milestone 2 Source Editing Test Plan</h1>
+		<h2>Status of this Plan</h2>
+		<p>
+			Near final plan (pending review of immediate team, and
+			community).
+		</p>
+		<p>
+			For M2, we are lumping a wide range of editors and editing
+			functions into this one plan, for simple convenience, since
+			primarily covered by one team in one geographic area. In the
+			future, we'll start to break into component-by-component
+			plans, with appropriate cross-links, etc.
+		</p>
+		<h2>Overall goals</h2>
+		<h3>Co-developer Testing</h3>
+		<p>
+			We will inspect &quot;runtime&quot; version of build to be
+			sure extra source is not included, and more important, we'll
+			inspect and test importing SDK version to be sure all
+			relevant &quot;open source&quot; is included in that SDK
+			build and that it correctly imports into a development
+			environment.
+		</p>
+		<h3>API Testing</h3>
+		<p>
+			Here in M2 we don't consider we have any official API yet
+			(since not spec'd as such) but will reserve this space for
+			future plans to details were API Unit tests are, their
+			coverage, etc.
+		</p>
+		<p>
+			We do have several hundred unit tests which we expect to be
+			running and (mostly) passing for M2, which test various
+			aspects of parsing, model creation, and correct charset
+			handling.
+		</p>
+		<h3>End User Testing</h3>
+		<p>
+			Our primary goal in M2 End-User Testing is to ensure basic
+			functions still work, after all the renaming,
+			reorganizations, etc. We'll do this by quickly checking
+			editing features in simple, typical files.
+		</p>
+		<p>
+			I might also point out that the nature of the end-user
+			testing is intentionally planned to be "ad hoc" instead of
+			specifying step by step "how to" directions and specific
+			"expected results" sections often seen in test cases. This
+			is done because its felt leads to greater number of "paths"
+			being tested, and allows end-users more motivation for
+			logging "bugs" if things didn't work as
+			<i>they</i>
+			expected, even if it is working as designed.
+		</p>
+		<p>
+			As we progress through milestones, we'll add more and more
+			detail for special cases, special files, special projects,
+			etc.When we do have special or sample test files and
+			projects, we will keep those stored in CVS, as projects
+			under a
+			<i>testdata</i>
+			directory under the
+			<i>development</i>
+			directory of relevant component so that testers (from
+			immediate team, or community) can easily check out into the
+			environment being tested.
+		</p>
+		<h3>Platform Testing</h3>
+		<p>
+			While we do not have any platform specific code, or
+			function, we will have some team members do end-user tests
+			on Linux, some on Windows. We will also confirm unit tests
+			pass on both platforms.
+		</p>
+		<h3>Performance Testing</h3>
+		<p>
+			We do not have any specific performance testing planned for
+			M2, but will add automated performance tests along the lines
+			of the Eclipse base peformance unit tests in future
+			milestones.
+		</p>
+		<h2>Common Eclipse Source Editing Features</h2>
+		<p>
+			The following table represents the features for our various
+			source editors that will play a role in our testing,
+			according to the following legend.
+		</p>
+
+		<ul>
+			<li>Y - Yes, should work, will be tested</li>
+			<li>
+				P - Planned for later, will not be tested this milestone
+			</li>
+			<li>N - No, no plans, does not work, will not be tested</li>
+		</ul>
+
+		<table border="1" width="90%" cellspacing="2" cellpadding="2">
+			<caption align="bottom">
+				Source Editing Feature Matrix
+			</caption>
+			<tbody>
+				<tr>
+					<th style="text-align: left" />
+					<th style="text-align: center">XML</th>
+					<th style="text-align: center">JSP</th>
+					<th style="text-align: center">HTML</th>
+					<th style="text-align: center">XHTML</th>
+					<th style="text-align: center">CSS</th>
+					<th style="text-align: center">DTD</th>
+					<th style="text-align: center">JavaScript</th>
+				</tr>
+				<tr>
+					<td style="text-align: left">Highlighting</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Semantic Highlighting
+					</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Content Assist</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">Y</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Parameter/Attribute Hints
+					</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Document/Element Formatting
+					</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Structured Selection
+					</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Hover Info</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Smart Edit</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Open On (hyperlinks)
+					</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Mark Occurrences</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Linked Edit</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Find Element Occurrences
+					</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Validate as-you-type
+					</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Delimiter Highlighting (bracket matching)
+					</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Refactoring</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">
+
+						N
+					</td>
+					<td style="text-align: center">
+						N
+
+					</td>
+					<td style="text-align: center">
+
+						N
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Search Participant</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">
+
+						N
+					</td>
+					<td style="text-align: center">
+						N
+
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Quick Fix/Assist</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">
+
+						N
+					</td>
+					<td style="text-align: center">
+						N
+
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Property Sheet</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">
+						Y
+
+					</td>
+					<td style="text-align: center">
+						N
+
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Outline View</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">
+						Y
+
+					</td>
+					<td style="text-align: center">Y</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Folding</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Annotation Navigation (go to next annotation)
+					</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">External Files</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Toggle Comment</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">Y</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Quick Type Hierarchy View
+					</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">Quick Outline</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+					<td style="text-align: center">N</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						Task Tags in Source Comments
+					</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">P</td>
+					<td style="text-align: center">N</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2>XML Tests</h2>
+		<ul>
+			<li>
+				check Source Editing features from feature matrix
+				<br />
+				check samples of range of types of web resources
+				(web.xml, tld files, schema source, etc)
+				<br />
+				especially any we (WTP) generate
+			</li>
+			<li>
+				test Design page, Source page, Outline view, Properties
+				view synchronization
+			</li>
+			<li>
+				check content assist and source validation using content
+				model from the following source:
+				<ul>
+					<li>
+						inferred content model (XML with no DOCTYPE or
+						schema specified)
+					</li>
+					<li>DTD from XML catalog</li>
+					<li>DTD from URI</li>
+					<li>schema from XML catalog</li>
+					<li>schema from URI</li>
+					<li>
+						basic schema (with lots of complex types, and
+						lots of 'includes')
+					</li>
+					<li>advanced schema (with lots of namespaces)</li>
+				</ul>
+			</li>
+		</ul>
+		<h2>JSP Tests</h2>
+		<ul>
+			<li>check Source Editing features from feature matrix</li>
+			<li>
+				check &quot;embedded languages&quot; (Java, HTML, CSS,
+				JavaScript) have same features as indicated in matrix
+			</li>
+			<li>
+				test taglib directives in the following ways:
+				<ul>
+					<li>
+						Using the taglib URI value in the Web deployment
+						descriptor
+					</li>
+					<li>
+						Using the context-relative path that refers
+						directly to the TLD or JAR file
+					</li>
+					<li>
+						Using a page-relative path that refers directly
+						to the TLD or JAR file
+					</li>
+					<li>
+						For a J2EE 1.3 Web project only, using the URI
+						element value defined in the TLD
+					</li>
+				</ul>
+			</li>
+			<li>
+				test standard samples
+				<ul>
+					<li>in HTML &quot;text/html&quot; content type</li>
+					<li>in XHTML &quot;text/html&quot; content type</li>
+					<li>in XHTML &quot;text/xml&quot; content type</li>
+					<li>all in JSP syntax and XML syntax</li>
+				</ul>
+			</li>
+			<li>test with simple custom tags</li>
+			<li>
+				test with commonly used custom tags (such as Struts)
+			</li>
+			<li>
+				test defining custom tags in TLD (with tag-dependent
+				body content; for example, SQL statements)
+			</li>
+			<li>
+				test debug breakpoints can be set, displayed in
+				left-hand-ruler, breakpoint view
+			</li>
+			<li>
+				quick test that breakpoints do indeed 'break' (we'll use
+				Tomcat)
+			</li>
+		</ul>
+		<h2>HTML Tests</h2>
+		<ul>
+			<li>check Source Editing features from feature matrix</li>
+			<li>
+				check &quot;embedded languages&quot; (CSS, JavaScript)
+				have same features as indicated in matrix
+			</li>
+		</ul>
+		<h2>XHTML Tests</h2>
+		<ul>
+			<li>check Source Editing features from feature matrix</li>
+			<li>
+				check &quot;embedded languages&quot; (CSS, JavaScript)
+				have same features as indicated in matrix
+			</li>
+		</ul>
+		<h2>CSS Tests</h2>
+		<ul>
+			<li>check Source Editing features from feature matrix</li>
+		</ul>
+		<h2>DTD Tests</h2>
+		<ul>
+			<li>check Source Editing features from feature matrix</li>
+		</ul>
+		<h2>JavaScript Tests</h2>
+		<ul>
+			<li>check Source Editing features from feature matrix</li>
+			<li>
+				test Design page, Source page, Outline view, Properties
+				view synchronization
+			</li>
+		</ul>
+		<h2>Assigned Focus Areas</h2>
+		<p>
+			inspect builds, test sdk import: Jens - Windows, Nitin -
+			Linux
+		</p>
+		<p>End User Testing:</p>
+		<table border="2">
+			<tbody>
+				<tr>
+					<td>
+						Platform/
+						<br />
+						ContentType
+					</td>
+					<td>
+						<b>Linux</b>
+					</td>
+					<td>
+						<b>Windows</b>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>XML</b>
+					</td>
+					<td>Phil</td>
+					<td>Jens</td>
+				</tr>
+				<tr>
+					<td>
+						<b>JSP</b>
+					</td>
+					<td>Nitin</td>
+					<td>David</td>
+				</tr>
+				<tr>
+					<td>
+						<b>HTML</b>
+					</td>
+					<td>(none)</td>
+					<td>Amy</td>
+				</tr>
+				<tr>
+					<td>
+						<b>XHTML</b>
+					</td>
+					<td>(none)</td>
+					<td>Amy</td>
+				</tr>
+				<tr>
+					<td>
+						<b>DTD</b>
+					</td>
+					<td>Nitin</td>
+					<td>(none)</td>
+				</tr>
+				<tr>
+					<td>
+						<b>CSS</b>
+					</td>
+					<td>(none)</td>
+					<td>Kit</td>
+				</tr>
+				<tr>
+					<td>
+						<b>JavaScript</b>
+					</td>
+					<td>(none)</td>
+					<td>Kit</td>
+				</tr>
+			</tbody>
+		</table>
+		<p />
+	</body>
+</html>
