@@ -213,7 +213,6 @@ public class Lexer implements IRawLexer {
 	}
 
 	public Token getToken() throws IOException, LexerException {
-		int dfa_state = 0;
 
 		int start_pos = 0; // todo: remove variable
 		int start_line = line;
