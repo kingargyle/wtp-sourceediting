@@ -26,7 +26,7 @@ import org.eclipse.wst.css.core.internal.text.rules.StructuredTextPartitionerFor
 import org.eclipse.wst.css.ui.style.LineStyleProviderForEmbeddedCSS;
 import org.eclipse.wst.html.core.internal.text.rules.StructuredTextPartitionerForHTML;
 import org.eclipse.wst.html.ui.style.LineStyleProviderForHTML;
-import org.eclipse.wst.javascript.common.ui.style.LineStyleProviderForJavaScript;
+import org.eclipse.wst.javascript.common.ui.internal.style.LineStyleProviderForJavaScript;
 import org.eclipse.wst.sse.core.IModelManager;
 import org.eclipse.wst.sse.core.IModelManagerPlugin;
 import org.eclipse.wst.sse.core.IStructuredModel;

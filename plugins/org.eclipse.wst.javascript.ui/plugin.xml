@@ -8,7 +8,7 @@
    class="org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin">
 
    <runtime>
-      <library name="jseditor.jar">
+      <library name="javascriptui.jar">
          <export name="*"/>
       </library>
    </runtime>
@@ -24,10 +24,10 @@
       <import plugin="org.eclipse.wst.sse.ui"/>
       <import plugin="org.eclipse.wst.sse.core"/>
       <import plugin="org.eclipse.wst.javascript.core"/>
-      <import plugin="org.eclipse.wst.javascript.common.ui"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.wst.xml.core"/>
    </requires>
 
 <!-- define editors -->
@@ -37,10 +37,10 @@
             name="%JavaScript_Source_Page_Editor.name"
             icon="icons/sourceEditor.gif"
             extensions="js"
-            contributorClass="org.eclipse.wst.javascript.ui.actions.ActionContributorJS"
-            class="org.eclipse.wst.javascript.ui.JSEditor"
+            contributorClass="org.eclipse.wst.javascript.ui.internal.actions.ActionContributorJS"
+            class="org.eclipse.wst.javascript.ui.internal.editor.JSEditor"
             symbolicFontName="org.eclipse.wst.sse.ui.textfont"
-            id="org.eclipse.wst.javascript.ui.JSEditor">
+            id="org.eclipse.wst.javascript.ui.internal.editor.JSEditor">
       </editor>
    </extension>
    <extension
@@ -50,10 +50,10 @@
             default="true"
             icon="icons/javascript.gif"
             extensions="js"
-            contributorClass="org.eclipse.wst.javascript.ui.actions.MultiPageEditorActionBarContributorJS"
-            class="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart"
+            contributorClass="org.eclipse.wst.javascript.ui.internal.actions.MultiPageEditorActionBarContributorJS"
+            class="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart"
             symbolicFontName="org.eclipse.wst.sse.ui.textfont"
-            id="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart">
+            id="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart">
       </editor>
    </extension>
    
@@ -63,46 +63,23 @@
       <actionSetPartAssociation
             targetID="org.eclipse.ui.edit.text.actionSet.annotationNavigation">
          <part
-               id="org.eclipse.wst.javascript.ui.JSEditor">
+               id="org.eclipse.wst.javascript.ui.internal.editor.JSEditor">
          </part>
          <part
-               id="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart">
+               id="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart">
          </part>
       </actionSetPartAssociation>
       <actionSetPartAssociation
             targetID="org.eclipse.ui.NavigateActionSet">
          <part
-               id="org.eclipse.wst.javascript.ui.JSEditor">
+               id="org.eclipse.wst.javascript.ui.internal.editor.JSEditor">
          </part>
          <part
-               id="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart">
+               id="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart">
          </part>
       </actionSetPartAssociation>
    </extension>
 
-<!-- (base now provides an open preferences dialog in editor so this is no longer needed)
-   <extension
-         point="org.eclipse.wst.sse.ui.extendedEditorActions">
-      <editorContribution
-            targetID="org.eclipse.wst.javascript.ui.JSeditor"
-            id="org.eclipse.wst.javascript.ui.extendedActions">
-         <action
-               popupmenuPath="group.add"
-               class="org.eclipse.wst.sse.ui/org.eclipse.wst.sse.ui.preferences.ui.EditStructuredTextEditorPreferencesAction"
-               id="org.eclipse.wst.sse.ui.preferences.ui.EditStructuredTextEditorPreferencesAction">
-         </action>
-      </editorContribution>
-      <editorContribution
-            targetID="org.eclipse.wst.javascript.ui.JSMultiPageEditorPart.source"
-            id="org.eclipse.wst.javascript.ui.extendedActions">
-         <action
-               popupmenuPath="group.add"
-               class="org.eclipse.wst.sse.ui/org.eclipse.wst.sse.ui.preferences.ui.EditStructuredTextEditorPreferencesAction"
-               id="org.eclipse.wst.sse.ui.preferences.ui.EditStructuredTextEditorPreferencesAction">
-         </action>
-      </editorContribution>
-   </extension>
--->
 <!-- use a modified annotation model for all JavaScript source files -->
    <extension
       point="org.eclipse.core.filebuffers.annotationModelCreation">
@@ -157,4 +134,45 @@
 			<selection class="org.eclipse.core.resources.IResource" />
 		</wizard>
 	</extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+<!-- JAVASCRIPT PREFERENCE PAGES -->
+      <page
+            name="%JavaScript_Files.name"
+            category="org.eclipse.wst.sse.ui.preferences"
+            class="org.eclipse.wst.javascript.common.ui.internal.preferences.ui.JavaScriptFilesPreferencePage"
+            id="org.eclipse.wst.sse.javascript.preferences">
+      </page>
+      <page
+            name="%JavaScript_Source.name"
+            category="org.eclipse.wst.sse.javascript.preferences"
+            class="org.eclipse.wst.javascript.common.ui.internal.preferences.ui.JavaScriptSourcePreferencePage"
+            id="org.eclipse.wst.sse.javascript.preferences.source">
+      </page>
+      <page
+            name="%JavaScript_Styles.name"
+            category="org.eclipse.wst.sse.javascript.preferences"
+            class="org.eclipse.wst.javascript.common.ui.internal.preferences.ui.JavaScriptColorPage"
+            id="org.eclipse.wst.sse.javascript.preferences.styles">
+      </page>
+   </extension>
+	<!-- initialize javascript ui preferences -->
+	<extension point="org.eclipse.core.runtime.preferences">
+	   <initializer class="org.eclipse.wst.javascript.common.ui.internal.preferences.JSCommonUIPreferenceInitializer"/>
+	</extension>
+   <extension
+         point="org.eclipse.wst.sse.ui.extendedconfiguration">
+      <definition 
+      		type="preferencepages"
+            value="org.eclipse.wst.sse.javascript.preferences"
+            target="org.eclipse.wst.javascript.core.javascriptsource"/>
+      <definition 
+      		type="preferencepages"
+            value="org.eclipse.wst.sse.javascript.preferences.source"
+            target="org.eclipse.wst.javascript.core.javascriptsource"/>
+      <definition 
+      		type="preferencepages"
+            value="org.eclipse.wst.sse.javascript.preferences.styles"
+            target="org.eclipse.wst.javascript.core.javascriptsource"/>
+   </extension>
 </plugin>

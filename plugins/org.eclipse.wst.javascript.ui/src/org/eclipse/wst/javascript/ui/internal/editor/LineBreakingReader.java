@@ -26,7 +26,7 @@ import org.eclipse.swt.graphics.GC;
 /*
  * Not a real reader. Could change if requested
  */
-public class LineBreakingReader {
+class LineBreakingReader {
 
 
 	private BufferedReader fReader;

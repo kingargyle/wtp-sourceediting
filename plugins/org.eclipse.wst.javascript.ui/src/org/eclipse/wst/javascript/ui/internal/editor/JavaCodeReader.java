@@ -20,7 +20,6 @@ import java.io.IOException;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.wst.javascript.common.ui.contentassist.javadoc.SingleCharReader;
 
 
 /**
@@ -32,7 +31,7 @@ import org.eclipse.wst.javascript.common.ui.contentassist.javadoc.SingleCharRead
  * 
  * No modifications were made.
  */
-public class JavaCodeReader extends SingleCharReader {
+class JavaCodeReader extends SingleCharReader {
 
 	/** The EOF character */
 	public static final int EOF = -1;

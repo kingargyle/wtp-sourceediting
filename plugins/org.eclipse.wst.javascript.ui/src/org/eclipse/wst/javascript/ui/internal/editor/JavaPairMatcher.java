@@ -27,7 +27,7 @@ import org.eclipse.jface.text.source.ICharacterPairMatcher;
  * 
  * No modifications were made.
  */
-public class JavaPairMatcher implements ICharacterPairMatcher {
+class JavaPairMatcher implements ICharacterPairMatcher {
 
 	protected char[] fPairs;
 	protected IDocument fDocument;
