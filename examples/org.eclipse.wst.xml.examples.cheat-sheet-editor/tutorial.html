@@ -1,9 +1,30 @@
 <html>
 <head>
-<title>Extending the SSE - Example Cheatsheet Editor</title>
+<title>Extending the SSE XML Editor - An Example Cheatsheet Editor</title>
 </head>
 <body>
-
+<h2>The pupose of the editor created by this example</h2>
+<p>
+The editor gives custom content assist while allowing the "auto content model" 
+to continue to be effective. Also, shows how content outline by be customized, 
+and custom navigation hyper link added. 
+</p>
+<p>
+An example cheat sheet file can be found in
+<eclipse_home>/plugins/org.eclipse.jdt_3.1.0/cheatsheets/HelloWorld.xml
+</p>
+<p>
+the custom content assist for attribute values exists for pluginId and class
+attributes of action elements (inside item elements)
+- pluginId shows all registered plugin ids
+- class needs references to org.eclipse.jface.action.IAction and searches for
+all its implementors to determine which classes are legal inputs for the class
+attribute
+</p>
+<p>
+The content outline has the titles of the items, the cheatsheet itself and the
+action classes as nodes.
+</p>
 <h2>SSE principles</h2>
 <p>
 The structured source editor (SSE) framework is content type based. Therefore if you want to
