@@ -21,6 +21,16 @@
       <import plugin="org.eclipse.wst.common.encoding"/>
    </requires>
 
+	<extension
+         point="org.eclipse.core.runtime.contentTypes">
+         <content-type
+               priority="high"
+               name="XSD Content Type "
+               id="xsdsource"
+               base-type="org.eclipse.core.runtime.xml"
+			   default-charset="UTF-8"
+			   file-extensions="xsd"/>
+   </extension>
 
    <extension
          point="org.eclipse.wst.common.contentmodel.documentFactories">
