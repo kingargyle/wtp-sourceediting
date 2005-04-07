@@ -77,7 +77,6 @@ import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wst.javascript.common.ui.JSSourceViewerConfiguration;
-import org.eclipse.wst.javascript.common.ui.internal.JSCommonUIMessages;
 import org.eclipse.wst.javascript.core.contenttype.ContentTypeIdForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.views.contentoutline.JSContentOutlinePage;
 import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
@@ -262,23 +261,23 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 		// override the cut/paste/delete action to make them run on read-only
 		// files
-		ResourceAction action = new TextOperationAction(JSCommonUIMessages.getResourceBundle(), "Editor.Cut.", this, ITextOperationTarget.CUT, true); //$NON-NLS-1$
+		ResourceAction action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor.Cut.", this, ITextOperationTarget.CUT, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.CUT_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.CUT);
 		setAction(ITextEditorActionConstants.CUT, action);
 
-		action = new TextOperationAction(JSCommonUIMessages.getResourceBundle(), "Editor.Paste.", this, ITextOperationTarget.PASTE, true); //$NON-NLS-1$
+		action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor.Paste.", this, ITextOperationTarget.PASTE, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.PASTE_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.PASTE);
 		setAction(ITextEditorActionConstants.PASTE, action);
 
-		action = new TextOperationAction(JSCommonUIMessages.getResourceBundle(), "Editor.Delete.", this, ITextOperationTarget.DELETE, true); //$NON-NLS-1$
+		action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor.Delete.", this, ITextOperationTarget.DELETE, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.DELETE_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.DELETE);
 		setAction(ITextEditorActionConstants.DELETE, action);
 
 		try {
-			ResourceBundle resourceBundle = JSCommonUIMessages.getResourceBundle();
+			ResourceBundle resourceBundle = JavaScriptUIMessages.getResourceBundle();
 
 			// override TextEditor's SAVE action
 			// we duplicate the "Save" label, but that's better than depending
@@ -316,7 +315,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 				// mapping, but since it relies on the IEditorSite ID, it can't be
 				// relied on for MultiPageEditorParts. Instead, force the action
 				// registration manually.
-				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new MarkerRulerAction(SSEUIPlugin.getDefault().getResourceBundle(), "Editor.ManageBookmarks.", this, getVerticalRuler(), IMarker.BOOKMARK, true));
+				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new MarkerRulerAction(JavaScriptUIMessages.getResourceBundle(), "Editor.ManageBookmarks.", this, getVerticalRuler(), IMarker.BOOKMARK, true)); //$NON-NLS-1$
 			}
 
 
@@ -338,7 +337,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			//For error handling test only!!!==========
 		}
 		catch (MissingResourceException exception) {
-			throw new SourceEditingRuntimeException(JSCommonUIMessages.getResourceString("%An_error_has_occurred_when_ERROR_")); //$NON-NLS-1$ = ...
+			throw new SourceEditingRuntimeException(JavaScriptUIMessages.getString("An_error_has_occurred_when_ERROR_")); //$NON-NLS-1$ = ...
 			// ... "An error has occurred when retrieving resources for the
 			// source editor. The Eclipse Workbench installation may have been
 			// corrupted."
@@ -731,9 +730,9 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 				int offset2 = widgetOffset2ModelOffset(getSourceViewer(), selection.y);
 				String text = null;
 				if (offset1 != offset2)
-					text = "[" + offset1 + "-" + offset2 + "]";
+					text = "[" + offset1 + "-" + offset2 + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				else
-					text = "[ " + offset1 + " ]";
+					text = "[ " + offset1 + " ]"; //$NON-NLS-1$ //$NON-NLS-2$
 				field.setText(text == null ? fErrorLabel : text);
 			}
 		}

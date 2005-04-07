@@ -24,10 +24,10 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.wst.javascript.common.ui.internal.IHelpContextIds;
+import org.eclipse.wst.javascript.common.ui.internal.JSCommonUIMessages;
 import org.eclipse.wst.javascript.common.ui.internal.preferences.JSCommonUIPreferenceNames;
 import org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
-import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 import org.eclipse.wst.sse.ui.preferences.ui.AbstractPreferencePage;
 
 public class JavaScriptSourcePreferencePage extends AbstractPreferencePage implements ModifyListener, SelectionListener, IWorkbenchPreferencePage {
@@ -62,13 +62,13 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 
 	protected void createContentsForContentAssistGroup(Composite parent) {
 		Group contentAssistGroup = createGroup(parent, 2);
-		contentAssistGroup.setText(SSEUIPlugin.getResourceString("%Content_assist_UI_")); //$NON-NLS-1$ = "Content assist"
+		contentAssistGroup.setText(JSCommonUIMessages.getString("Content_assist_UI_")); //$NON-NLS-1$ = "Content assist"
 
-		fAutoPropose = createCheckBox(contentAssistGroup, SSEUIPlugin.getResourceString("%Automatically_make_suggest_UI_")); //$NON-NLS-1$ = "Automatically make suggestions"
+		fAutoPropose = createCheckBox(contentAssistGroup, JSCommonUIMessages.getString("Automatically_make_suggest_UI_")); //$NON-NLS-1$ = "Automatically make suggestions"
 		((GridData) fAutoPropose.getLayoutData()).horizontalSpan = 2;
 		fAutoPropose.addSelectionListener(this);
 
-		fAutoProposeLabel = createLabel(contentAssistGroup, SSEUIPlugin.getResourceString("%Prompt_when_these_characte_UI_")); //$NON-NLS-1$ = "Prompt when these characters are inserted:"
+		fAutoProposeLabel = createLabel(contentAssistGroup, JSCommonUIMessages.getString("Prompt_when_these_characte_UI_")); //$NON-NLS-1$ = "Prompt when these characters are inserted:"
 		fAutoProposeText = createTextField(contentAssistGroup);
 	}
 

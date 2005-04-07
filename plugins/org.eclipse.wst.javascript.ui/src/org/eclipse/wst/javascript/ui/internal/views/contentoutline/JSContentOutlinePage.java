@@ -47,6 +47,7 @@ import org.eclipse.wst.javascript.common.ui.JSContentElementImpl;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
+import org.eclipse.wst.javascript.ui.internal.editor.JavaScriptUIMessages;
 import org.eclipse.wst.javascript.ui.internal.editor.SimpleTreeViewer;
 import org.eclipse.wst.javascript.ui.internal.editor.SimpleViewerSelectionManagerImpl;
 import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
@@ -77,7 +78,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		}
 
 		public SortAction(TreeViewer viewer, IPreferenceStore store, String preferenceKey) {
-			super(JSEditorPlugin.getResourceString("%JSContentOutlinePage.4"), store, preferenceKey, false); //$NON-NLS-1$
+			super(JavaScriptUIMessages.getString("JSContentOutlinePage.4"), store, preferenceKey, false); //$NON-NLS-1$
 			setImageDescriptor(JSEditorPluginImageHelper.getInstance().getImageDescriptor(JSEditorPluginImages.IMG_OBJ_SORT));
 			setToolTipText(getText());
 			treeViewer = viewer;
@@ -115,7 +116,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		private TreeViewer fTreeViewer = null;
 
 		public CollapseTreeAction(TreeViewer viewer) {
-			super(JSEditorPlugin.getResourceString("%JSContentOutlinePage.0"), AS_PUSH_BUTTON); //$NON-NLS-1$
+			super(JavaScriptUIMessages.getString("JSContentOutlinePage.0"), AS_PUSH_BUTTON); //$NON-NLS-1$
 			setImageDescriptor(COLLAPSE_E);
 			setDisabledImageDescriptor(COLLAPSE_D);
 			setToolTipText(getText());
@@ -130,7 +131,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 
 	protected class DeleteAction extends Action {
 		public DeleteAction() {
-			super(JSEditorPlugin.getResourceString("%JSContentOutlinePage.5")); //$NON-NLS-1$
+			super(JavaScriptUIMessages.getString("JSContentOutlinePage.5")); //$NON-NLS-1$
 			setImageDescriptor(DELETE_E);
 			setDisabledImageDescriptor(DELETE_D);
 			setToolTipText(getText());
@@ -188,7 +189,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 
 	protected class ToggleLinkAction extends PropertyChangeUpdateAction {
 		public ToggleLinkAction(IPreferenceStore store, String preference) {
-			super(JSEditorPlugin.getResourceString("%JSContentOutlinePage.1"), store, preference, true); //$NON-NLS-1$
+			super(JavaScriptUIMessages.getString("JSContentOutlinePage.1"), store, preference, true); //$NON-NLS-1$
 			setToolTipText(getText());
 			setDisabledImageDescriptor(SYNCED_D);
 			setImageDescriptor(SYNCED_E);
@@ -355,7 +356,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 				IEditorPart ownerEditor = page.getActiveEditor();
 				if (ownerEditor != null) {
 					fContextMenuRegistered = true;
-					getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + "#outlinecontext", fContextMenu, this);
+					getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + "#outlinecontext", fContextMenu, this); //$NON-NLS-1$
 				}
 			}
 		}
@@ -367,10 +368,10 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		SortAction sortAction = new SortAction(getTreeViewer(), JSEditorPlugin.getDefault().getPreferenceStore(), OUTLINE_SORT_PREF);
 		fSortItem = new PropertyChangeUpdateActionContributionItem(sortAction);
 
-		PropertyChangeUpdateAction action = new ShowHierarchyAction(JSEditorPlugin.getResourceString("%JSContentOutlinePage.2"), JSEditorPlugin.getInstance().getPreferenceStore(), OUTLINE_SHOW_HIERARCHY_PREF, true); //$NON-NLS-1$
+		PropertyChangeUpdateAction action = new ShowHierarchyAction(JavaScriptUIMessages.getString("JSContentOutlinePage.2"), JSEditorPlugin.getInstance().getPreferenceStore(), OUTLINE_SHOW_HIERARCHY_PREF, true); //$NON-NLS-1$
 		fShowHierarchyItem = new PropertyChangeUpdateActionContributionItem(action);
 
-		action = new ShowVariablesAction(JSEditorPlugin.getResourceString("%JSContentOutlinePage.3"), JSEditorPlugin.getInstance().getPreferenceStore(), OUTLINE_SHOW_VARIABLES_PREF, true); //$NON-NLS-1$
+		action = new ShowVariablesAction(JavaScriptUIMessages.getString("JSContentOutlinePage.3"), JSEditorPlugin.getInstance().getPreferenceStore(), OUTLINE_SHOW_VARIABLES_PREF, true); //$NON-NLS-1$
 		fShowVariablesItem = new PropertyChangeUpdateActionContributionItem(action);
 
 		IAction collapseAction = new CollapseTreeAction(getTreeViewer());

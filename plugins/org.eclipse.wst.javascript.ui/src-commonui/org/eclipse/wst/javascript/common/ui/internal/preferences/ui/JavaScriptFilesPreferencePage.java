@@ -34,10 +34,10 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.wst.javascript.common.ui.internal.IHelpContextIds;
+import org.eclipse.wst.javascript.common.ui.internal.JSCommonUIMessages;
 import org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;
-import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 
 public class JavaScriptFilesPreferencePage extends PreferencePage implements
 		ModifyListener, SelectionListener, IWorkbenchPreferencePage {
@@ -89,13 +89,13 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 
 	protected void createContentsForCreatingOrSavingGroup(Composite parent) {
 		Group creatingOrSavingGroup = createGroup(parent, 2);
-		creatingOrSavingGroup.setText(SSEUIPlugin.getResourceString("%Creating_or_saving_files")); //$NON-NLS-1$
+		creatingOrSavingGroup.setText(JSCommonUIMessages.getString("Creating_or_saving_files")); //$NON-NLS-1$
 
-		Label label = createLabel(creatingOrSavingGroup, SSEUIPlugin.getResourceString("%End-of-line_code_desc")); //$NON-NLS-1$
+		Label label = createLabel(creatingOrSavingGroup, JSCommonUIMessages.getString("End-of-line_code_desc")); //$NON-NLS-1$
 		((GridData) label.getLayoutData()).horizontalSpan = 2;
 		((GridData) label.getLayoutData()).grabExcessHorizontalSpace = true;
 
-		createLabel(creatingOrSavingGroup, SSEUIPlugin.getResourceString("%End-of-line_code")); //$NON-NLS-1$
+		createLabel(creatingOrSavingGroup, JSCommonUIMessages.getString("End-of-line_code")); //$NON-NLS-1$
 		fEndOfLineCode = createDropDownBox(creatingOrSavingGroup);
 		populateLineDelimiters();
 	}
@@ -273,16 +273,16 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 	 */
 	private void populateLineDelimiters() {
 		fEOLCodes = new Vector();
-		fEndOfLineCode.add(SSEUIPlugin.getResourceString("%EOL_Unix")); //$NON-NLS-1$
+		fEndOfLineCode.add(JSCommonUIMessages.getString("EOL_Unix")); //$NON-NLS-1$
 		fEOLCodes.add(CommonEncodingPreferenceNames.LF);
 
-		fEndOfLineCode.add(SSEUIPlugin.getResourceString("%EOL_Mac")); //$NON-NLS-1$
+		fEndOfLineCode.add(JSCommonUIMessages.getString("EOL_Mac")); //$NON-NLS-1$
 		fEOLCodes.add(CommonEncodingPreferenceNames.CR);
 
-		fEndOfLineCode.add(SSEUIPlugin.getResourceString("%EOL_Windows")); //$NON-NLS-1$
+		fEndOfLineCode.add(JSCommonUIMessages.getString("EOL_Windows")); //$NON-NLS-1$
 		fEOLCodes.add(CommonEncodingPreferenceNames.CRLF);
 
-		fEndOfLineCode.add(SSEUIPlugin.getResourceString("%EOL_NoTranslation")); //$NON-NLS-1$
+		fEndOfLineCode.add(JSCommonUIMessages.getString("EOL_NoTranslation")); //$NON-NLS-1$
 		fEOLCodes.add(CommonEncodingPreferenceNames.NO_TRANSLATION);
 	}
 

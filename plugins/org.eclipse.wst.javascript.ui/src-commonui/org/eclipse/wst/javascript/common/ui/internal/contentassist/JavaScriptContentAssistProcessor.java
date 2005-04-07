@@ -498,7 +498,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 					}
 					else if (cs.toUpperCase().startsWith(nextstrUC)) {
 						//String strAddInfo = getAdditionalInfoText( fcc, fc, csn );
-						String strAddInfo = (cs.charAt(0) == '@') ? JSCommonUIMessages.getResourceString("%javadocinfo_" + cs.substring(1)) : null; //$NON-NLS-1$
+						String strAddInfo = (cs.charAt(0) == '@') ? JSCommonUIMessages.getString("javadocinfo_" + cs.substring(1)) : null; //$NON-NLS-1$
 						// ==> // String reststring = cs.substring(nextstr.length()) + " "; //$NON-NLS-1$
 						if (cs.length() > 0) {
 							CustomCompletionProposal cap = new CustomCompletionProposal(cs + " " // reststring //$NON-NLS-1$
@@ -528,7 +528,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 				CustomCompletionProposal cap = new CustomCompletionProposal("/**" + strLine.substring(2 + offBegComment - ir.getOffset()) + "*/" //$NON-NLS-1$ //$NON-NLS-2$
 				, offBegComment, endoff - offBegComment, estring.length() + 1, /*image:*/
 				null, "/**...", null, /*additional info:*///$NON-NLS-1$
-				JSCommonUIMessages.getResourceString("%Convert_to_a_JavaDoc_comment")); //$NON-NLS-1$ //$NON-NLS-2$
+				JSCommonUIMessages.getString("Convert_to_a_JavaDoc_comment")); //$NON-NLS-1$ 
 				retval.add(cap);
 			}
 			catch (BadLocationException exc) {
@@ -541,7 +541,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 			CustomCompletionProposal cap = new CustomCompletionProposal("/**" + estring.substring(2) //$NON-NLS-1$
 			, docPosition - estring.length(), estring.length(), estring.length() + 1, /*image:*/
 			null, "/**...", null, /*additional info:*///$NON-NLS-1$
-			JSCommonUIMessages.getResourceString("%Convert_to_a_JavaDoc_comment")); //$NON-NLS-1$ //$NON-NLS-2$
+			JSCommonUIMessages.getString("Convert_to_a_JavaDoc_comment")); //$NON-NLS-1$
 			retval.add(cap);
 		}
 		return retval;
@@ -1827,7 +1827,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 		if (!hasEndTag) {
 
 			// create appropriate close tag text
-			String proposedText = proposedText = "</" + tagName; // ResourceHandler
+			String proposedText = proposedText = "</" + tagName; // ResourceHandler //$NON-NLS-1$
 			// wants text
 			// w/out
 			// ending '>'
@@ -1844,7 +1844,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 			// create proposal
 			p = new CustomCompletionProposal(proposedText + ">", //$NON-NLS-1$
 						documentPosition, 0, proposedText.length() + 1, JSEditorPluginImageHelper.getInstance().getImage(imagePath), //$NON-NLS-1$
-						JSCommonUIMessages.getResourceString("%15concat", (new Object[]{proposedText})), //$NON-NLS-1$ = "End with '{0}>'"
+						JSCommonUIMessages.getString("15concat", (new Object[]{proposedText})), //$NON-NLS-1$ = "End with '{0}>'"
 						null, null, 1400); // XMLRelevanceConstants.R_END_TAG=1400
 		}
 		return p;

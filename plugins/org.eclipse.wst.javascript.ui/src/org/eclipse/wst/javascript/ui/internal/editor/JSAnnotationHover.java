@@ -36,7 +36,6 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.wst.sse.core.util.StringUtils;
-import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 
 public class JSAnnotationHover implements IAnnotationHover {
 
@@ -212,7 +211,7 @@ public class JSAnnotationHover implements IAnnotationHover {
 
 		StringBuffer buffer = new StringBuffer();
 		printer.addPageProlog(buffer);
-		printer.addParagraph(buffer, SSEUIPlugin.getResourceString("%Multiple_errors")); //$NON-NLS-1$
+		printer.addParagraph(buffer, JavaScriptUIMessages.getString("Multiple_errors")); //$NON-NLS-1$
 
 		printer.startBulletList(buffer);
 		Iterator e = messages.iterator();

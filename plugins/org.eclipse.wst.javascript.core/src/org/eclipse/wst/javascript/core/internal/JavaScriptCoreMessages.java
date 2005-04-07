@@ -9,18 +9,18 @@
  *     IBM Corporation - initial API and implementation
  *     
  *******************************************************************************/
-package org.eclipse.wst.javascript.common.ui.internal;
+package org.eclipse.wst.javascript.core.internal;
 
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * Handles getting resource strings for javascript common ui
+ * Handles getting resource strings for javascript core
  */
-public class JSCommonUIMessages {
+public class JavaScriptCoreMessages {
 	private static ResourceBundle fResourceBundle;
-	private static final String RESOURCE_BUNDLE = "org.eclipse.wst.javascript.common.ui.internal.JSCommonUIPluginResources"; //$NON-NLS-1$
+	private static final String RESOURCE_BUNDLE = "org.eclipse.wst.javascript.core.internal.JavaScriptCorePluginResources"; //$NON-NLS-1$
 
 	/**
 	 * Returns the plugin's resource bundle,
@@ -55,7 +55,7 @@ public class JSCommonUIMessages {
 		}
 	}
 
-	private JSCommonUIMessages() {
+	private JavaScriptCoreMessages() {
 		// empty constructor cannot be instantiated
 	}
 }

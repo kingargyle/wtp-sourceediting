@@ -15,35 +15,36 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
+import org.eclipse.wst.javascript.ui.internal.editor.JavaScriptUIMessages;
 import org.eclipse.wst.javascript.ui.internal.editor.Logger;
 
 public class NewJSWizard extends Wizard implements INewWizard {
-	static String PAGE_IMAGE = "/icons/full/wizban/newjscriptfile_wiz.gif";
+	static String PAGE_IMAGE = "/icons/full/wizban/newjscriptfile_wiz.gif"; //$NON-NLS-1$
 	private WizardNewFileCreationPage fNewFilePage;
 	private IStructuredSelection fSelection;
 
 	public void addPages() {
-		fNewFilePage = new WizardNewFileCreationPage("JSWizardNewFileCreationPage", new StructuredSelection(IDE.computeSelectedResources(fSelection))) {
+		fNewFilePage = new WizardNewFileCreationPage("JSWizardNewFileCreationPage", new StructuredSelection(IDE.computeSelectedResources(fSelection))) { //$NON-NLS-1$
 			protected boolean validatePage() {
 				IPath handlePath = new Path(getFileName());
 				String extension = handlePath.getFileExtension();
-				if (extension == null || !extension.equalsIgnoreCase("js")) {
-					setErrorMessage(JSEditorPlugin.getResourceString("%_ERROR_FILENAME_MUST_END_JS"));
+				if (extension == null || !extension.equalsIgnoreCase("js")) { //$NON-NLS-1$
+					setErrorMessage(JavaScriptUIMessages.getString("_ERROR_FILENAME_MUST_END_JS")); //$NON-NLS-1$
 					return false;
 				}
 				setErrorMessage(null);
 				return super.validatePage();
 			}
 		};
-		fNewFilePage.setTitle(JSEditorPlugin.getResourceString("%_UI_WIZARD_NEW_HEADING"));
-		fNewFilePage.setDescription(JSEditorPlugin.getResourceString("%_UI_WIZARD_NEW_DESCRIPTION"));
+		fNewFilePage.setTitle(JavaScriptUIMessages.getString("_UI_WIZARD_NEW_HEADING")); //$NON-NLS-1$
+		fNewFilePage.setDescription(JavaScriptUIMessages.getString("_UI_WIZARD_NEW_DESCRIPTION")); //$NON-NLS-1$
 
 		addPage(fNewFilePage);
 	}
 
 	public void init(IWorkbench aWorkbench, IStructuredSelection aSelection) {
 		fSelection = aSelection;
-		setWindowTitle(JSEditorPlugin.getResourceString("%_UI_WIZARD_NEW_TITLE"));
+		setWindowTitle(JavaScriptUIMessages.getString("_UI_WIZARD_NEW_TITLE")); //$NON-NLS-1$
 		if (PAGE_IMAGE != null) {
 			ImageDescriptor descriptor = JSEditorPlugin.getDefault().getImageRegistry().getDescriptor(PAGE_IMAGE);
 			if (descriptor == null) {
