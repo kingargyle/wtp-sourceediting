@@ -356,7 +356,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 				IEditorPart ownerEditor = page.getActiveEditor();
 				if (ownerEditor != null) {
 					fContextMenuRegistered = true;
-					getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + "#outlinecontext", fContextMenu, this); //$NON-NLS-1$
+					getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + ".OutlineContext", fContextMenu, this);	//$NON-NLS-1$
 				}
 			}
 		}
