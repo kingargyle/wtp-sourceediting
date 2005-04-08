@@ -56,10 +56,12 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IStorageEditorInput;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.editors.text.StorageDocumentProvider;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
@@ -459,6 +461,18 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 		try {
 			super.doSetInput(input);
+			
+			// currently this only works if createpartcontrol has not been called yet
+			String contentType = getInputContentType(input);
+			setEditorContextMenuId(contentType+".source.EditorContext"); //$NON-NLS-1$
+			setRulerContextMenuId(contentType+".source.RulerContext");	//$NON-NLS-1$
+			setHelpContextId(contentType+".source.HelpId");				//$NON-NLS-1$
+			// allows help to be set at any time (not just on AbstractTextEditor's
+			// creation)
+			if ((getHelpContextId() != null) && (getSourceViewer() != null) && (getSourceViewer().getTextWidget() != null)) {
+				IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
+				helpSystem.setHelp(getSourceViewer().getTextWidget(), getHelpContextId());
+			}
 
 			JSLineStyleListener lineStyleListener = getLineStyleListener();
 			if (lineStyleListener != null) {
