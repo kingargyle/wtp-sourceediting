@@ -13,6 +13,7 @@ package org.eclipse.wst.javascript.ui.internal.editor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
+import org.eclipse.swt.SWTError;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -47,7 +48,7 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 	/**
 	 * Adds the preview page of the multi-page editor.
 	 */
-	protected void addPreviewPage() {
+	private void addPreviewPage() {
 		fPreviewPage = new JSPreviewPage(getContainer(), fEditor);
 		fPreviewPageIndex = addPage(fPreviewPage.getControl());
 		setPageText(fPreviewPageIndex, JavaScriptUIMessages.getString("%Preview")); //$NON-NLS-1$
@@ -56,7 +57,7 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 	/**
 	 * Adds the source page of the multi-page editor.
 	 */
-	protected void addSourcePage() {
+	private void addSourcePage() {
 		try {
 			fEditor = new JSEditor();
 			fEditor.setEditorPart(this);
@@ -74,7 +75,17 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 
 	protected void createPages() {
 		addSourcePage();
-		addPreviewPage();
+		
+		/* https://bugs.eclipse.org/bugs/show_bug.cgi?id=87657
+		 * used this check for SWTError in attempt to work around 
+		 * "blocker" mentioned in 87657
+		 */
+		try {
+			addPreviewPage();
+		}
+		catch (SWTError e) {
+			Logger.logException(e);
+		}
 
 		// use the javascript icon with beige box instead of the
 		// javascript icon for the navigator view so the letter J is
