@@ -41,6 +41,7 @@
             class="org.eclipse.wst.javascript.ui.internal.editor.JSEditor"
             symbolicFontName="org.eclipse.wst.sse.ui.textfont"
             id="org.eclipse.wst.javascript.core.javascriptsource.source">
+      <contentTypeBinding contentTypeId="org.eclipse.wst.javascript.core.javascriptsource" />
       </editor>
    </extension>
    <extension
@@ -54,6 +55,7 @@
             class="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart"
             symbolicFontName="org.eclipse.wst.sse.ui.textfont"
             id="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart">
+      <contentTypeBinding contentTypeId="org.eclipse.wst.javascript.core.javascriptsource" />
       </editor>
    </extension>
    
