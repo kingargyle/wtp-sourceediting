@@ -36,6 +36,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.javascript.core.internal.jsparser.lexer.ILexer;
 import org.eclipse.wst.javascript.core.internal.jsparser.node.TCommenttok;
 import org.eclipse.wst.javascript.core.internal.jsparser.node.Token;
@@ -66,6 +67,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 	static protected final Character chRightBrace = new Character(')');
 	static protected final Character chRightBracket = new Character(']');
 	static protected final HashMap follow3classes = new java.util.HashMap();
+	static private HashMap fJavadocinfos;
 	static protected JavaScriptTagInfoProvider tagInfoProvider = null;
 
 	private static void addFunctionsNVars(String nextstr, int docpos, CompletionStringNode csn, Vector outval, FCContext fcc) {
@@ -498,7 +500,8 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 					}
 					else if (cs.toUpperCase().startsWith(nextstrUC)) {
 						//String strAddInfo = getAdditionalInfoText( fcc, fc, csn );
-						String strAddInfo = (cs.charAt(0) == '@') ? JSCommonUIMessages.getString("javadocinfo_" + cs.substring(1)) : null; //$NON-NLS-1$
+						String key = cs.substring(1);
+						String strAddInfo = (cs.charAt(0) == '@') ? (String)getJavadocinfo().get(key) : null;
 						// ==> // String reststring = cs.substring(nextstr.length()) + " "; //$NON-NLS-1$
 						if (cs.length() > 0) {
 							CustomCompletionProposal cap = new CustomCompletionProposal(cs + " " // reststring //$NON-NLS-1$
@@ -528,7 +531,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 				CustomCompletionProposal cap = new CustomCompletionProposal("/**" + strLine.substring(2 + offBegComment - ir.getOffset()) + "*/" //$NON-NLS-1$ //$NON-NLS-2$
 				, offBegComment, endoff - offBegComment, estring.length() + 1, /*image:*/
 				null, "/**...", null, /*additional info:*///$NON-NLS-1$
-				JSCommonUIMessages.getString("Convert_to_a_JavaDoc_comment")); //$NON-NLS-1$ 
+				JSCommonUIMessages.Convert_to_a_JavaDoc_comment); //$NON-NLS-1$ 
 				retval.add(cap);
 			}
 			catch (BadLocationException exc) {
@@ -541,7 +544,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 			CustomCompletionProposal cap = new CustomCompletionProposal("/**" + estring.substring(2) //$NON-NLS-1$
 			, docPosition - estring.length(), estring.length(), estring.length() + 1, /*image:*/
 			null, "/**...", null, /*additional info:*///$NON-NLS-1$
-			JSCommonUIMessages.getString("Convert_to_a_JavaDoc_comment")); //$NON-NLS-1$
+			JSCommonUIMessages.Convert_to_a_JavaDoc_comment); //$NON-NLS-1$
 			retval.add(cap);
 		}
 		return retval;
@@ -700,6 +703,22 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 		if (Debug.jsDebugContextAssist)
 			System.out.println("the string to complete is: <<<" + prefix + ">>>"); //$NON-NLS-2$//$NON-NLS-1$
 		return prefix;
+	}
+	
+	private static java.util.HashMap getJavadocinfo() {
+		if (fJavadocinfos == null) {
+			fJavadocinfos = new java.util.HashMap();
+			fJavadocinfos.put("author", JSCommonUIMessages.javadocinfo_author); //$NON-NLS-1$
+			fJavadocinfos.put("param", JSCommonUIMessages.javadocinfo_param); //$NON-NLS-1$
+			fJavadocinfos.put("return", JSCommonUIMessages.javadocinfo_return); //$NON-NLS-1$
+			fJavadocinfos.put("exception", JSCommonUIMessages.javadocinfo_exception); //$NON-NLS-1$
+			fJavadocinfos.put("throws", JSCommonUIMessages.javadocinfo_throws); //$NON-NLS-1$
+			fJavadocinfos.put("see", JSCommonUIMessages.javadocinfo_see); //$NON-NLS-1$
+			fJavadocinfos.put("since", JSCommonUIMessages.javadocinfo_since); //$NON-NLS-1$
+			fJavadocinfos.put("version", JSCommonUIMessages.javadocinfo_version); //$NON-NLS-1$
+			fJavadocinfos.put("deprecated", JSCommonUIMessages.javadocinfo_deprecated); //$NON-NLS-1$
+		}
+		return fJavadocinfos;
 	}
 
 	/**
@@ -1844,7 +1863,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 			// create proposal
 			p = new CustomCompletionProposal(proposedText + ">", //$NON-NLS-1$
 						documentPosition, 0, proposedText.length() + 1, JSEditorPluginImageHelper.getInstance().getImage(imagePath), //$NON-NLS-1$
-						JSCommonUIMessages.getString("15concat", (new Object[]{proposedText})), //$NON-NLS-1$ = "End with '{0}>'"
+						NLS.bind(JSCommonUIMessages.End_with, (new Object[]{proposedText})), 
 						null, null, 1400); // XMLRelevanceConstants.R_END_TAG=1400
 		}
 		return p;

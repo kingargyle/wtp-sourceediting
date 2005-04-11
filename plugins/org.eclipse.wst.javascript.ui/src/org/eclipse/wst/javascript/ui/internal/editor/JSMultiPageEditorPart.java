@@ -51,7 +51,7 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 	private void addPreviewPage() {
 		fPreviewPage = new JSPreviewPage(getContainer(), fEditor);
 		fPreviewPageIndex = addPage(fPreviewPage.getControl());
-		setPageText(fPreviewPageIndex, JavaScriptUIMessages.getString("%Preview")); //$NON-NLS-1$
+		setPageText(fPreviewPageIndex, JavaScriptUIMessages.Preview);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 			fEditor.setEditorPart(this);
 			fEditor.addPropertyListener(this);
 			fSourcePageIndex = addPage(fEditor, getEditorInput());
-			setPageText(fSourcePageIndex, JavaScriptUIMessages.getString("%Source")); //$NON-NLS-1$
+			setPageText(fSourcePageIndex, JavaScriptUIMessages.Source);
 		}
 		catch (PartInitException exception) {
 			// dispose editor

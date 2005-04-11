@@ -29,22 +29,22 @@ public class NewJSWizard extends Wizard implements INewWizard {
 				IPath handlePath = new Path(getFileName());
 				String extension = handlePath.getFileExtension();
 				if (extension == null || !extension.equalsIgnoreCase("js")) { //$NON-NLS-1$
-					setErrorMessage(JavaScriptUIMessages.getString("_ERROR_FILENAME_MUST_END_JS")); //$NON-NLS-1$
+					setErrorMessage(JavaScriptUIMessages._ERROR_FILENAME_MUST_END_JS); //$NON-NLS-1$
 					return false;
 				}
 				setErrorMessage(null);
 				return super.validatePage();
 			}
 		};
-		fNewFilePage.setTitle(JavaScriptUIMessages.getString("_UI_WIZARD_NEW_HEADING")); //$NON-NLS-1$
-		fNewFilePage.setDescription(JavaScriptUIMessages.getString("_UI_WIZARD_NEW_DESCRIPTION")); //$NON-NLS-1$
+		fNewFilePage.setTitle(JavaScriptUIMessages._UI_WIZARD_NEW_HEADING); //$NON-NLS-1$
+		fNewFilePage.setDescription(JavaScriptUIMessages._UI_WIZARD_NEW_DESCRIPTION); //$NON-NLS-1$
 
 		addPage(fNewFilePage);
 	}
 
 	public void init(IWorkbench aWorkbench, IStructuredSelection aSelection) {
 		fSelection = aSelection;
-		setWindowTitle(JavaScriptUIMessages.getString("_UI_WIZARD_NEW_TITLE")); //$NON-NLS-1$
+		setWindowTitle(JavaScriptUIMessages._UI_WIZARD_NEW_TITLE); //$NON-NLS-1$
 		if (PAGE_IMAGE != null) {
 			ImageDescriptor descriptor = JSEditorPlugin.getDefault().getImageRegistry().getDescriptor(PAGE_IMAGE);
 			if (descriptor == null) {

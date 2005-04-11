@@ -55,7 +55,7 @@ public class JavaScriptColorPage extends AbstractColorPage {
 	}
 
 	public String getSampleText() {
-		return JSCommonUIMessages.getString("sample_javascript_UI_"); //$NON-NLS-1$ = "function init() {\n\tfVersions = new Array();\n\tfVersions[1] = 'Version 1';\n\tfVersions[2] = 'Version 2';\n\t// For which version is the user requesting support?\n}\nfunction selectVersion(f) {\n\tvar cnt = 0;\n\tvar i;\n\tfor (i = 0 ; i < f.version.length ; i++) {\n\t\tif (f.version[i].selected) {\n\t\t\tcnt++;\n\t\t}\n\t}\n\tvar doall = (cnt == f.product.length || cnt == 0);\n\tString unfinishedString = \"resource;\n}"
+		return JSCommonUIMessages.sample_javascript_UI_; //$NON-NLS-1$ = "function init() {\n\tfVersions = new Array();\n\tfVersions[1] = 'Version 1';\n\tfVersions[2] = 'Version 2';\n\t// For which version is the user requesting support?\n}\nfunction selectVersion(f) {\n\tvar cnt = 0;\n\tvar i;\n\tfor (i = 0 ; i < f.version.length ; i++) {\n\t\tif (f.version[i].selected) {\n\t\t\tcnt++;\n\t\t}\n\t}\n\tvar doall = (cnt == f.product.length || cnt == 0);\n\tString unfinishedString = \"resource;\n}"
 	}
 
 	protected void initContextSytleMap(Dictionary contextStyleMap) {
@@ -69,11 +69,11 @@ public class JavaScriptColorPage extends AbstractColorPage {
 
 	protected void initDescriptions(Dictionary descriptions) {
 
-		descriptions.put(IStyleConstantsJavaScript.DEFAULT, JSCommonUIMessages.getString("Default_Code_UI_")); //$NON-NLS-1$ = "Default Code"
-		descriptions.put(IStyleConstantsJavaScript.KEYWORD, JSCommonUIMessages.getString("Keywords_UI_")); //$NON-NLS-1$ = "Keywords"
-		descriptions.put(IStyleConstantsJavaScript.LITERAL, JSCommonUIMessages.getString("Literal_Strings_UI_")); //$NON-NLS-1$ = "Literal Strings"
-		descriptions.put(IStyleConstantsJavaScript.COMMENT, JSCommonUIMessages.getString("Comments_UI_")); //$NON-NLS-1$ = "Comments"
-		descriptions.put(IStyleConstantsJavaScript.UNFINISHED_COMMENT, JSCommonUIMessages.getString("Unfinished_Strings_and_Comments_UI_")); //$NON-NLS-1$ = "Unfinished Strings and Comments"
+		descriptions.put(IStyleConstantsJavaScript.DEFAULT, JSCommonUIMessages.Default_Code_UI_); //$NON-NLS-1$ = "Default Code"
+		descriptions.put(IStyleConstantsJavaScript.KEYWORD, JSCommonUIMessages.Keywords_UI_); //$NON-NLS-1$ = "Keywords"
+		descriptions.put(IStyleConstantsJavaScript.LITERAL, JSCommonUIMessages.Literal_Strings_UI_); //$NON-NLS-1$ = "Literal Strings"
+		descriptions.put(IStyleConstantsJavaScript.COMMENT, JSCommonUIMessages.Comments_UI_); //$NON-NLS-1$ = "Comments"
+		descriptions.put(IStyleConstantsJavaScript.UNFINISHED_COMMENT, JSCommonUIMessages.Unfinished_Strings_and_Comments_UI_); //$NON-NLS-1$ = "Unfinished Strings and Comments"
 
 	}
 

@@ -201,10 +201,10 @@ public class LexerCacheForJavaScript implements ITokenCache {
 	public TextRange notifyChange(String strNew, int posChange, int lenOld, int lenNew) {
 		//System.out.println( "\nLCFJS:notifyChange strNew, "+posChange+", "+lenOld+" "+lenNew );
 		if (lenNew < 0)
-			throw new RuntimeException(JSCommonUIMessages.getString("internal_error_1")); //$NON-NLS-1$
+			throw new RuntimeException(JSCommonUIMessages.internal_error_1); //$NON-NLS-1$
 		//if (lenOld<0) throw new RuntimeException( "internal error: can't pass a negative lenNew to LCFJS.notifyChange" );
 		if (strNew == null)
-			throw new RuntimeException(JSCommonUIMessages.getString("internal_error_2")); //$NON-NLS-1$
+			throw new RuntimeException(JSCommonUIMessages.internal_error_2); //$NON-NLS-1$
 		if (strNew == strOldNodeValue)
 			return new TextRange(0, CHANGED_NONE); // no change
 		String nv = strNew;

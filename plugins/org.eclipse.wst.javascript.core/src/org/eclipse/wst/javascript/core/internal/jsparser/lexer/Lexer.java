@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackReader;
 
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.javascript.core.internal.JavaScriptCoreMessages;
 import org.eclipse.wst.javascript.core.internal.jsparser.node.EOF;
 import org.eclipse.wst.javascript.core.internal.jsparser.node.TBlank;
@@ -1308,7 +1309,7 @@ public class Lexer implements ILexer {
 			try {
 				InputStream inStream = Lexer.class.getResourceAsStream("javascript.llex");//$NON-NLS-1$
 				if (inStream == null)
-					throw new RuntimeWrappedException(JavaScriptCoreMessages.getString("__javascript.llex___not_fo_EXC_")); //$NON-NLS-1$ = "\"javascript.llex\" not found on classpath"
+					throw new RuntimeWrappedException(JavaScriptCoreMessages.__javascript_llex___not_fo_EXC_); //$NON-NLS-1$ = "\"javascript.llex\" not found on classpath"
 
 				s = new DataInputStream(new BufferedInputStream(inStream));
 
@@ -1341,7 +1342,7 @@ public class Lexer implements ILexer {
 				}
 			}
 			catch (IOException e) {
-				throw new RuntimeWrappedException(JavaScriptCoreMessages.getString("The_file___javascript.llex_EXC_")); //$NON-NLS-1$ = "The file \"javascript.llex\" is either missing or corrupted."
+				throw new RuntimeWrappedException(JavaScriptCoreMessages.The_file___javascript_llex_EXC_); //$NON-NLS-1$ = "The file \"javascript.llex\" is either missing or corrupted."
 			}
 			finally {
 				try {
@@ -1577,7 +1578,7 @@ public class Lexer implements ILexer {
 				}
 				else {
 					if (text.length() > 0) {
-						throw new LexerException(JavaScriptCoreMessages.getString("_Unknown_token___EXC_", //$NON-NLS-1$ = "[{0},{1}]  Unknown token: {2}"
+						throw new LexerException(NLS.bind(JavaScriptCoreMessages._Unknown_token___EXC_,
 									(new Object[]{Integer.toString((start_line + 1)), Integer.toString((start_pos + 1)), text})));
 					}
 					else {

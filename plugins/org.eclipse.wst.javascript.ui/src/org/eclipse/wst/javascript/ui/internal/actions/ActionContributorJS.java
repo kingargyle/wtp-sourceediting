@@ -22,7 +22,6 @@ import org.eclipse.ui.texteditor.RetargetTextEditorAction;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorActionConstants;
 import org.eclipse.wst.javascript.ui.internal.editor.JavaScriptUIMessages;
 import org.eclipse.wst.sse.ui.internal.actions.ActionContributor;
-import org.eclipse.wst.sse.ui.internal.actions.StructuredTextEditorActionConstants;
 
 /**
  * XMLEditorActionContributor
@@ -44,7 +43,7 @@ public class ActionContributorJS extends ActionContributor {
 		ResourceBundle resourceBundle = JavaScriptUIMessages.getResourceBundle();
 
 		// edit commands
-		fContentAssist = new RetargetTextEditorAction(resourceBundle, StructuredTextEditorActionConstants.ACTION_NAME_CONTENTASSIST_PROPOSALS + StructuredTextEditorActionConstants.DOT);
+		fContentAssist = new RetargetTextEditorAction(resourceBundle, ""); //$NON-NLS-1$
 		fContentAssist.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
 	}
 
@@ -63,7 +62,7 @@ public class ActionContributorJS extends ActionContributor {
 		}
 
 		// source commands
-		String sourceMenuLabel = JavaScriptUIMessages.getString("SourceMenu.label"); //$NON-NLS-1$
+		String sourceMenuLabel = JavaScriptUIMessages.SourceMenu_label; //$NON-NLS-1$
 		String sourceMenuId = "sourceMenuId"; // This is just a menu id. No need to translate. //$NON-NLS-1$
 		IMenuManager sourceMenu = new MenuManager(sourceMenuLabel, sourceMenuId);
 		menu.insertAfter(IWorkbenchActionConstants.M_EDIT, sourceMenu);

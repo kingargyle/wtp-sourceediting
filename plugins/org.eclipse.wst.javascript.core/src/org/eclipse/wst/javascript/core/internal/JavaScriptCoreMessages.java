@@ -1,61 +1,35 @@
-/*******************************************************************************
- * Copyright (c) 2005 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+/**********************************************************************
+ * Copyright (c) 2005 IBM Corporation and others. All rights reserved.   This
+ * program and the accompanying materials are made available under the terms of
+ * the Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors:
- *     IBM Corporation - initial API and implementation
- *     
- *******************************************************************************/
+ * Contributors: 
+ * IBM - Initial API and implementation
+ **********************************************************************/
 package org.eclipse.wst.javascript.core.internal;
 
-import java.text.MessageFormat;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import org.eclipse.osgi.util.NLS;
 
 /**
- * Handles getting resource strings for javascript core
+ * Strings used by Javascript Core
+ * 
+ * @since 1.0
  */
-public class JavaScriptCoreMessages {
-	private static ResourceBundle fResourceBundle;
-	private static final String RESOURCE_BUNDLE = "org.eclipse.wst.javascript.core.internal.JavaScriptCorePluginResources"; //$NON-NLS-1$
+public class JavaScriptCoreMessages extends NLS {
+	private static final String BUNDLE_NAME = "org.eclipse.wst.javascript.core.internal.JavaScriptCorePluginResources";//$NON-NLS-1$
 
-	/**
-	 * Returns the plugin's resource bundle,
-	 */
-	public static ResourceBundle getResourceBundle() {
-		try {
-			if (fResourceBundle == null)
-				fResourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE);
-		} catch (MissingResourceException x) {
-			fResourceBundle = null;
-		}
-		return fResourceBundle;
+	public static String __javascript_llex___not_fo_EXC_;
+	public static String The_file___javascript_llex_EXC_;
+	public static String _Unknown_token___EXC_;
+	public static String RuntimeWrappedException_0;
+
+	static {
+		// load message values from bundle file
+		NLS.initializeMessages(BUNDLE_NAME, JavaScriptCoreMessages.class);
 	}
-
-	/**
-	 * Returns the string from the plugin's resource bundle, or 'key' if not
-	 * found.
-	 */
-	public static String getString(String key) {
-		try {
-			return getResourceBundle().getString(key);
-		} catch (MissingResourceException e) {
-			return '!' + key + '!';
-		}
-	}
-
-	public static String getString(String key, Object[] args) {
-		try {
-			return MessageFormat.format(getString(key), args);
-		} catch (IllegalArgumentException e) {
-			return getString(key);
-		}
-	}
-
+	
 	private JavaScriptCoreMessages() {
-		// empty constructor cannot be instantiated
+		// cannot create new instance
 	}
 }

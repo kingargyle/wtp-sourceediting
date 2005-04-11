@@ -62,13 +62,13 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 
 	protected void createContentsForContentAssistGroup(Composite parent) {
 		Group contentAssistGroup = createGroup(parent, 2);
-		contentAssistGroup.setText(JSCommonUIMessages.getString("Content_assist_UI_")); //$NON-NLS-1$ = "Content assist"
+		contentAssistGroup.setText(JSCommonUIMessages.Content_assist_UI_); //$NON-NLS-1$ = "Content assist"
 
-		fAutoPropose = createCheckBox(contentAssistGroup, JSCommonUIMessages.getString("Automatically_make_suggest_UI_")); //$NON-NLS-1$ = "Automatically make suggestions"
+		fAutoPropose = createCheckBox(contentAssistGroup, JSCommonUIMessages.Automatically_make_suggest_UI_); //$NON-NLS-1$ = "Automatically make suggestions"
 		((GridData) fAutoPropose.getLayoutData()).horizontalSpan = 2;
 		fAutoPropose.addSelectionListener(this);
 
-		fAutoProposeLabel = createLabel(contentAssistGroup, JSCommonUIMessages.getString("Prompt_when_these_characte_UI_")); //$NON-NLS-1$ = "Prompt when these characters are inserted:"
+		fAutoProposeLabel = createLabel(contentAssistGroup, JSCommonUIMessages.Prompt_when_these_characte_UI_); //$NON-NLS-1$ = "Prompt when these characters are inserted:"
 		fAutoProposeText = createTextField(contentAssistGroup);
 	}
 

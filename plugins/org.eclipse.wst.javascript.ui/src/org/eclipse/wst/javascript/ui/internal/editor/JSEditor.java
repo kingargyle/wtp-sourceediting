@@ -206,6 +206,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	private IShowInTargetList fShowInTargetListAdapter = new ShowInTargetLister();
 
 	IDocumentProvider fStorageInputDocumentProvider = null;
+	private static final String UNDERSCORE = "_"; //$NON-NLS-1$
 
 	protected void addContextMenuActions(IMenuManager menu) {
 	}
@@ -263,17 +264,17 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 		// override the cut/paste/delete action to make them run on read-only
 		// files
-		ResourceAction action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor.Cut.", this, ITextOperationTarget.CUT, true); //$NON-NLS-1$
+		ResourceAction action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor_Cut_", this, ITextOperationTarget.CUT, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.CUT_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.CUT);
 		setAction(ITextEditorActionConstants.CUT, action);
 
-		action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor.Paste.", this, ITextOperationTarget.PASTE, true); //$NON-NLS-1$
+		action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor_Paste_", this, ITextOperationTarget.PASTE, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.PASTE_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.PASTE);
 		setAction(ITextEditorActionConstants.PASTE, action);
 
-		action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor.Delete.", this, ITextOperationTarget.DELETE, true); //$NON-NLS-1$
+		action = new TextOperationAction(JavaScriptUIMessages.getResourceBundle(), "Editor_Delete_", this, ITextOperationTarget.DELETE, true); //$NON-NLS-1$
 		action.setHelpContextId(IAbstractTextEditorHelpContextIds.DELETE_ACTION);
 		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.DELETE);
 		setAction(ITextEditorActionConstants.DELETE, action);
@@ -292,7 +293,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			//				saveAction.setEditorPart(getEditorPart());
 			//			setAction(ITextEditorActionConstants.SAVE, saveAction);
 
-			IAction contentAssistAction = new TextOperationAction(resourceBundle, JSEditorActionConstants.ACTION_NAME_CONTENT_ASSIST_PROPOSAL + JSEditorActionConstants.DOT, this, ISourceViewer.CONTENTASSIST_PROPOSALS, true);
+			IAction contentAssistAction = new TextOperationAction(resourceBundle, JSEditorActionConstants.ACTION_NAME_CONTENT_ASSIST_PROPOSAL + UNDERSCORE, this, ISourceViewer.CONTENTASSIST_PROPOSALS, true);
 			WorkbenchHelp.setHelp(contentAssistAction, IHelpContextIds.CONTMNU_CONTENTASSIST_HELPID);
 			contentAssistAction.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
 			setAction(JSEditorActionConstants.ACTION_NAME_CONTENT_ASSIST_PROPOSAL, contentAssistAction);
@@ -339,7 +340,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			//For error handling test only!!!==========
 		}
 		catch (MissingResourceException exception) {
-			throw new SourceEditingRuntimeException(JavaScriptUIMessages.getString("An_error_has_occurred_when_ERROR_")); //$NON-NLS-1$ = ...
+			throw new SourceEditingRuntimeException(JavaScriptUIMessages.An_error_has_occurred_when_ERROR_); //$NON-NLS-1$ = ...
 			// ... "An error has occurred when retrieving resources for the
 			// source editor. The Eclipse Workbench installation may have been
 			// corrupted."

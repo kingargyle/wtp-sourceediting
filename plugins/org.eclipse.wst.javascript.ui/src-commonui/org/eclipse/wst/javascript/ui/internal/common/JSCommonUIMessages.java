@@ -1,61 +1,60 @@
-/*******************************************************************************
- * Copyright (c) 2005 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+/**********************************************************************
+ * Copyright (c) 2005 IBM Corporation and others. All rights reserved.   This
+ * program and the accompanying materials are made available under the terms of
+ * the Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors:
- *     IBM Corporation - initial API and implementation
- *     
- *******************************************************************************/
+ * Contributors: 
+ * IBM - Initial API and implementation
+ **********************************************************************/
 package org.eclipse.wst.javascript.ui.internal.common;
 
-import java.text.MessageFormat;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import org.eclipse.osgi.util.NLS;
 
 /**
- * Handles getting resource strings for javascript common ui
+ * Strings used by Javascript Common UI
+ * 
+ * @since 1.0
  */
-public class JSCommonUIMessages {
-	private static ResourceBundle fResourceBundle;
-	private static final String RESOURCE_BUNDLE = "org.eclipse.wst.javascript.common.ui.internal.JSCommonUIPluginResources"; //$NON-NLS-1$
+public class JSCommonUIMessages extends NLS {
+	private static final String BUNDLE_NAME = "org.eclipse.wst.javascript.ui.internal.common.JSCommonUIPluginResources";//$NON-NLS-1$
 
-	/**
-	 * Returns the plugin's resource bundle,
-	 */
-	public static ResourceBundle getResourceBundle() {
-		try {
-			if (fResourceBundle == null)
-				fResourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE);
-		} catch (MissingResourceException x) {
-			fResourceBundle = null;
-		}
-		return fResourceBundle;
+	public static String Default_Code_UI_;
+	public static String Keywords_UI_;
+	public static String Literal_Strings_UI_;
+	public static String Comments_UI_;
+	public static String Unfinished_Strings_and_Comments_UI_;
+	public static String sample_javascript_UI_;
+	public static String Convert_to_a_JavaDoc_comment;
+	public static String internal_error_1;
+	public static String internal_error_2;
+	public static String javadocinfo_author;
+	public static String javadocinfo_param;
+	public static String javadocinfo_return;
+	public static String javadocinfo_exception;
+	public static String javadocinfo_throws;
+	public static String javadocinfo_see;
+	public static String javadocinfo_since;
+	public static String javadocinfo_version;
+	public static String javadocinfo_deprecated;
+	public static String End_with;
+	public static String Creating_or_saving_files;
+	public static String End_of_line_code_desc;
+	public static String End_of_line_code;
+	public static String EOL_Windows;
+	public static String EOL_Unix;
+	public static String EOL_Mac;
+	public static String EOL_NoTranslation;
+	public static String Content_assist_UI_;
+	public static String Automatically_make_suggest_UI_;
+	public static String Prompt_when_these_characte_UI_;
+
+	static {
+		// load message values from bundle file
+		NLS.initializeMessages(BUNDLE_NAME, JSCommonUIMessages.class);
 	}
-
-	/**
-	 * Returns the string from the plugin's resource bundle, or 'key' if not
-	 * found.
-	 */
-	public static String getString(String key) {
-		try {
-			return getResourceBundle().getString(key);
-		} catch (MissingResourceException e) {
-			return '!' + key + '!';
-		}
-	}
-
-	public static String getString(String key, Object[] args) {
-		try {
-			return MessageFormat.format(getString(key), args);
-		} catch (IllegalArgumentException e) {
-			return getString(key);
-		}
-	}
-
+	
 	private JSCommonUIMessages() {
-		// empty constructor cannot be instantiated
+		// cannot create new instance
 	}
 }

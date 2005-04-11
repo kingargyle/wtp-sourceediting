@@ -22,8 +22,8 @@ public class FilteredFileSelectionDialog extends ElementTreeSelectionDialog {
 		super(parent, new WorkbenchLabelProvider(), new WorkbenchContentProvider());
 		setShellStyle(SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
 
-		setTitle(JavaScriptUIMessages.getString("%FilteredFileSelectionDialog.0")); //$NON-NLS-1$
-		setMessage(JavaScriptUIMessages.getString("%FilteredFileSelectionDialog.1")); //$NON-NLS-1$
+		setTitle(JavaScriptUIMessages.FilteredFileSelectionDialog_0);
+		setMessage(JavaScriptUIMessages.FilteredFileSelectionDialog_1);
 		setAllowMultiple(false);
 		addFilter(new ContentTypeViewerFilter(contentTypes));
 	}

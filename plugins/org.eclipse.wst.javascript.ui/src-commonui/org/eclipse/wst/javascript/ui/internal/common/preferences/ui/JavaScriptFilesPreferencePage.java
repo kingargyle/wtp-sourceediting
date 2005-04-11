@@ -89,13 +89,13 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 
 	protected void createContentsForCreatingOrSavingGroup(Composite parent) {
 		Group creatingOrSavingGroup = createGroup(parent, 2);
-		creatingOrSavingGroup.setText(JSCommonUIMessages.getString("Creating_or_saving_files")); //$NON-NLS-1$
+		creatingOrSavingGroup.setText(JSCommonUIMessages.Creating_or_saving_files); //$NON-NLS-1$
 
-		Label label = createLabel(creatingOrSavingGroup, JSCommonUIMessages.getString("End-of-line_code_desc")); //$NON-NLS-1$
+		Label label = createLabel(creatingOrSavingGroup, JSCommonUIMessages.End_of_line_code_desc); //$NON-NLS-1$
 		((GridData) label.getLayoutData()).horizontalSpan = 2;
 		((GridData) label.getLayoutData()).grabExcessHorizontalSpace = true;
 
-		createLabel(creatingOrSavingGroup, JSCommonUIMessages.getString("End-of-line_code")); //$NON-NLS-1$
+		createLabel(creatingOrSavingGroup, JSCommonUIMessages.End_of_line_code); //$NON-NLS-1$
 		fEndOfLineCode = createDropDownBox(creatingOrSavingGroup);
 		populateLineDelimiters();
 	}
@@ -273,16 +273,16 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 	 */
 	private void populateLineDelimiters() {
 		fEOLCodes = new Vector();
-		fEndOfLineCode.add(JSCommonUIMessages.getString("EOL_Unix")); //$NON-NLS-1$
+		fEndOfLineCode.add(JSCommonUIMessages.EOL_Unix); //$NON-NLS-1$
 		fEOLCodes.add(CommonEncodingPreferenceNames.LF);
 
-		fEndOfLineCode.add(JSCommonUIMessages.getString("EOL_Mac")); //$NON-NLS-1$
+		fEndOfLineCode.add(JSCommonUIMessages.EOL_Mac); //$NON-NLS-1$
 		fEOLCodes.add(CommonEncodingPreferenceNames.CR);
 
-		fEndOfLineCode.add(JSCommonUIMessages.getString("EOL_Windows")); //$NON-NLS-1$
+		fEndOfLineCode.add(JSCommonUIMessages.EOL_Windows); //$NON-NLS-1$
 		fEOLCodes.add(CommonEncodingPreferenceNames.CRLF);
 
-		fEndOfLineCode.add(JSCommonUIMessages.getString("EOL_NoTranslation")); //$NON-NLS-1$
+		fEndOfLineCode.add(JSCommonUIMessages.EOL_NoTranslation); //$NON-NLS-1$
 		fEOLCodes.add(CommonEncodingPreferenceNames.NO_TRANSLATION);
 	}
 

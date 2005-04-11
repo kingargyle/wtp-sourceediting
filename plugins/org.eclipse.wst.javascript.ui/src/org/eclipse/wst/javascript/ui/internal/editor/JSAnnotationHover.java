@@ -211,7 +211,7 @@ public class JSAnnotationHover implements IAnnotationHover {
 
 		StringBuffer buffer = new StringBuffer();
 		printer.addPageProlog(buffer);
-		printer.addParagraph(buffer, JavaScriptUIMessages.getString("Multiple_errors")); //$NON-NLS-1$
+		printer.addParagraph(buffer, JavaScriptUIMessages.Multiple_errors); //$NON-NLS-1$
 
 		printer.startBulletList(buffer);
 		Iterator e = messages.iterator();
