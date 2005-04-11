@@ -142,25 +142,25 @@
       <page
             name="%JavaScript_Files.name"
             category="org.eclipse.wst.sse.ui.preferences"
-            class="org.eclipse.wst.javascript.common.ui.internal.preferences.ui.JavaScriptFilesPreferencePage"
+            class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JavaScriptFilesPreferencePage"
             id="org.eclipse.wst.sse.javascript.preferences">
       </page>
       <page
             name="%JavaScript_Source.name"
             category="org.eclipse.wst.sse.javascript.preferences"
-            class="org.eclipse.wst.javascript.common.ui.internal.preferences.ui.JavaScriptSourcePreferencePage"
+            class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JavaScriptSourcePreferencePage"
             id="org.eclipse.wst.sse.javascript.preferences.source">
       </page>
       <page
             name="%JavaScript_Styles.name"
             category="org.eclipse.wst.sse.javascript.preferences"
-            class="org.eclipse.wst.javascript.common.ui.internal.preferences.ui.JavaScriptColorPage"
+            class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JavaScriptColorPage"
             id="org.eclipse.wst.sse.javascript.preferences.styles">
       </page>
    </extension>
 	<!-- initialize javascript ui preferences -->
 	<extension point="org.eclipse.core.runtime.preferences">
-	   <initializer class="org.eclipse.wst.javascript.common.ui.internal.preferences.JSCommonUIPreferenceInitializer"/>
+	   <initializer class="org.eclipse.wst.javascript.ui.internal.common.preferences.JSCommonUIPreferenceInitializer"/>
 	</extension>
    <extension
          point="org.eclipse.wst.sse.ui.extendedconfiguration">

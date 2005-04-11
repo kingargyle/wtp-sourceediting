@@ -14,7 +14,7 @@ import java.util.Vector;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.wst.javascript.common.ui.ContentElement;
+import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
 import org.eclipse.wst.javascript.ui.internal.editor.ContentElementProvider;
 
 

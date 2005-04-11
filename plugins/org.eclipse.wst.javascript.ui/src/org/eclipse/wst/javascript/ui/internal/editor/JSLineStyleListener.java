@@ -30,20 +30,20 @@ import org.eclipse.swt.custom.LineStyleEvent;
 import org.eclipse.swt.custom.LineStyleListener;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.wst.javascript.common.ui.JavaScriptColorPreferences;
-import org.eclipse.wst.javascript.common.ui.LexerCacheForJavaScript;
-import org.eclipse.wst.javascript.common.ui.TextRange;
-import org.eclipse.wst.javascript.common.ui.internal.style.LineStyleProviderForJavaScript;
-import org.eclipse.wst.javascript.core.jsparser.lexer.ILexer;
-import org.eclipse.wst.javascript.core.jsparser.lexer.LexerException;
-import org.eclipse.wst.javascript.core.jsparser.node.EOF;
-import org.eclipse.wst.javascript.core.jsparser.node.TBlank;
-import org.eclipse.wst.javascript.core.jsparser.node.TCommenttok;
-import org.eclipse.wst.javascript.core.jsparser.node.TErrorChar;
-import org.eclipse.wst.javascript.core.jsparser.node.TStringLiteral;
-import org.eclipse.wst.javascript.core.jsparser.node.TUnterminatedComment;
-import org.eclipse.wst.javascript.core.jsparser.node.TUnterminatedStringLiteral;
-import org.eclipse.wst.javascript.core.jsparser.node.Token;
+import org.eclipse.wst.javascript.core.internal.jsparser.lexer.ILexer;
+import org.eclipse.wst.javascript.core.internal.jsparser.lexer.LexerException;
+import org.eclipse.wst.javascript.core.internal.jsparser.node.EOF;
+import org.eclipse.wst.javascript.core.internal.jsparser.node.TBlank;
+import org.eclipse.wst.javascript.core.internal.jsparser.node.TCommenttok;
+import org.eclipse.wst.javascript.core.internal.jsparser.node.TErrorChar;
+import org.eclipse.wst.javascript.core.internal.jsparser.node.TStringLiteral;
+import org.eclipse.wst.javascript.core.internal.jsparser.node.TUnterminatedComment;
+import org.eclipse.wst.javascript.core.internal.jsparser.node.TUnterminatedStringLiteral;
+import org.eclipse.wst.javascript.core.internal.jsparser.node.Token;
+import org.eclipse.wst.javascript.ui.internal.common.JavaScriptColorPreferences;
+import org.eclipse.wst.javascript.ui.internal.common.LexerCacheForJavaScript;
+import org.eclipse.wst.javascript.ui.internal.common.TextRange;
+import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
 
 
 public class JSLineStyleListener implements LineStyleListener, IDocumentListener {

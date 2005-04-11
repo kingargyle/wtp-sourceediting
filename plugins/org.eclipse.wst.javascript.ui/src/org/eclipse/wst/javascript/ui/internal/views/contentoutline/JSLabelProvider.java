@@ -14,8 +14,8 @@ package org.eclipse.wst.javascript.ui.internal.views.contentoutline;
 
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.wst.javascript.common.ui.ContentElement;
-import org.eclipse.wst.javascript.common.ui.JSContentElementConstants;
+import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
+import org.eclipse.wst.javascript.ui.internal.common.JSContentElementConstants;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
 

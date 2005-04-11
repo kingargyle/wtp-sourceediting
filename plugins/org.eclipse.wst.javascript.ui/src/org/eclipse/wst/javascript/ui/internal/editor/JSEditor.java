@@ -78,8 +78,8 @@ import org.eclipse.ui.texteditor.ResourceAction;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.wst.javascript.common.ui.JSSourceViewerConfiguration;
 import org.eclipse.wst.javascript.core.contenttype.ContentTypeIdForJavaScript;
+import org.eclipse.wst.javascript.ui.internal.common.JSSourceViewerConfiguration;
 import org.eclipse.wst.javascript.ui.internal.views.contentoutline.JSContentOutlinePage;
 import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;
@@ -622,7 +622,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 		//https://w3.opensource.ibm.com/bugzilla/show_bug.cgi?id=3426
 		//setDocumentProvider(new JSTextFileDocumentProvider());
 		setRangeIndicator(new DefaultRangeIndicator());
-		setHelpContextId(org.eclipse.wst.javascript.common.ui.internal.IHelpContextIds.JS_SOURCEVIEW_HELPID);
+		setHelpContextId(org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds.JS_SOURCEVIEW_HELPID);
 		setPreferenceStore(createCombinedPreferenceStore());
 		//		getCommonPreferenceStore().addPropertyChangeListener(this);
 

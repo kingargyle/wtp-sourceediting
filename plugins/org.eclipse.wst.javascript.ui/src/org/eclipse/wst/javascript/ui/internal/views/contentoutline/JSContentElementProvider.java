@@ -15,10 +15,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.wst.javascript.common.ui.ContentElement;
-import org.eclipse.wst.javascript.common.ui.JSContentElementConstants;
-import org.eclipse.wst.javascript.common.ui.JSContentElementImpl;
-import org.eclipse.wst.javascript.common.ui.LexerCacheForJavaScript;
+import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
+import org.eclipse.wst.javascript.ui.internal.common.JSContentElementConstants;
+import org.eclipse.wst.javascript.ui.internal.common.JSContentElementImpl;
+import org.eclipse.wst.javascript.ui.internal.common.LexerCacheForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.editor.ContentElementProvider;
 
 

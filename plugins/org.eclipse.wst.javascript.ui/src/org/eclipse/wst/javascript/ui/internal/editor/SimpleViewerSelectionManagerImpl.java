@@ -25,7 +25,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.wst.javascript.common.ui.ContentElement;
+import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
 import org.eclipse.wst.sse.core.IStructuredModel;
 import org.eclipse.wst.sse.ui.internal.CaretMediator;
 import org.eclipse.wst.sse.ui.internal.ViewerSelectionManager;
