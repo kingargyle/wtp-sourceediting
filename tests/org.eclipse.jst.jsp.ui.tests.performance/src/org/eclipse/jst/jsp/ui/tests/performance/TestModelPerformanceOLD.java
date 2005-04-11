@@ -15,7 +15,7 @@ import java.io.InputStream;
 
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsp.core.PageDirectiveAdapter;
+import org.eclipse.jst.jsp.core.internal.document.PageDirectiveAdapter;
 import org.eclipse.wst.sse.core.IModelManager;
 import org.eclipse.wst.sse.core.INodeNotifier;
 import org.eclipse.wst.sse.core.IStructuredModel;

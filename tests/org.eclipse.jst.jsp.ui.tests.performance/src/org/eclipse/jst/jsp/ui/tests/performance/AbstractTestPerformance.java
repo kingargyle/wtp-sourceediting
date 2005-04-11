@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Vector;
 
-import org.eclipse.jst.jsp.core.PageDirectiveAdapter;
+import org.eclipse.jst.jsp.core.internal.document.PageDirectiveAdapter;
 import org.eclipse.jst.jsp.core.internal.util.DocumentProvider;
 import org.eclipse.jst.jsp.ui.tests.performance.util.DateUtil;
 import org.eclipse.jst.jsp.ui.tests.performance.util.FileUtil;
