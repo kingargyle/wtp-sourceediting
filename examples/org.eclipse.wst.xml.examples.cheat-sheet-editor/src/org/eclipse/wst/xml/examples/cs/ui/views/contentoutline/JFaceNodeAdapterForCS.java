@@ -13,7 +13,7 @@ package org.eclipse.wst.xml.examples.cs.ui.views.contentoutline;
 
 import java.util.ArrayList;
 
-import org.eclipse.wst.sse.core.IAdapterFactory;
+import org.eclipse.wst.sse.core.INodeAdapterFactory;
 import org.eclipse.wst.sse.ui.internal.contentoutline.IJFaceNodeAdapter;
 import org.eclipse.wst.xml.ui.internal.contentoutline.JFaceNodeAdapter;
 import org.w3c.dom.Node;
@@ -25,7 +25,7 @@ import org.w3c.dom.Node;
 public class JFaceNodeAdapterForCS extends JFaceNodeAdapter {
 	final static Class ADAPTER_KEY = IJFaceNodeAdapter.class;
 
-	public JFaceNodeAdapterForCS(IAdapterFactory adapterFactory) {
+	public JFaceNodeAdapterForCS(INodeAdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
