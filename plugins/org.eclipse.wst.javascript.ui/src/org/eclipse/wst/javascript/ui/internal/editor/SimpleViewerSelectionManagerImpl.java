@@ -29,9 +29,9 @@ import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
 import org.eclipse.wst.sse.core.IStructuredModel;
 import org.eclipse.wst.sse.ui.internal.CaretMediator;
 import org.eclipse.wst.sse.ui.internal.ViewerSelectionManager;
-import org.eclipse.wst.sse.ui.view.events.CaretEvent;
-import org.eclipse.wst.sse.ui.view.events.INodeSelectionListener;
-import org.eclipse.wst.sse.ui.view.events.ITextSelectionListener;
+import org.eclipse.wst.sse.ui.internal.view.events.CaretEvent;
+import org.eclipse.wst.sse.ui.internal.view.events.INodeSelectionListener;
+import org.eclipse.wst.sse.ui.internal.view.events.ITextSelectionListener;
 
 public class SimpleViewerSelectionManagerImpl implements ViewerSelectionManager {
 

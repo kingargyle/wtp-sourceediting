@@ -28,7 +28,7 @@ import org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds;
 import org.eclipse.wst.javascript.ui.internal.common.JSCommonUIMessages;
 import org.eclipse.wst.javascript.ui.internal.common.preferences.JSCommonUIPreferenceNames;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
-import org.eclipse.wst.sse.ui.preferences.ui.AbstractPreferencePage;
+import org.eclipse.wst.sse.ui.internal.preferences.ui.AbstractPreferencePage;
 
 public class JavaScriptSourcePreferencePage extends AbstractPreferencePage implements ModifyListener, SelectionListener, IWorkbenchPreferencePage {
 	// Formatting

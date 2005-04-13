@@ -19,8 +19,8 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.wst.javascript.ui.internal.common.style.IStyleConstantsJavaScript;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
-import org.eclipse.wst.sse.ui.preferences.ui.ColorHelper;
-import org.eclipse.wst.sse.ui.util.EditorUtility;
+import org.eclipse.wst.sse.ui.internal.preferences.ui.ColorHelper;
+import org.eclipse.wst.sse.ui.internal.util.EditorUtility;
 
 public class JavaScriptColorPreferences {
 	private class PropertyChangeListener implements IPropertyChangeListener {

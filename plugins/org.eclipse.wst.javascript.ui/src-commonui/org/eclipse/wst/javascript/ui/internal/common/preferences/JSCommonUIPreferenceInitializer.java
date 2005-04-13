@@ -4,7 +4,7 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.wst.javascript.ui.internal.common.style.IStyleConstantsJavaScript;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
-import org.eclipse.wst.sse.ui.preferences.ui.ColorHelper;
+import org.eclipse.wst.sse.ui.internal.preferences.ui.ColorHelper;
 
 /**
  * Sets default values for JS Common UI preferences

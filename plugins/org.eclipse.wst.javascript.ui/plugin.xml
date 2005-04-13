@@ -11,7 +11,7 @@
       <library name="javascriptui.jar">
          <export name="*"/>
       </library>
-   </runtime>
+   </runtime> 
    <requires>
       <import plugin="org.eclipse.debug.core"/>
       <import plugin="org.eclipse.debug.ui"/>
@@ -106,9 +106,9 @@
                id="org.eclipse.swt.dnd.FileTransfer">
          </transfer>
          <dropAction
-               class="org.eclipse.wst.sse.ui.extension.FileDropAction"
+               class="org.eclipse.wst.sse.ui.internal.FileDropAction"
                transferID="org.eclipse.swt.dnd.FileTransfer"
-               id="org.eclipse.wst.sse.ui.extension.FileDropAction">
+               id="org.eclipse.wst.sse.ui.internal.FileDropAction">
          </dropAction>
          <transfer
                priority="low"
@@ -118,9 +118,9 @@
                id="org.eclipse.swt.dnd.TextTransfer">
          </transfer>
          <dropAction
-               class="org.eclipse.wst.sse.ui.extension.TextDropAction"
+               class="ororg.eclipse.wst.sse.ui.internal.TextDropAction"
                transferID="org.eclipse.swt.dnd.TextTransfer"
-               id="org.eclipse.wst.sse.ui.extension.TextDropAction">
+               id="ororg.eclipse.wst.sse.ui.internal.TextDropAction">
          </dropAction>
       </dropTargetContribution>
    </extension>

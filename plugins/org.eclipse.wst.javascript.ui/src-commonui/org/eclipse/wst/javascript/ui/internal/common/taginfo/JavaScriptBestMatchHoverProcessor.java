@@ -11,7 +11,7 @@
 package org.eclipse.wst.javascript.ui.internal.common.taginfo;
 
 import org.eclipse.jface.text.ITextHover;
-import org.eclipse.wst.sse.ui.taginfo.AbstractBestMatchHoverProcessor;
+import org.eclipse.wst.sse.ui.internal.taginfo.AbstractBestMatchHoverProcessor;
 
 /**
  * Provides the best javascript hover help documentation (by using other hover help processors)
