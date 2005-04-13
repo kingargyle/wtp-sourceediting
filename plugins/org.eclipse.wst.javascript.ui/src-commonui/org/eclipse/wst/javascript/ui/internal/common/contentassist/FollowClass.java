@@ -20,7 +20,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import org.eclipse.wst.sse.core.util.Debug;
+import org.eclipse.wst.sse.core.internal.util.Debug;
 
 class FollowClass {
 

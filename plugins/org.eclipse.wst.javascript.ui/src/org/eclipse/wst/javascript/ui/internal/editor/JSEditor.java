@@ -84,7 +84,7 @@ import org.eclipse.wst.javascript.ui.internal.views.contentoutline.JSContentOutl
 import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;
 import org.eclipse.wst.sse.core.internal.encoding.ContentBasedPreferenceGateway;
-import org.eclipse.wst.sse.core.util.StringUtils;
+import org.eclipse.wst.sse.core.internal.util.StringUtils;
 import org.eclipse.wst.sse.ui.extension.ExtendedConfigurationBuilder;
 import org.eclipse.wst.sse.ui.extension.ExtendedEditorActionBuilder;
 import org.eclipse.wst.sse.ui.extension.ExtendedEditorDropTargetAdapter;
