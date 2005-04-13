@@ -28,7 +28,7 @@ import org.eclipse.wst.javascript.ui.internal.common.preferences.OverlayPreferen
 import org.eclipse.wst.javascript.ui.internal.common.preferences.OverlayPreferenceStore.OverlayKey;
 import org.eclipse.wst.javascript.ui.internal.common.style.IStyleConstantsJavaScript;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
-import org.eclipse.wst.sse.core.parser.RegionParser;
+import org.eclipse.wst.sse.core.internal.ltk.parser.RegionParser;
 import org.eclipse.wst.sse.ui.preferences.ui.AbstractColorPage;
 import org.eclipse.wst.sse.ui.preferences.ui.StyledTextColorPicker;
 

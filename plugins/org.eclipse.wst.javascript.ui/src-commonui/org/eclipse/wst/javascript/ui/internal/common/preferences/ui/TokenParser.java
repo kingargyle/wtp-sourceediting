@@ -29,9 +29,9 @@ import org.eclipse.wst.javascript.core.internal.jsparser.node.TUnterminatedStrin
 import org.eclipse.wst.javascript.core.internal.jsparser.node.Token;
 import org.eclipse.wst.javascript.ui.internal.common.style.IStyleConstantsJavaScript;
 import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
+import org.eclipse.wst.sse.core.internal.ltk.parser.RegionParser;
 import org.eclipse.wst.sse.core.internal.parser.ContextRegion;
 import org.eclipse.wst.sse.core.internal.text.BasicStructuredDocumentRegion;
-import org.eclipse.wst.sse.core.parser.RegionParser;
 import org.eclipse.wst.sse.core.text.IStructuredDocumentRegion;
 
 /**
