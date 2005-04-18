@@ -81,12 +81,10 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wst.javascript.core.contenttype.ContentTypeIdForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.common.JSSourceViewerConfiguration;
 import org.eclipse.wst.javascript.ui.internal.views.contentoutline.JSContentOutlinePage;
-import org.eclipse.wst.sse.core.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;
 import org.eclipse.wst.sse.core.internal.encoding.ContentBasedPreferenceGateway;
+import org.eclipse.wst.sse.core.internal.provisional.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.core.internal.util.StringUtils;
-import org.eclipse.wst.sse.ui.extensions.ConfigurationPointCalculator;
-import org.eclipse.wst.sse.ui.extensions.breakpoint.IExtendedStorageEditorInput;
 import org.eclipse.wst.sse.ui.internal.ExtendedConfigurationBuilder;
 import org.eclipse.wst.sse.ui.internal.ExtendedEditorActionBuilder;
 import org.eclipse.wst.sse.ui.internal.ExtendedEditorDropTargetAdapter;
@@ -105,6 +103,8 @@ import org.eclipse.wst.sse.ui.internal.debug.ToggleBreakpointsTarget;
 import org.eclipse.wst.sse.ui.internal.editor.IHelpContextIds;
 import org.eclipse.wst.sse.ui.internal.extension.BreakpointProviderBuilder;
 import org.eclipse.wst.sse.ui.internal.preferences.EditorPreferenceNames;
+import org.eclipse.wst.sse.ui.internal.provisional.extensions.ConfigurationPointCalculator;
+import org.eclipse.wst.sse.ui.internal.provisional.extensions.breakpoint.IExtendedStorageEditorInput;
 
 public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	// local adapter

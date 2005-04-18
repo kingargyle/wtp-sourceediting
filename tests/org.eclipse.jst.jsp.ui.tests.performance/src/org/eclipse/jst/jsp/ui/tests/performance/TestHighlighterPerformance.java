@@ -22,18 +22,18 @@ import org.eclipse.jst.jsp.core.text.IJSPPartitionTypes;
 import org.eclipse.jst.jsp.ui.internal.style.LineStyleProviderForJSP;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.test.performance.PerformanceTestCase;
-import org.eclipse.wst.css.core.text.ICSSPartitionTypes;
+import org.eclipse.wst.css.core.internal.provisional.text.ICSSPartitionTypes;
 import org.eclipse.wst.css.ui.internal.style.LineStyleProviderForEmbeddedCSS;
-import org.eclipse.wst.html.core.text.IHTMLPartitionTypes;
+import org.eclipse.wst.html.core.internal.provisional.text.IHTMLPartitionTypes;
 import org.eclipse.wst.html.ui.internal.style.LineStyleProviderForHTML;
 import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
-import org.eclipse.wst.sse.core.IModelManager;
-import org.eclipse.wst.sse.core.IStructuredModel;
-import org.eclipse.wst.sse.core.StructuredModelManager;
-import org.eclipse.wst.sse.core.text.IStructuredDocument;
-import org.eclipse.wst.sse.ui.style.Highlighter;
-import org.eclipse.wst.sse.ui.style.IHighlighter;
-import org.eclipse.wst.sse.ui.style.LineStyleProvider;
+import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
+import org.eclipse.wst.sse.ui.internal.provisional.style.Highlighter;
+import org.eclipse.wst.sse.ui.internal.provisional.style.IHighlighter;
+import org.eclipse.wst.sse.ui.internal.provisional.style.LineStyleProvider;
 
 /**
  * This class is a performance test for the sed Highlighter class

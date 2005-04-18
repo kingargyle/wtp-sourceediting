@@ -15,7 +15,7 @@ package org.eclipse.wst.javascript.ui.internal.common.contentassist;
 import java.util.Hashtable;
 
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.wst.sse.core.IndexedRegion;
+import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 

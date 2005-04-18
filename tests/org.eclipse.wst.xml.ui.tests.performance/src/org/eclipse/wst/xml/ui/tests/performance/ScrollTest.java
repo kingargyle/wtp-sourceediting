@@ -6,7 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
-import org.eclipse.wst.sse.ui.preferences.CommonEditorPreferenceNames;
+import org.eclipse.wst.sse.ui.internal.provisional.preferences.CommonEditorPreferenceNames;
 
 /**
  * @author pavery

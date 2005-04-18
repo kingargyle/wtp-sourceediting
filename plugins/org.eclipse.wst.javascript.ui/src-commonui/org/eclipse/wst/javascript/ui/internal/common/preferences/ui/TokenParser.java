@@ -31,8 +31,8 @@ import org.eclipse.wst.javascript.ui.internal.common.style.IStyleConstantsJavaSc
 import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
 import org.eclipse.wst.sse.core.internal.ltk.parser.RegionParser;
 import org.eclipse.wst.sse.core.internal.parser.ContextRegion;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.core.internal.text.BasicStructuredDocumentRegion;
-import org.eclipse.wst.sse.core.text.IStructuredDocumentRegion;
 
 /**
  * The JavaScript Lexer does not conform to the top level IStructuredDocumentRegion model

@@ -36,13 +36,13 @@ import org.eclipse.wst.javascript.ui.internal.common.JavaScriptColorPreferences;
 import org.eclipse.wst.javascript.ui.internal.common.LexerCacheForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.common.Logger;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
+import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.util.Debug;
-import org.eclipse.wst.sse.core.text.IStructuredDocument;
-import org.eclipse.wst.sse.core.text.IStructuredDocumentRegion;
-import org.eclipse.wst.sse.core.text.ITextRegion;
-import org.eclipse.wst.sse.ui.style.AbstractLineStyleProvider;
-import org.eclipse.wst.sse.ui.style.Highlighter;
-import org.eclipse.wst.sse.ui.style.LineStyleProvider;
+import org.eclipse.wst.sse.ui.internal.provisional.style.AbstractLineStyleProvider;
+import org.eclipse.wst.sse.ui.internal.provisional.style.Highlighter;
+import org.eclipse.wst.sse.ui.internal.provisional.style.LineStyleProvider;
 
 public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider implements LineStyleProvider, IDocumentListener {
 

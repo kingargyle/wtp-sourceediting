@@ -26,7 +26,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
-import org.eclipse.wst.sse.core.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.ui.internal.CaretMediator;
 import org.eclipse.wst.sse.ui.internal.ViewerSelectionManager;
 import org.eclipse.wst.sse.ui.internal.view.events.CaretEvent;

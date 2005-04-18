@@ -141,7 +141,7 @@
 <!-- JAVASCRIPT PREFERENCE PAGES -->
       <page
             name="%JavaScript_Files.name"
-            category="org.eclipse.wst.sse.ui.preferences"
+            category="org.eclipse.wst.sse.ui.internal.provisional.preferences"
             class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JavaScriptFilesPreferencePage"
             id="org.eclipse.wst.sse.javascript.preferences">
       </page>

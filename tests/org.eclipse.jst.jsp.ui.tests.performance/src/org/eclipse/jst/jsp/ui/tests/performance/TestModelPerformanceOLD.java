@@ -16,15 +16,15 @@ import java.io.InputStream;
 import junit.framework.TestCase;
 
 import org.eclipse.jst.jsp.core.internal.document.PageDirectiveAdapter;
-import org.eclipse.wst.sse.core.IModelManager;
-import org.eclipse.wst.sse.core.INodeNotifier;
-import org.eclipse.wst.sse.core.IStructuredModel;
-import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.PropagatingAdapter;
 import org.eclipse.wst.sse.core.internal.ltk.modelhandler.EmbeddedTypeHandler;
 import org.eclipse.wst.sse.core.internal.model.FactoryRegistry;
-import org.eclipse.wst.xml.core.document.IDOMDocument;
-import org.eclipse.wst.xml.core.document.IDOMModel;
+import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
