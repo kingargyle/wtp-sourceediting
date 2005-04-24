@@ -15,11 +15,12 @@ import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.wst.sse.core.text.IStructuredPartitionTypes;
-import org.eclipse.wst.xml.core.text.IXMLPartitions;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredPartitionTypes;
+import org.eclipse.wst.xml.core.internal.provisional.text.IXMLPartitions;
 import org.eclipse.wst.xml.examples.cs.ui.contentassist.CSContentAssistProcessor;
-import org.eclipse.wst.xml.ui.StructuredTextViewerConfigurationXML;
-import org.eclipse.wst.xml.ui.contentassist.NoRegionContentAssistProcessor;
+import org.eclipse.wst.xml.ui.internal.contentassist.NoRegionContentAssistProcessor;
+import org.eclipse.wst.xml.ui.internal.provisional.StructuredTextViewerConfigurationXML;
+
 
 
 public class StructuredTextViewerConfigurationCS extends StructuredTextViewerConfigurationXML {

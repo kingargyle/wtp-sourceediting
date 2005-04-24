@@ -25,15 +25,15 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.wst.sse.core.text.IStructuredDocumentRegion;
-import org.eclipse.wst.sse.core.text.ITextRegion;
-import org.eclipse.wst.sse.core.text.ITextRegionList;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
+import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
+import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 import org.eclipse.wst.sse.ui.internal.contentassist.CustomCompletionProposal;
-import org.eclipse.wst.xml.core.document.IDOMNode;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
-import org.eclipse.wst.xml.ui.contentassist.ContentAssistRequest;
-import org.eclipse.wst.xml.ui.contentassist.XMLContentAssistProcessor;
-import org.eclipse.wst.xml.ui.contentassist.XMLRelevanceConstants;
+import org.eclipse.wst.xml.ui.internal.contentassist.ContentAssistRequest;
+import org.eclipse.wst.xml.ui.internal.contentassist.XMLContentAssistProcessor;
+import org.eclipse.wst.xml.ui.internal.contentassist.XMLRelevanceConstants;
 import org.eclipse.wst.xml.ui.internal.editor.XMLEditorPluginImageHelper;
 import org.eclipse.wst.xml.ui.internal.editor.XMLEditorPluginImages;
 
@@ -97,9 +97,9 @@ public class CSContentAssistProcessor extends XMLContentAssistProcessor implemen
 					if (fEditor.getEditorInput() instanceof IFileEditorInput) {
 						IFile file = ((IFileEditorInput) fEditor.getEditorInput()).getFile();
 						IJavaProject project = JavaCore.create(file.getProject());
+
 						try {
 							IType cheatsheetInterface = project.findType("org.eclipse.jface.action.IAction");
-							
 							if (cheatsheetInterface != null) {
 								ITypeHierarchy hier = cheatsheetInterface.newTypeHierarchy(project, new NullProgressMonitor());
 								IType[] classes = hier.getAllSubtypes(cheatsheetInterface);
