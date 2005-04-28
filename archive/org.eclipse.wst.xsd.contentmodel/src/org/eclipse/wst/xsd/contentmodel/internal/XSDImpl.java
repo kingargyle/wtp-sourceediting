@@ -193,7 +193,7 @@ public class XSDImpl
     try
     {
       // if XML Schema for Schema is requested, get it through schema model 
-      if (uriString.endsWith("w3c/XMLSchema.xsd"))
+      if (uriString.endsWith("2001/XMLSchema.xsd"))
       {
       	xsdSchema = XSDSchemaImpl.getSchemaForSchema(XSDConstants.SCHEMA_FOR_SCHEMA_URI_2001);			
       }
