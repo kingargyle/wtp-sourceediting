@@ -1,0 +1,49 @@
+
+	Preliminaries
+
+		Security/Confidentiality
+		-- WTP Only --
+		
+		
+	
+	Times/Rooms
+	
+		Main meeting room Building 500, Room A209
+		
+		Extra Reserved Breakout rooms
+		Mon. 5/2	8-5:00PM	501-P201
+		
+		Tue. 5/3	8-12:00PM	500-A211
+					12-5:00PM	501-P201
+		
+		Wed. 5/4	8-5:00PM	501-G217
+
+	====================================================================================
+	Tuesday
+		8:50 - DW to meet BEA team at 500 Lobby 
+		
+		9:00 - 10:00   
+		      Introductions, discuss objectives/plans for the week
+		
+		10 - 11:30 short break (for some at least) for weekly PMC call
+		
+		11:30 - 12:30 continue Introductions, discuss objectives/plans for the week
+		
+		12:30 - 1:30 Lunch in IBM Cafeteria
+		
+		1:30 - 5:00 breakout to "project" and "editing" groups for specific discussions/team programming.
+		
+		5 - 7 ish ... (tentative) business dinner
+	
+	====================================================================================
+	Wednesday
+		9 to 4:30 more of the same
+		
+		4:30 - 5:00 Group Checkpoint meeting
+	
+	====================================================================================
+	
+	Thursday 
+		9 to noonish - whole group meeting: 
+		wrap-up, impressions, plans for next steps, etc.
+	

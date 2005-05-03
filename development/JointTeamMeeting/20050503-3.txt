@@ -1,0 +1,60 @@
+		
+		
+		High Level topics
+		
+		Architecture Council background on the ill-named “Languages PMC” topic
+		Discussion around LDT tech proj proposal, including location of SSE and other language technologies (probably covered in the preceding item), ideas around language modeling, value of trying to lever some common infrastructure out of the JDT and down into the platform, etc.
+		 
+		 = = = = = = 
+		Design, Test on M4, and/or create JUnit tests for 
+		
+		
+		
+			Flex Builder Integration points
+				Flex Projects feature - access vs. deployment, 
+				Flex Projects API - access vs. "component provider"
+		
+			Dependent Modules Tooling (e.g. dependant jar editor/property page?) 
+			Plan for M5 (coordinate across BEA/IBM resources)
+		
+			Java Search and flexible projects (can "hits" find source?).
+		
+			Flex project interaction with logical resources? - Discuss integration ... R1.1 item
+		
+			Java Refactoring and flexible projects (do "dependancies" update correctly).
+		
+			Do "virtual resources" maintain correct resource markers?
+		
+			Do "virtual resources" do validateEdit correctly 
+			(can use Pessimistic File Provider to test). 
+		
+			Validation (batch)
+		
+			Validation (source)
+		
+			EJB creation/edit and flex projects discussion.
+		
+			J2EE Wizard extensibility/pluggability
+		
+			Discuss overall/general appropriatness of "EMF Model based API". 
+			(such as the proposed J2EE and WSDL APIs). 
+		
+		Working exercises:
+		
+			.wtpmodules validator - This would be a great opportunity 
+				to learn the validation and IResource api.
+		
+			Design/Implement exclusions filters used by component resources.
+		
+			Full Dependency graph support for flexible builder.
+		
+		
+		Editing related   = = = = = = = =
+		
+			JSP/Java Search and flexible projects (can hits find source). 
+		
+			TagLib lookup/content assist/validation in flexible projects. 
+		
+			Expression Language Support (highlighting and content assist in JSP Editor). 
+		
+			JUnit/Performance tests for ... ? partitioning? DOM updates? other?
