@@ -1,7 +1,8 @@
 
 	Preliminaries
 
-		Security/Confidentiality
+		Security
+		Confidentiality
 		-- WTP Only --
 		
 		
