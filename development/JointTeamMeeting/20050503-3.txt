@@ -58,3 +58,34 @@
 			Expression Language Support (highlighting and content assist in JSP Editor). 
 		
 			JUnit/Performance tests for ... ? partitioning? DOM updates? other?
+
+			
+
+
+		Other ideas			
+			
+			Sign up for bugzilla 
+			
+			User scenerios/wizard frameworks
+			UI and ease of use
+			
+			Movement of components.
+			Review Arch. snapshot.
+			
+			Crisp up Feature definition (into subsystems/core vs. ui)
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
