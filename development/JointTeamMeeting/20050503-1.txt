@@ -6,19 +6,19 @@
 		-- WTP Only --
 		
 		
+		
 	
 	Times/Rooms
 	
 		Main meeting room Building 500, Room A209
 		
 		Extra Reserved Breakout rooms
-		Mon. 5/2	8-5:00PM	501-P201
-		
 		Tue. 5/3	8-12:00PM	500-A211
 					12-5:00PM	501-P201
 		
 		Wed. 5/4	8-5:00PM	501-G217
-
+ 		Thur. 5/5   8-2:00PM    500-A311 
+                 	2-5:00PM    501-P201
 	====================================================================================
 	Tuesday
 		8:50 - DW to meet BEA team at 500 Lobby 
