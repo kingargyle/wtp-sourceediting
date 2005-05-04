@@ -3,7 +3,10 @@
 		High Level topics
 		
 		Architecture Council background on the ill-named “Languages PMC” topic
-		Discussion around LDT tech proj proposal, including location of SSE and other language technologies (probably covered in the preceding item), ideas around language modeling, value of trying to lever some common infrastructure out of the JDT and down into the platform, etc.
+		
+		Discussion around LDT tech proj proposal, including location of SSE and other language 
+		technologies (probably covered in the preceding item), ideas around language modeling, 
+		value of trying to lever some common infrastructure out of the JDT and down into the platform, etc.
 		 
 		 = = = = = = 
 		Design, Test on M4, and/or create JUnit tests for 
