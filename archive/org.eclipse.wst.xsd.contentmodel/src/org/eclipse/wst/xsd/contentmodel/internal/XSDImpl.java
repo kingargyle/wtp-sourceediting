@@ -19,13 +19,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -200,25 +198,15 @@ public class XSDImpl
       else
       { 	
       ResourceSet resourceSet = new ResourceSetImpl();
+      //resourceSet.getAdapterFactories().add(new XSDSchemaLocationResolverAdapterFactory());
       resourceSet.getAdapterFactories().add(new XSDSchemaLocatorAdapterFactory());
-      
-      // CS... why do we need to do this??
-      resourceSet.getLoadOptions().put(XSDResourceImpl.XSD_TRACK_LOCATION, Boolean.TRUE);
-            
+                  
       URI uri = createURI(uriString);    
       XSDResourceImpl resource = (XSDResourceImpl)resourceSet.createResource(URI.createURI("*.xsd"));
       resource.setURI(uri);
       resource.load(null);
       
-      xsdSchema = resource.getSchema();
-      if (xsdSchema != null)
-      {
-        String schemaLocation = xsdSchema.getSchemaLocation();
-        if (schemaLocation == null)
-        {
-          xsdSchema.setSchemaLocation(uriString);
-        }
-      }
+      xsdSchema = resource.getSchema();    
       }
     }
     catch (Exception e)
@@ -2114,7 +2102,7 @@ public class XSDImpl
         List sgroup = getResolvedXSDElementDeclaration().getSubstitutionGroup();
         for (Iterator i = sgroup.iterator(); i.hasNext();)
         {
-          XSDElementDeclaration ed = (XSDElementDeclaration) i.next();
+          XSDElementDeclaration ed = (XSDElementDeclaration) i.next();  
           substitutionGroup.add(getAdapter(ed));
         }
       }

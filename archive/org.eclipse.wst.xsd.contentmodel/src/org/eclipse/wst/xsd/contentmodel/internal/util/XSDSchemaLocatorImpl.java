@@ -15,6 +15,7 @@ import java.io.InputStream;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.wst.common.uriresolver.URIResolverPlugin;
 import org.eclipse.xsd.XSDSchema;
@@ -31,19 +32,29 @@ public class XSDSchemaLocatorImpl extends AdapterImpl implements XSDSchemaLocato
     {
       XSDSchema result = null;
       String baseLocation = xsdSchema.getSchemaLocation();      
-      String resolvedURI = URIResolverPlugin.createResolver().resolve(baseLocation, namespaceURI, rawSchemaLocationURI);
+      String resolvedURI = URIResolverPlugin.createResolver().resolve(baseLocation, namespaceURI, rawSchemaLocationURI); 
       if (resolvedURI == null) 
       {
-        resolvedURI = resolvedSchemaLocationURI;
+        resolvedURI = resolvedSchemaLocationURI;       
       }
       try
-      {
+      {        
         ResourceSet resourceSet = xsdSchema.eResource().getResourceSet();
         URI uri = URI.createURI(resolvedURI);
-        InputStream inputStream = resourceSet.getURIConverter().createInputStream(uri);
-        XSDResourceImpl resolvedResource = (XSDResourceImpl)resourceSet.createResource(URI.createURI("*.xsd"));
-        resolvedResource.setURI(uri);
-        resolvedResource.load(inputStream, resourceSet.getLoadOptions());
+        Resource r = resourceSet.getResource(uri, false); 
+        XSDResourceImpl resolvedResource = null;
+        if (r instanceof XSDResourceImpl)
+        {
+          resolvedResource = (XSDResourceImpl)r;
+        }
+        else        
+        {  
+          InputStream inputStream = resourceSet.getURIConverter().createInputStream(uri);
+          resolvedResource = (XSDResourceImpl)resourceSet.createResource(URI.createURI("*.xsd"));
+          resolvedResource.setURI(uri);
+          resolvedResource.load(inputStream, null);           
+        }
+
         result = resolvedResource.getSchema();
       }
       catch (IOException exception)
