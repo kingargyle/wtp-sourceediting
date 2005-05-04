@@ -5,6 +5,7 @@ Done - - - - - - -
 					
 		
 		Overview of SSE philosophy and primary models and flow
+		    -- everyone loved it :)
 		
 		Discuss overall/general appropriatness of "EMF Model based API". 
 		(such as the proposed J2EE and WSDL APIs). 
@@ -21,6 +22,7 @@ Done - - - - - - -
 
 
 Scheduled -- ----		
+    10
 		1:30 - 2:30 BeanInfo discussion with Rich Kulp
 
 		xKevin Haaland- and plans for flex. project in base (unavailable)
@@ -28,28 +30,35 @@ Scheduled -- ----
 		4:30 - checkpoint/summary - 
 			accomplished: ....
 			task assignments: ....
+	
+	
+	TODO - 
+	     document plan/approach for JavaCC and grammar to attorney's cc arthur
+	
 			
 Scheduled -- ----		
 			
 		
-		Architecture Council background on the ill-named “Languages PMC” topic
+		T, D Architecture Council background on the ill-named “Languages PMC” topic
 		
-		"Logistics" of Demo
+		T, D "Logistics" of Demo
 		
-		Discussion around LDT tech proj proposal, including location of SSE and other language 
+		T, D Discussion around LDT tech proj proposal, including location of SSE and other language 
 		technologies (probably covered in the preceding item), ideas around language modeling, 
 		value of trying to lever some common infrastructure out of the JDT and down into the platform, etc.
 		
-		Crisp up Feature definition (iterate/refine on subsystems ... core vs. ui)
+		H, All, 3:00 Crisp up Feature definition (iterate/refine on subsystems ... core vs. ui)
 		Discuss plugin consolidation philosophy - specific cases
 				 
-		(Validation Proposal/Plan)
+		D, A (Validation Proposal/Plan)
 		 
 		 
+		 Flex Project 
+		     H Multiple Modelues per Project
 		 
 			Flex Builder Integration points
-				Flex Projects feature - access vs. deployment, 
-				Flex Projects API - access vs. "component provider"
+				 Flex Projects feature - access vs. deployment, 
+				 Flex Projects API - access vs. "component provider"
 		
 			Dependent Modules Tooling (e.g. dependant jar editor/property page?) 
 			Plan for M5 (coordinate across BEA/IBM resources)
@@ -93,12 +102,11 @@ Scheduled -- ----
 		
 			JUnit/Performance tests for ... ? partitioning? DOM updates? other?
 
-			
+			Drag and Drop - 10-11:00
 
 
 		Other ideas			
 			
-			Sign up for bugzilla access
 			
 			User scenerios/wizard frameworks
 			UI and ease of use
@@ -107,11 +115,28 @@ Scheduled -- ----
 	= = = = = = = = = == = = = = = = = = = = = = = = = = =	
 			Thursday
 				review Ted's code, prep for suppling a patch
-				M5 plan items
+				Editing M5 plan items
 				
+				9:30 - 10:30 Call with Naci, Wizard Extensibility 
+
+				Depenancy Graph
 				
+==========================
 
+   H 12:00 	Server API -- 
+		    proposal
+			use cases
+			come up with evolable api plan
+			
+    H, 1:30 3:00 Flexible Project
+    	     list of comments/review
 
+	3:00 check point meeting, 
+	3:30 feature disucssion
+    	     
+ 	Chuck leaves at 3:30
+    	     
+	Sign up for bugzilla access/dev lists
 
 
 
