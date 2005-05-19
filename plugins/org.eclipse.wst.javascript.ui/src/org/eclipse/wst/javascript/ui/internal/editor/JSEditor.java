@@ -78,7 +78,7 @@ import org.eclipse.ui.texteditor.ResourceAction;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.wst.javascript.core.contenttype.ContentTypeIdForJavaScript;
+import org.eclipse.wst.javascript.core.internal.contenttype.ContentTypeIdForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.common.JSSourceViewerConfiguration;
 import org.eclipse.wst.javascript.ui.internal.views.contentoutline.JSContentOutlinePage;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;

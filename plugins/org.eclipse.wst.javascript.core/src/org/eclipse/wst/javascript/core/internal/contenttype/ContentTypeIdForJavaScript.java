@@ -10,7 +10,7 @@
  *     
  *******************************************************************************/
 
-package org.eclipse.wst.javascript.core.contenttype;
+package org.eclipse.wst.javascript.core.internal.contenttype;
 
 /**
  * This class, with its one field, is a convience to provide compile-time
