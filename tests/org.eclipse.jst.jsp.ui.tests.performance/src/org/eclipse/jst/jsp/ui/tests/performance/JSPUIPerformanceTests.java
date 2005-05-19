@@ -22,7 +22,6 @@ public class JSPUIPerformanceTests extends TestSuite {
 
 	public JSPUIPerformanceTests() {
 		super("JSPUIPerformanceTests"); //$NON-NLS-1$
-
 		
 		addTest(new TestSuite(TestInsertPerformance.class, "TestInsertPerformance")); //$NON-NLS-1$
 		addTest(new TestSuite(TestModelPerformance.class, "TestModelPerformance")); //$NON-NLS-1$

@@ -3,13 +3,13 @@ package org.eclipse.jst.jsp.ui.tests.performance;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.eclipse.core.runtime.Plugin;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The main plugin class to be used in the desktop.
  */
-public class JSPUIPerformancePlugin extends Plugin {
+public class JSPUIPerformancePlugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static JSPUIPerformancePlugin plugin;
 	//Resource bundle.

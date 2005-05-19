@@ -1,13 +1,15 @@
 package org.eclipse.wst.xml.ui.tests.performance;
 
-import org.eclipse.core.runtime.Plugin;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import java.util.*;
 
 /**
  * The main plugin class to be used in the desktop.
  */
-public class XMLUIPerformancePlugin extends Plugin {
+public class XMLUIPerformancePlugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static XMLUIPerformancePlugin plugin;
 	//Resource bundle.

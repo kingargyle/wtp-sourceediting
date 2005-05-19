@@ -1,13 +1,15 @@
 package org.eclipse.wst.sse.ui.tests.performance;
 
-import org.eclipse.core.runtime.Plugin;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import java.util.*;
 
 /**
  * The main plugin class to be used in the desktop.
  */
-public class SSEUIPerformancePlugin extends Plugin {
+public class SSEUIPerformancePlugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static SSEUIPerformancePlugin plugin;
 	//Resource bundle.
