@@ -42,6 +42,4 @@ public class JSEditorPlugin extends AbstractUIPlugin {
 		return EmbeddedAdapterFactoryRegistryImpl.getInstance();
 
 	}
-	// The initialization of default plugin preferences for JavaScript is
-	// done in com.ibm.sse.javascript.common.ui.UiPlugin
 }
