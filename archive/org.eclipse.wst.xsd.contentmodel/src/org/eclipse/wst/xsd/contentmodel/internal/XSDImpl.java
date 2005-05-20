@@ -1752,7 +1752,7 @@ public class XSDImpl
      */
     public CMDocument getCMDocument()
     {
-      return (CMDocument) getAdapter(getXSDElementDeclaration().getSchema());
+      return (CMDocument) getAdapter(getResolvedXSDElementDeclaration().getSchema());
     }
 
     /**
