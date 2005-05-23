@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.wst.javascript.ui.internal.common;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IInformationControl;
@@ -25,18 +26,23 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
 import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptInformationPresenter;
 import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoHoverProcessor;
 
 
-public class JSSourceViewerConfiguration extends SourceViewerConfiguration {
+public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 	private ITextHover fTextHover = null;
 	private IContentAssistant fContentAssistant = null;
 	private InformationPresenter fInformationPresenter = null;
 
 	public JSSourceViewerConfiguration() {
 		super();
+	}
+	
+	public JSSourceViewerConfiguration(IPreferenceStore store) {
+		super(store);
 	}
 
 	/**

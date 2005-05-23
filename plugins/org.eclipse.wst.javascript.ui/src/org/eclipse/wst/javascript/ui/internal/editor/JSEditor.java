@@ -691,7 +691,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 		SourceViewerConfiguration configuration = super.getSourceViewerConfiguration();
 
 		if ((configuration == null) || !(configuration instanceof JSSourceViewerConfiguration)) {
-			configuration = new JSEditorSourceViewerConfiguration();
+			configuration = new JSEditorSourceViewerConfiguration(getPreferenceStore());
 			setSourceViewerConfiguration(configuration);
 		}
 	}
