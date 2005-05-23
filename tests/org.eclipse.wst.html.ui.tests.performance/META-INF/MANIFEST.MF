@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: HTML UI Performance tests Plug-in
+Bundle-SymbolicName: org.eclipse.wst.html.ui.tests.performance
+Bundle-Version: 1.0.0
+Bundle-ClassPath: htmluiperformance.jar
+Bundle-Activator: org.eclipse.wst.html.ui.tests.performance.HTMLUIPerformancePlugin
+Bundle-Vendor: Eclipse.org
+Bundle-Localization: plugin
+Export-Package: org.eclipse.wst.html.ui.tests.performance
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit,
+ org.eclipse.test.performance,
+ org.eclipse.wst.html.core,
+ org.eclipse.wst.html.ui,
+ org.eclipse.ui
+Eclipse-AutoStart: true

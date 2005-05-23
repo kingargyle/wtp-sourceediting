@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XML UI Performance Plug-in
+Bundle-SymbolicName: org.eclipse.wst.sse.ui.tests.performance
+Bundle-Version: 1.0.0
+Bundle-ClassPath: sseuiperformance.jar
+Bundle-Activator: org.eclipse.wst.sse.ui.tests.performance.SSEUIPerformancePlugin
+Bundle-Vendor: Eclipse.org
+Bundle-Localization: plugin
+Export-Package: org.eclipse.wst.sse.ui.tests.performance
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit,
+ org.eclipse.test.performance,
+ org.eclipse.wst.sse.core,
+ org.eclipse.wst.sse.ui,
+ org.eclipse.ui
+Eclipse-AutoStart: true
