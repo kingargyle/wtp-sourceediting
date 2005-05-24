@@ -12,11 +12,26 @@ Done - - - - - - -
 		  -- resolved "approprite", and "EMF API" is ok as API
 		     (wouldn't hurt to verify and/or write down what's expected,
 		     how to use). 
-		  -- suggested packages heavily/directly dependendent on emf, should have 
+		  -- it was suggested packages heavily/directly dependendent on emf, should have 
 		     'emf' in them (if not otherwise marked internal), 
 		     to make clear that clients were building in that
 		     dependancy 
-		     ?EObject's too?
+		     
+		     
+
+	Server Tools API Resolution and Plan:
+	   
+	   Add concept of "web feature" as an extension of project nature
+	   Ted will document, open bugzilla feature requests, and "drive" review
+	       (implementation is partially BEA, partially IBM)
+	       request review of Marshall Culpepper@jboss.org
+	       
+	
+	Flexible Project resolution and Plan:
+	
+		Resolved, allow multiple components per project (as is) 
+		- but not default (as UI currently is), but capability is there.
+		     
 		
 Done - - - - - - -			
 
@@ -33,19 +48,29 @@ Scheduled -- ----
 	
 	
 	TODO - 
-	     document plan/approach for JavaCC and grammar to attorney's cc arthur
-	
+	     DW: document plan/approach for JavaCC and grammar to attorney's cc arthur
+	     DW: prepare paragraph on SSE vision for LDT involvement
+		 TW: prepare slide for project overlap problems, policies, and procedures    
+	     DW: send TW, AR, HS, note on validation cross-team proposal
+	     
+	     DW: make sure JEM has "update site" with Jeffrey
+	     
+	     DW: open [arch] bug on WEB/J2EE model split
 			
 Scheduled -- ----		
 			
 		
 		T, D Architecture Council background on the ill-named “Languages PMC” topic
+			
 		
 		T, D "Logistics" of Demo
+				DW, JSP, debugging, flex project
+				TW, WebServices
 		
 		T, D Discussion around LDT tech proj proposal, including location of SSE and other language 
 		technologies (probably covered in the preceding item), ideas around language modeling, 
 		value of trying to lever some common infrastructure out of the JDT and down into the platform, etc.
+
 		
 		H, All, 3:00 Crisp up Feature definition (iterate/refine on subsystems ... core vs. ui)
 		Discuss plugin consolidation philosophy - specific cases
@@ -119,7 +144,11 @@ Scheduled -- ----
 				
 				9:30 - 10:30 Call with Naci, Wizard Extensibility 
 
-				Depenancy Graph
+				Dependancy Graph
+				
+				Exclusion filters on flexible projects
+				
+				AutoTesting suggestions
 				
 ==========================
 
@@ -137,15 +166,3 @@ Scheduled -- ----
  	Chuck leaves at 3:30
     	     
 	Sign up for bugzilla access/dev lists
-
-
-
-
-
-
-
-
-
-
-
-			

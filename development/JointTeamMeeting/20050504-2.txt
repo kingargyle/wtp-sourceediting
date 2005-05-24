@@ -1,0 +1,28 @@
+
+
+	Server Tools API Resolution and Plan:
+	   
+	   Add concept of "web feature" as an extension of project nature
+	   Ted will document, open bugzilla feature requests, and "drive" review
+	       (implementation is partially BEA, partially IBM)
+	       request review of Marshall Culpepper@jboss.org
+	       
+	
+	Flexible Project resolution and Plan:
+	
+		Multiple components per project - not default (in UI), but capability is there.
+		
+	==============================
+	
+	5/5/05
+	
+	
+	wizard extensions
+	    entry point - web features
+	    
+	    testing, stilll open -- but focus and priority should be on headless JUnit tests
+	
+	
+	
+	
+	

@@ -18,7 +18,7 @@
 		Tim Wagner
 		
 		Jess Garms
-		(Ted Carroll)
+		Ted Carroll -- tcarroll@bea.com
 		
 		Karl Lum
 		Ted Bashor

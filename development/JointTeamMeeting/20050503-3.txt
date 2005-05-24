@@ -11,8 +11,6 @@
 		 = = = = = = 
 		Design, Test on M4, and/or create JUnit tests for 
 		
-		
-		
 			Flex Builder Integration points
 				Flex Projects feature - access vs. deployment, 
 				Flex Projects API - access vs. "component provider"
