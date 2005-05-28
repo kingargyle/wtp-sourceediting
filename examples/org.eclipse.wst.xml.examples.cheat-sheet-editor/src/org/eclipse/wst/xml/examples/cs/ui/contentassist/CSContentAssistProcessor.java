@@ -93,7 +93,6 @@ public class CSContentAssistProcessor extends XMLContentAssistProcessor implemen
 					}
 				} else if ("class".equals(attributeName)) {
 					// get all classes
-					String ns = "org.eclipse.ui.cheatsheets";
 					if (fEditor.getEditorInput() instanceof IFileEditorInput) {
 						IFile file = ((IFileEditorInput) fEditor.getEditorInput()).getFile();
 						IJavaProject project = JavaCore.create(file.getProject());
