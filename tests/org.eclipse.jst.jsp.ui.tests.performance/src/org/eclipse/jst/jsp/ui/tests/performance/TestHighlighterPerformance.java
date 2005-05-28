@@ -42,9 +42,9 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 
 	// (pa)
 	// this flag determines wether or not to test the GA code
-	// true > (the patched old code in com.ibm.sed.style.Highlighter)
+	// true > (the patched old code in *.style.Highlighter)
 	// otherwise it will try the newer test
-	// false > (the code in com.ibm.sed.structured.style.Highlighter)
+	// false > (the code in *structured.style.Highlighter)
 	private boolean fDoGATest = false;
 
 	public TestHighlighterPerformance(String name) {
@@ -118,7 +118,7 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 
 	/**
 	 * exactly the same as doOldHighlighterTest except uses the old
-	 * com.ibm.sed.structured.style.Highlighter class
+	 * *.structured.style.Highlighter class
 	 * 
 	 * @param filename
 	 * @param start
