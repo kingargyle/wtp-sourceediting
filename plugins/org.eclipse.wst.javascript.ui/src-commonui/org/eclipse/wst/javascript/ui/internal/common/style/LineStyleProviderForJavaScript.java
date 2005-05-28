@@ -490,12 +490,7 @@ public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider im
 
 		// figure out at what file offset the node starts.
 		int offNode = 0; // bad guess, override below
-		//		if (targetNode instanceof com.ibm.sed.model.xml.TextImpl) {
-		//			com.ibm.sed.model.xml.TextImpl ti = (com.ibm.sed.model.xml.TextImpl)targetNode;
 		if (getDocument() != null) {
-			//IStructuredDocument structuredDocument = getDocument();
-			//com.ibm.sed.structuredDocument.IStructuredDocumentRegion fnode = structuredDocument.getNodeAtCharacterOffset(offStart2);
-			//			String txt = fnode.getText();
 			if (fnode != null) {
 				offNode = fnode.getStartOffset();
 			}
@@ -504,7 +499,7 @@ public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider im
 		try {
 			{
 				//cachedStyles.clear();  // debug performance
-				// perf: see about implementing cachedStyles as an array to avoid all this casting to StyleRange
+				// TODO: see about implementing cachedStyles as an array to avoid all this casting to StyleRange
 				int cacheSize = nd.cachedStyles.size();
 				if (cacheSize > 0) {
 					//if ( false /*cacheSize > 0*/ ) { System.out.println( "debug no js style cache" ); } else {

@@ -21,7 +21,6 @@ import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
  * 
  */
 public interface IHelpContextIds {
-	// com.ibm.sse.javascript.common.ui.
 	public static final String PREFIX = JSEditorPlugin.ID + "."; //$NON-NLS-1$
 
 	// JavaScript Source page editor

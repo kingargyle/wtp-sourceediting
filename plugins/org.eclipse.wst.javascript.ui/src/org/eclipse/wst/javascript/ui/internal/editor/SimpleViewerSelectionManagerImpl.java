@@ -192,92 +192,40 @@ public class SimpleViewerSelectionManagerImpl implements ViewerSelectionManager 
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#addNodeDoubleClickListener(org.eclipse.jface.viewers.IDoubleClickListener)
-	 */
 	public void addNodeDoubleClickListener(IDoubleClickListener listener) {
-		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#addNodeSelectionListener(com.ibm.sse.editor.view.events.INodeSelectionListener)
-	 */
 	public void addNodeSelectionListener(INodeSelectionListener listener) {
-		// TODO Auto-generated method stub
-
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#addTextSelectionListener(com.ibm.sse.editor.view.events.ITextSelectionListener)
-	 */
 	public void addTextSelectionListener(ITextSelectionListener listener) {
-		// TODO Auto-generated method stub
-
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#getCaretPosition()
-	 */
 	public int getCaretPosition() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#getSelectedNodes()
-	 */
 	public List getSelectedNodes() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#release()
-	 */
 	public void release() {
-		// TODO Auto-generated method stub
-
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#removeNodeDoubleClickListener(org.eclipse.jface.viewers.IDoubleClickListener)
-	 */
 	public void removeNodeDoubleClickListener(IDoubleClickListener listener) {
-		// TODO Auto-generated method stub
-
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#removeNodeSelectionListener(com.ibm.sse.editor.view.events.INodeSelectionListener)
-	 */
 	public void removeNodeSelectionListener(INodeSelectionListener listener) {
-		// TODO Auto-generated method stub
-
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#removeTextSelectionListener(com.ibm.sse.editor.view.events.ITextSelectionListener)
-	 */
 	public void removeTextSelectionListener(ITextSelectionListener listener) {
-		// TODO Auto-generated method stub
-
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#setModel(com.ibm.sse.model.core.IStructuredModel)
-	 */
 	public void setModel(IStructuredModel newModel) {
-		// TODO Auto-generated method stub
-
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.ViewerSelectionManager#setTextViewer(org.eclipse.jface.text.ITextViewer)
-	 */
 	public void setTextViewer(ITextViewer newTextViewer) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**

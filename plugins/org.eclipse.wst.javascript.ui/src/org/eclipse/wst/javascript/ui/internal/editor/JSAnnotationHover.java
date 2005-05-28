@@ -359,9 +359,6 @@ public class JSAnnotationHover implements IAnnotationHover {
 		return exact;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.ibm.sse.editor.IReleasable#release()
-	 */
 	public void release() {
 		if(fDebugModelPresentation != null) {
 			fDebugModelPresentation.dispose();

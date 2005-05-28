@@ -14,14 +14,13 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * Copied from org.eclipse.jdt.internal.ui.text.SubstitutionTextReader
- * Also copied in com.ibm.sse.javascript.common.ui.contentassist.javadoc.SubstitutionTextReader
- * Modifications were made to read() to allow whitespaces
- */
-/**
  * Reads the text contents from a reader and computes for each character
  * a potential substitution. The substitution may eat more characters than 
  * only the one passed into the computation routine.
+ * <p>
+ * Copied from org.eclipse.jdt.internal.ui.text.SubstitutionTextReader
+ * Modifications were made to read() to allow whitespaces
+ * </p>
  */
 public abstract class SubstitutionTextReader extends SingleCharReader {
 

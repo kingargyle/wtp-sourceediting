@@ -1817,8 +1817,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 	 * @param parentTagName
 	 *            the tag on which you are checkin for an ending tag
 	 * @param imagePath
-	 *            content assist image path in realation to com.ibm.sed.
-	 *            structured. contentassist. xmlSourceEditorImageHelper
+	 *            relative content assist image path 
 	 * @return ICompletionProposal
 	 */
 	private ICompletionProposal computeXMLEndTagProposal(ITextViewer viewer, int documentPosition, IndexedRegion indexedNode, String parentTagName, String imagePath) {
