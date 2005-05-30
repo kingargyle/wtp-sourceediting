@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-<plugin
-   id="org.eclipse.wst.javascript.core"
-   name="%pluginName"
-   version="1.0.0"
-   provider-name="%providerName"
-   class="org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin">
+<plugin>
 
-   <runtime>
-      <library name="javascriptmodel.jar">
-         <export name="*"/>
-      </library>
-   </runtime>
-   <requires>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.core.runtime"/>
-   </requires>
-
-
-   <extension
+     <extension
          point="org.eclipse.team.core.fileTypes">
    </extension>
    <extension

@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-<plugin
-   id="org.apache.xerces"
-   name="%pluginName"
-   version="2.6.2"
-   >
+<plugin>
 
-   <runtime>
-      <library name="jars/xercesImpl.jar">
-         <export name="*"/>
-      </library>
-      <library name="jars/xmlParserAPIs.jar">
-         <export name="*"/>
-      </library>
-   </runtime>
-
+   
 </plugin>
