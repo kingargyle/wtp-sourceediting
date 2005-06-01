@@ -35,6 +35,24 @@
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
 
+    <antcall target="ReadOAGISXSDTestcase"/>
+  	<antcall target="ReadOAGISXSDTestcase"/>
+    <antcall target="ReadOAGISXSDTestcase"/>
+   	<antcall target="ReadOAGISXSDTestcase"/>
+  	<antcall target="ReadOAGISXSDTestcase"/>
+  	<antcall target="ReadOAGISXSDTestcase"/>
+  	<antcall target="ReadOAGISXSDTestcase"/>
+  	<antcall target="ReadOAGISXSDTestcase"/>
+
+  	<antcall target="ValidateOAGISXSDTestcase"/>
+  	<antcall target="ValidateOAGISXSDTestcase"/>
+  	<antcall target="ValidateOAGISXSDTestcase"/>
+  	<antcall target="ValidateOAGISXSDTestcase"/>
+  	<antcall target="ValidateOAGISXSDTestcase"/>
+  	<antcall target="ValidateOAGISXSDTestcase"/>
+  	<antcall target="ValidateOAGISXSDTestcase"/>
+  	<antcall target="ValidateOAGISXSDTestcase"/>
+
   </target>
 
   <target name="openEditorOAGISXSDTestcase">
@@ -43,6 +61,26 @@
       <property name="data-dir" value="${workspace}"/>
       <property name="plugin-name" value="${plugin-name}"/>
       <property name="classname" value="org.eclipse.wst.xsd.tests.performance.OpenEditorOAGISXSDTestcase"/>
+      <property name="extraVMargs" value="${extraVMargs}"/>
+    </ant>
+  </target>
+
+  <target name="ReadOAGISXSDTestcase">
+    <delete dir="${workspace}" quiet="true"/>
+    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+      <property name="data-dir" value="${workspace}"/>
+      <property name="plugin-name" value="${plugin-name}"/>
+      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.ReadOAGISXSDTestcase"/>
+      <property name="extraVMargs" value="${extraVMargs}"/>
+    </ant>
+  </target>
+
+  <target name="ValidateOAGISXSDTestcase">
+    <delete dir="${workspace}" quiet="true"/>
+    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+      <property name="data-dir" value="${workspace}"/>
+      <property name="plugin-name" value="${plugin-name}"/>
+      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.ValidateOAGISXSDTestcase"/>
       <property name="extraVMargs" value="${extraVMargs}"/>
     </ant>
   </target>
