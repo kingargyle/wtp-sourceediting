@@ -1411,7 +1411,8 @@ public class XSDImpl
      */
     public String getElementName()
     {
-      return getResolvedXSDElementDeclaration().getName();
+      String result = getResolvedXSDElementDeclaration().getName();
+      return result != null ? result : "";
     }
 
     /**
