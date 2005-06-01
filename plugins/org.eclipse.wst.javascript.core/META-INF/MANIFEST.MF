@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.wst.javascript.core; singleton:=true
 Bundle-Version: 1.0.0
-Bundle-ClassPath: javascriptmodel.jar
 Bundle-Activator: org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

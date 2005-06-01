@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.wst.javascript.ui; singleton:=true
 Bundle-Version: 1.0.0
-Bundle-ClassPath: javascriptui.jar
 Bundle-Activator: org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
