@@ -42,7 +42,7 @@ public class ScrollTest extends BasicEditorTest {
         EditorTestHelper.calmDown(1000,5000,1000);
         
         // warmup runs
-        IDocument doc = getEditor().getDocument();
+        IDocument doc = getEditor().getDocumentProvider().getDocument(getEditor().getEditorInput());
         int lines = doc.getNumberOfLines();
         int iterations = 3;
         for(int j=0;j<iterations; j++) {

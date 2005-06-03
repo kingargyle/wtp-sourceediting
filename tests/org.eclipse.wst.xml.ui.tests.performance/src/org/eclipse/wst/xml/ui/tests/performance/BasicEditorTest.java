@@ -84,15 +84,15 @@ public class BasicEditorTest extends PerformanceTestCase {
     }
     
     protected void setUpEditor(String filename) {
-        
-        fEditor= openEditor(new Path(F_SLASH + PROJECT_NAME + F_SLASH + filename));
-        assertNotNull(fEditor);
-        fTextWidget= fEditor.getTextViewer().getTextWidget();
-        assertNotNull(fTextWidget);
-        fAccessor= new Accessor(fTextWidget, StyledText.class);
-        fDocument= fEditor.getDocument();
-        assertNotNull(fDocument);
-    }
+
+		fEditor = openEditor(new Path(F_SLASH + PROJECT_NAME + F_SLASH + filename));
+		assertNotNull(fEditor);
+		fTextWidget = fEditor.getTextViewer().getTextWidget();
+		assertNotNull(fTextWidget);
+		fAccessor = new Accessor(fTextWidget, StyledText.class);
+		fDocument = getEditor().getDocumentProvider().getDocument(getEditor().getEditorInput());
+		assertNotNull(fDocument);
+	}
     
     protected StructuredTextEditor openEditor(IPath path) {
         IFile file= ResourcesPlugin.getWorkspace().getRoot().getFile(path);
