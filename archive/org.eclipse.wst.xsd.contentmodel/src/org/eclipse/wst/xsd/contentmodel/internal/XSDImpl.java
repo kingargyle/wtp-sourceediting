@@ -349,7 +349,7 @@ public class XSDImpl
    */
   public static String[] getEnumeratedValuesForType(XSDTypeDefinition type)
   {
-    Vector result = new Vector();
+    List result = new ArrayList();
     if (type instanceof XSDSimpleTypeDefinition)
     {
       List enumerationFacets = ((XSDSimpleTypeDefinition) type).getEnumerationFacets();
@@ -359,11 +359,17 @@ public class XSDImpl
         List values = enumFacet.getValue();
         for (Iterator j = values.iterator(); j.hasNext();)
         {
-          result.add(j.next());
+          Object o = j.next();
+          if (o != null)
+          {
+            result.add(o.toString());
+          }  
         }
       }
     }
-    return (String[]) result.toArray(new String[result.size()]);
+    String[] array = new String[result.size()];
+    result.toArray(array);
+    return array;
   }
 
   /**
