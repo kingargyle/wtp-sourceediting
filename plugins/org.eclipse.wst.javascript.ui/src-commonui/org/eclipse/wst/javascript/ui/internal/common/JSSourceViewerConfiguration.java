@@ -67,14 +67,10 @@ public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 
 
 	public IInformationControlCreator getInformationControlCreator(ISourceViewer sourceViewer) {
-		return getInformationControlCreator(sourceViewer, true);
-	}
-
-	private IInformationControlCreator getInformationControlCreator(ISourceViewer sourceViewer, final boolean cutDown) {
 		return new IInformationControlCreator() {
 			public IInformationControl createInformationControl(Shell parent) {
-				int style = cutDown ? SWT.NONE : (SWT.V_SCROLL | SWT.H_SCROLL);
-				return new DefaultInformationControl(parent, style, new HTMLTextPresenter(cutDown));
+				int style = true ? SWT.NONE : (SWT.V_SCROLL | SWT.H_SCROLL);
+				return new DefaultInformationControl(parent, style, new HTMLTextPresenter(true));
 			}
 		};
 	}
@@ -123,6 +119,7 @@ public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 			fInformationPresenter = new JavaScriptInformationPresenter(getInformationPresenterControlCreator(sourceViewer));
 
 			fInformationPresenter.setSizeConstraints(60, 10, true, true);
+			fInformationPresenter.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
 		}
 		return fInformationPresenter;
 	}
