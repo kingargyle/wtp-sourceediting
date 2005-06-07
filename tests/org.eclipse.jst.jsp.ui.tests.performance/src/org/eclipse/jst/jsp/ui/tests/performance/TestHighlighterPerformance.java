@@ -195,7 +195,7 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 				System.out.println(""); //$NON-NLS-1$
 				System.out.println("---------------------------------------"); //$NON-NLS-1$
 				System.out.println(""); //$NON-NLS-1$
-				System.out.println("V51 com.ibm.sed.structured.style.Highlighter > " + filename); //$NON-NLS-1$
+				System.out.println("V51 Highlighter > " + filename); //$NON-NLS-1$
 				System.out.println("total lines >			" + (i - startLine)); //$NON-NLS-1$
 				System.out.println("total time >			" + totalTime); //$NON-NLS-1$
 				System.out.println("total memory >			" + totalMemory); //$NON-NLS-1$

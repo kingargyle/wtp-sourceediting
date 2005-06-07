@@ -29,13 +29,6 @@ public class JSMarkerAnnotation extends MarkerAnnotation {
 		super(marker);
 	}
 
-	/*
-	 * @see MarkerAnnotation#getUnknownImageName(IMarker)
-	 */
-	protected String getUnknownImageName(IMarker marker) {
-		return "com.ibm.sed.jseditor.ghost.gif"; //$NON-NLS-1$
-	}
-
 	/**
 	 * Initializes the annotation's icon representation and its drawing layer
 	 * based upon the properties of the underlying marker.

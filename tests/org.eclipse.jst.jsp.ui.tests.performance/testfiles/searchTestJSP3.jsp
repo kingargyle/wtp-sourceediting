@@ -9,8 +9,8 @@
 		<!-- default package bean -->
 		<jsp:useBean id="judo1" class="Jellybean"></jsp:useBean>
 		
-		<!-- com.ibm.test package bean -->
-		<jsp:useBean id="judo2" class="com.ibm.test.Jellybean2" />
+		<!-- org.eclipse.jst.jsp.ui.tests package bean -->
+		<jsp:useBean id="judo2" class="org.eclipse.jst.jsp.ui.tests.Jellybean2" />
 	
 	
 		<%
