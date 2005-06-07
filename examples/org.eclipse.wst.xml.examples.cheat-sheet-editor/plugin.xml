@@ -4,7 +4,7 @@
 	id="org.eclipse.wst.xml.examples.cs.ui"
 	name="%SSE_CS_Source_Editor.name"
 	version="1.0.0"
-	provider-name="Eclipse.org"
+	provider-name="%providerName"
 	class="org.eclipse.wst.xml.examples.cs.ui.internal.CSUIPlugin">
 
 	<runtime>
@@ -36,7 +36,7 @@
 		<content-type
 			file-extensions="xml"
 			priority="low"
-			name="CS Content Type"
+			name="%CS_Content_Type_Extension_Element.name"
 			id="cssource"
 			base-type="org.eclipse.core.runtime.xml"
 			default-charset="UTF-8">
