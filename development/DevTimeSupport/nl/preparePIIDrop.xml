@@ -1,0 +1,360 @@
+<project name="preparePIIDrop" default="PreparePIIDrop" basedir=".">
+
+	<target name="init">
+		<property name="jsp_core" value="org.eclipse.jst.jsp.core" />
+		<property name="jsp_ui" value="org.eclipse.jst.jsp.ui" />
+		<property name="snippets" value="org.eclipse.wst.common.snippets" />
+		<property name="css_core" value="org.eclipse.wst.css.core" />
+		<property name="css_ui" value="org.eclipse.wst.css.ui" />
+		<property name="dtd_core" value="org.eclipse.wst.dtd.core" />
+		<property name="dtd_ui" value="org.eclipse.wst.dtd.ui" />
+		<property name="dtd_validation" value="org.eclipse.wst.dtd.validation" />
+		<property name="html_core" value="org.eclipse.wst.html.core" />
+		<property name="html_ui" value="org.eclipse.wst.html.ui" />
+		<property name="js_core" value="org.eclipse.wst.javascript.core" />
+		<property name="js_ui" value="org.eclipse.wst.javascript.ui" />
+		<property name="sse_core" value="org.eclipse.wst.sse.core" />
+		<property name="sse_ui" value="org.eclipse.wst.sse.ui" />
+		<property name="xml_core" value="org.eclipse.wst.xml.core" />
+		<property name="xml_ui" value="org.eclipse.wst.xml.ui" />
+		
+		<property name="dropsDir" value="E:/builds/piibuilds/drops/en" />
+	</target>
+
+	<target name="CleanDrive" depends="init">
+		<echo message="Deleting previous drop files." />
+		<delete dir="${dropsDir}" />
+	</target>
+
+	<target name="CopyFiles" depends="init">
+		<echo message="Copying files from workspace to build directory." />
+		<mkdir dir="${dropsDir}" />
+
+		<mkdir dir="${dropsDir}/${jsp_core}.nl1" />
+		<mkdir dir="${dropsDir}/${jsp_core}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${jsp_ui}.nl1" />
+		<mkdir dir="${dropsDir}/${jsp_ui}.nl1/src" />
+		<mkdir dir="${dropsDir}/${jsp_ui}" />
+		<mkdir dir="${dropsDir}/${jsp_ui}/templates" />
+		
+		<mkdir dir="${dropsDir}/${snippets}.nl1" />
+		<mkdir dir="${dropsDir}/${snippets}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${css_core}.nl1" />
+		<mkdir dir="${dropsDir}/${css_core}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${css_ui}.nl1" />
+		<mkdir dir="${dropsDir}/${css_ui}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${dtd_core}.nl1" />
+		<mkdir dir="${dropsDir}/${dtd_core}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${dtd_ui}.nl1" />
+		<mkdir dir="${dropsDir}/${dtd_ui}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${dtd_validation}.nl1" />
+		<mkdir dir="${dropsDir}/${dtd_validation}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${html_core}.nl1" />
+		<mkdir dir="${dropsDir}/${html_core}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${html_core}" />
+		<mkdir dir="${dropsDir}/${html_core}/data" />
+		
+		<mkdir dir="${dropsDir}/${html_ui}.nl1" />
+		<mkdir dir="${dropsDir}/${html_ui}.nl1/src" />
+		<mkdir dir="${dropsDir}/${html_ui}" />
+		<mkdir dir="${dropsDir}/${html_ui}/templates" />
+		
+		<mkdir dir="${dropsDir}/${js_core}.nl1" />
+		<mkdir dir="${dropsDir}/${js_core}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${js_ui}.nl1" />
+		<mkdir dir="${dropsDir}/${js_ui}.nl1/src" />
+		<mkdir dir="${dropsDir}/${js_ui}.nl1/src-commonui" />
+		<mkdir dir="${dropsDir}/${js_ui}" />
+		<mkdir dir="${dropsDir}/${js_ui}/data" />
+		
+		<mkdir dir="${dropsDir}/${sse_core}.nl1" />
+		<mkdir dir="${dropsDir}/${sse_core}.nl1/src" />
+		<mkdir dir="${dropsDir}/${sse_core}" />
+		<mkdir dir="${dropsDir}/${sse_core}/config" />
+
+		<mkdir dir="${dropsDir}/${sse_ui}.nl1" />
+		<mkdir dir="${dropsDir}/${sse_ui}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${xml_core}.nl1" />
+		<mkdir dir="${dropsDir}/${xml_core}.nl1/src" />
+		
+		<mkdir dir="${dropsDir}/${xml_ui}.nl1" />
+		<mkdir dir="${dropsDir}/${xml_ui}.nl1/src" />
+		<mkdir dir="${dropsDir}/${xml_ui}.nl1/src-multipage" />
+		<mkdir dir="${dropsDir}/${xml_ui}.nl1/src-wizards" />
+		<mkdir dir="${dropsDir}/${xml_ui}" />
+		<mkdir dir="${dropsDir}/${xml_ui}/templates" />
+
+		<copy toDir="${dropsDir}/${jsp_core}.nl1">
+			<fileset dir="../../../${jsp_core}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${jsp_core}.nl1/src">
+			<fileset dir="../../../${jsp_core}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${jsp_ui}.nl1">
+			<fileset dir="../../../${jsp_ui}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${jsp_ui}.nl1/src">
+			<fileset dir="../../../${jsp_ui}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${jsp_ui}/templates">
+			<fileset dir="../../../${jsp_ui}/templates" includes="**/jspdefault-templates.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${snippets}.nl1">
+			<fileset dir="../../../${snippets}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${snippets}.nl1/src">
+			<fileset dir="../../../${snippets}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${css_core}.nl1">
+			<fileset dir="../../../${css_core}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${css_core}.nl1/src">
+			<fileset dir="../../../${css_core}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${css_ui}.nl1">
+			<fileset dir="../../../${css_ui}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${css_ui}.nl1/src">
+			<fileset dir="../../../${css_ui}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${dtd_core}.nl1">
+			<fileset dir="../../../${dtd_core}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${dtd_core}.nl1/src">
+			<fileset dir="../../../${dtd_core}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${dtd_ui}.nl1">
+			<fileset dir="../../../${dtd_ui}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${dtd_ui}.nl1/src">
+			<fileset dir="../../../${dtd_ui}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${dtd_validation}.nl1">
+			<fileset dir="../../../${dtd_validation}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${dtd_validation}.nl1/src">
+			<fileset dir="../../../${dtd_validation}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${html_core}.nl1">
+			<fileset dir="../../../${html_core}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${html_core}.nl1/src">
+			<fileset dir="../../../${html_core}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${html_core}/data">
+			<fileset dir="../../../${html_core}/data" includes="**/htmref.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${html_ui}.nl1">
+			<fileset dir="../../../${html_ui}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${html_ui}.nl1/src">
+			<fileset dir="../../../${html_ui}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${html_ui}/templates">
+			<fileset dir="../../../${html_ui}/templates" includes="**/htmldefault-templates.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${js_core}.nl1">
+			<fileset dir="../../../${js_core}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${js_core}.nl1/src">
+			<fileset dir="../../../${js_core}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${js_ui}.nl1">
+			<fileset dir="../../../${js_ui}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${js_ui}.nl1/src">
+			<fileset dir="../../../${js_ui}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${js_ui}.nl1/src-commonui">
+			<fileset dir="../../../${js_ui}/src-commonui" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${js_ui}/data">
+			<fileset dir="../../../${js_ui}/data" includes="**/jsref.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${sse_core}.nl1">
+			<fileset dir="../../../${sse_core}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${sse_core}.nl1/src">
+			<fileset dir="../../../${sse_core}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${sse_core}/config">
+			<fileset dir="../../../${sse_core}/config" includes="**/charset.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${sse_ui}.nl1">
+			<fileset dir="../../../${sse_ui}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${sse_ui}.nl1/src">
+			<fileset dir="../../../${sse_ui}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${xml_core}.nl1">
+			<fileset dir="../../../${xml_core}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${xml_core}.nl1/src">
+			<fileset dir="../../../${xml_core}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${xml_ui}.nl1">
+			<fileset dir="../../../${xml_ui}" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${xml_ui}.nl1/src">
+			<fileset dir="../../../${xml_ui}/src" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${xml_ui}.nl1/src-multipage">
+			<fileset dir="../../../${xml_ui}/src-multipage" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${xml_ui}.nl1/src-wizards">
+			<fileset dir="../../../${xml_ui}/src-wizards" includes="**/*.properties" />
+		</copy>
+		<copy toDir="${dropsDir}/${xml_ui}/templates">
+			<fileset dir="../../../${xml_ui}/templates" includes="**/xmldefault-templates.properties" />
+		</copy>
+		
+		<copy toDir="${dropsDir}" file="README.2TC.RME" />
+	</target>
+
+	<!-- Set all the message IDs ... IWAK####X -->
+	<target name="SetMessageIDs" depends="init">
+		<messageIdGen folderPath="${dropsDir}" componentId="K" />
+	</target>
+
+	<!-- Delete the backup files created by msgID -->
+	<target name="DeleteBackup" depends="init">
+		<echo message="Deleting *.properties.backup files" />
+		<delete>
+			<fileset dir="${dropsDir}" includes="**/*.properties.backup" />
+		</delete>
+	</target>
+
+	<target name="CreateZip" depends="init">
+		<echo message="Creating zip." />
+		<zip basedir="${dropsDir}" zipfile="${dropsDir}/../sedit.zip" />
+	</target>
+
+	<target name="CopyBack" depends="init">
+		<echo message="Copying files back to workspace." />
+		<copy toDir="../../../${jsp_core}">
+			<fileset dir="${dropsDir}/${jsp_core}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${jsp_core}/src">
+			<fileset dir="${dropsDir}/${jsp_core}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${jsp_ui}">
+			<fileset dir="${dropsDir}/${jsp_ui}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${jsp_ui}/src">
+			<fileset dir="${dropsDir}/${jsp_ui}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${snippets}">
+			<fileset dir="${dropsDir}/${snippets}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${snippets}/src">
+			<fileset dir="${dropsDir}/${snippets}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${css_core}">
+			<fileset dir="${dropsDir}/${css_core}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${css_core}/src">
+			<fileset dir="${dropsDir}/${css_core}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${css_ui}">
+			<fileset dir="${dropsDir}/${css_ui}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${css_ui}/src">
+			<fileset dir="${dropsDir}/${css_ui}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${dtd_core}">
+			<fileset dir="${dropsDir}/${dtd_core}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${dtd_core}/src">
+			<fileset dir="${dropsDir}/${dtd_core}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${dtd_ui}">
+			<fileset dir="${dropsDir}/${dtd_ui}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${dtd_ui}/src">
+			<fileset dir="${dropsDir}/${dtd_ui}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${dtd_validation}">
+			<fileset dir="${dropsDir}/${dtd_validation}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${dtd_validation}/src">
+			<fileset dir="${dropsDir}/${dtd_validation}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${html_core}">
+			<fileset dir="${dropsDir}/${html_core}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${html_core}/src">
+			<fileset dir="${dropsDir}/${html_core}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${html_ui}">
+			<fileset dir="${dropsDir}/${html_ui}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${html_ui}/src">
+			<fileset dir="${dropsDir}/${html_ui}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${js_core}">
+			<fileset dir="${dropsDir}/${js_core}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${js_core}/src">
+			<fileset dir="${dropsDir}/${js_core}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${js_ui}">
+			<fileset dir="${dropsDir}/${js_ui}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${js_ui}/src">
+			<fileset dir="${dropsDir}/${js_ui}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${js_ui}/src-commonui">
+			<fileset dir="${dropsDir}/${js_ui}.nl1/src-commonui" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${sse_core}">
+			<fileset dir="${dropsDir}/${sse_core}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${sse_core}/src">
+			<fileset dir="${dropsDir}/${sse_core}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${sse_ui}">
+			<fileset dir="${dropsDir}/${sse_ui}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${sse_ui}/src">
+			<fileset dir="${dropsDir}/${sse_ui}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${xml_core}">
+			<fileset dir="${dropsDir}/${xml_core}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${xml_core}/src">
+			<fileset dir="${dropsDir}/${xml_core}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${xml_ui}">
+			<fileset dir="${dropsDir}/${xml_ui}.nl1" includes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${xml_ui}/src">
+			<fileset dir="${dropsDir}/${xml_ui}.nl1/src" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${xml_ui}/src-multipage">
+			<fileset dir="${dropsDir}/${xml_ui}.nl1/src-multipage" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		<copy toDir="../../../${xml_ui}/src-wizards">
+			<fileset dir="${dropsDir}/${xml_ui}.nl1/src-wizards" includes="**/*.properties" excludes="**/plugin.properties" />
+		</copy>
+		
+	</target>
+
+	<target name="PreparePIIDrop">
+		<antcall target="CleanDrive" />
+		<antcall target="CopyFiles" />
+		<antcall target="SetMessageIDs" />
+		<antcall target="DeleteBackup" />
+		<antcall target="CreateZip" />
+	</target>
+
+</project>
