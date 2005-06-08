@@ -11,7 +11,6 @@ Export-Package: org.eclipse.wst.html.ui.tests.performance
 Require-Bundle: org.eclipse.core.runtime,
  org.junit,
  org.eclipse.test.performance,
- org.eclipse.wst.html.core,
  org.eclipse.wst.html.ui,
  org.eclipse.ui
 Eclipse-AutoStart: true
