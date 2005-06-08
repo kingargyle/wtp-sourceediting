@@ -32,13 +32,16 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextOperationTarget;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.ITextViewerExtension2;
+import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTarget;
@@ -46,7 +49,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
@@ -62,7 +64,6 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.editors.text.StorageDocumentProvider;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
-import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.DefaultRangeIndicator;
@@ -89,7 +90,6 @@ import org.eclipse.wst.sse.ui.internal.ExtendedConfigurationBuilder;
 import org.eclipse.wst.sse.ui.internal.ExtendedEditorActionBuilder;
 import org.eclipse.wst.sse.ui.internal.ExtendedEditorDropTargetAdapter;
 import org.eclipse.wst.sse.ui.internal.IExtendedContributor;
-import org.eclipse.wst.sse.ui.internal.IExtendedSimpleEditor;
 import org.eclipse.wst.sse.ui.internal.IPopupMenuContributor;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 import org.eclipse.wst.sse.ui.internal.StructuredResourceMarkerAnnotationModel;
@@ -104,13 +104,41 @@ import org.eclipse.wst.sse.ui.internal.editor.IHelpContextIds;
 import org.eclipse.wst.sse.ui.internal.extension.BreakpointProviderBuilder;
 import org.eclipse.wst.sse.ui.internal.preferences.EditorPreferenceNames;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.ConfigurationPointCalculator;
+import org.eclipse.wst.sse.ui.internal.provisional.extensions.ISourceEditingTextTools;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.breakpoint.IExtendedStorageEditorInput;
 
-public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
+public class JSEditor extends TextEditor {
 	// local adapter
 	private class ShowInTargetLister implements IShowInTargetList {
 		public String[] getShowInTargetIds() {
 			return fShowInTargetIds;
+		}
+	}
+
+	private class SourceEditingTextTools implements ISourceEditingTextTools {
+
+		public int getCaretOffset() {
+			return 0;
+		}
+
+		public IDocument getDocument() {
+			return getDocumentProvider().getDocument(getEditorInput());
+		}
+
+		public IEditorPart getEditorPart() {
+			return JSEditor.this.getEditorPart();
+		}
+
+		public ITextSelection getSelection() {
+			ITextSelection selection = null;
+			ISelection s = getSelectionProvider().getSelection();
+			if (s instanceof ITextSelection) {
+				selection = (ITextSelection) s;
+			}
+			else {
+				selection = TextSelection.emptySelection();
+			}
+			return selection;
 		}
 	}
 
@@ -204,6 +232,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 	String[] fShowInTargetIds = new String[]{IPageLayout.ID_RES_NAV};
 	private IShowInTargetList fShowInTargetListAdapter = new ShowInTargetLister();
+	private ISourceEditingTextTools fSourceEditingTextTools = new SourceEditingTextTools();
 
 	IDocumentProvider fStorageInputDocumentProvider = null;
 	private static final String UNDERSCORE = "_"; //$NON-NLS-1$
@@ -285,16 +314,17 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			// override TextEditor's SAVE action
 			// we duplicate the "Save" label, but that's better than depending
 			// on private methods
-			//			MultiPageEditorSaveAction saveAction = new
+			// MultiPageEditorSaveAction saveAction = new
 			// MultiPageEditorSaveAction(resourceBundle,
 			// JSEditorActionConstants.ACTION_NAME_SAVE +
 			// JSEditorActionConstants.DOT, this);
-			//			if (getEditorPart() != null)
-			//				saveAction.setEditorPart(getEditorPart());
-			//			setAction(ITextEditorActionConstants.SAVE, saveAction);
+			// if (getEditorPart() != null)
+			// saveAction.setEditorPart(getEditorPart());
+			// setAction(ITextEditorActionConstants.SAVE, saveAction);
 
 			IAction contentAssistAction = new TextOperationAction(resourceBundle, JSEditorActionConstants.ACTION_NAME_CONTENT_ASSIST_PROPOSAL + UNDERSCORE, this, ISourceViewer.CONTENTASSIST_PROPOSALS, true);
-			WorkbenchHelp.setHelp(contentAssistAction, IHelpContextIds.CONTMNU_CONTENTASSIST_HELPID);
+			IWorkbenchHelpSystem helpSystem = JSEditorPlugin.getDefault().getWorkbench().getHelpSystem();
+			helpSystem.setHelp(contentAssistAction, IHelpContextIds.CONTMNU_CONTENTASSIST_HELPID);
 			contentAssistAction.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
 			setAction(JSEditorActionConstants.ACTION_NAME_CONTENT_ASSIST_PROPOSAL, contentAssistAction);
 
@@ -314,30 +344,33 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, getAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS));
 			}
 			else {
-				// The Default Text Editor uses editorContribution to perform this
-				// mapping, but since it relies on the IEditorSite ID, it can't be
-				// relied on for MultiPageEditorParts. Instead, force the action
+				// The Default Text Editor uses editorContribution to perform
+				// this
+				// mapping, but since it relies on the IEditorSite ID, it
+				// can't be
+				// relied on for MultiPageEditorParts. Instead, force the
+				// action
 				// registration manually.
 				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new MarkerRulerAction(JavaScriptUIMessages.getResourceBundle(), "Editor.ManageBookmarks.", this, getVerticalRuler(), IMarker.BOOKMARK, true)); //$NON-NLS-1$
 			}
 
 
-			//			action= new
+			// action= new
 			// TextOperationAction(ResourceHandler.getResourceBundle(),
 			// JSEditorActionConstants.ACTION_NAME_INFORMATION +
 			// JSEditorActionConstants.DOT, this, ISourceViewer.INFORMATION,
 			// true);
-			//			action.setActionDefinitionId(XMLEditorActionDefinitionIds.INFORMATION);
-			//			setAction(JSEditorActionConstants.ACTION_NAME_INFORMATION,
+			// action.setActionDefinitionId(XMLEditorActionDefinitionIds.INFORMATION);
+			// setAction(JSEditorActionConstants.ACTION_NAME_INFORMATION,
 			// action); //$NON-NLS-1$
 
-			//For error handling test only!!!==========
-			//Uncomment the following line of code to simulate a
+			// For error handling test only!!!==========
+			// Uncomment the following line of code to simulate a
 			// MissingResourceException.
-			//throw new java.util.MissingResourceException("Resource bundle
+			// throw new java.util.MissingResourceException("Resource bundle
 			// not found.", resourceBundle.getClass().toString(),
 			// ACTION_NAME_CONTENT_ASSIST_PROPOSAL);
-			//For error handling test only!!!==========
+			// For error handling test only!!!==========
 		}
 		catch (MissingResourceException exception) {
 			throw new SourceEditingRuntimeException(JavaScriptUIMessages.An_error_has_occurred_when_ERROR_); //$NON-NLS-1$ = ...
@@ -390,8 +423,10 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 		}
 		return (String[]) allIds.toArray(new String[0]);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#createPartControl(org.eclipse.swt.widgets.Composite)
 	 */
 	public void createPartControl(Composite parent) {
@@ -406,7 +441,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 		// create source viewer
 		SourceViewer sourceViewer = new SourceViewer(parent, verticalRuler, fOverviewRuler, true, styles);
 
-		//setup line style listener
+		// setup line style listener
 		JSLineStyleListener lineStyleListener = getLineStyleListener();
 		if (lineStyleListener != null) {
 			lineStyleListener.setSourceViewer(sourceViewer);
@@ -462,13 +497,15 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 		try {
 			super.doSetInput(input);
-			
-			// currently this only works if createpartcontrol has not been called yet
+
+			// currently this only works if createpartcontrol has not been
+			// called yet
 			String contentType = getInputContentType(input);
-			setEditorContextMenuId(contentType+".source.EditorContext"); //$NON-NLS-1$
-			setRulerContextMenuId(contentType+".source.RulerContext");	//$NON-NLS-1$
-			setHelpContextId(contentType+".source.HelpId");				//$NON-NLS-1$
-			// allows help to be set at any time (not just on AbstractTextEditor's
+			setEditorContextMenuId(contentType + ".source.EditorContext"); //$NON-NLS-1$
+			setRulerContextMenuId(contentType + ".source.RulerContext"); //$NON-NLS-1$
+			setHelpContextId(contentType + ".source.HelpId"); //$NON-NLS-1$
+			// allows help to be set at any time (not just on
+			// AbstractTextEditor's
 			// creation)
 			if ((getHelpContextId() != null) && (getSourceViewer() != null) && (getSourceViewer().getTextWidget() != null)) {
 				IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
@@ -482,7 +519,7 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			}
 
 			if (fContentOutlinePage != null)
-				fContentOutlinePage.setDocument(getDocument());
+				fContentOutlinePage.setDocument(getDocumentProvider().getDocument(getEditorInput()));
 
 			fShowInTargetIds = createShowInTargetIds();
 		}
@@ -519,14 +556,13 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 		if (IToggleBreakpointsTarget.class.equals(required)) {
 			return ToggleBreakpointsTarget.getInstance();
 		}
+		if (IDocument.class.equals(required)) {
+			return getDocumentProvider().getDocument(getEditorInput());
+		}
+		if (ISourceEditingTextTools.class.equals(required)) {
+			return fSourceEditingTextTools;
+		}
 		return super.getAdapter(required);
-	}
-
-	/**
-	 * @see IExtendedSimpleEditor#getCaretPosition()
-	 */
-	public int getCaretPosition() {
-		return getSourceViewer().getTextWidget().getCaretOffset();
 	}
 
 	protected String[] getConfigurationPoints() {
@@ -535,23 +571,13 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 	protected IContentOutlinePage getContentOutlinePage() {
 		if ((fContentOutlinePage == null) || (fContentOutlinePage.getControl().isDisposed())) {
-			IDocument document = getDocument();
+			IDocument document = getDocumentProvider().getDocument(getEditorInput());
 			fContentOutlinePage = new JSContentOutlinePage(document, getSourceViewer());
 		}
 		return fContentOutlinePage;
 	}
 
-	/**
-	 * @see IExtendedSimpleEditor#getDocument()
-	 */
-	public IDocument getDocument() {
-		return getDocumentProvider().getDocument(getEditorInput());
-	}
-
-	/**
-	 * @see IExtendedSimpleEditor#getEditorPart()
-	 */
-	public IEditorPart getEditorPart() {
+	IEditorPart getEditorPart() {
 		// unless one has been explicitly set, this is the EditorPart
 		if (fEditorPart == null)
 			return this;
@@ -569,17 +595,10 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 
 	protected JSLineStyleListener getLineStyleListener() {
 		if (fLineStyleListener == null) {
-			IDocument document = getDocument();
+			IDocument document = getDocumentProvider().getDocument(getEditorInput());
 			fLineStyleListener = new JSLineStyleListener(document, getSourceViewer());
 		}
 		return fLineStyleListener;
-	}
-
-	/**
-	 * @see IExtendedSimpleEditor#getSelectionRange()
-	 */
-	public Point getSelectionRange() {
-		return getSourceViewer().getTextWidget().getSelectionRange();
 	}
 
 	public ISourceViewer getViewer() {
@@ -619,24 +638,25 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#initializeEditor()
 	 */
 	protected void initializeEditor() {
-		
-		//https://w3.opensource.ibm.com/bugzilla/show_bug.cgi?id=3426
-		//setDocumentProvider(new JSTextFileDocumentProvider());
+
+		// https://w3.opensource.ibm.com/bugzilla/show_bug.cgi?id=3426
+		// setDocumentProvider(new JSTextFileDocumentProvider());
 		setRangeIndicator(new DefaultRangeIndicator());
 		setHelpContextId(org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds.JS_SOURCEVIEW_HELPID);
 		setPreferenceStore(createCombinedPreferenceStore());
-		//		getCommonPreferenceStore().addPropertyChangeListener(this);
+		// getCommonPreferenceStore().addPropertyChangeListener(this);
 
 		// enable the base source editor activity when editor opens
-//		try {
-//			WTPActivityBridge.getInstance().enableActivity(StructuredTextEditor.CORE_SSE_ACTIVITY_ID, true);
-//		}
-//		catch (Exception t) {
-//			// if something goes wrong with enabling activity, just log the
-//			// error but dont
-//			// have it break the editor
-//			Logger.log(Logger.WARNING_DEBUG, t.getMessage(), t);
-//		}
+		// try {
+		// WTPActivityBridge.getInstance().enableActivity(StructuredTextEditor.CORE_SSE_ACTIVITY_ID,
+		// true);
+		// }
+		// catch (Exception t) {
+		// // if something goes wrong with enabling activity, just log the
+		// // error but dont
+		// // have it break the editor
+		// Logger.log(Logger.WARNING_DEBUG, t.getMessage(), t);
+		// }
 	}
 
 	public boolean isEditable() {
@@ -753,41 +773,31 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 		}
 	}
 
-	public IStatus validateEdit(Shell context) {
-		IStatus status = STATUS_OK;
-
-		validateState(getEditorInput());
-		sanityCheckState(getEditorInput());
-
-		if (isEditorInputReadOnly())
-			status = STATUS_ERROR;
-
-		return status;
-	}
-
 	private void handleConvertLineDelimiters() {
-		if (getDocument().getNumberOfLines() > 1) {
+		if (getDocumentProvider().getDocument(getEditorInput()).getNumberOfLines() > 1) {
 			try {
-				convertLineDelimiters(getDocument());
+				convertLineDelimiters(getDocumentProvider().getDocument(getEditorInput()));
 			}
 			catch (CoreException e) {
 				throw new SourceEditingRuntimeException(e);
 			}
 		}
 	}
+
 	protected void handleCursorPositionChanged() {
 		super.handleCursorPositionChanged();
 		updateStatusField(StructuredTextEditorActionConstants.STATUS_CATEGORY_OFFSET);
 	}
 
 	/*
-	 * Note: This method appears in both ModelManagerImpl and JSEditor (with just a minor difference).
-	 * They should be kept the same.
+	 * Note: This method appears in both ModelManagerImpl and JSEditor (with
+	 * just a minor difference). They should be kept the same.
 	 */
 	private void convertLineDelimiters(IDocument document) throws CoreException {
 		String contentTypeId = ContentTypeIdForJavaScript.ContentTypeID_JAVASCRIPT;
 		String endOfLineCode = ContentBasedPreferenceGateway.getPreferencesString(contentTypeId, CommonEncodingPreferenceNames.END_OF_LINE_CODE);
-		// endOfLineCode == null means the content type does not support this function (e.g. DTD)
+		// endOfLineCode == null means the content type does not support this
+		// function (e.g. DTD)
 		// endOfLineCode == "" means no translation
 		if (endOfLineCode != null && endOfLineCode.length() > 0) {
 			String lineDelimiterToUse = System.getProperty("line.separator"); //$NON-NLS-1$
@@ -822,13 +832,15 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			}
 		}
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#collectContextMenuPreferencePages()
 	 */
 	protected String[] collectContextMenuPreferencePages() {
 		List allIds = new ArrayList(0);
-		
+
 		// get contributed preference pages
 		ExtendedConfigurationBuilder builder = ExtendedConfigurationBuilder.getInstance();
 		String[] configurationIds = getConfigurationPoints();
@@ -837,7 +849,8 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			for (int j = 0; j < definitions.length; j++) {
 				String someIds = definitions[j];
 				if (someIds != null && someIds.length() > 0) {
-					// supports multiple comma-delimited page IDs in one element 
+					// supports multiple comma-delimited page IDs in one
+					// element
 					String[] ids = StringUtils.unpack(someIds);
 					for (int k = 0; k < ids.length; k++) {
 						// trim, just to keep things clean
@@ -849,9 +862,9 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 				}
 			}
 		}
-		
+
 		// add pages contributed by super
-		String[] superPages =  super.collectContextMenuPreferencePages();
+		String[] superPages = super.collectContextMenuPreferencePages();
 		for (int m = 0; m < superPages.length; m++) {
 			// trim, just to keep things clean
 			String id = superPages[m].trim();
@@ -860,6 +873,6 @@ public class JSEditor extends TextEditor implements IExtendedSimpleEditor {
 			}
 		}
 
-		return (String[]) allIds.toArray(new String[0]);		
+		return (String[]) allIds.toArray(new String[0]);
 	}
 }

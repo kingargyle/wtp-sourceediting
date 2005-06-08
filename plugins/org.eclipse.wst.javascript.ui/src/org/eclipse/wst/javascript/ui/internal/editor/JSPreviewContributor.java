@@ -128,8 +128,9 @@ public class JSPreviewContributor {
 		if (resource != null && resource.getType() == IResource.FILE) {
 			String url = "file://" + resource.getLocation(); //$NON-NLS-1$
 			fBrowser.setUrl(url);
-		} else {
-			String editorText = fEditor.getDocument().get();
+		}
+		else {
+			String editorText = fEditor.getDocumentProvider().getDocument(fEditor.getEditorInput()).get();
 			String previewText = "<HTML><BODY><SCRIPT language=\"JavaScript\">" + "<!--" + "\n" + editorText + "\n" + "//-->" + "</SCRIPT></BODY></HTML>"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 			fBrowser.setText(previewText);
 		}
