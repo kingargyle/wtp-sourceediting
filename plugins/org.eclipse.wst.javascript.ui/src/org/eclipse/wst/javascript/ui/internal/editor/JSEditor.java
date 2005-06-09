@@ -373,7 +373,7 @@ public class JSEditor extends TextEditor {
 			// For error handling test only!!!==========
 		}
 		catch (MissingResourceException exception) {
-			throw new SourceEditingRuntimeException(JavaScriptUIMessages.An_error_has_occurred_when_ERROR_); //$NON-NLS-1$ = ...
+			throw new SourceEditingRuntimeException(exception, JavaScriptUIMessages.An_error_has_occurred_when_ERROR_); //$NON-NLS-1$ = ...
 			// ... "An error has occurred when retrieving resources for the
 			// source editor. The Eclipse Workbench installation may have been
 			// corrupted."
