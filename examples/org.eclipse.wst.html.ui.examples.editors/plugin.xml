@@ -3,7 +3,7 @@
 <plugin
    id="org.eclipse.wst.html.ui.examples.editors"
    name="HTML Editor Examples"
-   version="1.0.0"
+   version="0.7.0"
    provider-name="Eclipse.org"
    class="org.eclipse.wst.html.ui.examples.editors.internal.EditorExamplesPlugin">
 
