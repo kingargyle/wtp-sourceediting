@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CSS UI Performance tests Plug-in
 Bundle-SymbolicName: org.eclipse.wst.css.ui.tests.performance
-Bundle-Version: 1.0.0
+Bundle-Version: 0.7.0
 Bundle-ClassPath: cssuiperformance.jar
 Bundle-Activator: org.eclipse.wst.css.ui.tests.performance.CSSUIPerformancePlugin
 Bundle-Vendor: Eclipse.org

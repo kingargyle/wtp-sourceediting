@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XML UI Performance Plug-in
 Bundle-SymbolicName: org.eclipse.wst.xml.ui.tests.performance
-Bundle-Version: 1.0.0
+Bundle-Version: 0.7.0
 Bundle-ClassPath: xmluiperformance.jar
 Bundle-Activator: org.eclipse.wst.xml.ui.tests.performance.XMLUIPerformancePlugin
 Bundle-Vendor: Eclipse.org
