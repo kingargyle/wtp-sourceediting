@@ -2,27 +2,12 @@
 <?eclipse version="3.0"?>
 <plugin>
 
-
-	<!-- define editors -->
-	<extension point="org.eclipse.ui.editors">
-		<editor
-			name="%JavaScript_Source_Page_Editor.name"
-			icon="icons/sourceEditor.gif"
-			extensions="js"
-			contributorClass="org.eclipse.wst.javascript.ui.internal.actions.ActionContributorJS"
-			class="org.eclipse.wst.javascript.ui.internal.editor.JSEditor"
-			symbolicFontName="org.eclipse.wst.sse.ui.textfont"
-			id="org.eclipse.wst.javascript.core.javascriptsource.source">
-			<contentTypeBinding
-				contentTypeId="org.eclipse.wst.javascript.core.javascriptsource" />
-		</editor>
-	</extension>
+	<!-- define editor -->
 	<extension point="org.eclipse.ui.editors">
 		<editor
 			name="%JavaScript_Editor.name"
 			default="true"
 			icon="icons/javascript.gif"
-			extensions="js"
 			contributorClass="org.eclipse.wst.javascript.ui.internal.actions.MultiPageEditorActionBarContributorJS"
 			class="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart"
 			symbolicFontName="org.eclipse.wst.sse.ui.textfont"
