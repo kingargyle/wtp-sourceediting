@@ -8,7 +8,6 @@
 		<property name="css_ui" value="org.eclipse.wst.css.ui" />
 		<property name="dtd_core" value="org.eclipse.wst.dtd.core" />
 		<property name="dtd_ui" value="org.eclipse.wst.dtd.ui" />
-		<property name="dtd_validation" value="org.eclipse.wst.dtd.validation" />
 		<property name="html_core" value="org.eclipse.wst.html.core" />
 		<property name="html_ui" value="org.eclipse.wst.html.ui" />
 		<property name="js_core" value="org.eclipse.wst.javascript.core" />
