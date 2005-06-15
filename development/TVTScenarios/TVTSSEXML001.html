@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type"
+	content="text/html; charset=windows-1255">
+<title>TVTSSEXML001 - TVT Testcase for XML Source Page Editor</title>
+</head>
+<body>
+<h1>XML Source Page Editor</h1>
+<h2>Prerequisites:</h2>
+<ol>
+	<li>File -&gt;New -&gt;Example... -&gt;Examples -&gt;Editing and
+	validating XML files</li>
+	<li>Press the Finish button</li>
+</ol>
+<h2>Steps:</h2>
+<ol>
+	<li>Open XMLExamples/Invoice/Invoice.xml with XML Source page editor.</li>
+	<li>Position the mouse over tags (e.g., &lt;Invoice&gt;,
+	&lt;Header&gt;, &lt;Date&gt;, and &lt;Month &gt;) or attributes
+	(invoiceNumber or discount) within the content area of the Source page.</li>
+	<li>Verify the Hover Helps are translated.
+	<p>Here's some information from development regarding what they do/do
+	not translate for Hover Help (and for Tag Help for content assist
+	proposals): For XML, we get the hover help from either the DTD or XSD
+	file, if one is referenced in the XML file (e.g., the Invoice.xml file
+	references the Invoice.dtd file in its DOCTYPE statement). The bold
+	labels in front of the hover help ("Element:", "Content Model:", "Data
+	Type:", etc) are translated. We also pull in the description for the
+	element from the referenced DTD/XSD file, if any. This is usually in
+	the language the DTD/XSD file is written in and we don't translate
+	them. However, we have seen some DTDs with a long description for the
+	element, one paragraph in French, another paragraph in English. We will
+	just pull in the whole description.</p>
+	</li>
+	<!-- Common source editor strings begin -->
+	<li>Position the mouse somewhere in the content area of the Source page
+	and press mouse button 2.</li>
+	<li>Verify the following items in the context menu that appears
+	(including cascading menus), which is shown below:
+	<ul>
+		<li>Undo/Undo Text Change</li>
+		<li>Cut</li>
+		<li>Paste</li>
+		<li>Cleanup Document...</li>
+		<li>Format (and its submenu)</li>
+		<li>Properties</li>
+	</ul>
+	Note: Other menu items are covered by IES.<br />
+	<img src="images/xmleditor01.JPG" /></li>
+	<!-- Common source editor strings end -->
+	<li>Select Cleanup Document...</li>
+	<li>Verify the Cleanup dialog that appears.<br />
+	<img src="images/xmleditor02.JPG" /></li>
+	<li>Press the Cancel button from the Cleanup dialog</li>
+	<!-- Common source editor strings begin -->
+	<li>Select Edit from the menu bar.</li>
+	<li>Verify the following menu items (including cascading menus):
+	<ul>
+		<li>Undo Text Change</li>
+		<li>Redo Text Change</li>
+		<li>Expand Selection To (and submenu)</li>
+		<li>Show Tooltip Description</li>
+		<li>Content Assist</li>
+		<li>Quick Fix</li>
+	</ul>
+	Note: Translations for other menu items are covered by IES.<br />
+	<img src="images/xmleditor03.JPG" /></li>
+	<!-- Common source editor strings end -->
+	<li>Select Source from the menu bar.</li>
+	<li>Verify all menu items.<br />
+	<img src="images/xmleditor04.JPG" /></li>
+	<li>Select Navigate from the menu bar.</li>
+	<li>Verify Open Selection menu item (Translations for other menu items
+	are covered by IES).<br />
+	<img src="images/xmleditor05.JPG" /></li>
+	<li>Remove the &lt;/Invoice&gt; tag at the end of the Invoice.xml file.</li>
+	<li>Select Edit-&gt;Content Assist from the menu bar.</li>
+	<li>Verify End with "&lt;/Invoice" is translated.<br />
+	<img src="images/xmleditor06.JPG" /></li>
+	<!-- Common source editor strings begin -->
+	<li>In the Outline view, expand all nodes and selecting each one,
+	verify context menu. Some of the items include:
+	<ul>
+		<li>Remove</li>
+		<li>Edit Processing Instruction...</li>
+		<li>Add Before</li>
+		<li>Add After</li>
+		<li>Edit Doctype...</li>
+		<li>Add Child</li>
+		<li>Add Attribute</li>
+	</ul>
+	<img src="images/xmleditor07.JPG" /></li>
+	<li>Also verify any dialogs that pop up when you select menu items with
+	"..."</li>
+	<li>In the Outline view, hover over toolbar items and verify Collapse
+	All.<br />
+	<img src="images/xmleditor09.JPG" /></li>
+	<li>Click on the Outline view Menu (the triangle button) and verify
+	Link with Editor.<br />
+	<img src="images/xmleditor10.JPG" /></li>
+	<!-- Common source editor strings end -->
+	<li>Close the editor, discarding any changes.</li>
+	<li>Right-click Invoice.xml in the Navigator/Project Explorer and
+	select Open With-&gt;XML Editor</li>
+	<li>Verify the translation of the labels for the 2 tabs (Design,
+	Source) at the bottom of the editor.<br />
+	<img src="images/xmleditor08.JPG" /></li>
+</ol>
+</body>
+</html>

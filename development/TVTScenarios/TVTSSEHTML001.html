@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type"
+	content="text/html; charset=windows-1255">
+<title>TVTSSEHTML001 - TVT Testcase for HTML Source Page Editor</title>
+</head>
+<body>
+<h1>HTML Source Page Editor</h1>
+<h2>Prerequisites:</h2>
+<ol>
+	<li>Open the J2EE Perspective if it is not already open.(Window
+	-&gt;Open Perspective -&gt; J2EE)</li>
+	<li>Create a new J2EE web project if it does not already exist. (File
+	-&gt;New -&gt;J2EE Web Project)</li>
+	<li>Create and open a HTML file if it does not already exist (File
+	-&gt;New -&gt;Other -&gt;Web -&gt;HTML)
+</ol>
+<h2>Steps:</h2>
+<ol>
+	<li>Position the mouse over tags (e.g., &lt;HTML&gt;, &lt;HEAD&gt;, and
+	&lt;BODY&gt;) or attributes (type and border) within the content area
+	of the editor</li>
+	<li>Verify the Hover Helps are translated.</li>
+	<!-- Common source editor strings begin -->
+	<li>Position the mouse somewhere in the content area of the Source page
+	and press mouse button 2.</li>
+	<li>Verify the following items in the context menu that appears
+	(including cascading menus), which is shown below:
+	<ul>
+		<li>Undo/Undo Text Change</li>
+		<li>Cut</li>
+		<li>Paste</li>
+		<li>Cleanup Document...</li>
+		<li>Format (and its submenu)</li>
+		<li>Add to Snippets...</li>
+		<li>Properties</li>
+	</ul>
+	Note: Other menu items are covered by IES.<br />
+	<img src="images/htmleditor01.JPG" /></li>
+	<!-- Common source editor strings end -->
+	<li>Select Cleanup Document...</li>
+	<li>Verify the Cleanup dialog that appears.<br />
+	<img src="images/htmleditor02.JPG" /></li>
+	<li>Press the Cancel button from the Cleanup dialog</li>
+	<!-- Common source editor strings begin -->
+	<li>Select Edit from the menu bar.</li>
+	<li>Verify the following menu items (including cascading menus):
+	<ul>
+		<li>Undo Text Change</li>
+		<li>Redo Text Change</li>
+		<li>Expand Selection To (and submenu)</li>
+		<li>Show Tooltip Description</li>
+		<li>Content Assist</li>
+		<li>Quick Fix</li>
+	</ul>
+	Note: Translations for other menu items are covered by IES.<br />
+	<img src="images/xmleditor03.JPG" /></li>
+	<!-- Common source editor strings end -->
+	<li>Select Source from the menu bar.</li>
+	<li>Verify all menu items.<br />
+	<img src="images/xmleditor04.JPG" /></li>
+	<li>Select Navigate from the menu bar.</li>
+	<li>Verify Open Selection menu item (Translations for other menu items
+	are covered by IES).<br />
+	<img src="images/xmleditor05.JPG" /></li>
+	<li>Remove the &lt;/html&gt; tag at the end of the file.</li>
+	<li>Select Edit-&gt;Content Assist from the menu bar.</li>
+	<li>Verify End with "&lt;/html" is translated.<br />
+	<img src="images/htmleditor03.JPG" /></li>
+	<!-- Common source editor strings begin -->
+	<li>In the Outline view, expand all nodes and selecting each one,
+	verify context menu. Some of the items include:
+	<ul>
+		<li>Remove</li>
+		<li>Add Before</li>
+		<li>Add After</li>
+		<li>Edit Doctype...</li>
+		<li>Add Child</li>
+		<li>Add Attribute</li>
+	</ul>
+	<img src="images/xmleditor07.JPG" /></li>
+	<li>Also verify any dialogs that pop up when you select menu items with
+	"..."</li>
+	<li>In the Outline view, hover over toolbar items and verify Collapse
+	All.<br />
+	<img src="images/xmleditor09.JPG" /></li>
+	<li>Click on the Outline view Menu (the triangle button) and verify
+	Link with Editor.<br />
+	<img src="images/xmleditor10.JPG" /></li>
+	<!-- Common source editor strings end -->
+	<li>Close the editor, discarding any changes.</li>
+</ol>
+</body>
+</html>
