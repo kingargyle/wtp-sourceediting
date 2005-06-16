@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -64,6 +63,7 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.editors.text.StorageDocumentProvider;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
+import org.eclipse.ui.ide.IDEActionFactory;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.DefaultRangeIndicator;
@@ -74,7 +74,6 @@ import org.eclipse.ui.texteditor.IStatusField;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.IWorkbenchActionDefinitionIds;
-import org.eclipse.ui.texteditor.MarkerRulerAction;
 import org.eclipse.ui.texteditor.ResourceAction;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.texteditor.TextOperationAction;
@@ -351,7 +350,9 @@ public class JSEditor extends TextEditor {
 				// relied on for MultiPageEditorParts. Instead, force the
 				// action
 				// registration manually.
-				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new MarkerRulerAction(JavaScriptUIMessages.getResourceBundle(), "Editor.ManageBookmarks.", this, getVerticalRuler(), IMarker.BOOKMARK, true)); //$NON-NLS-1$
+//				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new MarkerRulerAction(JavaScriptUIMessages.getResourceBundle(), "Editor.ManageBookmarks.", this, getVerticalRuler(), IMarker.BOOKMARK, true)); //$NON-NLS-1$
+				// add bookmark action is already registered in AbstractDecoratedTextEditor, so just get it
+				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, getAction(IDEActionFactory.BOOKMARK.getId()));
 			}
 
 
