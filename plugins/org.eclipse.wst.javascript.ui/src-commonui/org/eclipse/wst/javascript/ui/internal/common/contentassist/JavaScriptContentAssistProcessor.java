@@ -55,6 +55,7 @@ import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
 import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.util.Debug;
 import org.eclipse.wst.sse.core.internal.util.URIResolver;
+import org.eclipse.wst.sse.ui.internal.IReleasable;
 import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMText;
@@ -63,7 +64,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class JavaScriptContentAssistProcessor implements IContentAssistProcessor, IPropertyChangeListener {
+public class JavaScriptContentAssistProcessor implements IContentAssistProcessor, IPropertyChangeListener, IReleasable {
 	static protected final Character chRightBrace = new Character(')');
 	static protected final Character chRightBracket = new Character(']');
 	static protected final HashMap follow3classes = new java.util.HashMap();
@@ -1711,7 +1712,6 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
      * 
      */
     public JavaScriptContentAssistProcessor() {
-        super();
         init();
     }
 
@@ -1924,6 +1924,10 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
     protected void init() {
         getPreferenceStore().addPropertyChangeListener(this);
         reinit();
+    }
+    
+    public void release() {
+    	getPreferenceStore().removePropertyChangeListener(this);
     }
 
     public void propertyChange(PropertyChangeEvent event) {
