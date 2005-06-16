@@ -17,7 +17,7 @@ import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 import org.eclipse.wst.sse.ui.internal.provisional.preferences.CommonEditorPreferenceNames;
-import org.eclipse.wst.xml.validation.internal.ui.eclipse.XMLValidator;
+import org.eclipse.wst.xml.ui.internal.validation.XMLValidator;
 
 /**
  * @author kboo

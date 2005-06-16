@@ -24,8 +24,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.test.performance.Dimension;
 import org.eclipse.test.performance.PerformanceTestCase;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.wst.xml.validation.internal.core.ValidationReport;
-import org.eclipse.wst.xsd.validation.internal.ui.eclipse.XSDValidator;
+import org.eclipse.wst.xml.core.internal.validation.core.ValidationReport;
+import org.eclipse.wst.xsd.ui.internal.validation.XSDValidator;
 
 public class ValidateOAGISXSDTestcase extends PerformanceTestCase
 {
