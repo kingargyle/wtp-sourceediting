@@ -678,7 +678,7 @@ public class JSEditor extends TextEditor {
 	 * 
 	 * @param input
 	 *            the editor input whose state is to be checked
-	 * @since 2.0
+	 * @see 2.0
 	 */
 	protected void sanityCheckState(IEditorInput input) {
 		super.sanityCheckState(input);

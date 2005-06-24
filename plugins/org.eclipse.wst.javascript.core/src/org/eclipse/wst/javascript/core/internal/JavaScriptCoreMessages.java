@@ -14,7 +14,7 @@ import org.eclipse.osgi.util.NLS;
 /**
  * Strings used by Javascript Core
  * 
- * @since 1.0
+ * @plannedfor 1.0
  */
 public class JavaScriptCoreMessages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.wst.javascript.core.internal.JavaScriptCorePluginResources";//$NON-NLS-1$

@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
 /**
  * Strings used by Javascript UI
  * 
- * @since 1.0
+ * @plannedfor 1.0
  */
 public class JavaScriptUIMessages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.wst.javascript.ui.internal.editor.JSUIPluginResources";//$NON-NLS-1$
