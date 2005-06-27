@@ -1,0 +1,13 @@
+this file was originally attached to bug 
+71994
+https://bugs.eclipse.org/bugs/show_bug.cgi?id=71994
+
+Its a good example of a couple of things. 
+Mostly, that we do not handle extremely long lines
+well. 
+
+
+Also, that we do not handle pasting large amounts of 
+text well. 
+
+
