@@ -21,7 +21,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 /**
  * copied from org.eclipse.ant.tests.ui.editor.performance.EditorTestHelper
- * @since 3.1
+ * 
  */
 public class EditorTestHelper {
 

@@ -12,7 +12,7 @@ import junit.framework.Assert;
  * be accessed using standard Java access control like private
  * or package visible elements.
  * 
- * @since 3.1
+ * 
  */
 public class Accessor extends Assert {
     
