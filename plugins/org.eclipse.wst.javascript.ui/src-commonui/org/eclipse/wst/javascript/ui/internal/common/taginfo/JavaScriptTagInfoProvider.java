@@ -11,6 +11,7 @@
 package org.eclipse.wst.javascript.ui.internal.common.taginfo;
 
 
+import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.xml.core.internal.contentmodel.annotation.AnnotationMap;
 
 /**
@@ -18,10 +19,7 @@ import org.eclipse.wst.xml.core.internal.contentmodel.annotation.AnnotationMap;
  * @see ITagInfoProvider
  */
 public class JavaScriptTagInfoProvider {
-
-	// TODO: we should not have to hard code a location like this, 
-	// but use class loader like other properties.
-	static public final String JSAnnotationURI = "platform:/plugin/org.eclipse.wst.javascript.ui/data/jsref.xml"; //$NON-NLS-1$
+	static public final String JSAnnotationURI = "data/jsref.xml"; //$NON-NLS-1$
 
 	static protected final char chEndBracket = ']';
 	static protected final char chEndBrace = ')';
@@ -61,7 +59,7 @@ public class JavaScriptTagInfoProvider {
 		if (fAnnotationMap == null) {
 			fAnnotationMap = new AnnotationMap();
 			try {
-				fAnnotationMap.load(JSAnnotationURI);
+				fAnnotationMap.load(JSAnnotationURI, JSEditorPlugin.ID);
 			}
 			catch (Exception e) {
 				// could not load annotation map
