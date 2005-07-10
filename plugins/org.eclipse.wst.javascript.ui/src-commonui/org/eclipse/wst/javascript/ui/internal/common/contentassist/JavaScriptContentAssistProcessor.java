@@ -624,7 +624,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 					return null;
 				}
 				char ch = doc.getChar(iPos);
-				if (Character.isLetterOrDigit(ch) || (ch == '.')) {
+				if (Character.isJavaIdentifierPart(ch) || (ch == '.')) {
 					//if ((ch=='.') && (iPosLastDot!=-1)) { iPosLastDot = iPos; }
 					iPos--;
 				}
