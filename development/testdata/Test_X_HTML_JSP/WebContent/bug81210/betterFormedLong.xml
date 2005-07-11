@@ -1,0 +1,2312 @@
+<SELECT>
+
+
+        <OPTION VALUE="9wm">9wm</OPTION>
+
+        <OPTION VALUE="AfterStep">
+                AfterStep
+
+        </OPTION>
+
+        <OPTION VALUE="AfterStep-APPS">AfterStep-APPS</OPTION>
+
+        <OPTION VALUE="AnotherLevel">
+                AnotherLevel
+
+        </OPTION>
+
+        <OPTION VALUE="BitchX">BitchX</OPTION>
+        <OPTION VALUE="C-Kermit">C-Kermit</OPTION>
+
+        <OPTION VALUE="ElectricFence">ElectricFence</OPTION>
+
+        <OPTION VALUE="EmiClock">EmiClock</OPTION>
+
+        <OPTION VALUE="Eterm">Eterm</OPTION>
+
+        <OPTION VALUE="FaxMail">FaxMail</OPTION>
+
+        <OPTION VALUE="FileRunner">FileRunner</OPTION>
+
+        <OPTION VALUE="FunktrackerGOLD">FunktrackerGOLD</OPTION>
+        </OPTION>
+        <OPTION VALUE="GXedit">GXedit</OPTION>
+
+        <OPTION VALUE="GnoSamba">GnoSamba</OPTION>
+        </OPTION>
+        <OPTION VALUE="GnomePM">GnomePM</OPTION>
+
+        <OPTION VALUE="Gtk-Perl">Gtk-Perl</OPTION>
+        </OPTION>
+        <OPTION VALUE="ImageMagick">ImageMagick</OPTION>
+
+        <OPTION VALUE="InDependence">InDependence</OPTION>
+
+        <OPTION VALUE="Inti">Inti</OPTION>
+
+        <OPTION VALUE="LPRng">LPRng</OPTION>
+
+        <OPTION VALUE="MAKEDEV">MAKEDEV</OPTION>
+
+        <OPTION VALUE="MPEG">MPEG</OPTION>
+        </OPTION>
+        <OPTION VALUE="Maelstrom">Maelstrom</OPTION>
+
+        <OPTION VALUE="Mesa">Mesa</OPTION>
+        </OPTION>
+        <OPTION VALUE="ORBit">ORBit</OPTION>
+
+        <OPTION VALUE="OffiX-Clipboard">OffiX- Clipboard</OPTION>
+
+        <OPTION VALUE="OffiX-Editor">OffiX-Editor</OPTION>
+        </OPTION>
+        <OPTION VALUE="OffiX-Execute">OffiX-Execute</OPTION>
+
+        <OPTION VALUE="OffiX-Files">OffiX- Files</OPTION>
+
+        <OPTION VALUE="OffiX-Printer">OffiX-Printer</OPTION>
+
+        <OPTION VALUE="OffiX-
+Trash">
+                OffiX-Trash
+        </OPTION>
+
+        <OPTION VALUE="OffiX-devel">OffiX-devel</OPTION>
+        </OPTION>
+        <OPTION VALUE="Offix-devel">Offix-devel</OPTION>
+
+        <OPTION VALUE="PyKDE">PyKDE</OPTION>
+        </OPTION>
+        <OPTION VALUE="PyQt">PyQt</OPTION>
+
+        <OPTION VALUE="R-Devore5">R-Devore5</OPTION>
+
+        <OPTION VALUE="R-
+KernSmooth">
+                R-KernSmooth
+        </OPTION>
+
+        <OPTION VALUE="R-NISTnls">R-NISTnls</OPTION>
+        </OPTION>
+        <OPTION VALUE="R-RmSQL">R-RmSQL</OPTION>
+
+        <OPTION VALUE="R-Rnotes">R-Rnotes</OPTION>
+        </OPTION>
+        <OPTION VALUE="R-VR">R-VR</OPTION>
+
+        <OPTION VALUE="R-acepack">R-acepack</OPTION>
+
+        <OPTION VALUE="R-
+akima">
+                R-akima
+        </OPTION>
+
+        <OPTION VALUE="R-ash">R-ash</OPTION>
+
+        <OPTION VALUE="R-base">R- base</OPTION>
+
+        <OPTION VALUE="R-bindata">R-bindata</OPTION>
+
+        <OPTION VALUE="R-boot">R- boot</OPTION>
+
+        <OPTION VALUE="R-bootstrap">R-bootstrap</OPTION>
+
+        <OPTION VALUE="R-cclust">R- cclust</OPTION>
+
+        <OPTION VALUE="R-chron">R-chron</OPTION>
+
+        <OPTION VALUE="R-cluster">R- cluster</OPTION>
+
+        <OPTION VALUE="R-coda">R-coda</OPTION>
+
+        <OPTION VALUE="R-contrib">R- contrib</OPTION>
+
+        <OPTION VALUE="R-ctest">R-ctest</OPTION>
+
+        <OPTION VALUE="R-e1071">R- e1071</OPTION>
+
+        <OPTION VALUE="R-funfits">R-funfits</OPTION>
+
+        <OPTION VALUE="R-gee">R- gee</OPTION>
+
+        <OPTION VALUE="R-gnlm">R-gnlm</OPTION>
+
+        <OPTION VALUE="R-growth">R- growth</OPTION>
+
+        <OPTION VALUE="R-gss">R-gss</OPTION>
+
+        <OPTION VALUE="R-leaps">R- leaps</OPTION>
+
+        <OPTION VALUE="R-lme">R-lme</OPTION>
+
+        <OPTION VALUE="R-lmtest">R- lmtest</OPTION>
+
+        <OPTION VALUE="R-locfit">R-locfit</OPTION>
+
+        <OPTION VALUE="R-logspline">R- logspline</OPTION>
+
+        <OPTION VALUE="R-mda">R-mda</OPTION>
+
+        <OPTION VALUE="R-mlbench">R- mlbench</OPTION>
+
+        <OPTION VALUE="R-multilm">R-multilm</OPTION>
+
+        <OPTION VALUE="R-multiv">R- multiv</OPTION>
+
+        <OPTION VALUE="R-nlme">R-nlme</OPTION>
+
+        <OPTION VALUE="R-oz">R-oz</OPTION>
+        </OPTION>
+        <OPTION VALUE="R-pls">R-pls</OPTION>
+
+        <OPTION VALUE="R-polymars">R-polymars</OPTION>
+        </OPTION>
+        <OPTION VALUE="R-polynom">R-polynom</OPTION>
+
+        <OPTION VALUE="R-princurve">R- princurve</OPTION>
+
+        <OPTION VALUE="R-pspline">R-pspline</OPTION>
+
+        <OPTION VALUE="R-
+quadprog">
+                R-quadprog
+        </OPTION>
+
+        <OPTION VALUE="R-quantreg">R-quantreg</OPTION>
+        </OPTION>
+        <OPTION VALUE="R-rational">R-rational</OPTION>
+
+        <OPTION VALUE="R-repeated">R- repeated</OPTION>
+
+        <OPTION VALUE="R-rmeta">R-rmeta</OPTION>
+
+        <OPTION VALUE="R-rmutil">R- rmutil</OPTION>
+
+        <OPTION VALUE="R-rpart">R-rpart</OPTION>
+
+        <OPTION VALUE="R-sgeostat">R- sgeostat</OPTION>
+
+        <OPTION VALUE="R-sm">R-sm</OPTION>
+
+        <OPTION VALUE="R-splines">R- splines</OPTION>
+
+        <OPTION VALUE="R-stable">R-stable</OPTION>
+
+        <OPTION VALUE="R-stataread">R- stataread</OPTION>
+
+        <OPTION VALUE="R-survival4">R-survival4</OPTION>
+
+        <OPTION VALUE="R-
+tree">
+                R-tree
+        </OPTION>
+
+        <OPTION VALUE="R-tripack">R-tripack</OPTION>
+
+        <OPTION VALUE="R-
+wavethresh">
+                R-wavethresh
+        </OPTION>
+
+        <OPTION VALUE="SDL">SDL</OPTION>
+        </OPTION>
+        <OPTION VALUE="SDL_image">SDL_image</OPTION>
+
+        <OPTION VALUE="SNNS">SNNS</OPTION>
+        <OPTION VALUE="SVGATextMode">SVGATextMode</OPTION>
+
+        <OPTION VALUE="SoundStudio">SoundStudio</OPTION>
+
+        <OPTION VALUE="SysVinit">SysVinit</OPTION>
+
+        <OPTION VALUE="TkZip">TkZip</OPTION>
+
+        <OPTION VALUE="Tru64-compat">Tru64-compat</OPTION>
+
+        <OPTION VALUE="WMRack">WMRack</OPTION>
+
+        <OPTION VALUE="WebMaker">WebMaker</OPTION>
+
+        <OPTION VALUE="WindowMaker">WindowMaker</OPTION>
+
+        <OPTION VALUE="WindowMaker-themes">WindowMaker- themes</OPTION>
+
+        <OPTION VALUE="X11R6-contrib">X11R6-contrib</OPTION>
+        <OPTION VALUE="XFree86">XFree86</OPTION>
+
+        <OPTION VALUE="XFree86-ISO8859-2">XFree86- ISO8859-2</OPTION>
+
+        <OPTION VALUE="XFree86-ISO8859-7">XFree86-ISO8859-7</OPTION>
+        <OPTION VALUE="XFree86-ISO8859-9">XFree86-ISO8859-9</OPTION>
+
+        <OPTION VALUE="XFree86-
+Servers">
+                XFree86-Servers
+        </OPTION>
+
+        <OPTION VALUE="XFrisk">XFrisk</OPTION>
+        <OPTION VALUE="XaoS">XaoS</OPTION>
+
+        <OPTION VALUE="Xaw3d">Xaw3d</OPTION>
+
+        <OPTION VALUE="Xbae">Xbae</OPTION>
+
+        <OPTION VALUE="Xconfigurator">Xconfigurator</OPTION>
+        <OPTION VALUE="Xdialog">Xdialog</OPTION>
+
+        <OPTION VALUE="ZZplayer">ZZplayer</OPTION>
+        <OPTION VALUE="Zope">Zope</OPTION>
+
+        <OPTION VALUE="a2ac">a2ac</OPTION>
+
+        <OPTION VALUE="a2ps">a2ps</OPTION>
+
+        <OPTION VALUE="a2ps-i18n">a2ps-i18n</OPTION>
+
+        <OPTION VALUE="aalib">aalib</OPTION>
+
+        <OPTION VALUE="aavga">aavga</OPTION>
+
+        <OPTION VALUE="abiword">abiword</OPTION>
+        <OPTION VALUE="aboot">aboot</OPTION>
+
+        <OPTION VALUE="abs">abs</OPTION>
+
+        <OPTION VALUE="ace-rhcn">ace-rhcn</OPTION>
+
+        <OPTION VALUE="acidwarp">acidwarp</OPTION>
+
+        <OPTION VALUE="acm">acm</OPTION>
+
+        <OPTION VALUE="acua">acua</OPTION>
+
+        <OPTION VALUE="adjtimex">adjtimex</OPTION>
+        <OPTION VALUE="aee">aee</OPTION>
+
+        <OPTION VALUE="afio">afio</OPTION>
+
+        <OPTION VALUE="aktion">aktion</OPTION>
+
+        <OPTION VALUE="alevt">alevt</OPTION>
+
+        <OPTION VALUE="alien">alien</OPTION>
+        <OPTION VALUE="am-utils">am-utils</OPTION>
+
+        <OPTION VALUE="amanda">amanda</OPTION>
+        <OPTION VALUE="amcl">amcl</OPTION>
+
+        <OPTION VALUE="anaconda">anaconda</OPTION>
+        <OPTION VALUE="anacron">anacron</OPTION>
+
+        <OPTION VALUE="analog">analog</OPTION>
+        <OPTION VALUE="anonftp">anonftp</OPTION>
+
+        <OPTION VALUE="aout-libs">aout-libs</OPTION>
+        <OPTION VALUE="apache">apache</OPTION>
+
+        <OPTION VALUE="apache-config">apache- config</OPTION>
+
+        <OPTION VALUE="apcd">apcd</OPTION>
+
+        <OPTION VALUE="apmd">apmd</OPTION>
+        <OPTION VALUE="arla">arla</OPTION>
+
+        <OPTION VALUE="armadillo">armadillo</OPTION>
+        <OPTION VALUE="ash">ash</OPTION>
+
+        <OPTION VALUE="asp2php">asp2php</OPTION>
+
+        <OPTION VALUE="aspell">aspell</OPTION>
+
+        <OPTION VALUE="aspell-de">aspell-de</OPTION>
+
+        <OPTION VALUE="aspell-dk">aspell-dk</OPTION>
+
+        <OPTION VALUE="aspell-es">aspell-es</OPTION>
+
+        <OPTION VALUE="aspell-fr">aspell-fr</OPTION>
+
+        <OPTION VALUE="aspell-no">aspell-no</OPTION>
+
+        <OPTION VALUE="aspell-se">aspell-se</OPTION>
+
+        <OPTION VALUE="aspell-uk">aspell-uk</OPTION>
+
+        <OPTION VALUE="astyle">astyle</OPTION>
+
+        <OPTION VALUE="at">at</OPTION>
+
+        <OPTION VALUE="aterm">aterm</OPTION>
+        <OPTION VALUE="aub">aub</OPTION>
+
+        <OPTION VALUE="auctex">auctex</OPTION>
+
+        <OPTION VALUE="audioctl">audioctl</OPTION>
+
+        <OPTION VALUE="audiofile">audiofile</OPTION>
+
+        <OPTION VALUE="aumix">aumix</OPTION>
+
+        <OPTION VALUE="auth_ldap">auth_ldap</OPTION>
+
+        <OPTION VALUE="authconfig">authconfig</OPTION>
+
+        <OPTION VALUE="autoconf">autoconf</OPTION>
+
+        <OPTION VALUE="autofs">autofs</OPTION>
+
+        <OPTION VALUE="autologin">autologin</OPTION>
+
+        <OPTION VALUE="automake">automake</OPTION>
+
+        <OPTION VALUE="autorpm">autorpm</OPTION>
+
+        <OPTION VALUE="autorun">autorun</OPTION>
+
+        <OPTION VALUE="aview">aview</OPTION>
+
+        <OPTION VALUE="awesfx">awesfx</OPTION>
+        <OPTION VALUE="ax25-apps">ax25-apps</OPTION>
+
+        <OPTION VALUE="ax25-tools">ax25- tools</OPTION>
+
+        <OPTION VALUE="ax25-utils">ax25-utils</OPTION>
+
+        <OPTION VALUE="basesystem">basesystem</OPTION>
+
+        <OPTION VALUE="bash">bash</OPTION>
+
+        <OPTION VALUE="bash2">bash2</OPTION>
+        <OPTION VALUE="battalion">battalion</OPTION>
+
+        <OPTION VALUE="bb">bb</OPTION>
+
+        <OPTION VALUE="bc">bc</OPTION>
+
+        <OPTION VALUE="bchunk">bchunk</OPTION>
+
+        <OPTION VALUE="bdflush">bdflush</OPTION>
+        <OPTION VALUE="beav">beav</OPTION>
+
+        <OPTION VALUE="bibview">bibview</OPTION>
+
+        <OPTION VALUE="biff">biff</OPTION>
+
+        <OPTION VALUE="bin86">bin86</OPTION>
+
+        <OPTION VALUE="bind">bind</OPTION>
+        <OPTION VALUE="binutils">binutils</OPTION>
+
+        <OPTION VALUE="bison">bison</OPTION>
+        <OPTION VALUE="blackbox">blackbox</OPTION>
+
+        <OPTION VALUE="blackened">blackened</OPTION>
+        <OPTION VALUE="blockade">blockade</OPTION>
+
+        <OPTION VALUE="blt">blt</OPTION>
+        <OPTION VALUE="bm2font">bm2font</OPTION>
+
+        <OPTION VALUE="bmud">bmud</OPTION>
+
+        <OPTION VALUE="bootp">bootp</OPTION>
+
+        <OPTION VALUE="bootparamd">bootparamd</OPTION>
+
+        <OPTION VALUE="bootpc">bootpc</OPTION>
+
+        <OPTION VALUE="bplay">bplay</OPTION>
+
+        <OPTION VALUE="bsd-games">bsd- games</OPTION>
+
+        <OPTION VALUE="bug-buddy">bug-buddy</OPTION>
+
+        <OPTION VALUE="bugzilla">bugzilla</OPTION>
+
+        <OPTION VALUE="byacc">byacc</OPTION>
+
+        <OPTION VALUE="bzip2">bzip2</OPTION>
+        <OPTION VALUE="c_count">c_count</OPTION>
+
+        <OPTION VALUE="caching-nameserver">caching- nameserver</OPTION>
+
+        <OPTION VALUE="caitoo">caitoo</OPTION>
+
+        <OPTION VALUE="calamaris">calamaris</OPTION>
+
+        <OPTION VALUE="cam">cam</OPTION>
+
+        <OPTION VALUE="camlp4">camlp4</OPTION>
+        <OPTION VALUE="cbb">cbb</OPTION>
+
+        <OPTION VALUE="cdcd">cdcd</OPTION>
+
+        <OPTION VALUE="cdda2wav">cdda2wav</OPTION>
+
+        <OPTION VALUE="cdecl">cdecl</OPTION>
+
+        <OPTION VALUE="cdlabelgen">cdlabelgen</OPTION>
+
+        <OPTION VALUE="cdp">cdp</OPTION>
+
+        <OPTION VALUE="cdparanoia">cdparanoia</OPTION>
+
+        <OPTION VALUE="cdparanoia-III">cdparanoia-III</OPTION>
+        <OPTION VALUE="cdrdao">cdrdao</OPTION>
+
+        <OPTION VALUE="cdrecord">cdrecord</OPTION>
+        <OPTION VALUE="cervisia">cervisia</OPTION>
+
+        <OPTION VALUE="cflow">cflow</OPTION>
+        <OPTION VALUE="cgilib">cgilib</OPTION>
+
+        <OPTION VALUE="cgoban">cgoban</OPTION>
+        <OPTION VALUE="chbg">chbg</OPTION>
+
+        <OPTION VALUE="cheops">cheops</OPTION>
+        <OPTION VALUE="chkconfig">chkconfig</OPTION>
+
+        <OPTION VALUE="chkfontpath">chkfontpath</OPTION>
+
+        <OPTION VALUE="christminster">christminster</OPTION>
+        <OPTION VALUE="cleanfeed">cleanfeed</OPTION>
+
+        <OPTION VALUE="clobberd">clobberd</OPTION>
+        <OPTION VALUE="clock">clock</OPTION>
+
+        <OPTION VALUE="cmpskit">cmpskit</OPTION>
+
+        <OPTION VALUE="cmu-
+snmp">
+                cmu-snmp
+        </OPTION>
+
+        <OPTION VALUE="color-yahtzee">color-yahtzee</OPTION>
+        <OPTION VALUE="colour-yahtzee">colour-yahtzee</OPTION>
+
+        <OPTION VALUE="comanche">comanche</OPTION>
+
+        <OPTION VALUE="compat-binutils">compat-binutils</OPTION>
+        <OPTION VALUE="compat-egcs">compat-egcs</OPTION>
+
+        <OPTION VALUE="compat-glibc">compat- glibc</OPTION>
+
+        <OPTION VALUE="compat-libs">compat-libs</OPTION>
+
+        <OPTION VALUE="comsat">comsat</OPTION>
+
+        <OPTION VALUE="console-tools">console-tools</OPTION>
+        <OPTION VALUE="control-center">control-center</OPTION>
+
+        <OPTION VALUE="control-panel">control-panel</OPTION>
+
+        <OPTION VALUE="cpio">cpio</OPTION>
+
+        <OPTION VALUE="cpp">cpp</OPTION>
+        <OPTION VALUE="cproto">cproto</OPTION>
+
+        <OPTION VALUE="cracklib">cracklib</OPTION>
+        <OPTION VALUE="crafty">crafty</OPTION>
+
+        <OPTION VALUE="crontabs">crontabs</OPTION>
+        <OPTION VALUE="cryst">cryst</OPTION>
+
+        <OPTION VALUE="ctags">ctags</OPTION>
+
+        <OPTION VALUE="curl">curl</OPTION>
+
+        <OPTION VALUE="cvs">cvs</OPTION>
+
+        <OPTION VALUE="cvsmapfs">cvsmapfs</OPTION>
+        <OPTION VALUE="cxhextris">cxhextris</OPTION>
+
+        <OPTION VALUE="cyrus-imapd">cyrus- imapd</OPTION>
+
+        <OPTION VALUE="cyrus-sasl">cyrus-sasl</OPTION>
+
+        <OPTION VALUE="db1">db1</OPTION>
+
+        <OPTION VALUE="db2">db2</OPTION>
+
+        <OPTION VALUE="db3">db3</OPTION>
+
+        <OPTION VALUE="ddd">ddd</OPTION>
+
+        <OPTION VALUE="dejagnu">dejagnu</OPTION>
+
+        <OPTION VALUE="dents">dents</OPTION>
+        <OPTION VALUE="desktop-backgrounds">desktop-backgrounds</OPTION>
+
+        <OPTION VALUE="dev">dev</OPTION>
+
+        <OPTION VALUE="dev86">dev86</OPTION>
+
+        <OPTION VALUE="dfm">dfm</OPTION>
+        <OPTION VALUE="dhcp">dhcp</OPTION>
+
+        <OPTION VALUE="dhcpcd">dhcpcd</OPTION>
+
+        <OPTION VALUE="dia">dia</OPTION>
+
+        <OPTION VALUE="diablo">diablo</OPTION>
+
+        <OPTION VALUE="dialog">dialog</OPTION>
+        <OPTION VALUE="diffstat">diffstat</OPTION>
+
+        <OPTION VALUE="diffutils">diffutils</OPTION>
+        <OPTION VALUE="dip">dip</OPTION>
+
+        <OPTION VALUE="diskcheck">diskcheck</OPTION>
+        <OPTION VALUE="dldialog">dldialog</OPTION>
+
+        <OPTION VALUE="dlh">dlh</OPTION>
+
+        <OPTION VALUE="doc++">doc++</OPTION>
+
+        <OPTION VALUE="docbook">docbook</OPTION>
+
+        <OPTION VALUE="dosemu">dosemu</OPTION>
+
+        <OPTION VALUE="dosfstools">dosfstools</OPTION>
+
+        <OPTION VALUE="dotfile">dotfile</OPTION>
+
+        <OPTION VALUE="doxygen">doxygen</OPTION>
+
+        <OPTION VALUE="dump">dump</OPTION>
+        <OPTION VALUE="dxpc">dxpc</OPTION>
+
+        <OPTION VALUE="e2fsprogs">e2fsprogs</OPTION>
+        <OPTION VALUE="eMusic">eMusic</OPTION>
+
+        <OPTION VALUE="eMusic-DR">eMusic-DR</OPTION>
+        <OPTION VALUE="ed">ed</OPTION>
+
+        <OPTION VALUE="ee">ee</OPTION>
+
+        <OPTION VALUE="efax">efax</OPTION>
+        <OPTION VALUE="egcs">egcs</OPTION>
+
+        <OPTION VALUE="egcs64">egcs64</OPTION>
+
+        <OPTION VALUE="eject">eject</OPTION>
+
+        <OPTION VALUE="elftoaout">elftoaout</OPTION>
+
+        <OPTION VALUE="eli">eli</OPTION>
+        <OPTION VALUE="elm">elm</OPTION>
+
+        <OPTION VALUE="elvis">elvis</OPTION>
+
+        <OPTION VALUE="emacs">emacs</OPTION>
+
+        <OPTION VALUE="enlightenment">enlightenment</OPTION>
+        <OPTION VALUE="enlightenment-conf">enlightenment-conf</OPTION>
+
+        <OPTION VALUE="enscript">enscript</OPTION>
+
+        <OPTION VALUE="epic">epic</OPTION>
+
+        <OPTION VALUE="erlang">erlang</OPTION>
+        <OPTION VALUE="esound">esound</OPTION>
+
+        <OPTION VALUE="etcskel">etcskel</OPTION>
+        <OPTION VALUE="etherape">etherape</OPTION>
+
+        <OPTION VALUE="ethereal">ethereal</OPTION>
+        <OPTION VALUE="ethtool">ethtool</OPTION>
+
+        <OPTION VALUE="exim">exim</OPTION>
+
+        <OPTION VALUE="exmh">exmh</OPTION>
+
+        <OPTION VALUE="ext2ed">ext2ed</OPTION>
+
+        <OPTION VALUE="ext2resize">ext2resize</OPTION>
+
+        <OPTION VALUE="extace">extace</OPTION>
+
+        <OPTION VALUE="f2c">f2c</OPTION>
+        <OPTION VALUE="faces">faces</OPTION>
+
+        <OPTION VALUE="fake">fake</OPTION>
+
+        <OPTION VALUE="faq">faq</OPTION>
+
+        <OPTION VALUE="fbset">fbset</OPTION>
+
+        <OPTION VALUE="fdisk">fdisk</OPTION>
+        <OPTION VALUE="festival">festival</OPTION>
+
+        <OPTION VALUE="fetchmail">fetchmail</OPTION>
+        <OPTION VALUE="fetchpop">fetchpop</OPTION>
+
+        <OPTION VALUE="fftw">fftw</OPTION>
+        <OPTION VALUE="file">file</OPTION>
+
+        <OPTION VALUE="filesystem">filesystem</OPTION>
+        <OPTION VALUE="fileutils">fileutils</OPTION>
+
+        <OPTION VALUE="findutils">findutils</OPTION>
+        <OPTION VALUE="finger">finger</OPTION>
+
+        <OPTION VALUE="firewall-config">firewall- config</OPTION>
+
+        <OPTION VALUE="firewall-config-qt">firewall-config-qt</OPTION>
+        <OPTION VALUE="flash">flash</OPTION>
+
+        <OPTION VALUE="flex">flex</OPTION>
+
+        <OPTION VALUE="flying">flying</OPTION>
+
+        <OPTION VALUE="fnlib">fnlib</OPTION>
+
+        <OPTION VALUE="fort77">fort77</OPTION>
+        <OPTION VALUE="fortune-mod">fortune-mod</OPTION>
+
+        <OPTION VALUE="fpc">fpc</OPTION>
+        <OPTION VALUE="fpc-extra">fpc-extra</OPTION>
+
+        <OPTION VALUE="fpc-units">fpc-units</OPTION>
+        <OPTION VALUE="freeamp">freeamp</OPTION>
+
+        <OPTION VALUE="freeciv">freeciv</OPTION>
+        <OPTION VALUE="freetype">freetype</OPTION>
+
+        <OPTION VALUE="fribidi-gtkbeta">fribidi- gtkbeta</OPTION>
+
+        <OPTION VALUE="ftnchek">ftnchek</OPTION>
+
+        <OPTION VALUE="ftp">ftp</OPTION>
+        <OPTION VALUE="ftpcopy">ftpcopy</OPTION>
+
+        <OPTION VALUE="fvwm">fvwm</OPTION>
+
+        <OPTION VALUE="fvwm2">fvwm2</OPTION>
+
+        <OPTION VALUE="fwconfig">fwconfig</OPTION>
+
+        <OPTION VALUE="fwhois">fwhois</OPTION>
+
+        <OPTION VALUE="gaim">gaim</OPTION>
+
+        <OPTION VALUE="gated">gated</OPTION>
+        <OPTION VALUE="gawk">gawk</OPTION>
+
+        <OPTION VALUE="gbuild">gbuild</OPTION>
+
+        <OPTION VALUE="gcal">gcal</OPTION>
+
+        <OPTION VALUE="gcc">gcc</OPTION>
+
+        <OPTION VALUE="gcombust">gcombust</OPTION>
+        <OPTION VALUE="gd">gd</OPTION>
+
+        <OPTION VALUE="gdb">gdb</OPTION>
+
+        <OPTION VALUE="gdbm">gdbm</OPTION>
+        <OPTION VALUE="gdk-pixbuf">gdk-pixbuf</OPTION>
+
+        <OPTION VALUE="gdm">gdm</OPTION>
+        <OPTION VALUE="gecko">gecko</OPTION>
+
+        <OPTION VALUE="gedit">gedit</OPTION>
+
+        <OPTION VALUE="geg">geg</OPTION>
+
+        <OPTION VALUE="genromfs">genromfs</OPTION>
+
+        <OPTION VALUE="gettext">gettext</OPTION>
+
+        <OPTION VALUE="getty_ps">getty_ps</OPTION>
+
+        <OPTION VALUE="gfcc">gfcc</OPTION>
+
+        <OPTION VALUE="gftp">gftp</OPTION>
+
+        <OPTION VALUE="gglyph">gglyph</OPTION>
+        <OPTION VALUE="ggv">ggv</OPTION>
+
+        <OPTION VALUE="ghostscript">ghostscript</OPTION>
+        <OPTION VALUE="ghostscript-fonts">ghostscript-fonts</OPTION>
+
+        <OPTION VALUE="giflib">giflib</OPTION>
+
+        <OPTION VALUE="giftrans">giftrans</OPTION>
+
+        <OPTION VALUE="gimp">gimp</OPTION>
+
+        <OPTION VALUE="gimp-data-extras">gimp-data-extras</OPTION>
+        <OPTION VALUE="gimp-manual">gimp-manual</OPTION>
+
+        <OPTION VALUE="git">git</OPTION>
+        <OPTION VALUE="gkermit">gkermit</OPTION>
+
+        <OPTION VALUE="glade">glade</OPTION>
+        <OPTION VALUE="glib">glib</OPTION>
+
+        <OPTION VALUE="glib-gtkbeta">glib-gtkbeta</OPTION>
+        <OPTION VALUE="glibc">glibc</OPTION>
+
+        <OPTION VALUE="glint">glint</OPTION>
+
+        <OPTION VALUE="glload">glload</OPTION>
+
+        <OPTION VALUE="glms">glms</OPTION>
+
+        <OPTION VALUE="glxMesa">glxMesa</OPTION>
+        <OPTION VALUE="gmc">gmc</OPTION>
+
+        <OPTION VALUE="gmp">gmp</OPTION>
+
+        <OPTION VALUE="gnats">gnats</OPTION>
+
+        <OPTION VALUE="gnewt">gnewt</OPTION>
+
+        <OPTION VALUE="gnokii">gnokii</OPTION>
+        <OPTION VALUE="gnomail">gnomail</OPTION>
+
+        <OPTION VALUE="gnomba">gnomba</OPTION>
+        <OPTION VALUE="gnome-admin">gnome-admin</OPTION>
+
+        <OPTION VALUE="gnome-applets">gnome- applets</OPTION>
+
+        <OPTION VALUE="gnome-audio">gnome-audio</OPTION>
+
+        <OPTION VALUE="gnome-
+core">
+                gnome-core
+        </OPTION>
+
+        <OPTION VALUE="gnome-games">gnome-games</OPTION>
+        <OPTION VALUE="gnome-imglib">gnome-imglib</OPTION>
+
+        <OPTION VALUE="gnome-kerberos">gnome- kerberos</OPTION>
+
+        <OPTION VALUE="gnome-libs">gnome-libs</OPTION>
+
+        <OPTION VALUE="gnome-
+linuxconf">
+                gnome-linuxconf
+        </OPTION>
+
+        <OPTION VALUE="gnome-media">gnome- media</OPTION>
+
+        <OPTION VALUE="gnome-objc">gnome-objc</OPTION>
+
+        <OPTION VALUE="gnome-pim">gnome-pim</OPTION>
+
+        <OPTION VALUE="gnome-print">gnome-print</OPTION>
+
+        <OPTION VALUE="gnome-
+python">
+                gnome-python
+        </OPTION>
+
+        <OPTION VALUE="gnome-rh5.2-release-notes">
+                gnome- rh5.2-release-notes
+        </OPTION>
+
+        <OPTION VALUE="gnome-users-guide">gnome-users- guide</OPTION>
+
+        <OPTION VALUE="gnome-utils">gnome-utils</OPTION>
+
+        <OPTION VALUE="gnomeicu">gnomeicu</OPTION>
+
+        <OPTION VALUE="gnorpm">gnorpm</OPTION>
+
+        <OPTION VALUE="gnotepad+">gnotepad+</OPTION>
+
+        <OPTION VALUE="gnu-efi">gnu-efi</OPTION>
+
+        <OPTION VALUE="gnuchess">gnuchess</OPTION>
+
+        <OPTION VALUE="gnumeric">gnumeric</OPTION>
+
+        <OPTION VALUE="gnupg">gnupg</OPTION>
+
+        <OPTION VALUE="gnuplot">gnuplot</OPTION>
+
+        <OPTION VALUE="gnupro">gnupro</OPTION>
+
+        <OPTION VALUE="gperf">gperf</OPTION>
+
+        <OPTION VALUE="gpgp">gpgp</OPTION>
+        <OPTION VALUE="gphoto">gphoto</OPTION>
+
+        <OPTION VALUE="gpm">gpm</OPTION>
+
+        <OPTION VALUE="gps">gps</OPTION>
+
+        <OPTION VALUE="gqview">gqview</OPTION>
+
+        <OPTION VALUE="grep">grep</OPTION>
+        <OPTION VALUE="grip">grip</OPTION>
+
+        <OPTION VALUE="groff">groff</OPTION>
+
+        <OPTION VALUE="grpm">grpm</OPTION>
+
+        <OPTION VALUE="gsl">gsl</OPTION>
+
+        <OPTION VALUE="gsm">gsm</OPTION>
+        <OPTION VALUE="gtk+">gtk+</OPTION>
+
+        <OPTION VALUE="gtk+-gtkbeta">gtk+-gtkbeta</OPTION>
+        <OPTION VALUE="gtk+-perl">gtk+-perl</OPTION>
+
+        <OPTION VALUE="gtk+10">gtk+10</OPTION>
+        <OPTION VALUE="gtk--">gtk--</OPTION>
+
+        <OPTION VALUE="gtk-engines">gtk-engines</OPTION>
+        <OPTION VALUE="gtkglarea">gtkglarea</OPTION>
+
+        <OPTION VALUE="gtkmm">gtkmm</OPTION>
+        <OPTION VALUE="gtksee">gtksee</OPTION>
+
+        <OPTION VALUE="gtop">gtop</OPTION>
+
+        <OPTION VALUE="guavac">guavac</OPTION>
+
+        <OPTION VALUE="guile">guile</OPTION>
+
+        <OPTION VALUE="gv">gv</OPTION>
+        <OPTION VALUE="gxtar">gxtar</OPTION>
+
+        <OPTION VALUE="gzilla">gzilla</OPTION>
+
+        <OPTION VALUE="gzip">gzip</OPTION>
+
+        <OPTION VALUE="hdparm">hdparm</OPTION>
+
+        <OPTION VALUE="heartbeat">heartbeat</OPTION>
+
+        <OPTION VALUE="helptool">helptool</OPTION>
+
+        <OPTION VALUE="hexcalc">hexcalc</OPTION>
+
+        <OPTION VALUE="hexedit">hexedit</OPTION>
+
+        <OPTION VALUE="hfsutils">hfsutils</OPTION>
+
+        <OPTION VALUE="horde">horde</OPTION>
+
+        <OPTION VALUE="howto">howto</OPTION>
+        <OPTION VALUE="hsc">hsc</OPTION>
+
+        <OPTION VALUE="htdig">htdig</OPTION>
+
+        <OPTION VALUE="hylafax">hylafax</OPTION>
+
+        <OPTION VALUE="ical">ical</OPTION>
+
+        <OPTION VALUE="icecast">icecast</OPTION>
+        <OPTION VALUE="icepref">icepref</OPTION>
+
+        <OPTION VALUE="icewm">icewm</OPTION>
+        <OPTION VALUE="icewm-themes">icewm-themes</OPTION>
+
+        <OPTION VALUE="icqlib">icqlib</OPTION>
+        <OPTION VALUE="id-utils">id-utils</OPTION>
+
+        <OPTION VALUE="ide/browser">ide/browser</OPTION>
+
+        <OPTION VALUE="ide/db">ide/db</OPTION>
+
+        <OPTION VALUE="ide/hyper">ide/hyper</OPTION>
+
+        <OPTION VALUE="ide/parsers">ide/parsers</OPTION>
+
+        <OPTION VALUE="imap">imap</OPTION>
+
+        <OPTION VALUE="imlib">imlib</OPTION>
+
+        <OPTION VALUE="imlib-cfgeditor">imlib- cfgeditor</OPTION>
+
+        <OPTION VALUE="imp">imp</OPTION>
+
+        <OPTION VALUE="imwheel">imwheel</OPTION>
+        <OPTION VALUE="indent">indent</OPTION>
+
+        <OPTION VALUE="indexhtml">indexhtml</OPTION>
+        <OPTION VALUE="inetd">inetd</OPTION>
+
+        <OPTION VALUE="info">info</OPTION>
+        <OPTION VALUE="initscripts">initscripts</OPTION>
+
+        <OPTION VALUE="inn">inn</OPTION>
+        <OPTION VALUE="install-guide">install-guide</OPTION>
+
+        <OPTION VALUE="installer">installer</OPTION>
+
+        <OPTION VALUE="installer/documentation">
+                installer/documentation
+        </OPTION>
+
+        <OPTION VALUE="installer/hardware setup">
+                installer/hardware setup
+        </OPTION>
+
+        <OPTION VALUE="installer/software setup">
+                installer/software setup
+        </OPTION>
+
+        <OPTION VALUE="installer/tutorial">installer/tutorial</OPTION>
+
+        <OPTION VALUE="intimed">intimed</OPTION>
+        <OPTION VALUE="ipchains">ipchains</OPTION>
+
+        <OPTION VALUE="iproute">iproute</OPTION>
+        <OPTION VALUE="iptables">iptables</OPTION>
+
+        <OPTION VALUE="iptraf">iptraf</OPTION>
+        <OPTION VALUE="iputils">iputils</OPTION>
+
+        <OPTION VALUE="ircii">ircii</OPTION>
+
+        <OPTION VALUE="irda-
+utils">
+                irda-utils
+        </OPTION>
+
+        <OPTION VALUE="isapnptools">isapnptools</OPTION>
+        <OPTION VALUE="isdn-config">isdn-config</OPTION>
+
+        <OPTION VALUE="isdn4k-utils">isdn4k- utils</OPTION>
+
+        <OPTION VALUE="isdnbutton">isdnbutton</OPTION>
+
+        <OPTION VALUE="isdnconfig">isdnconfig</OPTION>
+
+        <OPTION VALUE="isicom">isicom</OPTION>
+
+        <OPTION VALUE="ispell">ispell</OPTION>
+
+        <OPTION VALUE="ispell-cat">ispell-cat</OPTION>
+
+        <OPTION VALUE="ispell-cz">ispell-cz</OPTION>
+
+        <OPTION VALUE="ispell-da">ispell-da</OPTION>
+
+        <OPTION VALUE="ispell-de">ispell-de</OPTION>
+
+        <OPTION VALUE="ispell-eo">ispell-eo</OPTION>
+
+        <OPTION VALUE="ispell-es">ispell-es</OPTION>
+
+        <OPTION VALUE="ispell-fr">ispell-fr</OPTION>
+
+        <OPTION VALUE="ispell-gr">ispell-gr</OPTION>
+
+        <OPTION VALUE="ispell-it">ispell-it</OPTION>
+
+        <OPTION VALUE="ispell-nl">ispell-nl</OPTION>
+
+        <OPTION VALUE="ispell-no">ispell-no</OPTION>
+
+        <OPTION VALUE="ispell-pl">ispell-pl</OPTION>
+
+        <OPTION VALUE="ispell-pt">ispell-pt</OPTION>
+
+        <OPTION VALUE="ispell-ru">ispell-ru</OPTION>
+
+        <OPTION VALUE="ispell-se">ispell-se</OPTION>
+
+        <OPTION VALUE="jade">jade</OPTION>
+
+        <OPTION VALUE="jadetex">jadetex</OPTION>
+
+        <OPTION VALUE="jed">jed</OPTION>
+        <OPTION VALUE="jikes">jikes</OPTION>
+
+        <OPTION VALUE="joe">joe</OPTION>
+
+        <OPTION VALUE="joystick">joystick</OPTION>
+
+        <OPTION VALUE="jpilot">jpilot</OPTION>
+
+        <OPTION VALUE="junkbuster">junkbuster</OPTION>
+
+        <OPTION VALUE="kaffe">kaffe</OPTION>
+
+        <OPTION VALUE="kapm">kapm</OPTION>
+        <OPTION VALUE="karpski">karpski</OPTION>
+
+        <OPTION VALUE="kbd">kbd</OPTION>
+        <OPTION VALUE="kbdconfig">kbdconfig</OPTION>
+
+        <OPTION VALUE="kcc">kcc</OPTION>
+        <OPTION VALUE="kcmbind">kcmbind</OPTION>
+
+        <OPTION VALUE="kcmclock">kcmclock</OPTION>
+        <OPTION VALUE="kcmlaptop">kcmlaptop</OPTION>
+
+        <OPTION VALUE="kcontrol">kcontrol</OPTION>
+        <OPTION VALUE="kcrontab">kcrontab</OPTION>
+
+        <OPTION VALUE="kdbg">kdbg</OPTION>
+
+        <OPTION VALUE="kde-
+i18n">
+                kde-i18n
+        </OPTION>
+
+        <OPTION VALUE="kde-themepak">kde-themepak</OPTION>
+        <OPTION VALUE="kde2libs">kde2libs</OPTION>
+
+        <OPTION VALUE="kdeadmin">kdeadmin</OPTION>
+        <OPTION VALUE="kdebase">kdebase</OPTION>
+
+        <OPTION VALUE="kdegames">kdegames</OPTION>
+        <OPTION VALUE="kdegraphics">kdegraphics</OPTION>
+
+        <OPTION VALUE="kdelibs">kdelibs</OPTION>
+        <OPTION VALUE="kdemultimedia">kdemultimedia</OPTION>
+
+        <OPTION VALUE="kdenetwork">kdenetwork</OPTION>
+
+        <OPTION VALUE="kdepim">kdepim</OPTION>
+
+        <OPTION VALUE="kdesupport">kdesupport</OPTION>
+
+        <OPTION VALUE="kdetoys">kdetoys</OPTION>
+
+        <OPTION VALUE="kdeutils">kdeutils</OPTION>
+
+        <OPTION VALUE="kdevelop">kdevelop</OPTION>
+
+        <OPTION VALUE="kdiff">kdiff</OPTION>
+
+        <OPTION VALUE="kdoc">kdoc</OPTION>
+
+        <OPTION VALUE="kdpms">kdpms</OPTION>
+        <OPTION VALUE="keasycd">keasycd</OPTION>
+
+        <OPTION VALUE="kernel">kernel</OPTION>
+        <OPTION VALUE="kernelcfg">kernelcfg</OPTION>
+
+        <OPTION VALUE="khexedit">khexedit</OPTION>
+        <OPTION VALUE="kicq">kicq</OPTION>
+
+        <OPTION VALUE="killustrator">killustrator</OPTION>
+        <OPTION VALUE="kimon">kimon</OPTION>
+
+        <OPTION VALUE="kisdnload">kisdnload</OPTION>
+        <OPTION VALUE="kless">kless</OPTION>
+
+        <OPTION VALUE="klm">klm</OPTION>
+
+        <OPTION VALUE="klyx">klyx</OPTION>
+
+        <OPTION VALUE="knetmon">knetmon</OPTION>
+
+        <OPTION VALUE="knewmail">knewmail</OPTION>
+
+        <OPTION VALUE="knfsd">knfsd</OPTION>
+
+        <OPTION VALUE="koffice">koffice</OPTION>
+
+        <OPTION VALUE="kon2">kon2</OPTION>
+
+        <OPTION VALUE="korganizer">korganizer</OPTION>
+
+        <OPTION VALUE="kpackage">kpackage</OPTION>
+
+        <OPTION VALUE="kpilot">kpilot</OPTION>
+
+        <OPTION VALUE="kpppload">kpppload</OPTION>
+
+        <OPTION VALUE="krb5">krb5</OPTION>
+
+        <OPTION VALUE="krbafs">krbafs</OPTION>
+
+        <OPTION VALUE="krepton">krepton</OPTION>
+
+        <OPTION VALUE="krootpict">krootpict</OPTION>
+
+        <OPTION VALUE="ksendfax">ksendfax</OPTION>
+
+        <OPTION VALUE="ksnuffle">ksnuffle</OPTION>
+
+        <OPTION VALUE="ktalk">ktalk</OPTION>
+
+        <OPTION VALUE="kterm">kterm</OPTION>
+
+        <OPTION VALUE="ktop">ktop</OPTION>
+        <OPTION VALUE="ktranslator">ktranslator</OPTION>
+
+        <OPTION VALUE="kudzu">kudzu</OPTION>
+        <OPTION VALUE="kvirc">kvirc</OPTION>
+
+        <OPTION VALUE="kwintv">kwintv</OPTION>
+
+        <OPTION VALUE="lam">lam</OPTION>
+
+        <OPTION VALUE="lapack">lapack</OPTION>
+
+        <OPTION VALUE="lavaps">lavaps</OPTION>
+        <OPTION VALUE="lclint">lclint</OPTION>
+
+        <OPTION VALUE="ld.so">ld.so</OPTION>
+        <OPTION VALUE="ldconfig">ldconfig</OPTION>
+
+        <OPTION VALUE="less">less</OPTION>
+        <OPTION VALUE="lesstif">lesstif</OPTION>
+
+        <OPTION VALUE="lftp">lftp</OPTION>
+
+        <OPTION VALUE="lha">lha</OPTION>
+
+        <OPTION VALUE="libPropList">libPropList</OPTION>
+
+        <OPTION VALUE="libax25">libax25</OPTION>
+
+        <OPTION VALUE="libc">libc</OPTION>
+
+        <OPTION VALUE="libcdaudio">libcdaudio</OPTION>
+
+        <OPTION VALUE="libconf">libconf</OPTION>
+
+        <OPTION VALUE="libconfig">libconfig</OPTION>
+
+        <OPTION VALUE="libelf">libelf</OPTION>
+
+        <OPTION VALUE="libg++">libg++</OPTION>
+
+        <OPTION VALUE="libgcj">libgcj</OPTION>
+
+        <OPTION VALUE="libghttp">libghttp</OPTION>
+
+        <OPTION VALUE="libglade">libglade</OPTION>
+
+        <OPTION VALUE="libgr">libgr</OPTION>
+
+        <OPTION VALUE="libgtop">libgtop</OPTION>
+
+        <OPTION VALUE="libjpeg">libjpeg</OPTION>
+
+        <OPTION VALUE="libjpeg6a">libjpeg6a</OPTION>
+
+        <OPTION VALUE="libpcap">libpcap</OPTION>
+
+        <OPTION VALUE="libpng">libpng</OPTION>
+
+        <OPTION VALUE="librep">librep</OPTION>
+
+        <OPTION VALUE="libsafe">libsafe</OPTION>
+
+        <OPTION VALUE="libsidplay">libsidplay</OPTION>
+
+        <OPTION VALUE="libsigc++">libsigc++</OPTION>
+        <OPTION VALUE="libstdc++">libstdc++</OPTION>
+
+        <OPTION VALUE="libtermcap">libtermcap</OPTION>
+
+        <OPTION VALUE="libtiff">libtiff</OPTION>
+
+        <OPTION VALUE="libtool">libtool</OPTION>
+
+        <OPTION VALUE="libungif">libungif</OPTION>
+
+        <OPTION VALUE="libunicode">libunicode</OPTION>
+
+        <OPTION VALUE="libwmf">libwmf</OPTION>
+
+        <OPTION VALUE="libxml">libxml</OPTION>
+
+        <OPTION VALUE="libxml10">libxml10</OPTION>
+
+        <OPTION VALUE="licq">licq</OPTION>
+
+        <OPTION VALUE="licq-data">licq-data</OPTION>
+
+        <OPTION VALUE="lilo">lilo</OPTION>
+
+        <OPTION VALUE="lincity">lincity</OPTION>
+
+        <OPTION VALUE="links">links</OPTION>
+        <OPTION VALUE="linux_logo">linux_logo</OPTION>
+
+        <OPTION VALUE="linuxconf">linuxconf</OPTION>
+
+        <OPTION VALUE="listar">listar</OPTION>
+
+        <OPTION VALUE="lm_sensors">lm_sensors</OPTION>
+
+        <OPTION VALUE="loadmeter">loadmeter</OPTION>
+
+        <OPTION VALUE="locale-
+ja">
+                locale-ja
+        </OPTION>
+
+        <OPTION VALUE="locale_config">locale_config</OPTION>
+        <OPTION VALUE="lockdev">lockdev</OPTION>
+
+        <OPTION VALUE="logcoloriser">logcoloriser</OPTION>
+
+        <OPTION VALUE="logrotate">logrotate</OPTION>
+        <OPTION VALUE="logwatch">logwatch</OPTION>
+
+        <OPTION VALUE="lout">lout</OPTION>
+
+        <OPTION VALUE="lpg">lpg</OPTION>
+
+        <OPTION VALUE="lpr">lpr</OPTION>
+
+        <OPTION VALUE="lrzsz">lrzsz</OPTION>
+        <OPTION VALUE="lslk">lslk</OPTION>
+
+        <OPTION VALUE="lsof">lsof</OPTION>
+
+        <OPTION VALUE="ltrace">ltrace</OPTION>
+
+        <OPTION VALUE="lurkftp">lurkftp</OPTION>
+
+        <OPTION VALUE="lynx">lynx</OPTION>
+        <OPTION VALUE="lyx">lyx</OPTION>
+
+        <OPTION VALUE="m4">m4</OPTION>
+
+        <OPTION VALUE="macutils">macutils</OPTION>
+
+        <OPTION VALUE="magicdev">magicdev</OPTION>
+
+        <OPTION VALUE="mailcap">mailcap</OPTION>
+
+        <OPTION VALUE="mailman">mailman</OPTION>
+
+        <OPTION VALUE="mailx">mailx</OPTION>
+
+        <OPTION VALUE="majordomo">majordomo</OPTION>
+
+        <OPTION VALUE="make">make</OPTION>
+
+        <OPTION VALUE="make_pvm">make_pvm</OPTION>
+
+        <OPTION VALUE="man">man</OPTION>
+        <OPTION VALUE="man-pages">man-pages</OPTION>
+
+        <OPTION VALUE="man-pages-cs">man-pages- cs</OPTION>
+
+        <OPTION VALUE="man-pages-de">man-pages-de</OPTION>
+
+        <OPTION VALUE="man-pages-
+es">
+                man-pages-es
+        </OPTION>
+
+        <OPTION VALUE="man-pages-fr">man-pages-fr</OPTION>
+        <OPTION VALUE="man-pages-it">man-pages-it</OPTION>
+
+        <OPTION VALUE="man-pages-ja">man- pages-ja</OPTION>
+
+        <OPTION VALUE="man-pages-pl">man-pages-pl</OPTION>
+
+        <OPTION VALUE="man-
+pages-ru">
+                man-pages-ru
+        </OPTION>
+
+        <OPTION VALUE="maplay">maplay</OPTION>
+        <OPTION VALUE="mars-nwe">mars-nwe</OPTION>
+
+        <OPTION VALUE="mason">mason</OPTION>
+        <OPTION VALUE="mawk">mawk</OPTION>
+
+        <OPTION VALUE="mc">mc</OPTION>
+
+        <OPTION VALUE="memprof">memprof</OPTION>
+
+        <OPTION VALUE="metamail">metamail</OPTION>
+
+        <OPTION VALUE="mgetty">mgetty</OPTION>
+
+        <OPTION VALUE="mgp">mgp</OPTION>
+
+        <OPTION VALUE="mico">mico</OPTION>
+        <OPTION VALUE="micq">micq</OPTION>
+
+        <OPTION VALUE="mikmod">mikmod</OPTION>
+        <OPTION VALUE="mingetty">mingetty</OPTION>
+
+        <OPTION VALUE="minicom">minicom</OPTION>
+        <OPTION VALUE="minlabel">minlabel</OPTION>
+
+        <OPTION VALUE="mirror">mirror</OPTION>
+        <OPTION VALUE="mk-ftp-stats">mk-ftp-stats</OPTION>
+
+        <OPTION VALUE="mkbootdisk">mkbootdisk</OPTION>
+
+        <OPTION VALUE="mkdosfs">mkdosfs</OPTION>
+
+        <OPTION VALUE="mkdosfs-ygg">mkdosfs-ygg</OPTION>
+
+        <OPTION VALUE="mkhybrid">mkhybrid</OPTION>
+
+        <OPTION VALUE="mkinitrd">mkinitrd</OPTION>
+
+        <OPTION VALUE="mkisofs">mkisofs</OPTION>
+
+        <OPTION VALUE="mkkickstart">mkkickstart</OPTION>
+
+        <OPTION VALUE="mktemp">mktemp</OPTION>
+
+        <OPTION VALUE="mkxauth">mkxauth</OPTION>
+
+        <OPTION VALUE="mod_dav">mod_dav</OPTION>
+
+        <OPTION VALUE="mod_perl">mod_perl</OPTION>
+
+        <OPTION VALUE="mod_php">mod_php</OPTION>
+
+        <OPTION VALUE="mod_php3">mod_php3</OPTION>
+
+        <OPTION VALUE="modemtool">modemtool</OPTION>
+
+        <OPTION VALUE="modutils">modutils</OPTION>
+
+        <OPTION VALUE="mon">mon</OPTION>
+
+        <OPTION VALUE="moonclock">moonclock</OPTION>
+
+        <OPTION VALUE="mopd-linux">mopd-linux</OPTION>
+
+        <OPTION VALUE="mount">mount</OPTION>
+
+        <OPTION VALUE="mouseconfig">mouseconfig</OPTION>
+
+        <OPTION VALUE="mozilla">mozilla</OPTION>
+
+        <OPTION VALUE="mpage">mpage</OPTION>
+
+        <OPTION VALUE="mpg123">mpg123</OPTION>
+        <OPTION VALUE="mpg123-0.59pre">mpg123-0.59pre</OPTION>
+
+        <OPTION VALUE="mpich">mpich</OPTION>
+
+        <OPTION VALUE="mpr">mpr</OPTION>
+
+        <OPTION VALUE="mrtg">mrtg</OPTION>
+        <OPTION VALUE="mswordview">mswordview</OPTION>
+
+        <OPTION VALUE="mt-st">mt-st</OPTION>
+        <OPTION VALUE="mtools">mtools</OPTION>
+
+        <OPTION VALUE="mtr">mtr</OPTION>
+
+        <OPTION VALUE="mtrack">mtrack</OPTION>
+
+        <OPTION VALUE="mtx">mtx</OPTION>
+
+        <OPTION VALUE="multimedia">multimedia</OPTION>
+
+        <OPTION VALUE="mutt">mutt</OPTION>
+
+        <OPTION VALUE="mxp">mxp</OPTION>
+        <OPTION VALUE="mysql">mysql</OPTION>
+
+        <OPTION VALUE="mysterious">mysterious</OPTION>
+        <OPTION VALUE="nag">nag</OPTION>
+
+        <OPTION VALUE="nasm">nasm</OPTION>
+
+        <OPTION VALUE="nc">nc</OPTION>
+        <OPTION VALUE="ncftp">ncftp</OPTION>
+
+        <OPTION VALUE="ncompress">ncompress</OPTION>
+        <OPTION VALUE="ncpfs">ncpfs</OPTION>
+
+        <OPTION VALUE="ncurses">ncurses</OPTION>
+        <OPTION VALUE="ncurses3">ncurses3</OPTION>
+
+        <OPTION VALUE="ncurses4">ncurses4</OPTION>
+        <OPTION VALUE="nedit">nedit</OPTION>
+
+        <OPTION VALUE="nenscript">nenscript</OPTION>
+        <OPTION VALUE="nessus">nessus</OPTION>
+
+        <OPTION VALUE="net-tools">net-tools</OPTION>
+        <OPTION VALUE="netatalk">netatalk</OPTION>
+
+        <OPTION VALUE="netcat">netcat</OPTION>
+        <OPTION VALUE="netcdf">netcdf</OPTION>
+
+        <OPTION VALUE="netcfg">netcfg</OPTION>
+        <OPTION VALUE="nethack">nethack</OPTION>
+
+        <OPTION VALUE="netkit-base">netkit-base</OPTION>
+        <OPTION VALUE="netpbm">netpbm</OPTION>
+
+        <OPTION VALUE="netscape">netscape</OPTION>
+        <OPTION VALUE="netscape-alpha">netscape-alpha</OPTION>
+
+        <OPTION VALUE="netscape-sparc">netscape-sparc</OPTION>
+
+        <OPTION VALUE="netwatch">netwatch</OPTION>
+
+        <OPTION VALUE="newt">newt</OPTION>
+
+        <OPTION VALUE="newtonlink">newtonlink</OPTION>
+
+        <OPTION VALUE="nfs-server">nfs-server</OPTION>
+
+        <OPTION VALUE="nfs-utils">nfs-utils</OPTION>
+        <OPTION VALUE="nighthawk">nighthawk</OPTION>
+
+        <OPTION VALUE="njamd">njamd</OPTION>
+        <OPTION VALUE="nls">nls</OPTION>
+
+        <OPTION VALUE="nmap">nmap</OPTION>
+
+        <OPTION VALUE="nmh">nmh</OPTION>
+        <OPTION VALUE="node">node</OPTION>
+
+        <OPTION VALUE="nscd">nscd</OPTION>
+
+        <OPTION VALUE="nss_ldap">nss_ldap</OPTION>
+
+        <OPTION VALUE="ntalk">ntalk</OPTION>
+
+        <OPTION VALUE="ntop">ntop</OPTION>
+        <OPTION VALUE="nut">nut</OPTION>
+
+        <OPTION VALUE="ocaml">ocaml</OPTION>
+
+        <OPTION VALUE="octave">octave</OPTION>
+
+        <OPTION VALUE="oneko">oneko</OPTION>
+
+        <OPTION VALUE="open">open</OPTION>
+        <OPTION VALUE="openjade">openjade</OPTION>
+
+        <OPTION VALUE="openldap">openldap</OPTION>
+        <OPTION VALUE="openssh">openssh</OPTION>
+
+        <OPTION VALUE="openssl">openssl</OPTION>
+        <OPTION VALUE="p2c">p2c</OPTION>
+
+        <OPTION VALUE="pam">pam</OPTION>
+
+        <OPTION VALUE="pam_krb5">pam_krb5</OPTION>
+
+        <OPTION VALUE="pam_ldap">pam_ldap</OPTION>
+
+        <OPTION VALUE="pan">pan</OPTION>
+
+        <OPTION VALUE="pango-gtkbeta">pango-gtkbeta</OPTION>
+        <OPTION VALUE="paradise">paradise</OPTION>
+
+        <OPTION VALUE="passwd">passwd</OPTION>
+        <OPTION VALUE="patch">patch</OPTION>
+
+        <OPTION VALUE="pavuk">pavuk</OPTION>
+
+        <OPTION VALUE="pax">pax</OPTION>
+
+        <OPTION VALUE="pcb">pcb</OPTION>
+
+        <OPTION VALUE="pccts">pccts</OPTION>
+        <OPTION VALUE="pciutils">pciutils</OPTION>
+
+        <OPTION VALUE="pdksh">pdksh</OPTION>
+        <OPTION VALUE="perl">perl</OPTION>
+
+        <OPTION VALUE="perl-Apache-ASP">perl-Apache- ASP</OPTION>
+
+        <OPTION VALUE="perl-Convert-BER">perl-Convert-BER</OPTION>
+        <OPTION VALUE="perl-Data-Dumper">perl-Data-Dumper</OPTION>
+
+        <OPTION VALUE="perl-MD5">perl-MD5</OPTION>
+
+        <OPTION VALUE="perl-MLDBM">perl-MLDBM</OPTION>
+
+        <OPTION VALUE="perl-Mon">perl-Mon</OPTION>
+
+        <OPTION VALUE="perl-Net-Telnet">perl-Net-Telnet</OPTION>
+        <OPTION VALUE="perl-Period">perl-Period</OPTION>
+
+        <OPTION VALUE="perl-Time-HiRes">perl- Time-HiRes</OPTION>
+
+        <OPTION VALUE="perl-TimeDate">perl-TimeDate</OPTION>
+        <OPTION VALUE="perl-libnet">perl-libnet</OPTION>
+
+        <OPTION VALUE="phhttpd">phhttpd</OPTION>
+        <OPTION VALUE="php">php</OPTION>
+
+        <OPTION VALUE="phpfi">phpfi</OPTION>
+
+        <OPTION VALUE="pidentd">pidentd</OPTION>
+
+        <OPTION VALUE="pilot-link">pilot-link</OPTION>
+
+        <OPTION VALUE="pilrc">pilrc</OPTION>
+
+        <OPTION VALUE="pilrc-example">pilrc-example</OPTION>
+
+        <OPTION VALUE="pine">pine</OPTION>
+
+        <OPTION VALUE="pinfo">pinfo</OPTION>
+
+        <OPTION VALUE="pinfocom">pinfocom</OPTION>
+
+        <OPTION VALUE="ping">ping</OPTION>
+
+        <OPTION VALUE="piranha">piranha</OPTION>
+
+        <OPTION VALUE="plan">plan</OPTION>
+
+        <OPTION VALUE="playmidi">playmidi</OPTION>
+
+        <OPTION VALUE="plugger">plugger</OPTION>
+
+        <OPTION VALUE="pmake">pmake</OPTION>
+
+        <OPTION VALUE="pnm2ppa">pnm2ppa</OPTION>
+
+        <OPTION VALUE="popt">popt</OPTION>
+        <OPTION VALUE="portmap">portmap</OPTION>
+
+        <OPTION VALUE="portsentry">portsentry</OPTION>
+        <OPTION VALUE="portslave">portslave</OPTION>
+
+        <OPTION VALUE="portslave-cistron">portslave-cistron</OPTION>
+
+        <OPTION VALUE="postfix">postfix</OPTION>
+        <OPTION VALUE="postgresql">postgresql</OPTION>
+
+        <OPTION VALUE="povray">povray</OPTION>
+        <OPTION VALUE="power pc/ide">power pc/ide</OPTION>
+
+        <OPTION VALUE="powerpc
+compiler/binutils">
+                powerpc compiler/binutils
+        </OPTION>
+
+        <OPTION VALUE="powerpc
+compiler/doc">
+                powerpc compiler/doc
+        </OPTION>
+
+        <OPTION VALUE="powerpc
+compiler/g++">
+                powerpc compiler/g++
+        </OPTION>
+
+        <OPTION VALUE="powerpc
+compiler/gas">
+                powerpc compiler/gas
+        </OPTION>
+
+        <OPTION VALUE="powerpc
+compiler/gcc">
+                powerpc compiler/gcc
+        </OPTION>
+
+        <OPTION VALUE="powerpc compiler/ld">powerpc compiler/ld</OPTION>
+
+        <OPTION VALUE="powerpc compiler/libraries">
+                powerpc compiler/libraries
+        </OPTION>
+
+        <OPTION VALUE="powerpc debugger/gdb">powerpc debugger/gdb</OPTION>
+
+        <OPTION VALUE="powerpc debugger/gui">powerpc debugger/gui</OPTION>
+
+        <OPTION VALUE="powerpc debugger/target">
+                powerpc debugger/target
+        </OPTION>
+
+        <OPTION VALUE="powerpc kernel/block device">
+                powerpc kernel/block device
+        </OPTION>
+
+        <OPTION VALUE="powerpc kernel/char device">
+                powerpc kernel/char device
+        </OPTION>
+
+        <OPTION VALUE="powerpc kernel/fs">powerpc kernel/fs</OPTION>
+
+        <OPTION VALUE="powerpc kernel/lowlevel driver">
+                powerpc kernel/lowlevel driver
+        </OPTION>
+
+        <OPTION VALUE="powerpc kernel/scsi">powerpc kernel/scsi</OPTION>
+
+        <OPTION VALUE="powerpc kernel/vfs">powerpc kernel/vfs</OPTION>
+
+        <OPTION VALUE="powerpc kernel/vm">powerpc kernel/vm</OPTION>
+        <OPTION VALUE="powertweak">powertweak</OPTION>
+
+        <OPTION VALUE="ppp">ppp</OPTION>
+        <OPTION VALUE="pptpd">pptpd</OPTION>
+
+        <OPTION VALUE="prc-tools">prc-tools</OPTION>
+        <OPTION VALUE="printer-config">printer-config</OPTION>
+
+        <OPTION VALUE="printtool">printtool</OPTION>
+
+        <OPTION VALUE="procinfo">procinfo</OPTION>
+
+        <OPTION VALUE="procmail">procmail</OPTION>
+
+        <OPTION VALUE="procps">procps</OPTION>
+
+        <OPTION VALUE="proftpd">proftpd</OPTION>
+
+        <OPTION VALUE="prtconf">prtconf</OPTION>
+
+        <OPTION VALUE="psacct">psacct</OPTION>
+
+        <OPTION VALUE="psgml">psgml</OPTION>
+
+        <OPTION VALUE="psmisc">psmisc</OPTION>
+        <OPTION VALUE="pspell">pspell</OPTION>
+
+        <OPTION VALUE="pump">pump</OPTION>
+
+        <OPTION VALUE="purp">purp</OPTION>
+
+        <OPTION VALUE="pvm">pvm</OPTION>
+
+        <OPTION VALUE="pwdb">pwdb</OPTION>
+        <OPTION VALUE="pxe">pxe</OPTION>
+
+        <OPTION VALUE="python">python</OPTION>
+
+        <OPTION VALUE="pythonlib">pythonlib</OPTION>
+
+        <OPTION VALUE="qcad">qcad</OPTION>
+
+        <OPTION VALUE="qt">qt</OPTION>
+        <OPTION VALUE="qt1x">qt1x</OPTION>
+
+        <OPTION VALUE="qtarch">qtarch</OPTION>
+        <OPTION VALUE="quickstrip">quickstrip</OPTION>
+
+        <OPTION VALUE="quota">quota</OPTION>
+        <OPTION VALUE="radiusd-cistron">radiusd-cistron</OPTION>
+
+        <OPTION VALUE="raidtools">raidtools</OPTION>
+
+        <OPTION VALUE="rarpd">rarpd</OPTION>
+
+        <OPTION VALUE="rcs">rcs</OPTION>
+        <OPTION VALUE="rdate">rdate</OPTION>
+
+        <OPTION VALUE="rdist">rdist</OPTION>
+        <OPTION VALUE="readline">readline</OPTION>
+
+        <OPTION VALUE="redhat-logos">redhat- logos</OPTION>
+
+        <OPTION VALUE="redhat-release">redhat-release</OPTION>
+
+        <OPTION VALUE="rep-
+gtk">
+                rep-gtk
+        </OPTION>
+
+        <OPTION VALUE="repton">repton</OPTION>
+
+        <OPTION VALUE="rhbackup">rhbackup</OPTION>
+
+        <OPTION VALUE="rhclib">rhclib</OPTION>
+
+        <OPTION VALUE="rhcn">rhcn</OPTION>
+        <OPTION VALUE="rhisdn">rhisdn</OPTION>
+
+        <OPTION VALUE="rhl-alpha-install-addend-en">
+                rhl- alpha-install-addend-en
+        </OPTION>
+
+        <OPTION VALUE="rhl-getting-started-guide-en">
+                rhl-getting-started-guide-en
+        </OPTION>
+
+        <OPTION VALUE="rhl-gsg">rhl-gsg</OPTION>
+        <OPTION VALUE="rhl-ig">rhl-ig</OPTION>
+
+        <OPTION VALUE="rhl-install-guide-en">rhl-install- guide-en</OPTION>
+
+        <OPTION VALUE="rhl-rg">rhl-rg</OPTION>
+
+        <OPTION VALUE="rhmask">rhmask</OPTION>
+
+        <OPTION VALUE="rhs-hwdiag">rhs-hwdiag</OPTION>
+
+        <OPTION VALUE="rhs-
+printfilters">
+                rhs-printfilters
+        </OPTION>
+
+        <OPTION VALUE="rhsound">rhsound</OPTION>
+        <OPTION VALUE="rio">rio</OPTION>
+
+        <OPTION VALUE="rootfiles">rootfiles</OPTION>
+        <OPTION VALUE="routed">routed</OPTION>
+
+        <OPTION VALUE="rp-pppoe">rp-pppoe</OPTION>
+        <OPTION VALUE="rp3">rp3</OPTION>
+
+        <OPTION VALUE="rpm">rpm</OPTION>
+
+        <OPTION VALUE="rpm2html">rpm2html</OPTION>
+
+        <OPTION VALUE="rpmdb-powertools">rpmdb-powertools</OPTION>
+        <OPTION VALUE="rpmdb-redhat">rpmdb-redhat</OPTION>
+
+        <OPTION VALUE="rpmfind">rpmfind</OPTION>
+
+        <OPTION VALUE="rpmlint">rpmlint</OPTION>
+
+        <OPTION VALUE="rrlogind">rrlogind</OPTION>
+
+        <OPTION VALUE="rsh">rsh</OPTION>
+
+        <OPTION VALUE="rstatd">rstatd</OPTION>
+        <OPTION VALUE="rsync">rsync</OPTION>
+
+        <OPTION VALUE="rusers">rusers</OPTION>
+
+        <OPTION VALUE="rwall">rwall</OPTION>
+
+        <OPTION VALUE="rwho">rwho</OPTION>
+
+        <OPTION VALUE="rxvt">rxvt</OPTION>
+        <OPTION VALUE="sabre">sabre</OPTION>
+
+        <OPTION VALUE="sac">sac</OPTION>
+
+        <OPTION VALUE="safedelete">safedelete</OPTION>
+
+        <OPTION VALUE="sag">sag</OPTION>
+
+        <OPTION VALUE="samba">samba</OPTION>
+        <OPTION VALUE="sane">sane</OPTION>
+
+        <OPTION VALUE="sart">sart</OPTION>
+
+        <OPTION VALUE="sash">sash</OPTION>
+
+        <OPTION VALUE="sawfish">sawfish</OPTION>
+
+        <OPTION VALUE="sawmill">sawmill</OPTION>
+
+        <OPTION VALUE="scavenger">scavenger</OPTION>
+
+        <OPTION VALUE="sceda">sceda</OPTION>
+
+        <OPTION VALUE="scilab">scilab</OPTION>
+
+        <OPTION VALUE="scottfree">scottfree</OPTION>
+
+        <OPTION VALUE="scotty">scotty</OPTION>
+
+        <OPTION VALUE="screen">screen</OPTION>
+
+        <OPTION VALUE="seahorse">seahorse</OPTION>
+
+        <OPTION VALUE="secureweb">secureweb</OPTION>
+
+        <OPTION VALUE="sed">sed</OPTION>
+
+        <OPTION VALUE="sendmail">sendmail</OPTION>
+
+        <OPTION VALUE="sendmail-config">sendmail-config</OPTION>
+        <OPTION VALUE="sentry">sentry</OPTION>
+
+        <OPTION VALUE="setconsole">setconsole</OPTION>
+        <OPTION VALUE="setserial">setserial</OPTION>
+
+        <OPTION VALUE="setup">setup</OPTION>
+        <OPTION VALUE="setuptool">setuptool</OPTION>
+
+        <OPTION VALUE="sgml-common">sgml- common</OPTION>
+
+        <OPTION VALUE="sgml-tools">sgml-tools</OPTION>
+
+        <OPTION VALUE="sh-utils">sh-utils</OPTION>
+
+        <OPTION VALUE="shadow-utils">shadow-utils</OPTION>
+        <OPTION VALUE="shapecfg">shapecfg</OPTION>
+
+        <OPTION VALUE="sharutils">sharutils</OPTION>
+        <OPTION VALUE="siag">siag</OPTION>
+
+        <OPTION VALUE="sidplay">sidplay</OPTION>
+        <OPTION VALUE="sidplay-base">sidplay-base</OPTION>
+
+        <OPTION VALUE="silo">silo</OPTION>
+        <OPTION VALUE="sip">sip</OPTION>
+
+        <OPTION VALUE="slang">slang</OPTION>
+
+        <OPTION VALUE="sliplogin">sliplogin</OPTION>
+
+        <OPTION VALUE="slocate">slocate</OPTION>
+
+        <OPTION VALUE="slrn">slrn</OPTION>
+
+        <OPTION VALUE="smpeg">smpeg</OPTION>
+
+        <OPTION VALUE="sndconfig">sndconfig</OPTION>
+
+        <OPTION VALUE="sniffit">sniffit</OPTION>
+
+        <OPTION VALUE="solemul">solemul</OPTION>
+
+        <OPTION VALUE="soundtracker">soundtracker</OPTION>
+
+        <OPTION VALUE="sox">sox</OPTION>
+
+        <OPTION VALUE="sparc32">sparc32</OPTION>
+
+        <OPTION VALUE="specspo">specspo</OPTION>
+
+        <OPTION VALUE="spice">spice</OPTION>
+
+        <OPTION VALUE="spider">spider</OPTION>
+        <OPTION VALUE="squid">squid</OPTION>
+
+        <OPTION VALUE="squid-config">squid-config</OPTION>
+        <OPTION VALUE="srp">srp</OPTION>
+
+        <OPTION VALUE="staroffice-wrapper">staroffice- wrapper</OPTION>
+
+        <OPTION VALUE="stat">stat</OPTION>
+
+        <OPTION VALUE="statserial">statserial</OPTION>
+
+        <OPTION VALUE="stella">stella</OPTION>
+
+        <OPTION VALUE="strace">strace</OPTION>
+
+        <OPTION VALUE="stringlist">stringlist</OPTION>
+
+        <OPTION VALUE="strobe">strobe</OPTION>
+
+        <OPTION VALUE="stunnel">stunnel</OPTION>
+
+        <OPTION VALUE="stylesheets">stylesheets</OPTION>
+
+        <OPTION VALUE="suck">suck</OPTION>
+
+        <OPTION VALUE="sudo">sudo</OPTION>
+        <OPTION VALUE="svgalib">svgalib</OPTION>
+
+        <OPTION VALUE="swatch">swatch</OPTION>
+        <OPTION VALUE="swig">swig</OPTION>
+
+        <OPTION VALUE="swish">swish</OPTION>
+        <OPTION VALUE="switchdesk">switchdesk</OPTION>
+
+        <OPTION VALUE="symlinks">symlinks</OPTION>
+        <OPTION VALUE="synaesthesia">synaesthesia</OPTION>
+
+        <OPTION VALUE="sysctlconfig">sysctlconfig</OPTION>
+
+        <OPTION VALUE="sysklogd">sysklogd</OPTION>
+
+        <OPTION VALUE="syslinux">syslinux</OPTION>
+
+        <OPTION VALUE="sysreport">sysreport</OPTION>
+
+        <OPTION VALUE="sysstat">sysstat</OPTION>
+
+        <OPTION VALUE="t1accent">t1accent</OPTION>
+
+        <OPTION VALUE="t1lib">t1lib</OPTION>
+
+        <OPTION VALUE="t1lib-0.7.1">t1lib-0.7.1</OPTION>
+
+        <OPTION VALUE="talk">talk</OPTION>
+
+        <OPTION VALUE="taper">taper</OPTION>
+
+        <OPTION VALUE="tar">tar</OPTION>
+        <OPTION VALUE="tcltk">tcltk</OPTION>
+
+        <OPTION VALUE="tcp_wrappers">tcp_wrappers</OPTION>
+        <OPTION VALUE="tcpdump">tcpdump</OPTION>
+
+        <OPTION VALUE="tcsh">tcsh</OPTION>
+        <OPTION VALUE="telnet">telnet</OPTION>
+
+        <OPTION VALUE="termcap">termcap</OPTION>
+        <OPTION VALUE="termfiles_sparc">termfiles_sparc</OPTION>
+
+        <OPTION VALUE="tetex">tetex</OPTION>
+
+        <OPTION VALUE="tetrinet">tetrinet</OPTION>
+
+        <OPTION VALUE="texinfo">texinfo</OPTION>
+
+        <OPTION VALUE="textutils">textutils</OPTION>
+
+        <OPTION VALUE="tftp">tftp</OPTION>
+
+        <OPTION VALUE="tgif">tgif</OPTION>
+
+        <OPTION VALUE="thrust">thrust</OPTION>
+        <OPTION VALUE="thttpd">thttpd</OPTION>
+
+        <OPTION VALUE="time">time</OPTION>
+        <OPTION VALUE="timeconfig">timeconfig</OPTION>
+
+        <OPTION VALUE="timed">timed</OPTION>
+        <OPTION VALUE="timetool">timetool</OPTION>
+
+        <OPTION VALUE="timidity++">timidity++</OPTION>
+        <OPTION VALUE="tin">tin</OPTION>
+
+        <OPTION VALUE="tkdesk">tkdesk</OPTION>
+        <OPTION VALUE="tkgoodstuff">tkgoodstuff</OPTION>
+
+        <OPTION VALUE="tkhylafax">tkhylafax</OPTION>
+
+        <OPTION VALUE="tkirc">tkirc</OPTION>
+
+        <OPTION VALUE="tkrat">tkrat</OPTION>
+        <OPTION VALUE="tksysv">tksysv</OPTION>
+
+        <OPTION VALUE="tmpwatch">tmpwatch</OPTION>
+        <OPTION VALUE="traceroute">traceroute</OPTION>
+
+        <OPTION VALUE="tracker">tracker</OPTION>
+        <OPTION VALUE="trafshow">trafshow</OPTION>
+
+        <OPTION VALUE="transfig">transfig</OPTION>
+        <OPTION VALUE="tree">tree</OPTION>
+
+        <OPTION VALUE="tripwire">tripwire</OPTION>
+
+        <OPTION VALUE="trn">trn</OPTION>
+
+        <OPTION VALUE="trojka">trojka</OPTION>
+
+        <OPTION VALUE="tunelp">tunelp</OPTION>
+        <OPTION VALUE="tvision">tvision</OPTION>
+
+        <OPTION VALUE="twin">twin</OPTION>
+        <OPTION VALUE="type1inst">type1inst</OPTION>
+
+        <OPTION VALUE="uae">uae</OPTION>
+
+        <OPTION VALUE="ucd-
+snmp">
+                ucd-snmp
+        </OPTION>
+
+        <OPTION VALUE="umb-scheme">umb-scheme</OPTION>
+        <OPTION VALUE="unarj">unarj</OPTION>
+
+        <OPTION VALUE="units">units</OPTION>
+        <OPTION VALUE="unixODBC">unixODBC</OPTION>
+
+        <OPTION VALUE="unzip">unzip</OPTION>
+        <OPTION VALUE="up2date">up2date</OPTION>
+
+        <OPTION VALUE="urlview">urlview</OPTION>
+        <OPTION VALUE="urw">urw</OPTION>
+
+        <OPTION VALUE="urw-fonts">urw-fonts</OPTION>
+        <OPTION VALUE="usermode">usermode</OPTION>
+
+        <OPTION VALUE="usernet">usernet</OPTION>
+        <OPTION VALUE="utempter">utempter</OPTION>
+
+        <OPTION VALUE="util-linux">util-linux</OPTION>
+        <OPTION VALUE="uucp">uucp</OPTION>
+
+        <OPTION VALUE="uudeview">uudeview</OPTION>
+        <OPTION VALUE="vacation">vacation</OPTION>
+
+        <OPTION VALUE="ver">ver</OPTION>
+        <OPTION VALUE="vga_gamespack">vga_gamespack</OPTION>
+
+        <OPTION VALUE="vic">vic</OPTION>
+        <OPTION VALUE="vile">vile</OPTION>
+
+        <OPTION VALUE="vim">vim</OPTION>
+
+        <OPTION VALUE="vixie-cron">vixie-cron</OPTION>
+
+        <OPTION VALUE="vlock">vlock</OPTION>
+
+        <OPTION VALUE="vnc">vnc</OPTION>
+        <OPTION VALUE="vrfy">vrfy</OPTION>
+
+        <OPTION VALUE="vsa">vsa</OPTION>
+
+        <OPTION VALUE="vt">vt</OPTION>
+        <OPTION VALUE="w3c-libwww">w3c-libwww</OPTION>
+
+        <OPTION VALUE="w3m">w3m</OPTION>
+        <OPTION VALUE="wavplay">wavplay</OPTION>
+
+        <OPTION VALUE="webalizer">webalizer</OPTION>
+        <OPTION VALUE="webalizer-1.20">webalizer-1.20</OPTION>
+
+        <OPTION VALUE="weblint">weblint</OPTION>
+
+        <OPTION VALUE="webxref">webxref</OPTION>
+
+        <OPTION VALUE="wget">wget</OPTION>
+        <OPTION VALUE="which">which</OPTION>
+
+        <OPTION VALUE="whois">whois</OPTION>
+
+        <OPTION VALUE="winbind">winbind</OPTION>
+
+        <OPTION VALUE="wine">wine</OPTION>
+
+        <OPTION VALUE="wmakerconf">wmakerconf</OPTION>
+
+        <OPTION VALUE="wmconfig">wmconfig</OPTION>
+
+        <OPTION VALUE="wmmon">wmmon</OPTION>
+
+        <OPTION VALUE="wmnet">wmnet</OPTION>
+
+        <OPTION VALUE="wmtime">wmtime</OPTION>
+        <OPTION VALUE="words">words</OPTION>
+
+        <OPTION VALUE="wu-ftpd">wu-ftpd</OPTION>
+        <OPTION VALUE="wuftpd-config">wuftpd-config</OPTION>
+
+        <OPTION VALUE="wv">wv</OPTION>
+        <OPTION VALUE="wvdial">wvdial</OPTION>
+
+        <OPTION VALUE="wxftp">wxftp</OPTION>
+        <OPTION VALUE="x11amp">x11amp</OPTION>
+
+        <OPTION VALUE="x3270">x3270</OPTION>
+
+        <OPTION VALUE="x86
+compiler/binutils">
+                x86 compiler/binutils
+        </OPTION>
+
+        <OPTION VALUE="x86
+compiler/doc">
+                x86 compiler/doc
+        </OPTION>
+
+        <OPTION VALUE="x86 compiler/g++">x86 compiler/g++</OPTION>
+
+        <OPTION VALUE="x86 compiler/gas">x86 compiler/gas</OPTION>
+        <OPTION VALUE="x86 compiler/gcc">x86 compiler/gcc</OPTION>
+
+        <OPTION VALUE="x86
+compiler/ld">
+                x86 compiler/ld
+        </OPTION>
+
+        <OPTION VALUE="x86 compiler/libraries">
+                x86 compiler/libraries
+        </OPTION>
+
+        <OPTION VALUE="x86 debugger/gdb">x86 debugger/gdb</OPTION>
+
+        <OPTION VALUE="x86 debugger/gui">x86 debugger/gui</OPTION>
+        <OPTION VALUE="x86 debugger/target">x86 debugger/target</OPTION>
+
+        <OPTION VALUE="x86
+kernel/block device">
+                x86 kernel/block device
+        </OPTION>
+
+        <OPTION VALUE="x86
+kernel/char device">
+                x86 kernel/char device
+        </OPTION>
+
+        <OPTION VALUE="x86
+kernel/fs">
+                x86 kernel/fs
+        </OPTION>
+
+        <OPTION VALUE="x86 kernel/ide">x86 kernel/ide</OPTION>
+
+        <OPTION VALUE="x86 kernel/lowlevel driver">
+                x86 kernel/lowlevel driver
+        </OPTION>
+
+        <OPTION VALUE="x86 kernel/scsi">x86 kernel/scsi</OPTION>
+
+        <OPTION VALUE="x86 kernel/vfs">x86 kernel/vfs</OPTION>
+        <OPTION VALUE="x86 kernel/vm">x86 kernel/vm</OPTION>
+
+        <OPTION VALUE="xNES">xNES</OPTION>
+        <OPTION VALUE="xanim">xanim</OPTION>
+
+        <OPTION VALUE="xattax">xattax</OPTION>
+
+        <OPTION VALUE="xawtv">xawtv</OPTION>
+
+        <OPTION VALUE="xbanner">xbanner</OPTION>
+
+        <OPTION VALUE="xbattle">xbattle</OPTION>
+
+        <OPTION VALUE="xbeats">xbeats</OPTION>
+
+        <OPTION VALUE="xbill">xbill</OPTION>
+        <OPTION VALUE="xbl">xbl</OPTION>
+
+        <OPTION VALUE="xbmbrowser">xbmbrowser</OPTION>
+        <OPTION VALUE="xboard">xboard</OPTION>
+
+        <OPTION VALUE="xboing">xboing</OPTION>
+        <OPTION VALUE="xcdroast">xcdroast</OPTION>
+
+        <OPTION VALUE="xchat">xchat</OPTION>
+        <OPTION VALUE="xchomp">xchomp</OPTION>
+
+        <OPTION VALUE="xconq">xconq</OPTION>
+        <OPTION VALUE="xcopilot">xcopilot</OPTION>
+
+        <OPTION VALUE="xcoral">xcoral</OPTION>
+        <OPTION VALUE="xcpustate">xcpustate</OPTION>
+
+        <OPTION VALUE="xdaliclock">xdaliclock</OPTION>
+
+        <OPTION VALUE="xdelta">xdelta</OPTION>
+
+        <OPTION VALUE="xdemineur">xdemineur</OPTION>
+
+        <OPTION VALUE="xearth">xearth</OPTION>
+
+        <OPTION VALUE="xemacs">xemacs</OPTION>
+
+        <OPTION VALUE="xengine">xengine</OPTION>
+
+        <OPTION VALUE="xephem">xephem</OPTION>
+
+        <OPTION VALUE="xevil">xevil</OPTION>
+
+        <OPTION VALUE="xfce">xfce</OPTION>
+        <OPTION VALUE="xfig">xfig</OPTION>
+
+        <OPTION VALUE="xfinans">xfinans</OPTION>
+        <OPTION VALUE="xfishtank">xfishtank</OPTION>
+
+        <OPTION VALUE="xfm">xfm</OPTION>
+        <OPTION VALUE="xforms">xforms</OPTION>
+
+        <OPTION VALUE="xfpovray">xfpovray</OPTION>
+        <OPTION VALUE="xfstt">xfstt</OPTION>
+
+        <OPTION VALUE="xgalaga">xgalaga</OPTION>
+        <OPTION VALUE="xgammon">xgammon</OPTION>
+
+        <OPTION VALUE="xgopher">xgopher</OPTION>
+        <OPTION VALUE="xinetd">xinetd</OPTION>
+
+        <OPTION VALUE="xinitrc">xinitrc</OPTION>
+        <OPTION VALUE="xinvest">xinvest</OPTION>
+
+        <OPTION VALUE="xjewel">xjewel</OPTION>
+        <OPTION VALUE="xkeycaps">xkeycaps</OPTION>
+
+        <OPTION VALUE="xlander">xlander</OPTION>
+        <OPTION VALUE="xlispstat">xlispstat</OPTION>
+
+        <OPTION VALUE="xloadimage">xloadimage</OPTION>
+
+        <OPTION VALUE="xlockmore">xlockmore</OPTION>
+
+        <OPTION VALUE="xmailbox">xmailbox</OPTION>
+
+        <OPTION VALUE="xmake">xmake</OPTION>
+
+        <OPTION VALUE="xmame">xmame</OPTION>
+        <OPTION VALUE="xmbase-grok">xmbase-grok</OPTION>
+
+        <OPTION VALUE="xmcd">xmcd</OPTION>
+        <OPTION VALUE="xmmix">xmmix</OPTION>
+
+        <OPTION VALUE="xmms">xmms</OPTION>
+
+        <OPTION VALUE="xmmsskins">xmmsskins</OPTION>
+
+        <OPTION VALUE="xmorph">xmorph</OPTION>
+
+        <OPTION VALUE="xmountains">xmountains</OPTION>
+
+        <OPTION VALUE="xmris">xmris</OPTION>
+
+        <OPTION VALUE="xntp3">xntp3</OPTION>
+
+        <OPTION VALUE="xodo">xodo</OPTION>
+
+        <OPTION VALUE="xosview">xosview</OPTION>
+        <OPTION VALUE="xpaint">xpaint</OPTION>
+
+        <OPTION VALUE="xpat2">xpat2</OPTION>
+
+        <OPTION VALUE="xpdf">xpdf</OPTION>
+
+        <OPTION VALUE="xpilot">xpilot</OPTION>
+
+        <OPTION VALUE="xpinguin">xpinguin</OPTION>
+
+        <OPTION VALUE="xpm">xpm</OPTION>
+
+        <OPTION VALUE="xpuzzles">xpuzzles</OPTION>
+
+        <OPTION VALUE="xquote">xquote</OPTION>
+
+        <OPTION VALUE="xrn">xrn</OPTION>
+        <OPTION VALUE="xroads">xroads</OPTION>
+
+        <OPTION VALUE="xsane">xsane</OPTION>
+        <OPTION VALUE="xscrabble">xscrabble</OPTION>
+
+        <OPTION VALUE="xscreensaver">xscreensaver</OPTION>
+
+        <OPTION VALUE="xscreensaver-gl">xscreensaver-gl</OPTION>
+        <OPTION VALUE="xsession">xsession</OPTION>
+
+        <OPTION VALUE="xsnow">xsnow</OPTION>
+        <OPTION VALUE="xsok">xsok</OPTION>
+
+        <OPTION VALUE="xspringies">xspringies</OPTION>
+        <OPTION VALUE="xsri">xsri</OPTION>
+
+        <OPTION VALUE="xsysinfo">xsysinfo</OPTION>
+        <OPTION VALUE="xterm">xterm</OPTION>
+
+        <OPTION VALUE="xterm-color">xterm-color</OPTION>
+        <OPTION VALUE="xtoolwait">xtoolwait</OPTION>
+
+        <OPTION VALUE="xtraceroute">xtraceroute</OPTION>
+
+        <OPTION VALUE="xtrojka">xtrojka</OPTION>
+
+        <OPTION VALUE="xv">xv</OPTION>
+        <OPTION VALUE="xwmm">xwmm</OPTION>
+
+        <OPTION VALUE="xwpe">xwpe</OPTION>
+
+        <OPTION VALUE="xwpick">xwpick</OPTION>
+
+        <OPTION VALUE="xxgdb">xxgdb</OPTION>
+
+        <OPTION VALUE="xzip">xzip</OPTION>
+        <OPTION VALUE="yagirc">yagirc</OPTION>
+
+        <OPTION VALUE="yp-tools">yp-tools</OPTION>
+        <OPTION VALUE="ypbind">ypbind</OPTION>
+
+        <OPTION VALUE="ypbind-mt">ypbind-mt</OPTION>
+        <OPTION VALUE="ypserv">ypserv</OPTION>
+
+        <OPTION VALUE="ytalk">ytalk</OPTION>
+
+        <OPTION VALUE="zgv">zgv</OPTION>
+
+        <OPTION VALUE="zip">zip</OPTION>
+
+        <OPTION VALUE="zlib">zlib</OPTION>
+        <OPTION VALUE="zsdh">zsh</OPTION>
+</SELECT>
+
