@@ -34,8 +34,6 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeAdapterFactory;
 import org.eclipse.wst.sse.ui.internal.IReleasable;
 import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateAction;
 import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateActionContributionItem;
-import org.eclipse.wst.sse.ui.internal.editor.EditorPluginImageHelper;
-import org.eclipse.wst.sse.ui.internal.editor.EditorPluginImages;
 import org.eclipse.wst.sse.ui.internal.provisional.views.contentoutline.StructuredContentOutlineConfiguration;
 import org.eclipse.wst.sse.ui.internal.view.events.NodeSelectionChangedEvent;
 import org.eclipse.wst.xml.ui.internal.XMLUIMessages;
@@ -88,8 +86,7 @@ public class XMLContentOutlineConfiguration extends StructuredContentOutlineConf
 			setToolTipText(getText());
 			// images needed
 			// setDisabledImageDescriptor(SYNCED_D);
-			// (nsd) temporarily re-use Properties view image
-			setImageDescriptor(EditorPluginImageHelper.getInstance().getImageDescriptor(EditorPluginImages.IMG_OBJ_PROP_PS));
+			// setImageDescriptor(SYNCED_E);
 			fTreeViewer = treeViewer;
 			update();
 		}
