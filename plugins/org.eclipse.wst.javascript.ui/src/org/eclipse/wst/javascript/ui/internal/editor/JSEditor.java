@@ -41,6 +41,7 @@ import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTarget;
@@ -875,5 +876,10 @@ public class JSEditor extends TextEditor {
 		}
 
 		return (String[]) allIds.toArray(new String[0]);
+	}
+
+	public int getOrientation() {
+		//https://bugs.eclipse.org/bugs/show_bug.cgi?id=88714
+		return SWT.LEFT_TO_RIGHT;
 	}
 }
