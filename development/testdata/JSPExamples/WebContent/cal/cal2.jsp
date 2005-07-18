@@ -28,13 +28,15 @@
 %>
 
 <FONT SIZE=5> Please add the following event:
-<BR> <h3> Date <%= table.getDate() %>
-<BR> Time <%= time %> </h3>
+<BR> 
 </FONT>
+<h3> Date <%= table.getDate() %>
+<BR> Time <%= time %> </h3>
+
 <FORM METHOD=POST ACTION=cal1.jsp>
 <BR> 
 <BR> <INPUT NAME="date" TYPE=HIDDEN VALUE="current">
-<BR> <INPUT NAME="time" TYPE=HIDDEN VALUE=<%= time %>
+<BR> <INPUT NAME="time" TYPE=HIDDEN VALUE=<%= time %>>
 <BR> <h2> Description of the event <INPUT NAME="description" TYPE=TEXT SIZE=20> </h2>
 <BR> <INPUT TYPE=SUBMIT VALUE="submit">
 </FORM>
