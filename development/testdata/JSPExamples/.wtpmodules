@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId">
-    <wb-module deploy-name="ApacheJSPExamples">
+    <wb-module deploy-name="JSPExamples">
         <module-type module-type-id="jst.web">
             <version>2.4</version>
-            <property name="context-root" value="ApacheJSPExamples"/>
+            <property name="context-root" value="JSPExamples"/>
             <property name="java-output-path" value="/bin/"/>
         </module-type>
         <wb-resource source-path="/JavaSource" deploy-path="/WEB-INF/classes"/>
