@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS type="org.eclipse.help.contexts"?>
+<!-- /*******************************************************************************
+ * Copyright (c) 2000, 2005 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *******************************************************************************/ -->
+<contexts>
+<context id="ejsc0000">
+<description>The JavaScript source page editor lets you edit a JavaScript file. The editor provides text editing features such as content assist, syntax highlighting, and unlimited undo and redo.
+</description>
+<topic label="Structured text editors for markup languages" href="../org.eclipse.wst.sse.doc.user/topics/csrcedt004.html"/>
+<topic label="Editing text coded in markup languages - overview" href="../org.eclipse.wst.sse.doc.user/topics/tsrcedt000.html"/>
+</context>
+
+<context id="webx0040">
+<description>This page lets you specify the line delimiter that will be used when you create or save a JavaScript file.
+
+Various development platforms use different line delimiters to indicate the start of a new line. Select the operating system that corresponds to your development or deployment platform.
+<b>Note:</b> This delimiter will not automatically be added to any documents that currently exist. It will be added only to documents that you create after you select the line delimiter type and click <b>Apply</b>, or to existing files that you open and then resave after you select the line delimiter type and click <b>Apply</b>.
+</description>
+<topic label="Setting preferences for structured text editors" href="../org.eclipse.wst.sse.doc.user/topics/tsrcedt025.html"/>
+</context>
+
+<context id="webx0041">
+<description>This page lets you specify the content assist preferences that will be used when editing a JavaScript file.
+
+If the <b>Automatically make suggestions</b> check box is selected, you can specify that certain characters will cause the content assist list to pop up automatically. Specify these characters in the <b>Prompt when these characters are inserted</b> field.
+</description>
+<topic label="Setting preferences for structured text editors" href="../org.eclipse.wst.sse.doc.user/topics/tsrcedt025.html"/>
+</context>
+
+<context id="webx0042">
+<description>This page lets you customize the syntax highlighting that the JavaScript editor does when you are editing a file.
+
+The <b>Content type</b> field contains a list of all the source types that you can select a highlighting style for. You can either select the content type that you want to work with from the drop-down list, or click text in the text sample window that corresponds to the content type for which you want to change the text highlighting.
+
+The <b>Foreground</b> and <b>Background</b> push buttons open <b>Color</b> dialog boxes that let you specify text foreground and background colors. Select the <b>Bold</b> check box to make the specified content type appear in bold.
+
+Click the <b>Restore Default</b> push button to set the highlighting styles back to their default values.
+</description>
+<topic label="Setting preferences for structured text editors" href="../org.eclipse.wst.sse.doc.user/topics/tsrcedt025.html"/>
+</context>
+
+</contexts>
