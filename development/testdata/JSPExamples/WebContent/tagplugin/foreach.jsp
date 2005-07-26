@@ -22,10 +22,11 @@
 
     <hr>
     </br>
-    <a href="notes.html">Plugin Introductory Notes
-    <font color="#0000FF"></a>
+    <a href="notes.html">Plugin Introductory Notes<font <font color="#0000FF"></
+a>
     <br/>
-    <a href="howto.html">Brief Instructions for Writing Plugins<font color="#0000FF"></a>
+    <a href="howto.html">Brief Instructions for Writing Plugins<font color="#0000
+FF"></a>
     <br/> <br/>
     <hr>
 

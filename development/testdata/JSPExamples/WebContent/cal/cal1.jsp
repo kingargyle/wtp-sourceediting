@@ -40,14 +40,12 @@
 </TABLE>
 
 <!-- the main table -->
-<FORM METHOD=POST ACTION=cal1.jsp>
 <TABLE WIDTH=60% BGCOLOR=lightblue BORDER=1 CELLPADDING=10>
 <TR>
 <TH> Time </TH>
 <TH> Appointment </TH>
 </TR>
-
-
+<FORM METHOD=POST ACTION=cal1.jsp>
 <%
 	for(int i=0; i<table.getEntries().getRows(); i++) {
 	   cal.Entry entr = table.getEntries().getEntry(i);	
@@ -64,9 +62,8 @@
 <%
 	}
 %>
-
-</TABLE>
 </FORM>
+</TABLE>
 <BR>
 
 <!-- footer -->

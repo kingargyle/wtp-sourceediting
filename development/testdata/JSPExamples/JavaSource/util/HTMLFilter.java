@@ -21,7 +21,7 @@ package util;
  *
  * @author Craig R. McClanahan
  * @author Tim Tye
- * @version $Revision: 1.1 $ $Date: 2005/07/18 02:29:58 $
+ * @version $Revision: 1.2 $ $Date: 2005/07/26 02:11:29 $
  */
 
 public final class HTMLFilter {
