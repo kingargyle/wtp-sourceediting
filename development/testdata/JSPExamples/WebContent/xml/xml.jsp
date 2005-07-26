@@ -51,7 +51,7 @@ This is the output of a simple JSP using XML format.
 
 <!-- Because I omit br's end tag, declare it as CDATA -->
 <![CDATA[
-  <br><br>
+  <br><br> 
 ]]>
 
 <div align="left">
