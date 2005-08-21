@@ -30,6 +30,8 @@ import org.eclipse.test.performance.Dimension;
 import org.eclipse.test.performance.PerformanceTestCase;
 import org.eclipse.wst.xsd.ui.internal.XSDEditorPlugin;
 import org.eclipse.xsd.util.XSDResourceImpl;
+import org.eclipse.xsd.XSDSchema;
+import org.eclipse.xsd.XSDDiagnostic;
 
 public class ReadOAGISXSDTestcase extends PerformanceTestCase
 {
@@ -66,6 +68,7 @@ public class ReadOAGISXSDTestcase extends PerformanceTestCase
 	        IContainer.INCLUDE_PHANTOMS
 	      );
       tagAsSummary("Read XSD", new Dimension[] {Dimension.ELAPSED_PROCESS, Dimension.WORKING_SET});
+      //System.out.println("processing: " + xsds.size() + " files...");
       startMeasuring();
 	  for (Iterator it = xsds.iterator(); it.hasNext();)
         readXSD((IFile)it.next());
@@ -129,6 +132,8 @@ public class ReadOAGISXSDTestcase extends PerformanceTestCase
 	ResourceSet resourceSet = new ResourceSetImpl();
     XSDResourceImpl resource = (XSDResourceImpl)resourceSet.createResource(URI.createURI("*.xsd"));
 	resource.load(is,null); 
-	resource.getSchema();
+	XSDSchema xsdSchema = resource.getSchema();
+	xsdSchema.validate();
+	List l = xsdSchema.getAllDiagnostics();
   }
 }

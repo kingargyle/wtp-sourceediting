@@ -62,6 +62,7 @@ public class ValidateOAGISXSDTestcase extends PerformanceTestCase
         IContainer.INCLUDE_PHANTOMS
       );
       tagAsSummary("Validate XSD", new Dimension[] {Dimension.ELAPSED_PROCESS, Dimension.WORKING_SET});
+      //System.out.println("processing: " + wsdls.size() + " files...");
       startMeasuring();
       for (Iterator it = wsdls.iterator(); it.hasNext();)
         validateXSD((IFile)it.next());
@@ -121,6 +122,6 @@ public class ValidateOAGISXSDTestcase extends PerformanceTestCase
 
   private void validateXSD(IFile file) throws PartInitException
   {
-	  ValidationReport valreport = validator.validate(file.getRawLocation().toOSString(), null);
+	  ValidationReport valreport = validator.validate("file:/" + file.getRawLocation().toOSString(), null);
   }
 }
