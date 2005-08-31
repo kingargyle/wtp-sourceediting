@@ -432,6 +432,19 @@ public class JSEditor extends TextEditor {
 	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#createPartControl(org.eclipse.swt.widgets.Composite)
 	 */
 	public void createPartControl(Composite parent) {
+		// just set editor/ruler/help in here because this editor is always js
+		// content
+		String contentType = getInputContentType(getEditorInput());
+		setEditorContextMenuId(contentType + ".source.EditorContext"); //$NON-NLS-1$
+		setRulerContextMenuId(contentType + ".source.RulerContext"); //$NON-NLS-1$
+		setHelpContextId(contentType + "_source_HelpId"); //$NON-NLS-1$
+		// allows help to be set at any time (not just on
+		// AbstractTextEditor's
+		// creation)
+		if ((getHelpContextId() != null) && (getSourceViewer() != null) && (getSourceViewer().getTextWidget() != null)) {
+			IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
+			helpSystem.setHelp(getSourceViewer().getTextWidget(), getHelpContextId());
+		}
 		super.createPartControl(parent);
 		initializeDrop(getSourceViewer().getTextWidget());
 	}
@@ -499,20 +512,6 @@ public class JSEditor extends TextEditor {
 
 		try {
 			super.doSetInput(input);
-
-			// currently this only works if createpartcontrol has not been
-			// called yet
-			String contentType = getInputContentType(input);
-			setEditorContextMenuId(contentType + ".source.EditorContext"); //$NON-NLS-1$
-			setRulerContextMenuId(contentType + ".source.RulerContext"); //$NON-NLS-1$
-			setHelpContextId(contentType + ".source.HelpId"); //$NON-NLS-1$
-			// allows help to be set at any time (not just on
-			// AbstractTextEditor's
-			// creation)
-			if ((getHelpContextId() != null) && (getSourceViewer() != null) && (getSourceViewer().getTextWidget() != null)) {
-				IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
-				helpSystem.setHelp(getSourceViewer().getTextWidget(), getHelpContextId());
-			}
 
 			JSLineStyleListener lineStyleListener = getLineStyleListener();
 			if (lineStyleListener != null) {

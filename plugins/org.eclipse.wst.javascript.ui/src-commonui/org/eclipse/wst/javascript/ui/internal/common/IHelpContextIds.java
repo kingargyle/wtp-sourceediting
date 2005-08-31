@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.wst.javascript.ui.internal.common;
 
+import org.eclipse.wst.javascript.core.internal.contenttype.ContentTypeIdForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 
 
@@ -24,7 +25,7 @@ public interface IHelpContextIds {
 	public static final String PREFIX = JSEditorPlugin.ID + "."; //$NON-NLS-1$
 
 	// JavaScript Source page editor
-	public static final String JS_SOURCEVIEW_HELPID = PREFIX + "ejsc0000"; //$NON-NLS-1$
+	public static final String JS_SOURCEVIEW_HELPID = ContentTypeIdForJavaScript.ContentTypeID_JAVASCRIPT +"_source_HelpId"; //$NON-NLS-1$
 	
 	// JavaScript Files Preference page
 	public static final String JS_PREFWEBX_FILES_HELPID = PREFIX + "webx0040"; //$NON-NLS-1$
