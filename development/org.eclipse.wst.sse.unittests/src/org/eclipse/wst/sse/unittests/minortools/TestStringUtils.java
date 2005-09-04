@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.wst.xml.core.tests.hacks;
+package org.eclipse.wst.sse.unittests.minortools;
 
 
 
