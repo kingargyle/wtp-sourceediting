@@ -18,6 +18,9 @@
 		name="library-file"
 		value="${eclipse-home}/plugins/org.eclipse.test_3.1.0/library.xml" />
 	<property
+		name="perf-tests-file"
+		value="${testDir}/performance-tests.xml"/>
+	<property
 		name="workspace"
 		value="${eclipse-home}/workspace-jsp-ui-perf" />
 	<!--<property name="perf-tests-file" value="${testDir}/performance-tests.xml"/>-->
@@ -34,6 +37,12 @@
 
 	<!-- This target defines the performance tests that need to be run. -->
 	<target name="performance_suite">
+		<antcall target="OpenNavigatorFolderTest"/>
+		<antcall target="OpenNavigatorFolderTest"/>
+		<antcall target="OpenNavigatorFolderTest"/>
+		<antcall target="OpenNavigatorFolderTest"/>
+		<antcall target="OpenNavigatorFolderTest"/>
+
 		<ant
 			target="ui-test"
 			antfile="${library-file}"
@@ -52,6 +61,16 @@
 				value="${eclipse-home}/plugins/${plugin-name}" />
 		</ant>
 
+	</target>
+
+	<target name="OpenNavigatorFolderTest">
+		<delete dir="${workspace}" quiet="true"/>
+		<ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+			<property name="data-dir" value="${workspace}"/>
+			<property name="plugin-name" value="${plugin-name}"/>
+			<property name="classname" value="org.eclipse.wst.html.ui.tests.performance.OpenNavigatorFolderTest"/>
+			<property name="extraVMargs" value="${extraVMargs}"/>
+		</ant>
 	</target>
 
 	<!-- This target holds code to cleanup the testing environment after -->
