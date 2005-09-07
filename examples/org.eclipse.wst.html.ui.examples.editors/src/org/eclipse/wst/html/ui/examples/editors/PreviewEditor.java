@@ -106,29 +106,17 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 				tableTreeViewer.setViewerSelectionManager((ViewerSelectionManager) fSourcePage.getAdapter(ViewerSelectionManager.class));
 			}
 			class ModelUpdater implements IPropertyListener, DisposeListener {
-				IStructuredModel model = null;
-				int referenceCount = 0;
-
 				public void propertyChanged(Object source, int propId) {
 					if (propId == IEditorPart.PROP_INPUT) {
-						if (model != null && referenceCount > 0) {
-							model.releaseFromRead();
-							referenceCount--;
-						}
 						if (!tableTreeViewer.getControl().isDisposed()) {
-							model = StructuredModelManager.getModelManager().getExistingModelForRead(fSourcePage.getDocumentProvider().getDocument(fSourcePage.getEditorInput()));
-							if (model != null) {
-								referenceCount++;
-								tableTreeViewer.setModel(model);
-							}
+							tableTreeViewer.setDocument(fSourcePage.getDocumentProvider().getDocument(getEditorInput()));
 						}
 					}
 				}
 
 				public void widgetDisposed(DisposeEvent e) {
-					if (model != null && referenceCount > 0) {
-						referenceCount--;
-						model.releaseFromRead();
+					if (!tableTreeViewer.getControl().isDisposed()) {
+						tableTreeViewer.setDocument(null);
 					}
 				}
 			}
@@ -488,7 +476,8 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 			editModel = StructuredModelManager.getModelManager().getExistingModelForRead(editDocument);
 			if (editModel != null && editModel instanceof IDOMModel) {
 				Document document = ((IDOMModel) editModel).getDocument();
-				// remove meta tags specifying encoding as required by Browser API
+				// remove meta tags specifying encoding as required by Browser
+				// API
 				NodeList metaElements = document.getElementsByTagName(HTML40Namespace.ElementName.META);
 				for (int i = 0; i < metaElements.getLength(); i++) {
 					IDOMElement meta = (IDOMElement) metaElements.item(i);
@@ -502,7 +491,8 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 							removalRegions.add(meta.getEndStructuredDocumentRegion());
 					}
 				}
-				// remove existing base elements with hrefs so we can add one for the local location
+				// remove existing base elements with hrefs so we can add one
+				// for the local location
 				NodeList baseElements = document.getElementsByTagName(HTML40Namespace.ElementName.BASE);
 				for (int i = 0; i < baseElements.getLength(); i++) {
 					IDOMElement base = (IDOMElement) baseElements.item(i);
