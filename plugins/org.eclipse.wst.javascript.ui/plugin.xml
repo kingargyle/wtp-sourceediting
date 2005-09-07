@@ -119,18 +119,10 @@
 		<initializer
 			class="org.eclipse.wst.javascript.ui.internal.common.preferences.JSCommonUIPreferenceInitializer" />
 	</extension>
-	<extension point="org.eclipse.wst.sse.ui.extendedconfiguration">
-		<definition
+	<extension point="org.eclipse.wst.sse.ui.editorConfiguration">
+		<provisionalDefinition
 			type="preferencepages"
-			value="org.eclipse.wst.sse.javascript.preferences"
-			target="org.eclipse.wst.javascript.core.javascriptsource" />
-		<definition
-			type="preferencepages"
-			value="org.eclipse.wst.sse.javascript.preferences.source"
-			target="org.eclipse.wst.javascript.core.javascriptsource" />
-		<definition
-			type="preferencepages"
-			value="org.eclipse.wst.sse.javascript.preferences.styles"
+			value="org.eclipse.wst.sse.javascript.preferences, org.eclipse.wst.sse.javascript.preferences.source, org.eclipse.wst.sse.javascript.preferences.styles"
 			target="org.eclipse.wst.javascript.core.javascriptsource" />
 	</extension>
 

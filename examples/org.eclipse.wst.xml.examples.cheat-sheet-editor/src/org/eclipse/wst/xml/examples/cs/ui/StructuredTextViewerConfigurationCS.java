@@ -29,11 +29,15 @@ public class StructuredTextViewerConfigurationCS extends StructuredTextViewerCon
 		IContentAssistant ca = super.getContentAssistant(sourceViewer);
 		if (ca != null && ca instanceof ContentAssistant) {
 			ContentAssistant contentAssistant = (ContentAssistant) ca;
-			IContentAssistProcessor xmlContentAssistProcessor = new CSContentAssistProcessor(getEditorPart());
+			
+			// create content assist processors to be used
+			IContentAssistProcessor xmlContentAssistProcessor = new CSContentAssistProcessor();
 			IContentAssistProcessor noRegionProcessor = new NoRegionContentAssistProcessor();
-			setContentAssistProcessor(contentAssistant, xmlContentAssistProcessor, IStructuredPartitionTypes.DEFAULT_PARTITION);
-			setContentAssistProcessor(contentAssistant, xmlContentAssistProcessor, IXMLPartitions.XML_DEFAULT);
-			setContentAssistProcessor(contentAssistant, noRegionProcessor, IStructuredPartitionTypes.UNKNOWN_PARTITION);
+			
+			// add processors to content assistant
+			contentAssistant.setContentAssistProcessor(xmlContentAssistProcessor, IStructuredPartitionTypes.DEFAULT_PARTITION);
+			contentAssistant.setContentAssistProcessor(xmlContentAssistProcessor, IXMLPartitions.XML_DEFAULT);
+			contentAssistant.setContentAssistProcessor(noRegionProcessor, IStructuredPartitionTypes.UNKNOWN_PARTITION);
 		}
 		return ca;
 	}

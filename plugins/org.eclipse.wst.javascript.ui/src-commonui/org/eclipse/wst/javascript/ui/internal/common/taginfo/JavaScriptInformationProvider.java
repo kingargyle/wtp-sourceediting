@@ -13,9 +13,11 @@ package org.eclipse.wst.javascript.ui.internal.common.taginfo;
 
 
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.information.IInformationProvider;
 import org.eclipse.jface.text.information.IInformationProviderExtension;
+import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 
 /**
  * Provides context information for javascript code (Shows tooltip description)
@@ -24,10 +26,10 @@ import org.eclipse.jface.text.information.IInformationProviderExtension;
  */
 public class JavaScriptInformationProvider implements IInformationProvider, IInformationProviderExtension {
 
-	private JavaScriptBestMatchHoverProcessor fTextHover = null;
+	private ITextHover fTextHover = null;
 
 	public JavaScriptInformationProvider() {
-		fTextHover = new JavaScriptBestMatchHoverProcessor();
+		fTextHover = SSEUIPlugin.getDefault().getTextHoverManager().createBestMatchHover(new JavaScriptTagInfoHoverProcessor());
 	}
 
 	/* (non-Javadoc)

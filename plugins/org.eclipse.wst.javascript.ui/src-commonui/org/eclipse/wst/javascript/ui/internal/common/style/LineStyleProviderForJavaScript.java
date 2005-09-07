@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.ITypedRegion;
@@ -35,23 +34,21 @@ import org.eclipse.wst.javascript.core.internal.jsparser.node.Token;
 import org.eclipse.wst.javascript.ui.internal.common.JavaScriptColorPreferences;
 import org.eclipse.wst.javascript.ui.internal.common.LexerCacheForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.common.Logger;
-import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.util.Debug;
-import org.eclipse.wst.sse.ui.internal.provisional.style.AbstractLineStyleProvider;
 import org.eclipse.wst.sse.ui.internal.provisional.style.Highlighter;
 import org.eclipse.wst.sse.ui.internal.provisional.style.LineStyleProvider;
 
-public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider implements LineStyleProvider, IDocumentListener {
+public class LineStyleProviderForJavaScript implements LineStyleProvider, IDocumentListener {
 
 	private static java.util.HashSet boldKeywords = new java.util.HashSet();
 
 	public static String[] keywords = null; // global public to share with the preferences code.
 
 	private java.util.Hashtable htForNode2 = new java.util.Hashtable();
-
+	private IStructuredDocument fDocument;
 	class nodedata {
 		protected LexerCacheForJavaScript pcParseCache = null;
 		protected ArrayList cachedStyles = new ArrayList(100);
@@ -117,12 +114,12 @@ public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider im
 
 	public void init(IStructuredDocument structuredDocument, Highlighter highlighter) {
 		// TODO need a better place/way to add document listeners, instead of each init!
-		IStructuredDocument currentDocument = getDocument();
+		IStructuredDocument currentDocument = fDocument;
 		if (currentDocument != null && currentDocument != structuredDocument) {
 			currentDocument.removeDocumentListener(this);
 		}
-		super.init(structuredDocument, highlighter);
-		getDocument().addDocumentListener(this);
+		fDocument = structuredDocument;
+		fDocument.addDocumentListener(this);
 	}
 
 	private nodedata ndDoc = null;
@@ -394,7 +391,7 @@ public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider im
 	 */
 	public boolean prepareRegions(ITypedRegion currentRegion, int offStart, int length, Collection holdResults) {
 		//Date dt0 = new Date();
-		IStructuredDocument structuredDocument = getDocument();
+		IStructuredDocument structuredDocument = fDocument;
 		IStructuredDocumentRegion fnode = structuredDocument.getRegionAtCharacterOffset(offStart);
 		//init4(structuredDocument);
 
@@ -473,7 +470,7 @@ public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider im
 		if (Debug.jsDebugSyntaxColoring) {
 			int xxif = offStart - currentRegion.getOffset();
 			// good things this is only called during debug!
-			String tt = getDocument().getText().substring(xxif, xxif + length);
+			String tt = fDocument.getText().substring(xxif, xxif + length);
 			//System.out.println( "pr: ("+offStart+","+length+") "+tt );
 			if (tt.indexOf("xbove ") != -1) { //$NON-NLS-1$
 				Logger.trace("jsDebugSyntaxColoring", "tt.indexOf xbove != -1"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -490,7 +487,7 @@ public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider im
 
 		// figure out at what file offset the node starts.
 		int offNode = 0; // bad guess, override below
-		if (getDocument() != null) {
+		if (fDocument != null) {
 			if (fnode != null) {
 				offNode = fnode.getStartOffset();
 			}
@@ -742,14 +739,11 @@ public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider im
 	//		targetNode = newTargetNode;
 	//	}
 	public void release() {
-		super.release();
-
 		releaseNodesInLexerCache();
 
-		if (getDocument() != null) {
-			getDocument().removeDocumentListener(this);
+		if (fDocument != null) {
+			fDocument.removeDocumentListener(this);
 		}
-
 	}
 
 	protected void releaseNodesInLexerCache() {
@@ -758,9 +752,5 @@ public class LineStyleProviderForJavaScript extends AbstractLineStyleProvider im
 			IStructuredDocumentRegion fnode = (IStructuredDocumentRegion) keys.nextElement();
 			LexerCacheForJavaScript.release(fnode);
 		}
-	}
-	
-	protected IPreferenceStore getColorPreferences() {
-		return JSEditorPlugin.getDefault().getPreferenceStore();
 	}
 }

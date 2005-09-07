@@ -20,8 +20,8 @@ import java.text.BreakIterator;
 import org.eclipse.swt.graphics.GC;
 
 /**
- * Copied from org.eclipse.jdt.internal.ui.text.LineBreakingReader
- * No modifications were made
+ * Copied from org.eclipse.jdt.internal.ui.text.LineBreakingReader.
+ * Modifications were made to fix warnings.
  */
 /*
  * Not a real reader. Could change if requested
@@ -102,9 +102,7 @@ class LineBreakingReader {
 				if (currWidth > 0) {
 					return currOffset;
 				}
-				else {
-					return nextOffset;
-				}
+				return nextOffset;
 			}
 			currWidth = nextWidth;
 			currOffset = nextOffset;
