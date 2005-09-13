@@ -40,7 +40,12 @@ import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.dnd.DND;
@@ -80,6 +85,7 @@ import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wst.javascript.core.internal.contenttype.ContentTypeIdForJavaScript;
+import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
 import org.eclipse.wst.javascript.ui.internal.common.JSSourceViewerConfiguration;
 import org.eclipse.wst.javascript.ui.internal.views.contentoutline.JSContentOutlinePage;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;
@@ -142,9 +148,91 @@ public class JSEditor extends TextEditor {
 		}
 	}
 
-	// DocumentProvider for StorageEditorInputs - supports
-	// IExtendedStorageEditorInput notifications and custom
-	// ResourceAnnotationModels
+	/**
+	 * Listens to double-click and selection from the outline page
+	 */
+	private class OutlinePageListener implements IDoubleClickListener, ISelectionChangedListener {
+		public void doubleClick(DoubleClickEvent event) {
+			if (event.getSelection().isEmpty())
+				return;
+
+			int start = -1;
+			int length = 0;
+			if (event.getSelection() instanceof IStructuredSelection) {
+				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+				Object o = selection.getFirstElement();
+				Object o2 = null;
+				if (selection.size() > 1) {
+					o2 = selection.toArray()[selection.size() - 1];
+				}
+				else {
+					o2 = o;
+				}
+				start = ((ContentElement) o).getOffset();
+				int end = ((ContentElement) o2).getOffset() + ((ContentElement) o2).getLength();
+				length = end - start;
+			}
+			else if (event.getSelection() instanceof ITextSelection) {
+				start = ((ITextSelection) event.getSelection()).getOffset();
+				length = ((ITextSelection) event.getSelection()).getLength();
+			}
+			if (start > -1) {
+				getSourceViewer().setRangeIndication(start, length, false);
+				selectAndReveal(start, length);
+			}
+		}
+
+		public void selectionChanged(SelectionChangedEvent event) {
+			/*
+			 * Do not allow selection from other parts to affect selection in
+			 * the text widget if it has focus, or if we're still firing a
+			 * change of selection. Selection events "bouncing" off of other
+			 * parts are all that we can receive if we have focus (since we
+			 * forwarded our selection to the service just a moment ago), and
+			 * only the user should affect selection if we have focus.
+			 */
+
+			/* The isFiringSelection check only works if a selection listener */
+			if (event.getSelection().isEmpty())
+				return;
+
+			if (getSourceViewer() != null && getSourceViewer().getTextWidget() != null && !getSourceViewer().getTextWidget().isDisposed() && !getSourceViewer().getTextWidget().isFocusControl()) {
+				int start = -1;
+				int length = -1;
+				if (event.getSelection() instanceof IStructuredSelection) {
+					IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+					Object o = selection.getFirstElement();
+					Object o2 = null;
+					if (selection.size() > 1) {
+						o2 = selection.toArray()[selection.size() - 1];
+					}
+					else {
+						o2 = o;
+					}
+					start = ((ContentElement) o).getOffset();
+					int end = ((ContentElement) o2).getOffset() + ((ContentElement) o2).getLength();
+					length = end - start;
+				}
+				else if (event.getSelection() instanceof ITextSelection) {
+					start = ((ITextSelection) event.getSelection()).getOffset();
+					length = ((ITextSelection) event.getSelection()).getLength();
+				}
+				if (start > -1) {
+					getSourceViewer().setRangeIndication(start, length, false);
+					selectAndReveal(start, 0);
+				}
+				else {
+					getSourceViewer().removeRangeIndication();
+				}
+			}
+		}
+	}
+
+	/*
+	 * DocumentProvider for StorageEditorInputs - supports
+	 * IExtendedStorageEditorInput notifications and custom
+	 * ResourceAnnotationModels
+	 */
 	class StorageInputDocumentProvider extends StorageDocumentProvider implements IElementStateListener {
 		protected IAnnotationModel createAnnotationModel(Object element) throws CoreException {
 			IAnnotationModel model = null;
@@ -235,6 +323,8 @@ public class JSEditor extends TextEditor {
 	private ISourceEditingTextTools fSourceEditingTextTools = new SourceEditingTextTools();
 
 	IDocumentProvider fStorageInputDocumentProvider = null;
+
+	private OutlinePageListener fOutlinePageListener;
 	private static final String UNDERSCORE = "_"; //$NON-NLS-1$
 
 	protected void addContextMenuActions(IMenuManager menu) {
@@ -351,8 +441,13 @@ public class JSEditor extends TextEditor {
 				// relied on for MultiPageEditorParts. Instead, force the
 				// action
 				// registration manually.
-//				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new MarkerRulerAction(JavaScriptUIMessages.getResourceBundle(), "Editor.ManageBookmarks.", this, getVerticalRuler(), IMarker.BOOKMARK, true)); //$NON-NLS-1$
-				// add bookmark action is already registered in AbstractDecoratedTextEditor, so just get it
+				// setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK,
+				// new
+				// MarkerRulerAction(JavaScriptUIMessages.getResourceBundle(),
+				// "Editor.ManageBookmarks.", this, getVerticalRuler(),
+				// IMarker.BOOKMARK, true)); //$NON-NLS-1$
+				// add bookmark action is already registered in
+				// AbstractDecoratedTextEditor, so just get it
 				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, getAction(IDEActionFactory.BOOKMARK.getId()));
 			}
 
@@ -574,6 +669,12 @@ public class JSEditor extends TextEditor {
 		if ((fContentOutlinePage == null) || (fContentOutlinePage.getControl().isDisposed())) {
 			IDocument document = getDocumentProvider().getDocument(getEditorInput());
 			fContentOutlinePage = new JSContentOutlinePage(document, getSourceViewer());
+			if (fOutlinePageListener == null) {
+				fOutlinePageListener = new OutlinePageListener();
+			}
+
+			fContentOutlinePage.addSelectionChangedListener(fOutlinePageListener);
+			fContentOutlinePage.addDoubleClickListener(fOutlinePageListener);
 		}
 		return fContentOutlinePage;
 	}
@@ -878,7 +979,7 @@ public class JSEditor extends TextEditor {
 	}
 
 	public int getOrientation() {
-		//https://bugs.eclipse.org/bugs/show_bug.cgi?id=88714
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=88714
 		return SWT.LEFT_TO_RIGHT;
 	}
 }

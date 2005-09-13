@@ -23,15 +23,18 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.IShowInTargetList;
-import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
+import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageSelectionProvider;
+import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
 
-public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPropertyListener {
+public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart implements IPropertyListener {
 
 	class TextInputListener implements ITextInputListener {
 		public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
 		}
+
 		public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 			if (newInput != null) {
 				setInput(fEditor.getEditorInput());
@@ -75,10 +78,10 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 
 	protected void createPages() {
 		addSourcePage();
-		
-		/* https://bugs.eclipse.org/bugs/show_bug.cgi?id=87657
-		 * used this check for SWTError in attempt to work around 
-		 * "blocker" mentioned in 87657
+
+		/*
+		 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=87657 used this check
+		 * for SWTError in attempt to work around "blocker" mentioned in 87657
 		 */
 		try {
 			addPreviewPage();
@@ -93,6 +96,10 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 		fTitleImage = JSEditorPluginImageHelper.getInstance().getImageDescriptor(JSEditorPluginImages.IMG_OBJ_JAVASCRIPT_VIEW).createImage();
 		setTitleImage(fTitleImage);
 	}
+	
+	protected IEditorSite createSite(IEditorPart editor) {
+		return new PostMultiPageEditorSite(this, editor);
+	}
 
 	public void dispose() {
 		if (fEditor != null)
@@ -101,7 +108,7 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 		if (fTitleImage != null)
 			fTitleImage.dispose();
 	}
-	
+
 	public void doSave(IProgressMonitor monitor) {
 		fEditor.doSave(monitor);
 	}
@@ -121,8 +128,7 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 
 		if (IShowInTargetList.class.equals(required))
 			return fEditor.getAdapter(required);
-		if (IContentOutlinePage.class.equals(required))
-			return fEditor.getAdapter(required);
+		
 		if (ITextEditor.class.equals(required))
 			return fEditor;
 
@@ -136,12 +142,16 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.part.MultiPageEditorPart#init(org.eclipse.ui.IEditorSite, org.eclipse.ui.IEditorInput)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.part.MultiPageEditorPart#init(org.eclipse.ui.IEditorSite,
+	 *      org.eclipse.ui.IEditorInput)
 	 */
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 		setPartName(input.getName());
+		site.setSelectionProvider(new PostMultiPageSelectionProvider(this));
 	}
 
 	public boolean isSaveAsAllowed() {
@@ -157,35 +167,34 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart implements IPrope
 
 	public void propertyChanged(Object source, int propId) {
 		switch (propId) {
-			case IEditorPart.PROP_INPUT :
-				{
-					if (source == fEditor) {
-						if (fEditor.getEditorInput() != getEditorInput()) {
-							setInput(fEditor.getEditorInput());
-						}
+			case IEditorPart.PROP_INPUT : {
+				if (source == fEditor) {
+					if (fEditor.getEditorInput() != getEditorInput()) {
+						setInput(fEditor.getEditorInput());
 					}
-					break;
 				}
-			case IWorkbenchPart.PROP_TITLE :
-				{
-					if (source == fEditor) {
-						if (fEditor.getEditorInput() != getEditorInput()) {
-							setInput(fEditor.getEditorInput());
-						}
+				break;
+			}
+			case IWorkbenchPart.PROP_TITLE : {
+				if (source == fEditor) {
+					if (fEditor.getEditorInput() != getEditorInput()) {
+						setInput(fEditor.getEditorInput());
 					}
-					break;
 				}
-			default :
-				{
-					if (source == fEditor) {
-						firePropertyChange(propId);
-					}
-					break;
+				break;
+			}
+			default : {
+				if (source == fEditor) {
+					firePropertyChange(propId);
 				}
+				break;
+			}
 		}
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.part.EditorPart#setInput(org.eclipse.ui.IEditorInput)
 	 */
 	protected void setInput(IEditorInput input) {

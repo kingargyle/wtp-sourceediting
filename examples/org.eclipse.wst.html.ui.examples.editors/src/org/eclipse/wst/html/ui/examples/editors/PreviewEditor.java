@@ -102,9 +102,6 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 		if (showXMLDesign) {
 			final XMLTableTreeViewer tableTreeViewer = new XMLTableTreeViewer(getContainer());
 
-			if (fSourcePage.getAdapter(ViewerSelectionManager.class) != null) {
-				tableTreeViewer.setViewerSelectionManager((ViewerSelectionManager) fSourcePage.getAdapter(ViewerSelectionManager.class));
-			}
 			class ModelUpdater implements IPropertyListener, DisposeListener {
 				public void propertyChanged(Object source, int propId) {
 					if (propId == IEditorPart.PROP_INPUT) {

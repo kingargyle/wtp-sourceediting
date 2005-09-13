@@ -11,7 +11,12 @@
 package org.eclipse.wst.javascript.ui.internal.views.contentoutline;
 
 import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.IAction;
@@ -25,21 +30,26 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.util.SafeRunnable;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
 import org.eclipse.wst.javascript.ui.internal.common.ContentElementComparerImpl;
@@ -48,66 +58,12 @@ import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
 import org.eclipse.wst.javascript.ui.internal.editor.JavaScriptUIMessages;
-import org.eclipse.wst.javascript.ui.internal.editor.SimpleTreeViewer;
-import org.eclipse.wst.javascript.ui.internal.editor.SimpleViewerSelectionManagerImpl;
 import org.eclipse.wst.sse.core.internal.provisional.exceptions.SourceEditingRuntimeException;
-import org.eclipse.wst.sse.ui.internal.ViewerSelectionManager;
 import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateAction;
 import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateActionContributionItem;
 import org.eclipse.wst.sse.ui.internal.edit.util.SharedEditorPluginImageHelper;
 
 public class JSContentOutlinePage extends ContentOutlinePage implements IDocumentListener {
-	protected class SortAction extends PropertyChangeUpdateAction {
-		private TreeViewer treeViewer;
-
-		protected class CategorySorter extends ViewerSorter {
-			public int category(Object element) {
-				if (element instanceof ContentElement) {
-					return ((ContentElement) element).getType();
-				}
-				return 0;
-			}
-
-			public CategorySorter() {
-				super();
-			}
-
-			public CategorySorter(Collator collator) {
-				super(collator);
-			}
-		}
-
-		public SortAction(TreeViewer viewer, IPreferenceStore store, String preferenceKey) {
-			super(JavaScriptUIMessages.JSContentOutlinePage_4, store, preferenceKey, false); //$NON-NLS-1$
-			setImageDescriptor(JSEditorPluginImageHelper.getInstance().getImageDescriptor(JSEditorPluginImages.IMG_OBJ_SORT));
-			setToolTipText(getText());
-			treeViewer = viewer;
-			if (isChecked()) {
-				treeViewer.setSorter(new CategorySorter(Collator.getInstance()));
-			}
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.ui.texteditor.IUpdate#update()
-		 */
-		public void update() {
-			super.update();
-			treeViewer.getControl().setVisible(false);
-			Object[] expandedElements = treeViewer.getExpandedElements();
-			if (isChecked()) {
-				treeViewer.setSorter(new CategorySorter(Collator.getInstance()));
-			}
-			else {
-				treeViewer.setSorter(null);
-			}
-			treeViewer.setInput(treeViewer.getInput());
-			treeViewer.setExpandedElements(expandedElements);
-			treeViewer.getControl().setVisible(true);
-		}
-	}
-
 	/**
 	 * Structured source files tend to have large/long tree structures. Add a
 	 * collapse action to help with navigation.
@@ -145,7 +101,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 					ContentElement contentElement = (ContentElement) firstElement;
 					try {
 						fDocument.replace(contentElement.getOffset(), contentElement.getLength(), ""); //$NON-NLS-1$
-						fTreeViewer.refresh();
+						getTreeViewer().refresh();
 					}
 					catch (BadLocationException exception) {
 						throw new SourceEditingRuntimeException(exception);
@@ -187,6 +143,57 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		}
 	}
 
+	protected class SortAction extends PropertyChangeUpdateAction {
+		protected class CategorySorter extends ViewerSorter {
+			public CategorySorter() {
+				super();
+			}
+
+			public CategorySorter(Collator collator) {
+				super(collator);
+			}
+
+			public int category(Object element) {
+				if (element instanceof ContentElement) {
+					return ((ContentElement) element).getType();
+				}
+				return 0;
+			}
+		}
+
+		private TreeViewer treeViewer;
+
+		public SortAction(TreeViewer viewer, IPreferenceStore store, String preferenceKey) {
+			super(JavaScriptUIMessages.JSContentOutlinePage_4, store, preferenceKey, false); //$NON-NLS-1$
+			setImageDescriptor(JSEditorPluginImageHelper.getInstance().getImageDescriptor(JSEditorPluginImages.IMG_OBJ_SORT));
+			setToolTipText(getText());
+			treeViewer = viewer;
+			if (isChecked()) {
+				treeViewer.setSorter(new CategorySorter(Collator.getInstance()));
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.eclipse.ui.texteditor.IUpdate#update()
+		 */
+		public void update() {
+			super.update();
+			treeViewer.getControl().setVisible(false);
+			Object[] expandedElements = treeViewer.getExpandedElements();
+			if (isChecked()) {
+				treeViewer.setSorter(new CategorySorter(Collator.getInstance()));
+			}
+			else {
+				treeViewer.setSorter(null);
+			}
+			treeViewer.setInput(treeViewer.getInput());
+			treeViewer.setExpandedElements(expandedElements);
+			treeViewer.getControl().setVisible(true);
+		}
+	}
+
 	protected class ToggleLinkAction extends PropertyChangeUpdateAction {
 		public ToggleLinkAction(IPreferenceStore store, String preference) {
 			super(JavaScriptUIMessages.JSContentOutlinePage_1, store, preference, true); //$NON-NLS-1$
@@ -197,7 +204,52 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		}
 
 		public void update() {
-			((SimpleTreeViewer) getTreeViewer()).setLinkWithEditor(isChecked());
+			setLinkWithEditor(isChecked());
+		}
+	}
+
+	private class DoubleClickProvider implements IDoubleClickListener {
+		private IDoubleClickListener[] listeners = null;
+
+		void addDoubleClickListener(IDoubleClickListener newListener) {
+			if (listeners == null) {
+				listeners = new IDoubleClickListener[]{newListener};
+			}
+			else {
+				IDoubleClickListener[] newListeners = new IDoubleClickListener[listeners.length + 1];
+				System.arraycopy(listeners, 0, newListeners, 0, listeners.length);
+				newListeners[listeners.length] = newListener;
+				listeners = newListeners;
+			}
+		}
+
+		public void doubleClick(DoubleClickEvent event) {
+			fireDoubleClickEvent(event);
+		}
+
+		private void fireDoubleClickEvent(final DoubleClickEvent event) {
+			IDoubleClickListener[] firingListeners = listeners;
+			for (int i = 0; i < firingListeners.length; ++i) {
+				final IDoubleClickListener l = firingListeners[i];
+				Platform.run(new SafeRunnable() {
+					public void run() {
+						l.doubleClick(event);
+					}
+				});
+			}
+		}
+
+		void removeDoubleClickListener(IDoubleClickListener oldListener) {
+			if (listeners != null) {
+				if (listeners.length == 1 && listeners[0].equals(oldListener)) {
+					listeners = null;
+				}
+				else {
+					List newListeners = new ArrayList(Arrays.asList(listeners));
+					newListeners.remove(oldListener);
+					listeners = (IDoubleClickListener[]) newListeners.toArray(new IDoubleClickListener[listeners.length - 1]);
+				}
+			}
 		}
 	}
 
@@ -210,25 +262,33 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 	protected ImageDescriptor COLLAPSE_E = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_ELCL_COLLAPSEALL);
 	protected ImageDescriptor DELETE_D = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_DLCL_DELETE);
 	protected ImageDescriptor DELETE_E = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_ELCL_DELETE);
-	protected ImageDescriptor SYNCED_D = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_DLCL_SYNCED);
-	protected ImageDescriptor SYNCED_E = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_ELCL_SYNCED);
+	private MenuManager fContextMenu = null;
+	private boolean fContextMenuRegistered = false;
 
 	protected DeleteAction fDeleteAction = new DeleteAction();
 	protected IDocument fDocument = null;
+	private boolean fIsLinked = true;
 	private PropertyChangeUpdateActionContributionItem fShowHierarchyItem;
 	private PropertyChangeUpdateActionContributionItem fShowVariablesItem;
-	private PropertyChangeUpdateActionContributionItem fSortItem;
 
+	private PropertyChangeUpdateActionContributionItem fSortItem;
 	protected ISourceViewer fSourceViewer = null;
 	private PropertyChangeUpdateActionContributionItem fToggleLinkItem;
-	protected TreeViewer fTreeViewer = null;
-	protected SimpleViewerSelectionManagerImpl fViewerSelectionManager = null;
-	private boolean fContextMenuRegistered = false;
-	private MenuManager fContextMenu = null;
+	protected ImageDescriptor SYNCED_D = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_DLCL_SYNCED);
+	protected ImageDescriptor SYNCED_E = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_ELCL_SYNCED);
+	private DoubleClickProvider fDoubleClickProvider;
+	private ISelectionListener fSelectionListener;
 
 	public JSContentOutlinePage(IDocument document, ISourceViewer sourceViewer) {
 		setDocument(document);
 		setSourceViewer(sourceViewer);
+	}
+
+	public void addDoubleClickListener(IDoubleClickListener listener) {
+		if (fDoubleClickProvider == null) {
+			fDoubleClickProvider = new DoubleClickProvider();
+		}
+		fDoubleClickProvider.addDoubleClickListener(listener);
 	}
 
 	protected void contextMenuAboutToShow(IMenuManager menuManager) {
@@ -243,16 +303,20 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 	}
 
 	public void createControl(Composite parent) {
-		createTreeViewer(parent);
+		super.createControl(parent);
 
-		fTreeViewer.setContentProvider(new JSTreeContentProvider());
-		fTreeViewer.setLabelProvider(new JSLabelProvider());
-		fTreeViewer.addSelectionChangedListener(getViewerSelectionManager());
-		fTreeViewer.addDoubleClickListener(getViewerSelectionManager());
-		fTreeViewer.setInput(fDocument);
+		getTreeViewer().setContentProvider(new JSTreeContentProvider());
+		getTreeViewer().setLabelProvider(new JSLabelProvider());
+		getTreeViewer().setInput(fDocument);
+		getTreeViewer().setComparer(new ContentElementComparerImpl());
+		if (fDoubleClickProvider == null) {
+			fDoubleClickProvider = new DoubleClickProvider();
+		}
+		getTreeViewer().addDoubleClickListener(fDoubleClickProvider);
 
-		if (fDocument != null)
+		if (fDocument != null) {
 			fDocument.addDocumentListener(this);
+		}
 
 		fContextMenu = new MenuManager("#popup"); //$NON-NLS-1$
 		fContextMenu.setRemoveAllWhenShown(true);
@@ -261,17 +325,9 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 				contextMenuAboutToShow(menuManager);
 			}
 		});
-		Menu menu = fContextMenu.createContextMenu(fTreeViewer.getTree());
-		fTreeViewer.getTree().setMenu(menu);
+		Menu menu = fContextMenu.createContextMenu(getTreeViewer().getTree());
+		getTreeViewer().getTree().setMenu(menu);
 		registerContextMenu();
-	}
-
-	protected void createTreeViewer(Composite parent) {
-		fTreeViewer = new SimpleTreeViewer(new Tree(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL));
-		fTreeViewer.addSelectionChangedListener(this);
-		fTreeViewer.setComparer(new ContentElementComparerImpl());
-		if (fViewerSelectionManager != null)
-			fViewerSelectionManager.setTreeViewer(fTreeViewer);
 	}
 
 	public void dispose() {
@@ -281,17 +337,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		if (fDocument != null)
 			fDocument.removeDocumentListener(this);
 
-		// disconnect from the ViewerSelectionManager
-		if (fViewerSelectionManager != null) {
-			fViewerSelectionManager.disconnectCaretListeners();
-
-			if (fTreeViewer != null) {
-				fTreeViewer.removeDoubleClickListener(fViewerSelectionManager);
-				fTreeViewer.removeSelectionChangedListener(fViewerSelectionManager);
-			}
-		}
-
-		// disocnnect preference change listening contribution items
+		// disconnect preference change listening contribution items
 		if (fShowHierarchyItem != null)
 			fShowHierarchyItem.disconnect();
 		if (fSortItem != null)
@@ -300,6 +346,9 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 			fShowVariablesItem.disconnect();
 		if (fToggleLinkItem != null)
 			fToggleLinkItem.disconnect();
+
+		getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(getSelectionServiceListener());
+		getSite().getWorkbenchWindow().getSelectionService().removePostSelectionListener(getSelectionServiceListener());
 	}
 
 	/**
@@ -322,31 +371,66 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		//
 	}
 
-	public Control getControl() {
-		if (fTreeViewer == null)
-			return null;
-		return fTreeViewer.getControl();
+	public void init(IPageSite pageSite) {
+		super.init(pageSite);
+		getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(getSelectionServiceListener());
+		getSite().getWorkbenchWindow().getSelectionService().addPostSelectionListener(getSelectionServiceListener());
 	}
 
-	public ISelection getSelection() {
-		if (fTreeViewer == null)
-			return StructuredSelection.EMPTY;
-		return fTreeViewer.getSelection();
+	private ISelectionListener getSelectionServiceListener() {
+		if (fSelectionListener == null) {
+			fSelectionListener = new ISelectionListener() {
+				private ContentElement getContentElementAt(ContentElement contentElement, int caretPosition) {
+					ContentElement result = null;
+
+					List children = contentElement.getChildren();
+					if (children != null) {
+						for (Iterator iter = children.iterator(); iter.hasNext();) {
+							ContentElement eachContentElement = (ContentElement) iter.next();
+							result = getContentElementAt(eachContentElement, caretPosition);
+
+							if (result != null)
+								return result;
+						}
+					}
+
+					int offset = contentElement.getOffset();
+					int length = contentElement.getLength();
+					if ((caretPosition >= offset) && (caretPosition <= offset + length))
+						result = contentElement;
+
+					return result;
+				}
+
+				public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+					if (fIsLinked && !getTreeViewer().getControl().isDisposed() && !getTreeViewer().getControl().isFocusControl()) {
+						StructuredSelection structuredSelection = null;
+						Object o = null;
+						if (selection instanceof ITextSelection) {
+							Object[] treeItems = getTreeViewer().getTree().getItems();
+							for (int i = 0; i < treeItems.length; i++) {
+								ContentElement eachContentElement = (ContentElement) ((TreeItem) treeItems[i]).getData();
+
+								o = getContentElementAt(eachContentElement, ((ITextSelection) selection).getOffset());
+								if (o != null)
+									break;
+							}
+							if (o != null) {
+								structuredSelection = new StructuredSelection(o);
+							}
+						}
+						if (structuredSelection != null) {
+							getTreeViewer().setSelection(structuredSelection);
+						}
+					}
+				}
+			};
+		}
+		return fSelectionListener;
 	}
 
 	protected ISourceViewer getSourceViewer() {
 		return fSourceViewer;
-	}
-
-	protected TreeViewer getTreeViewer() {
-		return fTreeViewer;
-	}
-
-	protected ViewerSelectionManager getViewerSelectionManager() {
-		if (fViewerSelectionManager == null) {
-			fViewerSelectionManager = new SimpleViewerSelectionManagerImpl(getSourceViewer(), fTreeViewer);
-		}
-		return fViewerSelectionManager;
 	}
 
 	void registerContextMenu() {
@@ -356,9 +440,15 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 				IEditorPart ownerEditor = page.getActiveEditor();
 				if (ownerEditor != null) {
 					fContextMenuRegistered = true;
-					getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + ".OutlineContext", fContextMenu, this);	//$NON-NLS-1$
+					getSite().registerContextMenu(ownerEditor.getEditorSite().getId() + ".OutlineContext", fContextMenu, this); //$NON-NLS-1$
 				}
 			}
+		}
+	}
+
+	public void removeDoubleClickListener(IDoubleClickListener listener) {
+		if (fDoubleClickProvider != null) {
+			fDoubleClickProvider.removeDoubleClickListener(listener);
 		}
 	}
 
@@ -390,20 +480,20 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		if (document != fDocument) {
 			fDocument = document;
 
-			if (fTreeViewer != null) {
-				fTreeViewer.setInput(fDocument);
-				fTreeViewer.refresh();
+			if (getTreeViewer() != null) {
+				getTreeViewer().setInput(fDocument);
+				getTreeViewer().refresh();
 			}
 		}
 	}
 
-	public void setFocus() {
-		fTreeViewer.getControl().setFocus();
+	public void setLinkWithEditor(boolean b) {
+		fIsLinked = b;
 	}
 
 	public void setSelection(ISelection selection) {
-		if (fTreeViewer != null)
-			fTreeViewer.setSelection(selection, true);
+		if (getTreeViewer() != null && fIsLinked)
+			getTreeViewer().setSelection(selection, true);
 	}
 
 	protected void setSourceViewer(ISourceViewer sourceViewer) {

@@ -17,8 +17,6 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapterFactory;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.sse.ui.internal.contentoutline.IJFaceNodeAdapter;
-import org.eclipse.wst.xml.core.internal.contentmodel.modelquery.ModelQuery;
-import org.eclipse.wst.xml.core.internal.ssemodelquery.ModelQueryAdapter;
 import org.eclipse.wst.xml.ui.internal.contentoutline.JFaceNodeAdapterFactory;
 
 /**
@@ -27,8 +25,6 @@ import org.eclipse.wst.xml.ui.internal.contentoutline.JFaceNodeAdapterFactory;
  * DOM nodes in a tree.
  */
 public class JFaceNodeAdapterFactoryForCS extends JFaceNodeAdapterFactory {
-	protected INodeAdapter singletonAdapter;
-
 	public JFaceNodeAdapterFactoryForCS() {
 		this(IJFaceNodeAdapter.class, true);
 	}
@@ -48,28 +44,6 @@ public class JFaceNodeAdapterFactoryForCS extends JFaceNodeAdapterFactory {
 		}
 		return singletonAdapter;
 	}
-
-	protected void initAdapter(INodeAdapter adapter, INodeNotifier node) {
-		// register for CMDocumentManager events
-		if (((JFaceNodeAdapterForCS) adapter).getCMDocumentManagerListener() != null) {
-			ModelQueryAdapter mqadapter = (ModelQueryAdapter) node.getAdapterFor(ModelQueryAdapter.class);
-			if (mqadapter != null) {
-				ModelQuery mquery = mqadapter.getModelQuery();
-				if (mquery != null && mquery.getCMDocumentManager() != null) {
-					cmDocumentManager = mquery.getCMDocumentManager();
-					cmDocumentManager.addListener(((JFaceNodeAdapterForCS) adapter).getCMDocumentManagerListener());
-				}
-			}
-		}
-	}
-
-	public void release() {
-		// deregister from CMDocumentManager events
-		if (cmDocumentManager != null && singletonAdapter != null && ((JFaceNodeAdapterForCS) singletonAdapter).getCMDocumentManagerListener() != null) {
-			cmDocumentManager.removeListener(((JFaceNodeAdapterForCS) singletonAdapter).getCMDocumentManagerListener());
-		}
-	}
-
 
 	public INodeAdapterFactory copy() {
 		return new JFaceNodeAdapterFactoryForCS(this.adapterKey, this.shouldRegisterAdapter);
