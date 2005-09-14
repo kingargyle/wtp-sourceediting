@@ -39,17 +39,18 @@ import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.IReusableEditor;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.ILocationProvider;
-import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
+import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
 import org.eclipse.wst.html.core.internal.provisional.HTML40Namespace;
+import org.eclipse.wst.html.core.internal.provisional.contenttype.ContentTypeIdForHTML;
 import org.eclipse.wst.html.ui.examples.editors.internal.Logger;
-import org.eclipse.wst.html.ui.internal.provisional.StructuredTextEditorHTML;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.ui.internal.IExtendedSimpleEditor;
-import org.eclipse.wst.sse.ui.internal.ViewerSelectionManager;
+import org.eclipse.wst.sse.ui.internal.StructuredTextEditor;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.ui.internal.tabletree.XMLTableTreeViewer;
@@ -64,7 +65,7 @@ import org.w3c.dom.NodeList;
  * 
  * @author nitin
  */
-public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, IExtendedSimpleEditor, IReusableEditor {
+public class PreviewEditor extends PostSelectionMultiPageEditorPart implements ITextEditor, IExtendedSimpleEditor, IReusableEditor {
 	Control fPreviewControl = null;
 	ITextEditor fSourcePage = null;
 	/**
@@ -151,9 +152,24 @@ public class PreviewEditor extends MultiPageEditorPart implements ITextEditor, I
 	 * @return
 	 */
 	private ITextEditor createSourcePage() {
-		StructuredTextEditorHTML editor = new StructuredTextEditorHTML();
+		StructuredTextEditor editor = new StructuredTextEditor();
 		editor.setEditorPart(this);
 		return editor;
+	}
+
+	protected IEditorSite createSite(IEditorPart editor) {
+		IEditorSite site = null;
+		if (editor == fSourcePage) {
+			site = new PostMultiPageEditorSite(this, editor) {
+				public String getId() {
+					return ContentTypeIdForHTML.ContentTypeID_HTML + ".source"; //$NON-NLS-1$;
+				}
+			};
+		}
+		else {
+			site = super.createSite(editor);
+		}
+		return site;
 	}
 
 	/*
