@@ -18,8 +18,8 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredPartitionTypes;
 import org.eclipse.wst.xml.core.internal.provisional.text.IXMLPartitions;
 import org.eclipse.wst.xml.examples.cs.ui.contentassist.CSContentAssistProcessor;
+import org.eclipse.wst.xml.ui.StructuredTextViewerConfigurationXML;
 import org.eclipse.wst.xml.ui.internal.contentassist.NoRegionContentAssistProcessor;
-import org.eclipse.wst.xml.ui.internal.provisional.StructuredTextViewerConfigurationXML;
 
 
 

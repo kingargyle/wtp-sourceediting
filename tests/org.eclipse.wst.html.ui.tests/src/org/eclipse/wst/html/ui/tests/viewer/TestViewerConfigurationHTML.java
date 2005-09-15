@@ -125,16 +125,6 @@ public class TestViewerConfigurationHTML extends TestCase {
 		assertNotNull("there is no content formatter", cf);
 	}
 	
-	public void testGetCorrectionAssistant() {
-		
-		// probably no display
-		if(!fDisplayExists)
-			return;
-		
-		IContentAssistant ca = fConfig.getCorrectionAssistant(fViewer);
-		assertNotNull("there is no correction assistant", ca);
-	}
-	
 	public void testGetDoubleClickStrategy() {
 		
 		// probably no display
@@ -158,7 +148,7 @@ public class TestViewerConfigurationHTML extends TestCase {
 			return;
 		
 		IHyperlinkDetector[] detectors = fConfig.getHyperlinkDetectors(fViewer);
-		assertNotNull(detectors);
+		assertNotNull("there are no hyperlink detectors", detectors);
 		assertTrue("there are no hyperlink detectors", detectors.length > 1);
 	}
 	
