@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Simple Test for LineStyleProviding
+Bundle-SymbolicName: org.eclipse.wst.sse.tests.linestyle
+Bundle-Version: 3.1.0
+Bundle-Vendor: Eclipse.org
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.swt

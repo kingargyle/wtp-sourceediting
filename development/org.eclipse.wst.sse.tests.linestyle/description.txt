@@ -1,0 +1,17 @@
+2005 09 18
+
+Description of this project: 
+
+A small demo of issues with huge amounts of 
+StyleRanges being "sent" to StyledText. 
+
+To see, run the MinimalEditor class as an SWT Application. 
+
+
+data1 and data2 folders contain some data and charts 
+which appear to show that StyledText does quite well 
+for a few hundred (even a few thousand) StyledRanges, but 
+that this appears to be the "tip" of an exponetial curve? 
+(well, probably not really exponential, just non-linear, and 
+way way too slow for 20 thousand StyleRanges. 
+
