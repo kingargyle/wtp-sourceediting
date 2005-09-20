@@ -54,11 +54,11 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
 import org.eclipse.wst.javascript.ui.internal.common.ContentElementComparerImpl;
 import org.eclipse.wst.javascript.ui.internal.common.JSContentElementImpl;
+import org.eclipse.wst.javascript.ui.internal.common.Logger;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
 import org.eclipse.wst.javascript.ui.internal.editor.JavaScriptUIMessages;
-import org.eclipse.wst.sse.core.internal.provisional.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateAction;
 import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateActionContributionItem;
 import org.eclipse.wst.sse.ui.internal.edit.util.SharedEditorPluginImageHelper;
@@ -104,7 +104,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 						getTreeViewer().refresh();
 					}
 					catch (BadLocationException exception) {
-						throw new SourceEditingRuntimeException(exception);
+						Logger.logException(exception);
 					}
 				}
 			}
@@ -403,25 +403,28 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 				}
 
 				public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-					if (fIsLinked && !getTreeViewer().getControl().isDisposed() && !getTreeViewer().getControl().isFocusControl()) {
-						StructuredSelection structuredSelection = null;
-						Object o = null;
-						if (selection instanceof ITextSelection) {
-							Object[] treeItems = getTreeViewer().getTree().getItems();
-							for (int i = 0; i < treeItems.length; i++) {
-								ContentElement eachContentElement = (ContentElement) ((TreeItem) treeItems[i]).getData();
+					if (!getTreeViewer().getControl().isDisposed() && !getTreeViewer().getControl().isFocusControl()) {
+						if (fIsLinked) {
+							StructuredSelection structuredSelection = null;
+							Object o = null;
+							if (selection instanceof ITextSelection) {
+								Object[] treeItems = getTreeViewer().getTree().getItems();
+								for (int i = 0; i < treeItems.length; i++) {
+									ContentElement eachContentElement = (ContentElement) ((TreeItem) treeItems[i]).getData();
 
-								o = getContentElementAt(eachContentElement, ((ITextSelection) selection).getOffset());
-								if (o != null)
-									break;
+									o = getContentElementAt(eachContentElement, ((ITextSelection) selection).getOffset());
+									if (o != null)
+										break;
+								}
+								if (o != null) {
+									structuredSelection = new StructuredSelection(o);
+								}
 							}
-							if (o != null) {
-								structuredSelection = new StructuredSelection(o);
+							if (structuredSelection != null) {
+								getTreeViewer().setSelection(structuredSelection);
 							}
 						}
-						if (structuredSelection != null) {
-							getTreeViewer().setSelection(structuredSelection);
-						}
+						getTreeViewer().refresh();
 					}
 				}
 			};
