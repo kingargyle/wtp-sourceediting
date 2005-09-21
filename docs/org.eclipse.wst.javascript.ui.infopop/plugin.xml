@@ -17,7 +17,8 @@
 <plugin>
 
 <extension point="org.eclipse.help.contexts">
-       <contexts file="EditorJavascriptContexts.xml" plugin ="org.eclipse.wst.javascript.ui"/>
+      <contexts file="EditorJavascriptContexts.xml" plugin ="org.eclipse.wst.javascript.ui"/>
+      <contexts file="EditorJavascriptContexts2.xml" plugin ="org.eclipse.wst.javascript.core"/>
 </extension>
 
 
