@@ -5,4 +5,8 @@ Bundle-SymbolicName: org.eclipse.wst.sse.tests.linestyle
 Bundle-Version: 3.1.0
 Bundle-Vendor: Eclipse.org
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.swt
+Require-Bundle: org.eclipse.swt,
+ org.junit,
+ org.eclipse.test.performance,
+ org.eclipse.ui,
+ org.eclipse.core.runtime

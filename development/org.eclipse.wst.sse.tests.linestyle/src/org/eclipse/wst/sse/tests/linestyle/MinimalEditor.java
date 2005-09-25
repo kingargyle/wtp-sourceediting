@@ -36,6 +36,11 @@ public class MinimalEditor {
 	private static final String SMALL_TEST_CONTENT = "1234567890";
 	// expected to be multiple of 10 (number of chars in SMALL_TEST_CONTENT)
 	private static final int NUMBER_OF_CHARACTERS = 40000;
+
+
+	static boolean DEBUG_PRINT = false;
+
+
 	Shell shell;
 	StyledText text;
 
@@ -61,6 +66,10 @@ public class MinimalEditor {
 		});
 	}
 
+	public void close() {
+		shell.dispose();
+	}
+	
 	void createStyledText() {
 		text = new StyledText(shell, SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		GridData spec = new GridData();
@@ -111,18 +120,38 @@ public class MinimalEditor {
 		return shell;
 	}
 
+	public Shell open(Display display, TestManyStyledRanges measure, int numberOfRanges) {
+		createShell(display);
+
+
+
+		createStyledText();
+		shell.setSize(1000, 150);
+
+		// create test thread after text component created
+		PeriodicRefresherForTest periodicRefresherForTest = new PeriodicRefresherForTest(text, measure, numberOfRanges, this);
+		periodicRefreshThread = new Thread(periodicRefresherForTest, "PeriodicRefresherForTest");
+		periodicRefreshThread.start();
+
+		shell.open();
+
+		return shell;
+	}
+
 	private String getOneReallyHugeLineofText(int nCharacters) {
 
 		StringBuffer sb = new StringBuffer();
-		int limit = nCharacters/SMALL_TEST_CONTENT.length();
-		
+		int limit = nCharacters / SMALL_TEST_CONTENT.length();
+
 		for (int i = 0; i < limit; i++) {
 			sb.append(SMALL_TEST_CONTENT);
 		}
-		//EOL does not, rightly, seem to effect results
-		//sb.append(System.getProperty("line.separator"));
+		// EOL does not, rightly, seem to effect results
+		// sb.append(System.getProperty("line.separator"));
 		String result = sb.toString();
-		System.out.println(result.length() + " characters used for test string");
+		if (MinimalEditor.DEBUG_PRINT) {
+			System.out.println(result.length() + " characters used for test string");
+		}
 		return result;
 	}
 

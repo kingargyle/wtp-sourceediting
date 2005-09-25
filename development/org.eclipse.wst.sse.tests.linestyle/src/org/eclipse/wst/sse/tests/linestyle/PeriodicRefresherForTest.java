@@ -20,39 +20,67 @@ public class PeriodicRefresherForTest implements Runnable {
 	static final String END_TIMING = "end";
 	private static final String REFRESH_TASK = "refresh";
 	static final String BEGIN_TIMING = "start";
-	
-	// set to something like 5000 to pause and have time to look at displayed ranges.
+
+
+
+	// set to something like 10000 to pause and have time to look at displayed
+	// ranges.
 	private static final int ANIMATION_DELAY = 1000;
 	private boolean testInProgress = false;
 	private long start;
 	private long end;
 	private StyledText styledText;
 	private int pointInTestLoop;
-	private int[] rangeOfRanges = new int[]{1, 500, 1000, 5000, 10000, 15000, 20000};
+	// make static so saved for whole instance of class loaded
+	static private int[] rangeOfRanges = new int[]{1, 500, 1000, 5000, 10000, 15000, 20000};
 	/*
-	10, 50, 100, 200, 300, 400, 600, 700, 800, 2000, 3000, 4000, 6000, 7000, 8000, 9000,
-	*/
+	 * 10, 50, 100, 200, 300, 400, 600, 700, 800, 2000, 3000, 4000, 6000,
+	 * 7000, 8000, 9000,
+	 */
 	private int pass = 1;
 	private boolean endThread;
+	private TestManyStyledRanges fMeasure;
+	private int maxPass = 3;
+	private int fNRanges;
+	private boolean fContinuous = true;
+	private int maxRuns = 5;
+	private MinimalEditor feditor;
 
 
-	private PeriodicRefresherForTest() {
-		super();
-	}
 
 	public PeriodicRefresherForTest(StyledText styledText) {
-		this();
+		super();
 		this.styledText = styledText;
+	}
+
+	public PeriodicRefresherForTest(StyledText text, TestManyStyledRanges measure) {
+		this(text);
+		fMeasure = measure;
+	}
+
+	public PeriodicRefresherForTest(StyledText text, TestManyStyledRanges measure, int numberOfRanges, MinimalEditor editor) {
+		this(text, measure);
+
+		fNRanges = numberOfRanges;
+		fContinuous = false;
+
+		feditor = editor;
 	}
 
 	public void run() {
 
-		while (!endThread && styledText != null && !styledText.isDisposed()) {
+		int runs = 0;
+
+
+
+		while (!endThread && styledText != null && !styledText.isDisposed() && (runs < maxRuns)) {
 			try {
 				// we sleep here, so we can see the display,
 				// such as look for that black bold one range case
 				Thread.currentThread().sleep(ANIMATION_DELAY);
-
+				if (!fContinuous) {
+					runs++;
+				}
 				synchronized (this) {
 					if (!testInProgress && !endThread) {
 						if (styledText != null && !styledText.isDisposed()) {
@@ -62,11 +90,11 @@ public class PeriodicRefresherForTest implements Runnable {
 								// set to false int "end timing" method
 								testInProgress = true;
 
-								refreshFromDisplayThread(this, REFRESH_TASK);
+								refreshFromDisplayThread(this);
 
 								this.wait();
 
-								markTimeFromDisplayThread(this, END_TIMING);
+								markEndTimeFromDisplayThread(this);
 
 								this.wait();
 							}
@@ -84,12 +112,21 @@ public class PeriodicRefresherForTest implements Runnable {
 				endThread = true;
 			}
 
+
 		}
 
 
+		fMeasure.commitMeasurements();
+		fMeasure.assertPerformance();
+
+		
+		if (!fContinuous) {
+			closeEditor();
+		}
+
 	}
 
-	void markTimeFromDisplayThread(final PeriodicRefresherForTest test, final String msgToSendBack) {
+	void markEndTimeFromDisplayThread(final PeriodicRefresherForTest test) {
 		if (styledText != null && !styledText.isDisposed()) {
 
 			Display display = styledText.getDisplay();
@@ -99,7 +136,8 @@ public class PeriodicRefresherForTest implements Runnable {
 						Display display = styledText.getDisplay();
 						if (display != null && !display.isDisposed()) {
 							if (test != null) {
-								test.systemTimeAtRun(System.currentTimeMillis(), msgToSendBack);
+								fMeasure.stopMeasuring();
+								test.systemTimeAtRun(System.currentTimeMillis(), END_TIMING);
 							}
 						}
 					}
@@ -119,8 +157,10 @@ public class PeriodicRefresherForTest implements Runnable {
 			}
 			else if (message.equals(END_TIMING)) {
 				end = systemtime;
-				System.out.print(": time: " + (end - start));
-				System.out.println();
+				if (MinimalEditor.DEBUG_PRINT) {
+					System.out.print(": time: " + (end - start));
+					System.out.println();
+				}
 				testInProgress = false;
 				this.notifyAll();
 			}
@@ -128,31 +168,57 @@ public class PeriodicRefresherForTest implements Runnable {
 				testInProgress = true;
 				// be sure any "waiting" wakes up and continues
 				this.notifyAll();
-				
+
 			}
 		}
 
 	}
 
-	void refreshFromDisplayThread(final PeriodicRefresherForTest test, final String msg) {
+	void refreshFromDisplayThread(final PeriodicRefresherForTest test) {
 		if (styledText != null && !styledText.isDisposed()) {
 			styledText.getDisplay().asyncExec(new Runnable() {
 				public void run() {
 					if (styledText != null && !styledText.isDisposed()) {
-						
-						// set the line style provider to control number of ranges each redraw
-						LineStyleProvider.fNumberOfRanges = lookupDesiredNumberOfRanges();
-						
-						// set the "begin time" 
+
+						if (fContinuous) {
+							// set the line style provider to control number
+							// of
+							// ranges each redraw
+							LineStyleProvider.setNumberOfRanges(lookupDesiredNumberOfRanges());
+						}
+						else {
+							LineStyleProvider.setNumberOfRanges((fNRanges));
+						}
+
+						// set the "begin time"
+						fMeasure.startMeasuring();
 						test.systemTimeAtRun(System.currentTimeMillis(), BEGIN_TIMING);
 
-						
+
 						styledText.redraw();
 						// here our "callback" is just used to signal its ok
 						// to post our next request on display thread
 						// (which in our case, would be the Runnable to
-						// measure the "end time" when it runs.
-						test.systemTimeAtRun(-1, msg);
+						// measure the "end time" when it finally runs on
+						// display thread)
+						test.systemTimeAtRun(-1, REFRESH_TASK);
+
+					}
+				}
+
+			});
+		}
+
+	}
+
+	void closeEditor() {
+		if (styledText != null && !styledText.isDisposed()) {
+			styledText.getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					if (styledText != null && !styledText.isDisposed()) {
+						if (feditor != null) {
+							feditor.close();
+						}
 
 					}
 				}
@@ -166,13 +232,18 @@ public class PeriodicRefresherForTest implements Runnable {
 
 		if (pointInTestLoop >= rangeOfRanges.length) {
 			pointInTestLoop = 0;
-			System.out.println(" --- beginning pass " + pass++ + " ---  (provider ranges cached) --- ");
+			pass++;
+			if (MinimalEditor.DEBUG_PRINT) {
+				System.out.println(" --- beginning pass " + pass + " ---  (provider ranges cached) --- ");
+			}
 		}
+
 
 		int result = rangeOfRanges[pointInTestLoop];
 
 		// now, prepare "in advance" for next time
 		pointInTestLoop++;
+
 
 
 		return result;

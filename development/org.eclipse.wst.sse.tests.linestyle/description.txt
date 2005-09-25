@@ -1,12 +1,16 @@
-2005 09 18
+2005 09 25
 
 Description of this project: 
 
 A small demo of issues with huge amounts of 
 StyleRanges being "sent" to StyledText. 
 
-To see, run the MinimalEditor class as an SWT Application. 
+To see test run continuously, run the 
+MinimalEditor class as an SWT Application. 
 
+
+To run as a "JUnit Performance Test" run the 
+TestManyStyledRanges class as a Plugin JUnit Test. 
 
 data1 and data2 folders contain some data and charts 
 which appear to show that StyledText does quite well 

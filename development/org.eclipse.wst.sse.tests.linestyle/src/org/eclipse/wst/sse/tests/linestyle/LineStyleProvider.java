@@ -14,7 +14,6 @@ package org.eclipse.wst.sse.tests.linestyle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.LineStyleEvent;
@@ -26,11 +25,10 @@ import org.eclipse.swt.widgets.Display;
 public class LineStyleProvider implements LineStyleListener {
 
 
-	static int fNumberOfRanges = 1;
+	private static int fNumberOfRanges = 1;
 	private HashMap savedRangeArrays = new HashMap();
 	private Display display;
 
-	Random random;
 	private boolean turn;
 
 	private LineStyleProvider() {
@@ -40,19 +38,22 @@ public class LineStyleProvider implements LineStyleListener {
 	public LineStyleProvider(Display display) {
 		super();
 		this.display = display;
-		long seed = System.currentTimeMillis();
-		this.random = new Random(seed);
-		System.out.println("Random Seed: " + seed);
+	}
+	public LineStyleProvider(Display display, int rangesToUse) {
+		this (display);
+		setNumberOfRanges(rangesToUse);
 	}
 
 	public void lineGetStyle(LineStyleEvent event) {
 		int offset = event.lineOffset;
 		String lineText = event.lineText;
 		int length = lineText.length();
-		int localNumberOfRanges = fNumberOfRanges;
+		int localNumberOfRanges = getNumberOfRanges();
 		event.styles = getManyStyleRanges(offset, length, localNumberOfRanges);
-		System.out.println();
-		System.out.print("number of style ranges: " + event.styles.length);
+		if (MinimalEditor.DEBUG_PRINT) {
+			System.out.println();
+			System.out.print("number of style ranges: " + event.styles.length);
+		}
 	}
 
 
@@ -109,7 +110,7 @@ public class LineStyleProvider implements LineStyleListener {
 				int remaingRanges = numberOfRanges - rangeCount;
 				// next start offset
 				rangeOffset = rangeOffset + styleWidth;
-				// guard against out of range, and will drop out of 
+				// guard against out of range, and will drop out of
 				// do-loop when checked.
 				if (rangeOffset < overallEndOffset) {
 					rangeOffset = checkOffset(rangeOffset, overallEndOffset);
@@ -120,20 +121,10 @@ public class LineStyleProvider implements LineStyleListener {
 						styleWidth = remainingSpace / remaingRanges;
 						styleWidth = safeWidth(styleWidth, rangeOffset, overallEndOffset);
 					}
-					//System.out.println("width: " + styleWidth + " requested Number of Ranges: " + numberOfRanges);
 				}
 
 			}
 			while (rangeCount < numberOfRanges && rangeOffset < overallEndOffset);
-
-			if (rangeCount < numberOfRanges) {
-				if (rangeOffset < overallEndOffset) {
-					System.out.println("here");
-				}
-				else {
-					System.out.println("here");
-				}
-			}
 
 		}
 
@@ -144,28 +135,14 @@ public class LineStyleProvider implements LineStyleListener {
 		return styleRanges;
 	}
 
-	private Color getRandomColor() {
-		// we take advantage of trick that "system colors" are from 1 to 16
-		// (but don't use background color)
-		Color result = null;
-		int randomColorNumber = 0;
-		while (randomColorNumber == 0 || display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND).equals(result)) {
-			randomColorNumber = random.nextInt(16);
-			result = display.getSystemColor(randomColorNumber);
-		}
-		return result;
-	}
-
 	private Color getAlternatingColor() {
 		Color result = null;
 		if (turn) {
-			// RED
-			result = display.getSystemColor(3);
+			result = display.getSystemColor(SWT.COLOR_RED);
 
 		}
 		else {
-			// BLUE
-			result = display.getSystemColor(9);
+			result = display.getSystemColor(SWT.COLOR_BLUE);
 
 		}
 		turn = !turn;
@@ -212,6 +189,14 @@ public class LineStyleProvider implements LineStyleListener {
 			result = Math.min(styleWidth, remaining);
 		}
 		return result;
+	}
+
+	static int getNumberOfRanges() {
+		return fNumberOfRanges;
+	}
+
+	static void setNumberOfRanges(int numberOfRanges) {
+		fNumberOfRanges = numberOfRanges;
 	}
 
 
