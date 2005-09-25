@@ -17,12 +17,21 @@ import org.eclipse.swt.widgets.Display;
 
 public class PeriodicRefresherForTest implements Runnable {
 
+	static final String END_TIMING = "end";
+	private static final String REFRESH_TASK = "refresh";
+	static final String BEGIN_TIMING = "start";
+	
+	// set to something like 5000 to pause and have time to look at displayed ranges.
+	private static final int ANIMATION_DELAY = 1000;
 	private boolean testInProgress = false;
 	private long start;
 	private long end;
 	private StyledText styledText;
 	private int pointInTestLoop;
-	private int[] rangeOfRanges = new int[]{1, 10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000};
+	private int[] rangeOfRanges = new int[]{1, 500, 1000, 5000, 10000, 15000, 20000};
+	/*
+	10, 50, 100, 200, 300, 400, 600, 700, 800, 2000, 3000, 4000, 6000, 7000, 8000, 9000,
+	*/
 	private int pass = 1;
 	private boolean endThread;
 
@@ -42,63 +51,45 @@ public class PeriodicRefresherForTest implements Runnable {
 			try {
 				// we sleep here, so we can see the display,
 				// such as look for that black bold one range case
-				Thread.currentThread().sleep(5000);
-			}
-			catch (InterruptedException e1) {
-				endThread = true;
-			}
-			synchronized (this) {
-				if (!testInProgress && !endThread) {
-					if (styledText != null && !styledText.isDisposed()) {
-						Display display = styledText.getDisplay();
-						if (display != null && !display.isDisposed()) {
+				Thread.currentThread().sleep(ANIMATION_DELAY);
 
-							testInProgress = true;
+				synchronized (this) {
+					if (!testInProgress && !endThread) {
+						if (styledText != null && !styledText.isDisposed()) {
+							Display display = styledText.getDisplay();
+							if (display != null && !display.isDisposed()) {
 
-							markTimeFromDisplayThread(this, "start");
-							try {
-								this.wait();
-							}
-							catch (InterruptedException e2) {
-								endThread = true;
-							}
-							if (!endThread) {
-								refreshFromDisplayThread(this, "refresh");
-							}
-							try {
-								this.wait();
-							}
-							catch (InterruptedException e1) {
-								endThread = true;
-							}
-							if (!endThread) {
-								markTimeFromDisplayThread(this, "end");
-							}
+								// set to false int "end timing" method
+								testInProgress = true;
 
-							try {
+								refreshFromDisplayThread(this, REFRESH_TASK);
+
 								this.wait();
-							}
-							catch (InterruptedException e) {
-								endThread = true;
+
+								markTimeFromDisplayThread(this, END_TIMING);
+
+								this.wait();
 							}
 						}
-					}
-					else {
-						try {
+						else {
+
 							this.wait();
-						}
-						catch (InterruptedException e) {
-							endThread = true;
+
 						}
 					}
 				}
 			}
+
+			catch (InterruptedException e1) {
+				endThread = true;
+			}
+
 		}
 
 
 	}
 
-	private void markTimeFromDisplayThread(final PeriodicRefresherForTest test, final String msgToSendBack) {
+	void markTimeFromDisplayThread(final PeriodicRefresherForTest test, final String msgToSendBack) {
 		if (styledText != null && !styledText.isDisposed()) {
 
 			Display display = styledText.getDisplay();
@@ -121,12 +112,12 @@ public class PeriodicRefresherForTest implements Runnable {
 
 	void systemTimeAtRun(long systemtime, String message) {
 		synchronized (this) {
-			if (message.equals("start")) {
+			if (message.equals(BEGIN_TIMING)) {
 				start = systemtime;
 				testInProgress = true;
 				this.notifyAll();
 			}
-			else if (message.equals("end")) {
+			else if (message.equals(END_TIMING)) {
 				end = systemtime;
 				System.out.print(": time: " + (end - start));
 				System.out.println();
@@ -134,24 +125,33 @@ public class PeriodicRefresherForTest implements Runnable {
 				this.notifyAll();
 			}
 			else {
-				// be sure any "waiting" continues
+				testInProgress = true;
+				// be sure any "waiting" wakes up and continues
 				this.notifyAll();
+				
 			}
 		}
 
 	}
 
-	private void refreshFromDisplayThread(final PeriodicRefresherForTest test, final String msg) {
+	void refreshFromDisplayThread(final PeriodicRefresherForTest test, final String msg) {
 		if (styledText != null && !styledText.isDisposed()) {
 			styledText.getDisplay().asyncExec(new Runnable() {
 				public void run() {
 					if (styledText != null && !styledText.isDisposed()) {
+						
+						// set the line style provider to control number of ranges each redraw
 						LineStyleProvider.fNumberOfRanges = lookupDesiredNumberOfRanges();
+						
+						// set the "begin time" 
+						test.systemTimeAtRun(System.currentTimeMillis(), BEGIN_TIMING);
+
+						
 						styledText.redraw();
-						// here our "callback" is just used to signal its ok 
-						// to post net request on display thread
-						// (which in our case, would be the Runnable to measure the 
-						// "end time" when it runs.
+						// here our "callback" is just used to signal its ok
+						// to post our next request on display thread
+						// (which in our case, would be the Runnable to
+						// measure the "end time" when it runs.
 						test.systemTimeAtRun(-1, msg);
 
 					}

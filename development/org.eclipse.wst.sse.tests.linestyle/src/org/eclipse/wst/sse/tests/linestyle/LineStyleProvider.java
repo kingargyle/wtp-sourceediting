@@ -31,6 +31,7 @@ public class LineStyleProvider implements LineStyleListener {
 	private Display display;
 
 	Random random;
+	private boolean turn;
 
 	private LineStyleProvider() {
 		super();
@@ -66,42 +67,82 @@ public class LineStyleProvider implements LineStyleListener {
 			styleRanges = cachedRanges;
 		}
 		else {
-			// safety check, and simple minded correction if numberOfRanges
-			// is set wrong
-			if (numberOfRanges <= 0)
-				numberOfRanges = 1;
-			
-			// to have uniform style widths for test, the 
-			// requested number of Ranges may not match exactly
-			// with the actualy number of Ranges
-			int styleWidth = (length - offset) / numberOfRanges;
-			
-			ArrayList arrayList = new ArrayList();
-			for (int i = offset; i < length; i = i + (styleWidth * 2)) {
-				int firstRangeOffset = i;
-				if (numberOfRanges == 1) {
-					// I want bold black here, for the "one" case, 
-					// to help "see" it not work
-					arrayList.add(new StyleRange(safeOffset(firstRangeOffset, length), safeWidth(styleWidth, firstRangeOffset, length), display.getSystemColor(SWT.COLOR_BLACK), null, SWT.BOLD));
-
-				}
-				else {
-					arrayList.add(new StyleRange(safeOffset(firstRangeOffset, length), safeWidth(styleWidth, firstRangeOffset, length), getRandomColor(), null));
-				}
-				int secondRangeOffset = i + styleWidth;
-				if (secondRangeOffset < length) {
-					arrayList.add(new StyleRange(safeOffset(secondRangeOffset, length), safeWidth(styleWidth, secondRangeOffset, length), getRandomColor(), null));
-				}
-			}
-			int resultLength = arrayList.size();
-			styleRanges = new StyleRange[resultLength];
-			System.arraycopy(arrayList.toArray(), 0, styleRanges, 0, resultLength);
+			styleRanges = computeRanges(offset, length, numberOfRanges);
 			savedRangeArrays.put(new Integer(numberOfRanges), styleRanges);
 		}
 		return styleRanges;
 	}
 
+	private StyleRange[] computeRanges(int offset, int length, int numberOfRanges) {
+		if (numberOfRanges <= 0)
+			throw new IllegalArgumentException("number of ranges must be greater than zero");
 
+		ArrayList arrayList = new ArrayList();
+
+		// I want force bold black here, for the "one range" case,
+		// to help "see" it.
+		if (numberOfRanges == 1) {
+			arrayList.add(new StyleRange(checkOffset(offset, length), safeWidth(length - offset, offset, length), display.getSystemColor(SWT.COLOR_BLACK), null, SWT.BOLD));
+
+		}
+		// otherwise break up line into roughly equal width style ranges and
+		// assign each a semi-random color
+		else {
+			int overallEndOffset = offset + length - 1;
+
+			// initial width
+			int styleWidth = length / numberOfRanges;
+			// initial range offset
+			int rangeOffset = offset;
+			// initial range count
+			int rangeCount = 0;
+
+			do {
+
+				arrayList.add(new StyleRange(rangeOffset, styleWidth, getAlternatingColor(), null));
+
+				rangeCount++;
+
+				// to have relatively uniform style widths for test,
+				// recompute each time, to correct for rounding error
+				int remainingSpace = overallEndOffset - (rangeOffset + styleWidth);
+				int remaingRanges = numberOfRanges - rangeCount;
+				// next start offset
+				rangeOffset = rangeOffset + styleWidth;
+				// guard against out of range, and will drop out of 
+				// do-loop when checked.
+				if (rangeOffset < overallEndOffset) {
+					rangeOffset = checkOffset(rangeOffset, overallEndOffset);
+
+					// gaurd against division by zero (and will drop out
+					// of do-loop when checked.
+					if (remaingRanges > 0) {
+						styleWidth = remainingSpace / remaingRanges;
+						styleWidth = safeWidth(styleWidth, rangeOffset, overallEndOffset);
+					}
+					//System.out.println("width: " + styleWidth + " requested Number of Ranges: " + numberOfRanges);
+				}
+
+			}
+			while (rangeCount < numberOfRanges && rangeOffset < overallEndOffset);
+
+			if (rangeCount < numberOfRanges) {
+				if (rangeOffset < overallEndOffset) {
+					System.out.println("here");
+				}
+				else {
+					System.out.println("here");
+				}
+			}
+
+		}
+
+
+		int resultLength = arrayList.size();
+		StyleRange[] styleRanges = new StyleRange[resultLength];
+		System.arraycopy(arrayList.toArray(), 0, styleRanges, 0, resultLength);
+		return styleRanges;
+	}
 
 	private Color getRandomColor() {
 		// we take advantage of trick that "system colors" are from 1 to 16
@@ -115,6 +156,22 @@ public class LineStyleProvider implements LineStyleListener {
 		return result;
 	}
 
+	private Color getAlternatingColor() {
+		Color result = null;
+		if (turn) {
+			// RED
+			result = display.getSystemColor(3);
+
+		}
+		else {
+			// BLUE
+			result = display.getSystemColor(9);
+
+		}
+		turn = !turn;
+		return result;
+	}
+
 	/**
 	 * Quick and dirty check to be sure style location are never out of range.
 	 * 
@@ -125,9 +182,9 @@ public class LineStyleProvider implements LineStyleListener {
 	 * @param length
 	 * @return
 	 */
-	private int safeOffset(int offset, int length) {
+	private int checkOffset(int offset, int endOffset) {
 
-		if (offset >= length) {
+		if (offset >= endOffset) {
 			throw new Error("hmm, not checking or calculating for start offset correctly");
 		}
 		return offset;
@@ -144,12 +201,12 @@ public class LineStyleProvider implements LineStyleListener {
 	 * @param length
 	 * @return
 	 */
-	private int safeWidth(int styleWidth, int offset, int length) {
+	private int safeWidth(int styleWidth, int offset, int endOffset) {
 
 		int result = 0;
-		int remaining = (length - offset);
-		if (0 == remaining) {
-			result = styleWidth;
+		int remaining = (endOffset - offset);
+		if (remaining <= 0) {
+			throw new IllegalArgumentException("not enough remaining space");
 		}
 		else {
 			result = Math.min(styleWidth, remaining);

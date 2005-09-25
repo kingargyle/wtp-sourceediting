@@ -32,6 +32,10 @@ import org.eclipse.swt.widgets.Shell;
  */
 
 public class MinimalEditor {
+	// used to create large input string to display
+	private static final String SMALL_TEST_CONTENT = "1234567890";
+	// expected to be multiple of 10 (number of chars in SMALL_TEST_CONTENT)
+	private static final int NUMBER_OF_CHARACTERS = 40000;
 	Shell shell;
 	StyledText text;
 
@@ -72,7 +76,7 @@ public class MinimalEditor {
 		text.addLineStyleListener(lineStyleProvider);
 		OneLineStaticContentProvider contentProvider = new OneLineStaticContentProvider();
 		text.setContent(contentProvider);
-		contentProvider.setText(getOneReallyHugeLineofText(10000));
+		contentProvider.setText(getOneReallyHugeLineofText(NUMBER_OF_CHARACTERS));
 
 	}
 
@@ -107,9 +111,11 @@ public class MinimalEditor {
 		return shell;
 	}
 
-	private String getOneReallyHugeLineofText(int limit) {
-		String SMALL_TEST_CONTENT = "1234567890";
+	private String getOneReallyHugeLineofText(int nCharacters) {
+
 		StringBuffer sb = new StringBuffer();
+		int limit = nCharacters/SMALL_TEST_CONTENT.length();
+		
 		for (int i = 0; i < limit; i++) {
 			sb.append(SMALL_TEST_CONTENT);
 		}

@@ -35,7 +35,11 @@ public class OneLineStaticContentProvider implements StyledTextContent {
 	}
 
 	public String getLine(int lineIndex) {
-		return contentText;
+		if (lineIndex == 0) {
+			return contentText;
+		}
+		else
+			return "";
 	}
 
 	public int getLineAtOffset(int offset) {
@@ -59,14 +63,14 @@ public class OneLineStaticContentProvider implements StyledTextContent {
 	}
 
 	public int getOffsetAtLine(int lineIndex) {
-		// we always only have one line, so 
+		// we always only have one line, so
 		// always return zero. (Spec isn't real clear
 		// on what to do if out of bounds?)
 		return 0;
 	}
 
 	public String getTextRange(int start, int length) {
-		// assuming never called in test, but if it as 
+		// assuming never called in test, but if it as
 		// would be just substring.
 		return contentText.substring(start, length - start);
 	}
