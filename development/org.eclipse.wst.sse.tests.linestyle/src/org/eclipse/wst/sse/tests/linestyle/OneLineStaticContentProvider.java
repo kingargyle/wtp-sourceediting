@@ -35,11 +35,11 @@ public class OneLineStaticContentProvider implements StyledTextContent {
 	}
 
 	public String getLine(int lineIndex) {
+		String result = "";
 		if (lineIndex == 0) {
-			return contentText;
+			result = contentText;
 		}
-		else
-			return "";
+		return result;
 	}
 
 	public int getLineAtOffset(int offset) {

@@ -15,16 +15,22 @@ package org.eclipse.wst.sse.tests.linestyle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.test.performance.PerformanceTestCase;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
 
 public class TestManyStyledRanges extends PerformanceTestCase {
 
+
+	public TestManyStyledRanges() {
+		this("TestManyStyleRanges");
+	}
+
+	public TestManyStyledRanges(String name) {
+		super(name);
+	}
+
 	public void testOne() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Display display = workbench.getDisplay();
+		Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		
+
 		Shell shell = editor.open(display, this, 1);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
@@ -32,11 +38,11 @@ public class TestManyStyledRanges extends PerformanceTestCase {
 			}
 		}
 	}
+
 	public void test500() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Display display = workbench.getDisplay();
+		Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		
+
 		Shell shell = editor.open(display, this, 500);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
@@ -44,14 +50,13 @@ public class TestManyStyledRanges extends PerformanceTestCase {
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	public void test1000() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Display display = workbench.getDisplay();
+		Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		
+
 		Shell shell = editor.open(display, this, 1000);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
@@ -59,62 +64,67 @@ public class TestManyStyledRanges extends PerformanceTestCase {
 			}
 		}
 	}
+
 	public void test2000() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Display display = workbench.getDisplay();
+		Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		
+
 		Shell shell = editor.open(display, this, 2000);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
-	}	public void test5000() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Display display = workbench.getDisplay();
+	}
+
+	public void test5000() {
+		Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		
+
 		Shell shell = editor.open(display, this, 5000);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
-	}	public void test10000() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Display display = workbench.getDisplay();
+	}
+
+	public void test10000() {
+		Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		
+
 		Shell shell = editor.open(display, this, 10000);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
-	}	public void test15000() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Display display = workbench.getDisplay();
+	}
+
+	public void test15000() {
+		Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		
+
 		Shell shell = editor.open(display, this, 15000);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
-	}	public void test20000() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Display display = workbench.getDisplay();
+	}
+
+	public void test20000() {
+		Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		
+
 		Shell shell = editor.open(display, this, 20000);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
-	}	
+	}
+
 	public void startMeasuring() {
 		super.startMeasuring();
 	}
@@ -129,5 +139,27 @@ public class TestManyStyledRanges extends PerformanceTestCase {
 
 	public void assertPerformance() {
 		super.assertPerformance();
+
+	}
+
+	public void setUp() {
+		try {
+			super.setUp();
+		}
+		catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public void tearDown() {
+		try {
+			commitMeasurements();
+			assertPerformance();
+			super.tearDown();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

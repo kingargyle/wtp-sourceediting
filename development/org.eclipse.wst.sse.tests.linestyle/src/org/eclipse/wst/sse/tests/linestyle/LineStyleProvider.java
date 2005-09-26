@@ -39,8 +39,9 @@ public class LineStyleProvider implements LineStyleListener {
 		super();
 		this.display = display;
 	}
+
 	public LineStyleProvider(Display display, int rangesToUse) {
-		this (display);
+		this(display);
 		setNumberOfRanges(rangesToUse);
 	}
 
@@ -185,9 +186,9 @@ public class LineStyleProvider implements LineStyleListener {
 		if (remaining <= 0) {
 			throw new IllegalArgumentException("not enough remaining space");
 		}
-		else {
-			result = Math.min(styleWidth, remaining);
-		}
+
+		result = Math.min(styleWidth, remaining);
+
 		return result;
 	}
 

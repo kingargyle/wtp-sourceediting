@@ -47,9 +47,6 @@ public class MinimalEditor {
 	LineStyleProvider lineStyleProvider;
 	static Thread periodicRefreshThread;
 
-	private static long start;
-	private static long end = -1;
-
 
 	void createShell(Display display) {
 		shell = new Shell(display);
@@ -69,7 +66,7 @@ public class MinimalEditor {
 	public void close() {
 		shell.dispose();
 	}
-	
+
 	void createStyledText() {
 		text = new StyledText(shell, SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		GridData spec = new GridData();
@@ -90,19 +87,32 @@ public class MinimalEditor {
 	}
 
 	public static void main(String[] args) {
-		final Display display = new Display();
+		final Display display = Display.getDefault();
 		final MinimalEditor editor = new MinimalEditor();
-		Shell shell = editor.open(display);
-		while (!shell.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
+
+		try {
+
+			Shell shell = editor.open(display);
+			while (!shell.isDisposed()) {
+				if (!display.readAndDispatch()) {
+					display.sleep();
+				}
 			}
 		}
-
-		display.dispose();
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (display != null) {
+				display.dispose();
+			}
+		}
 	}
 
 	public Shell open(Display display) {
+
+		DEBUG_PRINT = true;
+
 		createShell(display);
 
 

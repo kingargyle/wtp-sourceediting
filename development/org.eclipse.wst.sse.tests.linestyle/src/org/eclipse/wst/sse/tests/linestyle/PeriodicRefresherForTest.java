@@ -40,7 +40,6 @@ public class PeriodicRefresherForTest implements Runnable {
 	private int pass = 1;
 	private boolean endThread;
 	private TestManyStyledRanges fMeasure;
-	private int maxPass = 3;
 	private int fNRanges;
 	private boolean fContinuous = true;
 	private int maxRuns = 5;
@@ -67,6 +66,7 @@ public class PeriodicRefresherForTest implements Runnable {
 		feditor = editor;
 	}
 
+
 	public void run() {
 
 		int runs = 0;
@@ -77,7 +77,7 @@ public class PeriodicRefresherForTest implements Runnable {
 			try {
 				// we sleep here, so we can see the display,
 				// such as look for that black bold one range case
-				Thread.currentThread().sleep(ANIMATION_DELAY);
+				Thread.sleep(ANIMATION_DELAY);
 				if (!fContinuous) {
 					runs++;
 				}
@@ -116,10 +116,10 @@ public class PeriodicRefresherForTest implements Runnable {
 		}
 
 
-		fMeasure.commitMeasurements();
-		fMeasure.assertPerformance();
+		// fMeasure.commitMeasurements();
+		// fMeasure.assertPerformance();
 
-		
+
 		if (!fContinuous) {
 			closeEditor();
 		}
@@ -136,7 +136,9 @@ public class PeriodicRefresherForTest implements Runnable {
 						Display display = styledText.getDisplay();
 						if (display != null && !display.isDisposed()) {
 							if (test != null) {
-								fMeasure.stopMeasuring();
+								if (fMeasure != null) {
+									fMeasure.stopMeasuring();
+								}
 								test.systemTimeAtRun(System.currentTimeMillis(), END_TIMING);
 							}
 						}
@@ -191,7 +193,9 @@ public class PeriodicRefresherForTest implements Runnable {
 						}
 
 						// set the "begin time"
-						fMeasure.startMeasuring();
+						if (fMeasure != null) {
+							fMeasure.startMeasuring();
+						}
 						test.systemTimeAtRun(System.currentTimeMillis(), BEGIN_TIMING);
 
 
