@@ -35,7 +35,7 @@ public class MinimalEditor {
 	// used to create large input string to display
 	private static final String SMALL_TEST_CONTENT = "1234567890";
 	// expected to be multiple of 10 (number of chars in SMALL_TEST_CONTENT)
-	private static final int NUMBER_OF_CHARACTERS = 40000;
+	private static final int NUMBER_OF_CHARACTERS = 50000;
 
 
 	static boolean DEBUG_PRINT = false;

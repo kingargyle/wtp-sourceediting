@@ -124,7 +124,17 @@ public class TestManyStyledRanges extends PerformanceTestCase {
 			}
 		}
 	}
+	public void test25000() {
+		Display display = Display.getDefault();
+		final MinimalEditor editor = new MinimalEditor();
 
+		Shell shell = editor.open(display, this, 25000);
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
 	public void startMeasuring() {
 		super.startMeasuring();
 	}

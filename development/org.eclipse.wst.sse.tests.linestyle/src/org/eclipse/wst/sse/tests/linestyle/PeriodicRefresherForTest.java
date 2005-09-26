@@ -32,7 +32,7 @@ public class PeriodicRefresherForTest implements Runnable {
 	private StyledText styledText;
 	private int pointInTestLoop;
 	// make static so saved for whole instance of class loaded
-	static private int[] rangeOfRanges = new int[]{1, 500, 1000, 5000, 10000, 15000, 20000};
+	static private int[] rangeOfRanges = new int[]{1, 500, 1000, 5000, 10000, 15000, 20000, 25000};
 	/*
 	 * 10, 50, 100, 200, 300, 400, 600, 700, 800, 2000, 3000, 4000, 6000,
 	 * 7000, 8000, 9000,
