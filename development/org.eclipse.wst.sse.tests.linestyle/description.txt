@@ -19,3 +19,16 @@ that this appears to be the "tip" of an exponetial curve?
 (well, probably not really exponential, just non-linear, and 
 way way too slow for 20 thousand StyleRanges. 
 
+
+Note, the data3 folder was added with results obtained 
+on my machine using the latest version of this test. 
+It seems to be generally faster, but still non-linear. 
+I'm thinking perhaps in earlier tests there were bugs 
+that caused some style ranges to overlap with one another. 
+(would that cause extra processing?). 
+
+At any rate, the data3 results show a difference between 
+Linux and Windows, but the machines also have different 
+processors, graphic chips, etc., so not sure what 
+that indicates. I ran the tests on both platforms, just 
+to make sure it did run on both platforms.
