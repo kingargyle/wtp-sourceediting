@@ -25,7 +25,6 @@ import org.eclipse.wst.sse.ui.internal.provisional.registry.AdapterFactoryRegist
 import org.eclipse.wst.sse.ui.internal.provisional.registry.AdapterFactoryRegistryImpl;
 import org.eclipse.wst.sse.ui.internal.provisional.registry.embedded.EmbeddedAdapterFactoryRegistryImpl;
 import org.eclipse.wst.xml.ui.internal.JobStatusLineHelper;
-import org.eclipse.wst.xml.ui.internal.Logger;
 import org.eclipse.wst.xml.ui.internal.preferences.XMLUIPreferenceNames;
 import org.eclipse.wst.xml.ui.internal.templates.TemplateContextTypeIdsXML;
 
