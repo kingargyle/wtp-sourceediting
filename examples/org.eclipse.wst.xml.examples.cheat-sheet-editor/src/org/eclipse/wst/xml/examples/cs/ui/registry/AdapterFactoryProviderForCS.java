@@ -14,7 +14,6 @@ package org.eclipse.wst.xml.examples.cs.ui.registry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.wst.sse.core.internal.ltk.modelhandler.IDocumentTypeHandler;
 import org.eclipse.wst.sse.core.internal.model.FactoryRegistry;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapterFactory;
@@ -28,7 +27,6 @@ import org.eclipse.wst.xml.examples.cs.core.modelhandler.ModelHandlerForCS;
 import org.eclipse.wst.xml.examples.cs.ui.views.contentoutline.JFaceNodeAdapterFactoryForCS;
 import org.eclipse.wst.xml.ui.internal.DOMObserver;
 import org.eclipse.wst.xml.ui.internal.preferences.XMLUIPreferenceNames;
-import org.eclipse.wst.xml.ui.internal.properties.XMLPropertySourceAdapterFactory;
 import org.eclipse.wst.xml.ui.internal.registry.AdapterFactoryProviderForXML;
 
 /**
@@ -51,15 +49,6 @@ public class AdapterFactoryProviderForCS extends AdapterFactoryProviderForXML {
 		INodeAdapterFactory factory = null;
 		// == this list came from the previous "XML only" list
 
-		// what was this still here? (6/4/03)
-		// I commented out on 6/4/03) but may have been something "extra" initializing 
-		// old content assist adapter unnecessarily? 
-
-		factory = factoryRegistry.getFactoryFor(IPropertySource.class);
-		if (factory == null) {
-			factory = new XMLPropertySourceAdapterFactory();
-			factoryRegistry.addFactory(factory);
-		}
 		factory = factoryRegistry.getFactoryFor(IJFaceNodeAdapter.class);
 		if (factory == null) {
 			factory = new JFaceNodeAdapterFactoryForCS();
