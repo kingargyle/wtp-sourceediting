@@ -16,8 +16,10 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.test.performance.PerformanceTestCase;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.xml.ui.tests.performance.util.FileUtil;
 import org.eclipse.wst.xml.ui.tests.performance.util.ProjectUnzipUtility;
@@ -98,7 +100,14 @@ public class BasicEditorTest extends PerformanceTestCase {
         IFile file= ResourcesPlugin.getWorkspace().getRoot().getFile(path);
         assertTrue(file != null && file.exists());
         try {
-            return (StructuredTextEditor)EditorTestHelper.openInEditor(file, true);
+        	IEditorPart part = EditorTestHelper.openInEditor(file, true);
+        	Object editor = part.getAdapter(ITextEditor.class);
+        	if(editor instanceof StructuredTextEditor) {
+        		return (StructuredTextEditor)editor;
+        	}
+    		fail();
+    		return null;
+    		
         } catch (PartInitException e) {
             fail();
             return null;
