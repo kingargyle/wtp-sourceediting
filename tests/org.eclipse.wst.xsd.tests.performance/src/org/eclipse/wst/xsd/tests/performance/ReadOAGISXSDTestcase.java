@@ -29,9 +29,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.test.performance.Dimension;
 import org.eclipse.test.performance.PerformanceTestCase;
 import org.eclipse.wst.xsd.ui.internal.XSDEditorPlugin;
-import org.eclipse.xsd.util.XSDResourceImpl;
 import org.eclipse.xsd.XSDSchema;
-import org.eclipse.xsd.XSDDiagnostic;
+import org.eclipse.xsd.util.XSDResourceImpl;
 
 public class ReadOAGISXSDTestcase extends PerformanceTestCase
 {
@@ -134,6 +133,7 @@ public class ReadOAGISXSDTestcase extends PerformanceTestCase
 	resource.load(is,null); 
 	XSDSchema xsdSchema = resource.getSchema();
 	xsdSchema.validate();
-	List l = xsdSchema.getAllDiagnostics();
+	//List l = 
+		xsdSchema.getAllDiagnostics();
   }
 }

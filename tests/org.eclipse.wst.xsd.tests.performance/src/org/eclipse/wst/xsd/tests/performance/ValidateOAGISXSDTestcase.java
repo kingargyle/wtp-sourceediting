@@ -24,7 +24,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.test.performance.Dimension;
 import org.eclipse.test.performance.PerformanceTestCase;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.wst.xml.core.internal.validation.core.ValidationReport;
 import org.eclipse.wst.xsd.ui.internal.validation.XSDValidator;
 
 public class ValidateOAGISXSDTestcase extends PerformanceTestCase
@@ -122,6 +121,7 @@ public class ValidateOAGISXSDTestcase extends PerformanceTestCase
 
   private void validateXSD(IFile file) throws PartInitException
   {
-	  ValidationReport valreport = validator.validate("file:/" + file.getRawLocation().toOSString(), null);
+	  //ValidationReport valreport = 
+		  validator.validate("file:/" + file.getRawLocation().toOSString(), null); //$NON-NLS-1$
   }
 }
