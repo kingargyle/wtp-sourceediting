@@ -90,7 +90,6 @@ import org.eclipse.wst.javascript.ui.internal.common.JSSourceViewerConfiguration
 import org.eclipse.wst.javascript.ui.internal.views.contentoutline.JSContentOutlinePage;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;
 import org.eclipse.wst.sse.core.internal.encoding.ContentBasedPreferenceGateway;
-import org.eclipse.wst.sse.core.internal.provisional.exceptions.SourceEditingRuntimeException;
 import org.eclipse.wst.sse.core.internal.util.StringUtils;
 import org.eclipse.wst.sse.ui.internal.ExtendedConfigurationBuilder;
 import org.eclipse.wst.sse.ui.internal.ExtendedEditorActionBuilder;
@@ -469,11 +468,9 @@ public class JSEditor extends TextEditor {
 			// ACTION_NAME_CONTENT_ASSIST_PROPOSAL);
 			// For error handling test only!!!==========
 		}
-		catch (MissingResourceException exception) {
-			throw new SourceEditingRuntimeException(exception, JavaScriptUIMessages.An_error_has_occurred_when_ERROR_); //$NON-NLS-1$ = ...
-			// ... "An error has occurred when retrieving resources for the
-			// source editor. The Eclipse Workbench installation may have been
-			// corrupted."
+		catch (MissingResourceException e) {
+			// log or now, unless we find reason not to
+			Logger.log(Logger.INFO, e.getMessage());
 		}
 	}
 
@@ -881,7 +878,8 @@ public class JSEditor extends TextEditor {
 				convertLineDelimiters(getDocumentProvider().getDocument(getEditorInput()));
 			}
 			catch (CoreException e) {
-				throw new SourceEditingRuntimeException(e);
+				// log or now, unless we find reason not to
+				Logger.log(Logger.INFO, e.getMessage());
 			}
 		}
 	}
@@ -929,8 +927,9 @@ public class JSEditor extends TextEditor {
 				if (multiTextEdit.getChildrenSize() > 0)
 					multiTextEdit.apply(document);
 			}
-			catch (BadLocationException exception) {
-				throw new SourceEditingRuntimeException(exception);
+			catch (BadLocationException e) {
+				// log or now, unless we find reason not to
+				Logger.log(Logger.INFO, e.getMessage());
 			}
 		}
 	}
