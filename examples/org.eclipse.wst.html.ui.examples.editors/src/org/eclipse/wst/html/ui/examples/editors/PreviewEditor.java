@@ -17,21 +17,13 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -39,7 +31,6 @@ import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.IReusableEditor;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.ILocationProvider;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
 import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
@@ -50,7 +41,6 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
-import org.eclipse.wst.sse.ui.internal.IExtendedSimpleEditor;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.ui.internal.tabletree.XMLTableTreeViewer;
@@ -59,13 +49,15 @@ import org.w3c.dom.NodeList;
 
 /**
  * A simple multi-page editor embedding a Text Editor and the SWT Browser
- * widget synchronized on page switch.
+ * widget synchronized on page switch. Other issues like validate-edit,
+ * synchronization with resource changes, and action contribution are left for
+ * larger examples and implementations.
  * 
- * The Text editor class used is the SSE HTML source editor.
+ * The Text editor class used is the SSE source editor.
  * 
  * @author nitin
  */
-public class PreviewEditor extends PostSelectionMultiPageEditorPart implements ITextEditor, IExtendedSimpleEditor, IReusableEditor {
+public class PreviewEditor extends PostSelectionMultiPageEditorPart implements IReusableEditor {
 	Control fPreviewControl = null;
 	ITextEditor fSourcePage = null;
 	/**
@@ -74,15 +66,6 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 	 * proof-of-concept here.
 	 */
 	boolean showXMLDesign = false;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#close(boolean)
-	 */
-	public void close(boolean save) {
-		getSourcePage().close(save);
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -157,6 +140,11 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 		return editor;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.part.MultiPageEditorPart#createSite(org.eclipse.ui.IEditorPart)
+	 */
 	protected IEditorSite createSite(IEditorPart editor) {
 		IEditorSite site = null;
 		if (editor == fSourcePage) {
@@ -170,15 +158,6 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 			site = super.createSite(editor);
 		}
 		return site;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#doRevertToSaved()
-	 */
-	public void doRevertToSaved() {
-		getSourcePage().doRevertToSaved();
 	}
 
 	/*
@@ -202,99 +181,16 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#getAction(java.lang.String)
-	 */
-	public IAction getAction(String actionId) {
-		return getSourcePage().getAction(actionId);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
 	 */
-	public Object getAdapter(Class adapter) {
-		return getSourcePage().getAdapter(adapter);
+	public Object getAdapter(Class key) {
+		Object adapter = super.getAdapter(key);
+		if (adapter == null)
+			adapter = getSourcePage().getAdapter(key);
+		return adapter;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ibm.sse.editor.extension.IExtendedSimpleEditor#getCaretPosition()
-	 */
-	public int getCaretPosition() {
-		if (getSourcePage() instanceof IExtendedSimpleEditor) {
-			return ((IExtendedSimpleEditor) getSourcePage()).getCaretPosition();
-		}
-		ITextSelection selection = (ITextSelection) getSourcePage().getSelectionProvider().getSelection();
-		if (selection != null) {
-			return selection.getOffset();
-		}
-		return 0;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ibm.sse.editor.extension.IExtendedSimpleEditor#getDocument()
-	 */
-	public IDocument getDocument() {
-		return getSourcePage().getDocumentProvider().getDocument(getEditorInput());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#getDocumentProvider()
-	 */
-	public IDocumentProvider getDocumentProvider() {
-		return getSourcePage().getDocumentProvider();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ibm.sse.editor.extension.IExtendedSimpleEditor#getEditorPart()
-	 */
-	public IEditorPart getEditorPart() {
-		return this;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#getHighlightRange()
-	 */
-	public IRegion getHighlightRange() {
-		return getSourcePage().getHighlightRange();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#getSelectionProvider()
-	 */
-	public ISelectionProvider getSelectionProvider() {
-		return getSourcePage().getSelectionProvider();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ibm.sse.editor.extension.IExtendedSimpleEditor#getSelectionRange()
-	 */
-	public Point getSelectionRange() {
-		if (getSourcePage() instanceof IExtendedSimpleEditor) {
-			return ((IExtendedSimpleEditor) getSourcePage()).getSelectionRange();
-		}
-		ITextSelection selection = (ITextSelection) getSourcePage().getSelectionProvider().getSelection();
-		if (selection != null) {
-			return new Point(selection.getOffset(), selection.getOffset() + selection.getLength());
-		}
-		return new Point(0, 0);
-	}
-
-	protected ITextEditor getSourcePage() {
+	private ITextEditor getSourcePage() {
 		return fSourcePage;
 	}
 
@@ -311,27 +207,8 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 		return title;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IEditorPart#init(org.eclipse.ui.IEditorSite,
-	 *      org.eclipse.ui.IEditorInput)
-	 */
-	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		super.init(site, input);
-	}
-
 	protected void interruptPreview() {
 		((Browser) fPreviewControl).stop();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#isEditable()
-	 */
-	public boolean isEditable() {
-		return getSourcePage().isEditable();
 	}
 
 	/*
@@ -362,63 +239,6 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 				updatePreviewContent();
 			}
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#removeActionActivationCode(java.lang.String)
-	 */
-	public void removeActionActivationCode(String actionId) {
-		getSourcePage().removeActionActivationCode(actionId);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#resetHighlightRange()
-	 */
-	public void resetHighlightRange() {
-		getSourcePage().resetHighlightRange();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#selectAndReveal(int, int)
-	 */
-	public void selectAndReveal(int offset, int length) {
-		getSourcePage().selectAndReveal(offset, length);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#setAction(java.lang.String,
-	 *      org.eclipse.jface.action.IAction)
-	 */
-	public void setAction(String actionID, IAction action) {
-		getSourcePage().setAction(actionID, action);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#setActionActivationCode(java.lang.String,
-	 *      char, int, int)
-	 */
-	public void setActionActivationCode(String actionId, char activationCharacter, int activationKeyCode, int activationStateMask) {
-		setActionActivationCode(actionId, activationCharacter, activationKeyCode, activationStateMask);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#setHighlightRange(int, int,
-	 *      boolean)
-	 */
-	public void setHighlightRange(int offset, int length, boolean moveCursor) {
-		getSourcePage().setHighlightRange(offset, length, moveCursor);
 	}
 
 	/**
@@ -452,24 +272,6 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 			updatePreviewContent();
 		}
 		setPartName(input.getName());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#showHighlightRangeOnly(boolean)
-	 */
-	public void showHighlightRangeOnly(boolean showHighlightRangeOnly) {
-		getSourcePage().showHighlightRangeOnly(showHighlightRangeOnly);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.ITextEditor#showsHighlightRangeOnly()
-	 */
-	public boolean showsHighlightRangeOnly() {
-		return getSourcePage().showsHighlightRangeOnly();
 	}
 
 	/**
@@ -574,17 +376,5 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 		if (!rendered) {
 			getEditorSite().getActionBars().getStatusLineManager().setErrorMessage("Failure rendering");//$NON-NLS-1$
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ibm.sse.editor.extension.IExtendedSimpleEditor#validateEdit(org.eclipse.swt.widgets.Shell)
-	 */
-	public IStatus validateEdit(Shell context) {
-		if (getSourcePage() instanceof IExtendedSimpleEditor) {
-			return ((IExtendedSimpleEditor) getSourcePage()).validateEdit(context);
-		}
-		return new Status(IStatus.OK, "org.eclipse.wst.html.ui.tests", IStatus.OK, "", null); //$NON-NLS-2$ //$NON-NLS-1$
 	}
 }
