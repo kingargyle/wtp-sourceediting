@@ -69,7 +69,6 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.editors.text.StorageDocumentProvider;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
-import org.eclipse.ui.ide.IDEActionFactory;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.DefaultRangeIndicator;
@@ -427,28 +426,12 @@ public class JSEditor extends TextEditor {
 			breakpointAction = new EditBreakpointAction(this, getVerticalRuler());
 			setAction(ActionDefinitionIds.EDIT_BREAKPOINTS, breakpointAction);
 
-			// override ruler double click action
-			String ext = BreakpointRulerAction.getFileExtension(getEditorInput());
-			if (BreakpointProviderBuilder.getInstance().isAvailable(getInputContentType(getEditorInput()), ext)) {
-				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, getAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS));
-			}
-			else {
-				// The Default Text Editor uses editorContribution to perform
-				// this
-				// mapping, but since it relies on the IEditorSite ID, it
-				// can't be
-				// relied on for MultiPageEditorParts. Instead, force the
-				// action
-				// registration manually.
-				// setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK,
-				// new
-				// MarkerRulerAction(JavaScriptUIMessages.getResourceBundle(),
-				// "Editor.ManageBookmarks.", this, getVerticalRuler(),
-				// IMarker.BOOKMARK, true)); //$NON-NLS-1$
-				// add bookmark action is already registered in
-				// AbstractDecoratedTextEditor, so just get it
-				setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, getAction(IDEActionFactory.BOOKMARK.getId()));
-			}
+			/*
+			 * Make double-clicking on the ruler toggle a breakpoint instead of
+			 * toggling a bookmark. For lines where a breakpoint won't be created,
+			 * create a bookmark through the contributed RulerDoubleClick action.
+			 */
+			setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new ToggleBreakpointAction(this, getVerticalRuler(), getAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK)));
 
 
 			// action= new
@@ -514,6 +497,9 @@ public class JSEditor extends TextEditor {
 
 		if (!allIds.contains(IPageLayout.ID_RES_NAV)) {
 			allIds.add(IPageLayout.ID_RES_NAV);
+		}
+		if (!allIds.contains(IPageLayout.ID_OUTLINE)) {
+			allIds.add(IPageLayout.ID_OUTLINE);
 		}
 		return (String[]) allIds.toArray(new String[0]);
 	}
