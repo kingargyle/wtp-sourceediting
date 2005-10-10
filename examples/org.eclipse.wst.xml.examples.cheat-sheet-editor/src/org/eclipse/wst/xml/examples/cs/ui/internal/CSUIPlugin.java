@@ -23,7 +23,6 @@ import org.eclipse.ui.editors.text.templates.ContributionTemplateStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.wst.sse.ui.internal.provisional.registry.AdapterFactoryRegistry;
 import org.eclipse.wst.sse.ui.internal.provisional.registry.AdapterFactoryRegistryImpl;
-import org.eclipse.wst.xml.ui.internal.JobStatusLineHelper;
 import org.eclipse.wst.xml.ui.internal.preferences.XMLUIPreferenceNames;
 import org.eclipse.wst.xml.ui.internal.templates.TemplateContextTypeIdsXML;
 
@@ -57,8 +56,6 @@ public class CSUIPlugin extends AbstractUIPlugin {
 	public CSUIPlugin() {
 		super();
 		instance = this;
-
-		JobStatusLineHelper.init();
 	}
 
 	public AdapterFactoryRegistry getAdapterFactoryRegistry() {
