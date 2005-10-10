@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -239,8 +240,12 @@ public class JSEditor extends TextEditor {
 			String ext = BreakpointRulerAction.getFileExtension(storageInput);
 			IResource res = BreakpointProviderBuilder.getInstance().getResource(storageInput, contentType, ext);
 			String id = storageInput.getName();
-			if (storageInput.getStorage() != null)
-				id = storageInput.getStorage().getFullPath().toString();
+			if (storageInput.getStorage() != null) {
+				IPath fullPath = storageInput.getStorage().getFullPath();
+				if (fullPath != null) {
+					id = fullPath.toString();
+				}
+			}
 			if (res != null)
 				model = new StructuredResourceMarkerAnnotationModel(res, id);
 			else
@@ -427,9 +432,10 @@ public class JSEditor extends TextEditor {
 			setAction(ActionDefinitionIds.EDIT_BREAKPOINTS, breakpointAction);
 
 			/*
-			 * Make double-clicking on the ruler toggle a breakpoint instead of
-			 * toggling a bookmark. For lines where a breakpoint won't be created,
-			 * create a bookmark through the contributed RulerDoubleClick action.
+			 * Make double-clicking on the ruler toggle a breakpoint instead
+			 * of toggling a bookmark. For lines where a breakpoint won't be
+			 * created, create a bookmark through the contributed
+			 * RulerDoubleClick action.
 			 */
 			setAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK, new ToggleBreakpointAction(this, getVerticalRuler(), getAction(ITextEditorActionConstants.RULER_DOUBLE_CLICK)));
 
