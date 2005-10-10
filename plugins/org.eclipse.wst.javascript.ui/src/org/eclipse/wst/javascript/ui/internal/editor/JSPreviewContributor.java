@@ -13,6 +13,7 @@ package org.eclipse.wst.javascript.ui.internal.editor;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
@@ -82,7 +83,11 @@ public class JSPreviewContributor {
 				dialog.open();
 				Object[] result = dialog.getResult();
 				if (result != null && result.length > 0) {
-					String previewFileName = ((IResource) result[0]).getFullPath().toString();
+					IPath resourcePath = ((IResource) result[0]).getFullPath();
+					String previewFileName = "";
+					if (resourcePath != null) {
+						previewFileName = resourcePath.toString();
+					}
 					fCombo.add(previewFileName);
 					fCombo.setText(previewFileName);
 					refresh();

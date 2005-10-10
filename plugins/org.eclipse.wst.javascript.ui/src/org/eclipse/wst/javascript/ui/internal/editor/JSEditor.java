@@ -241,6 +241,8 @@ public class JSEditor extends TextEditor {
 			IResource res = BreakpointProviderBuilder.getInstance().getResource(storageInput, contentType, ext);
 			String id = storageInput.getName();
 			if (storageInput.getStorage() != null) {
+				// attempt to get more specific ID, if provided by the
+				// particular IStorage implementation.
 				IPath fullPath = storageInput.getStorage().getFullPath();
 				if (fullPath != null) {
 					id = fullPath.toString();
