@@ -21,15 +21,16 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.ui.actions.IToggleBreakpointsTarget;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ISelectionValidator;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.ITextSelection;
@@ -40,11 +41,15 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.jface.util.ListenerList;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
@@ -113,6 +118,178 @@ import org.eclipse.wst.sse.ui.internal.provisional.extensions.ISourceEditingText
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.breakpoint.IExtendedStorageEditorInput;
 
 public class JSEditor extends TextEditor {
+	/**
+	 * A post selection provider that wraps the provider implemented in
+	 * AbstractTextEditor to provide a StructuredTextSelection to post
+	 * selection listeners. Listens to selection changes from the source
+	 * viewer.
+	 */
+	private class JSSelectionProvider implements IPostSelectionProvider, ISelectionValidator {
+		ISelectionProvider fParentProvider = null;
+		private boolean isFiringSelection = false;
+		private ListenerList listeners = new ListenerList();
+		private ListenerList postListeners = new ListenerList();
+
+		JSSelectionProvider(ISelectionProvider parentProvider) {
+			fParentProvider = parentProvider;
+			fParentProvider.addSelectionChangedListener(new ISelectionChangedListener() {
+				public void selectionChanged(SelectionChangedEvent event) {
+					handleSelectionChanged(event);
+				}
+			});
+			if (fParentProvider instanceof IPostSelectionProvider) {
+				((IPostSelectionProvider) fParentProvider).addPostSelectionChangedListener(new ISelectionChangedListener() {
+					public void selectionChanged(SelectionChangedEvent event) {
+						handlePostSelectionChanged(event);
+					}
+				});
+			}
+		}
+
+		public void addPostSelectionChangedListener(ISelectionChangedListener listener) {
+			postListeners.add(listener);
+		}
+
+		public void addSelectionChangedListener(ISelectionChangedListener listener) {
+			listeners.add(listener);
+		}
+
+		private void fireSelectionChanged(final SelectionChangedEvent event, ListenerList listenerList) {
+			Object[] listeners = listenerList.getListeners();
+			isFiringSelection = true;
+			for (int i = 0; i < listeners.length; ++i) {
+				final ISelectionChangedListener l = (ISelectionChangedListener) listeners[i];
+				Platform.run(new SafeRunnable() {
+					public void run() {
+						l.selectionChanged(event);
+					}
+				});
+			}
+			isFiringSelection = false;
+		}
+
+		private ISelectionProvider getParentProvider() {
+			return fParentProvider;
+		}
+
+		public ISelection getSelection() {
+			ISelection selection = getParentProvider().getSelection();
+			return selection;
+		}
+
+		void handlePostSelectionChanged(SelectionChangedEvent event) {
+			// only update the range indicator on post selection
+			fireSelectionChanged(event, postListeners);
+		}
+
+		void handleSelectionChanged(SelectionChangedEvent event) {
+			fireSelectionChanged(event, listeners);
+		}
+
+		boolean isFiringSelection() {
+			return isFiringSelection;
+		}
+
+		public boolean isValid(ISelection selection) {
+			if (getParentProvider() instanceof ISelectionValidator) {
+				return ((ISelectionValidator) getParentProvider()).isValid(selection);
+			}
+			return true;
+		}
+
+		public void removePostSelectionChangedListener(ISelectionChangedListener listener) {
+			postListeners.remove(listener);
+		}
+
+		public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+			listeners.remove(listener);
+		}
+
+		public void setSelection(ISelection selection) {
+			if (isFiringSelection()) {
+				return;
+			}
+			getParentProvider().setSelection(selection);
+		}
+	}
+
+	/**
+	 * Listens to double-click and selection from the outline page
+	 */
+	private class OutlinePageListener implements IDoubleClickListener, ISelectionChangedListener {
+		public void doubleClick(DoubleClickEvent event) {
+			if (event.getSelection().isEmpty())
+				return;
+
+			int start = -1;
+			int length = 0;
+			if (event.getSelection() instanceof IStructuredSelection) {
+				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+				Object o = selection.getFirstElement();
+				start = ((ContentElement) o).getOffset();
+				int end = ((ContentElement) o).getOffset() + ((ContentElement) o).getLength();
+				length = end - start;
+			}
+			else if (event.getSelection() instanceof ITextSelection) {
+				start = ((ITextSelection) event.getSelection()).getOffset();
+				length = ((ITextSelection) event.getSelection()).getLength();
+			}
+			if (start > -1) {
+				getSourceViewer().setRangeIndication(start, length, false);
+				selectAndReveal(start, length);
+			}
+		}
+
+		public void selectionChanged(SelectionChangedEvent event) {
+			/*
+			 * Do not allow selection from other parts to affect selection in
+			 * the text widget if it has focus, or if we're still firing a
+			 * change of selection. Selection events "bouncing" off of other
+			 * parts are all that we can receive if we have focus (since we
+			 * forwarded our selection to the service just a moment ago), and
+			 * only the user should affect selection if we have focus.
+			 */
+
+			/* The isFiringSelection check only works if a selection listener */
+			if (event.getSelection().isEmpty() || fSelectionProvider.isFiringSelection())
+				return;
+
+			if (getSourceViewer() != null && getSourceViewer().getTextWidget() != null && !getSourceViewer().getTextWidget().isDisposed() && !getSourceViewer().getTextWidget().isFocusControl()) {
+				int start = -1;
+				int length = 0;
+				if (event.getSelection() instanceof IStructuredSelection) {
+					IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+					Object[] contentElements = selection.toArray();
+					if (contentElements.length > 0) {
+						start = ((ContentElement) contentElements[0]).getOffset();
+						int end = ((ContentElement) contentElements[0]).getOffset() + ((ContentElement) contentElements[0]).getLength();
+
+						// No ordering is guaranteed for multiple selection
+						if (contentElements.length > 1) {
+							for (int i = 1; i < contentElements.length; i++) {
+								start = Math.min(start, ((ContentElement) contentElements[i]).getOffset());
+								end = Math.max(end, ((ContentElement) contentElements[i]).getOffset() + ((ContentElement) contentElements[i]).getLength());
+							}
+							length = end - start;
+						}
+					}
+				}
+				else if (event.getSelection() instanceof ITextSelection) {
+					start = ((ITextSelection) event.getSelection()).getOffset();
+					length = ((ITextSelection) event.getSelection()).getLength();
+				}
+
+				if (start > -1) {
+					getSourceViewer().setRangeIndication(start, length, false);
+					selectAndReveal(start, length);
+				}
+				else {
+					getSourceViewer().removeRangeIndication();
+				}
+			}
+		}
+	}
+
 	// local adapter
 	private class ShowInTargetLister implements IShowInTargetList {
 		public String[] getShowInTargetIds() {
@@ -144,86 +321,6 @@ public class JSEditor extends TextEditor {
 				selection = TextSelection.emptySelection();
 			}
 			return selection;
-		}
-	}
-
-	/**
-	 * Listens to double-click and selection from the outline page
-	 */
-	private class OutlinePageListener implements IDoubleClickListener, ISelectionChangedListener {
-		public void doubleClick(DoubleClickEvent event) {
-			if (event.getSelection().isEmpty())
-				return;
-
-			int start = -1;
-			int length = 0;
-			if (event.getSelection() instanceof IStructuredSelection) {
-				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-				Object o = selection.getFirstElement();
-				Object o2 = null;
-				if (selection.size() > 1) {
-					o2 = selection.toArray()[selection.size() - 1];
-				}
-				else {
-					o2 = o;
-				}
-				start = ((ContentElement) o).getOffset();
-				int end = ((ContentElement) o2).getOffset() + ((ContentElement) o2).getLength();
-				length = end - start;
-			}
-			else if (event.getSelection() instanceof ITextSelection) {
-				start = ((ITextSelection) event.getSelection()).getOffset();
-				length = ((ITextSelection) event.getSelection()).getLength();
-			}
-			if (start > -1) {
-				getSourceViewer().setRangeIndication(start, length, false);
-				selectAndReveal(start, length);
-			}
-		}
-
-		public void selectionChanged(SelectionChangedEvent event) {
-			/*
-			 * Do not allow selection from other parts to affect selection in
-			 * the text widget if it has focus, or if we're still firing a
-			 * change of selection. Selection events "bouncing" off of other
-			 * parts are all that we can receive if we have focus (since we
-			 * forwarded our selection to the service just a moment ago), and
-			 * only the user should affect selection if we have focus.
-			 */
-
-			/* The isFiringSelection check only works if a selection listener */
-			if (event.getSelection().isEmpty())
-				return;
-
-			if (getSourceViewer() != null && getSourceViewer().getTextWidget() != null && !getSourceViewer().getTextWidget().isDisposed() && !getSourceViewer().getTextWidget().isFocusControl()) {
-				int start = -1;
-				int length = -1;
-				if (event.getSelection() instanceof IStructuredSelection) {
-					IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-					Object o = selection.getFirstElement();
-					Object o2 = null;
-					if (selection.size() > 1) {
-						o2 = selection.toArray()[selection.size() - 1];
-					}
-					else {
-						o2 = o;
-					}
-					start = ((ContentElement) o).getOffset();
-					int end = ((ContentElement) o2).getOffset() + ((ContentElement) o2).getLength();
-					length = end - start;
-				}
-				else if (event.getSelection() instanceof ITextSelection) {
-					start = ((ITextSelection) event.getSelection()).getOffset();
-					length = ((ITextSelection) event.getSelection()).getLength();
-				}
-				if (start > -1) {
-					getSourceViewer().setRangeIndication(start, length, false);
-					selectAndReveal(start, 0);
-				}
-				else {
-					getSourceViewer().removeRangeIndication();
-				}
-			}
 		}
 	}
 
@@ -317,20 +414,22 @@ public class JSEditor extends TextEditor {
 	 */
 	static final protected IStatus STATUS_OK = new Status(IStatus.OK, "JSEditorPlugin.ID", IStatus.OK, "OK", null); //$NON-NLS-1$ //$NON-NLS-2$
 
+	private static final String UNDERSCORE = "_"; //$NON-NLS-1$
 	/** This editor's bracket matcher */
 	protected JavaPairMatcher fBracketMatcher = new JavaPairMatcher(BRACKETS);
 	private JSContentOutlinePage fContentOutlinePage = null;
 	private IEditorPart fEditorPart = null;
+
 	private JSLineStyleListener fLineStyleListener = null;
+	private OutlinePageListener fOutlinePageListener;
+	JSSelectionProvider fSelectionProvider;
 
 	String[] fShowInTargetIds = new String[]{IPageLayout.ID_RES_NAV};
+
 	private IShowInTargetList fShowInTargetListAdapter = new ShowInTargetLister();
+
 	private ISourceEditingTextTools fSourceEditingTextTools = new SourceEditingTextTools();
-
 	IDocumentProvider fStorageInputDocumentProvider = null;
-
-	private OutlinePageListener fOutlinePageListener;
-	private static final String UNDERSCORE = "_"; //$NON-NLS-1$
 
 	protected void addContextMenuActions(IMenuManager menu) {
 	}
@@ -373,6 +472,49 @@ public class JSEditor extends TextEditor {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#collectContextMenuPreferencePages()
+	 */
+	protected String[] collectContextMenuPreferencePages() {
+		List allIds = new ArrayList(0);
+
+		// get contributed preference pages
+		ExtendedConfigurationBuilder builder = ExtendedConfigurationBuilder.getInstance();
+		String[] configurationIds = getConfigurationPoints();
+		for (int i = 0; i < configurationIds.length; i++) {
+			String[] definitions = builder.getDefinitions("preferencepages", configurationIds[i]); //$NON-NLS-1$
+			for (int j = 0; j < definitions.length; j++) {
+				String someIds = definitions[j];
+				if (someIds != null && someIds.length() > 0) {
+					// supports multiple comma-delimited page IDs in one
+					// element
+					String[] ids = StringUtils.unpack(someIds);
+					for (int k = 0; k < ids.length; k++) {
+						// trim, just to keep things clean
+						String id = ids[k].trim();
+						if (!allIds.contains(id)) {
+							allIds.add(id);
+						}
+					}
+				}
+			}
+		}
+
+		// add pages contributed by super
+		String[] superPages = super.collectContextMenuPreferencePages();
+		for (int m = 0; m < superPages.length; m++) {
+			// trim, just to keep things clean
+			String id = superPages[m].trim();
+			if (!allIds.contains(id)) {
+				allIds.add(id);
+			}
+		}
+
+		return (String[]) allIds.toArray(new String[0]);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.texteditor.ExtendedTextEditor#configureSourceViewerDecorationSupport(org.eclipse.ui.texteditor.SourceViewerDecorationSupport)
 	 */
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
@@ -381,6 +523,51 @@ public class JSEditor extends TextEditor {
 		// pa_TODO we should inherit values from either the text pref page or
 		// java pref page for annotations
 		super.configureSourceViewerDecorationSupport(support);
+	}
+
+	/*
+	 * Note: This method appears in both ModelManagerImpl and JSEditor (with
+	 * just a minor difference). They should be kept the same.
+	 */
+	private void convertLineDelimiters(IDocument document) throws CoreException {
+		String contentTypeId = ContentTypeIdForJavaScript.ContentTypeID_JAVASCRIPT;
+		String endOfLineCode = ContentBasedPreferenceGateway.getPreferencesString(contentTypeId, CommonEncodingPreferenceNames.END_OF_LINE_CODE);
+		// endOfLineCode == null means the content type does not support this
+		// function (e.g. DTD)
+		// endOfLineCode == "" means no translation
+		if (endOfLineCode != null && endOfLineCode.length() > 0) {
+			String lineDelimiterToUse = System.getProperty("line.separator"); //$NON-NLS-1$
+			if (endOfLineCode.equals(CommonEncodingPreferenceNames.CR))
+				lineDelimiterToUse = CommonEncodingPreferenceNames.STRING_CR;
+			else if (endOfLineCode.equals(CommonEncodingPreferenceNames.LF))
+				lineDelimiterToUse = CommonEncodingPreferenceNames.STRING_LF;
+			else if (endOfLineCode.equals(CommonEncodingPreferenceNames.CRLF))
+				lineDelimiterToUse = CommonEncodingPreferenceNames.STRING_CRLF;
+
+			TextEdit multiTextEdit = new MultiTextEdit();
+			int lineCount = document.getNumberOfLines();
+			try {
+				for (int i = 0; i < lineCount; i++) {
+					IRegion lineInfo = document.getLineInformation(i);
+					int lineStartOffset = lineInfo.getOffset();
+					int lineLength = lineInfo.getLength();
+					int lineEndOffset = lineStartOffset + lineLength;
+
+					if (i < lineCount - 1) {
+						String currentLineDelimiter = document.getLineDelimiter(i);
+						if (currentLineDelimiter != null && currentLineDelimiter.compareTo(lineDelimiterToUse) != 0)
+							multiTextEdit.addChild(new ReplaceEdit(lineEndOffset, currentLineDelimiter.length(), lineDelimiterToUse));
+					}
+				}
+
+				if (multiTextEdit.getChildrenSize() > 0)
+					multiTextEdit.apply(document);
+			}
+			catch (BadLocationException e) {
+				// log or now, unless we find reason not to
+				Logger.log(Logger.INFO, e.getMessage());
+			}
+		}
 	}
 
 	protected void createActions() {
@@ -465,6 +652,7 @@ public class JSEditor extends TextEditor {
 		}
 	}
 
+
 	/**
 	 * Create a preference store that combines the source editor preferences
 	 * with the base editor's preferences.
@@ -475,6 +663,29 @@ public class JSEditor extends TextEditor {
 		IPreferenceStore sseEditorPrefs = SSEUIPlugin.getDefault().getPreferenceStore();
 		IPreferenceStore baseEditorPrefs = EditorsUI.getPreferenceStore();
 		return new ChainedPreferenceStore(new IPreferenceStore[]{sseEditorPrefs, baseEditorPrefs});
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#createPartControl(org.eclipse.swt.widgets.Composite)
+	 */
+	public void createPartControl(Composite parent) {
+		// just set editor/ruler/help in here because this editor is always js
+		// content
+		String contentType = getInputContentType(getEditorInput());
+		setEditorContextMenuId(contentType + ".source.EditorContext"); //$NON-NLS-1$
+		setRulerContextMenuId(contentType + ".source.RulerContext"); //$NON-NLS-1$
+		setHelpContextId(contentType + "_source_HelpId"); //$NON-NLS-1$
+		// allows help to be set at any time (not just on
+		// AbstractTextEditor's
+		// creation)
+		if ((getHelpContextId() != null) && (getSourceViewer() != null) && (getSourceViewer().getTextWidget() != null)) {
+			IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
+			helpSystem.setHelp(getSourceViewer().getTextWidget(), getHelpContextId());
+		}
+		super.createPartControl(parent);
+		initializeDrop(getSourceViewer().getTextWidget());
 	}
 
 	/**
@@ -510,29 +721,6 @@ public class JSEditor extends TextEditor {
 			allIds.add(IPageLayout.ID_OUTLINE);
 		}
 		return (String[]) allIds.toArray(new String[0]);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#createPartControl(org.eclipse.swt.widgets.Composite)
-	 */
-	public void createPartControl(Composite parent) {
-		// just set editor/ruler/help in here because this editor is always js
-		// content
-		String contentType = getInputContentType(getEditorInput());
-		setEditorContextMenuId(contentType + ".source.EditorContext"); //$NON-NLS-1$
-		setRulerContextMenuId(contentType + ".source.RulerContext"); //$NON-NLS-1$
-		setHelpContextId(contentType + "_source_HelpId"); //$NON-NLS-1$
-		// allows help to be set at any time (not just on
-		// AbstractTextEditor's
-		// creation)
-		if ((getHelpContextId() != null) && (getSourceViewer() != null) && (getSourceViewer().getTextWidget() != null)) {
-			IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
-			helpSystem.setHelp(getSourceViewer().getTextWidget(), getHelpContextId());
-		}
-		super.createPartControl(parent);
-		initializeDrop(getSourceViewer().getTextWidget());
 	}
 
 	protected ISourceViewer createSourceViewer(Composite parent, IVerticalRuler verticalRuler, int styles) {
@@ -694,8 +882,43 @@ public class JSEditor extends TextEditor {
 		return fLineStyleListener;
 	}
 
+	public int getOrientation() {
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=88714
+		return SWT.LEFT_TO_RIGHT;
+	}
+
+	public ISelectionProvider getSelectionProvider() {
+		if (fSelectionProvider == null) {
+			ISelectionProvider parentProvider = super.getSelectionProvider();
+			if (parentProvider != null) {
+				fSelectionProvider = new JSSelectionProvider(parentProvider);
+			}
+		}
+		if (fSelectionProvider == null) {
+			return super.getSelectionProvider();
+		}
+		return fSelectionProvider;
+	}
+
 	public ISourceViewer getViewer() {
 		return getSourceViewer();
+	}
+
+	private void handleConvertLineDelimiters() {
+		if (getDocumentProvider().getDocument(getEditorInput()).getNumberOfLines() > 1) {
+			try {
+				convertLineDelimiters(getDocumentProvider().getDocument(getEditorInput()));
+			}
+			catch (CoreException e) {
+				// log or now, unless we find reason not to
+				Logger.log(Logger.INFO, e.getMessage());
+			}
+		}
+	}
+
+	protected void handleCursorPositionChanged() {
+		super.handleCursorPositionChanged();
+		updateStatusField(StructuredTextEditorActionConstants.STATUS_CATEGORY_OFFSET);
 	}
 
 	/*
@@ -757,23 +980,19 @@ public class JSEditor extends TextEditor {
 	}
 
 	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
-		menu.add(getAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS));
-		menu.add(getAction(ActionDefinitionIds.MANAGE_BREAKPOINTS));
-		menu.add(getAction(ActionDefinitionIds.EDIT_BREAKPOINTS));
-		menu.add(new Separator());
+		menu.appendToGroup("debug", getAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS));
+		menu.appendToGroup("debug", getAction(ActionDefinitionIds.MANAGE_BREAKPOINTS));
+		menu.appendToGroup("debug", getAction(ActionDefinitionIds.EDIT_BREAKPOINTS));
 		super.rulerContextMenuAboutToShow(menu);
 	}
 
-	/**
-	 * Checks the state of the given editor input if sanity checking is
-	 * enabled.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param input
-	 *            the editor input whose state is to be checked
-	 * @see 2.0
+	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#safelySanityCheckState(org.eclipse.ui.IEditorInput)
 	 */
-	protected void sanityCheckState(IEditorInput input) {
-		super.sanityCheckState(input);
+	protected void safelySanityCheckState(IEditorInput input) {
+		super.safelySanityCheckState(input);
 	}
 
 	/**
@@ -864,115 +1083,5 @@ public class JSEditor extends TextEditor {
 				field.setText(text == null ? fErrorLabel : text);
 			}
 		}
-	}
-
-	private void handleConvertLineDelimiters() {
-		if (getDocumentProvider().getDocument(getEditorInput()).getNumberOfLines() > 1) {
-			try {
-				convertLineDelimiters(getDocumentProvider().getDocument(getEditorInput()));
-			}
-			catch (CoreException e) {
-				// log or now, unless we find reason not to
-				Logger.log(Logger.INFO, e.getMessage());
-			}
-		}
-	}
-
-	protected void handleCursorPositionChanged() {
-		super.handleCursorPositionChanged();
-		updateStatusField(StructuredTextEditorActionConstants.STATUS_CATEGORY_OFFSET);
-	}
-
-	/*
-	 * Note: This method appears in both ModelManagerImpl and JSEditor (with
-	 * just a minor difference). They should be kept the same.
-	 */
-	private void convertLineDelimiters(IDocument document) throws CoreException {
-		String contentTypeId = ContentTypeIdForJavaScript.ContentTypeID_JAVASCRIPT;
-		String endOfLineCode = ContentBasedPreferenceGateway.getPreferencesString(contentTypeId, CommonEncodingPreferenceNames.END_OF_LINE_CODE);
-		// endOfLineCode == null means the content type does not support this
-		// function (e.g. DTD)
-		// endOfLineCode == "" means no translation
-		if (endOfLineCode != null && endOfLineCode.length() > 0) {
-			String lineDelimiterToUse = System.getProperty("line.separator"); //$NON-NLS-1$
-			if (endOfLineCode.equals(CommonEncodingPreferenceNames.CR))
-				lineDelimiterToUse = CommonEncodingPreferenceNames.STRING_CR;
-			else if (endOfLineCode.equals(CommonEncodingPreferenceNames.LF))
-				lineDelimiterToUse = CommonEncodingPreferenceNames.STRING_LF;
-			else if (endOfLineCode.equals(CommonEncodingPreferenceNames.CRLF))
-				lineDelimiterToUse = CommonEncodingPreferenceNames.STRING_CRLF;
-
-			TextEdit multiTextEdit = new MultiTextEdit();
-			int lineCount = document.getNumberOfLines();
-			try {
-				for (int i = 0; i < lineCount; i++) {
-					IRegion lineInfo = document.getLineInformation(i);
-					int lineStartOffset = lineInfo.getOffset();
-					int lineLength = lineInfo.getLength();
-					int lineEndOffset = lineStartOffset + lineLength;
-
-					if (i < lineCount - 1) {
-						String currentLineDelimiter = document.getLineDelimiter(i);
-						if (currentLineDelimiter != null && currentLineDelimiter.compareTo(lineDelimiterToUse) != 0)
-							multiTextEdit.addChild(new ReplaceEdit(lineEndOffset, currentLineDelimiter.length(), lineDelimiterToUse));
-					}
-				}
-
-				if (multiTextEdit.getChildrenSize() > 0)
-					multiTextEdit.apply(document);
-			}
-			catch (BadLocationException e) {
-				// log or now, unless we find reason not to
-				Logger.log(Logger.INFO, e.getMessage());
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#collectContextMenuPreferencePages()
-	 */
-	protected String[] collectContextMenuPreferencePages() {
-		List allIds = new ArrayList(0);
-
-		// get contributed preference pages
-		ExtendedConfigurationBuilder builder = ExtendedConfigurationBuilder.getInstance();
-		String[] configurationIds = getConfigurationPoints();
-		for (int i = 0; i < configurationIds.length; i++) {
-			String[] definitions = builder.getDefinitions("preferencepages", configurationIds[i]); //$NON-NLS-1$
-			for (int j = 0; j < definitions.length; j++) {
-				String someIds = definitions[j];
-				if (someIds != null && someIds.length() > 0) {
-					// supports multiple comma-delimited page IDs in one
-					// element
-					String[] ids = StringUtils.unpack(someIds);
-					for (int k = 0; k < ids.length; k++) {
-						// trim, just to keep things clean
-						String id = ids[k].trim();
-						if (!allIds.contains(id)) {
-							allIds.add(id);
-						}
-					}
-				}
-			}
-		}
-
-		// add pages contributed by super
-		String[] superPages = super.collectContextMenuPreferencePages();
-		for (int m = 0; m < superPages.length; m++) {
-			// trim, just to keep things clean
-			String id = superPages[m].trim();
-			if (!allIds.contains(id)) {
-				allIds.add(id);
-			}
-		}
-
-		return (String[]) allIds.toArray(new String[0]);
-	}
-
-	public int getOrientation() {
-		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=88714
-		return SWT.LEFT_TO_RIGHT;
 	}
 }

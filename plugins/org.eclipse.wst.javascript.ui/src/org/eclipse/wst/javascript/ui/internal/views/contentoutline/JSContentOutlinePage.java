@@ -50,15 +50,19 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.IPageSite;
+import org.eclipse.ui.part.IShowInSource;
+import org.eclipse.ui.part.IShowInTarget;
+import org.eclipse.ui.part.IShowInTargetList;
+import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
 import org.eclipse.wst.javascript.ui.internal.common.ContentElementComparerImpl;
 import org.eclipse.wst.javascript.ui.internal.common.JSContentElementImpl;
-import org.eclipse.wst.javascript.ui.internal.common.Logger;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
 import org.eclipse.wst.javascript.ui.internal.editor.JavaScriptUIMessages;
+import org.eclipse.wst.javascript.ui.internal.editor.Logger;
 import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateAction;
 import org.eclipse.wst.sse.ui.internal.contentoutline.PropertyChangeUpdateActionContributionItem;
 import org.eclipse.wst.sse.ui.internal.edit.util.SharedEditorPluginImageHelper;
@@ -111,6 +115,51 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		}
 	}
 
+	private class DoubleClickProvider implements IDoubleClickListener {
+		private IDoubleClickListener[] listeners = null;
+
+		void addDoubleClickListener(IDoubleClickListener newListener) {
+			if (listeners == null) {
+				listeners = new IDoubleClickListener[]{newListener};
+			}
+			else {
+				IDoubleClickListener[] newListeners = new IDoubleClickListener[listeners.length + 1];
+				System.arraycopy(listeners, 0, newListeners, 0, listeners.length);
+				newListeners[listeners.length] = newListener;
+				listeners = newListeners;
+			}
+		}
+
+		public void doubleClick(DoubleClickEvent event) {
+			fireDoubleClickEvent(event);
+		}
+
+		private void fireDoubleClickEvent(final DoubleClickEvent event) {
+			IDoubleClickListener[] firingListeners = listeners;
+			for (int i = 0; i < firingListeners.length; ++i) {
+				final IDoubleClickListener l = firingListeners[i];
+				Platform.run(new SafeRunnable() {
+					public void run() {
+						l.doubleClick(event);
+					}
+				});
+			}
+		}
+
+		void removeDoubleClickListener(IDoubleClickListener oldListener) {
+			if (listeners != null) {
+				if (listeners.length == 1 && listeners[0].equals(oldListener)) {
+					listeners = null;
+				}
+				else {
+					List newListeners = new ArrayList(Arrays.asList(listeners));
+					newListeners.remove(oldListener);
+					listeners = (IDoubleClickListener[]) newListeners.toArray(new IDoubleClickListener[listeners.length - 1]);
+				}
+			}
+		}
+	}
+
 	protected class ShowHierarchyAction extends PropertyChangeUpdateAction {
 		public ShowHierarchyAction(String text, IPreferenceStore store, String preferenceKey, boolean defaultValue) {
 			super(text, store, preferenceKey, defaultValue);
@@ -124,6 +173,16 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 			Object[] expanded = getTreeViewer().getExpandedElements();
 			getTreeViewer().refresh();
 			getTreeViewer().setExpandedElements(expanded);
+		}
+	}
+
+	private class ShowInTarget implements IShowInTarget {
+		/*
+		 * @see org.eclipse.ui.part.IShowInTarget#show(org.eclipse.ui.part.ShowInContext)
+		 */
+		public boolean show(ShowInContext context) {
+			setSelection(getStructuredSelectionFor(context.getSelection()));
+			return getTreeViewer().getSelection().equals(context.getSelection());
 		}
 	}
 
@@ -180,8 +239,9 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		 */
 		public void update() {
 			super.update();
-			treeViewer.getControl().setVisible(false);
+			treeViewer.getControl().setRedraw(false);
 			Object[] expandedElements = treeViewer.getExpandedElements();
+			ISelection selection = treeViewer.getSelection();
 			if (isChecked()) {
 				treeViewer.setSorter(new CategorySorter(Collator.getInstance()));
 			}
@@ -190,7 +250,8 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 			}
 			treeViewer.setInput(treeViewer.getInput());
 			treeViewer.setExpandedElements(expandedElements);
-			treeViewer.getControl().setVisible(true);
+			treeViewer.setSelection(selection);
+			treeViewer.getControl().setRedraw(true);
 		}
 	}
 
@@ -208,51 +269,6 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		}
 	}
 
-	private class DoubleClickProvider implements IDoubleClickListener {
-		private IDoubleClickListener[] listeners = null;
-
-		void addDoubleClickListener(IDoubleClickListener newListener) {
-			if (listeners == null) {
-				listeners = new IDoubleClickListener[]{newListener};
-			}
-			else {
-				IDoubleClickListener[] newListeners = new IDoubleClickListener[listeners.length + 1];
-				System.arraycopy(listeners, 0, newListeners, 0, listeners.length);
-				newListeners[listeners.length] = newListener;
-				listeners = newListeners;
-			}
-		}
-
-		public void doubleClick(DoubleClickEvent event) {
-			fireDoubleClickEvent(event);
-		}
-
-		private void fireDoubleClickEvent(final DoubleClickEvent event) {
-			IDoubleClickListener[] firingListeners = listeners;
-			for (int i = 0; i < firingListeners.length; ++i) {
-				final IDoubleClickListener l = firingListeners[i];
-				Platform.run(new SafeRunnable() {
-					public void run() {
-						l.doubleClick(event);
-					}
-				});
-			}
-		}
-
-		void removeDoubleClickListener(IDoubleClickListener oldListener) {
-			if (listeners != null) {
-				if (listeners.length == 1 && listeners[0].equals(oldListener)) {
-					listeners = null;
-				}
-				else {
-					List newListeners = new ArrayList(Arrays.asList(listeners));
-					newListeners.remove(oldListener);
-					listeners = (IDoubleClickListener[]) newListeners.toArray(new IDoubleClickListener[listeners.length - 1]);
-				}
-			}
-		}
-	}
-
 	private static final String OUTLINE_LINK_PREF = "outline-link-editor"; //$NON-NLS-1$
 	private static final String OUTLINE_SHOW_HIERARCHY_PREF = "outline-show-hierarchy"; //$NON-NLS-1$
 	private static final String OUTLINE_SHOW_VARIABLES_PREF = "outline-show-variables"; //$NON-NLS-1$
@@ -267,17 +283,17 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 
 	protected DeleteAction fDeleteAction = new DeleteAction();
 	protected IDocument fDocument = null;
+	private DoubleClickProvider fDoubleClickProvider;
 	private boolean fIsLinked = true;
+	private ISelectionListener fSelectionListener;
+
 	private PropertyChangeUpdateActionContributionItem fShowHierarchyItem;
 	private PropertyChangeUpdateActionContributionItem fShowVariablesItem;
-
 	private PropertyChangeUpdateActionContributionItem fSortItem;
 	protected ISourceViewer fSourceViewer = null;
 	private PropertyChangeUpdateActionContributionItem fToggleLinkItem;
 	protected ImageDescriptor SYNCED_D = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_DLCL_SYNCED);
 	protected ImageDescriptor SYNCED_E = SharedEditorPluginImageHelper.getImageDescriptor(SharedEditorPluginImageHelper.IMG_ELCL_SYNCED);
-	private DoubleClickProvider fDoubleClickProvider;
-	private ISelectionListener fSelectionListener;
 
 	public JSContentOutlinePage(IDocument document, ISourceViewer sourceViewer) {
 		setDocument(document);
@@ -347,7 +363,6 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		if (fToggleLinkItem != null)
 			fToggleLinkItem.disconnect();
 
-		getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(getSelectionServiceListener());
 		getSite().getWorkbenchWindow().getSelectionService().removePostSelectionListener(getSelectionServiceListener());
 	}
 
@@ -371,55 +386,66 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		//
 	}
 
-	public void init(IPageSite pageSite) {
-		super.init(pageSite);
-		getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(getSelectionServiceListener());
-		getSite().getWorkbenchWindow().getSelectionService().addPostSelectionListener(getSelectionServiceListener());
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
+	 */
+	public Object getAdapter(Class key) {
+		Object adapter = null;
+		if (key.equals(IShowInTarget.class)) {
+			adapter = new ShowInTarget();
+		}
+		
+		final IEditorPart editor = getActiveEditorPart();
+
+		if (key.equals(IShowInSource.class) && editor != null) {
+			adapter = new IShowInSource() {
+				public ShowInContext getShowInContext() {
+					return new ShowInContext(editor.getEditorInput(), editor.getEditorSite().getSelectionProvider().getSelection());
+				}
+			};
+		}
+		else if (key.equals(IShowInTargetList.class) && editor != null) {
+			adapter = editor.getAdapter(key);
+		}
+		return adapter;
+	}
+
+	IEditorPart getActiveEditorPart() {
+		return getSite().getWorkbenchWindow().getActivePage().getActiveEditor();
+	}
+
+	ContentElement getContentElementAt(ContentElement contentElement, int caretPosition) {
+		ContentElement result = null;
+
+		List children = contentElement.getChildren();
+		if (children != null) {
+			for (Iterator iter = children.iterator(); iter.hasNext();) {
+				ContentElement eachContentElement = (ContentElement) iter.next();
+				result = getContentElementAt(eachContentElement, caretPosition);
+
+				if (result != null)
+					return result;
+			}
+		}
+
+		int offset = contentElement.getOffset();
+		int length = contentElement.getLength();
+		if ((caretPosition >= offset) && (caretPosition <= offset + length))
+			result = contentElement;
+
+		return result;
 	}
 
 	private ISelectionListener getSelectionServiceListener() {
 		if (fSelectionListener == null) {
 			fSelectionListener = new ISelectionListener() {
-				private ContentElement getContentElementAt(ContentElement contentElement, int caretPosition) {
-					ContentElement result = null;
-
-					List children = contentElement.getChildren();
-					if (children != null) {
-						for (Iterator iter = children.iterator(); iter.hasNext();) {
-							ContentElement eachContentElement = (ContentElement) iter.next();
-							result = getContentElementAt(eachContentElement, caretPosition);
-
-							if (result != null)
-								return result;
-						}
-					}
-
-					int offset = contentElement.getOffset();
-					int length = contentElement.getLength();
-					if ((caretPosition >= offset) && (caretPosition <= offset + length))
-						result = contentElement;
-
-					return result;
-				}
 
 				public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-					if (!getTreeViewer().getControl().isDisposed() && !getTreeViewer().getControl().isFocusControl()) {
+					if (!getTreeViewer().getControl().isDisposed() && !getTreeViewer().getControl().isFocusControl() && getTreeViewer().getControl().isVisible()) {
 						if (fIsLinked) {
-							StructuredSelection structuredSelection = null;
-							Object o = null;
-							if (selection instanceof ITextSelection) {
-								Object[] treeItems = getTreeViewer().getTree().getItems();
-								for (int i = 0; i < treeItems.length; i++) {
-									ContentElement eachContentElement = (ContentElement) ((TreeItem) treeItems[i]).getData();
-
-									o = getContentElementAt(eachContentElement, ((ITextSelection) selection).getOffset());
-									if (o != null)
-										break;
-								}
-								if (o != null) {
-									structuredSelection = new StructuredSelection(o);
-								}
-							}
+							IStructuredSelection structuredSelection = getStructuredSelectionFor(selection);
 							if (structuredSelection != null) {
 								getTreeViewer().setSelection(structuredSelection);
 							}
@@ -434,6 +460,36 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 
 	protected ISourceViewer getSourceViewer() {
 		return fSourceViewer;
+	}
+
+	IStructuredSelection getStructuredSelectionFor(ISelection selection) {
+		IStructuredSelection structuredSelection = null;
+		if (selection instanceof IStructuredSelection) {
+			structuredSelection = (IStructuredSelection) selection;
+		}
+		else if (selection instanceof ITextSelection) {
+			Object o = null;
+			if (selection instanceof ITextSelection) {
+				Object[] treeItems = getTreeViewer().getTree().getItems();
+				for (int i = 0; i < treeItems.length; i++) {
+					ContentElement eachContentElement = (ContentElement) ((TreeItem) treeItems[i]).getData();
+
+					o = getContentElementAt(eachContentElement, ((ITextSelection) selection).getOffset());
+					if (o != null)
+						break;
+				}
+				if (o != null) {
+					structuredSelection = new StructuredSelection(o);
+				}
+			}
+		}
+		return structuredSelection;
+
+	}
+
+	public void init(IPageSite pageSite) {
+		super.init(pageSite);
+		getSite().getWorkbenchWindow().getSelectionService().addPostSelectionListener(getSelectionServiceListener());
 	}
 
 	void registerContextMenu() {

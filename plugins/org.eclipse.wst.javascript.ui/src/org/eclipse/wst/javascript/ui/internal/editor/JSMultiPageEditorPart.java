@@ -11,48 +11,206 @@
 package org.eclipse.wst.javascript.ui.internal.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IPartService;
 import org.eclipse.ui.IPropertyListener;
+import org.eclipse.ui.IWindowListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.ide.IGotoMarker;
-import org.eclipse.ui.part.IShowInTargetList;
-import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
 import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageSelectionProvider;
 import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
 
-public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart implements IPropertyListener {
+public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart {
 
-	class TextInputListener implements ITextInputListener {
-		public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
+	/**
+	 * Internal part activation listener, copied from AbstractTextEditor
+	 */
+	private class ActivationListener implements IPartListener, IWindowListener {
+
+		/** Cache of the active workbench part. */
+		private IWorkbenchPart fActivePart;
+		/** Indicates whether activation handling is currently be done. */
+		private boolean fIsHandlingActivation = false;
+		/**
+		 * The part service.
+		 * 
+		 * @since 3.1
+		 */
+		private IPartService fPartService;
+
+		/**
+		 * Creates this activation listener.
+		 * 
+		 * @param partService
+		 *            the part service on which to add the part listener
+		 * @since 3.1
+		 */
+		public ActivationListener(IPartService partService) {
+			fPartService = partService;
+			fPartService.addPartListener(this);
+			PlatformUI.getWorkbench().addWindowListener(this);
 		}
 
-		public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
-			if (newInput != null) {
-				setInput(fEditor.getEditorInput());
+		/**
+		 * Disposes this activation listener.
+		 * 
+		 * @since 3.1
+		 */
+		public void dispose() {
+			fPartService.removePartListener(this);
+			PlatformUI.getWorkbench().removeWindowListener(this);
+			fPartService = null;
+		}
+
+		/**
+		 * Handles the activation triggering a element state check in the
+		 * editor.
+		 */
+		void handleActivation() {
+			if (fIsHandlingActivation || fEditor == null)
+				return;
+
+			if (fActivePart == JSMultiPageEditorPart.this) {
+				fIsHandlingActivation = true;
+				try {
+					fEditor.safelySanityCheckState(getEditorInput());
+				}
+				finally {
+					fIsHandlingActivation = false;
+				}
+			}
+		}
+
+		/*
+		 * @see IPartListener#partActivated(org.eclipse.ui.IWorkbenchPart)
+		 */
+		public void partActivated(IWorkbenchPart part) {
+			fActivePart = part;
+			handleActivation();
+		}
+
+		/*
+		 * @see IPartListener#partBroughtToTop(org.eclipse.ui.IWorkbenchPart)
+		 */
+		public void partBroughtToTop(IWorkbenchPart part) {
+			// do nothing
+		}
+
+		/*
+		 * @see IPartListener#partClosed(org.eclipse.ui.IWorkbenchPart)
+		 */
+		public void partClosed(IWorkbenchPart part) {
+			// do nothing
+		}
+
+		/*
+		 * @see IPartListener#partDeactivated(org.eclipse.ui.IWorkbenchPart)
+		 */
+		public void partDeactivated(IWorkbenchPart part) {
+			fActivePart = null;
+		}
+
+		/*
+		 * @see IPartListener#partOpened(org.eclipse.ui.IWorkbenchPart)
+		 */
+		public void partOpened(IWorkbenchPart part) {
+			// do nothing
+		}
+
+		/*
+		 * @see org.eclipse.ui.IWindowListener#windowActivated(org.eclipse.ui.IWorkbenchWindow)
+		 * @since 3.1
+		 */
+		public void windowActivated(IWorkbenchWindow window) {
+			if (window == getEditorSite().getWorkbenchWindow()) {
+				/*
+				 * Workaround for problem described in
+				 * http://dev.eclipse.org/bugs/show_bug.cgi?id=11731 Will be
+				 * removed when SWT has solved the problem.
+				 */
+				window.getShell().getDisplay().asyncExec(new Runnable() {
+					public void run() {
+						handleActivation();
+					}
+				});
+			}
+		}
+
+		/*
+		 * @see org.eclipse.ui.IWindowListener#windowClosed(org.eclipse.ui.IWorkbenchWindow)
+		 * @since 3.1
+		 */
+		public void windowClosed(IWorkbenchWindow window) {
+			// do nothing
+		}
+
+		/*
+		 * @see org.eclipse.ui.IWindowListener#windowDeactivated(org.eclipse.ui.IWorkbenchWindow)
+		 * @since 3.1
+		 */
+		public void windowDeactivated(IWorkbenchWindow window) {
+			// do nothing
+		}
+
+		/*
+		 * @see org.eclipse.ui.IWindowListener#windowOpened(org.eclipse.ui.IWorkbenchWindow)
+		 * @since 3.1
+		 */
+		public void windowOpened(IWorkbenchWindow window) {
+			// do nothing
+		}
+	}
+
+	private class SourcePagePropertyListener implements IPropertyListener {
+		public void propertyChanged(Object source, int propId) {
+			switch (propId) {
+				case IEditorPart.PROP_INPUT : {
+					if (source == fEditor) {
+						if (fEditor.getEditorInput() != getEditorInput()) {
+							setInput(fEditor.getEditorInput());
+							setPartName(fEditor.getEditorInput().getName());
+						}
+					}
+					break;
+				}
+				case IWorkbenchPart.PROP_TITLE : {
+					if (source == fEditor) {
+						if (fEditor.getEditorInput() != getEditorInput()) {
+							setInput(fEditor.getEditorInput());
+						}
+					}
+					break;
+				}
+				default : {
+					if (source == fEditor) {
+						firePropertyChange(propId);
+					}
+					break;
+				}
 			}
 		}
 	}
 
-	private JSEditor fEditor = null;
+	private ActivationListener fActivationListener;
+	JSEditor fEditor = null;
 	private JSPreviewPage fPreviewPage = null;
 	private int fPreviewPageIndex = 1;
 	private int fSourcePageIndex = 0;
+	private IPropertyListener fSourcePagePropertyListener;
 	private Image fTitleImage = null;
 
 	/**
 	 * Adds the preview page of the multi-page editor.
 	 */
 	private void addPreviewPage() {
-		fPreviewPage = new JSPreviewPage(getContainer(), fEditor);
 		fPreviewPageIndex = addPage(fPreviewPage.getControl());
 		setPageText(fPreviewPageIndex, JavaScriptUIMessages.Preview);
 	}
@@ -64,7 +222,8 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart impl
 		try {
 			fEditor = new JSEditor();
 			fEditor.setEditorPart(this);
-			fEditor.addPropertyListener(this);
+			fSourcePagePropertyListener = new SourcePagePropertyListener();
+			fEditor.addPropertyListener(fSourcePagePropertyListener);
 			fSourcePageIndex = addPage(fEditor, getEditorInput());
 			setPageText(fSourcePageIndex, JavaScriptUIMessages.Source);
 		}
@@ -84,6 +243,7 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart impl
 		 * for SWTError in attempt to work around "blocker" mentioned in 87657
 		 */
 		try {
+			fPreviewPage = createPreviewPage();
 			addPreviewPage();
 		}
 		catch (SWTError e) {
@@ -96,12 +256,29 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart impl
 		fTitleImage = JSEditorPluginImageHelper.getInstance().getImageDescriptor(JSEditorPluginImages.IMG_OBJ_JAVASCRIPT_VIEW).createImage();
 		setTitleImage(fTitleImage);
 	}
-	
+
+	/**
+	 * Adds the preview page of the multi-page editor.
+	 */
+	private JSPreviewPage createPreviewPage() {
+		return new JSPreviewPage(getContainer(), fEditor);
+	}
+
 	protected IEditorSite createSite(IEditorPart editor) {
 		return new PostMultiPageEditorSite(this, editor);
 	}
 
 	public void dispose() {
+		if (fSourcePagePropertyListener != null) {
+			fEditor.removePropertyListener(fSourcePagePropertyListener);
+			fSourcePagePropertyListener = null;
+		}
+
+		if (fActivationListener != null) {
+			fActivationListener.dispose();
+			fActivationListener = null;
+		}
+
 		if (fEditor != null)
 			fEditor.dispose();
 
@@ -118,21 +295,11 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart impl
 	}
 
 	public Object getAdapter(Class required) {
-		// content outline page
-		if (IContentOutlinePage.class.equals(required))
-			return fEditor.getAdapter(IContentOutlinePage.class);
-
-		// goto marker
-		if (IGotoMarker.class.equals(required) && fEditor != null)
-			return fEditor.getAdapter(IGotoMarker.class);
-
-		if (IShowInTargetList.class.equals(required))
-			return fEditor.getAdapter(required);
-		
-		if (ITextEditor.class.equals(required))
-			return fEditor;
-
-		return super.getAdapter(required);
+		Object o = super.getAdapter(required);
+		if (o == null) {
+			o = fEditor.getAdapter(required);
+		}
+		return o;
 	}
 
 	public String getTitle() {
@@ -151,6 +318,10 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart impl
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 		setPartName(input.getName());
+
+		// we want to listen for our own activation
+		fActivationListener = new ActivationListener(site.getWorkbenchWindow().getPartService());
+
 		site.setSelectionProvider(new PostMultiPageSelectionProvider(this));
 	}
 
@@ -163,42 +334,5 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart impl
 			fPreviewPage.refresh();
 
 		super.pageChange(newPageIndex);
-	}
-
-	public void propertyChanged(Object source, int propId) {
-		switch (propId) {
-			case IEditorPart.PROP_INPUT : {
-				if (source == fEditor) {
-					if (fEditor.getEditorInput() != getEditorInput()) {
-						setInput(fEditor.getEditorInput());
-					}
-				}
-				break;
-			}
-			case IWorkbenchPart.PROP_TITLE : {
-				if (source == fEditor) {
-					if (fEditor.getEditorInput() != getEditorInput()) {
-						setInput(fEditor.getEditorInput());
-					}
-				}
-				break;
-			}
-			default : {
-				if (source == fEditor) {
-					firePropertyChange(propId);
-				}
-				break;
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.part.EditorPart#setInput(org.eclipse.ui.IEditorInput)
-	 */
-	protected void setInput(IEditorInput input) {
-		super.setInput(input);
-		setPartName(input.getName());
 	}
 }
