@@ -46,6 +46,6 @@ public class JFaceNodeAdapterFactoryForCS extends JFaceNodeAdapterFactory {
 	}
 
 	public INodeAdapterFactory copy() {
-		return new JFaceNodeAdapterFactoryForCS(this.adapterKey, this.shouldRegisterAdapter);
+		return new JFaceNodeAdapterFactoryForCS();
 	}
 }
