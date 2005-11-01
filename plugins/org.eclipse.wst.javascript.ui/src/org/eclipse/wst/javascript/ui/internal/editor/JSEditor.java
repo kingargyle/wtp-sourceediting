@@ -939,7 +939,7 @@ public class JSEditor extends TextEditor {
 		int operations = DND.DROP_COPY | DND.DROP_MOVE;
 		DropTarget dropTarget = new DropTarget(control, operations);
 
-		ExtendedEditorDropTargetAdapter dropTargetAdapter = new ExtendedEditorDropTargetAdapter();
+		ExtendedEditorDropTargetAdapter dropTargetAdapter = new ExtendedEditorDropTargetAdapter(true);
 		dropTargetAdapter.setTargetEditor(this);
 		dropTargetAdapter.setTargetIDs(getConfigurationPoints());
 		dropTargetAdapter.setTextViewer(getSourceViewer());
