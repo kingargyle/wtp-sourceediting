@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JSP UI Performance Plug-in
 Bundle-SymbolicName: org.eclipse.jst.jsp.ui.tests.performance
-Bundle-Version: 0.7.0
+Bundle-Version: 1.0.0
 Bundle-ClassPath: jspuiperformance.jar
 Bundle-Activator: org.eclipse.jst.jsp.ui.tests.performance.JSPUIPerformancePlugin
 Bundle-Vendor: Eclipse.org
