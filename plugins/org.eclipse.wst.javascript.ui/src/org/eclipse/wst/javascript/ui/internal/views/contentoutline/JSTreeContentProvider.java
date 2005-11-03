@@ -32,15 +32,17 @@ class JSTreeContentProvider implements ITreeContentProvider {
 	 * @see ITreeContentProvider#getChildren(Object parentElement)
 	 */
 	public Object[] getChildren(Object parentElement) {
-		Vector children = ((ContentElement) parentElement).getChildren();
-		if (children == null)
-			return null;
-		else
-			return children.toArray();
+		if (parentElement instanceof ContentElement) {
+			Vector children = ((ContentElement) parentElement).getChildren();
+			if (children != null)
+				return children.toArray();
+		}
+		return null;
 	}
 
 	/**
-	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(Object inputElement)
+	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(Object
+	 *      inputElement)
 	 */
 	public Object[] getElements(Object inputElement) {
 		return fContentElementProvider.getContentElements(inputElement).toArray();
@@ -50,18 +52,25 @@ class JSTreeContentProvider implements ITreeContentProvider {
 	 * @see ITreeContentProvider#getParent(Object element)
 	 */
 	public Object getParent(Object element) {
-		return ((ContentElement) element).getParent();
+		if (element instanceof ContentElement) {
+			return ((ContentElement) element).getParent();
+		}
+		return null;
 	}
 
 	/**
 	 * @see ITreeContentProvider#hasChildren(Object element)
 	 */
 	public boolean hasChildren(Object element) {
-		return ((ContentElement) element).hasChildren(element);
+		if (element instanceof ContentElement) {
+			return ((ContentElement) element).hasChildren(element);
+		}
+		return false;
 	}
 
 	/**
-	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(Viewer viewer, Object oldInput, Object newInput)
+	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(Viewer
+	 *      viewer, Object oldInput, Object newInput)
 	 */
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 	}
