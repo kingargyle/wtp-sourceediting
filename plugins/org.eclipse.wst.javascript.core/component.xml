@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component xmlns="http://eclipse.org/wtp/releng/tools/component-model"
-        name="org.eclipse.wst.javascript">
-        <component-depends unrestricted="true"></component-depends>
-        <plugin id="org.eclipse.wst.javascript.core" />
-        <plugin id="org.eclipse.wst.javascript.ui" />
+<component xmlns="http://eclipse.org/wtp/releng/tools/component-model" name="org.eclipse.wst.javascript">
+	<component-depends unrestricted="true"></component-depends>
+	<description url="http://eclipse.org/webtools/wst/components/javascript/overview.html" />
+	<plugin id="org.eclipse.wst.javascript.core" />
+	<plugin id="org.eclipse.wst.javascript.ui" />
 </component>
