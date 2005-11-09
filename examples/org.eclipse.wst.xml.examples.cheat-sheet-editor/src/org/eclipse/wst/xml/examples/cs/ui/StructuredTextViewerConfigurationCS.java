@@ -11,9 +11,7 @@
  *******************************************************************************/
 package org.eclipse.wst.xml.examples.cs.ui;
 
-import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
-import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredPartitionTypes;
 import org.eclipse.wst.xml.core.internal.provisional.text.IXMLPartitions;
@@ -24,22 +22,16 @@ import org.eclipse.wst.xml.ui.internal.contentassist.NoRegionContentAssistProces
 
 
 public class StructuredTextViewerConfigurationCS extends StructuredTextViewerConfigurationXML {
+	protected IContentAssistProcessor[] getContentAssistProcessors(ISourceViewer sourceViewer, String partitionType) {
+		IContentAssistProcessor[] processors = null;
 
-	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-		IContentAssistant ca = super.getContentAssistant(sourceViewer);
-		if (ca != null && ca instanceof ContentAssistant) {
-			ContentAssistant contentAssistant = (ContentAssistant) ca;
-			
-			// create content assist processors to be used
-			IContentAssistProcessor xmlContentAssistProcessor = new CSContentAssistProcessor();
-			IContentAssistProcessor noRegionProcessor = new NoRegionContentAssistProcessor();
-			
-			// add processors to content assistant
-			contentAssistant.setContentAssistProcessor(xmlContentAssistProcessor, IStructuredPartitionTypes.DEFAULT_PARTITION);
-			contentAssistant.setContentAssistProcessor(xmlContentAssistProcessor, IXMLPartitions.XML_DEFAULT);
-			contentAssistant.setContentAssistProcessor(noRegionProcessor, IStructuredPartitionTypes.UNKNOWN_PARTITION);
+		if ((partitionType == IStructuredPartitionTypes.DEFAULT_PARTITION) || (partitionType == IXMLPartitions.XML_DEFAULT)) {
+			processors = new IContentAssistProcessor[]{new CSContentAssistProcessor()};
 		}
-		return ca;
-	}
+		else if (partitionType == IStructuredPartitionTypes.UNKNOWN_PARTITION) {
+			processors = new IContentAssistProcessor[]{new NoRegionContentAssistProcessor()};
+		}
 
+		return processors;
+	}
 }
