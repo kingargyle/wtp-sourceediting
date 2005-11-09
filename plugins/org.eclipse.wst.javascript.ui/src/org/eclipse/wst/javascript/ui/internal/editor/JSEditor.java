@@ -980,10 +980,11 @@ public class JSEditor extends TextEditor {
 	}
 
 	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
+		super.rulerContextMenuAboutToShow(menu);
+		// append actions to "debug" group (created in AbstractDecoratedTextEditor.rulerContextMenuAboutToShow(IMenuManager))
 		menu.appendToGroup("debug", getAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS));
 		menu.appendToGroup("debug", getAction(ActionDefinitionIds.MANAGE_BREAKPOINTS));
 		menu.appendToGroup("debug", getAction(ActionDefinitionIds.EDIT_BREAKPOINTS));
-		super.rulerContextMenuAboutToShow(menu);
 	}
 
 	/*
