@@ -22,6 +22,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.information.IInformationPresenter;
 import org.eclipse.jface.text.information.InformationPresenter;
+import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
@@ -29,13 +30,15 @@ import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
 import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptInformationPresenter;
 import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoHoverProcessor;
+import org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor;
 
 
 public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 	private ITextHover fTextHover = null;
 	private IContentAssistant fContentAssistant = null;
 	private InformationPresenter fInformationPresenter = null;
-
+	private IReconciler fReconciler = null;
+	
 	public JSSourceViewerConfiguration() {
 		super();
 	}
@@ -122,5 +125,28 @@ public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 			fInformationPresenter.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
 		}
 		return fInformationPresenter;
+	}
+
+	/*
+	 * NOTE: this is a workaround for:
+	 * 
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=115531
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=114631
+	 * 
+	 * until we can get IContentType from IDocument somehow, we need 
+	 * to override this method. 
+	 * 
+	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getReconciler(org.eclipse.jface.text.source.ISourceViewer)
+	 */
+	public IReconciler getReconciler(ISourceViewer sourceViewer) {
+		if(fReconciler == null) {
+			fReconciler = new DocumentRegionProcessor() {
+				protected String getContentType(IDocument doc) {
+					return "org.eclipse.wst.javascript.core.javascriptsource";
+				}
+				
+			};
+		}
+		return fReconciler;
 	}
 }
