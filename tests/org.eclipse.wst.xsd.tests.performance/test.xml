@@ -26,6 +26,7 @@
   <!-- This target defines the performance tests that need to be run. -->
   <target name="performance_suite">
 
+  	<!--
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
@@ -34,6 +35,7 @@
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
+    -->
 
     <antcall target="ReadOAGISXSDTestcase"/>
   	<antcall target="ReadOAGISXSDTestcase"/>
@@ -52,6 +54,30 @@
   	<antcall target="ValidateOAGISXSDTestcase"/>
   	<antcall target="ValidateOAGISXSDTestcase"/>
   	<antcall target="ValidateOAGISXSDTestcase"/>
+
+  	<antcall target="Open1KBFileTestCase"/>
+  	<antcall target="Open1KBFileTestCase"/>
+  	<antcall target="Open1KBFileTestCase"/>
+
+  	<antcall target="Open10KBFileTestCase"/>
+  	<antcall target="Open10KBFileTestCase"/>
+  	<antcall target="Open10KBFileTestCase"/>
+
+  	<antcall target="Open100KBFileTestCase"/>
+  	<antcall target="Open100KBFileTestCase"/>
+  	<antcall target="Open100KBFileTestCase"/>
+
+  	<antcall target="Open200KBFileTestCase"/>
+  	<antcall target="Open200KBFileTestCase"/>
+  	<antcall target="Open200KBFileTestCase"/>
+
+  	<antcall target="Open500KBFileTestCase"/>
+  	<antcall target="Open500KBFileTestCase"/>
+  	<antcall target="Open500KBFileTestCase"/>
+
+  	<antcall target="Open1MBFileTestCase"/>
+  	<antcall target="Open1MBFileTestCase"/>
+  	<antcall target="Open1MBFileTestCase"/>
 
   </target>
 
@@ -84,6 +110,66 @@
       <property name="extraVMargs" value="${extraVMargs}"/>
     </ant>
   </target>
+
+  <target name="Open1KBFileTestCase">
+    <delete dir="${workspace}" quiet="true"/>
+    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+      <property name="data-dir" value="${workspace}"/>
+      <property name="plugin-name" value="${plugin-name}"/>
+      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Open1KBFileTestCase"/>
+      <property name="extraVMargs" value="${extraVMargs}"/>
+    </ant>
+  </target>
+
+	  <target name="Open10KBFileTestCase">
+	    <delete dir="${workspace}" quiet="true"/>
+	    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+	      <property name="data-dir" value="${workspace}"/>
+	      <property name="plugin-name" value="${plugin-name}"/>
+	      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Open10KBFileTestCase"/>
+	      <property name="extraVMargs" value="${extraVMargs}"/>
+	    </ant>
+	  </target>
+
+	  <target name="Open100KBFileTestCase">
+	    <delete dir="${workspace}" quiet="true"/>
+	    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+	      <property name="data-dir" value="${workspace}"/>
+	      <property name="plugin-name" value="${plugin-name}"/>
+	      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Open100KBFileTestCase"/>
+	      <property name="extraVMargs" value="${extraVMargs}"/>
+	    </ant>
+	  </target>
+
+	  <target name="Open200KBFileTestCase">
+	    <delete dir="${workspace}" quiet="true"/>
+	    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+	      <property name="data-dir" value="${workspace}"/>
+	      <property name="plugin-name" value="${plugin-name}"/>
+	      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Open200KBFileTestCase"/>
+	      <property name="extraVMargs" value="${extraVMargs}"/>
+	    </ant>
+	  </target>
+
+	  <target name="Open500KBFileTestCase">
+	    <delete dir="${workspace}" quiet="true"/>
+	    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+	      <property name="data-dir" value="${workspace}"/>
+	      <property name="plugin-name" value="${plugin-name}"/>
+	      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Open500KBFileTestCase"/>
+	      <property name="extraVMargs" value="${extraVMargs}"/>
+	    </ant>
+	  </target>
+
+	  <target name="Open1MBFileTestCase">
+	    <delete dir="${workspace}" quiet="true"/>
+	    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+	      <property name="data-dir" value="${workspace}"/>
+	      <property name="plugin-name" value="${plugin-name}"/>
+	      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Open1MBFileTestCase"/>
+	      <property name="extraVMargs" value="${extraVMargs}"/>
+	    </ant>
+	  </target>
 
   <!-- This target holds code to cleanup the testing environment after -->
   <!-- after all of the tests have been run. You can use this target to -->

@@ -21,6 +21,7 @@
       <import plugin="org.eclipse.wst.xml.core"/>
       <import plugin="org.eclipse.wst.xsd.ui"/>
       <import plugin="com.ibm.etools.emf.event"/>
+      <import plugin="org.eclipse.wst.common.tests.performance"/>
    </requires>
 
 </plugin>

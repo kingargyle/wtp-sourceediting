@@ -1,0 +1,4406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://www.eclipse.org/webtools/Catalogue" xmlns:c="http://www.eclipse.org/webtools/Catalogue">
+
+	<complexType name="PublicationType0">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType0">
+		<complexContent>
+			<extension base="c:PublicationType0">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType0">
+		<complexContent>			
+			<restriction base="c:PublicationType0">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication0" type="c:PublicationType0" abstract="true"></element>
+	
+	<element name="Book0" type="c:BookType0" substitutionGroup="c:Publication0"></element>
+
+	<element name="Magazine0" type="c:MagazineType0" substitutionGroup="c:Publication0"></element>
+	
+	<element name="Catalogue0">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication0" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType1">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType1">
+		<complexContent>
+			<extension base="c:PublicationType1">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType1">
+		<complexContent>			
+			<restriction base="c:PublicationType1">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication1" type="c:PublicationType1" abstract="true"></element>
+	
+	<element name="Book1" type="c:BookType1" substitutionGroup="c:Publication1"></element>
+
+	<element name="Magazine1" type="c:MagazineType1" substitutionGroup="c:Publication1"></element>
+	
+	<element name="Catalogue1">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication1" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType2">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType2">
+		<complexContent>
+			<extension base="c:PublicationType2">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType2">
+		<complexContent>			
+			<restriction base="c:PublicationType2">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication2" type="c:PublicationType2" abstract="true"></element>
+	
+	<element name="Book2" type="c:BookType2" substitutionGroup="c:Publication2"></element>
+
+	<element name="Magazine2" type="c:MagazineType2" substitutionGroup="c:Publication2"></element>
+	
+	<element name="Catalogue2">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication2" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType3">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType3">
+		<complexContent>
+			<extension base="c:PublicationType3">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType3">
+		<complexContent>			
+			<restriction base="c:PublicationType3">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication3" type="c:PublicationType3" abstract="true"></element>
+	
+	<element name="Book3" type="c:BookType3" substitutionGroup="c:Publication3"></element>
+
+	<element name="Magazine3" type="c:MagazineType3" substitutionGroup="c:Publication3"></element>
+	
+	<element name="Catalogue3">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication3" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType4">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType4">
+		<complexContent>
+			<extension base="c:PublicationType4">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType4">
+		<complexContent>			
+			<restriction base="c:PublicationType4">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication4" type="c:PublicationType4" abstract="true"></element>
+	
+	<element name="Book4" type="c:BookType4" substitutionGroup="c:Publication4"></element>
+
+	<element name="Magazine4" type="c:MagazineType4" substitutionGroup="c:Publication4"></element>
+	
+	<element name="Catalogue4">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication4" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType5">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType5">
+		<complexContent>
+			<extension base="c:PublicationType5">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType5">
+		<complexContent>			
+			<restriction base="c:PublicationType5">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication5" type="c:PublicationType5" abstract="true"></element>
+	
+	<element name="Book5" type="c:BookType5" substitutionGroup="c:Publication5"></element>
+
+	<element name="Magazine5" type="c:MagazineType5" substitutionGroup="c:Publication5"></element>
+	
+	<element name="Catalogue5">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication5" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType6">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType6">
+		<complexContent>
+			<extension base="c:PublicationType6">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType6">
+		<complexContent>			
+			<restriction base="c:PublicationType6">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication6" type="c:PublicationType6" abstract="true"></element>
+	
+	<element name="Book6" type="c:BookType6" substitutionGroup="c:Publication6"></element>
+
+	<element name="Magazine6" type="c:MagazineType6" substitutionGroup="c:Publication6"></element>
+	
+	<element name="Catalogue6">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication6" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType7">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType7">
+		<complexContent>
+			<extension base="c:PublicationType7">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType7">
+		<complexContent>			
+			<restriction base="c:PublicationType7">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication7" type="c:PublicationType7" abstract="true"></element>
+	
+	<element name="Book7" type="c:BookType7" substitutionGroup="c:Publication7"></element>
+
+	<element name="Magazine7" type="c:MagazineType7" substitutionGroup="c:Publication7"></element>
+	
+	<element name="Catalogue7">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication7" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType8">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType8">
+		<complexContent>
+			<extension base="c:PublicationType8">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType8">
+		<complexContent>			
+			<restriction base="c:PublicationType8">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication8" type="c:PublicationType8" abstract="true"></element>
+	
+	<element name="Book8" type="c:BookType8" substitutionGroup="c:Publication8"></element>
+
+	<element name="Magazine8" type="c:MagazineType8" substitutionGroup="c:Publication8"></element>
+	
+	<element name="Catalogue8">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication8" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType9">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType9">
+		<complexContent>
+			<extension base="c:PublicationType9">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType9">
+		<complexContent>			
+			<restriction base="c:PublicationType9">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication9" type="c:PublicationType9" abstract="true"></element>
+	
+	<element name="Book9" type="c:BookType9" substitutionGroup="c:Publication9"></element>
+
+	<element name="Magazine9" type="c:MagazineType9" substitutionGroup="c:Publication9"></element>
+	
+	<element name="Catalogue9">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication9" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType10">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType10">
+		<complexContent>
+			<extension base="c:PublicationType10">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType10">
+		<complexContent>			
+			<restriction base="c:PublicationType10">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication10" type="c:PublicationType10" abstract="true"></element>
+	
+	<element name="Book10" type="c:BookType10" substitutionGroup="c:Publication10"></element>
+
+	<element name="Magazine10" type="c:MagazineType10" substitutionGroup="c:Publication10"></element>
+	
+	<element name="Catalogue10">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication10" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType11">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType11">
+		<complexContent>
+			<extension base="c:PublicationType11">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType11">
+		<complexContent>			
+			<restriction base="c:PublicationType11">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication11" type="c:PublicationType11" abstract="true"></element>
+	
+	<element name="Book11" type="c:BookType11" substitutionGroup="c:Publication11"></element>
+
+	<element name="Magazine11" type="c:MagazineType11" substitutionGroup="c:Publication11"></element>
+	
+	<element name="Catalogue11">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication11" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType12">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType12">
+		<complexContent>
+			<extension base="c:PublicationType12">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType12">
+		<complexContent>			
+			<restriction base="c:PublicationType12">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication12" type="c:PublicationType12" abstract="true"></element>
+	
+	<element name="Book12" type="c:BookType12" substitutionGroup="c:Publication12"></element>
+
+	<element name="Magazine12" type="c:MagazineType12" substitutionGroup="c:Publication12"></element>
+	
+	<element name="Catalogue12">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication12" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType13">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType13">
+		<complexContent>
+			<extension base="c:PublicationType13">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType13">
+		<complexContent>			
+			<restriction base="c:PublicationType13">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication13" type="c:PublicationType13" abstract="true"></element>
+	
+	<element name="Book13" type="c:BookType13" substitutionGroup="c:Publication13"></element>
+
+	<element name="Magazine13" type="c:MagazineType13" substitutionGroup="c:Publication13"></element>
+	
+	<element name="Catalogue13">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication13" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType14">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType14">
+		<complexContent>
+			<extension base="c:PublicationType14">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType14">
+		<complexContent>			
+			<restriction base="c:PublicationType14">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication14" type="c:PublicationType14" abstract="true"></element>
+	
+	<element name="Book14" type="c:BookType14" substitutionGroup="c:Publication14"></element>
+
+	<element name="Magazine14" type="c:MagazineType14" substitutionGroup="c:Publication14"></element>
+	
+	<element name="Catalogue14">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication14" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType15">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType15">
+		<complexContent>
+			<extension base="c:PublicationType15">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType15">
+		<complexContent>			
+			<restriction base="c:PublicationType15">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication15" type="c:PublicationType15" abstract="true"></element>
+	
+	<element name="Book15" type="c:BookType15" substitutionGroup="c:Publication15"></element>
+
+	<element name="Magazine15" type="c:MagazineType15" substitutionGroup="c:Publication15"></element>
+	
+	<element name="Catalogue15">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication15" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType16">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType16">
+		<complexContent>
+			<extension base="c:PublicationType16">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType16">
+		<complexContent>			
+			<restriction base="c:PublicationType16">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication16" type="c:PublicationType16" abstract="true"></element>
+	
+	<element name="Book16" type="c:BookType16" substitutionGroup="c:Publication16"></element>
+
+	<element name="Magazine16" type="c:MagazineType16" substitutionGroup="c:Publication16"></element>
+	
+	<element name="Catalogue16">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication16" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType17">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType17">
+		<complexContent>
+			<extension base="c:PublicationType17">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType17">
+		<complexContent>			
+			<restriction base="c:PublicationType17">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication17" type="c:PublicationType17" abstract="true"></element>
+	
+	<element name="Book17" type="c:BookType17" substitutionGroup="c:Publication17"></element>
+
+	<element name="Magazine17" type="c:MagazineType17" substitutionGroup="c:Publication17"></element>
+	
+	<element name="Catalogue17">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication17" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType18">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType18">
+		<complexContent>
+			<extension base="c:PublicationType18">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType18">
+		<complexContent>			
+			<restriction base="c:PublicationType18">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication18" type="c:PublicationType18" abstract="true"></element>
+	
+	<element name="Book18" type="c:BookType18" substitutionGroup="c:Publication18"></element>
+
+	<element name="Magazine18" type="c:MagazineType18" substitutionGroup="c:Publication18"></element>
+	
+	<element name="Catalogue18">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication18" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType19">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType19">
+		<complexContent>
+			<extension base="c:PublicationType19">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType19">
+		<complexContent>			
+			<restriction base="c:PublicationType19">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication19" type="c:PublicationType19" abstract="true"></element>
+	
+	<element name="Book19" type="c:BookType19" substitutionGroup="c:Publication19"></element>
+
+	<element name="Magazine19" type="c:MagazineType19" substitutionGroup="c:Publication19"></element>
+	
+	<element name="Catalogue19">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication19" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType20">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType20">
+		<complexContent>
+			<extension base="c:PublicationType20">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType20">
+		<complexContent>			
+			<restriction base="c:PublicationType20">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication20" type="c:PublicationType20" abstract="true"></element>
+	
+	<element name="Book20" type="c:BookType20" substitutionGroup="c:Publication20"></element>
+
+	<element name="Magazine20" type="c:MagazineType20" substitutionGroup="c:Publication20"></element>
+	
+	<element name="Catalogue20">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication20" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType21">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType21">
+		<complexContent>
+			<extension base="c:PublicationType21">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType21">
+		<complexContent>			
+			<restriction base="c:PublicationType21">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication21" type="c:PublicationType21" abstract="true"></element>
+	
+	<element name="Book21" type="c:BookType21" substitutionGroup="c:Publication21"></element>
+
+	<element name="Magazine21" type="c:MagazineType21" substitutionGroup="c:Publication21"></element>
+	
+	<element name="Catalogue21">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication21" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType22">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType22">
+		<complexContent>
+			<extension base="c:PublicationType22">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType22">
+		<complexContent>			
+			<restriction base="c:PublicationType22">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication22" type="c:PublicationType22" abstract="true"></element>
+	
+	<element name="Book22" type="c:BookType22" substitutionGroup="c:Publication22"></element>
+
+	<element name="Magazine22" type="c:MagazineType22" substitutionGroup="c:Publication22"></element>
+	
+	<element name="Catalogue22">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication22" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType23">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType23">
+		<complexContent>
+			<extension base="c:PublicationType23">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType23">
+		<complexContent>			
+			<restriction base="c:PublicationType23">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication23" type="c:PublicationType23" abstract="true"></element>
+	
+	<element name="Book23" type="c:BookType23" substitutionGroup="c:Publication23"></element>
+
+	<element name="Magazine23" type="c:MagazineType23" substitutionGroup="c:Publication23"></element>
+	
+	<element name="Catalogue23">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication23" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType24">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType24">
+		<complexContent>
+			<extension base="c:PublicationType24">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType24">
+		<complexContent>			
+			<restriction base="c:PublicationType24">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication24" type="c:PublicationType24" abstract="true"></element>
+	
+	<element name="Book24" type="c:BookType24" substitutionGroup="c:Publication24"></element>
+
+	<element name="Magazine24" type="c:MagazineType24" substitutionGroup="c:Publication24"></element>
+	
+	<element name="Catalogue24">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication24" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType25">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType25">
+		<complexContent>
+			<extension base="c:PublicationType25">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType25">
+		<complexContent>			
+			<restriction base="c:PublicationType25">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication25" type="c:PublicationType25" abstract="true"></element>
+	
+	<element name="Book25" type="c:BookType25" substitutionGroup="c:Publication25"></element>
+
+	<element name="Magazine25" type="c:MagazineType25" substitutionGroup="c:Publication25"></element>
+	
+	<element name="Catalogue25">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication25" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType26">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType26">
+		<complexContent>
+			<extension base="c:PublicationType26">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType26">
+		<complexContent>			
+			<restriction base="c:PublicationType26">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication26" type="c:PublicationType26" abstract="true"></element>
+	
+	<element name="Book26" type="c:BookType26" substitutionGroup="c:Publication26"></element>
+
+	<element name="Magazine26" type="c:MagazineType26" substitutionGroup="c:Publication26"></element>
+	
+	<element name="Catalogue26">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication26" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType27">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType27">
+		<complexContent>
+			<extension base="c:PublicationType27">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType27">
+		<complexContent>			
+			<restriction base="c:PublicationType27">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication27" type="c:PublicationType27" abstract="true"></element>
+	
+	<element name="Book27" type="c:BookType27" substitutionGroup="c:Publication27"></element>
+
+	<element name="Magazine27" type="c:MagazineType27" substitutionGroup="c:Publication27"></element>
+	
+	<element name="Catalogue27">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication27" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType28">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType28">
+		<complexContent>
+			<extension base="c:PublicationType28">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType28">
+		<complexContent>			
+			<restriction base="c:PublicationType28">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication28" type="c:PublicationType28" abstract="true"></element>
+	
+	<element name="Book28" type="c:BookType28" substitutionGroup="c:Publication28"></element>
+
+	<element name="Magazine28" type="c:MagazineType28" substitutionGroup="c:Publication28"></element>
+	
+	<element name="Catalogue28">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication28" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType29">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType29">
+		<complexContent>
+			<extension base="c:PublicationType29">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType29">
+		<complexContent>			
+			<restriction base="c:PublicationType29">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication29" type="c:PublicationType29" abstract="true"></element>
+	
+	<element name="Book29" type="c:BookType29" substitutionGroup="c:Publication29"></element>
+
+	<element name="Magazine29" type="c:MagazineType29" substitutionGroup="c:Publication29"></element>
+	
+	<element name="Catalogue29">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication29" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType30">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType30">
+		<complexContent>
+			<extension base="c:PublicationType30">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType30">
+		<complexContent>			
+			<restriction base="c:PublicationType30">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication30" type="c:PublicationType30" abstract="true"></element>
+	
+	<element name="Book30" type="c:BookType30" substitutionGroup="c:Publication30"></element>
+
+	<element name="Magazine30" type="c:MagazineType30" substitutionGroup="c:Publication30"></element>
+	
+	<element name="Catalogue30">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication30" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType31">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType31">
+		<complexContent>
+			<extension base="c:PublicationType31">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType31">
+		<complexContent>			
+			<restriction base="c:PublicationType31">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication31" type="c:PublicationType31" abstract="true"></element>
+	
+	<element name="Book31" type="c:BookType31" substitutionGroup="c:Publication31"></element>
+
+	<element name="Magazine31" type="c:MagazineType31" substitutionGroup="c:Publication31"></element>
+	
+	<element name="Catalogue31">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication31" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType32">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType32">
+		<complexContent>
+			<extension base="c:PublicationType32">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType32">
+		<complexContent>			
+			<restriction base="c:PublicationType32">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication32" type="c:PublicationType32" abstract="true"></element>
+	
+	<element name="Book32" type="c:BookType32" substitutionGroup="c:Publication32"></element>
+
+	<element name="Magazine32" type="c:MagazineType32" substitutionGroup="c:Publication32"></element>
+	
+	<element name="Catalogue32">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication32" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType33">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType33">
+		<complexContent>
+			<extension base="c:PublicationType33">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType33">
+		<complexContent>			
+			<restriction base="c:PublicationType33">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication33" type="c:PublicationType33" abstract="true"></element>
+	
+	<element name="Book33" type="c:BookType33" substitutionGroup="c:Publication33"></element>
+
+	<element name="Magazine33" type="c:MagazineType33" substitutionGroup="c:Publication33"></element>
+	
+	<element name="Catalogue33">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication33" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType34">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType34">
+		<complexContent>
+			<extension base="c:PublicationType34">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType34">
+		<complexContent>			
+			<restriction base="c:PublicationType34">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication34" type="c:PublicationType34" abstract="true"></element>
+	
+	<element name="Book34" type="c:BookType34" substitutionGroup="c:Publication34"></element>
+
+	<element name="Magazine34" type="c:MagazineType34" substitutionGroup="c:Publication34"></element>
+	
+	<element name="Catalogue34">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication34" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType35">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType35">
+		<complexContent>
+			<extension base="c:PublicationType35">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType35">
+		<complexContent>			
+			<restriction base="c:PublicationType35">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication35" type="c:PublicationType35" abstract="true"></element>
+	
+	<element name="Book35" type="c:BookType35" substitutionGroup="c:Publication35"></element>
+
+	<element name="Magazine35" type="c:MagazineType35" substitutionGroup="c:Publication35"></element>
+	
+	<element name="Catalogue35">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication35" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType36">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType36">
+		<complexContent>
+			<extension base="c:PublicationType36">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType36">
+		<complexContent>			
+			<restriction base="c:PublicationType36">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication36" type="c:PublicationType36" abstract="true"></element>
+	
+	<element name="Book36" type="c:BookType36" substitutionGroup="c:Publication36"></element>
+
+	<element name="Magazine36" type="c:MagazineType36" substitutionGroup="c:Publication36"></element>
+	
+	<element name="Catalogue36">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication36" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType37">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType37">
+		<complexContent>
+			<extension base="c:PublicationType37">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType37">
+		<complexContent>			
+			<restriction base="c:PublicationType37">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication37" type="c:PublicationType37" abstract="true"></element>
+	
+	<element name="Book37" type="c:BookType37" substitutionGroup="c:Publication37"></element>
+
+	<element name="Magazine37" type="c:MagazineType37" substitutionGroup="c:Publication37"></element>
+	
+	<element name="Catalogue37">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication37" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType38">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType38">
+		<complexContent>
+			<extension base="c:PublicationType38">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType38">
+		<complexContent>			
+			<restriction base="c:PublicationType38">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication38" type="c:PublicationType38" abstract="true"></element>
+	
+	<element name="Book38" type="c:BookType38" substitutionGroup="c:Publication38"></element>
+
+	<element name="Magazine38" type="c:MagazineType38" substitutionGroup="c:Publication38"></element>
+	
+	<element name="Catalogue38">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication38" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType39">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType39">
+		<complexContent>
+			<extension base="c:PublicationType39">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType39">
+		<complexContent>			
+			<restriction base="c:PublicationType39">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication39" type="c:PublicationType39" abstract="true"></element>
+	
+	<element name="Book39" type="c:BookType39" substitutionGroup="c:Publication39"></element>
+
+	<element name="Magazine39" type="c:MagazineType39" substitutionGroup="c:Publication39"></element>
+	
+	<element name="Catalogue39">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication39" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType40">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType40">
+		<complexContent>
+			<extension base="c:PublicationType40">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType40">
+		<complexContent>			
+			<restriction base="c:PublicationType40">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication40" type="c:PublicationType40" abstract="true"></element>
+	
+	<element name="Book40" type="c:BookType40" substitutionGroup="c:Publication40"></element>
+
+	<element name="Magazine40" type="c:MagazineType40" substitutionGroup="c:Publication40"></element>
+	
+	<element name="Catalogue40">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication40" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType41">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType41">
+		<complexContent>
+			<extension base="c:PublicationType41">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType41">
+		<complexContent>			
+			<restriction base="c:PublicationType41">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication41" type="c:PublicationType41" abstract="true"></element>
+	
+	<element name="Book41" type="c:BookType41" substitutionGroup="c:Publication41"></element>
+
+	<element name="Magazine41" type="c:MagazineType41" substitutionGroup="c:Publication41"></element>
+	
+	<element name="Catalogue41">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication41" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType42">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType42">
+		<complexContent>
+			<extension base="c:PublicationType42">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType42">
+		<complexContent>			
+			<restriction base="c:PublicationType42">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication42" type="c:PublicationType42" abstract="true"></element>
+	
+	<element name="Book42" type="c:BookType42" substitutionGroup="c:Publication42"></element>
+
+	<element name="Magazine42" type="c:MagazineType42" substitutionGroup="c:Publication42"></element>
+	
+	<element name="Catalogue42">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication42" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType43">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType43">
+		<complexContent>
+			<extension base="c:PublicationType43">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType43">
+		<complexContent>			
+			<restriction base="c:PublicationType43">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication43" type="c:PublicationType43" abstract="true"></element>
+	
+	<element name="Book43" type="c:BookType43" substitutionGroup="c:Publication43"></element>
+
+	<element name="Magazine43" type="c:MagazineType43" substitutionGroup="c:Publication43"></element>
+	
+	<element name="Catalogue43">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication43" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType44">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType44">
+		<complexContent>
+			<extension base="c:PublicationType44">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType44">
+		<complexContent>			
+			<restriction base="c:PublicationType44">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication44" type="c:PublicationType44" abstract="true"></element>
+	
+	<element name="Book44" type="c:BookType44" substitutionGroup="c:Publication44"></element>
+
+	<element name="Magazine44" type="c:MagazineType44" substitutionGroup="c:Publication44"></element>
+	
+	<element name="Catalogue44">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication44" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType45">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType45">
+		<complexContent>
+			<extension base="c:PublicationType45">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType45">
+		<complexContent>			
+			<restriction base="c:PublicationType45">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication45" type="c:PublicationType45" abstract="true"></element>
+	
+	<element name="Book45" type="c:BookType45" substitutionGroup="c:Publication45"></element>
+
+	<element name="Magazine45" type="c:MagazineType45" substitutionGroup="c:Publication45"></element>
+	
+	<element name="Catalogue45">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication45" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType46">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType46">
+		<complexContent>
+			<extension base="c:PublicationType46">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType46">
+		<complexContent>			
+			<restriction base="c:PublicationType46">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication46" type="c:PublicationType46" abstract="true"></element>
+	
+	<element name="Book46" type="c:BookType46" substitutionGroup="c:Publication46"></element>
+
+	<element name="Magazine46" type="c:MagazineType46" substitutionGroup="c:Publication46"></element>
+	
+	<element name="Catalogue46">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication46" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType47">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType47">
+		<complexContent>
+			<extension base="c:PublicationType47">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType47">
+		<complexContent>			
+			<restriction base="c:PublicationType47">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication47" type="c:PublicationType47" abstract="true"></element>
+	
+	<element name="Book47" type="c:BookType47" substitutionGroup="c:Publication47"></element>
+
+	<element name="Magazine47" type="c:MagazineType47" substitutionGroup="c:Publication47"></element>
+	
+	<element name="Catalogue47">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication47" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType48">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType48">
+		<complexContent>
+			<extension base="c:PublicationType48">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType48">
+		<complexContent>			
+			<restriction base="c:PublicationType48">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication48" type="c:PublicationType48" abstract="true"></element>
+	
+	<element name="Book48" type="c:BookType48" substitutionGroup="c:Publication48"></element>
+
+	<element name="Magazine48" type="c:MagazineType48" substitutionGroup="c:Publication48"></element>
+	
+	<element name="Catalogue48">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication48" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType49">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType49">
+		<complexContent>
+			<extension base="c:PublicationType49">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType49">
+		<complexContent>			
+			<restriction base="c:PublicationType49">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication49" type="c:PublicationType49" abstract="true"></element>
+	
+	<element name="Book49" type="c:BookType49" substitutionGroup="c:Publication49"></element>
+
+	<element name="Magazine49" type="c:MagazineType49" substitutionGroup="c:Publication49"></element>
+	
+	<element name="Catalogue49">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication49" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType50">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType50">
+		<complexContent>
+			<extension base="c:PublicationType50">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType50">
+		<complexContent>			
+			<restriction base="c:PublicationType50">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication50" type="c:PublicationType50" abstract="true"></element>
+	
+	<element name="Book50" type="c:BookType50" substitutionGroup="c:Publication50"></element>
+
+	<element name="Magazine50" type="c:MagazineType50" substitutionGroup="c:Publication50"></element>
+	
+	<element name="Catalogue50">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication50" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType51">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType51">
+		<complexContent>
+			<extension base="c:PublicationType51">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType51">
+		<complexContent>			
+			<restriction base="c:PublicationType51">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication51" type="c:PublicationType51" abstract="true"></element>
+	
+	<element name="Book51" type="c:BookType51" substitutionGroup="c:Publication51"></element>
+
+	<element name="Magazine51" type="c:MagazineType51" substitutionGroup="c:Publication51"></element>
+	
+	<element name="Catalogue51">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication51" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType52">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType52">
+		<complexContent>
+			<extension base="c:PublicationType52">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType52">
+		<complexContent>			
+			<restriction base="c:PublicationType52">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication52" type="c:PublicationType52" abstract="true"></element>
+	
+	<element name="Book52" type="c:BookType52" substitutionGroup="c:Publication52"></element>
+
+	<element name="Magazine52" type="c:MagazineType52" substitutionGroup="c:Publication52"></element>
+	
+	<element name="Catalogue52">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication52" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType53">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType53">
+		<complexContent>
+			<extension base="c:PublicationType53">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType53">
+		<complexContent>			
+			<restriction base="c:PublicationType53">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication53" type="c:PublicationType53" abstract="true"></element>
+	
+	<element name="Book53" type="c:BookType53" substitutionGroup="c:Publication53"></element>
+
+	<element name="Magazine53" type="c:MagazineType53" substitutionGroup="c:Publication53"></element>
+	
+	<element name="Catalogue53">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication53" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType54">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType54">
+		<complexContent>
+			<extension base="c:PublicationType54">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType54">
+		<complexContent>			
+			<restriction base="c:PublicationType54">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication54" type="c:PublicationType54" abstract="true"></element>
+	
+	<element name="Book54" type="c:BookType54" substitutionGroup="c:Publication54"></element>
+
+	<element name="Magazine54" type="c:MagazineType54" substitutionGroup="c:Publication54"></element>
+	
+	<element name="Catalogue54">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication54" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType55">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType55">
+		<complexContent>
+			<extension base="c:PublicationType55">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType55">
+		<complexContent>			
+			<restriction base="c:PublicationType55">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication55" type="c:PublicationType55" abstract="true"></element>
+	
+	<element name="Book55" type="c:BookType55" substitutionGroup="c:Publication55"></element>
+
+	<element name="Magazine55" type="c:MagazineType55" substitutionGroup="c:Publication55"></element>
+	
+	<element name="Catalogue55">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication55" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType56">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType56">
+		<complexContent>
+			<extension base="c:PublicationType56">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType56">
+		<complexContent>			
+			<restriction base="c:PublicationType56">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication56" type="c:PublicationType56" abstract="true"></element>
+	
+	<element name="Book56" type="c:BookType56" substitutionGroup="c:Publication56"></element>
+
+	<element name="Magazine56" type="c:MagazineType56" substitutionGroup="c:Publication56"></element>
+	
+	<element name="Catalogue56">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication56" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType57">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType57">
+		<complexContent>
+			<extension base="c:PublicationType57">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType57">
+		<complexContent>			
+			<restriction base="c:PublicationType57">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication57" type="c:PublicationType57" abstract="true"></element>
+	
+	<element name="Book57" type="c:BookType57" substitutionGroup="c:Publication57"></element>
+
+	<element name="Magazine57" type="c:MagazineType57" substitutionGroup="c:Publication57"></element>
+	
+	<element name="Catalogue57">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication57" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType58">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType58">
+		<complexContent>
+			<extension base="c:PublicationType58">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType58">
+		<complexContent>			
+			<restriction base="c:PublicationType58">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication58" type="c:PublicationType58" abstract="true"></element>
+	
+	<element name="Book58" type="c:BookType58" substitutionGroup="c:Publication58"></element>
+
+	<element name="Magazine58" type="c:MagazineType58" substitutionGroup="c:Publication58"></element>
+	
+	<element name="Catalogue58">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication58" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType59">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType59">
+		<complexContent>
+			<extension base="c:PublicationType59">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType59">
+		<complexContent>			
+			<restriction base="c:PublicationType59">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication59" type="c:PublicationType59" abstract="true"></element>
+	
+	<element name="Book59" type="c:BookType59" substitutionGroup="c:Publication59"></element>
+
+	<element name="Magazine59" type="c:MagazineType59" substitutionGroup="c:Publication59"></element>
+	
+	<element name="Catalogue59">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication59" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType60">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType60">
+		<complexContent>
+			<extension base="c:PublicationType60">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType60">
+		<complexContent>			
+			<restriction base="c:PublicationType60">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication60" type="c:PublicationType60" abstract="true"></element>
+	
+	<element name="Book60" type="c:BookType60" substitutionGroup="c:Publication60"></element>
+
+	<element name="Magazine60" type="c:MagazineType60" substitutionGroup="c:Publication60"></element>
+	
+	<element name="Catalogue60">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication60" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType61">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType61">
+		<complexContent>
+			<extension base="c:PublicationType61">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType61">
+		<complexContent>			
+			<restriction base="c:PublicationType61">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication61" type="c:PublicationType61" abstract="true"></element>
+	
+	<element name="Book61" type="c:BookType61" substitutionGroup="c:Publication61"></element>
+
+	<element name="Magazine61" type="c:MagazineType61" substitutionGroup="c:Publication61"></element>
+	
+	<element name="Catalogue61">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication61" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType62">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType62">
+		<complexContent>
+			<extension base="c:PublicationType62">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType62">
+		<complexContent>			
+			<restriction base="c:PublicationType62">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication62" type="c:PublicationType62" abstract="true"></element>
+	
+	<element name="Book62" type="c:BookType62" substitutionGroup="c:Publication62"></element>
+
+	<element name="Magazine62" type="c:MagazineType62" substitutionGroup="c:Publication62"></element>
+	
+	<element name="Catalogue62">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication62" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType63">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType63">
+		<complexContent>
+			<extension base="c:PublicationType63">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType63">
+		<complexContent>			
+			<restriction base="c:PublicationType63">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication63" type="c:PublicationType63" abstract="true"></element>
+	
+	<element name="Book63" type="c:BookType63" substitutionGroup="c:Publication63"></element>
+
+	<element name="Magazine63" type="c:MagazineType63" substitutionGroup="c:Publication63"></element>
+	
+	<element name="Catalogue63">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication63" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType64">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType64">
+		<complexContent>
+			<extension base="c:PublicationType64">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType64">
+		<complexContent>			
+			<restriction base="c:PublicationType64">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication64" type="c:PublicationType64" abstract="true"></element>
+	
+	<element name="Book64" type="c:BookType64" substitutionGroup="c:Publication64"></element>
+
+	<element name="Magazine64" type="c:MagazineType64" substitutionGroup="c:Publication64"></element>
+	
+	<element name="Catalogue64">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication64" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType65">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType65">
+		<complexContent>
+			<extension base="c:PublicationType65">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType65">
+		<complexContent>			
+			<restriction base="c:PublicationType65">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication65" type="c:PublicationType65" abstract="true"></element>
+	
+	<element name="Book65" type="c:BookType65" substitutionGroup="c:Publication65"></element>
+
+	<element name="Magazine65" type="c:MagazineType65" substitutionGroup="c:Publication65"></element>
+	
+	<element name="Catalogue65">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication65" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType66">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType66">
+		<complexContent>
+			<extension base="c:PublicationType66">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType66">
+		<complexContent>			
+			<restriction base="c:PublicationType66">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication66" type="c:PublicationType66" abstract="true"></element>
+	
+	<element name="Book66" type="c:BookType66" substitutionGroup="c:Publication66"></element>
+
+	<element name="Magazine66" type="c:MagazineType66" substitutionGroup="c:Publication66"></element>
+	
+	<element name="Catalogue66">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication66" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType67">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType67">
+		<complexContent>
+			<extension base="c:PublicationType67">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType67">
+		<complexContent>			
+			<restriction base="c:PublicationType67">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication67" type="c:PublicationType67" abstract="true"></element>
+	
+	<element name="Book67" type="c:BookType67" substitutionGroup="c:Publication67"></element>
+
+	<element name="Magazine67" type="c:MagazineType67" substitutionGroup="c:Publication67"></element>
+	
+	<element name="Catalogue67">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication67" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType68">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType68">
+		<complexContent>
+			<extension base="c:PublicationType68">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType68">
+		<complexContent>			
+			<restriction base="c:PublicationType68">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication68" type="c:PublicationType68" abstract="true"></element>
+	
+	<element name="Book68" type="c:BookType68" substitutionGroup="c:Publication68"></element>
+
+	<element name="Magazine68" type="c:MagazineType68" substitutionGroup="c:Publication68"></element>
+	
+	<element name="Catalogue68">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication68" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType69">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType69">
+		<complexContent>
+			<extension base="c:PublicationType69">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType69">
+		<complexContent>			
+			<restriction base="c:PublicationType69">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication69" type="c:PublicationType69" abstract="true"></element>
+	
+	<element name="Book69" type="c:BookType69" substitutionGroup="c:Publication69"></element>
+
+	<element name="Magazine69" type="c:MagazineType69" substitutionGroup="c:Publication69"></element>
+	
+	<element name="Catalogue69">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication69" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType70">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType70">
+		<complexContent>
+			<extension base="c:PublicationType70">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType70">
+		<complexContent>			
+			<restriction base="c:PublicationType70">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication70" type="c:PublicationType70" abstract="true"></element>
+	
+	<element name="Book70" type="c:BookType70" substitutionGroup="c:Publication70"></element>
+
+	<element name="Magazine70" type="c:MagazineType70" substitutionGroup="c:Publication70"></element>
+	
+	<element name="Catalogue70">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication70" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType71">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType71">
+		<complexContent>
+			<extension base="c:PublicationType71">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType71">
+		<complexContent>			
+			<restriction base="c:PublicationType71">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication71" type="c:PublicationType71" abstract="true"></element>
+	
+	<element name="Book71" type="c:BookType71" substitutionGroup="c:Publication71"></element>
+
+	<element name="Magazine71" type="c:MagazineType71" substitutionGroup="c:Publication71"></element>
+	
+	<element name="Catalogue71">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication71" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType72">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType72">
+		<complexContent>
+			<extension base="c:PublicationType72">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType72">
+		<complexContent>			
+			<restriction base="c:PublicationType72">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication72" type="c:PublicationType72" abstract="true"></element>
+	
+	<element name="Book72" type="c:BookType72" substitutionGroup="c:Publication72"></element>
+
+	<element name="Magazine72" type="c:MagazineType72" substitutionGroup="c:Publication72"></element>
+	
+	<element name="Catalogue72">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication72" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType73">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType73">
+		<complexContent>
+			<extension base="c:PublicationType73">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType73">
+		<complexContent>			
+			<restriction base="c:PublicationType73">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication73" type="c:PublicationType73" abstract="true"></element>
+	
+	<element name="Book73" type="c:BookType73" substitutionGroup="c:Publication73"></element>
+
+	<element name="Magazine73" type="c:MagazineType73" substitutionGroup="c:Publication73"></element>
+	
+	<element name="Catalogue73">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication73" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType74">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType74">
+		<complexContent>
+			<extension base="c:PublicationType74">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType74">
+		<complexContent>			
+			<restriction base="c:PublicationType74">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication74" type="c:PublicationType74" abstract="true"></element>
+	
+	<element name="Book74" type="c:BookType74" substitutionGroup="c:Publication74"></element>
+
+	<element name="Magazine74" type="c:MagazineType74" substitutionGroup="c:Publication74"></element>
+	
+	<element name="Catalogue74">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication74" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType75">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType75">
+		<complexContent>
+			<extension base="c:PublicationType75">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType75">
+		<complexContent>			
+			<restriction base="c:PublicationType75">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication75" type="c:PublicationType75" abstract="true"></element>
+	
+	<element name="Book75" type="c:BookType75" substitutionGroup="c:Publication75"></element>
+
+	<element name="Magazine75" type="c:MagazineType75" substitutionGroup="c:Publication75"></element>
+	
+	<element name="Catalogue75">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication75" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType76">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType76">
+		<complexContent>
+			<extension base="c:PublicationType76">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType76">
+		<complexContent>			
+			<restriction base="c:PublicationType76">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication76" type="c:PublicationType76" abstract="true"></element>
+	
+	<element name="Book76" type="c:BookType76" substitutionGroup="c:Publication76"></element>
+
+	<element name="Magazine76" type="c:MagazineType76" substitutionGroup="c:Publication76"></element>
+	
+	<element name="Catalogue76">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication76" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType77">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType77">
+		<complexContent>
+			<extension base="c:PublicationType77">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType77">
+		<complexContent>			
+			<restriction base="c:PublicationType77">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication77" type="c:PublicationType77" abstract="true"></element>
+	
+	<element name="Book77" type="c:BookType77" substitutionGroup="c:Publication77"></element>
+
+	<element name="Magazine77" type="c:MagazineType77" substitutionGroup="c:Publication77"></element>
+	
+	<element name="Catalogue77">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication77" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType78">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType78">
+		<complexContent>
+			<extension base="c:PublicationType78">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType78">
+		<complexContent>			
+			<restriction base="c:PublicationType78">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication78" type="c:PublicationType78" abstract="true"></element>
+	
+	<element name="Book78" type="c:BookType78" substitutionGroup="c:Publication78"></element>
+
+	<element name="Magazine78" type="c:MagazineType78" substitutionGroup="c:Publication78"></element>
+	
+	<element name="Catalogue78">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication78" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType79">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType79">
+		<complexContent>
+			<extension base="c:PublicationType79">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType79">
+		<complexContent>			
+			<restriction base="c:PublicationType79">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication79" type="c:PublicationType79" abstract="true"></element>
+	
+	<element name="Book79" type="c:BookType79" substitutionGroup="c:Publication79"></element>
+
+	<element name="Magazine79" type="c:MagazineType79" substitutionGroup="c:Publication79"></element>
+	
+	<element name="Catalogue79">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication79" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType80">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType80">
+		<complexContent>
+			<extension base="c:PublicationType80">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType80">
+		<complexContent>			
+			<restriction base="c:PublicationType80">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication80" type="c:PublicationType80" abstract="true"></element>
+	
+	<element name="Book80" type="c:BookType80" substitutionGroup="c:Publication80"></element>
+
+	<element name="Magazine80" type="c:MagazineType80" substitutionGroup="c:Publication80"></element>
+	
+	<element name="Catalogue80">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication80" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType81">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType81">
+		<complexContent>
+			<extension base="c:PublicationType81">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType81">
+		<complexContent>			
+			<restriction base="c:PublicationType81">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication81" type="c:PublicationType81" abstract="true"></element>
+	
+	<element name="Book81" type="c:BookType81" substitutionGroup="c:Publication81"></element>
+
+	<element name="Magazine81" type="c:MagazineType81" substitutionGroup="c:Publication81"></element>
+	
+	<element name="Catalogue81">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication81" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType82">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType82">
+		<complexContent>
+			<extension base="c:PublicationType82">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType82">
+		<complexContent>			
+			<restriction base="c:PublicationType82">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication82" type="c:PublicationType82" abstract="true"></element>
+	
+	<element name="Book82" type="c:BookType82" substitutionGroup="c:Publication82"></element>
+
+	<element name="Magazine82" type="c:MagazineType82" substitutionGroup="c:Publication82"></element>
+	
+	<element name="Catalogue82">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication82" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType83">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType83">
+		<complexContent>
+			<extension base="c:PublicationType83">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType83">
+		<complexContent>			
+			<restriction base="c:PublicationType83">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication83" type="c:PublicationType83" abstract="true"></element>
+	
+	<element name="Book83" type="c:BookType83" substitutionGroup="c:Publication83"></element>
+
+	<element name="Magazine83" type="c:MagazineType83" substitutionGroup="c:Publication83"></element>
+	
+	<element name="Catalogue83">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication83" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType84">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType84">
+		<complexContent>
+			<extension base="c:PublicationType84">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType84">
+		<complexContent>			
+			<restriction base="c:PublicationType84">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication84" type="c:PublicationType84" abstract="true"></element>
+	
+	<element name="Book84" type="c:BookType84" substitutionGroup="c:Publication84"></element>
+
+	<element name="Magazine84" type="c:MagazineType84" substitutionGroup="c:Publication84"></element>
+	
+	<element name="Catalogue84">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication84" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType85">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType85">
+		<complexContent>
+			<extension base="c:PublicationType85">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType85">
+		<complexContent>			
+			<restriction base="c:PublicationType85">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication85" type="c:PublicationType85" abstract="true"></element>
+	
+	<element name="Book85" type="c:BookType85" substitutionGroup="c:Publication85"></element>
+
+	<element name="Magazine85" type="c:MagazineType85" substitutionGroup="c:Publication85"></element>
+	
+	<element name="Catalogue85">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication85" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType86">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType86">
+		<complexContent>
+			<extension base="c:PublicationType86">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType86">
+		<complexContent>			
+			<restriction base="c:PublicationType86">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication86" type="c:PublicationType86" abstract="true"></element>
+	
+	<element name="Book86" type="c:BookType86" substitutionGroup="c:Publication86"></element>
+
+	<element name="Magazine86" type="c:MagazineType86" substitutionGroup="c:Publication86"></element>
+	
+	<element name="Catalogue86">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication86" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType87">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType87">
+		<complexContent>
+			<extension base="c:PublicationType87">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType87">
+		<complexContent>			
+			<restriction base="c:PublicationType87">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication87" type="c:PublicationType87" abstract="true"></element>
+	
+	<element name="Book87" type="c:BookType87" substitutionGroup="c:Publication87"></element>
+
+	<element name="Magazine87" type="c:MagazineType87" substitutionGroup="c:Publication87"></element>
+	
+	<element name="Catalogue87">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication87" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType88">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType88">
+		<complexContent>
+			<extension base="c:PublicationType88">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType88">
+		<complexContent>			
+			<restriction base="c:PublicationType88">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication88" type="c:PublicationType88" abstract="true"></element>
+	
+	<element name="Book88" type="c:BookType88" substitutionGroup="c:Publication88"></element>
+
+	<element name="Magazine88" type="c:MagazineType88" substitutionGroup="c:Publication88"></element>
+	
+	<element name="Catalogue88">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication88" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType89">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType89">
+		<complexContent>
+			<extension base="c:PublicationType89">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType89">
+		<complexContent>			
+			<restriction base="c:PublicationType89">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication89" type="c:PublicationType89" abstract="true"></element>
+	
+	<element name="Book89" type="c:BookType89" substitutionGroup="c:Publication89"></element>
+
+	<element name="Magazine89" type="c:MagazineType89" substitutionGroup="c:Publication89"></element>
+	
+	<element name="Catalogue89">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication89" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType90">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType90">
+		<complexContent>
+			<extension base="c:PublicationType90">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType90">
+		<complexContent>			
+			<restriction base="c:PublicationType90">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication90" type="c:PublicationType90" abstract="true"></element>
+	
+	<element name="Book90" type="c:BookType90" substitutionGroup="c:Publication90"></element>
+
+	<element name="Magazine90" type="c:MagazineType90" substitutionGroup="c:Publication90"></element>
+	
+	<element name="Catalogue90">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication90" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType91">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType91">
+		<complexContent>
+			<extension base="c:PublicationType91">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType91">
+		<complexContent>			
+			<restriction base="c:PublicationType91">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication91" type="c:PublicationType91" abstract="true"></element>
+	
+	<element name="Book91" type="c:BookType91" substitutionGroup="c:Publication91"></element>
+
+	<element name="Magazine91" type="c:MagazineType91" substitutionGroup="c:Publication91"></element>
+	
+	<element name="Catalogue91">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication91" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType92">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType92">
+		<complexContent>
+			<extension base="c:PublicationType92">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType92">
+		<complexContent>			
+			<restriction base="c:PublicationType92">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication92" type="c:PublicationType92" abstract="true"></element>
+	
+	<element name="Book92" type="c:BookType92" substitutionGroup="c:Publication92"></element>
+
+	<element name="Magazine92" type="c:MagazineType92" substitutionGroup="c:Publication92"></element>
+	
+	<element name="Catalogue92">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication92" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType93">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType93">
+		<complexContent>
+			<extension base="c:PublicationType93">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType93">
+		<complexContent>			
+			<restriction base="c:PublicationType93">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication93" type="c:PublicationType93" abstract="true"></element>
+	
+	<element name="Book93" type="c:BookType93" substitutionGroup="c:Publication93"></element>
+
+	<element name="Magazine93" type="c:MagazineType93" substitutionGroup="c:Publication93"></element>
+	
+	<element name="Catalogue93">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication93" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType94">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType94">
+		<complexContent>
+			<extension base="c:PublicationType94">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType94">
+		<complexContent>			
+			<restriction base="c:PublicationType94">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication94" type="c:PublicationType94" abstract="true"></element>
+	
+	<element name="Book94" type="c:BookType94" substitutionGroup="c:Publication94"></element>
+
+	<element name="Magazine94" type="c:MagazineType94" substitutionGroup="c:Publication94"></element>
+	
+	<element name="Catalogue94">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication94" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType95">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType95">
+		<complexContent>
+			<extension base="c:PublicationType95">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType95">
+		<complexContent>			
+			<restriction base="c:PublicationType95">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication95" type="c:PublicationType95" abstract="true"></element>
+	
+	<element name="Book95" type="c:BookType95" substitutionGroup="c:Publication95"></element>
+
+	<element name="Magazine95" type="c:MagazineType95" substitutionGroup="c:Publication95"></element>
+	
+	<element name="Catalogue95">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication95" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType96">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType96">
+		<complexContent>
+			<extension base="c:PublicationType96">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType96">
+		<complexContent>			
+			<restriction base="c:PublicationType96">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication96" type="c:PublicationType96" abstract="true"></element>
+	
+	<element name="Book96" type="c:BookType96" substitutionGroup="c:Publication96"></element>
+
+	<element name="Magazine96" type="c:MagazineType96" substitutionGroup="c:Publication96"></element>
+	
+	<element name="Catalogue96">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication96" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType97">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType97">
+		<complexContent>
+			<extension base="c:PublicationType97">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType97">
+		<complexContent>			
+			<restriction base="c:PublicationType97">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication97" type="c:PublicationType97" abstract="true"></element>
+	
+	<element name="Book97" type="c:BookType97" substitutionGroup="c:Publication97"></element>
+
+	<element name="Magazine97" type="c:MagazineType97" substitutionGroup="c:Publication97"></element>
+	
+	<element name="Catalogue97">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication97" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType98">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType98">
+		<complexContent>
+			<extension base="c:PublicationType98">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType98">
+		<complexContent>			
+			<restriction base="c:PublicationType98">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication98" type="c:PublicationType98" abstract="true"></element>
+	
+	<element name="Book98" type="c:BookType98" substitutionGroup="c:Publication98"></element>
+
+	<element name="Magazine98" type="c:MagazineType98" substitutionGroup="c:Publication98"></element>
+	
+	<element name="Catalogue98">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication98" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PublicationType99">
+		<sequence>
+			<element name="title" type="string"></element>
+			<element name="author" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+			<element name="date" type="gYear"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="BookType99">
+		<complexContent>
+			<extension base="c:PublicationType99">
+				<sequence>
+					<element name="isbn" type="string" />
+					<element name="publisher" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="MagazineType99">
+		<complexContent>			
+			<restriction base="c:PublicationType99">
+				<sequence>
+					<element name="title" type="string" />
+					<element name="author" type="string" minOccurs="0" maxOccurs="0"/>
+					<element name="date" type="gYear"></element>
+				</sequence>
+			</restriction>
+		</complexContent>
+	</complexType>
+	
+	<element name="Publication99" type="c:PublicationType99" abstract="true"></element>
+	
+	<element name="Book99" type="c:BookType99" substitutionGroup="c:Publication99"></element>
+
+	<element name="Magazine99" type="c:MagazineType99" substitutionGroup="c:Publication99"></element>
+	
+	<element name="Catalogue99">
+		<complexType>
+			<sequence>
+				<element ref="c:Publication99" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>
