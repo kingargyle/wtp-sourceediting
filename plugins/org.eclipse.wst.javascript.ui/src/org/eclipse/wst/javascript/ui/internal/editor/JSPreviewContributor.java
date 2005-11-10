@@ -84,7 +84,7 @@ public class JSPreviewContributor {
 				Object[] result = dialog.getResult();
 				if (result != null && result.length > 0) {
 					IPath resourcePath = ((IResource) result[0]).getFullPath();
-					String previewFileName = "";
+					String previewFileName = ""; //$NON-NLS-1$
 					if (resourcePath != null) {
 						previewFileName = resourcePath.toString();
 					}
