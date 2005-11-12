@@ -28,6 +28,7 @@ public class StructuredTextViewerConfigurationCS extends StructuredTextViewerCon
 		if ((partitionType == IStructuredPartitionTypes.DEFAULT_PARTITION) || (partitionType == IXMLPartitions.XML_DEFAULT)) {
 			processors = new IContentAssistProcessor[]{new CSContentAssistProcessor()};
 		}
+		// ISSUE: this should be unneeded, right? Just supplied by super class? 
 		else if (partitionType == IStructuredPartitionTypes.UNKNOWN_PARTITION) {
 			processors = new IContentAssistProcessor[]{new NoRegionContentAssistProcessor()};
 		}
