@@ -14,5 +14,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.html.ui,
  org.eclipse.ui,
  org.eclipse.core.resources,
- org.eclipse.ui.ide
+ org.eclipse.ui.ide,
+ org.eclipse.wst.common.tests.performance
 Eclipse-AutoStart: true

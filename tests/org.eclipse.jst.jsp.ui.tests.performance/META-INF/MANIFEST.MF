@@ -30,5 +30,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.ide,
  org.eclipse.ui.workbench.texteditor,
  org.eclipse.jdt.core,
- org.eclipse.wst.javascript.ui
+ org.eclipse.wst.javascript.ui,
+ org.eclipse.wst.common.tests.performance
 Eclipse-AutoStart: true
