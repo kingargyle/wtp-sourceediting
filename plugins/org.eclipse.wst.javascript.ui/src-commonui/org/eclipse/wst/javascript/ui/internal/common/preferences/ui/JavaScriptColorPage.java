@@ -21,7 +21,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.help.WorkbenchHelp;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds;
 import org.eclipse.wst.javascript.ui.internal.common.JSCommonUIMessages;
 import org.eclipse.wst.javascript.ui.internal.common.preferences.OverlayPreferenceStore;
@@ -125,7 +125,7 @@ public class JavaScriptColorPage extends AbstractColorPage {
 	 */
 	protected Control createContents(Composite parent) {
 		Control c = super.createContents(parent);
-		WorkbenchHelp.setHelp(c, IHelpContextIds.JS_PREFWEBX_STYLES_HELPID);
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(c, IHelpContextIds.JS_PREFWEBX_STYLES_HELPID);
 		return c;
 	}
 	

@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.help.WorkbenchHelp;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin;
 import org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds;
 import org.eclipse.wst.javascript.ui.internal.common.JSCommonUIMessages;
@@ -52,7 +52,7 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 		Composite composite = (Composite) super.createContents(parent);
 
 		createContentsForContentAssistGroup(composite);
-		WorkbenchHelp.setHelp(composite, IHelpContextIds.JS_PREFWEBX_SOURCE_HELPID);
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(composite, IHelpContextIds.JS_PREFWEBX_SOURCE_HELPID);
 		
 		setSize(composite);
 		loadPreferences();

@@ -33,4 +33,7 @@ public interface IHelpContextIds {
 	public static final String JS_PREFWEBX_SOURCE_HELPID = PREFIX + "webx0041"; //$NON-NLS-1$
 	// JavaScript Styles Preference page
 	public static final String JS_PREFWEBX_STYLES_HELPID = PREFIX + "webx0042"; //$NON-NLS-1$
+
+	// Content Assist action
+	public static final String CONTMNU_CONTENTASSIST_HELPID = PREFIX + "js0000"; //$NON-NLS-1$
 }

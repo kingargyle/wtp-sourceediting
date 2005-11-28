@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.help.WorkbenchHelp;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin;
 import org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds;
 import org.eclipse.wst.javascript.ui.internal.common.JSCommonUIMessages;
@@ -78,7 +78,7 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 		setSize(composite);
 		loadPreferences();
 
-		WorkbenchHelp.setHelp(composite,
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(composite,
 				IHelpContextIds.JS_PREFWEBX_FILES_HELPID);
 		return composite;
 	}
