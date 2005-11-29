@@ -26,7 +26,6 @@
   <!-- This target defines the performance tests that need to be run. -->
   <target name="performance_suite">
 
-  	<!--
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
@@ -35,7 +34,6 @@
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
     <antcall target="openEditorOAGISXSDTestcase"/>
-    -->
 
     <antcall target="ReadOAGISXSDTestcase"/>
   	<antcall target="ReadOAGISXSDTestcase"/>

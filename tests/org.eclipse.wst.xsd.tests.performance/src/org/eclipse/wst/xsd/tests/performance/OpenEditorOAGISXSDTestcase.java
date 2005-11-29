@@ -26,6 +26,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.wst.common.tests.performance.internal.util.EditorTestHelper;
 import org.eclipse.wst.xsd.ui.internal.XSDEditorPlugin;
 
 public class OpenEditorOAGISXSDTestcase extends PerformanceTestCase
@@ -125,6 +126,7 @@ public class OpenEditorOAGISXSDTestcase extends PerformanceTestCase
   {
     IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
     IEditorPart editor = workbenchWindow.getActivePage().openEditor(new FileEditorInput(file), ID_XSD_EDITOR, true);
+    EditorTestHelper.runEventQueue(editor);
     workbenchWindow.getActivePage().closeEditor(editor, false);
   }
 }
