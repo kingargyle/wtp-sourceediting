@@ -39,5 +39,10 @@ Click the <b>Restore Default</b> push button to set the highlighting styles back
 </description>
 <topic label="Setting preferences for structured text editors" href="../org.eclipse.wst.sse.doc.user/topics/tsrcedt025.html"/>
 </context>
+<context id="js0000">
+<description>This menu item offers suggestions to insert or complete a JavaScript tag. Select an option from the pop-up list to insert the tag in your JavaScript file. You can also press Ctrl + Space to invoke content assist.
+</description>
+<topic label="Getting content assistance in structured text editors" href="../org.eclipse.wst.sse.doc.user/topics/tsrcedt005.html"/>
+</context>
 
 </contexts>
