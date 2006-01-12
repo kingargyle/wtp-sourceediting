@@ -1,2 +1,4 @@
 bin
 build.xml
+org.apache.xerces.feature_*.jar
+org.apache.xerces.feature_*.bin.dist.zip
