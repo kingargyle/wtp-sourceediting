@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-SymbolicName: org.apache.xerces
-Bundle-Version: 2.7.0
+Bundle-Version: 2.7.0.qualifier
 Bundle-ClassPath: resolver.jar,
  xercesImpl.jar,
  xml-apis.jar
