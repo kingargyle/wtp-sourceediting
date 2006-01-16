@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2006 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,12 +19,14 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;
+import org.eclipse.wst.sse.ui.internal.taginfo.AbstractHoverProcessor;
 
 /**
  * Provides hover help documentation for javascript code
+ * 
  * @see ITextHoverProcessor
  */
-public class JavaScriptTagInfoHoverProcessor implements ITextHover {
+public class JavaScriptTagInfoHoverProcessor extends AbstractHoverProcessor {
 	static protected final char chEndBracket = ']';
 	static protected final char chEndBrace = ')';
 	static protected final char chBeginBracket = '[';
@@ -54,12 +56,13 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 
 	/**
 	 * Returns the region to hover the text over based on the offset.
+	 * 
 	 * @param textViewer
 	 * @param offset
 	 * 
-	 * @return IRegion region to hover over if offset is within tag name, attribute
-	 * name, or attribute value and if offset is
-	 * not over invalid whitespace.  otherwise, returns <code>null</code>
+	 * @return IRegion region to hover over if offset is within tag name,
+	 *         attribute name, or attribute value and if offset is not over
+	 *         invalid whitespace. otherwise, returns <code>null</code>
 	 * 
 	 * @see ITextHover#getHoverRegion(ITextViewer, int)
 	 */
@@ -73,7 +76,8 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 				region = flatNode.getRegionAtCharacterOffset(offset);
 			}
 
-			// if no structuredDocumentRegion or in region's trailing whitespace, no hover region
+			// if no structuredDocumentRegion or in region's trailing
+			// whitespace, no hover region
 			if ((region == null) || (offset > flatNode.getTextEndOffset(region)))
 				return null;
 		}
@@ -97,8 +101,11 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 
 	/**
 	 * Returns the documentation associated with the hoverRegion passed in
-	 * @param ITextViewer viewer
-	 * @param IRegion hoverRegion
+	 * 
+	 * @param ITextViewer
+	 *            viewer
+	 * @param IRegion
+	 *            hoverRegion
 	 * 
 	 * @return String documentation for hoverRegion or null if there is none
 	 * @see ITextHover#getHoverInfo(ITextViewer, IRegion)
@@ -119,7 +126,7 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 	 * Retrieves documentation to display in the hover help popup.
 	 * 
 	 * @return String any documentation information to display
-	 * <code>null</code> if there is nothing to display.
+	 *         <code>null</code> if there is nothing to display.
 	 * 
 	 */
 	public String computeHoverHelp(ITextViewer textViewer, int documentPosition) {
@@ -133,7 +140,8 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 		if ((textViewer == null) || (textViewer.getDocument() == null))
 			return null;
 
-		// get only the region/block that contains the keyword identified by documentPosition
+		// get only the region/block that contains the keyword identified by
+		// documentPosition
 		if (textViewer instanceof StructuredTextViewer) {
 			scriptNode = getStructuredDocumentRegion((StructuredTextViewer) textViewer, documentPosition);
 			if (scriptNode != null) {
@@ -152,9 +160,11 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 	}
 
 	/**
-	 * @param ITextViewer textViewer - assumes this is not null
+	 * @param ITextViewer
+	 *            textViewer - assumes this is not null
 	 * 
-	 * @return String the substring in textViewer's doc associated with codeRegion
+	 * @return String the substring in textViewer's doc associated with
+	 *         codeRegion
 	 */
 	protected String getSegmentString(ITextViewer textViewer, org.eclipse.jface.text.Region codeRegion) {
 		String fullPath = null;
@@ -173,9 +183,9 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 	}
 
 	/**
-	 * Returns a region containing the segment of code containing docPos.
-	 * for example: document.lay*er where * is the docPos, would return a 
-	 * region representing layer
+	 * Returns a region containing the segment of code containing docPos. for
+	 * example: document.lay*er where * is the docPos, would return a region
+	 * representing layer
 	 */
 	public org.eclipse.jface.text.Region getSegmentRegion(ITextViewer viewer, int docPos) {
 		if (viewer == null)
@@ -186,11 +196,14 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 	}
 
 	/**
-	 * Returns a region containing the segment of code containing docPos
-	 * for example: document.lay*er where * is the docPos, would return a 
-	 * region representing layer
-	 * @param int blockBegin - the min doc position use in computing
-	 * @param int blockEnd - the max doc position to use in computing
+	 * Returns a region containing the segment of code containing docPos for
+	 * example: document.lay*er where * is the docPos, would return a region
+	 * representing layer
+	 * 
+	 * @param int
+	 *            blockBegin - the min doc position use in computing
+	 * @param int
+	 *            blockEnd - the max doc position to use in computing
 	 */
 	public org.eclipse.jface.text.Region getSegmentRegion(ITextViewer viewer, int docPos, int blockBegin, int blockEnd) {
 		org.eclipse.jface.text.IDocument doc = viewer.getDocument();
@@ -205,10 +218,11 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 		int iPos = docPos;
 		char ch;
 		try {
-			// future_TODO: add a limit so that we don't scan backwards a huge amount of time
+			// future_TODO: add a limit so that we don't scan backwards a huge
+			// amount of time
 			while (iPos >= blockBegin) {
 				if (iPos < (docPos - 100)) {
-					// don't scan backwards a lot.  If it's long, just give up.
+					// don't scan backwards a lot. If it's long, just give up.
 					return null;
 				}
 				ch = doc.getChar(iPos);
@@ -219,10 +233,11 @@ public class JavaScriptTagInfoHoverProcessor implements ITextHover {
 			begin = iPos;
 			iPos = docPos;
 
-			// future_TODO: add a limit so that we don't scan forwards a huge amount of time
+			// future_TODO: add a limit so that we don't scan forwards a huge
+			// amount of time
 			while (iPos <= blockEnd) {
 				if (iPos > (docPos + 100)) {
-					// don't scan forwards a lot.  If it's long, just give up.
+					// don't scan forwards a lot. If it's long, just give up.
 					return null;
 				}
 				ch = doc.getChar(iPos);
