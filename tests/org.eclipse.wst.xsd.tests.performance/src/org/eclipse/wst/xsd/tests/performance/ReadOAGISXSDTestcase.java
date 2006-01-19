@@ -131,9 +131,9 @@ public class ReadOAGISXSDTestcase extends PerformanceTestCase
 	ResourceSet resourceSet = new ResourceSetImpl();
     XSDResourceImpl resource = (XSDResourceImpl)resourceSet.createResource(URI.createURI("*.xsd"));
 	resource.load(is,null); 
-	XSDSchema xsdSchema = resource.getSchema();
-	xsdSchema.validate();
-	//List l = 
-		xsdSchema.getAllDiagnostics();
+	//XSDSchema xsdSchema = 
+		resource.getSchema();
+	//xsdSchema.validate();
+	//List l = xsdSchema.getAllDiagnostics();
   }
 }
