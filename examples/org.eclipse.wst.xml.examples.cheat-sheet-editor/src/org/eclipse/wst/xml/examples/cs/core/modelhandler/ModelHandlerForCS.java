@@ -29,7 +29,7 @@ public class ModelHandlerForCS extends AbstractModelHandler implements IModelHan
 	 * Needs to match what's in plugin registry. In fact, can be overwritten
 	 * at run time with what's in registry! (so should never be 'final')
 	 */
-	static String AssociatedContentTypeID = "org.eclipse.wst.cs.ui.cssource"; //$NON-NLS-1$
+	static String AssociatedContentTypeID = "org.eclipse.wst.xml.examples.cheat-sheet-editor.cssource"; //$NON-NLS-1$
 	/**
 	 * Needs to match what's in plugin registry. In fact, can be overwritten
 	 * at run time with what's in registry! (so should never be 'final')
