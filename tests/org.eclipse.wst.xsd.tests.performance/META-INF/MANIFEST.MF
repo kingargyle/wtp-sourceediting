@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XSD Performance Plug-in
+Bundle-SymbolicName: org.eclipse.wst.xsd.tests.performance
+Bundle-Version: 1.0.1
+Bundle-ClassPath: xsdperformance.jar
+Bundle-Localization: plugin
+Require-Bundle: org.junit,
+ org.eclipse.test.performance,
+ org.eclipse.ui,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.ide,
+ org.eclipse.emf.ecore,
+ org.eclipse.xsd,
+ org.eclipse.wst.xml.core,
+ org.eclipse.wst.xsd.ui,
+ com.ibm.etools.emf.event,
+ org.eclipse.wst.common.tests.performance,
+ org.eclipse.wst.xsd.core
