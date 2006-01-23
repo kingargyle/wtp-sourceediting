@@ -148,6 +148,31 @@
   	<antcall target="RepeatValidatex100TestCase"/>
   	<antcall target="RepeatValidatex100TestCase"/>
   	<antcall target="RepeatValidatex100TestCase"/>
+  	
+  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
+  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
+  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
+ 	
+  	<antcall target="Validate100XSDsCrossDependsTestCase"/>
+  	<antcall target="Validate100XSDsCrossDependsTestCase"/>
+  	<antcall target="Validate100XSDsCrossDependsTestCase"/>
+ 	
+  	<antcall target="Validate10XSDsCrossDependsTestCase"/>
+  	<antcall target="Validate10XSDsCrossDependsTestCase"/>
+  	<antcall target="Validate10XSDsCrossDependsTestCase"/>
+  	
+  	<antcall target="Validate1000XSDsNoDependsTestCase"/>
+  	<antcall target="Validate1000XSDsNoDependsTestCase"/>
+  	<antcall target="Validate1000XSDsNoDependsTestCase"/>
+  	
+  	<antcall target="Validate100XSDsNoDependsTestCase"/>
+  	<antcall target="Validate100XSDsNoDependsTestCase"/>
+  	<antcall target="Validate100XSDsNoDependsTestCase"/>
+  	  	
+  	<antcall target="Validate10XSDsNoDependsTestCase"/>
+  	<antcall target="Validate10XSDsNoDependsTestCase"/>
+  	<antcall target="Validate10XSDsNoDependsTestCase"/>
+  	  	
   </target>
 
   <target name="openEditorOAGISXSDTestcase">
@@ -419,6 +444,69 @@
 	      <property name="extraVMargs" value="${extraVMargs}"/>
 	    </ant>
 	  </target>
+	
+	  <target name="Validate1000XSDsCrossDependsTestCase">
+	    <delete dir="${workspace}" quiet="true"/>
+	    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+	      <property name="data-dir" value="${workspace}"/>
+	      <property name="plugin-name" value="${plugin-name}"/>
+	      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Validate1000XSDsCrossDependsTestcase"/>
+	      <property name="extraVMargs" value="${extraVMargs}"/>
+	    </ant>
+	  </target>
+	
+	  <target name="Validate100XSDsCrossDependsTestCase">
+		 <delete dir="${workspace}" quiet="true"/>
+		 <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+		   <property name="data-dir" value="${workspace}"/>
+		   <property name="plugin-name" value="${plugin-name}"/>
+		   <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Validate100XSDsCrossDependsTestcase"/>
+		   <property name="extraVMargs" value="${extraVMargs}"/>
+		 </ant>
+	  </target>
+	
+	
+	  <target name="Validate10XSDsCrossDependsTestCase">
+		 <delete dir="${workspace}" quiet="true"/>
+		 <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+		   <property name="data-dir" value="${workspace}"/>
+		   <property name="plugin-name" value="${plugin-name}"/>
+		   <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Validate10XSDsCrossDependsTestcase"/>
+		   <property name="extraVMargs" value="${extraVMargs}"/>
+		 </ant>
+	  </target>
+	
+	  <target name="Validate1000XSDsNoDependsTestCase">
+		<delete dir="${workspace}" quiet="true"/>
+		<ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+		  <property name="data-dir" value="${workspace}"/>
+		  <property name="plugin-name" value="${plugin-name}"/>
+		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Validate1000XSDsNoDependsTestcase"/>
+		  <property name="extraVMargs" value="${extraVMargs}"/>
+		</ant>
+      </target>
+
+	
+	  <target name="Validate100XSDsNoDependsTestCase">
+		<delete dir="${workspace}" quiet="true"/>
+		<ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+		  <property name="data-dir" value="${workspace}"/>
+		  <property name="plugin-name" value="${plugin-name}"/>
+		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Validate100XSDsNoDependsTestcase"/>
+		  <property name="extraVMargs" value="${extraVMargs}"/>
+		</ant>
+      </target>
+
+	
+	  <target name="Validate10XSDsNoDependsTestCase">
+		<delete dir="${workspace}" quiet="true"/>
+		<ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
+		  <property name="data-dir" value="${workspace}"/>
+		  <property name="plugin-name" value="${plugin-name}"/>
+		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.Validate10XSDsNoDependsTestcase"/>
+		  <property name="extraVMargs" value="${extraVMargs}"/>
+		</ant>
+      </target>
 
   <!-- This target holds code to cleanup the testing environment after -->
   <!-- after all of the tests have been run. You can use this target to -->
