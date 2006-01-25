@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2005 IBM Corporation and others. All rights reserved.   This
+ * Copyright (c) 2005 2006 IBM Corporation and others. All rights reserved.   This
  * program and the accompanying materials are made available under the terms of
  * the Eclipse Public License v1.0 which accompanies this distribution, and is
  * available at http://www.eclipse.org/legal/epl-v10.html
@@ -38,6 +38,9 @@ public class JSCommonUIMessages extends NLS {
 	public static String javadocinfo_version;
 	public static String javadocinfo_deprecated;
 	public static String End_with;
+	public static String Creating_files;
+	public static String JavaScriptFilesPreferencePage_ExtensionLabel;
+	public static String JavaScriptFilesPreferencePage_ExtensionError;
 	public static String Creating_or_saving_files;
 	public static String End_of_line_code_desc;
 	public static String End_of_line_code;

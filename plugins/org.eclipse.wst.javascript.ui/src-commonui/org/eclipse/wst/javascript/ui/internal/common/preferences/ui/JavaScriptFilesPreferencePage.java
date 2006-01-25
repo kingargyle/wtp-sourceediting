@@ -10,11 +10,18 @@
  *******************************************************************************/
 package org.eclipse.wst.javascript.ui.internal.common.preferences.ui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Preferences;
+import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -30,20 +37,24 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin;
+import org.eclipse.wst.javascript.core.internal.contenttype.ContentTypeIdForJavaScript;
+import org.eclipse.wst.javascript.core.internal.preferences.JavaScriptCorePreferenceNames;
 import org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds;
 import org.eclipse.wst.javascript.ui.internal.common.JSCommonUIMessages;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;
 
-public class JavaScriptFilesPreferencePage extends PreferencePage implements
-		ModifyListener, SelectionListener, IWorkbenchPreferencePage {
+public class JavaScriptFilesPreferencePage extends PreferencePage implements ModifyListener, SelectionListener, IWorkbenchPreferencePage {
 	protected Combo fEndOfLineCode = null;
 
 	private Vector fEOLCodes = null;
+	private Text fDefaultSuffix = null;
+	private List fValidExtensions = null;
 
 	protected Composite createComposite(Composite parent, int numColumns) {
 		Composite composite = new Composite(parent, SWT.NULL);
@@ -78,13 +89,18 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 		setSize(composite);
 		loadPreferences();
 
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(composite,
-				IHelpContextIds.JS_PREFWEBX_FILES_HELPID);
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(composite, IHelpContextIds.JS_PREFWEBX_FILES_HELPID);
 		return composite;
 	}
 
 	protected void createContentsForCreatingGroup(Composite parent) {
-		// do nothing
+		Group creatingGroup = createGroup(parent, 2);
+		creatingGroup.setText(JSCommonUIMessages.Creating_files);
+
+		// Default extension for New file Wizard
+		createLabel(creatingGroup, JSCommonUIMessages.JavaScriptFilesPreferencePage_ExtensionLabel);
+		fDefaultSuffix = createTextField(creatingGroup);
+		fDefaultSuffix.addModifyListener(this);
 	}
 
 	protected void createContentsForCreatingOrSavingGroup(Composite parent) {
@@ -147,8 +163,7 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 
 	protected Composite createScrolledComposite(Composite parent) {
 		// create scrollbars for this parent when needed
-		final ScrolledComposite sc1 = new ScrolledComposite(parent,
-				SWT.H_SCROLL | SWT.V_SCROLL);
+		final ScrolledComposite sc1 = new ScrolledComposite(parent, SWT.H_SCROLL | SWT.V_SCROLL);
 		sc1.setLayoutData(new GridData(GridData.FILL_BOTH));
 		Composite composite = createComposite(sc1, 1);
 		sc1.setContent(composite);
@@ -160,6 +175,24 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 		// has correct minSize
 		setSize(composite);
 		return composite;
+	}
+
+	protected Text createTextField(Composite parent) {
+		Text text = new Text(parent, SWT.SINGLE | SWT.BORDER);
+
+		// GridData
+		GridData data = new GridData();
+		data.verticalAlignment = GridData.CENTER;
+		data.horizontalAlignment = GridData.FILL;
+		data.grabExcessHorizontalSpace = true;
+		text.setLayoutData(data);
+
+		return text;
+	}
+
+	public void dispose() {
+		fDefaultSuffix.removeModifyListener(this);
+		super.dispose();
 	}
 
 	/*
@@ -175,7 +208,30 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 		JavaScriptCorePlugin.getDefault().savePluginPreferences(); // model
 	}
 
-	protected void enableValues() {
+	private void enableValues() {
+		// nothing
+	}
+
+	/**
+	 * Get content type associated with this new file wizard
+	 * 
+	 * @return IContentType
+	 */
+	private IContentType getContentType() {
+		return Platform.getContentTypeManager().getContentType(ContentTypeIdForJavaScript.ContentTypeID_JAVASCRIPT);
+	}
+
+	/**
+	 * Get list of valid extensions
+	 * 
+	 * @return List
+	 */
+	private List getValidExtensions() {
+		if (fValidExtensions == null) {
+			IContentType type = getContentType();
+			fValidExtensions = new ArrayList(Arrays.asList(type.getFileSpecs(IContentType.FILE_EXTENSION_SPEC)));
+		}
+		return fValidExtensions;
 	}
 
 	/**
@@ -196,6 +252,7 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 	}
 
 	public void init(IWorkbench workbench) {
+		// nothing
 	}
 
 	protected void initializeValues() {
@@ -204,12 +261,12 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 	}
 
 	protected void initializeValuesForCreatingGroup() {
-		// do nothing
+		String suffix = getModelPreferences().getString(JavaScriptCorePreferenceNames.DEFAULT_EXTENSION);
+		fDefaultSuffix.setText(suffix);
 	}
 
 	protected void initializeValuesForCreatingOrSavingGroup() {
-		String endOfLineCode = getModelPreferences().getString(
-				CommonEncodingPreferenceNames.END_OF_LINE_CODE);
+		String endOfLineCode = getModelPreferences().getString(CommonEncodingPreferenceNames.END_OF_LINE_CODE);
 
 		if (endOfLineCode.length() > 0)
 			setCurrentEOLCode(endOfLineCode);
@@ -247,12 +304,12 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 	}
 
 	protected void performDefaultsForCreatingGroup() {
-		// do nothing
+		String suffix = getModelPreferences().getDefaultString(JavaScriptCorePreferenceNames.DEFAULT_EXTENSION);
+		fDefaultSuffix.setText(suffix);
 	}
 
 	protected void performDefaultsForCreatingOrSavingGroup() {
-		String endOfLineCode = getModelPreferences().getDefaultString(
-				CommonEncodingPreferenceNames.END_OF_LINE_CODE);
+		String endOfLineCode = getModelPreferences().getDefaultString(CommonEncodingPreferenceNames.END_OF_LINE_CODE);
 
 		if (endOfLineCode.length() > 0)
 			setCurrentEOLCode(endOfLineCode);
@@ -310,8 +367,7 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 			// set scrollbar composite's min size so page is expandable but
 			// has scrollbars when needed
 			if (composite.getParent() instanceof ScrolledComposite) {
-				ScrolledComposite sc1 = (ScrolledComposite) composite
-						.getParent();
+				ScrolledComposite sc1 = (ScrolledComposite) composite.getParent();
 				sc1.setMinSize(minSize);
 				sc1.setExpandHorizontal(true);
 				sc1.setExpandVertical(true);
@@ -325,16 +381,31 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements
 	}
 
 	protected void storeValuesForCreatingGroup() {
-		// do nothing
+		String suffix = fDefaultSuffix.getText();
+		getModelPreferences().setValue(JavaScriptCorePreferenceNames.DEFAULT_EXTENSION, suffix);
 	}
 
 	protected void storeValuesForCreatingOrSavingGroup() {
 		String eolCode = getCurrentEOLCode();
-		getModelPreferences().setValue(
-				CommonEncodingPreferenceNames.END_OF_LINE_CODE, eolCode);
+		getModelPreferences().setValue(CommonEncodingPreferenceNames.END_OF_LINE_CODE, eolCode);
 	}
 
 	protected void validateValues() {
+		boolean isValid = false;
+		Iterator i = getValidExtensions().iterator();
+		while (i.hasNext() && !isValid) {
+			String extension = (String) i.next();
+			isValid = extension.equalsIgnoreCase(fDefaultSuffix.getText());
+		}
+
+		if (!isValid) {
+			setErrorMessage(NLS.bind(JSCommonUIMessages.JavaScriptFilesPreferencePage_ExtensionError, getValidExtensions().toString()));
+			setValid(false);
+		}
+		else {
+			setErrorMessage(null);
+			setValid(true);
+		}
 	}
 
 	public void widgetDefaultSelected(SelectionEvent e) {
