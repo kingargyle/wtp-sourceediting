@@ -13,6 +13,7 @@ package org.eclipse.wst.javascript.ui.internal.editor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -27,6 +28,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
 import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageSelectionProvider;
 import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
+import org.eclipse.wst.javascript.core.internal.contenttype.ContentTypeIdForJavaScript;
+import org.eclipse.wst.javascript.ui.internal.actions.MultiPageEditorActionBarContributorJS;
 
 public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart {
 
@@ -265,7 +268,32 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart {
 	}
 
 	protected IEditorSite createSite(IEditorPart editor) {
-		return new PostMultiPageEditorSite(this, editor);
+		IEditorSite site = null;
+		if (editor == fEditor) {
+			site = new PostMultiPageEditorSite(this, editor) {
+				/**
+				 * @see org.eclipse.ui.part.MultiPageEditorSite#getActionBarContributor()
+				 */
+				public IEditorActionBarContributor getActionBarContributor() {
+					IEditorActionBarContributor contributor = super.getActionBarContributor();
+					IEditorActionBarContributor multiContributor = JSMultiPageEditorPart.this.getEditorSite().getActionBarContributor();
+					if (multiContributor instanceof MultiPageEditorActionBarContributorJS) {
+						contributor = ((MultiPageEditorActionBarContributorJS) multiContributor).getSourceViewerActionContributor();
+					}
+					return contributor;
+				}
+
+				public String getId() {
+					// sets this id so nested editor is considered js source
+					// page
+					return ContentTypeIdForJavaScript.ContentTypeID_JAVASCRIPT + ".source"; //$NON-NLS-1$;
+				}
+			};
+		}
+		else {
+			site = super.createSite(editor);
+		}
+		return site;
 	}
 
 	public void dispose() {

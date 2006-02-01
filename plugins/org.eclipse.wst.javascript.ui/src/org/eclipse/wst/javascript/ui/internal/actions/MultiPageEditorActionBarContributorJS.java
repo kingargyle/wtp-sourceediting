@@ -11,6 +11,7 @@
 package org.eclipse.wst.javascript.ui.internal.actions;
 
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditor;
@@ -60,5 +61,10 @@ public class MultiPageEditorActionBarContributorJS extends MultiPageEditorAction
 
 	public IActionBars getActionBars() {
 		return fActionBars;
+	}
+	
+	// needed by JSMultiPageEditorPart
+	public IEditorActionBarContributor getSourceViewerActionContributor() {
+		return sourceViewerActionContributor;
 	}
 }
