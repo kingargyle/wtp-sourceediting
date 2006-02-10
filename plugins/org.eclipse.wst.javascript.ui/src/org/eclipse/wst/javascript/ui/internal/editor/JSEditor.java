@@ -82,6 +82,7 @@ import org.eclipse.ui.texteditor.IAbstractTextEditorHelpContextIds;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.IElementStateListener;
 import org.eclipse.ui.texteditor.IStatusField;
+import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.IWorkbenchActionDefinitionIds;
@@ -836,6 +837,9 @@ public class JSEditor extends TextEditor {
 		}
 		if (ISourceEditingTextTools.class.equals(required)) {
 			return fSourceEditingTextTools;
+		}
+		if (ITextEditor.class.equals(required)) {
+			return this;
 		}
 		return super.getAdapter(required);
 	}
