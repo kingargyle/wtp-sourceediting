@@ -18,13 +18,13 @@ import java.io.InputStream;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jst.jsp.core.internal.provisional.text.IJSPPartitionTypes;
+import org.eclipse.jst.jsp.core.text.IJSPPartitions;
 import org.eclipse.jst.jsp.ui.internal.style.LineStyleProviderForJSP;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.test.performance.PerformanceTestCase;
-import org.eclipse.wst.css.core.internal.provisional.text.ICSSPartitionTypes;
+import org.eclipse.wst.css.core.text.ICSSPartitions;
 import org.eclipse.wst.css.ui.internal.style.LineStyleProviderForEmbeddedCSS;
-import org.eclipse.wst.html.core.internal.provisional.text.IHTMLPartitionTypes;
+import org.eclipse.wst.html.core.text.IHTMLPartitions;
 import org.eclipse.wst.html.ui.internal.style.LineStyleProviderForHTML;
 import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
@@ -250,29 +250,29 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 		if (highlighter != null) {
 			// HTML
 			LineStyleProvider htmlLineStyleProvider = new LineStyleProviderForHTML();
-			highlighter.addProvider(IHTMLPartitionTypes.HTML_DEFAULT, htmlLineStyleProvider);
-			highlighter.addProvider(IHTMLPartitionTypes.HTML_COMMENT, htmlLineStyleProvider);
-			highlighter.addProvider(IHTMLPartitionTypes.HTML_DECLARATION, htmlLineStyleProvider);
+			highlighter.addProvider(IHTMLPartitions.HTML_DEFAULT, htmlLineStyleProvider);
+			highlighter.addProvider(IHTMLPartitions.HTML_COMMENT, htmlLineStyleProvider);
+			highlighter.addProvider(IHTMLPartitions.HTML_DECLARATION, htmlLineStyleProvider);
 
 			// HTML JavaScript
 			LineStyleProvider jsLineStyleProvider = new LineStyleProviderForJavaScript();
-			highlighter.addProvider(IHTMLPartitionTypes.SCRIPT, jsLineStyleProvider);
+			highlighter.addProvider(IHTMLPartitions.SCRIPT, jsLineStyleProvider);
 
 			// CSS
 			LineStyleProvider cssLineStyleProvider = new LineStyleProviderForEmbeddedCSS();
-			highlighter.addProvider(ICSSPartitionTypes.STYLE, cssLineStyleProvider);
+			highlighter.addProvider(ICSSPartitions.STYLE, cssLineStyleProvider);
 
 			// JSP
 			LineStyleProvider jspLineStyleProvider = new LineStyleProviderForJSP();
-			highlighter.addProvider(IJSPPartitionTypes.JSP_DEFAULT, jspLineStyleProvider);
-			highlighter.addProvider(IJSPPartitionTypes.JSP_COMMENT, jspLineStyleProvider);
-			highlighter.addProvider(IJSPPartitionTypes.JSP_DIRECTIVE, jspLineStyleProvider);
-			highlighter.addProvider(IJSPPartitionTypes.JSP_CONTENT_DELIMITER, jspLineStyleProvider);
+			highlighter.addProvider(IJSPPartitions.JSP_DEFAULT, jspLineStyleProvider);
+			highlighter.addProvider(IJSPPartitions.JSP_COMMENT, jspLineStyleProvider);
+			highlighter.addProvider(IJSPPartitions.JSP_DIRECTIVE, jspLineStyleProvider);
+			highlighter.addProvider(IJSPPartitions.JSP_CONTENT_DELIMITER, jspLineStyleProvider);
 
 			// JSP Java or JSP JavaScript
 			// highlighter.addProvider(IJSPPartitions.ST_JSP_CONTENT_JAVA,
 			// new LineStyleProviderForJava());
-			highlighter.addProvider(IJSPPartitionTypes.JSP_CONTENT_JAVASCRIPT, new LineStyleProviderForJavaScript());
+			highlighter.addProvider(IJSPPartitions.JSP_CONTENT_JAVASCRIPT, new LineStyleProviderForJavaScript());
 		}
 
 		return highlighter;
