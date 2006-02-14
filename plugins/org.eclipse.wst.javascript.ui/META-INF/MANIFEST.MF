@@ -33,5 +33,6 @@ Require-Bundle: org.eclipse.debug.core,
  org.eclipse.core.runtime,
  org.eclipse.ui.ide,
  org.eclipse.wst.xml.core,
- org.eclipse.wst.common.ui
+ org.eclipse.wst.common.ui,
+ com.ibm.icu
 Eclipse-AutoStart: true
