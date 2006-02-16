@@ -25,13 +25,12 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
-import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageSelectionProvider;
-import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
+import org.eclipse.ui.part.MultiPageEditorPart;
+import org.eclipse.ui.part.MultiPageEditorSite;
 import org.eclipse.wst.javascript.core.internal.contenttype.ContentTypeIdForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.actions.MultiPageEditorActionBarContributorJS;
 
-public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart {
+public class JSMultiPageEditorPart extends MultiPageEditorPart {
 
 	/**
 	 * Internal part activation listener, copied from AbstractTextEditor
@@ -270,7 +269,7 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart {
 	protected IEditorSite createSite(IEditorPart editor) {
 		IEditorSite site = null;
 		if (editor == fEditor) {
-			site = new PostMultiPageEditorSite(this, editor) {
+			site = new MultiPageEditorSite(this, editor) {
 				/**
 				 * @see org.eclipse.ui.part.MultiPageEditorSite#getActionBarContributor()
 				 */
@@ -349,8 +348,6 @@ public class JSMultiPageEditorPart extends PostSelectionMultiPageEditorPart {
 
 		// we want to listen for our own activation
 		fActivationListener = new ActivationListener(site.getWorkbenchWindow().getPartService());
-
-		site.setSelectionProvider(new PostMultiPageSelectionProvider(this));
 	}
 
 	public boolean isSaveAsAllowed() {
