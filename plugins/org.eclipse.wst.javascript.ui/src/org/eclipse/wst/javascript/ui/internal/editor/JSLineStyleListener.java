@@ -138,7 +138,7 @@ public class JSLineStyleListener implements LineStyleListener, IDocumentListener
 					//    beginning of a token.  The reason is for example that the token
 					//    is likely to be broken and possibly even split at the change point.
 
-					TextRange trRightmostParseChange = pcParseCache.notifyChange(nv, idx, event.getLength(), event.getText().length());
+					TextRange trRightmostParseChange = pcParseCache.notifyChange(nv, idx, event.getLength(), (event.getText() != null ? event.getText().length() : 0));
 
 					// note: we might need special code if changing of one character might
 					//    affect earlier parsing for example changing  "+ " to "++" changes
