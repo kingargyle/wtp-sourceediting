@@ -1,0 +1,132 @@
+<html>
+
+<head>
+	<title>Partition Types in the Structured Source Editor</title>
+	<style type="text/css">
+		body {
+			font-family: arial, helvetica;
+			font-size: 12pt;
+		}
+		
+		h2 {
+			font-family: arial, helvetica;
+			background-color: light blue;
+		}
+		
+		.greyBox {
+			background-color: #dddddd;
+			padding: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	
+	<h2>Overview</h2>
+	<p>
+		Partitions are a logical way our IDocument is divided.
+		We have different levels of granularity for categorizing sections of our document.
+		Partitions are the second most general type of granularity.
+	</p>
+	
+StructuredDocument divisions:
+<br>
+<div class="greyBox">
+<pre>
+	IContentType (file level)
+		- IPartitionType (coarse)
+			 -  IStructuredDocumentRegion (finer, non API)
+			 		- ITextRegion (finer, non API)
+</pre>
+</div>
+
+	
+	<h2>Usage</h2>
+	<p>
+		Partitions are used often in identifying which parts of the document you are interested
+		in.  One example of this is the participant design pattern. Source 
+		Validation (the error squiggles that show up while you type in the editor) participated
+		in through extension point.  
+	</p>
+	<p>
+		The extender (person trying to supply new validation) 
+		can specify which content types and which partitions for those content types
+		the validator is interested in.  Then the extender's validator will only be notified
+		when that specific partition in the document is affected.
+	</p>
+	
+<div class="greyBox">
+<pre>
+
+   &lt;extension
+         point="org.eclipse.wst.sse.ui.extensions.sourcevalidation"&gt;
+      &lt;validator
+            scope="total"
+            class="org.eclipse.wst.validation.html.HTMLValidator"
+            id="org.eclipse.wst.validation.htmlsourcevalidator"&gt;
+         &lt;contentTypeIdentifier
+               id="org.eclipse.wst.html.core.htmlsource"&gt;
+            &lt;partitionType
+                  id="org.eclipse.wst.html.HTML_DEFAULT"/&gt;
+         &lt;/contentTypeIdentifier&gt;
+         &lt;contentTypeIdentifier
+               id="org.eclipse.jst.jsp.core.jspsource"&gt;
+            &lt;partitionType
+                  id="org.eclipse.wst.html.HTML_DEFAULT"/&gt;
+         &lt;/contentTypeIdentifier&gt;
+      &lt;/validator&gt;
+   &lt;/extension&gt;
+
+</pre>
+</div>
+
+	<p>
+		Partitions are sometimes useful for jumping to a specific part of the document quickly.
+		You can get the partitions of a section of the document like this:
+		
+		<!-- add code here for getting/iterating -->
+<div class="greyBox">
+<pre>
+	ITypedRegion[] partitions = computePartitioning(document, "partitioning", offset, length, true);
+	for (int i = 0; i < partitions.length; i++) {
+		if(partitions[i].getType()  == IJSPPartitions.JSP_DIRECTIVE) {
+			// do stuff with a JSP directive
+		}
+	}
+
+</pre>
+</div>
+	
+		The partition string used is the same instance as ITypedRegion#getType()
+		so you can do a check like:
+		
+<div class="greyBox">
+<pre>	
+	ITypedRegion IDocumentExtension3#getPartition(String partitioning, int offset, boolean preferOpenPartitions)
+	if(typedRegion.getType() == IJSPPartitions.JSP_DIRECTIVE) {
+		// do stuff with a JSP directive
+	}
+</pre>
+</div>		
+		
+	</p>
+	
+	<h2>Partition Constants</h2>
+	<p>
+		Structured source editors use pre-defined constants for its partition types,
+		which are defined in the following interfaces:
+		
+		<br>
+		<br><b>org.eclipse.wst.sse.core.text.IStructuredPartitions</b>
+		<br><b>org.eclipse.wst.css.core.text.ICSSPartitions</b>
+		<br><b>org.eclipse.wst.dtd.core.text.IDTDPartitions</b>
+		<br><b>org.eclipse.wst.html.core.text.IHTMLPartitions</b>
+		<br><b>org.eclipse.wst.xml.core.text.IXMLPartitions</b>
+		<br><b>org.eclipse.jst.jsp.core.text.IJSPPartitions</b>
+		<br>
+		<br>
+		There's a set of constants used to identify parts of the document for each content type.
+	</p>
+</body>
+
+</html>
