@@ -46,18 +46,18 @@ public class Lexer implements ILexer {
 	public static class State {
 		public final static State INITIAL = new State(0);
 
-		private int id;
+		private int fid;
 
 		private State(int id) {
-			this.id = id;
+			this.fid = id;
 		}
 
 		public int id() {
-			return id;
+			return fid;
 		}
 	}
 
-	protected Token token;
+	protected Token ftoken;
 	protected State state = State.INITIAL;
 	private PushbackReader in;
 	private int lpoffset;
@@ -1302,8 +1302,8 @@ public class Lexer implements ILexer {
 
 	private static int[][] accept;
 
-	public Lexer(PushbackReader in) {
-		this.in = in;
+	public Lexer(PushbackReader in1Param) {
+		this.in = in1Param;
 		DataInputStream s = null;
 		if (gotoTable == null) {
 			try {
@@ -1359,9 +1359,6 @@ public class Lexer implements ILexer {
 		}
 	}
 
-	protected void filter() throws LexerException, IOException {
-	}
-
 	private int getChar() throws IOException {
 		if (eof) {
 			return -1;
@@ -1399,8 +1396,8 @@ public class Lexer implements ILexer {
 		int accept_line = -1;
 		int accept_lpoffset = -1;
 
-		int[][][] gotoTable = Lexer.gotoTable[state.id()];
-		int[] accept = Lexer.accept[state.id()];
+		int[][][] gotoTable1 = Lexer.gotoTable[state.id()];
+		int[] accept1 = Lexer.accept[state.id()];
 		text.setLength(0);
 
 		while (true) {
@@ -1436,7 +1433,7 @@ public class Lexer implements ILexer {
 
 					dfa_state = -1;
 
-					int[][] tmp1 = gotoTable[oldState];
+					int[][] tmp1 = gotoTable1[oldState];
 					int low = 0;
 					int high = tmp1.length - 1;
 
@@ -1463,9 +1460,9 @@ public class Lexer implements ILexer {
 			}
 
 			if (dfa_state >= 0) {
-				if (accept[dfa_state] != -1) {
+				if (accept1[dfa_state] != -1) {
 					accept_state = dfa_state;
-					accept_token = accept[dfa_state];
+					accept_token = accept1[dfa_state];
 					accept_length = text.length();
 					accept_pos = pos;
 					accept_line = line;
@@ -1581,10 +1578,10 @@ public class Lexer implements ILexer {
 						throw new LexerException(NLS.bind(JavaScriptCoreMessages._Unknown_token___EXC_,
 									(new Object[]{Integer.toString((start_line + 1)), Integer.toString((start_pos + 1)), text})));
 					}
-					else {
+					//else {
 						EOF token = new EOF(start_line + 1, start_pos + 1, start_lpoffset);
 						return token;
-					}
+					//}
 				}
 			}
 		}
@@ -1635,23 +1632,21 @@ public class Lexer implements ILexer {
 	}
 
 	public Token next() throws LexerException, IOException {
-		while (token == null) {
-			token = getToken();
-			filter();
+		while (ftoken == null) {
+			ftoken = getToken();
 		}
 
-		Token result = token;
-		token = null;
+		Token result = ftoken;
+		ftoken = null;
 		return result;
 	}
 
 	public Token peek() throws LexerException, IOException {
-		while (token == null) {
-			token = getToken();
-			filter();
+		while (ftoken == null) {
+			ftoken = getToken();
 		}
 
-		return token;
+		return ftoken;
 	}
 
 	private void pushBack(int acceptLength) throws IOException {

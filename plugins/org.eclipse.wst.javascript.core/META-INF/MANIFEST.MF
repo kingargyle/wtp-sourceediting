@@ -15,4 +15,4 @@ Export-Package: org.eclipse.wst.javascript.core.internal,
  org.eclipse.wst.javascript.core.internal.preferences
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.core.runtime
-Eclipse-AutoStart: true
+Eclipse-LazyStart: true
