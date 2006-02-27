@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IResourceProxy;
 import org.eclipse.core.resources.IResourceProxyVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
@@ -81,7 +82,7 @@ public class OpenEditorTest extends PerformanceTestCase {
 		Bundle bun = Platform.getBundle(PLUGIN_ID);
 		URL pluginURL = null;
 		try {
-			pluginURL = Platform.asLocalURL(bun.getEntry("/"));
+			pluginURL = FileLocator.toFileURL(bun.getEntry("/"));
 		}
 		catch (IOException e) {
 			e.printStackTrace();

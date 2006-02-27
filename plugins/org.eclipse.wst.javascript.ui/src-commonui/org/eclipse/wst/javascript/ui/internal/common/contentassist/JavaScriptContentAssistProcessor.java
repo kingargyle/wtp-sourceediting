@@ -50,10 +50,10 @@ import org.eclipse.wst.javascript.ui.internal.common.preferences.JSCommonUIPrefe
 import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoProvider;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
-import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
-import org.eclipse.wst.sse.core.internal.util.Debug;
+import org.eclipse.wst.javascript.ui.internal.common.Debug;
 import org.eclipse.wst.sse.core.internal.util.URIResolver;
 import org.eclipse.wst.sse.ui.internal.IReleasable;
 import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;

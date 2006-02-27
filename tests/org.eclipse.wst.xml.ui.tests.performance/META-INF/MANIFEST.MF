@@ -1,18 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: XML UI Performance Plug-in
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.wst.xml.ui.tests.performance
 Bundle-Version: 1.0.0
 Bundle-ClassPath: xmluiperformance.jar
 Bundle-Activator: org.eclipse.wst.xml.ui.tests.performance.XMLUIPerformancePlugin
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: %Bundle-Vendor.0
 Bundle-Localization: plugin
 Export-Package: org.eclipse.wst.xml.ui.tests.performance,
  org.eclipse.wst.xml.ui.tests.performance.util
 Require-Bundle: org.eclipse.core.runtime,
  org.junit,
  org.eclipse.test.performance,
- org.eclipse.wst.xml.core,
  org.eclipse.wst.xml.ui,
  org.eclipse.ui,
  org.eclipse.core.resources,
@@ -22,5 +21,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.workbench.texteditor,
  org.eclipse.wst.sse.core,
  org.eclipse.ui.editors,
- com.ibm.icu
-Eclipse-AutoStart: true
+ com.ibm.icu,
+ org.eclipse.wst.xml.core
+Eclipse-LazyStart: true

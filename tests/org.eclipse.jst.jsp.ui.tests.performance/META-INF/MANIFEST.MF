@@ -1,13 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: JSP UI Performance Plug-in
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsp.ui.tests.performance
 Bundle-Version: 1.0.0
 Bundle-ClassPath: jspuiperformance.jar
 Bundle-Activator: org.eclipse.jst.jsp.ui.tests.performance.JSPUIPerformancePlugin
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: %Bundle-Vendor.0
 Bundle-Localization: plugin
 Export-Package: org.eclipse.jst.jsp.ui.tests.performance,
+ org.eclipse.jst.jsp.ui.tests.performance.contentassist,
+ org.eclipse.jst.jsp.ui.tests.performance.editor,
+ org.eclipse.jst.jsp.ui.tests.performance.scalability,
  org.eclipse.jst.jsp.ui.tests.performance.testfiles,
  org.eclipse.jst.jsp.ui.tests.performance.util
 Require-Bundle: org.eclipse.core.runtime,
@@ -18,7 +21,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.sse.ui,
  org.eclipse.core.resources,
  org.eclipse.wst.html.ui,
- org.eclipse.wst.xml.ui,
  org.eclipse.wst.css.core,
  org.eclipse.wst.html.core,
  org.eclipse.wst.css.ui,
@@ -28,9 +30,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.swt,
  org.eclipse.ui,
  org.eclipse.ui.ide,
- org.eclipse.ui.workbench.texteditor,
  org.eclipse.jdt.core,
  org.eclipse.wst.javascript.ui,
  org.eclipse.wst.common.tests.performance,
- com.ibm.icu
-Eclipse-AutoStart: true
+ com.ibm.icu,
+ org.eclipse.wst.xml.ui
+Eclipse-LazyStart: true

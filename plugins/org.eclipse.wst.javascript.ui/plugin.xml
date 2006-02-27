@@ -7,7 +7,7 @@
 		<editor
 			name="%JavaScript_Editor.name"
 			default="true"
-			icon="icons/javascript.gif"
+			icon="$nl$/icons/javascript.gif"
 			contributorClass="org.eclipse.wst.javascript.ui.internal.actions.MultiPageEditorActionBarContributorJS"
 			class="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart"
 			symbolicFontName="org.eclipse.wst.sse.ui.textfont"
@@ -106,7 +106,7 @@
 			name="%_UI_WIZARD_NAME"
 			class="org.eclipse.wst.javascript.ui.internal.wizard.NewJSWizard"
 			category="org.eclipse.wst.web.ui"
-			icon="icons/full/ctool16/newjscript_wiz.gif">
+			icon="$nl$/icons/full/ctool16/newjscript_wiz.gif">
 			<description>%_UI_WIZARD_CREATE_NEW_FILE</description>
 			<selection class="org.eclipse.core.resources.IResource" />
 		</wizard>

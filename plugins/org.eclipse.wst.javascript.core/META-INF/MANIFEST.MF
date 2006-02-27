@@ -6,13 +6,13 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.wst.javascript.core.internal.JavaScriptCorePlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: org.eclipse.wst.javascript.core.internal,
- org.eclipse.wst.javascript.core.internal.contenttype,
- org.eclipse.wst.javascript.core.internal.jsparser.analysis,
- org.eclipse.wst.javascript.core.internal.jsparser.lexer,
- org.eclipse.wst.javascript.core.internal.jsparser.node,
- org.eclipse.wst.javascript.core.internal.langlexer,
- org.eclipse.wst.javascript.core.internal.preferences
+Export-Package: org.eclipse.wst.javascript.core.internal;x-friends:="org.eclipse.wst.javascript.ui",
+ org.eclipse.wst.javascript.core.internal.contenttype;x-friends:="org.eclipse.wst.javascript.ui",
+ org.eclipse.wst.javascript.core.internal.jsparser.analysis;x-friends:="org.eclipse.wst.javascript.ui",
+ org.eclipse.wst.javascript.core.internal.jsparser.lexer;x-friends:="org.eclipse.wst.javascript.ui",
+ org.eclipse.wst.javascript.core.internal.jsparser.node;x-friends:="org.eclipse.wst.javascript.ui",
+ org.eclipse.wst.javascript.core.internal.langlexer;x-friends:="org.eclipse.wst.javascript.ui",
+ org.eclipse.wst.javascript.core.internal.preferences;x-friends:="org.eclipse.wst.javascript.ui"
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.core.runtime
 Eclipse-LazyStart: true

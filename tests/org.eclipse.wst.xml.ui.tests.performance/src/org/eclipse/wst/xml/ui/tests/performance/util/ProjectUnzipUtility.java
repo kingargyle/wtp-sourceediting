@@ -317,9 +317,7 @@ public class ProjectUnzipUtility {
 		refreshWorkspace();
 		// change prereqs to get this functionality back in
 		IProject proj = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
-		boolean setNatures = false;
 		if (!proj.exists()) {
-			setNatures = true;
 			proj.create(new NullProgressMonitor());
 		}
 		if (!proj.isOpen()) {
