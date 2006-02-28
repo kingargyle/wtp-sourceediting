@@ -7,3 +7,5 @@ build.xml
 bin
 @dot
 src.zip
+javaCompiler...args
+org.eclipse.wst.javascript.core_1.0.0.200602272329.zip
