@@ -10,7 +10,7 @@ Bundle-Localization: plugin
 Export-Package: org.eclipse.wst.xml.examples.cs.core.modelhandler,
  org.eclipse.wst.xml.examples.cs.ui,
  org.eclipse.wst.xml.examples.cs.ui.contentassist,
- org.eclipse.wst.xml.examples.cs.ui.internal,
+ org.eclipse.wst.xml.examples.cs.ui.internal;x-internal:=true,
  org.eclipse.wst.xml.examples.cs.ui.registry,
  org.eclipse.wst.xml.examples.cs.ui.views.contentoutline
 Require-Bundle: org.eclipse.ui.ide,
