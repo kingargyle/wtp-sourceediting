@@ -1845,7 +1845,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 		if (!hasEndTag) {
 
 			// create appropriate close tag text
-			String proposedText = proposedText = "</" + tagName; // ResourceHandler //$NON-NLS-1$
+			String proposedText = "</" + tagName; // ResourceHandler //$NON-NLS-1$
 			// wants text
 			// w/out
 			// ending '>'
