@@ -301,7 +301,7 @@ public class JSEditor extends TextEditor {
 	private class SourceEditingTextTools implements ISourceEditingTextTools {
 
 		public int getCaretOffset() {
-			return 0;
+			return getViewer().getTextWidget().getCaretOffset();
 		}
 
 		public IDocument getDocument() {
