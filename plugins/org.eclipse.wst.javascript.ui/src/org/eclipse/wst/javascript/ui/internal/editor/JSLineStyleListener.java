@@ -545,6 +545,12 @@ public class JSLineStyleListener implements LineStyleListener, IDocumentListener
 				return;
 			}
 		}
+		// make extra sure not trying to redraw region that does not exist yet (bug 92962)
+		int end = start + difflen;
+		int actualEnd = getSourceViewer().getTextWidget().getCharCount();
+		if (end > actualEnd) {
+			difflen = actualEnd - start;
+		}
 		getSourceViewer().getTextWidget().redrawRange(start, difflen, true);
 
 		// temp workaround until StyledText.redrawRange(int start, int length, boolean clearBackground) is fixed.
