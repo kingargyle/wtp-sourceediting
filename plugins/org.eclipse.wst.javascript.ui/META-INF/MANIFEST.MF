@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.wst.javascript.ui.internal.actions;x-internal:=true,
  org.eclipse.wst.javascript.ui.internal.common;x-internal:=true,
+ org.eclipse.wst.javascript.ui.internal.common.autoedit;x-internal:=true,
  org.eclipse.wst.javascript.ui.internal.common.contentassist;x-internal:=true,
  org.eclipse.wst.javascript.ui.internal.common.contentassist.fcs.js1;x-internal:=true,
  org.eclipse.wst.javascript.ui.internal.common.contentassist.javadoc;x-internal:=true,

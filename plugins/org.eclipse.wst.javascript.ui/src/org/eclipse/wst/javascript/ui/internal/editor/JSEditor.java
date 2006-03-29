@@ -94,6 +94,7 @@ import org.eclipse.wst.javascript.core.internal.contenttype.ContentTypeIdForJava
 import org.eclipse.wst.javascript.ui.internal.common.ContentElement;
 import org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds;
 import org.eclipse.wst.javascript.ui.internal.common.JSSourceViewerConfiguration;
+import org.eclipse.wst.javascript.ui.internal.common.preferences.JSCommonUIPreferenceNames;
 import org.eclipse.wst.javascript.ui.internal.views.contentoutline.JSContentOutlinePage;
 import org.eclipse.wst.sse.core.internal.encoding.CommonEncodingPreferenceNames;
 import org.eclipse.wst.sse.core.internal.encoding.ContentBasedPreferenceGateway;
@@ -661,9 +662,10 @@ public class JSEditor extends TextEditor {
 	 * @return IPreferenceStore
 	 */
 	private IPreferenceStore createCombinedPreferenceStore() {
+		IPreferenceStore jsEditorPrefs = JSEditorPlugin.getDefault().getPreferenceStore();
 		IPreferenceStore sseEditorPrefs = SSEUIPlugin.getDefault().getPreferenceStore();
 		IPreferenceStore baseEditorPrefs = EditorsUI.getPreferenceStore();
-		return new ChainedPreferenceStore(new IPreferenceStore[]{sseEditorPrefs, baseEditorPrefs});
+		return new ChainedPreferenceStore(new IPreferenceStore[]{jsEditorPrefs, sseEditorPrefs, baseEditorPrefs});
 	}
 
 	/*
@@ -935,6 +937,9 @@ public class JSEditor extends TextEditor {
 		if (EditorPreferenceNames.EDITOR_TEXT_HOVER_MODIFIERS.equals(property)) {
 			updateHoverBehavior();
 		}
+		if (JSCommonUIPreferenceNames.INDENTATION_CHAR.equals(property) || JSCommonUIPreferenceNames.INDENTATION_SIZE.equals(property)) {
+			updateTabBehavior();
+		}
 		super.handlePreferenceStoreChanged(event);
 	}
 
@@ -985,7 +990,8 @@ public class JSEditor extends TextEditor {
 
 	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
 		super.rulerContextMenuAboutToShow(menu);
-		// append actions to "debug" group (created in AbstractDecoratedTextEditor.rulerContextMenuAboutToShow(IMenuManager))
+		// append actions to "debug" group (created in
+		// AbstractDecoratedTextEditor.rulerContextMenuAboutToShow(IMenuManager))
 		menu.appendToGroup("debug", getAction(ActionDefinitionIds.TOGGLE_BREAKPOINTS)); //$NON-NLS-1$
 		menu.appendToGroup("debug", getAction(ActionDefinitionIds.MANAGE_BREAKPOINTS)); //$NON-NLS-1$
 		menu.appendToGroup("debug", getAction(ActionDefinitionIds.EDIT_BREAKPOINTS)); //$NON-NLS-1$
@@ -1086,6 +1092,24 @@ public class JSEditor extends TextEditor {
 				else
 					text = "[ " + offset1 + " ]"; //$NON-NLS-1$ //$NON-NLS-2$
 				field.setText(text == null ? fErrorLabel : text);
+			}
+		}
+	}
+
+	/*
+	 * Update the tab behavior depending on the preferences.
+	 */
+	private void updateTabBehavior() {
+		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
+		if (configuration != null) {
+			ISourceViewer sourceViewer = getSourceViewer();
+			String[] types = configuration.getConfiguredContentTypes(sourceViewer);
+
+			for (int i = 0; i < types.length; i++) {
+				String t = types[i];
+				String[] prefixes = configuration.getIndentPrefixes(sourceViewer, t);
+				if (prefixes != null && prefixes.length > 0)
+					sourceViewer.setIndentPrefixes(prefixes, types[i]);
 			}
 		}
 	}

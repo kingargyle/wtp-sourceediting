@@ -12,6 +12,7 @@ package org.eclipse.wst.javascript.ui.internal.common.preferences.ui;
 
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -20,6 +21,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.PlatformUI;
@@ -30,12 +32,19 @@ import org.eclipse.wst.javascript.ui.internal.common.preferences.JSCommonUIPrefe
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
 import org.eclipse.wst.sse.ui.internal.preferences.ui.AbstractPreferencePage;
 
-public class JavaScriptSourcePreferencePage extends AbstractPreferencePage implements ModifyListener, SelectionListener, IWorkbenchPreferencePage {
+public class JavaScriptSourcePreferencePage extends AbstractPreferencePage 
+	implements ModifyListener, SelectionListener, IWorkbenchPreferencePage {
+	
 	// Formatting
 	protected Label fLineWidthLabel;
 	protected Text fLineWidthText;
 	protected Button fSplitMultiAttrs;
 	protected Button fIndentUsingTabs;
+	private Button fIndentUsingSpaces;
+	private Spinner fIndentationSize;
+	private final int MAX_INDENTATION_SIZE = 16;
+	private final int MIN_INDENTATION_SIZE = 0;
+	
 	protected Button fClearAllBlankLines;
 	// Content Assist
 	protected Button fAutoPropose;
@@ -51,6 +60,7 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 	protected Control createContents(Composite parent) {
 		Composite composite = (Composite) super.createContents(parent);
 
+        createContentsForFormattingGroup(composite);
 		createContentsForContentAssistGroup(composite);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(composite, IHelpContextIds.JS_PREFWEBX_SOURCE_HELPID);
 		
@@ -74,7 +84,7 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 
 	protected void performDefaults() {
 		performDefaultsForContentAssistGroup();
-
+		performDefaultsForFormattingGroup();
 		validateValues();
 		enableValues();
 
@@ -88,6 +98,7 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 	}
 
 	protected void initializeValues() {
+		initializeValuesForFormattingGroup();
 		initializeValuesForContentAssistGroup();
 	}
 
@@ -136,6 +147,7 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 
 	protected void storeValues() {
 		storeValuesForContentAssistGroup();
+		storeValuesForFormattingGroup();
 	}
 
 	protected void storeValuesForContentAssistGroup() {
@@ -153,19 +165,59 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 	}
 
 	protected void createContentsForFormattingGroup(Composite parent) {
-		// do nothing
+		Group formattingGroup = createGroup(parent, 2);
+		formattingGroup.setText(JSCommonUIMessages.Formatting_UI_);
+
+		fIndentUsingTabs = createRadioButton(formattingGroup, JSCommonUIMessages.Indent_using_tabs);
+		((GridData) fIndentUsingTabs.getLayoutData()).horizontalSpan = 2;
+		fIndentUsingSpaces = createRadioButton(formattingGroup, JSCommonUIMessages.Indent_using_spaces);
+		((GridData) fIndentUsingSpaces.getLayoutData()).horizontalSpan = 2;
+		
+		createLabel(formattingGroup, JSCommonUIMessages.Indentation_size);
+		fIndentationSize = new Spinner(formattingGroup, SWT.READ_ONLY | SWT.BORDER);
+		GridData gd= new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+		fIndentationSize.setLayoutData(gd);
+		fIndentationSize.setMinimum(MIN_INDENTATION_SIZE);
+		fIndentationSize.setMaximum(MAX_INDENTATION_SIZE);
+		fIndentationSize.setIncrement(1);
+		fIndentationSize.setPageIncrement(4);
+		fIndentationSize.addModifyListener(this);
+
 	}
 
 	protected void performDefaultsForFormattingGroup() {
-		// do nothing
-	}
-
+		if (JSCommonUIPreferenceNames.TAB.equals(getPreferenceStore().getDefaultString(JSCommonUIPreferenceNames.INDENTATION_CHAR))) {
+			fIndentUsingTabs.setSelection(true);
+			fIndentUsingSpaces.setSelection(false);
+		}
+		else {
+			fIndentUsingSpaces.setSelection(true);
+			fIndentUsingTabs.setSelection(false);
+		}
+		fIndentationSize.setSelection(getPreferenceStore().getDefaultInt(JSCommonUIPreferenceNames.INDENTATION_SIZE));
+	}		
+	
 	protected void initializeValuesForFormattingGroup() {
-		// do nothing
-	}
+		if (JSCommonUIPreferenceNames.TAB.equals(getPreferenceStore().getString(JSCommonUIPreferenceNames.INDENTATION_CHAR))) {
+			fIndentUsingTabs.setSelection(true);
+			fIndentUsingSpaces.setSelection(false);
+		}
+		else {
+			fIndentUsingSpaces.setSelection(true);
+			fIndentUsingTabs.setSelection(false);
+		}
 
+		fIndentationSize.setSelection(getPreferenceStore().getInt(JSCommonUIPreferenceNames.INDENTATION_SIZE));
+	}
+	
 	protected void storeValuesForFormattingGroup() {
-		// do nothing
+		if (fIndentUsingTabs.getSelection()) {
+			getPreferenceStore().setValue(JSCommonUIPreferenceNames.INDENTATION_CHAR, JSCommonUIPreferenceNames.TAB);
+		}
+		else {
+			getPreferenceStore().setValue(JSCommonUIPreferenceNames.INDENTATION_CHAR, JSCommonUIPreferenceNames.SPACE);
+		}
+		getPreferenceStore().setValue(JSCommonUIPreferenceNames.INDENTATION_SIZE, fIndentationSize.getSelection());
 	}
 
 	// don't create grammar constraints group
@@ -187,9 +239,7 @@ public class JavaScriptSourcePreferencePage extends AbstractPreferencePage imple
 
 	public boolean performOk() {
 		boolean result = super.performOk();
-
 		doSavePreferenceStore();
-
 		return result;
 	}
 }

@@ -52,4 +52,39 @@ public class JSCommonUIPreferenceNames {
 	private static String getTemplatesKey() {
 		return "org.eclipse.wst.sse.ui.custom_templates"; //$NON-NLS-1$
 	}
+
+	/**
+	 * The number of #INDENTATION_CHAR for 1 indentation.
+	 * <p>
+	 * Value is of type <code>Integer</code>.
+	 * </p>
+	 */
+	public static final String INDENTATION_SIZE = "indentationSize";//$NON-NLS-1$
+
+	/**
+	 * The character used for indentation.
+	 * <p>
+	 * Value is of type <code>String</code>.<br />
+	 * Possible values: {TAB, SPACE}
+	 * </p>
+	 */
+	public static final String INDENTATION_CHAR = "indentationChar";//$NON-NLS-1$
+
+	/**
+	 * Possible value for the preference #INDENTATION_CHAR. Indicates to use
+	 * tab character when formatting.
+	 * 
+	 * @see #SPACE
+	 * @see #INDENTATION_CHAR
+	 */
+	public static final String TAB = "tab"; //$NON-NLS-1$
+
+	/**
+	 * Possible value for the preference #INDENTATION_CHAR. Indicates to use
+	 * space character when formatting.
+	 * 
+	 * @see #TAB
+	 * @see #INDENTATION_CHAR
+	 */
+	public static final String SPACE = "space"; //$NON-NLS-1$
 }

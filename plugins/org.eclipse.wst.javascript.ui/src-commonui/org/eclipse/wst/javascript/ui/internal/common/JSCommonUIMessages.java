@@ -51,6 +51,10 @@ public class JSCommonUIMessages extends NLS {
 	public static String Content_assist_UI_;
 	public static String Automatically_make_suggest_UI_;
 	public static String Prompt_when_these_characte_UI_;
+	public static String Formatting_UI_;
+	public static String Indent_using_tabs;
+	public static String Indent_using_spaces;
+	public static String Indentation_size;
 
 	static {
 		// load message values from bundle file
