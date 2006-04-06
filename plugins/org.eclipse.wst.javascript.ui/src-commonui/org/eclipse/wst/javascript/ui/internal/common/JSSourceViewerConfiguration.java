@@ -221,7 +221,7 @@ public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 		if (fReconciler == null) {
 			fReconciler = new DocumentRegionProcessor() {
 				protected String getContentType(IDocument doc) {
-					return "org.eclipse.wst.javascript.core.javascriptsource";
+					return "org.eclipse.wst.javascript.core.javascriptsource"; //$NON-NLS-1$
 				}
 
 			};
