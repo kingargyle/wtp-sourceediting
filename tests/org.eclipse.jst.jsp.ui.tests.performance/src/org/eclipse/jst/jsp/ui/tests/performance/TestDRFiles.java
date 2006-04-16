@@ -72,7 +72,7 @@ public class TestDRFiles extends AbstractTestPerformance {
 		assertPerformance();
 	}
 	
-	private void doTestStructuredModel_1kfile() throws IOException {
+	 void doTestStructuredModel_1kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/1kfile.xml");		
 	}
 
@@ -84,7 +84,7 @@ public class TestDRFiles extends AbstractTestPerformance {
 		doPerfModelTest("testfiles/DRTestFiles/50kfile.xml");
 	}
 
-	private void doTestStructuredModel_75kfile() throws IOException {
+	 void doTestStructuredModel_75kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/75kfile.xml");
 	}
 
@@ -92,11 +92,11 @@ public class TestDRFiles extends AbstractTestPerformance {
 		doPerfModelTest("testfiles/DRTestFiles/100kfile.xml");
 	}
 
-	private void doTestStructuredModel_150kfile() throws IOException {
+	 void doTestStructuredModel_150kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/150kfile.xml");
 	}
 
-	private void doTestStructuredModel_200kfile() throws IOException {
+	 void doTestStructuredModel_200kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/200kfile.xml");
 	}
 
@@ -104,19 +104,19 @@ public class TestDRFiles extends AbstractTestPerformance {
 		doPerfModelTest("testfiles/DRTestFiles/250kfile.xml");
 	}
 
-	private void doTestStructuredModel_300kfile() throws IOException {
+	 void doTestStructuredModel_300kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/300kfile.xml");
 	}
 
-	private void doTestStructuredModel_350kfile() throws IOException {
+	 void doTestStructuredModel_350kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/350kfile.xml");
 	}
 
-	private void doTestStructuredModel_400kfile() throws IOException {
+	 void doTestStructuredModel_400kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/400kfile.xml");
 	}
 
-	private void doTestStructuredModel_450kfile() throws IOException {
+	 void doTestStructuredModel_450kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/450kfile.xml");
 	}
 
@@ -124,15 +124,15 @@ public class TestDRFiles extends AbstractTestPerformance {
 		doPerfModelTest("testfiles/DRTestFiles/500kfile.xml");
 	}
 
-	private void doTestStructuredModel_550kfile() throws IOException {
+	 void doTestStructuredModel_550kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/550kfile.xml");
 	}
 
-	private void doTestStructuredModel_600kfile() throws IOException {
+	 void doTestStructuredModel_600kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/600kfile.xml");
 	}
 
-	private void doTestStructuredModel_800kfile() throws IOException {
+	 void doTestStructuredModel_800kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/800kfile.xml");
 	}
 
@@ -140,7 +140,7 @@ public class TestDRFiles extends AbstractTestPerformance {
 		doPerfModelTest("testfiles/DRTestFiles/1000kfile.xml");
 	}
 
-	private void doTestStructuredModel_1500kfile() throws IOException {
+	 void doTestStructuredModel_1500kfile() throws IOException {
 		doPerfModelTest("testfiles/DRTestFiles/1500kfile.xml");
 	}
 

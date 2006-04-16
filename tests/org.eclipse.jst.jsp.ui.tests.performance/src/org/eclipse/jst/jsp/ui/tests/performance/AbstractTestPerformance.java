@@ -122,8 +122,6 @@ public class AbstractTestPerformance extends PerformanceTestCase {
 			// as a baseline
 			// for future testing...
 
-			// long diffTime = Math.abs(time - prev.time) / time;
-			long diffMem = Math.abs(memory - prev.fMemory) / memory;
 
 			// (pa) the problem with checking time is that different
 			// processors run at diffrent speed

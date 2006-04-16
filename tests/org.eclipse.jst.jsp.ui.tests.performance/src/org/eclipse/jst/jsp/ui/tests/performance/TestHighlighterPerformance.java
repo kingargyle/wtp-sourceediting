@@ -17,7 +17,6 @@ import java.io.InputStream;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jst.jsp.core.text.IJSPPartitions;
 import org.eclipse.jst.jsp.ui.internal.style.LineStyleProviderForJSP;
 import org.eclipse.swt.custom.StyleRange;
@@ -40,12 +39,7 @@ import org.eclipse.wst.sse.ui.internal.provisional.style.LineStyleProvider;
  */
 public class TestHighlighterPerformance extends PerformanceTestCase {
 
-	// (pa)
-	// this flag determines wether or not to test the GA code
-	// true > (the patched old code in *.style.Highlighter)
-	// otherwise it will try the newer test
-	// false > (the code in *structured.style.Highlighter)
-	private boolean fDoGATest = false;
+
 
 	public TestHighlighterPerformance(String name) {
 		super(name);
@@ -143,7 +137,6 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 			// ==> // ITypedRegion[] partitions =
 			// sModel.getStructuredDocument().getDocumentPartitioner().computePartitioning(start,
 			// end - start);
-			ITextViewer nullViewer = null;
 			Highlighter fHighlighter = (Highlighter) getAppropriateHighlighter(filename);
 			fHighlighter.setDocument(sModel.getStructuredDocument());
 
