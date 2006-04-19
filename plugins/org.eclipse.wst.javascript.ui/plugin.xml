@@ -6,7 +6,6 @@
 	<extension point="org.eclipse.ui.editors">
 		<editor
 			name="%JavaScript_Editor.name"
-			default="true"
 			icon="$nl$/icons/javascript.gif"
 			contributorClass="org.eclipse.wst.javascript.ui.internal.actions.MultiPageEditorActionBarContributorJS"
 			class="org.eclipse.wst.javascript.ui.internal.editor.JSMultiPageEditorPart"
