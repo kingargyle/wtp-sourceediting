@@ -66,7 +66,9 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IPathEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
@@ -1014,15 +1016,15 @@ public class JSEditor extends TextEditor {
 	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#setDocumentProvider(org.eclipse.ui.IEditorInput)
 	 */
 	protected void setDocumentProvider(IEditorInput input) {
-//		if (input instanceof IStorageEditorInput && !(input instanceof IFileEditorInput)) {
-//			if (fStorageInputDocumentProvider == null) {
-//				fStorageInputDocumentProvider = new StorageInputDocumentProvider();
-//			}
-//			setDocumentProvider(fStorageInputDocumentProvider);
-//		}
-//		else {
+		if (input instanceof IStorageEditorInput && !(input instanceof IFileEditorInput) && !(input instanceof IPathEditorInput)) {
+			if (fStorageInputDocumentProvider == null) {
+				fStorageInputDocumentProvider = new StorageInputDocumentProvider();
+			}
+			setDocumentProvider(fStorageInputDocumentProvider);
+		}
+		else {
 			super.setDocumentProvider(input);
-//		}
+		}
 	}
 
 	public void setEditorPart(IEditorPart editorPart) {
