@@ -11,10 +11,11 @@ Export-Package: org.eclipse.wst.html.ui.tests.performance,
  org.eclipse.wst.html.ui.tests.performance.scalability
 Require-Bundle: org.eclipse.core.runtime,
  org.junit,
- org.eclipse.test.performance,
  org.eclipse.wst.html.ui,
  org.eclipse.ui,
  org.eclipse.core.resources,
  org.eclipse.ui.ide,
- org.eclipse.wst.common.tests.performance
+ org.eclipse.wst.common.tests.performance,
+ org.eclipse.test,
+ org.eclipse.test.performance
 Eclipse-LazyStart: true
