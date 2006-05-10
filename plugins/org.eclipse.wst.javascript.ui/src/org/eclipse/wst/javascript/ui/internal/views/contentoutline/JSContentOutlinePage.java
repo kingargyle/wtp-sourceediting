@@ -39,6 +39,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
@@ -203,6 +204,9 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 	}
 
 	protected class SortAction extends PropertyChangeUpdateAction {
+		/**
+		 * @deprecated use CategoryComparator instead
+		 */
 		protected class CategorySorter extends ViewerSorter {
 			public CategorySorter() {
 				super();
@@ -210,6 +214,19 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 
 			public CategorySorter(Collator collator) {
 				super(collator);
+			}
+
+			public int category(Object element) {
+				if (element instanceof ContentElement) {
+					return ((ContentElement) element).getType();
+				}
+				return 0;
+			}
+		}
+
+		protected class CategoryComparator extends ViewerComparator {
+			public CategoryComparator() {
+				super();
 			}
 
 			public int category(Object element) {
@@ -228,7 +245,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 			setToolTipText(getText());
 			treeViewer = viewer;
 			if (isChecked()) {
-				treeViewer.setSorter(new CategorySorter(Collator.getInstance()));
+				treeViewer.setComparator(new CategoryComparator());
 			}
 		}
 
@@ -243,10 +260,10 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 			Object[] expandedElements = treeViewer.getExpandedElements();
 			ISelection selection = treeViewer.getSelection();
 			if (isChecked()) {
-				treeViewer.setSorter(new CategorySorter(Collator.getInstance()));
+				treeViewer.setComparator(new CategoryComparator());
 			}
 			else {
-				treeViewer.setSorter(null);
+				treeViewer.setComparator(null);
 			}
 			treeViewer.setInput(treeViewer.getInput());
 			treeViewer.setExpandedElements(expandedElements);
@@ -396,7 +413,7 @@ public class JSContentOutlinePage extends ContentOutlinePage implements IDocumen
 		if (key.equals(IShowInTarget.class)) {
 			adapter = new ShowInTarget();
 		}
-		
+
 		final IEditorPart editor = getActiveEditorPart();
 
 		if (key.equals(IShowInSource.class) && editor != null) {
