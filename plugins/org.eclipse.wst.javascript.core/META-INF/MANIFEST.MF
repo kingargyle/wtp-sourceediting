@@ -14,5 +14,6 @@ Export-Package: org.eclipse.wst.javascript.core.internal;x-friends:="org.eclipse
  org.eclipse.wst.javascript.core.internal.langlexer;x-friends:="org.eclipse.wst.javascript.ui",
  org.eclipse.wst.javascript.core.internal.preferences;x-friends:="org.eclipse.wst.javascript.ui"
 Require-Bundle: org.eclipse.core.resources,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ com.ibm.icu
 Eclipse-LazyStart: true
