@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.apache.xerces.feature"
-      label="%pluginName"
+      label="%featureName"
       version="2.8.0.qualifier"
       provider-name="%providerName">
 
-   <description url="http://http://xerces.apache.org/xerces2-j/">
+   <description url="http://xerces.apache.org/xerces2-j/">
       %description
    </description>
+
+   <copyright>
+      %copyright
+   </copyright>
 
    <license url="http://www.apache.org/licenses/">
       %license
    </license>
+
+   <url>
+      <update label="%updateSiteName" url="http://download.eclipse.org/webtools/updates/"/>
+   </url>
 
    <plugin
          id="org.apache.xerces"
