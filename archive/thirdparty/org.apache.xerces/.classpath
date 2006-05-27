@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="resolver.jar"/>
-	<classpathentry exported="true" sourcepath="D:/builds/Xerces/Xerces-J-src.2.8.0.zip" kind="lib" path="xercesImpl.jar"/>
-	<classpathentry exported="true" sourcepath="D:/builds/Xerces/Xerces-J-src.2.8.0.zip" kind="lib" path="xml-apis.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="resolver.jar"/>
+	<classpathentry kind="lib" path="xercesImpl.jar"/>
+	<classpathentry kind="lib" path="xml-apis.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
