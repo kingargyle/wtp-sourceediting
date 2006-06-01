@@ -306,11 +306,15 @@ public class JSMultiPageEditorPart extends MultiPageEditorPart {
 			fActivationListener = null;
 		}
 
-		if (fEditor != null)
-			fEditor.dispose();
+		// super.dispose() will take care of properly disposing nested editors, including fEditor
+//		if (fEditor != null)
+//			fEditor.dispose();
 
 		if (fTitleImage != null)
 			fTitleImage.dispose();
+		
+		// BUG144666 - instance of JavaScript editor leaks every time opened/closed
+		super.dispose();
 	}
 
 	public void doSave(IProgressMonitor monitor) {

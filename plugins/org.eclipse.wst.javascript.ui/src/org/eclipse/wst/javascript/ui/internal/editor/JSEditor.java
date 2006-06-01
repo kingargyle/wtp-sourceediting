@@ -754,10 +754,9 @@ public class JSEditor extends TextEditor {
 	}
 
 	public void dispose() {
-		JSLineStyleListener lineStyleListener = getLineStyleListener();
-		if (lineStyleListener != null) {
-			lineStyleListener.dispose();
-			lineStyleListener = null;
+		if (fLineStyleListener != null) {
+			fLineStyleListener.dispose();
+			fLineStyleListener = null;
 		}
 
 		super.dispose();
