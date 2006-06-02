@@ -1,0 +1,276 @@
+<html><head></head><body><h3><b>CSS content type  JSP model  design document</b></h3>
+<p align="right"><b>Last Update</b>: 05/30/2006</p>
+<p align="right"><b>Author</b>: Makio Hoshiura</p>
+<p align="right"><b>Email</b>: hoshiura@jp.ibm.com</p>
+<p></p>
+<h4><b>Overview</b></h4>
+<p>This document describes CSS content type JSP support in WTP 1.5. In
+WTP 1.0, CSS content type JSP file cannot be parsed and is not handled
+as CSS. We supports the following things:</p>
+<ul>
+	<li>Parse CSS content type JSP</li>
+	<li>Construct CSS structured model.</li>
+</ul>
+<h4><b>Key Functions</b></h4>
+<p>New content type, CSS JSP content type, is added for CSS content
+type JSP file. When CSS JSP content type is associated to the file, it
+is loaded as CSS structured model.</p>
+<ul>
+	<li>Content type definition: new content type,
+org.eclipse.jst.jsp.core.cssjspsource and
+org.eclipse.jst.jsp.core.cssjspfragmentsource, are defined for *.jsp
+and *.jspf files respectively. org.eclipse.jst.jsp.core.cssjspsource
+extends JSP content type (org.eclipse.jst.jsp.core.jspsource). For
+*.jsp file, one of JSP content type and CSS JSP content type is
+selected/applied. If CSS JSP is associated with the JSP file in
+preference page, CSS JSP content type is selected/applied. And the file
+mapped to CSS JSP content type is loaded as CSS model. Otherwise, JSP
+content type is selected/applied.<br> </li>
+	<li>CSS content type JSP
+Tokenizer: We provide JFlex tokenizer. It parses JSP expression,
+scriptlet, declaration, and comment. JSP expression can be part of CSS
+style property name and value and themselves.</li>
+</ul>
+<p>The CSS content type JSP tokenizer can parser the following JSP  and JSP fragment files.</p>
+<p>- cssjsp.jsp</p>
+<pre>&lt;%@ page session="false" contentType="text/css;charset=ISO-8859-1" %&gt;
+&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&gt;
+&lt;%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c-rt" %&gt;
+&lt;%@ include file="./csssettingsjspfragment.jspf" %&gt;
+&lt;%@ include file="./cssjspfragment.jspf" %&gt;
+</pre>
+<p>- cssjspfragment.jspf</p>
+<pre>body {
+	font-size : ${requestScope.fontSize.normal}
+	background-color: #FFFFFF;
+}
+
+.menubar {
+	float:${requestScope.direction};
+	background-color: transparent;
+	margin-${requestScope.direction}: 5px;
+}
+</pre>
+
+<h4><b>Related Plugins, Classes, and Extensions</b></h4>
+<p>We implemet this feature in org.eclipse.jst.jsp.core and
+org.eclipse.jst.jsp.ui pluigns. The model part is in
+org.eclipse.jst.jsp.core plugin. The main classes/packages for CSS
+content type JSP model is described in the following table.</p>
+<table border="1">
+	<tbody>
+		<tr>
+			<th>Package</th>
+			<th>Class</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td>org.eclipse.jst.jsp.css.core.internal.contenttype</td>
+			<td>ContentDescriberForJSPedCSS</td>
+			<td>CSS JSP content describer. This does not  parse actual file content.</td>
+		</tr>
+		<tr>
+			<td>org.eclipse.jst.jsp.css.core.internal.document</td>
+			<td>IJSPCSSImportRule</td>
+			<td>JSP include directive is mapped to this.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>IJSPCSSNode</td>
+			<td>All CSS JSP nodes implement this interface.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>JSPedCSSModelImpl</td>
+			<td>CSS model class</td>
+		</tr>
+		<tr>
+			<td>org.eclipse.jst.jsp.css.core.internal.modelhandler</td>
+			<td>ModelHandlerForJSPedCSS</td>
+			<td>CSS JSP model handler class</td>
+		</tr>
+		<tr>
+			<td>org.eclipse.jst.jsp.css.core.internal.parser</td>
+			<td>JSPedCSSSourceParser</td>
+			<td>Source parser. This uses JSPedCSSTokenizer.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>JSPedCSSTokenizer</td>
+			<td>JFlex
+tokenizer that extends JSPedCSSRegionContexts and ICSSTokenizer. The
+grammer file is DevTimeSupport/CSSJSPParser/JSPedCSSTokenizer.flex</td>
+		</tr>
+	</tbody>
+</table>
+<p>Most of the classes in org.eclipse.jst.jsp.css.core.internal.*
+package are added to parse CSS content type JSP file using
+JSPedCSSTokenizer. </p>
+<p>For CSS JSP model, the following extensions are added into
+org.eclipse.jst.jsp.core plugin.</p>
+<pre>    &lt;extension
+         point="org.eclipse.core.runtime.contentTypes"&gt;
+        &lt;content-type
+			file-extensions="jsp"
+			priority="high"
+			name="%contentTypeCSSJSPName"
+			id="cssjspsource"
+			base-type="org.eclipse.jst.jsp.core.jspsource"&gt;
+			&lt;describer
+				class="org.eclipse.jst.jsp.css.core.internal.contenttype.ContentDescriberForJSPedCSS" /&gt;
+		&lt;/content-type&gt;
+        &lt;content-type
+	        file-extensions="jspf"
+			priority="high"
+			name="%contentTypeCSSJSPFName"
+			id="cssjspfragmentsource"
+			base-type="org.eclipse.jst.jsp.core.cssjspsource"&gt;
+			&lt;describer
+				class="org.eclipse.jst.jsp.css.core.internal.contenttype.ContentDescriberForJSPedCSS" /&gt;
+		&lt;/content-type&gt;
+	&lt;/extension&gt;
+
+	&lt;extension point="org.eclipse.wst.sse.core.modelHandler"&gt;
+		&lt;modelHandler
+			class="org.eclipse.jst.jsp.css.core.internal.modelhandler.ModelHandlerForJSPedCSS"
+			associatedContentTypeId="org.eclipse.jst.jsp.core.cssjspsource"
+			id="org.eclipse.jst.jsp.css.core.modelhandler"&gt;
+		&lt;/modelHandler&gt;
+		&lt;modelHandler
+			class="org.eclipse.jst.jsp.css.core.internal.modelhandler.ModelHandlerForJSPedCSS"
+			associatedContentTypeId="org.eclipse.jst.jsp.core.cssjspfragmentsource"
+			id="org.eclipse.jst.jsp.css.core.modelhandler"&gt;
+		&lt;/modelHandler&gt;
+	&lt;/extension&gt;
+	
+	&lt;extension
+		point="org.eclipse.core.filebuffers.documentCreation"
+		id="org.eclipse.jst.jsp.css.core.internal.documentfactories"
+		name="%contentTypeCSSDocumentFactoryName"&gt;
+		&lt;factory
+			contentTypeId="org.eclipse.jst.jsp.core.cssjspsource"
+			class="org.eclipse.wst.sse.core.internal.filebuffers.BasicStructuredDocumentFactory" /&gt;
+	&lt;/extension&gt;
+	&lt;extension
+		point="org.eclipse.core.filebuffers.documentSetup"
+		id="org.eclipse.jst.jsp.css.core.documentsetup"
+		name="%Structured_JSP_Document_Setup_participant.name"&gt;
+		&lt;participant
+			contentTypeId="org.eclipse.jst.jsp.core.cssjspsource"
+			class="org.eclipse.jst.jsp.css.core.internal.contentmodel.JSPedCSSTaglibController" /&gt;
+	&lt;/extension&gt;
+</pre>
+<p></p>
+<p>Source editor, views, and content settings extensions are extended
+for CSS content type JSP file in org.eclipse.jst.jsp.ui pluign. </p>
+<ul>
+	<li>CSS JSP editor is added. It is  copy of JSP editor.</li>
+	<li>Outline view and properties view are added. Existing CSS Outline view and Properties view are reused.</li>
+	<li>Content
+settings properties page for JSP fragment is added. Existing properties
+page are reused. "text/css" is added to Content type pull-down menu.</li>
+</ul>
+<p>We implement new CSS content type JSP model by reusing existing CSS
+model in org.eclipse.wst.css.core plugin. To override/extend necessary
+classes in org.eclipse.wst.css.core plugin, following classes are
+modified. </p>
+<table border="1">
+	<tbody>
+		<tr>
+			<th>Package</th>
+			<th>Class</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td>org.eclipse.wst.css.core.internal.parserz</td>
+			<td>CSSRegionContexts</td>
+			<td>The change is for source formatter.</td>
+		</tr>
+		<tr>
+			<td>org.eclipse.wst.css.core.internal.formatter</td>
+			<td>AbstractCSSSourceFormatter</td>
+			<td>The change is for source formatter.</td>
+		</tr>
+		<tr>
+			<td>org.eclipse.wst.css.core.internal.document</td>
+			<td>CSSImportRuleImpl</td>
+			<td>JSPedCSSImportRuleImpl extends this.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSModelCreationContext</td>
+			<td>None.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSModelImpl</td>
+			<td>None.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSModelNodeFeeder</td>
+			<td>None.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSModelParser</td>
+			<td>Constructor
+is changed. The change affects other part of this class and
+constructors of CSSModelDeletionContext, CSSModelCreationContext, and
+CSSModelNodeFeeder as well.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSNodeImpl</td>
+			<td>Used in JSPedCSSModelParser.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSPrimitiveContainer</td>
+			<td>CSSNodeImple changes affects to this class. This is changed not to reduce the visibility of method inheriting from CSSNodeImpl.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSStructuredDocumentRegionContainer</td>
+			<td>None.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSStyleDeclItemImpl</td>
+			<td>None.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSStyleSheetImpl</td>
+			<td>None.</td>
+		</tr>
+		<tr>
+			<td>org.eclipse.wst.css.core.internal.parser</td>
+			<td>CSSSourceParser</td>
+			<td>None.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>CSSTokenizer</td>
+			<td>This implements ICSSTokenizer interface.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>ICSSTokenizer</td>
+			<td>This is common interface of CSS tokenizers. This is implemented by CSSTokenizer and JSPedCSSTokenizer.</td>
+		</tr>
+	</tbody>
+</table>
+<p>We added the following comments to the modified classes/methods.
+</p>
+<p><i>/**<br>
+* currently public but may be made default access protected in future.<br>
+*/</i></p>
+<h4><b>Limitations</b></h4>
+<ul>
+	<li>Source code is not colored with source editor.</li>
+	<li>Editing JSP elements with Properties view  is not supported.</li>
+	<li>No validator</li>
+	<li>Content assist for JSP element.</li>
+</ul>
+</body></html>
