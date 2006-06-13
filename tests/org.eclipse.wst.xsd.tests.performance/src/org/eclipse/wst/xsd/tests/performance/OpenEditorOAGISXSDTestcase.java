@@ -27,7 +27,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.wst.common.tests.performance.internal.util.EditorTestHelper;
-import org.eclipse.wst.xsd.ui.internal.XSDEditorPlugin;
 
 public class OpenEditorOAGISXSDTestcase extends PerformanceTestCase
 {
@@ -46,7 +45,6 @@ public class OpenEditorOAGISXSDTestcase extends PerformanceTestCase
       project.create(null);
       project.open(null);
       copy(dir, project);
-      XSDEditorPlugin.getPlugin().setDefaultPage(XSDEditorPlugin.GRAPH_PAGE);
       joinBackgroundJobs();
       final List wsdls = new ArrayList();
       project.accept

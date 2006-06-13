@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.test.performance.Dimension;
 import org.eclipse.test.performance.PerformanceTestCase;
-import org.eclipse.wst.xsd.ui.internal.XSDEditorPlugin;
 import org.eclipse.xsd.util.XSDResourceImpl;
 
 public class ReadOAGISXSDTestcase extends PerformanceTestCase
@@ -47,7 +46,6 @@ public class ReadOAGISXSDTestcase extends PerformanceTestCase
 	      project.create(null);
 	      project.open(null);
 	      copy(dir, project);
-	      XSDEditorPlugin.getPlugin().setDefaultPage(XSDEditorPlugin.GRAPH_PAGE);
 	      joinBackgroundJobs();
 	      final List xsds = new ArrayList();
 	      project.accept
