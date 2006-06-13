@@ -19,7 +19,7 @@
 		value="${eclipse-home}/plugins/org.eclipse.test_3.1.0/library.xml" />
 	<property
 		name="workspace"
-		value="${eclipse-home}/workspace-jsp-ui-perf" />
+		value="${eclipse-home}/workspace-sse-ui-perf" />
 	<property
 		name="perf-tests-file"
 		value="${testDir}/performance-tests.xml" />
@@ -37,7 +37,7 @@
 	<target name="performance_suite">
 		<ant
 			target="ui-test"
-			antfile="${library-file}"
+			antfile="${perf-tests-file}"
 			dir="${eclipse-home}">
 			<property
 				name="data-dir"
