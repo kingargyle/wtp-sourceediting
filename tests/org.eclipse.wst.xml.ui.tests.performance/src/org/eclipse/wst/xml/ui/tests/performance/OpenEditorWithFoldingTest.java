@@ -12,6 +12,7 @@ package org.eclipse.wst.xml.ui.tests.performance;
 
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.test.performance.Dimension;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
@@ -50,20 +51,42 @@ public class OpenEditorWithFoldingTest extends BasicEditorTest {
 	}
 
 	public void testOpenEditorSmall() {
-		testOpenEditor(FILE_NAME);
+		
+		tagAsSummary("Open XML Editor Small Folding ON", new Dimension[]{Dimension.ELAPSED_PROCESS, Dimension.WORKING_SET});
+		testOpenEditor(FILE_NAME, true);
+		
+		tagAsSummary("Open XML Editor Small Folding OFF", new Dimension[]{Dimension.ELAPSED_PROCESS, Dimension.WORKING_SET});
+		testOpenEditor(FILE_NAME, false);
 	}
 
 	public void testOpenEditorMedium() {
-		testOpenEditor("GolfCountryClub1.xml");
+		tagAsSummary("Open XML Editor Medium Folding ON", new Dimension[]{Dimension.ELAPSED_PROCESS, Dimension.WORKING_SET});
+		testOpenEditor("GolfCountryClub1.xml", true);
+
+		tagAsSummary("Open XML Editor Medium Folding OFF", new Dimension[]{Dimension.ELAPSED_PROCESS, Dimension.WORKING_SET});
+		testOpenEditor("GolfCountryClub1.xml", false);
 	}
 
 	public void testOpenEditorLarge() {
-		 testOpenEditor("formatted-a-first1000.xml");
+		tagAsSummary("Open XML Editor Large Folding ON", new Dimension[]{Dimension.ELAPSED_PROCESS, Dimension.WORKING_SET});
+		testOpenEditor("formatted-a-first1000.xml", true);
+
+		tagAsSummary("Open XML Editor Large Folding OFF", new Dimension[]{Dimension.ELAPSED_PROCESS, Dimension.WORKING_SET});
+		testOpenEditor("formatted-a-first1000.xml", false);
 	}
 
-	private void testOpenEditor(String filename) {
 
-		int iterations = 10;
+
+	private void testOpenEditor(String filename, boolean foldingEnabled) {
+
+		IPreferenceStore store = SSEUIPlugin.getDefault().getPreferenceStore();
+
+		// turn on folding
+		store.setValue(IStructuredTextFoldingProvider.FOLDING_ENABLED, foldingEnabled);
+
+
+
+		int iterations = 3;
 
 		// warmup runs
 		for (int i = 0; i < iterations; i++) {
