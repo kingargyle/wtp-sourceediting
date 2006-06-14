@@ -5,6 +5,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
+import org.eclipse.wst.sse.ui.internal.projection.IStructuredTextFoldingProvider;
 import org.eclipse.wst.sse.ui.internal.provisional.preferences.CommonEditorPreferenceNames;
 
 /**
@@ -27,6 +28,8 @@ public class OpenEditorTest extends BasicEditorTest {
         IPreferenceStore store = SSEUIPlugin.getDefault().getPreferenceStore();
         // turn off reconciling
         store.setValue(CommonEditorPreferenceNames.EVALUATE_TEMPORARY_PROBLEMS, false);
+        // turn off folding
+        store.setValue(IStructuredTextFoldingProvider.FOLDING_ENABLED, false);
         
         IPreferenceStore editorsStore = EditorsUI.getPreferenceStore();
         // turn off quick diff

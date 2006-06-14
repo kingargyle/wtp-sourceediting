@@ -9,14 +9,15 @@ import junit.framework.TestSuite;
 public class XMLUIPerformanceTestSuite extends TestSuite {
 	public XMLUIPerformanceTestSuite() {
 		super("XML UI Performance Tests");
-		
+
 		addTest(new TestSuite(BasicPluginTests.class));
-        addTest(new TestSuite(OpenEditorTest.class));
-        addTest(new TestSuite(FormatTest.class));
-        addTest(new TestSuite(FormatTestWithReconcilerOnly.class));
-        addTest(new TestSuite(ScrollTest.class));
+		addTest(new TestSuite(OpenEditorTest.class));
+		addTest(new TestSuite(FormatTest.class));
+		addTest(new TestSuite(FormatTestWithReconcilerOnly.class));
+		addTest(new TestSuite(ScrollTest.class));
+		addTest(new TestSuite(OpenEditorWithFoldingTest.class));
 	}
-	
+
 	public static Test suite() {
 		return new XMLUIPerformanceTestSuite();
 	}
