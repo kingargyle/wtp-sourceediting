@@ -11,22 +11,23 @@
 
 package org.eclipse.wst.xsd.tests.performance.scalability;
 
-public class RepeatValidatex10TestCase extends RepeatRunXSDValidatorTestCase
+import org.eclipse.wst.common.tests.performance.internal.scalability.RunValidatorTestCase;
+import org.eclipse.wst.xsd.tests.performance.XSDPerformancePlugin;
+
+public abstract class RunXSDValidatorTestCase extends RunValidatorTestCase
 {
-  protected int getRepeatCount()
+  public RunXSDValidatorTestCase()
   {
-    return 10;
+    super();
   }
 
-  public void testValidatex10()
+  protected String getValidatorId()
   {
-    try
-    {
-      super.execute();
-    }
-    catch (Throwable t)
-    {
-      fail(t.getMessage());
-    }
+      return XSDPerformancePlugin.XSD_VALIDATOR_ID;
+  }
+
+  protected String getBundleId()
+  {
+      return XSDPerformancePlugin.BUNDLE_ID;
   }
 }

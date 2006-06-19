@@ -11,22 +11,26 @@
 
 package org.eclipse.wst.xsd.tests.performance.scalability;
 
-public class RepeatValidatex10TestCase extends RepeatRunXSDValidatorTestCase
+import org.eclipse.wst.common.tests.performance.internal.scalability.RepeatOpenEditorTestCase;
+import org.eclipse.wst.xsd.tests.performance.XSDPerformancePlugin;
+import org.eclipse.wst.xsd.ui.internal.editor.XSDEditorPlugin;
+
+public abstract class RepeatOpenXSDEditorTestCase extends RepeatOpenEditorTestCase
 {
-  protected int getRepeatCount()
+
+  protected String getEditorId()
   {
-    return 10;
+    return XSDEditorPlugin.EDITOR_ID;
   }
 
-  public void testValidatex10()
+  protected String getBundleId()
   {
-    try
-    {
-      super.execute();
-    }
-    catch (Throwable t)
-    {
-      fail(t.getMessage());
-    }
+    return XSDPerformancePlugin.BUNDLE_ID;
   }
+
+  protected String getFilePath()
+  {
+    return "data/100KB.xsd"; //$NON-NLS-N$
+  }
+
 }
