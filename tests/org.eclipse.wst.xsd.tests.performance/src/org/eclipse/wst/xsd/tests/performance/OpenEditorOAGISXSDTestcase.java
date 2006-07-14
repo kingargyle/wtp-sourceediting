@@ -40,11 +40,10 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.wst.common.tests.performance.internal.util.EditorTestHelper;
+import org.eclipse.wst.xsd.ui.internal.editor.XSDEditorPlugin;
 
 public class OpenEditorOAGISXSDTestcase extends PerformanceTestCase
 {
-  private final String ID_XSD_EDITOR = "org.eclipse.wst.xsd.ui.XSDEditor";
-
   public void testReadWSDL() throws MalformedURLException, CoreException, FileNotFoundException
   {
     String oagis80Dir = System.getProperty("oagis80Dir");
@@ -136,7 +135,7 @@ public class OpenEditorOAGISXSDTestcase extends PerformanceTestCase
   private void openXSD(IFile file) throws PartInitException
   {
     IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-    IEditorPart editor = workbenchWindow.getActivePage().openEditor(new FileEditorInput(file), ID_XSD_EDITOR, true);
+    IEditorPart editor = workbenchWindow.getActivePage().openEditor(new FileEditorInput(file), XSDEditorPlugin.EDITOR_ID, true);
     EditorTestHelper.runEventQueue(editor);
     workbenchWindow.getActivePage().closeEditor(editor, false);
   }
