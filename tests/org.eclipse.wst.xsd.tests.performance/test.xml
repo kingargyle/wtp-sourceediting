@@ -432,7 +432,7 @@
 	    <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
 	      <property name="data-dir" value="${workspace}"/>
 	      <property name="plugin-name" value="${plugin-name}"/>
-	      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate1000XSDsCrossDependsTestcase"/>
+	      <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate1000XSDsCrossDependsTestCase"/>
 	      <property name="extraVMargs" value="${extraVMargs}"/>
 	    </ant>
 	  </target>
@@ -442,7 +442,7 @@
 		 <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
 		   <property name="data-dir" value="${workspace}"/>
 		   <property name="plugin-name" value="${plugin-name}"/>
-		   <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate100XSDsCrossDependsTestcase"/>
+		   <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate100XSDsCrossDependsTestCase"/>
 		   <property name="extraVMargs" value="${extraVMargs}"/>
 		 </ant>
 	  </target>
@@ -453,7 +453,7 @@
 		 <ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
 		   <property name="data-dir" value="${workspace}"/>
 		   <property name="plugin-name" value="${plugin-name}"/>
-		   <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate10XSDsCrossDependsTestcase"/>
+		   <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate10XSDsCrossDependsTestCase"/>
 		   <property name="extraVMargs" value="${extraVMargs}"/>
 		 </ant>
 	  </target>
@@ -463,7 +463,7 @@
 		<ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
 		  <property name="data-dir" value="${workspace}"/>
 		  <property name="plugin-name" value="${plugin-name}"/>
-		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate1000XSDsNoDependsTestcase"/>
+		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate1000XSDsNoDependsTestCase"/>
 		  <property name="extraVMargs" value="${extraVMargs}"/>
 		</ant>
       </target>
@@ -474,7 +474,7 @@
 		<ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
 		  <property name="data-dir" value="${workspace}"/>
 		  <property name="plugin-name" value="${plugin-name}"/>
-		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate100XSDsNoDependsTestcase"/>
+		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate100XSDsNoDependsTestCase"/>
 		  <property name="extraVMargs" value="${extraVMargs}"/>
 		</ant>
       </target>
@@ -485,7 +485,7 @@
 		<ant target="ui-test" antfile="${perf-tests-file}" dir="${eclipse-home}">
 		  <property name="data-dir" value="${workspace}"/>
 		  <property name="plugin-name" value="${plugin-name}"/>
-		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate10XSDsNoDependsTestcase"/>
+		  <property name="classname" value="org.eclipse.wst.xsd.tests.performance.scalability.Validate10XSDsNoDependsTestCase"/>
 		  <property name="extraVMargs" value="${extraVMargs}"/>
 		</ant>
       </target>
