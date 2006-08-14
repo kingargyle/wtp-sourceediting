@@ -8,9 +8,7 @@ Bundle-ClassPath: resolver.jar,
  xercesImpl.jar,
  xml-apis.jar
 Bundle-Localization: plugin
-Export-Package: META-INF,
- META-INF.services,
- javax.xml,
+Export-Package: javax.xml,
  javax.xml.datatype,
  javax.xml.namespace,
  javax.xml.parsers,
