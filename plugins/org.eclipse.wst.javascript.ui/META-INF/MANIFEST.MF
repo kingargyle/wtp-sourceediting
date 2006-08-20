@@ -6,19 +6,19 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: org.eclipse.wst.javascript.ui.internal.actions;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common.autoedit;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common.contentassist;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common.contentassist.fcs.js1;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common.contentassist.javadoc;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common.preferences;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common.preferences.ui;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common.style;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.common.taginfo;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.editor;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.views.contentoutline;x-internal:=true,
- org.eclipse.wst.javascript.ui.internal.wizard;x-internal:=true
+Export-Package: org.eclipse.wst.javascript.ui.internal.actions;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common.autoedit;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common.contentassist;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common.contentassist.fcs.js1;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common.contentassist.javadoc;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common.preferences;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common.preferences.ui;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common.style;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.common.taginfo;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.editor;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.views.contentoutline;x-friends:="org.eclipse.wst.html.ui",
+ org.eclipse.wst.javascript.ui.internal.wizard;x-friends:="org.eclipse.wst.html.ui"
 Require-Bundle: org.eclipse.debug.core;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.debug.ui;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.ide;bundle-version="[3.2.0,4.0.0)",
