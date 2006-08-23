@@ -22,7 +22,7 @@
 		value="${testDir}/performance-tests.xml"/>
 	<property
 		name="workspace"
-		value="${eclipse-home}/workspace-jsp-ui-perf" />
+		value="${eclipse-home}/junitworkspace-${plugin-name}" />
 	<property
 		name="extraVMargs"
 		value="-Doagis80Dir=${testDir} -Xmx256M"/>
