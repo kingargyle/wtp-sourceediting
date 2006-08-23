@@ -23,7 +23,9 @@
 	<property
 		name="perf-tests-file"
 		value="${testDir}/performance-tests.xml" />
-
+	<property
+		name="workspace"
+		value="${eclipse-home}/junitworkspace-${plugin-name}" />
 	<!-- This target holds all initialization code that needs to be done for -->
 	<!-- all tests that are to be run. Initialization for individual tests -->
 	<!-- should be done within the body of the suite target. -->
