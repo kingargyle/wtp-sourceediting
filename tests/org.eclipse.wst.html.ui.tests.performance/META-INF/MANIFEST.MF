@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.ide,
  org.eclipse.wst.common.tests.performance,
  org.eclipse.test,
- org.eclipse.test.performance
+ org.eclipse.test.performance,
+ org.eclipse.wst.sse.core
 Eclipse-LazyStart: true
