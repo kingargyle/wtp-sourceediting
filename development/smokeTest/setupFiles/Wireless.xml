@@ -5,6 +5,6 @@
       <go href="" method="get">
         <postfield name="" value=""/>
       </go>
-    </do>
+    </do> 
   </card>  
 </wml>
