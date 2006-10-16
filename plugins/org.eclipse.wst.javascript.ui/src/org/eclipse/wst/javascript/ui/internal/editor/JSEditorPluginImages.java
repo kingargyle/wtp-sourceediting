@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2006 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,4 +19,5 @@ public class JSEditorPluginImages {
 	public static final String IMG_OBJ_JAVASCRIPT_VIEW = "icons/full/obj16/javascript_view.gif";			//$NON-NLS-1$
 	public static final String IMG_OBJ_SORT = "icons/full/obj16/sort.gif";			//$NON-NLS-1$
 	public static final String IMG_OBJ_PUBLIC = "icons/full/obj16/public.gif";			//$NON-NLS-1$
+	public static final String IMG_WIZBAN_NEWJSFILE = "icons/full/wizban/newjscriptfile_wiz.png";			//$NON-NLS-1$
 }

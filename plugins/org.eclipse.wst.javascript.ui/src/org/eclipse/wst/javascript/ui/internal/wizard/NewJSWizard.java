@@ -22,12 +22,12 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
+import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
+import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
 import org.eclipse.wst.javascript.ui.internal.editor.JavaScriptUIMessages;
 import org.eclipse.wst.javascript.ui.internal.editor.Logger;
 
 public class NewJSWizard extends Wizard implements INewWizard {
-	static String PAGE_IMAGE = "/icons/full/wizban/newjscriptfile_wiz.gif"; //$NON-NLS-1$
 	private NewJSFileWizardPage fNewFilePage;
 	private IStructuredSelection fSelection;
 
@@ -41,14 +41,9 @@ public class NewJSWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench aWorkbench, IStructuredSelection aSelection) {
 		fSelection = aSelection;
 		setWindowTitle(JavaScriptUIMessages._UI_WIZARD_NEW_TITLE); //$NON-NLS-1$
-		if (PAGE_IMAGE != null) {
-			ImageDescriptor descriptor = JSEditorPlugin.getDefault().getImageRegistry().getDescriptor(PAGE_IMAGE);
-			if (descriptor == null) {
-				descriptor = ImageDescriptor.createFromURL(JSEditorPlugin.getDefault().getBundle().getEntry(PAGE_IMAGE));
-				JSEditorPlugin.getDefault().getImageRegistry().put(PAGE_IMAGE, descriptor);
-			}
-			setDefaultPageImageDescriptor(descriptor);
-		}
+		
+		ImageDescriptor descriptor = JSEditorPluginImageHelper.getInstance().getImageDescriptor(JSEditorPluginImages.IMG_WIZBAN_NEWJSFILE);
+		setDefaultPageImageDescriptor(descriptor);
 	}
 
 	private void openEditor(final IFile file) {
