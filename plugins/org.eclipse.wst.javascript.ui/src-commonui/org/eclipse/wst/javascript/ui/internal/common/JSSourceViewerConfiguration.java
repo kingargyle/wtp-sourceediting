@@ -37,6 +37,7 @@ import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptCon
 import org.eclipse.wst.javascript.ui.internal.common.preferences.JSCommonUIPreferenceNames;
 import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptInformationPresenter;
 import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoHoverProcessor;
+import org.eclipse.wst.sse.ui.internal.provisional.preferences.CommonEditorPreferenceNames;
 import org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor;
 
 
@@ -218,7 +219,14 @@ public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getReconciler(org.eclipse.jface.text.source.ISourceViewer)
 	 */
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		if (fReconciler == null) {
+		boolean reconcilingEnabled = fPreferenceStore.getBoolean(CommonEditorPreferenceNames.EVALUATE_TEMPORARY_PROBLEMS);
+		if (sourceViewer == null || !reconcilingEnabled)
+			return null;
+
+		/*
+		 * Only create reconciler if sourceviewer is present
+		 */
+		if (fReconciler == null && sourceViewer != null) {
 			fReconciler = new DocumentRegionProcessor() {
 				protected String getContentType(IDocument doc) {
 					return "org.eclipse.wst.javascript.core.javascriptsource"; //$NON-NLS-1$
