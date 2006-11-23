@@ -12,7 +12,6 @@ package org.eclipse.wst.javascript.ui.internal.common.taginfo;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.wst.javascript.ui.internal.common.Logger;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
@@ -24,7 +23,6 @@ import org.eclipse.wst.sse.ui.internal.taginfo.AbstractHoverProcessor;
 /**
  * Provides hover help documentation for javascript code
  * 
- * @see ITextHoverProcessor
  */
 public class JavaScriptTagInfoHoverProcessor extends AbstractHoverProcessor {
 	static protected final char chEndBracket = ']';
@@ -64,7 +62,7 @@ public class JavaScriptTagInfoHoverProcessor extends AbstractHoverProcessor {
 	 *         attribute name, or attribute value and if offset is not over
 	 *         invalid whitespace. otherwise, returns <code>null</code>
 	 * 
-	 * @see ITextHover#getHoverRegion(ITextViewer, int)
+	 * @see org.eclipse.jface.text.ITextHover#getHoverRegion(ITextViewer, int)
 	 */
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
 		if (textViewer instanceof StructuredTextViewer) {
