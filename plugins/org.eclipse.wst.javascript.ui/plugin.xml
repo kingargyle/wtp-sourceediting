@@ -117,20 +117,37 @@
 			category="org.eclipse.wst.sse.ui.internal.provisional.preferences"
 			class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JavaScriptFilesPreferencePage"
 			id="org.eclipse.wst.sse.javascript.preferences">
+			<keywordReference id="org.eclipse.wst.javascript.ui.files"/>
 		</page>
 		<page
 			name="%JavaScript_Source.name"
 			category="org.eclipse.wst.sse.javascript.preferences"
 			class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JavaScriptSourcePreferencePage"
 			id="org.eclipse.wst.sse.javascript.preferences.source">
+			<keywordReference id="org.eclipse.wst.javascript.ui.source"/>
 		</page>
 		<page
 			name="%JavaScript_Styles.name"
 			category="org.eclipse.wst.sse.javascript.preferences"
 			class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JavaScriptColorPage"
 			id="org.eclipse.wst.sse.javascript.preferences.styles">
+			<keywordReference id="org.eclipse.wst.javascript.ui.styles"/>
 		</page>
 	</extension>
+	
+	<!-- Keywords for preference and properties pages -->
+	<extension point="org.eclipse.ui.keywords">
+		<keyword
+			label="%preferenceKeywords.files"
+			id="org.eclipse.wst.javascript.ui.files"/>
+		<keyword
+			label="%preferenceKeywords.source"
+			id="org.eclipse.wst.javascript.ui.source"/>
+		<keyword
+			label="%preferenceKeywords.styles"
+			id="org.eclipse.wst.javascript.ui.styles"/>
+    </extension>
+	
 	<!-- initialize javascript ui preferences -->
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer
