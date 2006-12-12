@@ -53,7 +53,7 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements Mod
 	protected Combo fEndOfLineCode = null;
 
 	private Vector fEOLCodes = null;
-	private Text fDefaultSuffix = null;
+	private Combo fDefaultSuffix = null;
 	private List fValidExtensions = null;
 
 	protected Composite createComposite(Composite parent, int numColumns) {
@@ -99,8 +99,11 @@ public class JavaScriptFilesPreferencePage extends PreferencePage implements Mod
 
 		// Default extension for New file Wizard
 		createLabel(creatingGroup, JSCommonUIMessages.JavaScriptFilesPreferencePage_ExtensionLabel);
-		fDefaultSuffix = createTextField(creatingGroup);
-		fDefaultSuffix.addModifyListener(this);
+		fDefaultSuffix = createDropDownBox(creatingGroup);
+		String[] validExtensions = (String[]) getValidExtensions().toArray(new String[0]);
+		Arrays.sort(validExtensions);
+		fDefaultSuffix.setItems(validExtensions);
+		fDefaultSuffix.addSelectionListener(this);
 	}
 
 	protected void createContentsForCreatingOrSavingGroup(Composite parent) {
