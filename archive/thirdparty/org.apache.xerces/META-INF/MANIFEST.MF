@@ -8,6 +8,7 @@ Bundle-ClassPath: resolver.jar,
  xercesImpl.jar,
  xml-apis.jar
 Bundle-Localization: plugin
+Require-Bundle: system.bundle
 Export-Package: javax.xml,
  javax.xml.datatype,
  javax.xml.namespace,
