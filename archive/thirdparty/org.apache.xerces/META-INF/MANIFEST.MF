@@ -9,7 +9,8 @@ Bundle-ClassPath: resolver.jar,
  xml-apis.jar
 Bundle-Localization: plugin
 Require-Bundle: system.bundle
-Export-Package: javax.xml,
+Export-Package: META-INF.services,
+ javax.xml,
  javax.xml.datatype,
  javax.xml.namespace,
  javax.xml.parsers,
