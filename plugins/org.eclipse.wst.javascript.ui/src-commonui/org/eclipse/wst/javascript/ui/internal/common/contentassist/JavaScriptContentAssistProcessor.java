@@ -1539,7 +1539,7 @@ public class JavaScriptContentAssistProcessor implements IContentAssistProcessor
 				CompletionStringNode csn = (CompletionStringNode) elements.nextElement();
 				String cs = csn.getCompletionString();
 				boolean match = false;
-				if (cs.charAt(0) == '/') {
+				if (cs.length() > 0 && cs.charAt(0) == '/') {
 					if (cs.equals("/number/")) { //$NON-NLS-1$
 						int nint = -1;
 						try {
