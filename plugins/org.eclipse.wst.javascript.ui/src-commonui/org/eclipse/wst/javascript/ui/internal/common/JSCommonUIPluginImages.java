@@ -28,6 +28,7 @@ public class JSCommonUIPluginImages {
 	 * 
 	 * @param name icon to retrieve
 	 * @return String complete filename of icon
+	 * @deprecated deprecated in WTP 2.0 to be removed in next release
 	 */
 	public static String buildObjName(String name) {
 		return IMG_OBJ + name + DOT_GIF;

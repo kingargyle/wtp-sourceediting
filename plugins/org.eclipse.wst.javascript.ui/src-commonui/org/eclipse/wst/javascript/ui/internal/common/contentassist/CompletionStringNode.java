@@ -17,6 +17,7 @@ import java.util.Hashtable;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.javascript.ui.internal.common.JSCommonUIPluginImages;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImageHelper;
+import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPluginImages;
 
 
 class CompletionStringNode {
@@ -34,6 +35,9 @@ class CompletionStringNode {
 	static final String keyDisplayText = "displaytext";//$NON-NLS-1$
 	static final String keyAdditionalDisplayText = "additionaldisplaytext";//$NON-NLS-1$
 	static final String keyType = "type";//$NON-NLS-1$
+	private static final String JAVADOCAT_TYPE = "javadocat"; //$NON-NLS-1$
+	private static final String HTMLTAG_TYPE = "htmltag"; //$NON-NLS-1$
+	private static final String METHOD_TYPE = "method"; //$NON-NLS-1$
 
 	/**
 	 * Creates a new node describing an parsing alternative.
@@ -128,60 +132,63 @@ class CompletionStringNode {
 	 * get the image 
 	 */
 	public Image getImage(FCContext fcc) {
-		String fn = null;
 		String completype = (String) htAttributes.get(keyType);
 		if (completype != null) {
-			if (completype.equals("javadocat")) { //$NON-NLS-1$
+			if (completype.equals(JAVADOCAT_TYPE)) {
 				return JSEditorPluginImageHelper.getInstance().getImage(JSCommonUIPluginImages.IMG_OBJ_JDOC_TAG);
 			}
-			if (completype.equals("htmltag")) { //$NON-NLS-1$
+			if (completype.equals(HTMLTAG_TYPE)) {
 				return JSEditorPluginImageHelper.getInstance().getImage(JSCommonUIPluginImages.IMG_OBJ_HTML_TAG);
 			}
-		}
-		if (true) {
-			FCContext fcc2 = new FCContext(this, fcc);
-			if (fcc2.getAttribute(keyWASJSPSupport) == "y") {//$NON-NLS-1$
-				// todo: I have icons available for IMG_MISC_PUBLIC/_PRIVATE/_PROTECTED designations.  I'm not sure if it's useful, but I might as well use them.
-				//return JavaPluginImages.get( JavaPluginImages.IMG_MISC_DEFAULT );
-				return JSEditorPluginImageHelper.getInstance().getImage(JSCommonUIPluginImages.IMG_OBJ_METHPUB); // BSF only exposes public classes
-			}
-			//fn = "e" + htAttributes.get(keyIESupport) + "N" + htAttributes.get(keyNsSupport) ;
-			//fn = "e" + fcc2.getAttribute(keyIESupport) + "N" + fcc2.getAttribute(keyNsSupport) ;//$NON-NLS-2$//$NON-NLS-1$
-
-			// Use new icons names
-			char ieSupport = fcc2.getAttribute(keyIESupport).charAt(0);
-			switch (ieSupport) {
-				case 'y' :
-					fn = "yes"; //$NON-NLS-1$
-					break;
-
-				case 'n' :
-					fn = "no"; //$NON-NLS-1$
-					break;
-
-				default :
-					fn = "unknown"; //$NON-NLS-1$
-					break;
-			}
-
-			fn += "_"; //$NON-NLS-1$
-
-			char nsSupport = fcc2.getAttribute(keyNsSupport).charAt(0);
-			switch (nsSupport) {
-				case 'y' :
-					fn += "yes"; //$NON-NLS-1$
-					break;
-
-				case 'n' :
-					fn += "no"; //$NON-NLS-1$
-					break;
-
-				default :
-					fn += "unknown"; //$NON-NLS-1$
-					break;
+			if (completype.equals(METHOD_TYPE)) {
+				return JSEditorPluginImageHelper.getInstance().getImage(JSCommonUIPluginImages.IMG_OBJ_METHPUB);
 			}
 		}
-
-		return JSEditorPluginImageHelper.getInstance().getImage(JSCommonUIPluginImages.buildObjName(fn));
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=169802 - remove JS icons
+//		String fn = null;
+//			FCContext fcc2 = new FCContext(this, fcc);
+//			if (fcc2.getAttribute(keyWASJSPSupport) == "y") {//$NON-NLS-1$
+//				// todo: I have icons available for IMG_MISC_PUBLIC/_PRIVATE/_PROTECTED designations.  I'm not sure if it's useful, but I might as well use them.
+//				//return JavaPluginImages.get( JavaPluginImages.IMG_MISC_DEFAULT );
+//				return JSEditorPluginImageHelper.getInstance().getImage(JSCommonUIPluginImages.IMG_OBJ_METHPUB); // BSF only exposes public classes
+//			}
+//			//fn = "e" + htAttributes.get(keyIESupport) + "N" + htAttributes.get(keyNsSupport) ;
+//			//fn = "e" + fcc2.getAttribute(keyIESupport) + "N" + fcc2.getAttribute(keyNsSupport) ;//$NON-NLS-2$//$NON-NLS-1$
+//
+//			// Use new icons names
+//			char ieSupport = fcc2.getAttribute(keyIESupport).charAt(0);
+//			switch (ieSupport) {
+//				case 'y' :
+//					fn = "yes"; //$NON-NLS-1$
+//					break;
+//
+//				case 'n' :
+//					fn = "no"; //$NON-NLS-1$
+//					break;
+//
+//				default :
+//					fn = "unknown"; //$NON-NLS-1$
+//					break;
+//			}
+//
+//			fn += "_"; //$NON-NLS-1$
+//
+//			char nsSupport = fcc2.getAttribute(keyNsSupport).charAt(0);
+//			switch (nsSupport) {
+//				case 'y' :
+//					fn += "yes"; //$NON-NLS-1$
+//					break;
+//
+//				case 'n' :
+//					fn += "no"; //$NON-NLS-1$
+//					break;
+//
+//				default :
+//					fn += "unknown"; //$NON-NLS-1$
+//					break;
+//			}
+//
+//		return JSEditorPluginImageHelper.getInstance().getImage(JSCommonUIPluginImages.buildObjName(fn));
+		return JSEditorPluginImageHelper.getInstance().getImage(JSEditorPluginImages.IMG_OBJ_DEFAULT);
 	}
 }
