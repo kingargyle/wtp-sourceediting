@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -33,13 +33,13 @@ import org.eclipse.wst.javascript.core.internal.jsparser.node.TStringLiteral;
 import org.eclipse.wst.javascript.core.internal.jsparser.node.TUnterminatedComment;
 import org.eclipse.wst.javascript.core.internal.jsparser.node.TUnterminatedStringLiteral;
 import org.eclipse.wst.javascript.core.internal.jsparser.node.Token;
+import org.eclipse.wst.javascript.ui.internal.common.Debug;
 import org.eclipse.wst.javascript.ui.internal.common.JavaScriptColorPreferences;
 import org.eclipse.wst.javascript.ui.internal.common.LexerCacheForJavaScript;
 import org.eclipse.wst.javascript.ui.internal.common.Logger;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
-import org.eclipse.wst.javascript.ui.internal.common.Debug;
 import org.eclipse.wst.sse.ui.internal.provisional.style.Highlighter;
 import org.eclipse.wst.sse.ui.internal.provisional.style.LineStyleProvider;
 
@@ -51,6 +51,7 @@ public class LineStyleProviderForJavaScript implements LineStyleProvider, IDocum
 	private IStructuredDocument fDocument;
 	private Highlighter fHighlighter;
 	private PropertyChangeListener fPreferenceListener = new PropertyChangeListener();
+	private boolean fIsInitialized = false;
 
 	class nodedata {
 		protected LexerCacheForJavaScript pcParseCache = null;
@@ -152,7 +153,10 @@ public class LineStyleProviderForJavaScript implements LineStyleProvider, IDocum
 
 		fHighlighter = highlighter;
 
+		if (fIsInitialized)
+			return;
 		JavaScriptColorPreferences.addPropertyChangeListener(fPreferenceListener);
+		fIsInitialized = true;
 	}
 
 	private nodedata ndDoc = null;
@@ -705,6 +709,7 @@ public class LineStyleProviderForJavaScript implements LineStyleProvider, IDocum
 		}
 
 		JavaScriptColorPreferences.removePropertyChangeListener(fPreferenceListener);
+		fIsInitialized = false;
 	}
 
 	protected void releaseNodesInLexerCache() {
