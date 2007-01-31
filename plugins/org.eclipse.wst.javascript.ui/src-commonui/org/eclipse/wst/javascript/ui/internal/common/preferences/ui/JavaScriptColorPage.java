@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004,2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -32,6 +32,9 @@ import org.eclipse.wst.sse.core.internal.ltk.parser.RegionParser;
 import org.eclipse.wst.sse.ui.internal.preferences.ui.AbstractColorPage;
 import org.eclipse.wst.sse.ui.internal.preferences.ui.StyledTextColorPicker;
 
+/**
+ * @deprecated
+ */
 public class JavaScriptColorPage extends AbstractColorPage {
 	private OverlayPreferenceStore fOverlayStore;
 	protected RegionParser fParser = new TokenParser();

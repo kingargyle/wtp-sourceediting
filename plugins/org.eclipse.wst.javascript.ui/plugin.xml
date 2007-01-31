@@ -127,9 +127,9 @@
 			<keywordReference id="org.eclipse.wst.javascript.ui.source"/>
 		</page>
 		<page
-			name="%JavaScript_Styles.name"
+			name="%JS_Syntax_Coloring"
 			category="org.eclipse.wst.sse.javascript.preferences"
-			class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JavaScriptColorPage"
+			class="org.eclipse.wst.javascript.ui.internal.common.preferences.ui.JSSyntaxColoringPage"
 			id="org.eclipse.wst.sse.javascript.preferences.styles">
 			<keywordReference id="org.eclipse.wst.javascript.ui.styles"/>
 		</page>
