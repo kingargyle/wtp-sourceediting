@@ -36,7 +36,7 @@ public class LineStyleProvider implements LineStyleListener {
 	}
 
 	public LineStyleProvider(Display display) {
-		super();
+		this();
 		this.display = display;
 	}
 
