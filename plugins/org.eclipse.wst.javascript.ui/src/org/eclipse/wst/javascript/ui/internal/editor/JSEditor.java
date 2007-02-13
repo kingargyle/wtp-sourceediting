@@ -943,6 +943,15 @@ public class JSEditor extends TextEditor {
 		super.handlePreferenceStoreChanged(event);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#initializeDragAndDrop(org.eclipse.jface.text.source.ISourceViewer)
+	 */
+	protected void initializeDragAndDrop(ISourceViewer viewer) {
+		IPreferenceStore store= getPreferenceStore();
+		if (store != null && store.getBoolean(PREFERENCE_TEXT_DRAG_AND_DROP_ENABLED))
+			initializeDrop(viewer.getTextWidget());
+	}
+
 	protected void initializeDrop(Control control) {
 		// add drop support
 		int operations = DND.DROP_COPY | DND.DROP_MOVE;
@@ -982,6 +991,10 @@ public class JSEditor extends TextEditor {
 		// // have it break the editor
 		// Logger.log(Logger.WARNING_DEBUG, t.getMessage(), t);
 		// }
+	}
+
+	protected void installTextDragAndDrop(ISourceViewer viewer) {
+		// do nothing
 	}
 
 	public boolean isEditable() {
@@ -1037,6 +1050,10 @@ public class JSEditor extends TextEditor {
 			configuration = new JSEditorSourceViewerConfiguration(getPreferenceStore());
 			setSourceViewerConfiguration(configuration);
 		}
+	}
+
+	protected void uninstallTextDragAndDrop(ISourceViewer viewer) {
+		// do nothing
 	}
 
 	/*
