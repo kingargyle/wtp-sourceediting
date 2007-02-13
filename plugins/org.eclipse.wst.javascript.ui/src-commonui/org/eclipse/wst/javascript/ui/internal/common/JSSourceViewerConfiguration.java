@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
@@ -30,6 +31,8 @@ import org.eclipse.jface.text.information.InformationPresenter;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.wst.javascript.ui.internal.common.autoedit.AutoEditStrategyForTabs;
@@ -39,6 +42,7 @@ import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptInformati
 import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoHoverProcessor;
 import org.eclipse.wst.sse.ui.internal.preferences.EditorPreferenceNames;
 import org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor;
+import org.eclipse.wst.sse.ui.internal.util.EditorUtility;
 
 
 public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
@@ -97,7 +101,16 @@ public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 		return (String[]) vector.toArray(new String[vector.size()]);
 	}
 
-
+	/**
+	 * Get color for the preference key. Assumes fPreferenceStore is not null.
+	 * 
+	 * @param key
+	 * @return Color for preference key or null if none found
+	 */
+	private Color getColor(String key) {
+		RGB rgb = PreferenceConverter.getColor(fPreferenceStore, key);
+		return EditorUtility.getColor(rgb);
+	}
 
 	/**
 	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getContentAssistant(ISourceViewer)
@@ -113,10 +126,30 @@ public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 			IContentAssistProcessor contentAssistantProcessor = new JavaScriptContentAssistProcessor();
 			contentAssistant.setContentAssistProcessor(contentAssistantProcessor, IDocument.DEFAULT_CONTENT_TYPE);
 			contentAssistant.enableAutoActivation(true);
-			contentAssistant.setAutoActivationDelay(500);
 			contentAssistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
 			contentAssistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 			contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
+			
+			// set content assist preferences
+			if (fPreferenceStore != null) {
+				int delay = fPreferenceStore.getInt(EditorPreferenceNames.CODEASSIST_AUTOACTIVATION_DELAY);
+				contentAssistant.setAutoActivationDelay(delay);
+
+				Color color = getColor(EditorPreferenceNames.CODEASSIST_PROPOSALS_BACKGROUND);
+				contentAssistant.setProposalSelectorBackground(color);
+
+				color = getColor(EditorPreferenceNames.CODEASSIST_PROPOSALS_FOREGROUND);
+				contentAssistant.setProposalSelectorForeground(color);
+
+				color = getColor(EditorPreferenceNames.CODEASSIST_PARAMETERS_BACKGROUND);
+				contentAssistant.setContextInformationPopupBackground(color);
+				contentAssistant.setContextSelectorBackground(color);
+
+				color = getColor(EditorPreferenceNames.CODEASSIST_PARAMETERS_FOREGROUND);
+				contentAssistant.setContextInformationPopupForeground(color);
+				contentAssistant.setContextSelectorForeground(color);
+			}
+			
 			fContentAssistant = contentAssistant;
 		}
 		return fContentAssistant;
