@@ -689,7 +689,6 @@ public class JSEditor extends TextEditor {
 			helpSystem.setHelp(getSourceViewer().getTextWidget(), getHelpContextId());
 		}
 		super.createPartControl(parent);
-		initializeDrop(getSourceViewer().getTextWidget());
 	}
 
 	/**
