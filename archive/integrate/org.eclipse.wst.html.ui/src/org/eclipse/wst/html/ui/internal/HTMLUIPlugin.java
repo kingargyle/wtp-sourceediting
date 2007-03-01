@@ -17,6 +17,7 @@ import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.ui.editors.text.templates.ContributionContextTypeRegistry;
 import org.eclipse.ui.editors.text.templates.ContributionTemplateStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.wst.html.ui.external.content.ExternalContentResolver;
 import org.eclipse.wst.html.ui.internal.preferences.HTMLUIPreferenceNames;
 import org.eclipse.wst.html.ui.internal.templates.TemplateContextTypeIdsHTML;
 import org.eclipse.wst.sse.ui.internal.provisional.registry.AdapterFactoryRegistry;
@@ -43,6 +44,7 @@ public class HTMLUIPlugin extends AbstractUIPlugin {
 	public HTMLUIPlugin() {
 		super();
 		instance = this;
+		ExternalContentResolver.init();
 	}
 
 	public static HTMLUIPlugin getDefault() {
