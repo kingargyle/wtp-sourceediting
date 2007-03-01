@@ -67,34 +67,32 @@
 			category="org.eclipse.wst.sse.ui.internal.provisional.preferences"
 			class="org.eclipse.wst.html.ui.internal.preferences.ui.HTMLFilesPreferencePage"
 			id="org.eclipse.wst.html.ui.preferences">
-			<keywordReference id="org.eclipse.wst.html.ui.files"/>
 		</page>
 		<page
 			name="%HTML_Source.name"
 			category="org.eclipse.wst.html.ui.preferences"
 			class="org.eclipse.wst.html.ui.internal.preferences.ui.HTMLSourcePreferencePage"
 			id="org.eclipse.wst.html.ui.preferences.source">
-			<keywordReference id="org.eclipse.wst.html.ui.source"/>
 		</page>
 		<page
 			name="%HTML_Templates.name"
 			category="org.eclipse.wst.html.ui.preferences"
 			class="org.eclipse.wst.html.ui.internal.preferences.ui.HTMLTemplatePreferencePage"
 			id="org.eclipse.wst.html.ui.preferences.templates">
-			<keywordReference id="org.eclipse.wst.html.ui.templates"/>
 		</page>
 		<page
 			name="%HTML_Styles.name"
 			category="org.eclipse.wst.html.ui.preferences"
 			class="org.eclipse.wst.html.ui.internal.preferences.ui.HTMLColorPage"
 			id="org.eclipse.wst.html.ui.preferences.styles">
-			<keywordReference id="org.eclipse.wst.html.ui.styles"/>
 		</page>
 	</extension>
 	<!-- Web content settings -->
 	<extension point="org.eclipse.ui.propertyPages">
 		<!-- for j2ee web project -->
 		<page
+			objectClass="org.eclipse.core.resources.IProject"
+			adaptable="true"
 			name="%WebContentSettings.name"
 			class="org.eclipse.wst.html.ui.internal.contentproperties.ui.ProjectWebContentSettingsPropertyPage"
 			id="org.eclipse.wst.html.ui.dynamicprojectpropertypage">
@@ -114,9 +112,10 @@
 					</adapt>
 				</and> 
 			</enabledWhen>
-         	<keywordReference id="org.eclipse.wst.html.ui.webcontent"/>
 		</page>
 		<page
+			objectClass="org.eclipse.core.resources.IFile"
+			adaptable="true"
 			name="%WebContentSettings.name"
 			class="org.eclipse.wst.html.ui.internal.contentproperties.ui.WebContentSettingsPropertyPage"
 			id="org.eclipse.wst.html.ui.internal.contentproperties.ui.WebContentSettingsPropertyPage">
@@ -144,29 +143,8 @@
 					</adapt>
 				</and> 
 			</enabledWhen>
-         	<keywordReference id="org.eclipse.wst.html.ui.webcontent"/>
 		</page>
 	</extension>
-	
-	<!-- Keywords for preference and properties pages -->
-	<extension point="org.eclipse.ui.keywords">
-		<keyword
-			label="%preferenceKeywords.files"
-			id="org.eclipse.wst.html.ui.files"/>
-		<keyword
-			label="%preferenceKeywords.source"
-			id="org.eclipse.wst.html.ui.source"/>
-		<keyword
-			label="%preferenceKeywords.templates"
-			id="org.eclipse.wst.html.ui.templates"/>
-		<keyword
-			label="%preferenceKeywords.styles"
-			id="org.eclipse.wst.html.ui.styles"/>
-		<keyword
-			label="%preferenceKeywords.webcontent"
-			id="org.eclipse.wst.html.ui.webcontent"/>
-    </extension>
-	
 	<!-- Editor actionsets -->
 	<extension point="org.eclipse.ui.actionSetPartAssociations">
 		<actionSetPartAssociation
@@ -278,10 +256,6 @@
 				objectClass="org.eclipse.core.resources.IFile"
 				nameFilter="*.jtpl">
 			</filter>
-			
-			<projectNature id=""/>
-			<enablement></enablement>
-			
 			<helper
 				class="org.eclipse.wst.html.internal.validation.HTMLValidationWorkbenchHelper">
 			</helper>
@@ -312,8 +286,6 @@
 				<partitionType id="org.eclipse.wst.sse.ST_DEFAULT"/>
 			</contentTypeIdentifier>
 		</validator>
-	</extension>
-	<extension point="org.eclipse.wst.sse.ui.sourcevalidation">
 		<validator
 			scope="partial"
 			class="org.eclipse.wst.xml.ui.internal.validation.MarkupValidator"
