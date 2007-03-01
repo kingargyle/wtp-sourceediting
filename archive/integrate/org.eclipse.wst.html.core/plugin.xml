@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
+   <extension-point id="subcontentprovider" name="Sub Content (script/css) Provider" schema="schema/subcontentprovider.exsd"/>
 
 	<extension point="org.eclipse.wst.sse.core.modelHandler">
 		<modelHandler
