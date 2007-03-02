@@ -14,7 +14,7 @@ package org.eclipse.wst.jsdt.internal.debug.eval.ast.engine;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jsdt.core.Signature;
+import org.eclipse.wst.jsdt.core.Signature;
 import org.eclipse.wst.jsdt.debug.core.IJavaReferenceType;
 import org.eclipse.wst.jsdt.internal.debug.core.model.JDIReferenceType;
 

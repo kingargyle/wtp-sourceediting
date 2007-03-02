@@ -20,12 +20,12 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFileState;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jsdt.core.ICompilationUnit;
-import org.eclipse.jsdt.core.dom.AST;
-import org.eclipse.jsdt.core.dom.ASTMatcher;
-import org.eclipse.jsdt.core.dom.ASTParser;
-import org.eclipse.jsdt.core.dom.CompilationUnit;
-import org.eclipse.jsdt.core.dom.MethodDeclaration;
+import org.eclipse.wst.jsdt.core.ICompilationUnit;
+import org.eclipse.wst.jsdt.core.dom.AST;
+import org.eclipse.wst.jsdt.core.dom.ASTMatcher;
+import org.eclipse.wst.jsdt.core.dom.ASTParser;
+import org.eclipse.wst.jsdt.core.dom.CompilationUnit;
+import org.eclipse.wst.jsdt.core.dom.MethodDeclaration;
 
 /**
  * A <code>CompilationUnitDelta</code> represents the source code changes between

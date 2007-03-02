@@ -31,7 +31,7 @@ import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.ITerminate;
-import org.eclipse.jsdt.core.Signature;
+import org.eclipse.wst.jsdt.core.Signature;
 import org.eclipse.wst.jsdt.debug.core.IEvaluationRunnable;
 import org.eclipse.wst.jsdt.debug.core.IJavaBreakpoint;
 import org.eclipse.wst.jsdt.debug.core.IJavaObject;

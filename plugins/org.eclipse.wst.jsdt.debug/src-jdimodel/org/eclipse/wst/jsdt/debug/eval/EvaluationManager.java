@@ -13,7 +13,7 @@ package org.eclipse.wst.jsdt.debug.eval;
  
 import java.io.File;
 
-import org.eclipse.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaProject;
 import org.eclipse.wst.jsdt.debug.core.IJavaDebugTarget;
 import org.eclipse.wst.jsdt.internal.debug.eval.LocalEvaluationEngine;
 import org.eclipse.wst.jsdt.internal.debug.eval.ast.engine.ASTEvaluationEngine;

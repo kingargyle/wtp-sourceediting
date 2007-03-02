@@ -12,7 +12,7 @@ package org.eclipse.wst.jsdt.internal.debug.eval.ast.engine;
 
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaProject;
 import org.eclipse.wst.jsdt.debug.core.IJavaDebugTarget;
 import org.eclipse.wst.jsdt.debug.core.IJavaObject;
 import org.eclipse.wst.jsdt.debug.core.IJavaReferenceType;

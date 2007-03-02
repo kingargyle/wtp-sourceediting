@@ -25,7 +25,7 @@ import org.eclipse.debug.core.model.IRegisterGroup;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.jsdt.core.Signature;
+import org.eclipse.wst.jsdt.core.Signature;
 import org.eclipse.wst.jsdt.debug.core.IJavaClassType;
 import org.eclipse.wst.jsdt.debug.core.IJavaModifiers;
 import org.eclipse.wst.jsdt.debug.core.IJavaObject;

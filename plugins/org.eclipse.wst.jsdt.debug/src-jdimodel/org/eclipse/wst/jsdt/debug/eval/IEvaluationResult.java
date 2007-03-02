@@ -12,7 +12,7 @@ package org.eclipse.wst.jsdt.debug.eval;
 
 
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.jsdt.core.dom.Message;
+import org.eclipse.wst.jsdt.core.dom.Message;
 import org.eclipse.wst.jsdt.debug.core.IJavaThread;
 import org.eclipse.wst.jsdt.debug.core.IJavaValue;
 

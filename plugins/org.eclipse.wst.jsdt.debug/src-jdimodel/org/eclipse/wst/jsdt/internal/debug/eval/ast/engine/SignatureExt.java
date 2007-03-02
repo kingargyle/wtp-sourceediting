@@ -12,9 +12,9 @@ package org.eclipse.wst.jsdt.internal.debug.eval.ast.engine;
 
 import java.util.ArrayList;
 
-import org.eclipse.jsdt.core.Signature;
-import org.eclipse.jsdt.core.compiler.CharOperation;
-import org.eclipse.jsdt.internal.core.util.Util;
+import org.eclipse.wst.jsdt.core.Signature;
+import org.eclipse.wst.jsdt.core.compiler.CharOperation;
+import org.eclipse.wst.jsdt.internal.core.util.Util;
 
 public class SignatureExt {
 

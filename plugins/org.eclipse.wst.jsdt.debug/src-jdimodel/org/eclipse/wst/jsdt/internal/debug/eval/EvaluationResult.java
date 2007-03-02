@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.jsdt.core.dom.Message;
+import org.eclipse.wst.jsdt.core.dom.Message;
 import org.eclipse.wst.jsdt.debug.core.IJavaThread;
 import org.eclipse.wst.jsdt.debug.core.IJavaValue;
 import org.eclipse.wst.jsdt.debug.eval.IEvaluationEngine;

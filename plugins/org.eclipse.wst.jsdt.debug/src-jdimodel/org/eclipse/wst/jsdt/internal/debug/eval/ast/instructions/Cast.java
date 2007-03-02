@@ -15,7 +15,7 @@ import com.ibm.icu.text.MessageFormat;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jsdt.core.Signature;
+import org.eclipse.wst.jsdt.core.Signature;
 import org.eclipse.wst.jsdt.debug.core.IJavaObject;
 import org.eclipse.wst.jsdt.debug.core.IJavaPrimitiveValue;
 import org.eclipse.wst.jsdt.debug.core.IJavaValue;

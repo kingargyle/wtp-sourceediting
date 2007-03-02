@@ -17,7 +17,7 @@ import java.util.Iterator;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
-import org.eclipse.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaProject;
 import org.eclipse.wst.jsdt.debug.core.IJavaDebugTarget;
 import org.eclipse.wst.jsdt.debug.eval.EvaluationManager;
 import org.eclipse.wst.jsdt.debug.eval.IAstEvaluationEngine;

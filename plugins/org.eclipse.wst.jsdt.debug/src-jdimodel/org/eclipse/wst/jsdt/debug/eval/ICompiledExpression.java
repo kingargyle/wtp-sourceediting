@@ -11,7 +11,7 @@
 package org.eclipse.wst.jsdt.debug.eval;
 
 
-import org.eclipse.jsdt.core.dom.Message;
+import org.eclipse.wst.jsdt.core.dom.Message;
 
 /**
  * A compiled expression can be compiled once and evaluated multiple times

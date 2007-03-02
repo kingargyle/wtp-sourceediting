@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.jsdt.core.Signature;
+import org.eclipse.wst.jsdt.core.Signature;
 import org.eclipse.wst.jsdt.debug.core.IJavaFieldVariable;
 import org.eclipse.wst.jsdt.debug.core.IJavaObject;
 import org.eclipse.wst.jsdt.debug.core.IJavaThread;

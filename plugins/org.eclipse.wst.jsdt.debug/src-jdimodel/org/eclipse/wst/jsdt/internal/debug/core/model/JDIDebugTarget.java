@@ -39,7 +39,7 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.jdi.TimeoutException;
-import org.eclipse.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaProject;
 import org.eclipse.wst.jsdt.debug.core.IJavaBreakpoint;
 import org.eclipse.wst.jsdt.debug.core.IJavaDebugTarget;
 import org.eclipse.wst.jsdt.debug.core.IJavaThread;

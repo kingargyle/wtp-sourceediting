@@ -11,7 +11,7 @@
 package org.eclipse.wst.jsdt.internal.debug.eval.ast.instructions;
 
 
-import org.eclipse.jsdt.core.compiler.CharOperation;
+import org.eclipse.wst.jsdt.core.compiler.CharOperation;
 
 /**
  * Copy of org.eclipse.wst.jsdt.core.Signature. The class is copied here

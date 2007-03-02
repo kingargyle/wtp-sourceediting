@@ -15,7 +15,7 @@ import com.ibm.icu.text.MessageFormat;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaProject;
 import org.eclipse.wst.jsdt.debug.core.IJavaClassObject;
 import org.eclipse.wst.jsdt.debug.core.IJavaClassType;
 import org.eclipse.wst.jsdt.debug.core.IJavaObject;

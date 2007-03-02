@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jsdt.core.dom.Message;
+import org.eclipse.wst.jsdt.core.dom.Message;
 import org.eclipse.wst.jsdt.debug.eval.ICompiledExpression;
 
 public class InstructionSequence implements ICompiledExpression {
