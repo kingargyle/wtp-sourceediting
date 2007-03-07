@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2004 IBM Corporation and others.
+ * Copyright (c) 2001, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -100,7 +100,7 @@ public class CustomCompletionProposal implements ICompletionProposal, ICompletio
 	 * the replacement length is now 5 <tag id|name="attr"> - the replacement
 	 * length is now 6 <tag |name="attr"> - the replacementlength is now 4
 	 * again <tag |name="attr"> - the replacment length remains 4
-	 *  
+	 * 
 	 */
 	public CustomCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition, Image image, String displayString, IContextInformation contextInformation, String additionalProposalInfo, int relevance, boolean updateReplacementLengthOnValidate) {
 
@@ -154,13 +154,15 @@ public class CustomCompletionProposal implements ICompletionProposal, ICompletio
 		if (viewer instanceof ITextViewerExtension5) {
 			ITextViewerExtension5 extension = (ITextViewerExtension5) viewer;
 			caretOffset = extension.widgetOffset2ModelOffset(caretOffset);
-		} else {
+		}
+		else {
 			caretOffset = viewer.getTextWidget().getCaretOffset() + viewer.getVisibleRegion().getOffset();
 		}
 
 		if (caretOffset == getReplacementOffset()) {
 			apply(document);
-		} else {
+		}
+		else {
 			// replace the text without affecting the caret Position as this
 			// causes the cursor to move on its own
 			try {
@@ -191,9 +193,11 @@ public class CustomCompletionProposal implements ICompletionProposal, ICompletio
 					int preCaretTextLength = caretOffset - getReplacementOffset();
 					document.replace(getReplacementOffset(), preCaretTextLength, getReplacementString().substring(0, preCaretTextLength));
 				}
-			} catch (BadLocationException x) {
+			}
+			catch (BadLocationException x) {
 				apply(document);
-			} catch (StringIndexOutOfBoundsException e) {
+			}
+			catch (StringIndexOutOfBoundsException e) {
 				apply(document);
 			}
 		}
@@ -213,7 +217,11 @@ public class CustomCompletionProposal implements ICompletionProposal, ICompletio
 	 * @see org.eclipse.jface.text.contentassist.ICompletionProposalExtension#getContextInformationPosition()
 	 */
 	public int getContextInformationPosition() {
-		return getCursorPosition();
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=110355
+		// return getCursorPosition();
+		if (getContextInformation() == null)
+			return getReplacementOffset() - 1;
+		return getReplacementOffset() + getCursorPosition();
 	}
 
 	public int getCursorPosition() {
@@ -286,7 +294,8 @@ public class CustomCompletionProposal implements ICompletionProposal, ICompletio
 			int length = offset - fReplacementOffset;
 			String start = document.get(fReplacementOffset, length);
 			return word.substring(0, length).equalsIgnoreCase(start);
-		} catch (BadLocationException x) {
+		}
+		catch (BadLocationException x) {
 		}
 
 		return false;
