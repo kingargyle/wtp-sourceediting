@@ -121,7 +121,7 @@ public class JSSourceViewerConfiguration extends TextSourceViewerConfiguration {
 			// second assistant
 			// that is added to a viewer can cause odd key-eating by the wrong
 			// one.
-			ContentAssistant contentAssistant = new ContentAssistant();
+			ContentAssistant contentAssistant = new JavascriptContentAssistant();
 			contentAssistant.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
 			IContentAssistProcessor contentAssistantProcessor = new JavaScriptContentAssistProcessor();
 			contentAssistant.setContentAssistProcessor(contentAssistantProcessor, IDocument.DEFAULT_CONTENT_TYPE);
