@@ -13,7 +13,6 @@ package org.eclipse.wst.html.core.internal;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.wst.html.core.external.content.ExternalContentProviderExtension;
 import org.eclipse.wst.html.core.internal.contentproperties.HTMLContentPropertiesManager;
 import org.osgi.framework.BundleContext;
 
@@ -51,9 +50,6 @@ public class HTMLCorePlugin extends Plugin {
 
 		// listen for resource changes to update content properties keys
 		HTMLContentPropertiesManager.startup();
-		
-		/* read the external content providers extension point */
-		ExternalContentProviderExtension.init();
 	}
 
 	public void stop(BundleContext context) throws Exception {
