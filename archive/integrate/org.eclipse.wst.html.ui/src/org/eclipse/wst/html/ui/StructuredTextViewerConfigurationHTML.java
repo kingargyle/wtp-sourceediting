@@ -21,6 +21,7 @@ import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.formatter.IContentFormatter;
+import org.eclipse.jface.text.formatter.IFormattingStrategy;
 import org.eclipse.jface.text.formatter.MultiPassContentFormatter;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.information.IInformationProvider;
@@ -43,12 +44,13 @@ import org.eclipse.wst.html.ui.internal.hyperlink.XMLHyperlinkDetector;
 import org.eclipse.wst.html.ui.internal.style.LineStyleProviderForHTML;
 import org.eclipse.wst.html.ui.internal.taginfo.HTMLInformationProvider;
 import org.eclipse.wst.html.ui.internal.taginfo.HTMLTagInfoHoverProcessor;
-import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
-import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
-import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptInformationProvider;
-import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoHoverProcessor;
+//import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
+//import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
+//import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptInformationProvider;
+//import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoHoverProcessor;
 import org.eclipse.wst.sse.core.text.IStructuredPartitions;
 import org.eclipse.wst.sse.ui.StructuredTextViewerConfiguration;
+import org.eclipse.wst.sse.ui.internal.ExtendedConfigurationBuilder;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 import org.eclipse.wst.sse.ui.internal.format.StructuredFormattingStrategy;
 import org.eclipse.wst.sse.ui.internal.provisional.style.LineStyleProvider;
@@ -93,7 +95,14 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 	 */
 	private StructuredTextViewerConfiguration fXMLSourceViewerConfiguration;
 	private ILabelProvider fStatusLineLabelProvider;
-
+	/* Extension point identifications for externalalized content providers [Bradley Childs - childsb@us.ibm.com]*/
+	private static final class externalTypeExtension{
+		public static final String HOVER_ID="texthover";
+		public static final String INFORMATIONPROVIDER_ID="informationpresenter";
+		public static final String AUTOEDIT_ID="autoeditstrategy";
+		public static final String CONTENT_FORMATER="contentformater";
+		
+	}
 	/**
 	 * Create new instance of StructuredTextViewerConfigurationHTML
 	 */
@@ -112,6 +121,13 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 
 		if (contentType == IHTMLPartitions.HTML_DEFAULT || contentType == IHTMLPartitions.HTML_DECLARATION) {
 			allStrategies.add(new StructuredAutoEditStrategyHTML());
+		}else{
+			/* Load external autoEditProviders from extension point [Bradley Childs - childsb@us.ibm.com]*/
+			
+			Object externalAutoEditProvider = ExtendedConfigurationBuilder.getInstance().getConfiguration(externalTypeExtension.AUTOEDIT_ID, contentType);
+			if(externalAutoEditProvider!=null)
+				allStrategies.add(externalAutoEditProvider);
+			
 		}
 
 		// be sure this is added last in list, so it has a change to modify
@@ -145,9 +161,10 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 		if ((partitionType == IHTMLPartitions.HTML_DEFAULT) || (partitionType == IHTMLPartitions.HTML_COMMENT)) {
 			processors = new IContentAssistProcessor[]{new HTMLContentAssistProcessor()};
 		}
-		else if (partitionType == IHTMLPartitions.SCRIPT) {
-			processors = new IContentAssistProcessor[]{new JavaScriptContentAssistProcessor()};
-		}
+		/* content assistance now provided by extension point [Bradley Childs - childsb@us.ibm.com]*/	
+//		else if (partitionType == IHTMLPartitions.SCRIPT) {
+//			processors = new IContentAssistProcessor[]{new JavaScriptContentAssistProcessor()};
+//		}
 		else if (partitionType == ICSSPartitions.STYLE) {
 			processors = new IContentAssistProcessor[]{new CSSContentAssistProcessor()};
 		}
@@ -162,6 +179,12 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 		final MultiPassContentFormatter formatter = new MultiPassContentFormatter(getConfiguredDocumentPartitioning(sourceViewer), IHTMLPartitions.HTML_DEFAULT);
 
 		formatter.setMasterStrategy(new StructuredFormattingStrategy(new HTMLFormatProcessorImpl()));
+		/* Check for any externally supported auto edit strategies from EP. [Bradley Childs - childsb@us.ibm.com]*/
+		String[] contentTypes = getConfiguredContentTypes(sourceViewer);
+		for(int i = 0;i<contentTypes.length;i++){
+			IFormattingStrategy cf = (IFormattingStrategy)ExtendedConfigurationBuilder.getInstance().getConfiguration(externalTypeExtension.CONTENT_FORMATER, contentTypes[i]);
+			if(cf!=null) formatter.setSlaveStrategy(cf,contentTypes[i]);
+		}
 
 		return formatter;
 	}
@@ -240,11 +263,17 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 		if (partitionType == IHTMLPartitions.HTML_DEFAULT) {
 			// HTML
 			provider = new HTMLInformationProvider();
+		}else{
+			/* IInformationProvider now provided by extension point [Bradley Childs - childsb@us.ibm.com]*/
+			Object externalInfoProvider = ExtendedConfigurationBuilder.getInstance().getConfiguration(externalTypeExtension.INFORMATIONPROVIDER_ID, partitionType);
+			if(externalInfoProvider!=null)
+				provider = (IInformationProvider)externalInfoProvider;
+			
 		}
-		else if (partitionType == IHTMLPartitions.SCRIPT) {
-			// HTML JavaScript
-			provider = new JavaScriptInformationProvider();
-		}
+//		else if (partitionType == IHTMLPartitions.SCRIPT) {
+//			// HTML JavaScript
+//			provider = new JavaScriptInformationProvider();
+//		}
 		return provider;
 	}
 
@@ -254,9 +283,10 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 		if (partitionType == IHTMLPartitions.HTML_DEFAULT || partitionType == IHTMLPartitions.HTML_COMMENT || partitionType == IHTMLPartitions.HTML_DECLARATION) {
 			providers = new LineStyleProvider[]{getLineStyleProviderForHTML()};
 		}
-		else if (partitionType == IHTMLPartitions.SCRIPT) {
-			providers = new LineStyleProvider[]{getLineStyleProviderForJavascript()};
-		}
+		/* Line Styel Provider now provided by extension point defined in SSE [Bradley Childs - childsb@us.ibm.com]*/
+//		else if (partitionType == IHTMLPartitions.SCRIPT) {
+//			providers = new LineStyleProvider[]{getLineStyleProviderForJavascript()};
+//		}
 		else if (partitionType == ICSSPartitions.STYLE) {
 			providers = new LineStyleProvider[]{getLineStyleProviderForEmbeddedCSS()};
 		}
@@ -277,13 +307,13 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 		}
 		return fLineStyleProviderForHTML;
 	}
-
-	private LineStyleProvider getLineStyleProviderForJavascript() {
-		if (fLineStyleProviderForJavascript == null) {
-			fLineStyleProviderForJavascript = new LineStyleProviderForJavaScript();
-		}
-		return fLineStyleProviderForJavascript;
-	}
+	/* No longer needed.  Provided by extension defined in SSE. [Bradley Childs - childsb@us.ibm.com]*/
+//	private LineStyleProvider getLineStyleProviderForJavascript() {
+//		if (fLineStyleProviderForJavascript == null) {
+//			fLineStyleProviderForJavascript = new LineStyleProviderForJavaScript();
+//		}
+//		return fLineStyleProviderForJavascript;
+//	}
 
 	public ILabelProvider getStatusLineLabelProvider(ISourceViewer sourceViewer) {
 		if (fStatusLineLabelProvider == null) {
@@ -313,7 +343,7 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask) {
 		ITextHover textHover = null;
-
+		
 		// look for appropriate text hover processor to return based on
 		// content type and state mask
 		TextHoverManager manager = SSEUIPlugin.getDefault().getTextHoverManager();
@@ -324,20 +354,33 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 				String hoverType = hoverDescs[i].getId();
 				if (TextHoverManager.COMBINATION_HOVER.equalsIgnoreCase(hoverType)) {
 					// check if script or html is needed
-					if (contentType == IHTMLPartitions.SCRIPT) {
-						textHover = manager.createBestMatchHover(new JavaScriptTagInfoHoverProcessor());
-					}
-					else if (contentType == IHTMLPartitions.HTML_DEFAULT) {
+//					if (contentType == IHTMLPartitions.SCRIPT) {
+//						textHover = manager.createBestMatchHover(new JavaScriptTagInfoHoverProcessor());
+//					}
+//					else 
+					if (contentType == IHTMLPartitions.HTML_DEFAULT) {
 						textHover = manager.createBestMatchHover(new HTMLTagInfoHoverProcessor());
+					}else{
+						/* Check extension for TextHover providers [Bradley Childs - childsb@us.ibm.com]*/
+						Object externalHover = ExtendedConfigurationBuilder.getInstance().getConfiguration(externalTypeExtension.HOVER_ID, contentType);
+						if(externalHover!=null){
+							textHover = manager.createBestMatchHover((ITextHover)externalHover);
+						}
 					}
 				}
 				else if (TextHoverManager.DOCUMENTATION_HOVER.equalsIgnoreCase(hoverType))
 					// check if script or html is needed
-					if (contentType == IHTMLPartitions.SCRIPT) {
-						textHover = new JavaScriptTagInfoHoverProcessor();
-					}
-					else if (contentType == IHTMLPartitions.HTML_DEFAULT) {
+//					if (contentType == IHTMLPartitions.SCRIPT) {
+//						textHover = new JavaScriptTagInfoHoverProcessor();
+//					}
+					if (contentType == IHTMLPartitions.HTML_DEFAULT) {
 						textHover = new HTMLTagInfoHoverProcessor();
+					}else{
+						/* Check extension for TextHover providers [Bradley Childs - childsb@us.ibm.com]*/
+						Object externalHover = ExtendedConfigurationBuilder.getInstance().getConfiguration(externalTypeExtension.HOVER_ID, contentType);
+						if(externalHover!=null){
+							textHover = (ITextHover)externalHover;
+						}
 					}
 			}
 			i++;

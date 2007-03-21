@@ -28,7 +28,7 @@ import org.eclipse.wst.html.ui.internal.editor.HTMLEditorPluginImageHelper;
 import org.eclipse.wst.html.ui.internal.editor.HTMLEditorPluginImages;
 import org.eclipse.wst.html.ui.internal.preferences.HTMLUIPreferenceNames;
 import org.eclipse.wst.html.ui.internal.templates.TemplateContextTypeIdsHTML;
-import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
+//import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapterFactory;
@@ -184,25 +184,25 @@ public class HTMLContentAssistProcessor extends AbstractContentAssistProcessor i
 
 		// CMVC 242695
 		// if it's a </script> tag, bounce back to JS ca processor...
-		if (fn != null && fn.getType() == DOMRegionContext.XML_TAG_NAME && documentPosition == fn.getStartOffset()) {
-			ITextRegionList v = fn.getRegions();
-			if (v.size() > 1) {
-				// determine that it's a close tag
-				if ((v.get(0)).getType() == DOMRegionContext.XML_END_TAG_OPEN) {
-					Iterator it = v.iterator();
-					ITextRegion region = null;
-					// search for script tag name
-					while (it.hasNext()) {
-						region = (ITextRegion) it.next();
-						if (fn.getText(region).equalsIgnoreCase("script")) { //$NON-NLS-1$
-							// return JS content assist...
-							JavaScriptContentAssistProcessor jsProcessor = new JavaScriptContentAssistProcessor();
-							return jsProcessor.computeCompletionProposals(textViewer, documentPosition);
-						}
-					}
-				}
-			}
-		}
+//		if (fn != null && fn.getType() == DOMRegionContext.XML_TAG_NAME && documentPosition == fn.getStartOffset()) {
+//			ITextRegionList v = fn.getRegions();
+//			if (v.size() > 1) {
+//				// determine that it's a close tag
+//				if ((v.get(0)).getType() == DOMRegionContext.XML_END_TAG_OPEN) {
+//					Iterator it = v.iterator();
+//					ITextRegion region = null;
+//					// search for script tag name
+//					while (it.hasNext()) {
+//						region = (ITextRegion) it.next();
+//						if (fn.getText(region).equalsIgnoreCase("script")) { //$NON-NLS-1$
+//							// return JS content assist...
+//							JavaScriptContentAssistProcessor jsProcessor = new JavaScriptContentAssistProcessor();
+//							return jsProcessor.computeCompletionProposals(textViewer, documentPosition);
+//						}
+//					}
+//				}
+//			}
+//		}
 
 		isXHTML = getXHTML(node);
 
