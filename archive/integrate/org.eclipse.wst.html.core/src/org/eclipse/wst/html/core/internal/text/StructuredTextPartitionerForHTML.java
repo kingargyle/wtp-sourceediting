@@ -1,10 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2006 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
@@ -34,11 +34,27 @@ import org.eclipse.wst.xml.core.internal.text.rules.StructuredTextPartitionerFor
  */
 public class StructuredTextPartitionerForHTML extends StructuredTextPartitionerForXML implements IStructuredTextPartitioner {
 
-	private final static String[] configuredContentTypes = new String[]{IHTMLPartitions.HTML_DEFAULT, IHTMLPartitions.HTML_DECLARATION, IHTMLPartitions.HTML_COMMENT, IHTMLPartitions.SCRIPT, ICSSPartitions.STYLE};
+	private final static String[] configuredContentTypes = new String[]{IHTMLPartitions.HTML_DEFAULT, IHTMLPartitions.HTML_DECLARATION, IHTMLPartitions.HTML_COMMENT, IHTMLPartitions.SCRIPT, ICSSPartitions.STYLE,ISCRIPTPartitions.SCRIPT_EVENT,};
 
 	public static final String JAVASCRIPT = "javascript"; //$NON-NLS-1$
 	public static final String JAVASCRIPT_APPLICATION = "application/x-javascript"; //$NON-NLS-1$
-
+	
+	interface ScriptEventNameSpace extends HTML40Namespace{
+		/* Extension of the HTML40Namespace to aggregate EVENT type attributes */
+		
+		static final String[] EVENTS = {ATTR_NAME_ONCLICK, ATTR_NAME_ONDBLCLICK, 
+										ATTR_NAME_ONMOUSEDOWN, ATTR_NAME_ONMOUSEUP, 
+										ATTR_NAME_ONMOUSEOVER, ATTR_NAME_ONMOUSEMOVE, 
+										ATTR_NAME_ONMOUSEOUT, ATTR_NAME_ONKEYPRESS, 
+										ATTR_NAME_ONKEYDOWN, ATTR_NAME_ONKEYUP, 
+										ATTR_NAME_ONHELP};
+		
+	}
+	// Should be moved to the IHTMLPartitions
+	interface ISCRIPTPartitions extends IHTMLPartitions{
+		static final String SCRIPT_EVENT=SCRIPT + ".EVENT";
+	}
+	
 	public StructuredTextPartitionerForHTML() {
 		super();
 	}
@@ -133,6 +149,8 @@ public class StructuredTextPartitionerForHTML extends StructuredTextPartitionerF
 			result = IHTMLPartitions.HTML_COMMENT;
 		else if (region.getType() == DOMRegionContext.XML_DOCTYPE_DECLARATION || region.getType() == DOMRegionContext.XML_DECLARATION_OPEN)
 			result = IHTMLPartitions.HTML_DECLARATION;
+		else  if(region.getType()==DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE && StringUtils.contains(ScriptEventNameSpace.EVENTS,  getAttrName(region,offset), false) )
+			result = ISCRIPTPartitions.SCRIPT_EVENT;
 		else
 			result = super.getPartitionType(region, offset);
 		return result;
@@ -184,6 +202,8 @@ public class StructuredTextPartitionerForHTML extends StructuredTextPartitionerF
 			result = IHTMLPartitions.SCRIPT;
 		else if (tagname.equalsIgnoreCase(HTML40Namespace.ElementName.STYLE))
 			result = ICSSPartitions.STYLE;
+		else if(region.getType()==DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE && StringUtils.contains(ScriptEventNameSpace.EVENTS,  getAttrName(region,offset), false) )
+			result = ISCRIPTPartitions.SCRIPT_EVENT;
 		else
 			result = super.getPartitionType(region, offset);
 
@@ -204,5 +224,18 @@ public class StructuredTextPartitionerForHTML extends StructuredTextPartitionerF
 	public static String[] getConfiguredContentTypes() {
 		return configuredContentTypes;
 	}
-
+	
+	private String getAttrName(ITextRegion attrValueRegion, int offset){
+		if( attrValueRegion.getType() !=DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE ) return null;
+		
+		IStructuredDocumentRegion node = fStructuredDocument.getRegionAtCharacterOffset(offset);
+		ITextRegionList regionList = node.getRegions();
+		int currentIndex = regionList.indexOf(attrValueRegion);
+		
+		if((currentIndex-2)<0) return null;
+		ITextRegion tagAttrNameRegion = regionList.get(currentIndex-2);
+		
+		String tagAttrName = node.getText().substring(tagAttrNameRegion.getStart() , tagAttrNameRegion.getTextEnd()).trim();
+		return tagAttrName;
+	}
 }
