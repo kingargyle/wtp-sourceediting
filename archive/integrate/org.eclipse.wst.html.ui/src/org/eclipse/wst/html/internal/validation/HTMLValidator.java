@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2004 IBM Corporation and others.
+ * Copyright (c) 2001, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -38,6 +38,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.wst.html.core.internal.document.HTMLDocumentTypeConstants;
 import org.eclipse.wst.html.core.internal.validate.HTMLValidationAdapterFactory;
+import org.eclipse.wst.html.ui.internal.Logger;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.FileBufferModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
@@ -65,7 +66,6 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Text;
 
 public class HTMLValidator implements IValidatorJob, ISourceValidator, IExecutableExtension {
-	private static final String ORG_ECLIPSE_JST_JSP_CORE_JSPSOURCE = "org.eclipse.jst.jsp.core.jspsource"; //$NON-NLS-1$
 	private static final String ORG_ECLIPSE_WST_HTML_CORE_HTMLSOURCE = "org.eclipse.wst.html.core.htmlsource"; //$NON-NLS-1$
 
 	static boolean shouldValidate(IFile file) {
@@ -85,7 +85,6 @@ public class HTMLValidator implements IValidatorJob, ISourceValidator, IExecutab
 	private IContentType[] fOtherSupportedContentTypes = null;
 	private String[] fAdditionalContentTypesIDs = null;
 	private IContentType fHTMLContentType;
-	private IContentType fJSPContentType;
 
 	public HTMLValidator() {
 		super();
@@ -107,11 +106,6 @@ public class HTMLValidator implements IValidatorJob, ISourceValidator, IExecutab
 	private IContentType[] getOtherSupportedContentTypes() {
 		if (fOtherSupportedContentTypes == null) {
 			List contentTypes = new ArrayList(3);
-			fJSPContentType = Platform.getContentTypeManager().getContentType(ORG_ECLIPSE_JST_JSP_CORE_JSPSOURCE);
-			// might be absent depending on the installation
-			if (fJSPContentType != null) {
-				contentTypes.add(fJSPContentType);
-			}
 			if (fAdditionalContentTypesIDs != null) {
 				for (int i = 0; i < fAdditionalContentTypesIDs.length; i++) {
 					IContentType type = Platform.getContentTypeManager().getContentType(fAdditionalContentTypesIDs[i]);
@@ -138,7 +132,12 @@ public class HTMLValidator implements IValidatorJob, ISourceValidator, IExecutab
 
 		IStructuredModel model = null;
 		IModelManager manager = StructuredModelManager.getModelManager();
-
+		try {
+			file.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
+		}
+		catch (CoreException e) {
+			Logger.logException(e);
+		}
 		try {
 			try {
 				model = manager.getModelForRead(file);
@@ -154,7 +153,8 @@ public class HTMLValidator implements IValidatorJob, ISourceValidator, IExecutab
 		}
 		catch (IOException ex) {
 		}
-		catch (CoreException ex) {
+		catch (CoreException e) {
+			Logger.logException(e);
 		}
 
 		if (model == null)

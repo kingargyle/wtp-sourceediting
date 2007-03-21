@@ -11,34 +11,30 @@
 package org.eclipse.wst.html.ui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
-import org.eclipse.wst.html.core.internal.provisional.contenttype.ContentTypeIdForHTML;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.formatter.IContentFormatter;
-import org.eclipse.jface.text.formatter.IFormattingStrategy;
 import org.eclipse.jface.text.formatter.MultiPassContentFormatter;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.information.IInformationProvider;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.wst.css.core.text.ICSSPartitions;
 import org.eclipse.wst.css.ui.internal.contentassist.CSSContentAssistProcessor;
 import org.eclipse.wst.css.ui.internal.style.LineStyleProviderForEmbeddedCSS;
-import org.eclipse.wst.html.core.external.content.ExternalContentProviderExtension;
 import org.eclipse.wst.html.core.internal.HTMLCorePlugin;
 import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.html.core.internal.preferences.HTMLCorePreferenceNames;
 import org.eclipse.wst.html.core.internal.text.StructuredTextPartitionerForHTML;
 import org.eclipse.wst.html.core.text.IHTMLPartitions;
-import org.eclipse.wst.html.ui.external.content.ExternalContentResolver;
-import org.eclipse.wst.html.ui.external.content.StructuredTextViewerManipulator;
 import org.eclipse.wst.html.ui.internal.autoedit.AutoEditStrategyForTabs;
 import org.eclipse.wst.html.ui.internal.autoedit.StructuredAutoEditStrategyHTML;
 import org.eclipse.wst.html.ui.internal.contentassist.HTMLContentAssistProcessor;
@@ -47,6 +43,10 @@ import org.eclipse.wst.html.ui.internal.hyperlink.XMLHyperlinkDetector;
 import org.eclipse.wst.html.ui.internal.style.LineStyleProviderForHTML;
 import org.eclipse.wst.html.ui.internal.taginfo.HTMLInformationProvider;
 import org.eclipse.wst.html.ui.internal.taginfo.HTMLTagInfoHoverProcessor;
+import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
+import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
+import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptInformationProvider;
+import org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoHoverProcessor;
 import org.eclipse.wst.sse.core.text.IStructuredPartitions;
 import org.eclipse.wst.sse.ui.StructuredTextViewerConfiguration;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
@@ -57,6 +57,8 @@ import org.eclipse.wst.sse.ui.internal.util.EditorUtility;
 import org.eclipse.wst.xml.core.internal.text.rules.StructuredTextPartitionerForXML;
 import org.eclipse.wst.xml.core.text.IXMLPartitions;
 import org.eclipse.wst.xml.ui.StructuredTextViewerConfigurationXML;
+import org.eclipse.wst.xml.ui.internal.contentoutline.JFaceNodeLabelProvider;
+import org.w3c.dom.Node;
 
 /**
  * Configuration for a source viewer which shows HTML content.
@@ -90,46 +92,20 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 	 * One instance per configuration
 	 */
 	private StructuredTextViewerConfiguration fXMLSourceViewerConfiguration;
+	private ILabelProvider fStatusLineLabelProvider;
 
 	/**
 	 * Create new instance of StructuredTextViewerConfigurationHTML
 	 */
-	
-	private ExternalContentProviderExtension fExtContentResolver;
-	
-	private ExternalContentResolver fContentResolver;
-	
-	private String[] fExternalContentTypes;
-	
 	public StructuredTextViewerConfigurationHTML() {
 		// Must have empty constructor to createExecutableExtension
 		super();
-		
 	}
-	
-	private ExternalContentResolver getExternalResolver(){
-		if(fContentResolver==null){
-			fContentResolver = ExternalContentResolver.getInstance();
-		}
-		return fContentResolver;
-	}
-	
-	private String[] getExternalContentTypes(){
-		if(fContentResolver==null){
-			fExternalContentTypes = getExternalResolver().getSupportedContentTypes();
-		}
-		return fExternalContentTypes;
-	}
-	
-	private boolean isExternal(String type){
-		return getExternalResolver().isExternalSourceViewerConfigOf(type);
-	}
-	
+
 	public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
 		List allStrategies = new ArrayList(0);
 
 		IAutoEditStrategy[] superStrategies = super.getAutoEditStrategies(sourceViewer, contentType);
-		
 		for (int i = 0; i < superStrategies.length; i++) {
 			allStrategies.add(superStrategies[i]);
 		}
@@ -138,15 +114,6 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 			allStrategies.add(new StructuredAutoEditStrategyHTML());
 		}
 
-		if(isExternal(contentType)){
-			IAutoEditStrategy[] strategies = getExternalResolver().getElectedSourceViewerByType(contentType).getAutoEditStrategies(sourceViewer, contentType);
-			for(int i = 0;i<strategies.length;i++){
-				if(strategies[i]!=null) 
-					allStrategies.add(strategies[i]);
-			}
-		
-		}
-		
 		// be sure this is added last in list, so it has a change to modify
 		// previous results.
 		// add auto edit strategy that handles when tab key is pressed
@@ -157,26 +124,16 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
 		if (fConfiguredContentTypes == null) {
-			
 			String[] xmlTypes = StructuredTextPartitionerForXML.getConfiguredContentTypes();
 			String[] htmlTypes = StructuredTextPartitionerForHTML.getConfiguredContentTypes();
-			String[] externalTypes = getExternalContentTypes();
-			
-			/* goal is NOT to have duplicated types */
-			Vector supportedTypes = new Vector();
-			supportedTypes.addAll(Arrays.asList(xmlTypes));
-			
-			for(int i=0;i<htmlTypes.length;i++)
-				if(!supportedTypes.contains(htmlTypes[i])) supportedTypes.add(htmlTypes[i]);
-			
-			for(int i=0;i<externalTypes.length;i++)
-				if(!supportedTypes.contains(externalTypes[i])) supportedTypes.add(externalTypes[i]);
-			
-			if(!supportedTypes.contains(IStructuredPartitions.DEFAULT_PARTITION)) supportedTypes.add(IStructuredPartitions.DEFAULT_PARTITION);
-			if(!supportedTypes.contains(IStructuredPartitions.UNKNOWN_PARTITION)) supportedTypes.add(IStructuredPartitions.UNKNOWN_PARTITION);
-			
-			fConfiguredContentTypes = (String[])supportedTypes.toArray(new String[0]);
+			fConfiguredContentTypes = new String[2 + xmlTypes.length + htmlTypes.length];
 
+			fConfiguredContentTypes[0] = IStructuredPartitions.DEFAULT_PARTITION;
+			fConfiguredContentTypes[1] = IStructuredPartitions.UNKNOWN_PARTITION;
+
+			int index = 0;
+			System.arraycopy(xmlTypes, 0, fConfiguredContentTypes, index += 2, xmlTypes.length);
+			System.arraycopy(htmlTypes, 0, fConfiguredContentTypes, index += xmlTypes.length, htmlTypes.length);
 		}
 
 		return fConfiguredContentTypes;
@@ -184,15 +141,12 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 
 	protected IContentAssistProcessor[] getContentAssistProcessors(ISourceViewer sourceViewer, String partitionType) {
 		IContentAssistProcessor[] processors = null;
-		
-		if(isExternal(partitionType)){
-			/* dont think we wont manipulate */
-			StructuredTextViewerConfiguration sv = getExternalResolver().getElectedSourceViewerByType(partitionType);
-			StructuredTextViewerManipulator stvm = new StructuredTextViewerManipulator(sv);
-			return stvm.getContentAssistProcessors(sourceViewer, partitionType);
-		}else if ((partitionType == IHTMLPartitions.HTML_DEFAULT) || (partitionType == IHTMLPartitions.HTML_COMMENT)) {
+
+		if ((partitionType == IHTMLPartitions.HTML_DEFAULT) || (partitionType == IHTMLPartitions.HTML_COMMENT)) {
 			processors = new IContentAssistProcessor[]{new HTMLContentAssistProcessor()};
-		
+		}
+		else if (partitionType == IHTMLPartitions.SCRIPT) {
+			processors = new IContentAssistProcessor[]{new JavaScriptContentAssistProcessor()};
 		}
 		else if (partitionType == ICSSPartitions.STYLE) {
 			processors = new IContentAssistProcessor[]{new CSSContentAssistProcessor()};
@@ -208,28 +162,17 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 		final MultiPassContentFormatter formatter = new MultiPassContentFormatter(getConfiguredDocumentPartitioning(sourceViewer), IHTMLPartitions.HTML_DEFAULT);
 
 		formatter.setMasterStrategy(new StructuredFormattingStrategy(new HTMLFormatProcessorImpl()));
-		
-		String contentTypes[] = getExternalContentTypes();
-		
-		for(int i = 0;i<contentTypes.length;i++){
-			IContentFormatter cf = getExternalResolver().getElectedSourceViewerByType(contentTypes[i]).getContentFormatter(sourceViewer);
-			IFormattingStrategy fs = cf.getFormattingStrategy(contentTypes[i]);
-			if(fs!=null) formatter.setSlaveStrategy(fs,contentTypes[i]);
-		}
-		
+
 		return formatter;
 	}
 
 	public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer, String contentType) {
-	
-	  if(isExternal(contentType)){
-		   return getExternalResolver().getElectedSourceViewerByType(contentType).getDoubleClickStrategy(sourceViewer, contentType);
-	  }else if (contentType == IHTMLPartitions.HTML_DEFAULT) {
+		if (contentType == IHTMLPartitions.HTML_DEFAULT) {
 			// use xml's doubleclick strategy
 			return getXMLSourceViewerConfiguration().getDoubleClickStrategy(sourceViewer, IXMLPartitions.XML_DEFAULT);
-	  }else{
+		}
+		else
 			return super.getDoubleClickStrategy(sourceViewer, contentType);
-	  }
 	}
 
 	public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
@@ -246,25 +189,10 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 				allDetectors.add(detector);
 			}
 		}
-		
-		/* external content types */
-		String contentTypes[] = getExternalContentTypes();
-		
-		for(int i = 0;i<contentTypes.length;i++){
-			IHyperlinkDetector[] hd = getExternalResolver().getElectedSourceViewerByType(contentTypes[i]).getHyperlinkDetectors(sourceViewer);
-			if(hd!=null) allDetectors.addAll(Arrays.asList(hd));
-		}
-		
 		return (IHyperlinkDetector[]) allDetectors.toArray(new IHyperlinkDetector[0]);
 	}
 
 	public String[] getIndentPrefixes(ISourceViewer sourceViewer, String contentType) {
-		/* check external types first */
-		if(isExternal(contentType)){
-			   return getExternalResolver().getElectedSourceViewerByType(contentType).getIndentPrefixes(sourceViewer, contentType);
-		}
-		
-		
 		Vector vector = new Vector();
 
 		// prefix[0] is either '\t' or ' ' x tabWidth, depending on preference
@@ -308,34 +236,27 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 	}
 
 	protected IInformationProvider getInformationProvider(ISourceViewer sourceViewer, String partitionType) {
-		if(isExternal(partitionType)){
-			StructuredTextViewerConfiguration sv = getExternalResolver().getElectedSourceViewerByType(partitionType);
-			StructuredTextViewerManipulator stvm = new StructuredTextViewerManipulator(sv);
-			
-			return stvm.getInformationProvider(sourceViewer, partitionType);
-		}
-		
 		IInformationProvider provider = null;
 		if (partitionType == IHTMLPartitions.HTML_DEFAULT) {
 			// HTML
 			provider = new HTMLInformationProvider();
 		}
-		
-		
+		else if (partitionType == IHTMLPartitions.SCRIPT) {
+			// HTML JavaScript
+			provider = new JavaScriptInformationProvider();
+		}
 		return provider;
 	}
 
 	public LineStyleProvider[] getLineStyleProviders(ISourceViewer sourceViewer, String partitionType) {
-		if(isExternal(partitionType)){
-			   return getExternalResolver().getElectedSourceViewerByType(partitionType).getLineStyleProviders(sourceViewer, partitionType);
-		}
-		
 		LineStyleProvider[] providers = null;
 
 		if (partitionType == IHTMLPartitions.HTML_DEFAULT || partitionType == IHTMLPartitions.HTML_COMMENT || partitionType == IHTMLPartitions.HTML_DECLARATION) {
 			providers = new LineStyleProvider[]{getLineStyleProviderForHTML()};
 		}
-		
+		else if (partitionType == IHTMLPartitions.SCRIPT) {
+			providers = new LineStyleProvider[]{getLineStyleProviderForJavascript()};
+		}
 		else if (partitionType == ICSSPartitions.STYLE) {
 			providers = new LineStyleProvider[]{getLineStyleProviderForEmbeddedCSS()};
 		}
@@ -357,14 +278,40 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 		return fLineStyleProviderForHTML;
 	}
 
+	private LineStyleProvider getLineStyleProviderForJavascript() {
+		if (fLineStyleProviderForJavascript == null) {
+			fLineStyleProviderForJavascript = new LineStyleProviderForJavaScript();
+		}
+		return fLineStyleProviderForJavascript;
+	}
+
+	public ILabelProvider getStatusLineLabelProvider(ISourceViewer sourceViewer) {
+		if (fStatusLineLabelProvider == null) {
+			fStatusLineLabelProvider = new JFaceNodeLabelProvider() {
+				public String getText(Object element) {
+
+					if (element == null)
+						return null;
+
+					StringBuffer s = new StringBuffer();
+					Node node = (Node) element;
+					if (node.getNodeType() != Node.DOCUMENT_NODE) {
+						while (node != null && node.getNodeType() != Node.DOCUMENT_NODE) {
+							s.insert(0, super.getText(node));
+							node = node.getParentNode();
+							if (node != null)
+								s.insert(0, IPath.SEPARATOR);
+						}
+					}
+					return s.toString();
+				}
+
+			};
+		}
+		return fStatusLineLabelProvider;
+	}
 
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask) {
-		
-		if(isExternal(contentType)){
-			   return getExternalResolver().getElectedSourceViewerByType(contentType).getTextHover(sourceViewer, contentType,stateMask);
-		}
-		
-		
 		ITextHover textHover = null;
 
 		// look for appropriate text hover processor to return based on
@@ -377,16 +324,21 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 				String hoverType = hoverDescs[i].getId();
 				if (TextHoverManager.COMBINATION_HOVER.equalsIgnoreCase(hoverType)) {
 					// check if script or html is needed
-					if (contentType == IHTMLPartitions.HTML_DEFAULT) {
+					if (contentType == IHTMLPartitions.SCRIPT) {
+						textHover = manager.createBestMatchHover(new JavaScriptTagInfoHoverProcessor());
+					}
+					else if (contentType == IHTMLPartitions.HTML_DEFAULT) {
 						textHover = manager.createBestMatchHover(new HTMLTagInfoHoverProcessor());
 					}
 				}
 				else if (TextHoverManager.DOCUMENTATION_HOVER.equalsIgnoreCase(hoverType))
 					// check if script or html is needed
-					
-				if (contentType == IHTMLPartitions.HTML_DEFAULT) {
+					if (contentType == IHTMLPartitions.SCRIPT) {
+						textHover = new JavaScriptTagInfoHoverProcessor();
+					}
+					else if (contentType == IHTMLPartitions.HTML_DEFAULT) {
 						textHover = new HTMLTagInfoHoverProcessor();
-				}
+					}
 			}
 			i++;
 		}

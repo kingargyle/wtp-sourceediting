@@ -14,7 +14,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.wst.css.core.text.ICSSPartitions;
 import org.eclipse.wst.css.ui.internal.contentassist.CSSContentAssistProcessor;
 import org.eclipse.wst.html.core.text.IHTMLPartitions;
-
+import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
 import org.eclipse.wst.xml.ui.internal.contentassist.NoRegionContentAssistProcessor;
 
 /**
@@ -29,8 +29,8 @@ public class NoRegionContentAssistProcessorForHTML extends NoRegionContentAssist
 		addPartitionProcessor(IHTMLPartitions.HTML_DEFAULT, htmlProcessor);
 		addPartitionProcessor(IHTMLPartitions.HTML_COMMENT, htmlProcessor);
 
-		
-		
+		IContentAssistProcessor jsContentAssistProcessor = new JavaScriptContentAssistProcessor();
+		addPartitionProcessor(IHTMLPartitions.SCRIPT, jsContentAssistProcessor);
 
 		IContentAssistProcessor cssContentAssistProcessor = new CSSContentAssistProcessor();
 		addPartitionProcessor(ICSSPartitions.STYLE, cssContentAssistProcessor);
