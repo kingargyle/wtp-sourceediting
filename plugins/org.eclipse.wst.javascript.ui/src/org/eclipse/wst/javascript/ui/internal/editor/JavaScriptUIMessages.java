@@ -58,6 +58,12 @@ public class JavaScriptUIMessages extends NLS {
 	public static String An_error_has_occurred_when_ERROR_;
 	public static String SourceMenu_label;
 	public static String Multiple_errors;
+	public static String SyntaxColoringPage_0;
+	public static String SyntaxColoringPage_2;
+	public static String SyntaxColoringPage_3;
+	public static String SyntaxColoringPage_4;
+	public static String SyntaxColoringPage_5;
+	public static String SyntaxColoringPage_6;
 
 	static {
 		// load message values from bundle file

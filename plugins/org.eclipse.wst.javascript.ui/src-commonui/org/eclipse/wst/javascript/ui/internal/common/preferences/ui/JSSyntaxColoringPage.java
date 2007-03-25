@@ -71,6 +71,7 @@ import org.eclipse.wst.javascript.ui.internal.common.IHelpContextIds;
 import org.eclipse.wst.javascript.ui.internal.common.JSCommonUIMessages;
 import org.eclipse.wst.javascript.ui.internal.common.style.IStyleConstantsJavaScript;
 import org.eclipse.wst.javascript.ui.internal.editor.JSEditorPlugin;
+import org.eclipse.wst.javascript.ui.internal.editor.JavaScriptUIMessages;
 import org.eclipse.wst.sse.core.internal.document.DocumentReader;
 import org.eclipse.wst.sse.core.internal.ltk.parser.RegionParser;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
@@ -92,12 +93,17 @@ import com.ibm.icu.text.Collator;
  */
 public final class JSSyntaxColoringPage extends PreferencePage implements IWorkbenchPreferencePage {
 
+	private ColorSelector fBackgroundColorEditor;
+	private Label fBackgroundLabel;
 	private Button fBold;
-	private Label fColorLabel;
+	private Button fClearStyle;
 	private Map fContextToStyleMap;
+	private Color fDefaultBackground = null;
 	private Color fDefaultForeground = null;
+	private IDocument fDocument;
 	private IStructuredDocumentRegion fFirstDocumentRegion;
 	private ColorSelector fForegroundColorEditor;
+	private Label fForegroundLabel;
 	private Button fItalic;
 	private OverlayPreferenceStore fOverlayStore;
 	private Button fStrike;
@@ -106,18 +112,21 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 	private Map fStyleToDescriptionMap;
 	private StyledText fText;
 	private Button fUnderline;
-	private IDocument fDocument;
-
+	
 	// activate controls based on the given local color type
 	private void activate(String namedStyle) {
-		Color color = fDefaultForeground;
+		Color foreground = fDefaultForeground;
+		Color background = fDefaultBackground;
 		if (namedStyle == null) {
+			fClearStyle.setEnabled(false);
 			fBold.setEnabled(false);
 			fItalic.setEnabled(false);
 			fStrike.setEnabled(false);
 			fUnderline.setEnabled(false);
-			fColorLabel.setEnabled(false);
+			fForegroundLabel.setEnabled(false);
+			fBackgroundLabel.setEnabled(false);
 			fForegroundColorEditor.setEnabled(false);
+			fBackgroundColorEditor.setEnabled(false);
 			fBold.setSelection(false);
 			fItalic.setSelection(false);
 			fStrike.setSelection(false);
@@ -125,22 +134,29 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 		}
 		else {
 			TextAttribute attribute = getAttributeFor(namedStyle);
+			fClearStyle.setEnabled(true);
 			fBold.setEnabled(true);
 			fItalic.setEnabled(true);
 			fStrike.setEnabled(true);
 			fUnderline.setEnabled(true);
-			fColorLabel.setEnabled(true);
+			fForegroundLabel.setEnabled(true);
+			fBackgroundLabel.setEnabled(true);
 			fForegroundColorEditor.setEnabled(true);
+			fBackgroundColorEditor.setEnabled(true);
 			fBold.setSelection((attribute.getStyle() & SWT.BOLD) != 0);
 			fItalic.setSelection((attribute.getStyle() & SWT.ITALIC) != 0);
 			fStrike.setSelection((attribute.getStyle() & TextAttribute.STRIKETHROUGH) != 0);
 			fUnderline.setSelection((attribute.getStyle() & TextAttribute.UNDERLINE) != 0);
 			if (attribute.getForeground() != null) {
-				color = attribute.getForeground();
+				foreground = attribute.getForeground();
+			}
+			if (attribute.getBackground() != null) {
+				background = attribute.getBackground();
 			}
 		}
 
-		fForegroundColorEditor.setColorValue(color.getRGB());
+		fForegroundColorEditor.setColorValue(foreground.getRGB());
+		fBackgroundColorEditor.setColorValue(background.getRGB());
 	}
 
 	/**
@@ -192,15 +208,16 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 		composite.setLayout(layout);
 
 		// GridData
-		GridData data = new GridData(SWT.FILL, SWT.FILL, false, false);
+		GridData data = new GridData(SWT.FILL, SWT.FILL, true, false);
 		composite.setLayoutData(data);
 		return composite;
 	}
 
 	protected Control createContents(final Composite parent) {
 		initializeDialogUnits(parent);
-		
+
 		fDefaultForeground = parent.getDisplay().getSystemColor(SWT.COLOR_LIST_FOREGROUND);
+		fDefaultBackground = parent.getDisplay().getSystemColor(SWT.COLOR_LIST_BACKGROUND);
 		Composite pageComponent = createComposite(parent, 2);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(pageComponent, IHelpContextIds.JS_PREFWEBX_STYLES_HELPID);
 
@@ -225,48 +242,63 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 		Composite styleEditor = createComposite(top, 1);
 		((GridLayout) styleEditor.getLayout()).marginRight = 5;
 		((GridLayout) styleEditor.getLayout()).marginLeft = 0;
-		createLabel(styleEditor, "Syntax Element:");
+		createLabel(styleEditor, JavaScriptUIMessages.SyntaxColoringPage_0);
 		fStylesViewer = createStylesViewer(styleEditor);
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		gridData.horizontalIndent = 0;
 		Iterator iterator = fStyleToDescriptionMap.values().iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			gridData.widthHint = Math.max(gridData.widthHint, convertWidthInCharsToPixels(iterator.next().toString().length()));
 		}
-		gridData.heightHint= convertHeightInCharsToPixels(5);
+		gridData.heightHint = convertHeightInCharsToPixels(5);
 		fStylesViewer.getControl().setLayoutData(gridData);
 
 		Composite editingComposite = createComposite(top, 1);
 		((GridLayout) styleEditor.getLayout()).marginLeft = 5;
-		createLabel(editingComposite, "");
-		Button enabler = createCheckbox(editingComposite, "Enable");
+		createLabel(editingComposite, ""); //$NON-NLS-1$
+		Button enabler = createCheckbox(editingComposite, JavaScriptUIMessages.SyntaxColoringPage_2);
 		enabler.setEnabled(false);
 		enabler.setSelection(true);
 		Composite editControls = createComposite(editingComposite, 2);
 		((GridLayout) editControls.getLayout()).marginLeft = 20;
 
-		fColorLabel = createLabel(editControls, "C&olor:");
-		((GridData) fColorLabel.getLayoutData()).verticalAlignment = SWT.CENTER;
-		fColorLabel.setEnabled(false);
+		fForegroundLabel = createLabel(editControls, SSEUIMessages.Foreground_UI_);
+		((GridData) fForegroundLabel.getLayoutData()).verticalAlignment = SWT.CENTER;
+		fForegroundLabel.setEnabled(false);
 
 		fForegroundColorEditor = new ColorSelector(editControls);
-		Button fColor = fForegroundColorEditor.getButton();
+		Button fForegroundColor = fForegroundColorEditor.getButton();
 		GridData gd = new GridData(SWT.BEGINNING, SWT.FILL, false, false);
-		fColor.setLayoutData(gd);
+		fForegroundColor.setLayoutData(gd);
 		fForegroundColorEditor.setEnabled(false);
 
-		fBold = createCheckbox(editControls, "&Bold");
+		fBackgroundLabel = createLabel(editControls, SSEUIMessages.Background_UI_);
+		((GridData) fBackgroundLabel.getLayoutData()).verticalAlignment = SWT.CENTER;
+		fBackgroundLabel.setEnabled(false);
+
+		fBackgroundColorEditor = new ColorSelector(editControls);
+		Button fBackgroundColor = fBackgroundColorEditor.getButton();
+		gd = new GridData(SWT.BEGINNING, SWT.FILL, false, false);
+		fBackgroundColor.setLayoutData(gd);
+		fBackgroundColorEditor.setEnabled(false);
+
+		fBold = createCheckbox(editControls, JavaScriptUIMessages.SyntaxColoringPage_3);
 		fBold.setEnabled(false);
 		((GridData) fBold.getLayoutData()).horizontalSpan = 2;
-		fItalic = createCheckbox(editControls, "&Italic");
+		fItalic = createCheckbox(editControls, JavaScriptUIMessages.SyntaxColoringPage_4);
 		fItalic.setEnabled(false);
 		((GridData) fItalic.getLayoutData()).horizontalSpan = 2;
-		fStrike = createCheckbox(editControls, "&Strikethrough");
+		fStrike = createCheckbox(editControls, JavaScriptUIMessages.SyntaxColoringPage_5);
 		fStrike.setEnabled(false);
 		((GridData) fStrike.getLayoutData()).horizontalSpan = 2;
-		fUnderline = createCheckbox(editControls, "&Underline");
+		fUnderline = createCheckbox(editControls, JavaScriptUIMessages.SyntaxColoringPage_6);
 		fUnderline.setEnabled(false);
 		((GridData) fUnderline.getLayoutData()).horizontalSpan = 2;
+		fClearStyle = new Button(editingComposite, SWT.PUSH);
+		fClearStyle.setText(SSEUIMessages.Restore_Default_UI_); //$NON-NLS-1$ = "Restore Default"
+		fClearStyle.setLayoutData(new GridData(SWT.BEGINNING));
+		((GridData)fClearStyle.getLayoutData()).horizontalIndent = 20;
+		fClearStyle.setEnabled(false);
 
 		Composite sampleArea = createComposite(editor, 1);
 
@@ -276,32 +308,31 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 		SourceViewer viewer = new SourceViewer(sampleArea, null, SWT.BORDER | SWT.LEFT_TO_RIGHT | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.READ_ONLY);
 		fText = viewer.getTextWidget();
 		GridData gridData3 = new GridData(SWT.FILL, SWT.FILL, true, true);
-		gridData3.widthHint= convertWidthInCharsToPixels(20);
-		gridData3.heightHint= convertHeightInCharsToPixels(5);
+		gridData3.widthHint = convertWidthInCharsToPixels(20);
+		gridData3.heightHint = convertHeightInCharsToPixels(5);
 		gridData3.horizontalSpan = 2;
 		fText.setLayoutData(gridData3);
 		fText.setEditable(false);
-		fText.setFont(JFaceResources.getFont("org.eclipse.wst.sse.ui.textfont"));
+		fText.setFont(JFaceResources.getFont("org.eclipse.wst.sse.ui.textfont")); //$NON-NLS-1$
 		fText.addKeyListener(getTextKeyListener());
 		fText.addSelectionListener(getTextSelectionListener());
 		fText.addMouseListener(getTextMouseListener());
 		fText.addTraverseListener(getTraverseListener());
 		setAccessible(fText, SSEUIMessages.Sample_text__UI_);
-
+		
+		
 		RegionParser fParser = new TokenParser();
-
 		fDocument = new Document();
 		fDocument.set(getExampleText());
 		fParser.reset(new DocumentReader(fDocument));
 		fFirstDocumentRegion = fParser.getDocumentRegions();
 		viewer.setDocument(fDocument);
-
 		top.setWeights(new int[]{1, 1});
-		editor.setWeights(new int[]{1, 2});
+		editor.setWeights(new int[]{1, 1});
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(pageComponent, IHelpContextIds.JS_PREFWEBX_STYLES_HELPID);
-
 		fStylesViewer.setInput(getStylePreferenceKeys());
 		pageComponent.pack(true);
+
 
 		applyStyles();
 
@@ -335,6 +366,31 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 							getOverlayStore().setValue(namedStyle, newPrefString);
 							applyStyles();
 							fText.redraw();
+						}
+					}
+				}
+			}
+		});
+
+		fBackgroundColorEditor.addListener(new IPropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent event) {
+				if (event.getProperty().equals(ColorSelector.PROP_COLORCHANGE)) {
+					Object o = ((IStructuredSelection) fStylesViewer.getSelection()).getFirstElement();
+					String namedStyle = o.toString();
+					String prefString = getOverlayStore().getString(namedStyle);
+					String[] stylePrefs = ColorHelper.unpackStylePreferences(prefString);
+					if (stylePrefs != null) {
+						String oldValue = stylePrefs[1];
+						// open color dialog to get new color
+						String newValue = ColorHelper.toRGBString(fBackgroundColorEditor.getColorValue());
+
+						if (!newValue.equals(oldValue)) {
+							stylePrefs[1] = newValue;
+							String newPrefString = ColorHelper.packStylePreferences(stylePrefs);
+							getOverlayStore().setValue(namedStyle, newPrefString);
+							applyStyles();
+							fText.redraw();
+							activate(namedStyle);
 						}
 					}
 				}
@@ -428,6 +484,18 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 				}
 			}
 		});
+		
+		fClearStyle.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				if (fStylesViewer.getSelection().isEmpty())
+					return;
+				String namedStyle = ((IStructuredSelection) fStylesViewer.getSelection()).getFirstElement().toString();
+				getOverlayStore().setToDefault(namedStyle);
+				applyStyles();
+				fText.redraw();
+				activate(namedStyle);
+			}
+		});
 
 		return pageComponent;
 	}
@@ -517,7 +585,7 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 	}
 
 	private TextAttribute getAttributeFor(String namedStyle) {
-		TextAttribute ta = new TextAttribute(fDefaultForeground, null, SWT.NORMAL);
+		TextAttribute ta = new TextAttribute(fDefaultForeground, fDefaultBackground, SWT.NORMAL);
 
 		if (namedStyle != null && fOverlayStore != null) {
 			// note: "namedStyle" *is* the preference key
@@ -525,6 +593,7 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 			String[] stylePrefs = ColorHelper.unpackStylePreferences(prefString);
 			if (stylePrefs != null) {
 				RGB foreground = ColorHelper.toRGB(stylePrefs[0]);
+				RGB background = ColorHelper.toRGB(stylePrefs[1]);
 
 				int fontModifier = SWT.NORMAL;
 
@@ -549,7 +618,7 @@ public final class JSSyntaxColoringPage extends PreferencePage implements IWorkb
 						fontModifier = fontModifier | TextAttribute.UNDERLINE;
 				}
 
-				ta = new TextAttribute((foreground != null) ? EditorUtility.getColor(foreground) : null, null, fontModifier);
+				ta = new TextAttribute((foreground != null) ? EditorUtility.getColor(foreground) : null, (background != null) ? EditorUtility.getColor(background) : null, fontModifier);
 			}
 		}
 		return ta;
