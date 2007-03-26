@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.wst.html.jsdt"
+      label="org.eclipse.wst.html patch for org.eclipse.wst.jsdt"
+      version="1.0.0">
+   <install-handler library="mergeInstall/" handler="org.eclipse.update.splice.core.handler.MergingInstallHandler"/>
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.wst.common_ui.feature" version="1.6.0.v20061122005-7C7_EK5A9_XYz-pjw7ZXV-a2z00z-fZWI" patch="true"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.wst.html.core.jsdt"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.wst.html.ui.jsdt"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+</feature>
