@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: HTML patched files for JSDT
+Bundle-SymbolicName: org.eclipse.wst.html.core.jsdt;singleton:=true
+Fragment-Host: org.eclipse.wst.html.core;bundle-version="1.1.101.v200702150630"
+Bundle-Version: 1.0.0
+Import-Package: org.eclipse.ui
+Require-Bundle: org.eclipse.update.core
