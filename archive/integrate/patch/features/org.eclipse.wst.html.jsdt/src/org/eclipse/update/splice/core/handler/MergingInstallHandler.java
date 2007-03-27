@@ -74,8 +74,6 @@ public class MergingInstallHandler extends DeltaInstallHandler{
 					ZipEntry je = (ZipEntry)e.nextElement();
 					
 					/* if a file exists we overwrite unless its in the protected file list */
-					String name = je.getName();
-					System.out.println("adding to jar:" + name);
 					Boolean addFile = true;
 					for(int k = 0;(k<getProtectedFiles().length && jarEntries.containsKey(je.getName()));k++){
 						if(getProtectedFiles()[k].equalsIgnoreCase(je.getName())) addFile=false;
