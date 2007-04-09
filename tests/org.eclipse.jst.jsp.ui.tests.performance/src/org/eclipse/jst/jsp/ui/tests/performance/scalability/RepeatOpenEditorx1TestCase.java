@@ -30,7 +30,7 @@ public class RepeatOpenEditorx1TestCase extends RepeatOpenEditorTestCase
     {
       super.execute();
     }
-    catch (Throwable t)
+    catch (Exception t)
     {
       fail(t.getMessage());
     }

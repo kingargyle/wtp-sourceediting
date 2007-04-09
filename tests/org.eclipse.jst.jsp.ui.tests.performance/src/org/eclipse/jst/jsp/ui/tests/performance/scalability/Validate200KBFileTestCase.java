@@ -25,7 +25,7 @@ public class Validate200KBFileTestCase extends RunValidatorTestCase
     {
       super.execute();
     }
-    catch (Throwable t)
+    catch (Exception t)
     {
       fail(t.getMessage());
     }

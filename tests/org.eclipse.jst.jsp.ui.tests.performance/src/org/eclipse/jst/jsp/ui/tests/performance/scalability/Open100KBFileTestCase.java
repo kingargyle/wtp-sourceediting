@@ -25,7 +25,7 @@ public class Open100KBFileTestCase extends OpenEditorTestCase
     {
       super.execute();
     }
-    catch (Throwable t)
+    catch (Exception t)
     {
       fail(t.getMessage());
     }
