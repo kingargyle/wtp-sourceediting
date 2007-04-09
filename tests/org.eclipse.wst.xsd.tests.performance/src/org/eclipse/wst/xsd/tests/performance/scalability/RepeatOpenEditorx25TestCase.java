@@ -29,7 +29,7 @@ public class RepeatOpenEditorx25TestCase extends RepeatOpenXSDEditorTestCase
     {
       super.execute();
     }
-    catch (Throwable t)
+    catch (Exception t)
     {
       fail(t.getMessage());
     }

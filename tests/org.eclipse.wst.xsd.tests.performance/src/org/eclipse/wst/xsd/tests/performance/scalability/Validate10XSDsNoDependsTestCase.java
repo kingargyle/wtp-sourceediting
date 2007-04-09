@@ -37,7 +37,7 @@ public class Validate10XSDsNoDependsTestCase extends RunXSDValidatorTestCase {
 	    {
 	      super.execute();
 	    }
-	    catch (Throwable t)
+	    catch (Exception t)
 	    {
 	      fail(t.getMessage());
 	    }

@@ -24,7 +24,7 @@ public class RepeatValidatex100TestCase extends RepeatRunXSDValidatorTestCase
     {
       super.execute();
     }
-    catch (Throwable t)
+    catch (Exception t)
     {
       fail(t.getMessage());
     }

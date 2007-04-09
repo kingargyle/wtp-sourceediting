@@ -29,7 +29,7 @@ public class Open1MBFileTestCase extends OpenXSDEditorTestCase
     {
       super.execute();
     }
-    catch (Throwable t)
+    catch (Exception t)
     {
       fail(t.getMessage());
     }

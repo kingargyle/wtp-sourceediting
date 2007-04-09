@@ -24,7 +24,7 @@ public class Validate1MBFileTestCase extends RunXSDValidatorTestCase
     {
       super.execute();
     }
-    catch (Throwable t)
+    catch (Exception t)
     {
       fail(t.getMessage());
     }

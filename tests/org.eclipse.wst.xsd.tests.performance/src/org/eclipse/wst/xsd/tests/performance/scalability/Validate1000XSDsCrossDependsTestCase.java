@@ -37,7 +37,7 @@ public class Validate1000XSDsCrossDependsTestCase extends RunXSDValidatorTestCas
 	    {
 	      super.execute();
 	    }
-	    catch (Throwable t)
+	    catch (Exception t)
 	    {
 	      fail(t.getMessage());
 	    }
