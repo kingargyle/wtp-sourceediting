@@ -30,7 +30,7 @@ public class RepeatValidatex25TestCase extends RepeatRunValidatorTestCase
     {
       super.execute();
     }
-    catch (Throwable t)
+    catch (Exception t)
     {
       fail(t.getMessage());
     }
