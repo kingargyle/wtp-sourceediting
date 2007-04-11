@@ -1073,10 +1073,6 @@ public class JSEditor extends TextEditor {
 		// do nothing
 	}
 
-	public boolean isEditable() {
-		return true;
-	}
-
 	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
 		super.rulerContextMenuAboutToShow(menu);
 		// append actions to "debug" group (created in
