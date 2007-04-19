@@ -130,11 +130,13 @@
   	<antcall target="RepeatValidatex100TestCase"/>
   	<antcall target="RepeatValidatex100TestCase"/>
   	<antcall target="RepeatValidatex100TestCase"/>
+
+<!--  	
+  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
+  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
+  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
+ -->
   	
-  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
-  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
-  	<antcall target="Validate1000XSDsCrossDependsTestCase"/>
- 	
   	<antcall target="Validate100XSDsCrossDependsTestCase"/>
   	<antcall target="Validate100XSDsCrossDependsTestCase"/>
   	<antcall target="Validate100XSDsCrossDependsTestCase"/>
