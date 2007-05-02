@@ -89,7 +89,10 @@ public class JavaScriptColorPreferences {
 			RGB foreground = ColorHelper.toRGB(stylePrefs[0]);
 			RGB background = ColorHelper.toRGB(stylePrefs[1]);
 			boolean bold = Boolean.valueOf(stylePrefs[2]).booleanValue();
-			ta = createTextAttribute(foreground, background, bold);
+			boolean italic = Boolean.valueOf(stylePrefs[3]).booleanValue();
+			boolean strikethrough = Boolean.valueOf(stylePrefs[4]).booleanValue();
+			boolean underline = Boolean.valueOf(stylePrefs[5]).booleanValue();
+			ta = createTextAttribute(foreground, background, bold, italic, strikethrough, underline);
 		}
 		
 		return ta;
@@ -124,11 +127,24 @@ public class JavaScriptColorPreferences {
 	}
 
 	protected static void clearColors() {
-		taDefault = taKeyword = taStringLit = taComment = taUnfComment = createTextAttribute(null, null, false);
+		taDefault = taKeyword = taStringLit = taComment = taUnfComment = createTextAttribute(null, null, false, false, false, false);
 	}
 
-	protected static TextAttribute createTextAttribute(RGB foreground, RGB background, boolean bold) {
-		return new TextAttribute((foreground != null) ? EditorUtility.getColor(foreground) : defaultForeground, (background != null) ? EditorUtility.getColor(background) : defaultBackground, bold ? SWT.BOLD : SWT.NORMAL);
+	protected static TextAttribute createTextAttribute(RGB foreground, RGB background, boolean bold, boolean italic, boolean strikethrough, boolean underline) {
+		int style = SWT.NORMAL;
+		if (bold) {
+			style = style | SWT.BOLD;
+		}
+		if (italic) {
+			style = style | SWT.ITALIC;
+		}
+		if (strikethrough) {
+			style = style | TextAttribute.STRIKETHROUGH;
+		}
+		if (underline) {
+			style = style | TextAttribute.UNDERLINE;
+		}
+		return new TextAttribute((foreground != null) ? EditorUtility.getColor(foreground) : defaultForeground, (background != null) ? EditorUtility.getColor(background) : defaultBackground, style);
 	}
 
 	public static void addPropertyChangeListener(IPropertyChangeListener pcl) {
