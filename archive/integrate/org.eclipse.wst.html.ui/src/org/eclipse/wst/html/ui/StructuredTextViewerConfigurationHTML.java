@@ -101,6 +101,7 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 		public static final String INFORMATIONPROVIDER_ID="informationpresenter";
 		public static final String AUTOEDIT_ID="autoeditstrategy";
 		public static final String CONTENT_FORMATER="contentformater";
+		public static final String HYPERLINK_DETECTOR="hyperlinkdetector";
 		
 	}
 	/**
@@ -211,6 +212,12 @@ public class StructuredTextViewerConfigurationHTML extends StructuredTextViewerC
 			if (!allDetectors.contains(detector)) {
 				allDetectors.add(detector);
 			}
+		}
+		/* Check for external HyperLink Detectors */
+		String[] contentTypes = getConfiguredContentTypes(sourceViewer);
+		for(int i = 0;i<contentTypes.length;i++){
+			IHyperlinkDetector hl = (IHyperlinkDetector)ExtendedConfigurationBuilder.getInstance().getConfiguration(externalTypeExtension.HYPERLINK_DETECTOR, contentTypes[i]);
+			if(hl!=null) allDetectors.add(hl);
 		}
 		return (IHyperlinkDetector[]) allDetectors.toArray(new IHyperlinkDetector[0]);
 	}
