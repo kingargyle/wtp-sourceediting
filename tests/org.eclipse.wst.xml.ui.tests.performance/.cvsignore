@@ -4,3 +4,4 @@ build.xml
 dev.properties
 xmluiperformance.jar
 temp.folder
+javaCompiler.xmluiperformance.jar.args
