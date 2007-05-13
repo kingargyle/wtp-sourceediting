@@ -4,3 +4,4 @@ build.xml
 dev.properties
 sseuiperformance.jar
 temp.folder
+javaCompiler.sseuiperformance.jar.args
