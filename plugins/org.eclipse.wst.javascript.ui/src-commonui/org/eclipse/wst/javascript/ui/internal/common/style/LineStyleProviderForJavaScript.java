@@ -627,6 +627,13 @@ public class LineStyleProviderForJavaScript implements LineStyleProvider, IDocum
 							// attr, offNode + offsTkThis,
 							// strTkThis.length());
 							styleRange = new StyleRange(offNode + offsTkThis, strTkThis.length(), attr.getForeground(), attr.getBackground(), attr.getStyle());
+							// BUG187609 - strikethrough & underline syntax coloring preference don't work
+							if((attr.getStyle() & TextAttribute.STRIKETHROUGH) != 0) {
+								styleRange.strikeout = true;
+							}
+							if((attr.getStyle() & TextAttribute.UNDERLINE) != 0) {
+								styleRange.underline = true;
+							}
 							if (offsTkThis < offsMax)
 								holdResults.add(styleRange);
 							nd.cachedStyles.add(styleRange);

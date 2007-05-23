@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2006 IBM Corporation and others.
+ * Copyright (c) 2004, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -404,6 +404,13 @@ public class JSLineStyleListener implements LineStyleListener, IDocumentListener
 							// perf: createStyleRange could be inlined here and optimized out.  For now though it provides a central place to monitor all StyleRanges built.
 							//styleRange = createStyleRange(currentRegion, attr, offNode + offsTkThis, strTkThis.length());
 							styleRange = new StyleRange(offNode + offsTkThis, strTkThis.length(), attr.getForeground(), attr.getBackground(), attr.getStyle());
+							// BUG187609 - strikethrough & underline syntax coloring preference don't work
+							if((attr.getStyle() & TextAttribute.STRIKETHROUGH) != 0) {
+								styleRange.strikeout = true;
+							}
+							if((attr.getStyle() & TextAttribute.UNDERLINE) != 0) {
+								styleRange.underline = true;
+							}
 							if (offsTkThis < offsMax)
 								holdResults.add(styleRange);
 							cachedStyles.add(styleRange);
