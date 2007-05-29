@@ -24,3 +24,4 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.icu,
  org.eclipse.wst.xml.core
 Eclipse-LazyStart: true
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
