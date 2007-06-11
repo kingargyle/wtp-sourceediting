@@ -1,6 +1,5 @@
 bin
 build.xml
-
 temp.folder
 xsdperformance.jar
 javaCompiler.xsdperformance.jar.args
