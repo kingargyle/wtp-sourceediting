@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2006 IBM Corporation and others.
+ * Copyright (c) 2004, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,18 +17,20 @@ import java.util.List;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.wst.css.ui.internal.contentassist.CSSContentAssistProcessor;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocument;
 import org.eclipse.wst.html.core.internal.provisional.HTML40Namespace;
 import org.eclipse.wst.html.core.internal.provisional.HTMLCMProperties;
+import org.eclipse.wst.html.core.text.IHTMLPartitions;
+import org.eclipse.wst.html.ui.StructuredTextViewerConfigurationHTML.externalTypeExtension;
 import org.eclipse.wst.html.ui.internal.HTMLUIPlugin;
 import org.eclipse.wst.html.ui.internal.editor.HTMLEditorPluginImageHelper;
 import org.eclipse.wst.html.ui.internal.editor.HTMLEditorPluginImages;
 import org.eclipse.wst.html.ui.internal.preferences.HTMLUIPreferenceNames;
 import org.eclipse.wst.html.ui.internal.templates.TemplateContextTypeIdsHTML;
-//import org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapterFactory;
@@ -39,6 +41,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
+import org.eclipse.wst.sse.ui.internal.ExtendedConfigurationBuilder;
 import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;
 import org.eclipse.wst.sse.ui.internal.contentassist.ContentAssistUtils;
 import org.eclipse.wst.sse.ui.internal.contentassist.CustomCompletionProposal;
@@ -65,6 +68,7 @@ public class HTMLContentAssistProcessor extends AbstractContentAssistProcessor i
 	protected IPreferenceStore fPreferenceStore = null;
 	protected boolean isXHTML = false;
 	private HTMLTemplateCompletionProcessor fTemplateProcessor = null;
+	private IContentAssistProcessor fJSContentAssistProcessor = null;
 	private List fTemplateContexts = new ArrayList();
 
 	public HTMLContentAssistProcessor() {
@@ -184,25 +188,24 @@ public class HTMLContentAssistProcessor extends AbstractContentAssistProcessor i
 
 		// CMVC 242695
 		// if it's a </script> tag, bounce back to JS ca processor...
-//		if (fn != null && fn.getType() == DOMRegionContext.XML_TAG_NAME && documentPosition == fn.getStartOffset()) {
-//			ITextRegionList v = fn.getRegions();
-//			if (v.size() > 1) {
-//				// determine that it's a close tag
-//				if ((v.get(0)).getType() == DOMRegionContext.XML_END_TAG_OPEN) {
-//					Iterator it = v.iterator();
-//					ITextRegion region = null;
-//					// search for script tag name
-//					while (it.hasNext()) {
-//						region = (ITextRegion) it.next();
-//						if (fn.getText(region).equalsIgnoreCase("script")) { //$NON-NLS-1$
-//							// return JS content assist...
-//							JavaScriptContentAssistProcessor jsProcessor = new JavaScriptContentAssistProcessor();
-//							return jsProcessor.computeCompletionProposals(textViewer, documentPosition);
-//						}
-//					}
-//				}
-//			}
-//		}
+		if (fn != null && fn.getType() == DOMRegionContext.XML_TAG_NAME && documentPosition == fn.getStartOffset()) {
+			ITextRegionList v = fn.getRegions();
+			if (v.size() > 1) {
+				// determine that it's a close tag
+				if ((v.get(0)).getType() == DOMRegionContext.XML_END_TAG_OPEN) {
+					Iterator it = v.iterator();
+					ITextRegion region = null;
+					// search for script tag name
+					while (it.hasNext()) {
+						region = (ITextRegion) it.next();
+						if (fn.getText(region).equalsIgnoreCase("script")) { //$NON-NLS-1$
+							// return JS content assist...
+							return getJSContentAssistProcessor().computeCompletionProposals(textViewer, documentPosition);
+						}
+					}
+				}
+			}
+		}
 
 		isXHTML = getXHTML(node);
 
@@ -211,7 +214,7 @@ public class HTMLContentAssistProcessor extends AbstractContentAssistProcessor i
 		// handle blank HTML document case
 		if (treeNode == null || isViewerEmpty(textViewer)) {
 			// cursor is at the EOF
-			ICompletionProposal htmlTagProposal = getHTMLTagPropsosal((StructuredTextViewer) textViewer, documentPosition);
+			ICompletionProposal htmlTagProposal = getHTMLTagProposal((StructuredTextViewer) textViewer, documentPosition);
 			ICompletionProposal[] superResults = super.computeCompletionProposals(textViewer, documentPosition);
 			if (superResults != null && superResults.length > 0 && htmlTagProposal != null) {
 				ICompletionProposal[] blankHTMLDocResults = new ICompletionProposal[superResults.length + 1];
@@ -321,7 +324,7 @@ public class HTMLContentAssistProcessor extends AbstractContentAssistProcessor i
 	/**
 	 * @return ICompletionProposal
 	 */
-	private ICompletionProposal getHTMLTagPropsosal(StructuredTextViewer viewer, int documentPosition) {
+	private ICompletionProposal getHTMLTagProposal(StructuredTextViewer viewer, int documentPosition) {
 		IModelManager mm = StructuredModelManager.getModelManager();
 		IStructuredModel model = null;
 		ICompletionProposal result = null;
@@ -336,24 +339,28 @@ public class HTMLContentAssistProcessor extends AbstractContentAssistProcessor i
 					if (mq != null) {
 
 						// XHTML requires lowercase tagname for lookup
-						CMElementDeclaration htmlDecl = (CMElementDeclaration) mq.getCorrespondingCMDocument(doc).getElements().getNamedItem(HTML40Namespace.ElementName.HTML.toLowerCase());
-						if (htmlDecl != null) {
-							StringBuffer proposedTextBuffer = new StringBuffer();
-							getContentGenerator().generateTag(doc, htmlDecl, proposedTextBuffer);
+						CMDocument correspondingCMDocument = mq.getCorrespondingCMDocument(doc);
+						if (correspondingCMDocument != null) {
+							CMElementDeclaration htmlDecl = (CMElementDeclaration) correspondingCMDocument.getElements().getNamedItem(HTML40Namespace.ElementName.HTML.toLowerCase());
+							if (htmlDecl != null) {
+								StringBuffer proposedTextBuffer = new StringBuffer();
+								getContentGenerator().generateTag(doc, htmlDecl, proposedTextBuffer);
 
-							String proposedText = proposedTextBuffer.toString();
-							String requiredName = getContentGenerator().getRequiredName(doc, htmlDecl);
+								String proposedText = proposedTextBuffer.toString();
+								String requiredName = getContentGenerator().getRequiredName(doc, htmlDecl);
 
-							CustomCompletionProposal proposal = new CustomCompletionProposal(proposedText, documentPosition,
-							/* start pos */
-							0, /* replace length */
-							requiredName.length() + 2, /*
-														 * cursor position
-														 * after (relavtive to
-														 * start)
-														 */
-							HTMLEditorPluginImageHelper.getInstance().getImage(HTMLEditorPluginImages.IMG_OBJ_TAG_GENERIC), requiredName, null, null, XMLRelevanceConstants.R_TAG_NAME);
-							result = proposal;
+								CustomCompletionProposal proposal = new CustomCompletionProposal(proposedText, documentPosition,
+								/* start pos */
+								0, /* replace length */
+								requiredName.length() + 2, /*
+															 * cursor position
+															 * after
+															 * (relavtive to
+															 * start)
+															 */
+								HTMLEditorPluginImageHelper.getInstance().getImage(HTMLEditorPluginImages.IMG_OBJ_TAG_GENERIC), requiredName, null, null, XMLRelevanceConstants.R_TAG_NAME);
+								result = proposal;
+							}
 						}
 					}
 				}
@@ -392,6 +399,15 @@ public class HTMLContentAssistProcessor extends AbstractContentAssistProcessor i
 		if (isXHTML)
 			return " />"; //$NON-NLS-1$
 		return ">"; //$NON-NLS-1$
+	}
+	
+	private IContentAssistProcessor getJSContentAssistProcessor() {
+		if (fJSContentAssistProcessor == null) {
+			fJSContentAssistProcessor =  (IContentAssistProcessor)ExtendedConfigurationBuilder.getInstance().getConfiguration(externalTypeExtension.CONTENT_ASSIST, IHTMLPartitions.SCRIPT);
+			
+			
+		}
+		return fJSContentAssistProcessor;
 	}
 
 	private HTMLTemplateCompletionProcessor getTemplateCompletionProcessor() {

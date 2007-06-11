@@ -20,9 +20,11 @@
 		<sourceViewerConfiguration
 			class="org.eclipse.wst.html.ui.StructuredTextViewerConfigurationHTML"
 			target="org.eclipse.wst.html.core.htmlsource" />
+		<!--	
 		<contentOutlineConfiguration
 			class="org.eclipse.wst.html.ui.views.contentoutline.HTMLContentOutlineConfiguration"
 			target="org.eclipse.wst.html.core.htmlsource" />
+		-->
 		<propertySheetConfiguration
 			class="org.eclipse.wst.xml.ui.views.properties.XMLPropertySheetConfiguration"
 			target="org.eclipse.wst.html.core.htmlsource" />
@@ -39,9 +41,9 @@
 			class="org.eclipse.wst.html.ui.internal.projection.StructuredTextFoldingProviderHTML"
 			target="org.eclipse.wst.html.core.htmlsource" />
 		<provisionalConfiguration
-			type="correctionassistant"
-			class="org.eclipse.wst.html.ui.internal.correction.CorrectionAssistantProviderHTML"
-			target="org.eclipse.wst.html.core.htmlsource" />
+			type="org.eclipse.jface.text.quickassist.IQuickAssistProcessor"
+			class="org.eclipse.wst.xml.ui.internal.correction.XMLQuickAssistProcessor"
+			target="org.eclipse.wst.html.HTML_DEFAULT" />
 		<provisionalDefinition
 			type="preferencepages"
 			value="org.eclipse.wst.html.ui.preferences, org.eclipse.wst.html.ui.preferences.source, org.eclipse.wst.html.ui.preferences.templates, org.eclipse.wst.html.ui.preferences.styles"
@@ -262,21 +264,16 @@
 				objectClass="org.eclipse.core.resources.IFile"
 				nameFilter="*.wml">
 			</filter>
-			
+         	<contentTypeBinding contentTypeId="org.eclipse.wst.html.core.htmlsource"/>			
 			<projectNature id=""/>
 			<enablement></enablement>
-			
-			<helper
-				class="org.eclipse.wst.html.internal.validation.HTMLValidationWorkbenchHelper">
-			</helper>
-		
-		<run
-             async="true"
-             fullBuild="true"
-             incremental="true"
-             enabled="true"
-			 class="org.eclipse.wst.html.internal.validation.HTMLValidator">
-         </run>
+			<helper class="org.eclipse.wst.html.internal.validation.HTMLValidationWorkbenchHelper"/>
+			<run
+				async="true"
+				fullBuild="true"
+				incremental="true"
+				enabled="true"
+				class="org.eclipse.wst.html.internal.validation.HTMLValidator"/>
 		</validator>
 	</extension>
 
@@ -463,5 +460,12 @@
                actionID="RulerClick"
                id="org.eclipse.ui.texteditor.SelectRulerAction"/>
         </editorContribution>
+	</extension>
+	<extension
+		point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
+		<target
+			id="org.eclipse.wst.html.core.htmlsource"
+			name="%HTML_Source_target_name">
+		</target>
 	</extension>
 </plugin>
