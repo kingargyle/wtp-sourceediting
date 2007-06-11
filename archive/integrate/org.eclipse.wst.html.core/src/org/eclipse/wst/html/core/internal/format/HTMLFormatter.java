@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -28,16 +28,18 @@ import org.eclipse.wst.xml.core.internal.modelquery.ModelQueryUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
-import org.eclipse.wst.xml.core.internal.provisional.format.IStructuredFormatPreferencesXML;
 import org.eclipse.wst.xml.core.internal.provisional.format.StructuredFormatPreferencesXML;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 
 public class HTMLFormatter implements IStructuredFormatter {
 
 	private static final String HTML_NAME = "html";//$NON-NLS-1$
 	private static final String BODY_NAME = "BODY";//$NON-NLS-1$
+	// hidden jsp logic that should be removed when jsp formatter is created
+	private static final String JSP = "jsp";//$NON-NLS-1$
 
 	/**
 	 */
@@ -97,6 +99,48 @@ public class HTMLFormatter implements IStructuredFormatter {
 			return false;
 		Node next = node.getNextSibling();
 
+		// special exception if this node is a non-HTML tag (like JSP
+		// elements)
+		// BUG188093 - only preserve whitespace for jsp (not custom) tags
+		String prefix = node.getPrefix();
+		if (prefix != null && JSP.equals(prefix)) {
+			boolean canInsertBreakAfter = false;
+			// if a whitespace does not exist after it, do not add one
+			if (next != null && next.getNodeType() == Node.TEXT_NODE) {
+				String theText = ((Text) next).getData();
+				if (theText != null && theText.length() > 0) {
+					char theChar = theText.charAt(0);
+					canInsertBreakAfter = Character.isWhitespace(theChar);
+				}
+			}
+			// if cannot insert break, go ahead and return false (otherwise,
+			// continue processing)
+			if (!canInsertBreakAfter)
+				return false;
+		}
+
+		// special exception if next node is a non-HTML tag (like JSP
+		// elements)
+		// BUG188093 - only preserve whitespace for jsp (not custom) tags
+		if (next != null) {
+			prefix = next.getPrefix();
+			if (prefix != null && JSP.equals(prefix)) {
+				boolean canInsertBreakAfterPrevious = false;
+				// if a whitespace does not exist before it, do not add one
+				if (node.getNodeType() == Node.TEXT_NODE) {
+					String theText = ((Text) node).getData();
+					if (theText != null && theText.length() > 0) {
+						char theChar = theText.charAt(theText.length() - 1);
+						canInsertBreakAfterPrevious = Character.isWhitespace(theChar);
+					}
+				}
+				// if cannot insert break, go ahead and return false
+				// (otherwise,
+				// continue processing)
+				if (!canInsertBreakAfterPrevious)
+					return false;
+			}
+		}
 		if (parent.getNodeType() == Node.DOCUMENT_NODE) {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				// do not insert break after unclosed tag
@@ -111,7 +155,8 @@ public class HTMLFormatter implements IStructuredFormatter {
 			if (next == null && element.getEndStructuredDocumentRegion() == null)
 				return false;
 
-			// insert line break under non-HTML elements including JSP elements
+			// insert line break under non-HTML elements including JSP
+			// elements
 			if (element.getPrefix() != null)
 				return true;
 
@@ -165,6 +210,49 @@ public class HTMLFormatter implements IStructuredFormatter {
 			return false;
 		Node prev = node.getPreviousSibling();
 
+		// special exception if this node is a non-HTML tag (like JSP
+		// elements)
+		// BUG188093 - only preserve whitespace for jsp (not custom) tags
+		String prefix = node.getPrefix();
+		if (prefix != null && JSP.equals(prefix)) {
+			boolean canInsertBreakBefore = false;
+			// if a whitespace does not exist before it, do not add one
+			if (prev != null && prev.getNodeType() == Node.TEXT_NODE) {
+				String theText = ((Text) prev).getData();
+				if (theText != null && theText.length() > 0) {
+					char theChar = theText.charAt(theText.length() - 1);
+					canInsertBreakBefore = Character.isWhitespace(theChar);
+				}
+			}
+			// if cannot insert break, go ahead and return false (otherwise,
+			// continue processing)
+			if (!canInsertBreakBefore)
+				return false;
+		}
+
+		// special exception if previous node is a non-HTML tag (like JSP
+		// elements)
+		// BUG188093 - only preserve whitespace for jsp (not custom) tags
+		if (prev != null) {
+			prefix = prev.getPrefix();
+			if (prefix != null && JSP.equals(prefix)) {
+				boolean canInsertBreakBeforeNext = false;
+				// if a whitespace does not exist after it, do not add one
+				if (node.getNodeType() == Node.TEXT_NODE) {
+					String theText = ((Text) node).getData();
+					if (theText != null && theText.length() > 0) {
+						char theChar = theText.charAt(0);
+						canInsertBreakBeforeNext = Character.isWhitespace(theChar);
+					}
+				}
+				// if cannot insert break, go ahead and return false
+				// (otherwise,
+				// continue processing)
+				if (!canInsertBreakBeforeNext)
+					return false;
+			}
+		}
+
 		if (parent.getNodeType() == Node.DOCUMENT_NODE) {
 			if (prev == null)
 				return false;
@@ -176,7 +264,8 @@ public class HTMLFormatter implements IStructuredFormatter {
 			if (prev == null && element.getStartStructuredDocumentRegion() == null)
 				return false;
 
-			// insert line break under non-HTML elements including JSP elements
+			// insert line break under non-HTML elements including JSP
+			// elements
 			if (element.getPrefix() != null)
 				return true;
 
@@ -387,6 +476,10 @@ public class HTMLFormatter implements IStructuredFormatter {
 			return;
 		if (node.getNodeType() == Node.TEXT_NODE)
 			return;
+		// don't insert break if node is on the last line
+		int documentLength = node.getStructuredDocument().getLength();
+		if (documentLength < 1 || (node.getEndOffset() >= (documentLength - 1)))
+			return;
 		Node parent = node.getParentNode();
 		if (parent == null)
 			return;
@@ -483,9 +576,11 @@ public class HTMLFormatter implements IStructuredFormatter {
 		int startOffset = flatNode.getStartOffset();
 		if (structuredDocument.containsReadOnly(startOffset + offset, length))
 			return;
-		// We use 'structuredDocument' as the requester object just so this and the other
-		// format-related 'repalceText' (in replaceSource) can use the same requester.
-		// Otherwise, if requester is not identical, 
+		// We use 'structuredDocument' as the requester object just so this
+		// and the other
+		// format-related 'repalceText' (in replaceSource) can use the same
+		// requester.
+		// Otherwise, if requester is not identical,
 		// the undo group gets "broken" into multiple pieces based
 		// on the requesters being different. Technically, any unique, common
 		// requester object would work.
@@ -504,12 +599,14 @@ public class HTMLFormatter implements IStructuredFormatter {
 			source = new String();
 		if (structuredDocument.containsReadOnly(offset, length))
 			return;
-		// We use 'structuredDocument' as the requester object just so this and the other
-		// format-related 'repalceText' (in replaceSource) can use the same requester.
-		// Otherwise, if requester is not identical, 
+		// We use 'structuredDocument' as the requester object just so this
+		// and the other
+		// format-related 'repalceText' (in replaceSource) can use the same
+		// requester.
+		// Otherwise, if requester is not identical,
 		// the undo group gets "broken" into multiple pieces based
 		// on the requesters being different. Technically, any unique, common
-		// requester object would work. 
+		// requester object would work.
 		structuredDocument.replaceText(structuredDocument, offset, length, source);
 	}
 
@@ -588,19 +685,19 @@ public class HTMLFormatter implements IStructuredFormatter {
 	/**
 	 */
 	protected boolean splitLines() {
-		return true;//getFormatPreferences().getSplitLines();
+		return true;// getFormatPreferences().getSplitLines();
 	}
 
 	protected IStructuredFormatPreferences fFormatPreferences = null;
 	protected HTMLFormatContraints fFormatContraints = null;
 	protected IProgressMonitor fProgressMonitor = null;
 
-	//public void format(XMLNode node, FormatContraints formatContraints) {
-	//	if (formatContraints.getFormatWithSiblingIndent())
-	//		formatContraints.setCurrentIndent(getSiblingIndent(node));
+	// public void format(XMLNode node, FormatContraints formatContraints) {
+	// if (formatContraints.getFormatWithSiblingIndent())
+	// formatContraints.setCurrentIndent(getSiblingIndent(node));
 	//
-	//	formatNode(node, formatContraints);
-	//}
+	// formatNode(node, formatContraints);
+	// }
 
 	public void setFormatPreferences(IStructuredFormatPreferences formatPreferences) {
 		fFormatPreferences = formatPreferences;
@@ -613,7 +710,8 @@ public class HTMLFormatter implements IStructuredFormatter {
 			Preferences preferences = HTMLCorePlugin.getDefault().getPluginPreferences();
 			if (preferences != null) {
 				fFormatPreferences.setLineWidth(preferences.getInt(HTMLCorePreferenceNames.LINE_WIDTH));
-				((IStructuredFormatPreferencesXML) fFormatPreferences).setSplitMultiAttrs(preferences.getBoolean(HTMLCorePreferenceNames.SPLIT_MULTI_ATTRS));
+				((StructuredFormatPreferencesXML) fFormatPreferences).setSplitMultiAttrs(preferences.getBoolean(HTMLCorePreferenceNames.SPLIT_MULTI_ATTRS));
+				((StructuredFormatPreferencesXML) fFormatPreferences).setAlignEndBracket(preferences.getBoolean(HTMLCorePreferenceNames.ALIGN_END_BRACKET));
 				fFormatPreferences.setClearAllBlankLines(preferences.getBoolean(HTMLCorePreferenceNames.CLEAR_ALL_BLANK_LINES));
 
 				char indentChar = ' ';

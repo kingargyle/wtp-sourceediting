@@ -34,7 +34,7 @@ import org.eclipse.wst.xml.core.internal.text.rules.StructuredTextPartitionerFor
  */
 public class StructuredTextPartitionerForHTML extends StructuredTextPartitionerForXML implements IStructuredTextPartitioner {
 
-	private final static String[] configuredContentTypes = new String[]{IHTMLPartitions.HTML_DEFAULT, IHTMLPartitions.HTML_DECLARATION, IHTMLPartitions.HTML_COMMENT, IHTMLPartitions.SCRIPT, ICSSPartitions.STYLE,ISCRIPTPartitions.SCRIPT_EVENT,};
+	private final static String[] configuredContentTypes = new String[]{IHTMLPartitions.HTML_DEFAULT, IHTMLPartitions.HTML_DECLARATION, IHTMLPartitions.HTML_COMMENT, IHTMLPartitions.SCRIPT, ICSSPartitions.STYLE,IHTMLPartitions.SCRIPT_EVENT};
 
 	public static final String JAVASCRIPT = "javascript"; //$NON-NLS-1$
 	public static final String JAVASCRIPT_APPLICATION = "application/x-javascript"; //$NON-NLS-1$
@@ -50,11 +50,7 @@ public class StructuredTextPartitionerForHTML extends StructuredTextPartitionerF
 										ATTR_NAME_ONHELP};
 		
 	}
-	// Should be moved to the IHTMLPartitions
-	interface ISCRIPTPartitions extends IHTMLPartitions{
-		static final String SCRIPT_EVENT=SCRIPT + ".EVENT";
-	}
-	
+
 	public StructuredTextPartitionerForHTML() {
 		super();
 	}
@@ -149,8 +145,8 @@ public class StructuredTextPartitionerForHTML extends StructuredTextPartitionerF
 			result = IHTMLPartitions.HTML_COMMENT;
 		else if (region.getType() == DOMRegionContext.XML_DOCTYPE_DECLARATION || region.getType() == DOMRegionContext.XML_DECLARATION_OPEN)
 			result = IHTMLPartitions.HTML_DECLARATION;
-		else  if(region.getType()==DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE && StringUtils.contains(ScriptEventNameSpace.EVENTS,  getAttrName(region,offset), false) )
-			result = ISCRIPTPartitions.SCRIPT_EVENT;
+		else  if(region.getType()==DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE && StringUtils.contains(ScriptEventNameSpace.EVENTS,  getAttrName(region,offset), false)  )
+			result = IHTMLPartitions.SCRIPT_EVENT;
 		else
 			result = super.getPartitionType(region, offset);
 		return result;
@@ -203,7 +199,7 @@ public class StructuredTextPartitionerForHTML extends StructuredTextPartitionerF
 		else if (tagname.equalsIgnoreCase(HTML40Namespace.ElementName.STYLE))
 			result = ICSSPartitions.STYLE;
 		else if(region.getType()==DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE && StringUtils.contains(ScriptEventNameSpace.EVENTS,  getAttrName(region,offset), false) )
-			result = ISCRIPTPartitions.SCRIPT_EVENT;
+			result = IHTMLPartitions.SCRIPT_EVENT;
 		else
 			result = super.getPartitionType(region, offset);
 

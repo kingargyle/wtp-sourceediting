@@ -1,10 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2005 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
@@ -16,7 +16,7 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
 
 /**
- * Implementation of CMDocument for the JSP 1.1.
+ * Implementation of CMDocument for JSP 1.1 and JSP 1.2.
  */
 class JCMDocImpl extends CMNodeImpl implements JSPCMDocument {
 
@@ -28,9 +28,13 @@ class JCMDocImpl extends CMNodeImpl implements JSPCMDocument {
 	 * HCMDocImpl constructor comment.
 	 */
 	public JCMDocImpl(String docTypeName, CMNamespaceImpl targetNamespace) {
+		this(docTypeName, targetNamespace, new JSPElementCollection());
+	}
+
+	JCMDocImpl(String docTypeName, CMNamespaceImpl targetNamespace, JSPElementCollection collection) {
 		super(docTypeName);
 		namespace = targetNamespace;
-		elements = new JSPElementCollection();
+		elements = collection;
 	}
 
 	public HTMLElementDeclaration getElementDeclaration(String elementName) {

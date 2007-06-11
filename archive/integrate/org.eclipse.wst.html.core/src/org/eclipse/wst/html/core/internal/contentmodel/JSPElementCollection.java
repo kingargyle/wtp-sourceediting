@@ -1,10 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2005 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
@@ -28,12 +28,12 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
 
 /**
- * Factory for element declarations of the JSP 1.1.
+ * Factory for element declarations of the JSP 1.1 and 1.2.
  */
-final class JSPElementCollection extends DeclCollection implements JSP11Namespace.ElementName {
+class JSPElementCollection extends DeclCollection implements JSP11Namespace.ElementName {
 
 
-	private class TypePacket {
+	class TypePacket {
 		public String name = null;
 		public int content = CMElementDeclaration.EMPTY;
 		public int omit = HTMLElementDeclaration.OMIT_NONE;
@@ -48,7 +48,7 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 	}
 
 	/** JSP element declaration. */
-	private class ElemDecl extends CMContentImpl implements HTMLElementDeclaration, HTMLPropertyDeclaration {
+	class ElemDecl extends CMContentImpl implements HTMLElementDeclaration, HTMLPropertyDeclaration {
 		private TypePacket type = null;
 		private CMGroupImpl content = null;
 		private CMNamedNodeMapImpl attributes = null;
@@ -66,7 +66,7 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 			attributes = attrs;
 		}
 
-		// implementes CMNode
+		// implements CMNode
 		public int getNodeType() {
 			return CMNode.ELEMENT_DECLARATION;
 		}
@@ -88,7 +88,7 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 
 		public Object getProperty(String propertyName) {
 			if (propertyName.equals(HTMLCMProperties.SHOULD_IGNORE_CASE)) {
-				return new Boolean(false); //D208839
+				return Boolean.FALSE; //D208839
 			}
 			else if (propertyName.equals(HTMLCMProperties.CONTENT_HINT)) {
 				String myName = getElementName();
@@ -192,7 +192,7 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 	}
 
 	// element IDs
-	private static class Ids {
+	static class Ids {
 		public static final int ID_SCRIPTLET = 0;
 		public static final int ID_EXPRESSION = 1;
 		public static final int ID_DECLARATION = 2;
@@ -234,9 +234,9 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 	}
 
 	// attribute creater
-	private class JACreater implements JSP11Namespace {
+	class JACreater implements JSP11Namespace {
 		// attribute declaration
-		private class AttrDecl extends CMNodeImpl implements HTMLAttributeDeclaration {
+		class AttrDecl extends CMNodeImpl implements HTMLAttributeDeclaration {
 			HTMLCMDataTypeImpl type = null;
 			int usage = CMAttributeDeclaration.OPTIONAL;
 
@@ -279,7 +279,7 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 			}
 		}
 
-		private CMNamedNodeMapImpl declarations = null;
+		CMNamedNodeMapImpl declarations = null;
 
 		public JACreater() {
 			declarations = new CMNamedNodeMapImpl();
@@ -504,12 +504,13 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 			adec.usage = CMAttributeDeclaration.REQUIRED;
 			declarations.putNamedItem(ATTR_NAME_PAGE, adec);
 
-			// ("flush" ENUM REQUIRED (true|false)); Defect TORO:185241
+			// ("flush" ENUM OPTIONAL (true|false)); Defect TORO:185241
 			adec = new AttrDecl(ATTR_NAME_FLUSH);
 			adec.type = new HTMLCMDataTypeImpl(CMDataType.ENUM);
-			adec.usage = CMAttributeDeclaration.REQUIRED;
+			adec.usage = CMAttributeDeclaration.OPTIONAL;
 			String[] values = {ATTR_VALUE_TRUE, ATTR_VALUE_FALSE};
 			adec.type.setEnumValues(values);
+			adec.type.setImpliedValue(CMDataType.IMPLIED_VALUE_DEFAULT, ATTR_VALUE_FALSE);
 			declarations.putNamedItem(ATTR_NAME_FLUSH, adec);
 		}
 
@@ -676,6 +677,10 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 		names[Ids.ID_TEXT] = TEXT;
 	}
 
+	JSPElementCollection(String[] names, boolean tolerant) {
+		super(names, tolerant);
+	}
+
 	/**
 	 */
 	public JSPElementCollection() {
@@ -693,7 +698,7 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 	/**
 	 * @param eid int
 	 */
-	private CMGroupImpl createContent(int eid) {
+	CMGroupImpl createContent(int eid) {
 		if (eid == ID_UNKNOWN)
 			return null;
 
@@ -757,7 +762,7 @@ final class JSPElementCollection extends DeclCollection implements JSP11Namespac
 	/**
 	 * @param eid int
 	 */
-	private HTMLElementDeclaration createElemDecl(int eid) {
+	HTMLElementDeclaration createElemDecl(int eid) {
 		if (eid == ID_UNKNOWN)
 			return null;
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,8 @@ package org.eclipse.wst.html.core.internal.format;
 
 import java.util.Iterator;
 
-import org.eclipse.wst.css.core.internal.format.CSSSourceFormatter;
+import org.eclipse.wst.css.core.internal.formatter.CSSSourceFormatter;
+import org.eclipse.wst.css.core.internal.formatter.CSSSourceFormatterFactory;
 import org.eclipse.wst.css.core.internal.provisional.adapters.IStyleDeclarationAdapter;
 import org.eclipse.wst.css.core.internal.provisional.document.ICSSModel;
 import org.eclipse.wst.css.core.internal.provisional.document.ICSSNode;
@@ -24,7 +25,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
-import org.eclipse.wst.xml.core.internal.provisional.format.IStructuredFormatPreferencesXML;
+import org.eclipse.wst.xml.core.internal.provisional.format.StructuredFormatPreferencesXML;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -108,7 +109,7 @@ public class HTMLElementFormatter extends HTMLFormatter {
 		// String newEndTag = endStructuredDocumentRegion.getText();
 		// if (newEndTag != null && newEndTag.length() > 0) {
 		// setWidth(contraints, newEndTag);
-		//		}
+		// }
 	}
 
 	/**
@@ -155,7 +156,9 @@ public class HTMLElementFormatter extends HTMLFormatter {
 				formatStyleAttr(attr);
 		}
 		boolean insertBreak = false;
-		insertBreak = ((IStructuredFormatPreferencesXML) getFormatPreferences()).getSplitMultiAttrs();
+		insertBreak = ((StructuredFormatPreferencesXML) getFormatPreferences()).getSplitMultiAttrs();
+		boolean alignEndBracket = ((StructuredFormatPreferencesXML) getFormatPreferences()).isAlignEndBracket();
+		boolean attributesSplitted = false;
 
 		if (insertBreak) {
 			NamedNodeMap attributes = element.getAttributes();
@@ -163,6 +166,7 @@ public class HTMLElementFormatter extends HTMLFormatter {
 				insertBreak = false;
 		}
 		String breakSpaces = getBreakSpaces(element);
+		String originalBreakSpaces = breakSpaces;
 		String indent = getIndent();
 		if (indent != null && indent.length() > 0) {
 			breakSpaces += indent;
@@ -218,6 +222,7 @@ public class HTMLElementFormatter extends HTMLFormatter {
 					if (insertBreak || !isWidthAvailable(contraints, count + 1)) {
 						replaceTailingSpaces(startStructuredDocumentRegion, lastBreakRegion, breakSpaces);
 						setWidth(contraints, breakSpaces);
+						attributesSplitted = true;
 					}
 					else {
 						compressTailingSpaces(startStructuredDocumentRegion, lastBreakRegion);
@@ -242,6 +247,7 @@ public class HTMLElementFormatter extends HTMLFormatter {
 				if (insertBreak || !isWidthAvailable(contraints, count + 1)) {
 					replaceTailingSpaces(startStructuredDocumentRegion, lastBreakRegion, breakSpaces);
 					setWidth(contraints, breakSpaces);
+					attributesSplitted = true;
 				}
 				else {
 					compressTailingSpaces(startStructuredDocumentRegion, lastBreakRegion);
@@ -271,6 +277,12 @@ public class HTMLElementFormatter extends HTMLFormatter {
 		}
 		else {
 			addWidth(contraints, startStructuredDocumentRegion.getLength());
+		}
+		// BUG113584 - align last bracket
+		if (alignEndBracket && attributesSplitted) {
+			removeTailingSpaces(startStructuredDocumentRegion, lastBreakRegion);
+			replaceTailingSpaces(startStructuredDocumentRegion, lastBreakRegion, originalBreakSpaces);
+			contraints.setAvailableLineWidth(getLineWidth() - originalBreakSpaces.length() - 1);
 		}
 	}
 
@@ -339,10 +351,12 @@ public class HTMLElementFormatter extends HTMLFormatter {
 		if (document == null)
 			return null;
 		INodeNotifier notifier = (INodeNotifier) document;
-		INodeAdapter adapter = notifier.getAdapterFor(CSSSourceFormatter.class);
-		if (adapter == null)
+		CSSSourceFormatter formatter = (CSSSourceFormatter) notifier.getAdapterFor(CSSSourceFormatter.class);
+		// try another way to get formatter
+		if (formatter == null)
+			formatter = CSSSourceFormatterFactory.getInstance().getSourceFormatter(notifier);
+		if (formatter == null)
 			return null;
-		CSSSourceFormatter formatter = (CSSSourceFormatter) adapter;
 		StringBuffer buffer = formatter.format(document);
 		if (buffer == null)
 			return null;

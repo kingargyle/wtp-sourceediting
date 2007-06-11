@@ -1,10 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004, 2006 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
@@ -227,7 +227,7 @@ public class HTMLAttributeValidator extends PrimeValidator {
 			if (region == null)
 				continue;
 			String regionType = region.getType();
-			if (regionType == DOMRegionContext.XML_TAG_OPEN || (isNextedTagName(regionType)))
+			if (regionType == DOMRegionContext.XML_TAG_OPEN || (isNestedTagName(regionType)))
 				return true;
 		}
 		return false;
@@ -237,7 +237,7 @@ public class HTMLAttributeValidator extends PrimeValidator {
      * ISSUE: this is a bit of hidden JSP knowledge that was implemented this
      * way for expedency. Should be evolved in future to depend on "nestedContext".
      */
-	private boolean isNextedTagName(String regionType) {
+	private boolean isNestedTagName(String regionType) {
 		final String JSP_SCRIPTLET_OPEN = "JSP_SCRIPTLET_OPEN"; //$NON-NLS-1$
 		final String JSP_EXPRESSION_OPEN = "JSP_EXPRESSION_OPEN"; //$NON-NLS-1$
 		final String JSP_DECLARATION_OPEN = "JSP_DECLARATION_OPEN"; //$NON-NLS-1$
