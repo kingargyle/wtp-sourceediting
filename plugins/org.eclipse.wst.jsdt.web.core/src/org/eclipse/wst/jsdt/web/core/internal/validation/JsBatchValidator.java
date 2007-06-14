@@ -43,9 +43,8 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.jsdt.core.JavaCore;
-import org.eclipse.wst.jsdt.web.core.internal.JSPCoreMessages;
+import org.eclipse.wst.jsdt.web.core.internal.JsCoreMessages;
 import org.eclipse.wst.jsdt.web.core.internal.Logger;
-import org.eclipse.wst.jsdt.web.core.internal.contentproperties.JSPFContentProperties;
 import org.eclipse.wst.jsdt.web.core.internal.provisional.contenttype.ContentTypeIdForJSP;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
@@ -65,97 +64,11 @@ import org.eclipse.wst.validation.internal.provisional.core.IValidatorJob;
  * Performs JSP validation tasks for batch validation. The individual validator
  * classes will still be used for source validation.
  */
-public final class JSPBatchValidator implements IValidatorJob, IExecutableExtension {
-	class JSPFileVisitor implements IResourceProxyVisitor {
-
-		private List fFiles = new ArrayList();
-
-		private IReporter fReporter = null;
-
-		public JSPFileVisitor(IReporter reporter) {
-			fReporter = reporter;
-		}
-
-		final IFile[] getFiles() {
-			return (IFile[]) fFiles.toArray(new IFile[fFiles.size()]);
-		}
-
-		public boolean visit(IResourceProxy proxy) throws CoreException {
-
-			// check validation
-			if (fReporter.isCancelled()) {
-				return false;
-			}
-
-			if (proxy.getType() == IResource.FILE) {
-
-				if (isJSPType(proxy.getName()) && proxy.isAccessible()) {
-					IFile file = (IFile) proxy.requestResource();
-					if (JSPBatchValidator.DEBUG) {
-						System.out.println("(+) JSPValidator adding file: " + file.getName()); //$NON-NLS-1$
-					}
-					fFiles.add(file);
-
-					// don't search deeper for files
-					return false;
-				}
-			}
-			return true;
-		}
-	}
-
-	class LocalizedMessage extends Message {
-
-		private String _message = null;
-
-		public LocalizedMessage(int severity, String messageText) {
-			this(severity, messageText, null);
-		}
-
-		public LocalizedMessage(int severity, String messageText, IResource targetObject) {
-			this(severity, messageText, (Object) targetObject);
-		}
-
-		public LocalizedMessage(int severity, String messageText, Object targetObject) {
-			super(null, severity, null);
-			setLocalizedMessage(messageText);
-			setTargetObject(targetObject);
-		}
-
-		private String getLocalizedText() {
-			return _message;
-		}
-
-		@Override
-		public String getText() {
-			return getLocalizedText();
-		}
-
-		@Override
-		public String getText(ClassLoader cl) {
-			return getLocalizedText();
-		}
-
-		@Override
-		public String getText(Locale l) {
-			return getLocalizedText();
-		}
-
-		@Override
-		public String getText(Locale l, ClassLoader cl) {
-			return getLocalizedText();
-		}
-
-		public void setLocalizedMessage(String message) {
-			_message = message;
-		}
-	}
-
+public final class JsBatchValidator implements IValidatorJob, IExecutableExtension {
 	// for debugging
 	static final boolean DEBUG = Boolean.valueOf(Platform.getDebugOption("org.eclipse.wst.jsdt.web.core/debug/jspvalidator")).booleanValue(); //$NON-NLS-1$
-
 	private static final String PLUGIN_ID_JSP_CORE = "org.eclipse.wst.jsdt.web.core"; //$NON-NLS-1$
-
+	
 	/**
 	 * Gets current validation project configuration based on current project
 	 * (which is based on current document)
@@ -174,10 +87,9 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 				}
 			}
 		}
-
 		return projectConfiguration;
 	}
-
+	
 	/**
 	 * Checks if validator is enabled according in Validation preferences
 	 * 
@@ -188,12 +100,10 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 		if (file == null) {
 			return true;
 		}
-
 		boolean enabled = true;
-		ProjectConfiguration configuration = JSPBatchValidator.getProjectConfiguration(file);
+		ProjectConfiguration configuration = JsBatchValidator.getProjectConfiguration(file);
 		if (configuration != null) {
-			org.eclipse.wst.validation.internal.ValidatorMetaData metadata = ValidationRegistryReader.getReader().getValidatorMetaData(
-					JSPBatchValidator.class.getName());
+			org.eclipse.wst.validation.internal.ValidatorMetaData metadata = ValidationRegistryReader.getReader().getValidatorMetaData(JsBatchValidator.class.getName());
 			if (configuration != null && metadata != null) {
 				if (!configuration.isBuildEnabled(metadata) && !configuration.isManualEnabled(metadata)) {
 					enabled = false;
@@ -202,23 +112,93 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 		}
 		return enabled;
 	}
-
+	class JSPFileVisitor implements IResourceProxyVisitor {
+		private List fFiles = new ArrayList();
+		private IReporter fReporter = null;
+		
+		public JSPFileVisitor(IReporter reporter) {
+			fReporter = reporter;
+		}
+		
+		final IFile[] getFiles() {
+			return (IFile[]) fFiles.toArray(new IFile[fFiles.size()]);
+		}
+		
+		public boolean visit(IResourceProxy proxy) throws CoreException {
+			// check validation
+			if (fReporter.isCancelled()) {
+				return false;
+			}
+			if (proxy.getType() == IResource.FILE) {
+				if (isJSPType(proxy.getName()) && proxy.isAccessible()) {
+					IFile file = (IFile) proxy.requestResource();
+					if (JsBatchValidator.DEBUG) {
+						System.out.println("(+) JSPValidator adding file: " + file.getName()); //$NON-NLS-1$
+					}
+					fFiles.add(file);
+					// don't search deeper for files
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+	class LocalizedMessage extends Message {
+		private String _message = null;
+		
+		public LocalizedMessage(int severity, String messageText) {
+			this(severity, messageText, null);
+		}
+		
+		public LocalizedMessage(int severity, String messageText, IResource targetObject) {
+			this(severity, messageText, (Object) targetObject);
+		}
+		
+		public LocalizedMessage(int severity, String messageText, Object targetObject) {
+			super(null, severity, null);
+			setLocalizedMessage(messageText);
+			setTargetObject(targetObject);
+		}
+		
+		private String getLocalizedText() {
+			return _message;
+		}
+		
+		@Override
+		public String getText() {
+			return getLocalizedText();
+		}
+		
+		@Override
+		public String getText(ClassLoader cl) {
+			return getLocalizedText();
+		}
+		
+		@Override
+		public String getText(Locale l) {
+			return getLocalizedText();
+		}
+		
+		@Override
+		public String getText(Locale l, ClassLoader cl) {
+			return getLocalizedText();
+		}
+		
+		public void setLocalizedMessage(String message) {
+			_message = message;
+		}
+	}
 	String fAdditionalContentTypesIDs[] = null;
-
 	private IContentType[] fContentTypes = null;
-
 	private IContentType fJSPFContentType = null;
-
 	private JsValidator fJSPJavaValidator = new JsValidator(this);
-
+	
 	public void cleanup(IReporter reporter) {
-
 		fJSPJavaValidator.cleanup(reporter);
 	}
-
+	
 	void doValidate(IValidationContext helper, IReporter reporter) throws ValidationException {
 		reporter.removeAllMessages(this);
-
 		String[] uris = helper.getURIs();
 		if (uris.length > 0) {
 			IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
@@ -227,12 +207,11 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 				currentFile = wsRoot.getFile(new Path(uris[i]));
 				if (currentFile != null && currentFile.exists()) {
 					if (shouldValidate(currentFile) && fragmentCheck(currentFile)) {
-						Message message = new LocalizedMessage(IMessage.LOW_SEVERITY, "" + (i + 1) + "/" + uris.length + " - " +
-								currentFile.getFullPath().toString().substring(1));
+						Message message = new LocalizedMessage(IMessage.LOW_SEVERITY, "" + (i + 1) + "/" + uris.length + " - " + currentFile.getFullPath().toString().substring(1));
 						reporter.displaySubtask(this, message);
 						validateFile(currentFile, reporter);
 					}
-					if (JSPBatchValidator.DEBUG) {
+					if (JsBatchValidator.DEBUG) {
 						System.out.println("validating: [" + uris[i] + "]"); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
@@ -241,37 +220,32 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 			// if uris[] length 0 -> validate() gets called for each project
 			if (helper instanceof IWorkbenchContext) {
 				IProject project = ((IWorkbenchContext) helper).getProject();
-
-				Message message = new LocalizedMessage(IMessage.LOW_SEVERITY, NLS.bind(JSPCoreMessages.JSPBatchValidator_0, project.getFullPath()));
+				Message message = new LocalizedMessage(IMessage.LOW_SEVERITY, NLS.bind(JsCoreMessages.JSPBatchValidator_0, project.getFullPath()));
 				reporter.displaySubtask(this, message);
-
 				JSPFileVisitor visitor = new JSPFileVisitor(reporter);
 				try {
 					// collect all jsp files for the project
 					project.accept(visitor, IResource.DEPTH_INFINITE);
 				} catch (CoreException e) {
-					if (JSPBatchValidator.DEBUG) {
+					if (JsBatchValidator.DEBUG) {
 						e.printStackTrace();
 					}
 				}
 				IFile[] files = visitor.getFiles();
 				for (int i = 0; i < files.length && !reporter.isCancelled(); i++) {
 					if (shouldValidate(files[i]) && fragmentCheck(files[i])) {
-
-						message = new LocalizedMessage(IMessage.LOW_SEVERITY, "" + (i + 1) + "/" + files.length + " - " +
-								files[i].getFullPath().toString().substring(1));
+						message = new LocalizedMessage(IMessage.LOW_SEVERITY, "" + (i + 1) + "/" + files.length + " - " + files[i].getFullPath().toString().substring(1));
 						reporter.displaySubtask(this, message);
-
 						validateFile(files[i], reporter);
 					}
-					if (JSPBatchValidator.DEBUG) {
+					if (JsBatchValidator.DEBUG) {
 						System.out.println("validating: [" + files[i] + "]"); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
 			}
 		}
 	}
-
+	
 	/**
 	 * Checks if file is a jsp fragment or not. If so, check if the fragment
 	 * should be validated or not.
@@ -283,36 +257,9 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 	 *         otherwise
 	 */
 	private boolean fragmentCheck(IFile file) {
-		boolean shouldValidate = true;
-		// quick check to see if this is possibly a jsp fragment
-		if (getJSPFContentType().isAssociatedWith(file.getName())) {
-			// get preference for validate jsp fragments
-			boolean shouldValidateFragments = Boolean.valueOf(JSPFContentProperties.getProperty(JSPFContentProperties.VALIDATE_FRAGMENTS, file, true))
-					.booleanValue();
-			/*
-			 * if jsp fragments should not be validated, check if file is really
-			 * jsp fragment
-			 */
-			if (!shouldValidateFragments) {
-				boolean isFragment = isFragment(file);
-				shouldValidate = !isFragment;
-			}
-		}
-		return shouldValidate;
+		return isFragment(file);
 	}
-
-	/**
-	 * Returns JSP fragment content type
-	 * 
-	 * @return jspf content type
-	 */
-	private IContentType getJSPFContentType() {
-		if (fJSPFContentType == null) {
-			fJSPFContentType = Platform.getContentTypeManager().getContentType(ContentTypeIdForJSP.ContentTypeID_JSPFRAGMENT);
-		}
-		return fJSPFContentType;
-	}
-
+	
 	public ISchedulingRule getSchedulingRule(IValidationContext helper) {
 		if (helper instanceof IWorkbenchContext) {
 			/*
@@ -325,7 +272,7 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 		 */
 		return null;
 	}
-
+	
 	/**
 	 * Gets list of content types this visitor is interested in
 	 * 
@@ -349,7 +296,7 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 		}
 		return fContentTypes;
 	}
-
+	
 	/**
 	 * Determines if file is jsp fragment or not (does a deep, indepth check,
 	 * looking into contents of file)
@@ -366,8 +313,7 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 			// it can be null
 			if (contentDescription == null) {
 				is = file.getContents();
-				contentDescription = Platform.getContentTypeManager()
-						.getDescriptionFor(is, file.getName(), new QualifiedName[] { IContentDescription.CHARSET });
+				contentDescription = Platform.getContentTypeManager().getDescriptionFor(is, file.getName(), new QualifiedName[] { IContentDescription.CHARSET });
 			}
 			if (contentDescription != null) {
 				String fileCtId = contentDescription.getContentType().getId();
@@ -392,7 +338,7 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 		}
 		return isFragment;
 	}
-
+	
 	/**
 	 * Checks if fileName is some type of JSP (including JSP fragments)
 	 * 
@@ -401,7 +347,6 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 	 */
 	private boolean isJSPType(String fileName) {
 		boolean valid = false;
-
 		IContentType[] types = getValidContentTypes();
 		int i = 0;
 		while (i < types.length && !valid) {
@@ -410,14 +355,13 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 		}
 		return valid;
 	}
-
+	
 	private void performValidation(IFile f, IReporter reporter, IStructuredModel model) {
 		if (!reporter.isCancelled()) {
 			fJSPJavaValidator.performValidation(f, reporter, model);
 		}
-
 	}
-
+	
 	/**
 	 * @see org.eclipse.core.runtime.IExecutableExtension#setInitializationData(org.eclipse.core.runtime.IConfigurationElement,
 	 *      java.lang.String, java.lang.Object)
@@ -430,7 +374,7 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 			}
 		}
 	}
-
+	
 	private boolean shouldValidate(IFile file) {
 		IResource resource = file;
 		do {
@@ -441,11 +385,11 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 		} while ((resource.getType() & IResource.PROJECT) == 0);
 		return true;
 	}
-
+	
 	public void validate(IValidationContext helper, IReporter reporter) throws ValidationException {
 		doValidate(helper, reporter);
 	}
-
+	
 	/**
 	 * Validate one file. It's assumed that the file has JSP content type.
 	 * 
@@ -471,7 +415,7 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 			}
 		}
 	}
-
+	
 	public IStatus validateInJob(final IValidationContext helper, final IReporter reporter) throws ValidationException {
 		Job currentJob = Platform.getJobManager().currentJob();
 		ISchedulingRule rule = null;
@@ -483,7 +427,7 @@ public final class JSPBatchValidator implements IValidatorJob, IExecutableExtens
 				try {
 					doValidate(helper, reporter);
 				} catch (ValidationException e) {
-					throw new CoreException(new Status(IStatus.ERROR, JSPBatchValidator.PLUGIN_ID_JSP_CORE, 0, JSPBatchValidator.PLUGIN_ID_JSP_CORE, e));
+					throw new CoreException(new Status(IStatus.ERROR, JsBatchValidator.PLUGIN_ID_JSP_CORE, 0, JsBatchValidator.PLUGIN_ID_JSP_CORE, e));
 				}
 			}
 		};

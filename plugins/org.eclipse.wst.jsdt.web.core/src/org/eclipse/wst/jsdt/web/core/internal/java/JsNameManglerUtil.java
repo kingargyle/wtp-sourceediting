@@ -15,8 +15,7 @@ import java.io.File;
 /**
  * @author pavery
  */
-public class JSP2ServletNameUtil {
-
+public class JsNameManglerUtil {
 	/**
 	 * Determine if given string is a valid Hex representation of an ASCII
 	 * character (eg. 2F -> /)
@@ -41,34 +40,30 @@ public class JSP2ServletNameUtil {
 		}
 		return result;
 	}
-
+	
 	/**
 	 * Mangle string to WAS-like specifications
 	 * 
 	 */
 	public final static String mangle(String name) {
 		StringBuffer modifiedName = new StringBuffer();
-
 		// extension (.jsp, .jspf, .jspx, etc...) should already be encoded in
 		// name
-
 		int length = name.length();
 		// in case name is forbidden (a number, class, for, etc...)
 		modifiedName.append('_');
-
 		// ensure rest of characters are valid
 		for (int i = 0; i < length; i++) {
 			char currentChar = name.charAt(i);
 			if (Character.isJavaIdentifierPart(currentChar) == true) {
 				modifiedName.append(currentChar);
 			} else {
-				modifiedName.append(JSP2ServletNameUtil.mangleChar(currentChar));
+				modifiedName.append(JsNameManglerUtil.mangleChar(currentChar));
 			}
 		}
 		return modifiedName.toString();
-
 	}
-
+	
 	/**
 	 * take a character and return its hex equivalent
 	 */
@@ -76,13 +71,12 @@ public class JSP2ServletNameUtil {
 		if (ch == File.separatorChar) {
 			ch = '/';
 		}
-
 		if (Character.isLetterOrDigit(ch) == true) {
 			return "" + ch; //$NON-NLS-1$
 		}
 		return "_" + Integer.toHexString(ch).toUpperCase() + "_"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
-
+	
 	/**
 	 * WAS mangles Tom&Jerry as: _Tom_26_Jerry; this takes in the mangled name
 	 * and returns the original name.
@@ -97,15 +91,12 @@ public class JSP2ServletNameUtil {
 		if (qualifiedTypeName.charAt(0) != '_') {
 			return qualifiedTypeName;
 		}
-
 		StringBuffer buf = new StringBuffer();
 		String possible = ""; //$NON-NLS-1$
-
 		// remove the .java extension if there is one
 		if (qualifiedTypeName.endsWith(".js")) {
 			qualifiedTypeName = qualifiedTypeName.substring(0, qualifiedTypeName.length() - 3);
 		}
-
 		for (int i = 1; i < qualifiedTypeName.length(); i++) { // start at
 			// index 1 b/c
 			// 1st char is
@@ -119,13 +110,12 @@ public class JSP2ServletNameUtil {
 					char unmangled;
 					try {
 						possible = qualifiedTypeName.substring(i + 1, endIndex);
-						if (JSP2ServletNameUtil.isValid(possible)) {
+						if (JsNameManglerUtil.isValid(possible)) {
 							unmangled = (char) Integer.decode("0x" + possible).intValue();//$NON-NLS-1$
 							i = endIndex;
 						} else {
 							unmangled = c;
 						}
-
 					} catch (NumberFormatException e) {
 						unmangled = c;
 					}

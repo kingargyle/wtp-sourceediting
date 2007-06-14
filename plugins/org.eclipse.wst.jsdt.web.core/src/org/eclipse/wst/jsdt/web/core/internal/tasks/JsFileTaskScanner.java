@@ -8,15 +8,15 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.wst.jsdt.web.core.internal.encoding;
+package org.eclipse.wst.jsdt.web.core.internal.tasks;
 
-import java.io.IOException;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
+import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
+import org.eclipse.wst.xml.core.internal.tasks.XMLFileTaskScanner;
 
-import org.eclipse.wst.sse.core.internal.document.IDocumentCharsetDetector;
-
-public interface IJSPHeadContentDetector extends IDocumentCharsetDetector {
-	String getContentType() throws IOException;
-	
-	String getLanguage() throws IOException;
-	
+public class JsFileTaskScanner extends XMLFileTaskScanner {
+	@Override
+	protected boolean isCommentRegion(IStructuredDocumentRegion region, ITextRegion textRegion) {
+		return super.isCommentRegion(region, textRegion);
+	}
 }

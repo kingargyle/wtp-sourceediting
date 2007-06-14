@@ -11,13 +11,9 @@ import org.eclipse.wst.jsdt.core.WorkingCopyOwner;
 
 /**
  * @author childsb
- *
+ * 
  */
-public interface IJSPTranslation {
-	public abstract boolean ifOffsetInImportNode(int offset);
-	
-	public abstract boolean isOffsetInScriptNode(int offset);
-	
+public interface IJsTranslation {
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -42,7 +38,12 @@ public interface IJSPTranslation {
 	 */
 	public abstract IJavaElement[] getElementsFromJsRange(int jspStart, int jspEnd);
 	
-	public abstract IJavaElement getJsElementAtOffset(int htmlstart);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.wst.jsdt.web.core.internal.java.JSPTranslation_Interface#getJspText()
+	 */
+	public abstract String getHtmlText();
 	
 	/*
 	 * (non-Javadoc)
@@ -60,6 +61,8 @@ public interface IJSPTranslation {
 	 */
 	public abstract String getJavaPath();
 	
+	public abstract IJavaElement getJsElementAtOffset(int htmlstart);
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -75,13 +78,6 @@ public interface IJSPTranslation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.wst.jsdt.web.core.internal.java.JSPTranslation_Interface#getJspText()
-	 */
-	public abstract String getHtmlText();
-	
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.wst.jsdt.web.core.internal.java.JSPTranslation_Interface#getProblems()
 	 */
 	public abstract List getProblems();
@@ -92,6 +88,10 @@ public interface IJSPTranslation {
 	 * @see org.eclipse.wst.jsdt.web.core.internal.java.JSPTranslation_Interface#getWorkingCopyOwner()
 	 */
 	public abstract WorkingCopyOwner getWorkingCopyOwner();
+	
+	public abstract boolean ifOffsetInImportNode(int offset);
+	
+	public abstract boolean isOffsetInScriptNode(int offset);
 	
 	public abstract void reconcileCompilationUnit();
 	

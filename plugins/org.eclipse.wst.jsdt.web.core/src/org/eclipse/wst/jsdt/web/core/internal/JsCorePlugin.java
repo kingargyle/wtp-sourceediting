@@ -11,17 +11,16 @@
 package org.eclipse.wst.jsdt.web.core.internal;
 
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.wst.jsdt.web.core.internal.contentproperties.JSPFContentPropertiesManager;
-import org.eclipse.wst.jsdt.web.core.internal.java.search.JSPIndexManager;
+import org.eclipse.wst.jsdt.web.core.internal.java.search.JsIndexManager;
 import org.osgi.framework.BundleContext;
 
 /**
  * The main plugin class to be used in the desktop.
  */
-public class JSPCorePlugin extends Plugin {
+public class JsCorePlugin extends Plugin {
 	// The shared instance.
-	private static JSPCorePlugin plugin;
-	public static final String   PLUGIN_ID = "org.eclipse.wst.jsdt.web.core";
+	private static JsCorePlugin plugin;
+	public static final String PLUGIN_ID = "org.eclipse.wst.jsdt.web.core";
 	
 	/**
 	 * Returns the shared instance.
@@ -30,16 +29,16 @@ public class JSPCorePlugin extends Plugin {
 	 *             but there are other, better ways.
 	 */
 	@Deprecated
-	public static JSPCorePlugin getDefault() {
-		return JSPCorePlugin.plugin;
+	public static JsCorePlugin getDefault() {
+		return JsCorePlugin.plugin;
 	}
 	
 	/**
 	 * The constructor.
 	 */
-	public JSPCorePlugin() {
+	public JsCorePlugin() {
 		super();
-		JSPCorePlugin.plugin = this;
+		JsCorePlugin.plugin = this;
 	}
 	
 	/*
@@ -50,17 +49,11 @@ public class JSPCorePlugin extends Plugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		
 		// JSPIndexManager depends on TaglibController, so TaglibController
 		// should be started first
-		
 		// listen for classpath changes
-		
-		JSPIndexManager.getInstance().initialize();
-		
+		JsIndexManager.getInstance().initialize();
 		// listen for resource changes to update content properties keys
-		JSPFContentPropertiesManager.startup();
-		
 	}
 	
 	/*
@@ -72,11 +65,8 @@ public class JSPCorePlugin extends Plugin {
 	public void stop(BundleContext context) throws Exception {
 		// stop listenning for resource changes to update content properties
 		// keys
-		JSPFContentPropertiesManager.shutdown();
-		
 		// stop any indexing
-		JSPIndexManager.getInstance().shutdown();
-		
+		JsIndexManager.getInstance().shutdown();
 		super.stop(context);
 	}
 }

@@ -36,7 +36,7 @@ import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
  * 
  * @author pavery
  */
-public class JSPTranslator {
+public class JsTranslator {
 	// for debugging
 	private static final boolean DEBUG;
 	private static final boolean DEBUG_SAVE_OUTPUT = "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.wst.jsdt.web.core/debug/jsptranslationstodisk")); //$NON-NLS-1$  //$NON-NLS-2$
@@ -86,7 +86,7 @@ public class JSPTranslator {
 		String classname = ""; //$NON-NLS-1$
 		if (node != null) {
 			String base = node.getModel().getBaseLocation();
-			classname = JSP2ServletNameUtil.mangle(base);
+			classname = JsNameManglerUtil.mangle(base);
 		}
 		return classname;
 	}

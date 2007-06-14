@@ -23,42 +23,39 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
  * @author pavery
  * 
  */
-public class JSPTranslationAdapterFactory extends AbstractAdapterFactory {
-
+public class JsTranslationAdapterFactory extends AbstractAdapterFactory {
 	// for debugging
 	private static final boolean DEBUG;
-
 	static {
 		String value = Platform.getDebugOption("org.eclipse.wst.jsdt.web.core/debug/jsptranslation"); //$NON-NLS-1$
 		DEBUG = value != null && value.equalsIgnoreCase("true"); //$NON-NLS-1$
 	}
-
-	private JSPTranslationAdapter fAdapter = null;
-
-	public JSPTranslationAdapterFactory() {
-		super(IJSPTranslation.class, true);
+	private JsTranslationAdapter fAdapter = null;
+	
+	public JsTranslationAdapterFactory() {
+		super(IJsTranslation.class, true);
 	}
-
+	
 	@Override
 	public INodeAdapterFactory copy() {
-		return new JSPTranslationAdapterFactory();
+		return new JsTranslationAdapterFactory();
 	}
-
+	
 	@Override
 	protected INodeAdapter createAdapter(INodeNotifier target) {
 		if (target instanceof IDOMNode && fAdapter == null) {
-			fAdapter = new JSPTranslationAdapter(((IDOMNode) target).getModel());
-			if (JSPTranslationAdapterFactory.DEBUG) {
+			fAdapter = new JsTranslationAdapter(((IDOMNode) target).getModel());
+			if (JsTranslationAdapterFactory.DEBUG) {
 				System.out.println("(+) JSPTranslationAdapterFactory [" + this + "] created adapter: " + fAdapter); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		return fAdapter;
 	}
-
+	
 	@Override
 	public void release() {
 		if (fAdapter != null) {
-			if (JSPTranslationAdapterFactory.DEBUG) {
+			if (JsTranslationAdapterFactory.DEBUG) {
 				System.out.println("(-) JSPTranslationAdapterFactory [" + this + "] releasing adapter: " + fAdapter); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			fAdapter.release();
