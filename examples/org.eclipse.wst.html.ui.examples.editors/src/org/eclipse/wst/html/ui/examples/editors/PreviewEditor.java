@@ -248,7 +248,9 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 		super.pageChange(newPageIndex);
 		if (newPageIndex == fSourcePageIndex) {
 			getEditorSite().getActionBarContributor().setActiveEditor(fSourcePage);
-			fSourcePage.getSelectionProvider().setSelection(fDesignPage.getSelection());
+			if (fShowXMLDesign) {
+				fSourcePage.getSelectionProvider().setSelection(fDesignPage.getSelection());
+			}
 		}
 		else {
 			getEditorSite().getActionBarContributor().setActiveEditor(this);
