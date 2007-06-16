@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004 IBM Corporation and others.
+ * Copyright (c) 2004 , 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@ package org.eclipse.wst.html.ui.examples.editors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -21,6 +22,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Control;
@@ -31,9 +33,9 @@ import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.IReusableEditor;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.ILocationProvider;
+import org.eclipse.ui.part.MultiPageEditorPart;
+import org.eclipse.ui.part.MultiPageEditorSite;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
-import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
 import org.eclipse.wst.html.core.internal.provisional.HTML40Namespace;
 import org.eclipse.wst.html.core.internal.provisional.contenttype.ContentTypeIdForHTML;
 import org.eclipse.wst.html.ui.examples.editors.internal.Logger;
@@ -57,15 +59,22 @@ import org.w3c.dom.NodeList;
  * 
  * @author nitin
  */
-public class PreviewEditor extends PostSelectionMultiPageEditorPart implements IReusableEditor {
+public class PreviewEditor extends MultiPageEditorPart implements IReusableEditor {
 	Control fPreviewControl = null;
+	int fPreviewPageIndex;
 	ITextEditor fSourcePage = null;
+	int fSourcePageIndex;
+
 	/**
 	 * Controls whether to also insert the XML design page into this editor.
 	 * This combination is largely untested, so it's more of a
 	 * proof-of-concept here.
 	 */
-	boolean showXMLDesign = false;
+	boolean fShowXMLDesign = false;
+	XMLTableTreeViewer fDesignPage = null;
+	int fDesignPageIndex;
+
+	String fPreferredContentTypeID = ContentTypeIdForHTML.ContentTypeID_HTML;
 
 	/*
 	 * (non-Javadoc)
@@ -75,7 +84,7 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 	protected void createPages() {
 		fSourcePage = createSourcePage();
 		try {
-			addPage(fSourcePage, getEditorInput());
+			fSourcePageIndex = addPage(fSourcePage, getEditorInput());
 		}
 		catch (PartInitException e) {
 			if (getPageCount() > 0) {
@@ -83,21 +92,25 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 			}
 		}
 
-		if (showXMLDesign) {
-			final XMLTableTreeViewer tableTreeViewer = new XMLTableTreeViewer(getContainer());
+		if (fShowXMLDesign) {
+			/**
+			 * Note that no effort has been spent to keep selection
+			 * synchronized between the various pages.
+			 */
+			fDesignPage = new XMLTableTreeViewer(getContainer());
 
 			class ModelUpdater implements IPropertyListener, DisposeListener {
 				public void propertyChanged(Object source, int propId) {
 					if (propId == IEditorPart.PROP_INPUT) {
-						if (!tableTreeViewer.getControl().isDisposed()) {
-							tableTreeViewer.setDocument(fSourcePage.getDocumentProvider().getDocument(getEditorInput()));
+						if (!fDesignPage.getControl().isDisposed()) {
+							fDesignPage.setDocument(fSourcePage.getDocumentProvider().getDocument(getEditorInput()));
 						}
 					}
 				}
 
 				public void widgetDisposed(DisposeEvent e) {
-					if (!tableTreeViewer.getControl().isDisposed()) {
-						tableTreeViewer.setDocument(null);
+					if (!fDesignPage.getControl().isDisposed()) {
+						fDesignPage.setDocument(null);
 					}
 				}
 			}
@@ -105,19 +118,20 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 			addPropertyListener(modelController);
 			getContainer().addDisposeListener(modelController);
 			modelController.propertyChanged(this, IEditorPart.PROP_INPUT);
-
-			addPage(tableTreeViewer.getControl());
+			fDesignPageIndex = addPage(fDesignPage.getControl());
 		}
 
 		fPreviewControl = createPreviewControl();
-		addPage(fPreviewControl);
+		fPreviewPageIndex = addPage(fPreviewControl);
 
-		int page = 0;
-		setPageText(page++, "Source"); //$NON-NLS-1$
-		if (showXMLDesign) {
-			setPageText(page++, "Design"); //$NON-NLS-1$
+		setPageText(fSourcePageIndex, "Source"); //$NON-NLS-1$
+		if (fShowXMLDesign) {
+			setPageText(fDesignPageIndex, "Design"); //$NON-NLS-1$
 		}
-		setPageText(page++, "Preview"); //$NON-NLS-1$
+		setPageText(fPreviewPageIndex, "Preview"); //$NON-NLS-1$
+
+		getEditorSite().getActionBarContributor().setActiveEditor(fSourcePage);
+		getEditorSite().setSelectionProvider(fSourcePage.getSelectionProvider());
 	}
 
 	/**
@@ -148,9 +162,9 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 	protected IEditorSite createSite(IEditorPart editor) {
 		IEditorSite site = null;
 		if (editor == fSourcePage) {
-			site = new PostMultiPageEditorSite(this, editor) {
+			site = new MultiPageEditorSite(this, editor) {
 				public String getId() {
-					return ContentTypeIdForHTML.ContentTypeID_HTML + ".source"; //$NON-NLS-1$;
+					return fPreferredContentTypeID + ".source"; //$NON-NLS-1$;
 				}
 			};
 		}
@@ -207,7 +221,11 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 		return title;
 	}
 
-	protected void interruptPreview() {
+	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
+		super.init(site, input);
+	}
+
+	private void interruptPreview() {
 		((Browser) fPreviewControl).stop();
 	}
 
@@ -230,13 +248,17 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 		interruptPreview();
 
 		super.pageChange(newPageIndex);
-		if (getControl(newPageIndex) == fSourcePage) {
+		if (newPageIndex == fSourcePageIndex) {
 			getEditorSite().getActionBarContributor().setActiveEditor(fSourcePage);
+			getEditorSite().setSelectionProvider(fSourcePage.getSelectionProvider());
 		}
 		else {
 			getEditorSite().getActionBarContributor().setActiveEditor(this);
-			if (getControl(newPageIndex) == fPreviewControl) {
+			if (newPageIndex == fPreviewPageIndex) {
 				updatePreviewContent();
+			}
+			else if (newPageIndex == fDesignPageIndex) {
+				getEditorSite().setSelectionProvider(fDesignPage);
 			}
 		}
 	}
@@ -249,10 +271,14 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 		super.setInitializationData(config, propertyName, data);
 		if (data != null) {
 			if (data instanceof String && data.toString().length() > 0) {
-				showXMLDesign = data.toString().equalsIgnoreCase("true"); //$NON-NLS-1$
+				fShowXMLDesign = data.toString().equalsIgnoreCase("true"); //$NON-NLS-1$
 			}
 			else if (data instanceof Boolean) {
-				showXMLDesign = ((Boolean) data).booleanValue();
+				fShowXMLDesign = ((Boolean) data).booleanValue();
+			}
+			else if (data instanceof Map) {
+				fShowXMLDesign = Boolean.valueOf((String) ((Map) data).get("showGrid")).booleanValue();
+				fPreferredContentTypeID = ((Map) data).get("contentType").toString();
 			}
 		}
 	}
@@ -277,104 +303,113 @@ public class PreviewEditor extends PostSelectionMultiPageEditorPart implements I
 	/**
 	 * Update the contents of the Preview page
 	 */
-	protected void updatePreviewContent() {
+	private void updatePreviewContent() {
 		if (getEditorInput() == null || getSourcePage() == null || getSourcePage().getDocumentProvider() == null)
 			return;
 
-		IDocument editDocument = getSourcePage().getDocumentProvider().getDocument(getSourcePage().getEditorInput());
-		IDocument htmlSource = new org.eclipse.jface.text.Document(editDocument.get());
+		BusyIndicator.showWhile(getSite().getShell().getDisplay(), new Runnable() {
+			public void run() {
+				IDocument editDocument = getSourcePage().getDocumentProvider().getDocument(getSourcePage().getEditorInput());
+				IDocument sourceDocument = new org.eclipse.jface.text.Document(editDocument.get());
 
-		IStructuredModel editModel = null;
-		int insertOffset = 0;
-		List removalRegions = new ArrayList(2);
-		try {
-			editModel = StructuredModelManager.getModelManager().getExistingModelForRead(editDocument);
-			if (editModel != null && editModel instanceof IDOMModel) {
-				Document document = ((IDOMModel) editModel).getDocument();
-				// remove meta tags specifying encoding as required by Browser
-				// API
-				NodeList metaElements = document.getElementsByTagName(HTML40Namespace.ElementName.META);
-				for (int i = 0; i < metaElements.getLength(); i++) {
-					IDOMElement meta = (IDOMElement) metaElements.item(i);
-					if (insertOffset == 0)
-						insertOffset = meta.getStartOffset();
-					insertOffset = Math.max(0, Math.min(insertOffset, meta.getStartOffset()));
-					if (meta.getAttribute(HTML40Namespace.ATTR_NAME_HTTP_EQUIV).equals("Content-Type") && meta.getAttribute(HTML40Namespace.ATTR_NAME_CONTENT).indexOf("charset") > 0) { //$NON-NLS-2$ //$NON-NLS-1$
-						if (meta.getStartStructuredDocumentRegion() != null)
-							removalRegions.add(meta.getStartStructuredDocumentRegion());
-						if (meta.getEndStructuredDocumentRegion() != null)
-							removalRegions.add(meta.getEndStructuredDocumentRegion());
+				IStructuredModel editModel = null;
+				int insertOffset = 0;
+				List removalRegions = new ArrayList(2);
+				try {
+					editModel = StructuredModelManager.getModelManager().getExistingModelForRead(editDocument);
+					if (editModel != null && editModel instanceof IDOMModel) {
+						Document document = ((IDOMModel) editModel).getDocument();
+						/*
+						 * remove meta tags specifying encoding as required by
+						 * Browser API
+						 */
+						NodeList metaElements = document.getElementsByTagName(HTML40Namespace.ElementName.META);
+						for (int i = 0; i < metaElements.getLength(); i++) {
+							IDOMElement meta = (IDOMElement) metaElements.item(i);
+							if (insertOffset == 0)
+								insertOffset = meta.getStartOffset();
+							insertOffset = Math.max(0, Math.min(insertOffset, meta.getStartOffset()));
+							if (meta.getAttribute(HTML40Namespace.ATTR_NAME_HTTP_EQUIV).equals("Content-Type") && meta.getAttribute(HTML40Namespace.ATTR_NAME_CONTENT).indexOf("charset") > 0) { //$NON-NLS-2$ //$NON-NLS-1$
+								if (meta.getStartStructuredDocumentRegion() != null)
+									removalRegions.add(meta.getStartStructuredDocumentRegion());
+								if (meta.getEndStructuredDocumentRegion() != null)
+									removalRegions.add(meta.getEndStructuredDocumentRegion());
+							}
+						}
+						/*
+						 * remove existing base elements with hrefs so we can
+						 * add one for the local location
+						 */
+						NodeList baseElements = document.getElementsByTagName(HTML40Namespace.ElementName.BASE);
+						for (int i = 0; i < baseElements.getLength(); i++) {
+							IDOMElement base = (IDOMElement) baseElements.item(i);
+							if (insertOffset == 0)
+								insertOffset = base.getStartOffset();
+							insertOffset = Math.max(0, Math.min(insertOffset, base.getStartOffset()));
+							if (base.getStartStructuredDocumentRegion() != null)
+								removalRegions.add(base.getStartStructuredDocumentRegion());
+							if (base.getEndStructuredDocumentRegion() != null)
+								removalRegions.add(base.getEndStructuredDocumentRegion());
+						}
+					}
+
+					for (int i = removalRegions.size() - 1; i >= 0; i--) {
+						IStructuredDocumentRegion region = (IStructuredDocumentRegion) removalRegions.get(i);
+						try {
+							sourceDocument.replace(region.getStartOffset(), region.getEndOffset() - region.getStartOffset(), ""); //$NON-NLS-1$
+						}
+						catch (BadLocationException e1) {
+							Logger.logException(e1);
+						}
+					}
+
+					if (insertOffset == 0) {
+						Document document = ((IDOMModel) editModel).getDocument();
+						NodeList headElements = document.getElementsByTagName(HTML40Namespace.ElementName.HEAD);
+						if (headElements.getLength() > 0) {
+							IDOMElement head = (IDOMElement) headElements.item(0);
+							if (head.getStartStructuredDocumentRegion() != null) {
+								insertOffset = head.getStartStructuredDocumentRegion().getEndOffset();
+							}
+							else {
+								insertOffset = head.getEndOffset();
+							}
+						}
+
 					}
 				}
-				// remove existing base elements with hrefs so we can add one
-				// for the local location
-				NodeList baseElements = document.getElementsByTagName(HTML40Namespace.ElementName.BASE);
-				for (int i = 0; i < baseElements.getLength(); i++) {
-					IDOMElement base = (IDOMElement) baseElements.item(i);
-					if (insertOffset == 0)
-						insertOffset = base.getStartOffset();
-					insertOffset = Math.max(0, Math.min(insertOffset, base.getStartOffset()));
-					if (base.getStartStructuredDocumentRegion() != null)
-						removalRegions.add(base.getStartStructuredDocumentRegion());
-					if (base.getEndStructuredDocumentRegion() != null)
-						removalRegions.add(base.getEndStructuredDocumentRegion());
+				catch (Exception e) {
+					Logger.logException(e);
 				}
-			}
+				finally {
+					if (editModel != null)
+						editModel.releaseFromRead();
+				}
 
-			for (int i = removalRegions.size() - 1; i >= 0; i--) {
-				IStructuredDocumentRegion region = (IStructuredDocumentRegion) removalRegions.get(i);
+				String location = null;
+				if (getEditorInput().getAdapter(IFile.class) != null) {
+					location = "file:" + ((IFile) getEditorInput().getAdapter(IFile.class)).getLocation(); //$NON-NLS-1$
+				}
+				else if (getEditorInput() instanceof ILocationProvider) {
+					location = "file:" + ((ILocationProvider) getEditorInput()).getPath(getEditorInput()); //$NON-NLS-1$
+				}
+				else {
+					location = "file:" + ResourcesPlugin.getWorkspace().getRoot().getLocation(); //$NON-NLS-1$
+				}
+
 				try {
-					htmlSource.replace(region.getStartOffset(), region.getEndOffset() - region.getStartOffset(), ""); //$NON-NLS-1$
+					sourceDocument.replace(insertOffset, 0, "<base href=\"" + location + "\" />"); //$NON-NLS-2$ //$NON-NLS-1$
 				}
 				catch (BadLocationException e1) {
 					Logger.logException(e1);
 				}
-			}
 
-			if (insertOffset == 0) {
-				Document document = ((IDOMModel) editModel).getDocument();
-				NodeList headElements = document.getElementsByTagName(HTML40Namespace.ElementName.HEAD);
-				if (headElements.getLength() > 0) {
-					IDOMElement head = (IDOMElement) headElements.item(0);
-					if (head.getStartStructuredDocumentRegion() != null) {
-						insertOffset = head.getStartStructuredDocumentRegion().getEndOffset();
-					}
-					else {
-						insertOffset = head.getEndOffset();
-					}
+				boolean rendered = ((Browser) fPreviewControl).setText(sourceDocument.get());
+				if (!rendered) {
+					getEditorSite().getActionBars().getStatusLineManager().setErrorMessage("Failure rendering");//$NON-NLS-1$
 				}
-
 			}
-		}
-		catch (Exception e) {
-			Logger.logException(e);
-		}
-		finally {
-			if (editModel != null)
-				editModel.releaseFromRead();
-		}
+		});
 
-		String location = null;
-		if (getEditorInput().getAdapter(IFile.class) != null) {
-			location = "file:" + ((IFile) getEditorInput().getAdapter(IFile.class)).getLocation(); //$NON-NLS-1$
-		}
-		else if (getEditorInput() instanceof ILocationProvider) {
-			location = "file:" + ((ILocationProvider) getEditorInput()).getPath(getEditorInput()); //$NON-NLS-1$
-		}
-		else {
-			location = "file:" + ResourcesPlugin.getWorkspace().getRoot().getLocation(); //$NON-NLS-1$
-		}
-
-		try {
-			htmlSource.replace(insertOffset, 0, "<base href=\"" + location + "\" />"); //$NON-NLS-2$ //$NON-NLS-1$
-		}
-		catch (BadLocationException e1) {
-			Logger.logException(e1);
-		}
-
-		boolean rendered = ((Browser) fPreviewControl).setText(htmlSource.get());
-		if (!rendered) {
-			getEditorSite().getActionBars().getStatusLineManager().setErrorMessage("Failure rendering");//$NON-NLS-1$
-		}
 	}
 }
