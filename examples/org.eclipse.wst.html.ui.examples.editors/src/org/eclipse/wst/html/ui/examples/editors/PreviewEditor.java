@@ -20,6 +20,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.BusyIndicator;
@@ -94,7 +96,7 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 
 		if (fShowXMLDesign) {
 			/**
-			 * Note that no effort has been spent to keep selection
+			 * Note, little effort has been spent to keep selection
 			 * synchronized between the various pages.
 			 */
 			fDesignPage = new XMLTableTreeViewer(getContainer());
@@ -119,6 +121,16 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 			getContainer().addDisposeListener(modelController);
 			modelController.propertyChanged(this, IEditorPart.PROP_INPUT);
 			fDesignPageIndex = addPage(fDesignPage.getControl());
+			/*
+			 * The source page is already sending notifications to the
+			 * workbench. Take advantage of that and that we're not both
+			 * visible at the same time.
+			 */
+			fDesignPage.addPostSelectionChangedListener(new ISelectionChangedListener() {
+				public void selectionChanged(SelectionChangedEvent event) {
+					fSourcePage.getSelectionProvider().setSelection(event.getSelection());
+				}
+			});
 		}
 
 		fPreviewControl = createPreviewControl();
@@ -131,7 +143,6 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 		setPageText(fPreviewPageIndex, "Preview"); //$NON-NLS-1$
 
 		getEditorSite().getActionBarContributor().setActiveEditor(fSourcePage);
-		getEditorSite().setSelectionProvider(fSourcePage.getSelectionProvider());
 	}
 
 	/**
@@ -250,17 +261,24 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 		super.pageChange(newPageIndex);
 		if (newPageIndex == fSourcePageIndex) {
 			getEditorSite().getActionBarContributor().setActiveEditor(fSourcePage);
-			getEditorSite().setSelectionProvider(fSourcePage.getSelectionProvider());
+			fSourcePage.getSelectionProvider().setSelection(fDesignPage.getSelection());
 		}
 		else {
 			getEditorSite().getActionBarContributor().setActiveEditor(this);
 			if (newPageIndex == fPreviewPageIndex) {
+				getEditorSite().setSelectionProvider(null);
 				updatePreviewContent();
 			}
 			else if (newPageIndex == fDesignPageIndex) {
-				getEditorSite().setSelectionProvider(fDesignPage);
+				fDesignPage.setSelection(fSourcePage.getSelectionProvider().getSelection());
 			}
 		}
+		updateSelectionProvider();
+	}
+
+	private void updateSelectionProvider() {
+		// TODO Auto-generated method stub
+
 	}
 
 	/**
