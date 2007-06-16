@@ -242,7 +242,7 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 	 * @see org.eclipse.ui.part.MultiPageEditorPart#pageChange(int)
 	 */
 	protected void pageChange(int newPageIndex) {
-		getEditorSite().getActionBars().getStatusLineManager().setErrorMessage(null);//$NON-NLS-1$
+		getEditorSite().getActionBars().getStatusLineManager().setErrorMessage(null);
 		interruptPreview();
 
 		super.pageChange(newPageIndex);
@@ -282,8 +282,8 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 				fShowXMLDesign = ((Boolean) data).booleanValue();
 			}
 			else if (data instanceof Map) {
-				fShowXMLDesign = Boolean.valueOf((String) ((Map) data).get("showGrid")).booleanValue();
-				fPreferredContentTypeID = ((Map) data).get("contentType").toString();
+				fShowXMLDesign = Boolean.valueOf((String) ((Map) data).get("showGrid")).booleanValue(); //$NON-NLS-1$
+				fPreferredContentTypeID = ((Map) data).get("contentType").toString(); //$NON-NLS-1$
 			}
 		}
 	}
