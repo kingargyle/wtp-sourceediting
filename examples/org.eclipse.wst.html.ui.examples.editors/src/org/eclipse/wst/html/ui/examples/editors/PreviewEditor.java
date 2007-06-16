@@ -63,9 +63,9 @@ import org.w3c.dom.NodeList;
  */
 public class PreviewEditor extends MultiPageEditorPart implements IReusableEditor {
 	Control fPreviewControl = null;
-	int fPreviewPageIndex;
+	int fPreviewPageIndex = -1;
 	ITextEditor fSourcePage = null;
-	int fSourcePageIndex;
+	int fSourcePageIndex = -1;
 
 	/**
 	 * Controls whether to also insert the XML design page into this editor.
@@ -74,7 +74,7 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 	 */
 	boolean fShowXMLDesign = false;
 	XMLTableTreeViewer fDesignPage = null;
-	int fDesignPageIndex;
+	int fDesignPageIndex = -1;
 
 	String fPreferredContentTypeID = ContentTypeIdForHTML.ContentTypeID_HTML;
 
