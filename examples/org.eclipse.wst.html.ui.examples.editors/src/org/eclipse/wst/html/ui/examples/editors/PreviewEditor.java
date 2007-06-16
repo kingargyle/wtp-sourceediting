@@ -219,19 +219,6 @@ public class PreviewEditor extends MultiPageEditorPart implements IReusableEdito
 		return fSourcePage;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IWorkbenchPart#getTitle()
-	 */
-	public String getTitle() {
-		String title = super.getTitle();
-		if (title == null && getEditorInput() != null) {
-			title = getEditorInput().getName();
-		}
-		return title;
-	}
-
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 	}
