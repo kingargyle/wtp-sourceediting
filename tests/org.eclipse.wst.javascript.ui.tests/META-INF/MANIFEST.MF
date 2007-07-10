@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JavaScript UI Tests Plug-in
+Bundle-SymbolicName: org.eclipse.wst.javascript.ui.tests
+Bundle-Version: 1.0.0
+Bundle-Activator: org.eclipse.wst.javascript.ui.tests.internal.Activator
+Bundle-Vendor: Eclipse.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit,
+ org.eclipse.wst.javascript.ui
+Eclipse-LazyStart: true
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Export-Package: org.eclipse.wst.javascript.ui.tests,
+ org.eclipse.wst.javascript.ui.tests.internal
