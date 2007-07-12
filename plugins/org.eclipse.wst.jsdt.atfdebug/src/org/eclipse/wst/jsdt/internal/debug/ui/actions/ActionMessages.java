@@ -22,7 +22,8 @@ public class ActionMessages extends NLS {
 	public static String BreakpointLocationVerifierJob_breakpointRemoved;
 	public static String BreakpointLocationVerifierJob_breakpointMovedToValidPosition;
 	public static String ToggleBreakpointAdapter_3;
-
+	public static String BreakpointLocationVerifierJob_breakpointSetToRightType;
+	
 	static {
 		// load message values from bundle file
 		NLS.initializeMessages(BUNDLE_NAME, ActionMessages.class);

@@ -805,7 +805,13 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 		if (visit(node, false)) {
 			if (fBestMatch) {
 				// check if we are on the line which contains the method name
-				int nameOffset= node.getName().getStartPosition();
+				SimpleName name = node.getName();
+				int nameOffset;
+				if (name == null){
+					nameOffset= node.getStartPosition();
+				} else {
+					nameOffset= name.getStartPosition();
+				}
 				if (lineNumber(nameOffset) == fLineNumber) {
 					fMemberOffset= nameOffset;
 					fLocationType= LOCATION_METHOD;

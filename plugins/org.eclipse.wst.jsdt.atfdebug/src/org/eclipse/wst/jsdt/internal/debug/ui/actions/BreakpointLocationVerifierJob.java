@@ -101,7 +101,7 @@ public class BreakpointLocationVerifierJob extends Job {
 		fBreakpoint= breakpoint;
 		fLineNumber= lineNumber;
 		fBestMatch= bestMatch;
-//		fTypeName= typeName;
+		fTypeName= typeName;
 		fType= type;
 		fResource= resource;
 		fEditorPart= editorPart;
@@ -244,10 +244,10 @@ public class BreakpointLocationVerifierJob extends Job {
 				replaceBreakpoint(lineNumber, typeName);
 				return new Status(IStatus.OK, JDIDebugUIPlugin.getUniqueIdentifier(), IStatus.WARNING, ActionMessages.BreakpointLocationVerifierJob_breakpointMovedToValidPosition, null); 
 			}
-//			if (!typeName.equals(fTypeName)) {
-//				replaceBreakpoint(lineNumber, typeName);
-//				return new Status(IStatus.OK, JDIDebugUIPlugin.getUniqueIdentifier(), IStatus.WARNING, ActionMessages.BreakpointLocationVerifierJob_breakpointSetToRightType, null); 
-//			}
+			if (!typeName.equals(fTypeName)) {
+				replaceBreakpoint(lineNumber, typeName);
+				return new Status(IStatus.OK, JDIDebugUIPlugin.getUniqueIdentifier(), IStatus.WARNING, ActionMessages.BreakpointLocationVerifierJob_breakpointSetToRightType, null); 
+			}
 		} catch (CoreException e) {
 			JDIDebugUIPlugin.log(e);
 		}
