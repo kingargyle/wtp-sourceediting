@@ -101,7 +101,7 @@ public class BreakpointLocationVerifierJob extends Job {
 		fBreakpoint= breakpoint;
 		fLineNumber= lineNumber;
 		fBestMatch= bestMatch;
-		fTypeName= typeName;
+//		fTypeName= typeName;
 		fType= type;
 		fResource= resource;
 		fEditorPart= editorPart;

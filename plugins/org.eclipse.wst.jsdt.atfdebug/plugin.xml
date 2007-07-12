@@ -2,6 +2,9 @@
 <?eclipse version="3.2"?>
 <plugin>
 
+ <extension point="org.eclipse.ui.startup" >
+ 	<startup class="org.eclipse.wst.jsdt.internal.debug.ui.JDIDebugUIPlugin" />
+ </extension>
 
    <extension
          point="org.eclipse.ui.editorActions">
@@ -10,7 +13,7 @@
             id="org.eclipse.wst.jsdt.debug.CompilationUnitEditor.BreakpointRulerActions">
          <action
                label="%AddBreakpoint.label"
-               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" 
                actionID="RulerDoubleClick"
                id="org.eclipse.wst.jsdt.debug.ui.actions.ManageBreakpointRulerAction">
          </action>
@@ -20,12 +23,12 @@
             id="org.eclipse.wst.jsdt.debug.ClassFileEditor.BreakpointRulerActions">
          <action
                label="%AddBreakpoint.label"
-               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" 
                actionID="RulerDoubleClick"
                id="org.eclipse.wst.jsdt.debug.ui.actions.ManageBreakpointRulerAction">
          </action>
       </editorContribution>
-   </extension>
+   </extension> 
 
    <extension
          point="org.eclipse.ui.popupMenus">
@@ -33,57 +36,51 @@
       <viewerContribution
             targetID="#ReadOnlyJavaScriptRulerContext"
             id="org.eclipse.wst.jsdt.debug.ui.ClassFileRulerPopupActions">
-         <action
+<!--         <action
                label="%JavaBreakpointProperties.label"
                helpContextId="breakpoint_properties_action_context"
                class="org.eclipse.wst.jsdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
                menubarPath="group.properties"
                id="org.eclipse.wst.jsdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate">
-         </action>
+         </action> -->
          <action
                label="%EnableBreakpoint.label"
-               helpContextId="enable_disable_breakpoint_action_context"
                class="org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
                menubarPath="debug"
                id="org.eclipse.wst.jsdt.debug.ui.actions.EnableDisableBreakpointRulerActionDelegate">
          </action>
          <action
                class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
-               helpContextId="manage_breakpoint_action_context"
-               icon="icons/full/obj16/brkp_obj.gif"
                id="org.eclipse.wst.jsdt.debug.ui.actions.BreakpointRulerActionDelegate"
                label="%AddBreakpoint.label"
                menubarPath="debug">
          </action>
-      </viewerContribution>
+      </viewerContribution> 
 
       <viewerContribution
             targetID="#JavaScriptRulerContext"
             id="org.eclipse.wst.jsdt.atfdebug.CompilationUnitRulerPopupActions">
-         <action
+<!--         <action
                label="%JavaBreakpointProperties.label"
                helpContextId="breakpoint_properties_action_context"
                class="org.eclipse.wst.jsdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
                menubarPath="group.properties"
                id="org.eclipse.wst.jsdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate">
-         </action>
+         </action> -->
          <action
                label="%EnableBreakpoint.label"
-               helpContextId="enable_disable_breakpoint_action_context"
                class="org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
                menubarPath="debug"
                id="org.eclipse.wst.jsdt.debug.ui.actions.EnableDisableBreakpointRulerActionDelegate">
          </action>
          <action
                class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
-               helpContextId="manage_breakpoint_action_context"
-               icon="icons/full/obj16/brkp_obj.gif"
                id="org.eclipse.wst.jsdt.debug.ui.actions.BreakpointRulerActionDelegate"
                label="%AddBreakpoint.label"
                menubarPath="debug">
-         </action>
-      </viewerContribution>
-   </extension>
+         </action> 
+      </viewerContribution> 
+   </extension> -->
 
 	<extension point="org.eclipse.core.runtime.adapters">
          
@@ -91,13 +88,13 @@
      	  <factory 
             class="org.eclipse.wst.jsdt.internal.debug.ui.actions.RetargettableActionAdapterFactory" 
             adaptableType="org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditor">
-            <adapter type="org.eclipse.debug.ui.actions.IRunToLineTarget"/>
+<!--            <adapter type="org.eclipse.debug.ui.actions.IRunToLineTarget"/> -->
             <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
          </factory>
          <factory 
             class="org.eclipse.wst.jsdt.internal.debug.ui.actions.RetargettableActionAdapterFactory" 
             adaptableType="org.eclipse.wst.jsdt.internal.ui.javaeditor.ClassFileEditor">
-            <adapter type="org.eclipse.debug.ui.actions.IRunToLineTarget"/>
+<!--           <adapter type="org.eclipse.debug.ui.actions.IRunToLineTarget"/> -->
             <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
          </factory>         
          <factory 

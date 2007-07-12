@@ -81,8 +81,6 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	 * Constructor
 	 */
 	public ToggleBreakpointAdapter() {
-		// initialize helper in UI thread
-		ActionDelegateHelper.getDefault();
 	}
 
     /**
@@ -113,7 +111,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @param selection the current text selection
      * @return the <code>IType</code> for the text selection or <code>null</code>
      */
-    protected IType getType(ITextSelection selection) {
+/*    protected IType getType(ITextSelection selection) {
         IMember member = ActionDelegateHelper.getDefault().getCurrentMember(selection);
         IType type = null;
         if (member instanceof IType) {
@@ -132,7 +130,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
             JDIDebugUIPlugin.log(e);
         }
         return type;
-    }
+    }*/
 
     /**
      * Returns the IType associated with the <code>IJavaElement</code> passed in
@@ -140,7 +138,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @return the corresponding <code>IType</code> for the <code>IJavaElement</code>, or <code>null</code> if there is not one.
      * @since 3.3
      */
-    protected IType getType(IJavaElement element) {
+ /*   protected IType getType(IJavaElement element) {
     	switch(element.getElementType()) {
 	    	case IJavaElement.FIELD: {
 	    		return ((IField)element).getDeclaringType();
@@ -155,7 +153,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	    		return null;
 	    	}
     	}
-    }
+    }*/
     
     /* (non-Javadoc)
      * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#toggleLineBreakpoints(org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
@@ -183,10 +181,6 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	                    ISelection sel = selection;
 	                	if(!(selection instanceof IStructuredSelection)) {
 	                		sel = translateToMembers(part, selection);
-	                	}
-	                	if(isInterface(sel, part)) {
-	                		report(ActionMessages.ToggleBreakpointAdapter_6, part);
-	                    	return Status.OK_STATUS;
 	                	}
 	                    if(sel instanceof IStructuredSelection) {
 	                    	IJavaElement member = (IJavaElement) ((IStructuredSelection)sel).getFirstElement();

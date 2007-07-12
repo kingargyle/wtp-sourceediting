@@ -58,6 +58,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IStartup;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -71,7 +72,7 @@ import org.osgi.framework.BundleContext;
 /**
  * Plug-in class for the org.eclipse.wst.jsdt.debug.ui plug-in.
  */
-public class JDIDebugUIPlugin extends AbstractUIPlugin {
+public class JDIDebugUIPlugin extends AbstractUIPlugin implements IStartup{
 
 	/**
 	 * Unique identifier constant (value <code>"org.eclipse.wst.jsdt.debug.ui"</code>)
@@ -90,8 +91,6 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 	 * Java Debug UI plug-in instance
 	 */
 	private static JDIDebugUIPlugin fgPlugin;
-	
-	private JavaBreakpointWorkbenchAdapterFactory fBreakpointAdapterFactory;
 	
 	private IDebugModelPresentation fUtilPresentation;
 	
@@ -278,56 +277,6 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		IAdapterManager manager= Platform.getAdapterManager();
-//		fActionFilterAdapterFactory= new ActionFilterAdapterFactory();
-//		manager.registerAdapters(fActionFilterAdapterFactory, IMember.class);
-//		manager.registerAdapters(fActionFilterAdapterFactory, IJavaVariable.class);
-//		manager.registerAdapters(fActionFilterAdapterFactory, IJavaStackFrame.class);
-//		manager.registerAdapters(fActionFilterAdapterFactory, IJavaThread.class);
-//		manager.registerAdapters(fActionFilterAdapterFactory, JavaInspectExpression.class);
-//		fSourceLocationAdapterFactory = new JavaSourceLocationWorkbenchAdapterFactory();
-//		manager.registerAdapters(fSourceLocationAdapterFactory, IJavaSourceLocation.class);
-		fBreakpointAdapterFactory= new JavaBreakpointWorkbenchAdapterFactory();
-//		manager.registerAdapters(fBreakpointAdapterFactory, IJavaBreakpoint.class);
-//        IAdapterFactory typeFactory = new JavaBreakpointTypeAdapterFactory();
-//        manager.registerAdapters(typeFactory, IJavaBreakpoint.class);
-        
-//        IAdapterFactory monitorFactory = new MonitorsAdapterFactory();
-//        manager.registerAdapters(monitorFactory, IJavaThread.class);
-//        manager.registerAdapters(monitorFactory, JavaContendedMonitor.class);
-//        manager.registerAdapters(monitorFactory, JavaOwnedMonitor.class);
-//        manager.registerAdapters(monitorFactory, JavaOwningThread.class);
-//        manager.registerAdapters(monitorFactory, JavaWaitingThread.class);
-//        manager.registerAdapters(monitorFactory, IJavaStackFrame.class);
-//        
-//        IAdapterFactory targetFactory = new TargetAdapterFactory();
-//        manager.registerAdapters(targetFactory, IJavaDebugTarget.class);
-//        
-//        IAdapterFactory objectFactory = new ObjectReferencesAdapterFactory();
-//        manager.registerAdapters(objectFactory, IJavaObject.class);
-//        
-//        IAdapterFactory groupFactory = new ThreadGroupAdapterFactory();
-//        manager.registerAdapters(groupFactory, IJavaThreadGroup.class);
-//        
-//        IAdapterFactory showInFactory = new JavaDebugShowInAdapterFactory();
-//        manager.registerAdapters(showInFactory, IJavaStackFrame.class);
-//        
-//        IAdapterFactory columnFactory = new ColumnPresentationAdapterFactory();
-//        manager.registerAdapters(columnFactory, IJavaVariable.class);
-//        manager.registerAdapters(columnFactory, IJavaStackFrame.class);
-//        
-//        IAdapterFactory entryFactory = new ClasspathEntryAdapterFactory();
-//        manager.registerAdapters(entryFactory, DefaultProjectClasspathEntry.class);
-//        
-//        IAdapterFactory variableFactory = new JavaVariableAdapterFactory();
-//        manager.registerAdapters(variableFactory, IJavaVariable.class);
-		
-//		fHCRListener= new JavaHotCodeReplaceListener();
-//		JDIDebugModel.addHotCodeReplaceListener(fHCRListener);
-		
-		
-		// initialize exception inspector handler
-//		new ExceptionInspector();
 	}
 	
 	/* (non-Javadoc)
@@ -336,10 +285,6 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		try {
 			setShuttingDown(true);
-			IAdapterManager manager= Platform.getAdapterManager();
-//			manager.unregisterAdapters(fActionFilterAdapterFactory);
-//			manager.unregisterAdapters(fSourceLocationAdapterFactory);
-			manager.unregisterAdapters(fBreakpointAdapterFactory);
 			if (fTextTools != null) {
 				fTextTools.dispose();
 			}
@@ -402,32 +347,12 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 			return window.getShell();
 		}
 		return null;
+	}
+
+	public void earlyStartup() {
+		// TODO Auto-generated method stub
+		
 	}	
  
-	/**
-	 * Returns a shared utility Java debug model presentation. Clients should not
-	 * dispose the presentation.
-	 * 
-	 * @return a Java debug model presentation
-	 */
-	public IDebugModelPresentation getModelPresentation() {
-		if (fUtilPresentation == null) {
-			fUtilPresentation = DebugUITools.newDebugModelPresentation(JDIDebugModel.getPluginIdentifier());
-		}
-		return fUtilPresentation;
-	}
- 
- 
-	/**
-	 * Returns the text tools used by this plug-in
-	 * 
-	 * @return
-	 */
-	public JavaTextTools getJavaTextTools() {
-		if (fTextTools == null) {
-			fTextTools = new JavaTextTools(PreferenceConstants.getPreferenceStore());
-		}
-		return fTextTools;
-	}
 }
 
