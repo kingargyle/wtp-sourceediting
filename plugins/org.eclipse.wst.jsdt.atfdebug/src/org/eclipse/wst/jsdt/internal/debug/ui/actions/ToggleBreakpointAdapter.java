@@ -206,7 +206,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 							} 	
 							catch (BadLocationException ble) {JDIDebugUIPlugin.log(ble);}
 							JSLineBreakpoint breakpoint = BreakpointUtils.createLineBreakpoint(document, editor.getEditorInput(), lnumber, -1, -1, 0, true, attributes);
-							new BreakpointLocationVerifierJob(document, breakpoint, lnumber, bestMatch, tname, member, resource, editor).schedule();
+//							new BreakpointLocationVerifierJob(document, breakpoint, lnumber, bestMatch, tname, member, resource, editor).schedule();
 	                    }
 	                    else {
 	                    	report(ActionMessages.ToggleBreakpointAdapter_3, part);
