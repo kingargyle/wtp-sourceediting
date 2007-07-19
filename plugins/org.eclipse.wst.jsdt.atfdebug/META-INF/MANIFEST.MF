@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Atfdebug Plug-in
 Bundle-SymbolicName: org.eclipse.wst.jsdt.atfdebug;singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Version: 0.0.1.qualifier
 Require-Bundle: org.eclipse.atf.mozilla.ide.debug,
  org.eclipse.atf.mozilla.ide.debug.ui,
  org.eclipse.wst.jsdt.core,
