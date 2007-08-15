@@ -31,9 +31,9 @@
   	<antcall target="ReadOAGISXSDTestcase"/>
     <antcall target="ReadOAGISXSDTestcase"/>
 
+  	<!--<antcall target="ValidateOAGISXSDTestcase"/>
   	<antcall target="ValidateOAGISXSDTestcase"/>
-  	<antcall target="ValidateOAGISXSDTestcase"/>
-  	<antcall target="ValidateOAGISXSDTestcase"/>
+  	<antcall target="ValidateOAGISXSDTestcase"/>-->
 
   	<antcall target="Open1KBFileTestCase"/>
   	<antcall target="Open1KBFileTestCase"/>
