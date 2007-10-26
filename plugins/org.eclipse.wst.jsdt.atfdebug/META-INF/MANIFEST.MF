@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Atfdebug Plug-in (Incubation)
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.wst.jsdt.atfdebug;singleton:=true
 Bundle-Version: 0.0.1.qualifier
 Require-Bundle: org.eclipse.atf.mozilla.ide.debug,
@@ -20,3 +20,6 @@ Require-Bundle: org.eclipse.atf.mozilla.ide.debug,
 Bundle-Activator: org.eclipse.wst.jsdt.internal.debug.ui.JDIDebugUIPlugin
 Eclipse-LazyStart: true
 Import-Package: com.ibm.icu.text;version="3.6.1"
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-Vendor: %Bundle-Vendor.0
+Bundle-Localization: plugin
