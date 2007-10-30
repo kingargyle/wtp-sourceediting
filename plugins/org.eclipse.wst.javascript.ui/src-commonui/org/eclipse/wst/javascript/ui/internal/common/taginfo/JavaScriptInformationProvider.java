@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2005 IBM Corporation and others.
+ * Copyright (c) 2004, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,9 +20,11 @@ import org.eclipse.jface.text.information.IInformationProviderExtension;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
 
 /**
- * Provides context information for javascript code (Shows tooltip description)
+ * Provides context information for javascript code (Shows tooltip
+ * description)
  * 
- * @author amywu
+ * @deprecated StructuredTextViewerConfiguration creates the appropriate
+ *             information provider
  */
 public class JavaScriptInformationProvider implements IInformationProvider, IInformationProviderExtension {
 
@@ -32,22 +34,31 @@ public class JavaScriptInformationProvider implements IInformationProvider, IInf
 		fTextHover = SSEUIPlugin.getDefault().getTextHoverManager().createBestMatchHover(new JavaScriptTagInfoHoverProcessor());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.text.information.IInformationProvider#getSubject(org.eclipse.jface.text.ITextViewer, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.text.information.IInformationProvider#getSubject(org.eclipse.jface.text.ITextViewer,
+	 *      int)
 	 */
 	public IRegion getSubject(ITextViewer textViewer, int offset) {
 		return fTextHover.getHoverRegion(textViewer, offset);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.text.information.IInformationProvider#getInformation(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.text.information.IInformationProvider#getInformation(org.eclipse.jface.text.ITextViewer,
+	 *      org.eclipse.jface.text.IRegion)
 	 */
 	public String getInformation(ITextViewer textViewer, IRegion subject) {
-		return (String)getInformation2(textViewer, subject);
+		return (String) getInformation2(textViewer, subject);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.text.information.IInformationProviderExtension#getInformation2(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.text.information.IInformationProviderExtension#getInformation2(org.eclipse.jface.text.ITextViewer,
+	 *      org.eclipse.jface.text.IRegion)
 	 */
 	public Object getInformation2(ITextViewer textViewer, IRegion subject) {
 		return fTextHover.getHoverInfo(textViewer, subject);
