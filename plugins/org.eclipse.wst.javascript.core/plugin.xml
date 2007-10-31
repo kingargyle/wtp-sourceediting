@@ -5,7 +5,7 @@
 	<extension point="org.eclipse.core.runtime.contentTypes">
 		<content-type
 			file-extensions="js, es"
-			priority="high"
+			priority="low"
 			name="%JavaScript_Content_Type_Extension_Element.name"
 			id="javascriptsource"
 			base-type="org.eclipse.core.runtime.text"
