@@ -20,6 +20,16 @@
         	class="org.eclipse.wst.javascript.ui.internal.common.taginfo.JavaScriptTagInfoHoverProcessor"
         	target="org.eclipse.wst.html.SCRIPT">
   		</documentationTextHover>
+    <provisionalConfiguration
+          class="org.eclipse.wst.javascript.ui.internal.common.contentassist.JavaScriptContentAssistProcessor"
+          target="org.eclipse.wst.html.SCRIPT"
+          type="contentassistprocessor">
+    </provisionalConfiguration>
+    <provisionalConfiguration
+          class="org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript"
+          target="org.eclipse.wst.html.SCRIPT"
+          type="linestyleprovider">
+    </provisionalConfiguration>
 	</extension>
 	<extension point="org.eclipse.ui.editorActions">
         <editorContribution
