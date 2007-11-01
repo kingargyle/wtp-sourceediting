@@ -118,6 +118,7 @@
 	</extension>
 
 	<!-- New JavaScript wizard -->
+	<!--
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard
 			id="org.eclipse.wst.javascript.ui.internal.wizard.NewJSWizard"
@@ -130,7 +131,9 @@
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
+	-->
 		<!-- JAVASCRIPT PREFERENCE PAGES -->
+	<!--
 		<page
 			name="%JavaScript_Files.name"
 			category="org.eclipse.wst.sse.ui.internal.provisional.preferences"
@@ -153,8 +156,9 @@
 			<keywordReference id="org.eclipse.wst.javascript.ui.styles"/>
 		</page>
 	</extension>
-	
+    -->	
 	<!-- Keywords for preference and properties pages -->
+	<!--
 	<extension point="org.eclipse.ui.keywords">
 		<keyword
 			label="%preferenceKeywords.files"
@@ -166,6 +170,7 @@
 			label="%preferenceKeywords.styles"
 			id="org.eclipse.wst.javascript.ui.styles"/>
     </extension>
+    -->
 	
 	<!-- initialize javascript ui preferences -->
 	<extension point="org.eclipse.core.runtime.preferences">
