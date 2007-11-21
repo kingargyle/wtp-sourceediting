@@ -1,0 +1,29 @@
+######## done #########
+
+* "preferences" action added to the outline to directly access the outline configuration template preferences
+
+* applying edited templates is directly reflected by the active xml outline. very useful for testing your configuration.
+
+* outline configurations use pure xpath expressions encapsulated within "${" and "}". this makes it possible to 
+write simple labels from element attributes (${@title} for example) but also more element labels like 
+like ${title} (i.e. takes the text within the title sub element of the current element as label)
+
+* configurations are once parsed and cached as a kind of compiled expressions 
+(much faster outlining than before, makes sense for huge xml documents) 
+
+* outline configuration can be published via template contribution by other plugins   
+
+* outline configuration can be configured/overloaded via preference page by the user
+
+* plugin org.eclipse.wst.xml.ui.editor.outline created
+
+* classes for editor outlining extracted from orangevolt to org.eclipse.wst.xml.ui.editor.outline
+
+* package renamed to org.eclipse.wst.xml.ui.editor.outline
+
+* localization added
+
+* code cleaned up and refactored (templating,localization) 
+
+######## todo ##########
+ 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><templates><template autoinsert="true" context="org.eclipse.wst.xml.ui.editor.outline.contextType" deleted="false" description="docbook outline" enabled="true" name="book|part|article">book|part=${text()}|${@label}|${@xreflabel}|${@id}
+article=${title}|${articleinfo/title}|${@xreflabel}|${@id}
+preface=${text()}|${@xreflabel}|${@id}|Preface
+chapter=${text()}|${@label}|${@xreflabel}|${@id}
+appendix=${text()}|${@label}|${@xreflabel}|${@id}
+glossary=${text()}|${@xreflabel}|${@id}
+section=${text()}|${@label}|${@xreflabel}|${@id}
+simplesect=${text()}|${@xreflabel}|${@id}
+sect1|sect2|sect3|sect4|sect5=${text()}|${@label}|${@xreflabel}|${@id}
+index=${text()}|${@xreflabel}|${@id}</template></templates>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors.templates">
+      <include
+            file="templates/outline.xml">
+      </include>
+      <contextType
+            class="org.eclipse.wst.xml.ui.editor.outline.internal.OutlineTemplateContextType"
+            id="org.eclipse.wst.xml.ui.editor.outline.contextType">
+      </contextType>
+   </extension>
+   
+   <extension point="org.eclipse.ui.keywords">
+      <keyword label="outline configuration xml"
+            id="org.eclipse.wst.xml.ui.editor.outline.keywords"/>  
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.eclipse.wst.xml.ui.editor.outline.preferences.OutlineTemplatePreferencesPage"
+            id="org.eclipse.wst.xml.ui.editor.outline.templates"
+            name="%outlinePreferencesPage"
+            category="org.eclipse.wst.sse.ui.preferences.xml">
+            <keywordReference
+                  id="org.eclipse.wst.xml.ui.editor.outline.">
+            </keywordReference>
+      </page>
+   </extension>
+
+   <extension
+         point="org.eclipse.wst.sse.ui.editorConfiguration">
+      <contentOutlineConfiguration
+            class="org.eclipse.wst.xml.ui.editor.outline.internal.ContentOutlineConfiguration"
+            target="org.eclipse.wst.xml.ui.editor.outline.docbook"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            file-extensions="dbk"
+            id="org.eclipse.wst.xml.ui.editor.outline.docbook"
+            name="DocBook Content Type">
+      </content-type>
+   </extension>
+</plugin>

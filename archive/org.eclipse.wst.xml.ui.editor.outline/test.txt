@@ -1,0 +1,10 @@
+book|part=${text()}|${@label}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-docbook-book-16.png
+article=${text()}|${articleinfo/title}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-docbook-article-16.png
+preface=${text()}|${@xreflabel}|${@id}|Preface;icon=icons/outline/docbook/cong-subsection-16.png
+chapter=${text()}|${@label}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-subsection-16.png
+appendix=${text()}|${@label}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-summary-16.png
+glossary=${text()}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-summary-16.png
+section=${text()}|${@label}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-subsection-16.png
+simplesect=${text()}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-subsection-16.png
+sect1|sect2|sect3|sect4|sect5=${text()}|${@label}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-subsection-16.png
+index=${text()}|${@xreflabel}|${@id};icon=icons/outline/docbook/cong-subsection-16.png
