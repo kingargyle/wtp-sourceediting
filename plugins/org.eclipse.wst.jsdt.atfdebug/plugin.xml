@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-
+<!--
  <extension point="org.eclipse.ui.startup" >
  	<startup class="org.eclipse.wst.jsdt.internal.debug.ui.JDIDebugUIPlugin" />
  </extension>
@@ -71,10 +71,12 @@
          </action> 
       </viewerContribution> 
    </extension> -->
-
+-->
+<!--
 	<extension point="org.eclipse.core.runtime.adapters">
-         
+    -->     
      <!-- Adapters for retargettable actions -->
+     	<!--
      	  <factory 
             class="org.eclipse.wst.jsdt.internal.debug.ui.actions.RetargettableActionAdapterFactory" 
             adaptableType="org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditor">
@@ -97,6 +99,6 @@
          </factory>         
       </extension>     	   
 
-
+-->
 
 </plugin>
