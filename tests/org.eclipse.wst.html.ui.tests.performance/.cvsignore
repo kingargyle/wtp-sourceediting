@@ -4,3 +4,4 @@ build.xml
 dev.properties
 htmluiperformance.jar
 temp.folder
+javaCompiler.htmluiperformance.jar.args
