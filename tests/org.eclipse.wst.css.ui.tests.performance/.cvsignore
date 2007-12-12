@@ -4,3 +4,4 @@ build.xml
 dev.properties
 cssuiperformance.jar
 temp.folder
+javaCompiler.cssuiperformance.jar.args
