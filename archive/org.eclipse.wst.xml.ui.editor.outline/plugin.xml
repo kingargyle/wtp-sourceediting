@@ -22,9 +22,9 @@
             class="org.eclipse.wst.xml.ui.editor.outline.preferences.OutlineTemplatePreferencesPage"
             id="org.eclipse.wst.xml.ui.editor.outline.templates"
             name="%outlinePreferencesPage"
-            category="org.eclipse.wst.sse.ui.preferences.xml">
+            category="org.eclipse.wst.sse.ui.preferences.xml.source">
             <keywordReference
-                  id="org.eclipse.wst.xml.ui.editor.outline.">
+                  id="org.eclipse.wst.xml.ui.editor.outline.keywords">
             </keywordReference>
       </page>
    </extension>
