@@ -90,7 +90,7 @@ import org.eclipse.wst.jsdt.core.dom.SuperFieldAccess;
 import org.eclipse.wst.jsdt.core.dom.SuperMethodInvocation;
 import org.eclipse.wst.jsdt.core.dom.SwitchCase;
 import org.eclipse.wst.jsdt.core.dom.SwitchStatement;
-import org.eclipse.wst.jsdt.core.dom.SynchronizedStatement;
+
 import org.eclipse.wst.jsdt.core.dom.TagElement;
 import org.eclipse.wst.jsdt.core.dom.TextElement;
 import org.eclipse.wst.jsdt.core.dom.ThisExpression;
@@ -976,9 +976,9 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	/**
 	 * @see org.eclipse.wst.jsdt.core.dom.ASTVisitor#visit(org.eclipse.wst.jsdt.core.dom.SingleVariableDeclaration)
 	 */
-	public boolean visit(SingleVariableDeclaration node) {
-		return visit(node, false);
-	}
+//	public boolean visit(SingleVariableDeclaration node) {
+//		return visit(node, false);
+//	}
 
 	/**
 	 * @see org.eclipse.wst.jsdt.core.dom.ASTVisitor#visit(org.eclipse.wst.jsdt.core.dom.StringLiteral)
@@ -1025,9 +1025,9 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	/**
 	 * @see org.eclipse.wst.jsdt.core.dom.ASTVisitor#visit(org.eclipse.wst.jsdt.core.dom.SynchronizedStatement)
 	 */
-	public boolean visit(SynchronizedStatement node) {
-		return visit(node, false);
-	}
+//	public boolean visit(SynchronizedStatement node) {
+//		return visit(node, false);
+//	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.wst.jsdt.core.dom.ASTVisitor#visit(org.eclipse.wst.jsdt.core.dom.TagElement)
