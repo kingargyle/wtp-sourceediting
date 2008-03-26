@@ -18,7 +18,19 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.wst.jsdt.feature" version="0.0.1" match="compatible"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.wst.jsdt.web.ui"/>
+      <import plugin="org.eclipse.jst.jsp.ui"/>
+      <import plugin="org.eclipse.wst.sse.ui"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.wst.html.ui"/>
+      <import plugin="org.eclipse.wst.html.core"/>
+      <import plugin="org.eclipse.jst.jsp.core"/>
+      <import plugin="org.eclipse.wst.css.core"/>
+      <import plugin="org.eclipse.wst.xml.core"/>
+      <import plugin="org.eclipse.wst.sse.core"/>
+      <import plugin="org.eclipse.wst.jsdt.web.core"/>
    </requires>
 
    <plugin
