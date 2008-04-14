@@ -84,7 +84,7 @@ public class LineStyleProvider implements LineStyleListener {
 		// I want force bold black here, for the "one range" case,
 		// to help "see" it.
 		if (numberOfRanges == 1) {
-			arrayList.add(new StyleRange(checkOffset(offset, length), safeWidth(length - offset, offset, length), display.getSystemColor(SWT.COLOR_BLACK), null, SWT.BOLD));
+			arrayList.add(new StyleRange(checkOffset(offset, offset+length), safeWidth(length - offset, offset, length), display.getSystemColor(SWT.COLOR_BLACK), null, SWT.BOLD));
 
 		}
 		// otherwise break up line into roughly equal width style ranges and
@@ -162,7 +162,8 @@ public class LineStyleProvider implements LineStyleListener {
 	 */
 	private int checkOffset(int offset, int endOffset) {
 
-		if (offset >= endOffset) {
+		// zero-length lines are possible if there is just one line
+		if (offset > endOffset) {
 			throw new Error("hmm, not checking or calculating for start offset correctly");
 		}
 		return offset;
@@ -183,7 +184,7 @@ public class LineStyleProvider implements LineStyleListener {
 
 		int result = 0;
 		int remaining = (endOffset - offset);
-		if (remaining <= 0) {
+		if (remaining < 0) {
 			throw new IllegalArgumentException("not enough remaining space");
 		}
 
