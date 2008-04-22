@@ -9,7 +9,7 @@
 			name="%JavaScript_Content_Type_Extension_Element.name"
 			id="javascriptsource"
 			base-type="org.eclipse.core.runtime.text"
-			default-charset="ISO-8859-1">
+			alias-for="org.eclipse.wst.jsdt.core.jsSource">
 		</content-type>
 	</extension>
 
