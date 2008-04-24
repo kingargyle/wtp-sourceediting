@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2006 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Common Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,7 +24,7 @@ public class XSDPerformancePlugin extends Plugin
 
   // TODO: This constant should really be pulled from the plugin which declares it.
   // This will avoid "magic string" dependencies which can be easily broken.
-  public static final String XSD_VALIDATOR_ID = "org.eclipse.wst.xsd.core.internal.validation.eclipse.XSDDelegatingValidator"; //$NON-NLS-1$
+  public static final String XSD_VALIDATOR_ID = "org.eclipse.wst.xsd.core.xsd"; //$NON-NLS-1$
 
   public static final String BUNDLE_ID = "org.eclipse.wst.xsd.tests.performance"; //$NON-NLS-1$
 
