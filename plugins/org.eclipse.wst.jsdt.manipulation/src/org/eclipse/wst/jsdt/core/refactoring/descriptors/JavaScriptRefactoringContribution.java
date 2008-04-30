@@ -26,15 +26,15 @@ import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
  * 
  * @since 3.3
  */
-public abstract class JavaRefactoringContribution extends RefactoringContribution {
+public abstract class JavaScriptRefactoringContribution extends RefactoringContribution {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public final Map retrieveArgumentMap(final RefactoringDescriptor descriptor) {
 		Assert.isNotNull(descriptor);
-		if (descriptor instanceof JavaRefactoringDescriptor)
-			return ((JavaRefactoringDescriptor) descriptor).getArguments();
+		if (descriptor instanceof JavaScriptRefactoringDescriptor)
+			return ((JavaScriptRefactoringDescriptor) descriptor).getArguments();
 		return super.retrieveArgumentMap(descriptor);
 	}
 }

@@ -10,19 +10,19 @@
  *******************************************************************************/
 package org.eclipse.wst.jsdt.core.refactoring;
 
-import org.eclipse.wst.jsdt.core.IJavaElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
 
 /**
- * An <code>IJavaElementMapper</code> provides methods to map an original
+ * An <code>IJavaScriptElementMapper</code> provides methods to map an original
  * elements to its refactored counterparts.
  * <p>
- * An <code>IJavaElementMapper</code> can be obtained via 
+ * An <code>IJavaScriptElementMapper</code> can be obtained via 
  * {@link org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor#getAdapter(Class)}. 
  * </p>
  * 
  * @since 3.2
  */
-public interface IJavaElementMapper {
+public interface IJavaScriptElementMapper {
 	
 	/**
 	 * Returns the refactored Java element for the given element.
@@ -37,5 +37,5 @@ public interface IJavaElementMapper {
 	 * 
 	 * @return the refactored element for the given element
 	 */
-	IJavaElement getRefactoredJavaElement(IJavaElement element);
+	IJavaScriptElement getRefactoredJavaScriptElement(IJavaScriptElement element);
 }

@@ -35,7 +35,7 @@ package org.eclipse.wst.jsdt.core.refactoring;
  * 
  * @since 3.3
  */
-public interface IJavaRefactorings {
+public interface IJavaScriptRefactorings {
 
 	/**
 	 * Refactoring id of the 'Change Method Signature' refactoring (value:
@@ -292,17 +292,17 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.compilationunit</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
-	public static final String RENAME_COMPILATION_UNIT= "org.eclipse.wst.jsdt.ui.rename.compilationunit"; //$NON-NLS-1$
+	public static final String RENAME_JAVASCRIPT_UNIT= "org.eclipse.wst.jsdt.ui.rename.compilationunit"; //$NON-NLS-1$
 
 	/**
 	 * Refactoring id of the 'Rename Enum Constant' refactoring (value:
 	 * <code>org.eclipse.wst.jsdt.ui.rename.enum.constant</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_ENUM_CONSTANT= "org.eclipse.wst.jsdt.ui.rename.enum.constant"; //$NON-NLS-1$
@@ -312,7 +312,7 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.field</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_FIELD= "org.eclipse.wst.jsdt.ui.rename.field"; //$NON-NLS-1$
@@ -322,7 +322,7 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.java.project</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_JAVA_PROJECT= "org.eclipse.wst.jsdt.ui.rename.java.project"; //$NON-NLS-1$
@@ -332,7 +332,7 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.local.variable</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_LOCAL_VARIABLE= "org.eclipse.wst.jsdt.ui.rename.local.variable"; //$NON-NLS-1$
@@ -342,7 +342,7 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.method</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_METHOD= "org.eclipse.wst.jsdt.ui.rename.method"; //$NON-NLS-1$
@@ -352,7 +352,7 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.package</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_PACKAGE= "org.eclipse.wst.jsdt.ui.rename.package"; //$NON-NLS-1$
@@ -372,7 +372,7 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.source.folder</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_SOURCE_FOLDER= "org.eclipse.wst.jsdt.ui.rename.source.folder"; //$NON-NLS-1$
@@ -382,7 +382,7 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.type</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_TYPE= "org.eclipse.wst.jsdt.ui.rename.type"; //$NON-NLS-1$
@@ -392,7 +392,7 @@ public interface IJavaRefactorings {
 	 * <code>org.eclipse.wst.jsdt.ui.rename.type.parameter</code>).
 	 * <p>
 	 * Clients may safely cast the obtained refactoring descriptor to
-	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaElementDescriptor}.
+	 * {@link org.eclipse.wst.jsdt.core.refactoring.descriptors.RenameJavaScriptElementDescriptor}.
 	 * </p>
 	 */
 	public static final String RENAME_TYPE_PARAMETER= "org.eclipse.wst.jsdt.ui.rename.type.parameter"; //$NON-NLS-1$

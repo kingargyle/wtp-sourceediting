@@ -13,7 +13,7 @@ package org.eclipse.wst.jsdt.core.manipulation;
 /**
  * Central access point for the Java Manipulation plug-in (id <code>"org.eclipse.wst.jsdt.manipulation"</code>).
  */
-public class JavaManipulation {
+public class JavaScriptManipulation {
 	
 	/**
 	 * The id of the Java Manipulation plug-in (value <code>"org.eclipse.wst.jsdt.manipulation"</code>).

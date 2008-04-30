@@ -12,9 +12,9 @@ package org.eclipse.wst.jsdt.core.refactoring.descriptors;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.wst.jsdt.core.IJavaElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
 import org.eclipse.wst.jsdt.core.ITypeParameter;
-import org.eclipse.wst.jsdt.core.refactoring.IJavaRefactorings;
+import org.eclipse.wst.jsdt.core.refactoring.IJavaScriptRefactorings;
 import org.eclipse.wst.jsdt.internal.core.refactoring.descriptors.DescriptorMessages;
 
 /**
@@ -32,7 +32,7 @@ import org.eclipse.wst.jsdt.internal.core.refactoring.descriptors.DescriptorMess
  * 
  * @since 3.3
  */
-public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor {
+public final class RenameJavaScriptElementDescriptor extends JavaScriptRefactoringDescriptor {
 
 	/** The delegate attribute */
 	private static final String ATTRIBUTE_DELEGATE= "delegate"; //$NON-NLS-1$
@@ -95,7 +95,7 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 	private boolean fHierarchical= false;
 
 	/** The java element attribute */
-	private IJavaElement fJavaElement= null;
+	private IJavaScriptElement fJavaElement= null;
 
 	/** The match strategy */
 	private int fMatchStrategy= STRATEGY_EXACT;
@@ -129,9 +129,9 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 	 * 
 	 * @param id
 	 *            the unique id of the rename refactoring
-	 * @see IJavaRefactorings
+	 * @see IJavaScriptRefactorings
 	 */
-	public RenameJavaElementDescriptor(final String id) {
+	public RenameJavaScriptElementDescriptor(final String id) {
 		super(id);
 		Assert.isLegal(checkId(id), "Refactoring id is not a rename refactoring id"); //$NON-NLS-1$
 	}
@@ -145,27 +145,27 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 	 */
 	private boolean checkId(final String id) {
 		Assert.isNotNull(id);
-		if (id.equals(IJavaRefactorings.RENAME_COMPILATION_UNIT))
+		if (id.equals(IJavaScriptRefactorings.RENAME_JAVASCRIPT_UNIT))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_ENUM_CONSTANT))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_ENUM_CONSTANT))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_FIELD))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_FIELD))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_JAVA_PROJECT))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_JAVA_PROJECT))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_LOCAL_VARIABLE))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_LOCAL_VARIABLE))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_METHOD))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_METHOD))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_PACKAGE))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_PACKAGE))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_RESOURCE))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_RESOURCE))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_SOURCE_FOLDER))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_SOURCE_FOLDER))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_TYPE))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_TYPE))
 			return true;
-		else if (id.equals(IJavaRefactorings.RENAME_TYPE_PARAMETER))
+		else if (id.equals(IJavaScriptRefactorings.RENAME_TYPE_PARAMETER))
 			return true;
 		return false;
 	}
@@ -175,32 +175,32 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 	 */
 	protected void populateArgumentMap() {
 		super.populateArgumentMap();
-		fArguments.put(JavaRefactoringDescriptor.ATTRIBUTE_NAME, fName);
-		if (getID().equals(IJavaRefactorings.RENAME_TYPE_PARAMETER)) {
+		fArguments.put(JavaScriptRefactoringDescriptor.ATTRIBUTE_NAME, fName);
+		if (getID().equals(IJavaScriptRefactorings.RENAME_TYPE_PARAMETER)) {
 			final ITypeParameter parameter= (ITypeParameter) fJavaElement;
-			fArguments.put(JavaRefactoringDescriptor.ATTRIBUTE_INPUT, elementToHandle(getProject(), parameter.getDeclaringMember()));
+			fArguments.put(JavaScriptRefactoringDescriptor.ATTRIBUTE_INPUT, elementToHandle(getProject(), parameter.getDeclaringMember()));
 			fArguments.put(ATTRIBUTE_PARAMETER, parameter.getElementName());
 		} else
-			fArguments.put(JavaRefactoringDescriptor.ATTRIBUTE_INPUT, elementToHandle(getProject(), fJavaElement));
+			fArguments.put(JavaScriptRefactoringDescriptor.ATTRIBUTE_INPUT, elementToHandle(getProject(), fJavaElement));
 		final int type= fJavaElement.getElementType();
-		if (type != IJavaElement.PACKAGE_FRAGMENT_ROOT)
-			fArguments.put(JavaRefactoringDescriptor.ATTRIBUTE_REFERENCES, Boolean.toString(fReferences));
-		if (type == IJavaElement.FIELD) {
+		if (type != IJavaScriptElement.PACKAGE_FRAGMENT_ROOT)
+			fArguments.put(JavaScriptRefactoringDescriptor.ATTRIBUTE_REFERENCES, Boolean.toString(fReferences));
+		if (type == IJavaScriptElement.FIELD) {
 			fArguments.put(ATTRIBUTE_RENAME_GETTER, Boolean.toString(fRenameGetter));
 			fArguments.put(ATTRIBUTE_RENAME_SETTER, Boolean.toString(fRenameSetter));
 		}
 		switch (type) {
-			case IJavaElement.PACKAGE_FRAGMENT:
-			case IJavaElement.TYPE:
-			case IJavaElement.FIELD:
+			case IJavaScriptElement.PACKAGE_FRAGMENT:
+			case IJavaScriptElement.TYPE:
+			case IJavaScriptElement.FIELD:
 				fArguments.put(ATTRIBUTE_TEXTUAL_MATCHES, Boolean.toString(fTextual));
 				break;
 			default:
 				break;
 		}
 		switch (type) {
-			case IJavaElement.METHOD:
-			case IJavaElement.FIELD:
+			case IJavaScriptElement.METHOD:
+			case IJavaScriptElement.FIELD:
 				fArguments.put(ATTRIBUTE_DEPRECATE, Boolean.toString(fDeprecate));
 				fArguments.put(ATTRIBUTE_DELEGATE, Boolean.toString(fDelegate));
 				break;
@@ -208,8 +208,8 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 				break;
 		}
 		switch (type) {
-			case IJavaElement.PACKAGE_FRAGMENT:
-			case IJavaElement.TYPE:
+			case IJavaScriptElement.PACKAGE_FRAGMENT:
+			case IJavaScriptElement.TYPE:
 				fArguments.put(ATTRIBUTE_QUALIFIED, Boolean.toString(fQualified));
 				if (fPatterns != null && !"".equals(fPatterns)) //$NON-NLS-1$
 					fArguments.put(ATTRIBUTE_PATTERNS, fPatterns);
@@ -218,7 +218,7 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 				break;
 		}
 		switch (type) {
-			case IJavaElement.TYPE:
+			case IJavaScriptElement.TYPE:
 				fArguments.put(ATTRIBUTE_SIMILAR_DECLARATIONS, Boolean.toString(fSimilarDeclarations));
 				fArguments.put(ATTRIBUTE_MATCH_STRATEGY, Integer.toString(fMatchStrategy));
 				break;
@@ -226,7 +226,7 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 				break;
 		}
 		switch (type) {
-			case IJavaElement.PACKAGE_FRAGMENT:
+			case IJavaScriptElement.PACKAGE_FRAGMENT:
 				fArguments.put(ATTRIBUTE_HIERARCHICAL, Boolean.toString(fHierarchical));
 				break;
 			default:
@@ -239,7 +239,7 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 	 * deprecated.
 	 * <p>
 	 * Note: Deprecation of the delegate is currently applicable to the Java elements
-	 * {@link org.eclipse.wst.jsdt.core.IMethod} and {@link org.eclipse.wst.jsdt.core.IField}. The default is to not deprecate the
+	 * {@link org.eclipse.wst.jsdt.core.IFunction} and {@link org.eclipse.wst.jsdt.core.IField}. The default is to not deprecate the
 	 * delegate.
 	 * </p>
 	 * 
@@ -281,14 +281,14 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 	 * Sets the Java element to be renamed.
 	 * <p>
 	 * Note: If the Java element to be renamed is of type
-	 * {@link IJavaElement#JAVA_PROJECT}, clients are required to to set the
+	 * {@link IJavaScriptElement#JAVASCRIPT_PROJECT}, clients are required to to set the
 	 * project name to <code>null</code>.
 	 * </p>
 	 * 
 	 * @param element
 	 *            the Java element to be renamed
 	 */
-	public void setJavaElement(final IJavaElement element) {
+	public void setJavaElement(final IJavaScriptElement element) {
 		Assert.isNotNull(element);
 		fJavaElement= element;
 	}
@@ -298,7 +298,7 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 	 * delegate to the renamed one.
 	 * <p>
 	 * Note: Keeping of original elements as delegates is currently applicable to the Java
-	 * elements {@link org.eclipse.wst.jsdt.core.IMethod} and {@link org.eclipse.wst.jsdt.core.IField}. The default is to not keep
+	 * elements {@link org.eclipse.wst.jsdt.core.IFunction} and {@link org.eclipse.wst.jsdt.core.IField}. The default is to not keep
 	 * the original as delegate.
 	 * </p>
 	 * 
@@ -347,7 +347,7 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 	 * Sets the project name of this refactoring.
 	 * <p>
 	 * Note: If the Java element to be renamed is of type
-	 * {@link IJavaElement#JAVA_PROJECT}, clients are required to to set the
+	 * {@link IJavaScriptElement#JAVASCRIPT_PROJECT}, clients are required to to set the
 	 * project name to <code>null</code>.
 	 * </p>
 	 * <p>
@@ -498,15 +498,15 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 			status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_no_java_element));
 		else {
 			final int type= fJavaElement.getElementType();
-			if (type == IJavaElement.JAVA_PROJECT && getProject() != null)
+			if (type == IJavaScriptElement.JAVASCRIPT_PROJECT && getProject() != null)
 				status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_project_constraint));
-			if (type == IJavaElement.PACKAGE_FRAGMENT_ROOT && fReferences)
+			if (type == IJavaScriptElement.PACKAGE_FRAGMENT_ROOT && fReferences)
 				status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_reference_constraint));
 			if (fTextual) {
 				switch (type) {
-					case IJavaElement.PACKAGE_FRAGMENT:
-					case IJavaElement.TYPE:
-					case IJavaElement.FIELD:
+					case IJavaScriptElement.PACKAGE_FRAGMENT:
+					case IJavaScriptElement.TYPE:
+					case IJavaScriptElement.FIELD:
 						break;
 					default:
 						status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_textual_constraint));
@@ -514,8 +514,8 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 			}
 			if (fDeprecate) {
 				switch (type) {
-					case IJavaElement.METHOD:
-					case IJavaElement.FIELD:
+					case IJavaScriptElement.METHOD:
+					case IJavaScriptElement.FIELD:
 						break;
 					default:
 						status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_deprecation_constraint));
@@ -523,21 +523,21 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 			}
 			if (fDelegate) {
 				switch (type) {
-					case IJavaElement.METHOD:
-					case IJavaElement.FIELD:
+					case IJavaScriptElement.METHOD:
+					case IJavaScriptElement.FIELD:
 						break;
 					default:
 						status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_delegate_constraint));
 				}
 			}
 			if (fRenameGetter || fRenameSetter) {
-				if (type != IJavaElement.FIELD)
+				if (type != IJavaScriptElement.FIELD)
 					status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_accessor_constraint));
 			}
 			if (fQualified) {
 				switch (type) {
-					case IJavaElement.PACKAGE_FRAGMENT:
-					case IJavaElement.TYPE: 
+					case IJavaScriptElement.PACKAGE_FRAGMENT:
+					case IJavaScriptElement.TYPE: 
 						break;
 					default:
 						status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_qualified_constraint));
@@ -545,7 +545,7 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 			}
 			if (fSimilarDeclarations) {
 				switch (type) {
-					case IJavaElement.TYPE:
+					case IJavaScriptElement.TYPE:
 						break;
 					default:
 						status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_similar_constraint));
@@ -553,7 +553,7 @@ public final class RenameJavaElementDescriptor extends JavaRefactoringDescriptor
 			}
 			if (fHierarchical) {
 				switch (type) {
-					case IJavaElement.PACKAGE_FRAGMENT:
+					case IJavaScriptElement.PACKAGE_FRAGMENT:
 						break;
 					default:
 						status.merge(RefactoringStatus.createFatalErrorStatus(DescriptorMessages.RenameJavaElementDescriptor_hierarchical_constraint));
