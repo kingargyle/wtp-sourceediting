@@ -15,7 +15,7 @@ package org.eclipse.wst.jsdt.ui.text;
  *
  * @since 3.1
  */
-public interface IJavaPartitions {
+public interface IJavaScriptPartitions {
 
 	/**
 	 * The identifier of the Java partitioning.

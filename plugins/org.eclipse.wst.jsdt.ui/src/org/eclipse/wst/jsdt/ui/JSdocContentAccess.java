@@ -22,16 +22,16 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.wst.jsdt.core.IBuffer;
-import org.eclipse.wst.jsdt.core.IJavaElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
 import org.eclipse.wst.jsdt.core.IMember;
-import org.eclipse.wst.jsdt.core.IMethod;
+import org.eclipse.wst.jsdt.core.IFunction;
 import org.eclipse.wst.jsdt.core.ISourceRange;
 import org.eclipse.wst.jsdt.core.IType;
 import org.eclipse.wst.jsdt.core.ITypeHierarchy;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.internal.corext.javadoc.JavaDocCommentReader;
 import org.eclipse.wst.jsdt.internal.corext.util.MethodOverrideTester;
-import org.eclipse.wst.jsdt.internal.ui.JavaPlugin;
+import org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin;
 import org.eclipse.wst.jsdt.internal.ui.text.javadoc.JavaDoc2HTMLTextReader;
 
 /**
@@ -43,7 +43,7 @@ import org.eclipse.wst.jsdt.internal.ui.text.javadoc.JavaDoc2HTMLTextReader;
  *
  * @since 3.1
  */
-public class JavadocContentAccess {
+public class JSdocContentAccess {
 	
 	
 	public static final String EXTENSION_POINT= "documentationProvider"; //$NON-NLS-1$
@@ -53,7 +53,7 @@ public class JavadocContentAccess {
 
 	private static IDocumentationReader[] docReaders;
 	
-	private JavadocContentAccess() {
+	private JSdocContentAccess() {
 		// do not instantiate
 	}
 	
@@ -66,9 +66,9 @@ public class JavadocContentAccess {
 	 * is returned if <code>allowInherited</code> is <code>true</code>.
 	 * @return Returns a reader for the Javadoc comment content or <code>null</code> if the member
 	 * does not contain a Javadoc comment or if no source is available
-	 * @throws JavaModelException is thrown when the elements javadoc can not be accessed
+	 * @throws JavaScriptModelException is thrown when the elements javadoc can not be accessed
 	 */
-	public static Reader getContentReader(IMember member, boolean allowInherited) throws JavaModelException {
+	public static Reader getContentReader(IMember member, boolean allowInherited) throws JavaScriptModelException {
 		
 		IDocumentationReader docReader = getDocReader(member);
 		if (docReader!=null)
@@ -79,7 +79,7 @@ public class JavadocContentAccess {
 			return null; // no source attachment found
 		}
 		
-		ISourceRange javadocRange= member.getJavadocRange();
+		ISourceRange javadocRange= member.getJSdocRange();
 		if (javadocRange != null) {
 			JavaDocCommentReader reader= new JavaDocCommentReader(buf, javadocRange.getOffset(), javadocRange.getOffset() + javadocRange.getLength() - 1);
 			if (!containsOnlyInheritDoc(reader, javadocRange.getLength())) {
@@ -88,8 +88,8 @@ public class JavadocContentAccess {
 			}
 		}
 
-		if (allowInherited && (member.getElementType() == IJavaElement.METHOD)) {
-			return findDocInHierarchy((IMethod) member);
+		if (allowInherited && (member.getElementType() == IJavaScriptElement.METHOD)) {
+			return findDocInHierarchy((IFunction) member);
 		}
 		
 		return null;
@@ -127,10 +127,10 @@ public class JavadocContentAccess {
 	 * 									if there's no source
 	 * @return a reader for the Javadoc comment content in HTML or <code>null</code> if the member
 	 * 			does not contain a Javadoc comment or if no source is available
-	 * @throws JavaModelException is thrown when the elements Javadoc can not be accessed
+	 * @throws JavaScriptModelException is thrown when the elements Javadoc can not be accessed
 	 * @since 3.2
 	 */
-	public static Reader getHTMLContentReader(IMember member, boolean allowInherited, boolean useAttachedJavadoc) throws JavaModelException {
+	public static Reader getHTMLContentReader(IMember member, boolean allowInherited, boolean useAttachedJavadoc) throws JavaScriptModelException {
 		Reader contentReader= getContentReader(member, allowInherited);
 		if (contentReader != null)
 		{
@@ -152,7 +152,7 @@ public class JavadocContentAccess {
 
  
 
-	private static Reader findDocInHierarchy(IMethod method) throws JavaModelException {
+	private static Reader findDocInHierarchy(IFunction method) throws JavaScriptModelException {
 		IType type= method.getDeclaringType();
 		if (type==null)
 			return null;
@@ -163,7 +163,7 @@ public class JavadocContentAccess {
 		IType[] superTypes= hierarchy.getAllSupertypes(type);
 		for (int i= 0; i < superTypes.length; i++) {
 			IType curr= superTypes[i];
-			IMethod overridden= tester.findOverriddenMethodInType(curr, method);
+			IFunction overridden= tester.findOverriddenMethodInType(curr, method);
 			if (overridden != null) {
 				Reader reader= getContentReader(overridden, false);
 				if (reader != null) {
@@ -191,7 +191,7 @@ public class JavadocContentAccess {
 		ArrayList extList = new ArrayList();
 		if (registry != null) {
 			IExtensionPoint point = registry.getExtensionPoint(
-					JavaPlugin.getPluginId(), EXTENSION_POINT);
+					JavaScriptPlugin.getPluginId(), EXTENSION_POINT);
 
 			if (point != null) {
 				IExtension[] extensions = point.getExtensions();

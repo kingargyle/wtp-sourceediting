@@ -27,18 +27,18 @@ import org.eclipse.wst.jsdt.core.Flags;
 import org.eclipse.wst.jsdt.core.IField;
 import org.eclipse.wst.jsdt.core.IInitializer;
 import org.eclipse.wst.jsdt.core.IJarEntryResource;
-import org.eclipse.wst.jsdt.core.IJavaElement;
-import org.eclipse.wst.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.IMember;
-import org.eclipse.wst.jsdt.core.IMethod;
+import org.eclipse.wst.jsdt.core.IFunction;
 import org.eclipse.wst.jsdt.core.IPackageFragment;
 import org.eclipse.wst.jsdt.core.IPackageFragmentRoot;
 import org.eclipse.wst.jsdt.core.IType;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.Signature;
 import org.eclipse.wst.jsdt.internal.corext.util.JavaModelUtil;
 import org.eclipse.wst.jsdt.internal.corext.util.JdtFlags;
-import org.eclipse.wst.jsdt.internal.ui.JavaPlugin;
+import org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin;
 import org.eclipse.wst.jsdt.internal.ui.packageview.PackageFragmentRootContainer;
 import org.eclipse.wst.jsdt.internal.ui.preferences.MembersOrderPreferenceCache;
 
@@ -53,13 +53,13 @@ import org.eclipse.wst.jsdt.internal.ui.preferences.MembersOrderPreferenceCache;
  * 
  * @since 3.3
  */
-public class JavaElementComparator extends ViewerComparator {
+public class JavaScriptElementComparator extends ViewerComparator {
 	
 	private static final int PROJECTS= 1;
 	private static final int PACKAGEFRAGMENTROOTS= 2;
 	private static final int PACKAGEFRAGMENT= 3;
 
-	private static final int COMPILATIONUNITS= 4;
+	private static final int JAVASCRIPTUNITS= 4;
 	private static final int CLASSFILES= 5;
 	
 	private static final int RESOURCEFOLDERS= 7;
@@ -81,23 +81,23 @@ public class JavaElementComparator extends ViewerComparator {
 	/**
 	 * Constructor.
 	 */
-	public JavaElementComparator() {	
+	public JavaScriptElementComparator() {	
 		super(null); // delay initialization of collator
-		fMemberOrderCache= JavaPlugin.getDefault().getMemberOrderPreferenceCache();
+		fMemberOrderCache= JavaScriptPlugin.getDefault().getMemberOrderPreferenceCache();
 	}
 		
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ViewerComparator#category(java.lang.Object)
 	 */
 	public int category(Object element) {
-		if (element instanceof IJavaElement) {
+		if (element instanceof IJavaScriptElement) {
 			try {
-				IJavaElement je= (IJavaElement) element;
+				IJavaScriptElement je= (IJavaScriptElement) element;
 
 				switch (je.getElementType()) {
-					case IJavaElement.METHOD:
+					case IJavaScriptElement.METHOD:
 						{
-							IMethod method= (IMethod) je;
+							IFunction method= (IFunction) je;
 							if (method.isConstructor()) {
 								return getMemberCategory(MembersOrderPreferenceCache.CONSTRUCTORS_INDEX);
 							}
@@ -107,7 +107,7 @@ public class JavaElementComparator extends ViewerComparator {
 							else
 								return getMemberCategory(MembersOrderPreferenceCache.METHOD_INDEX);
 						}
-					case IJavaElement.FIELD :
+					case IJavaScriptElement.FIELD :
 						{
 							int flags= ((IField) je).getFlags();
 							if (Flags.isEnum(flags)) {
@@ -118,7 +118,7 @@ public class JavaElementComparator extends ViewerComparator {
 							else
 								return getMemberCategory(MembersOrderPreferenceCache.FIELDS_INDEX);
 						}
-					case IJavaElement.INITIALIZER :
+					case IJavaScriptElement.INITIALIZER :
 						{
 							int flags= ((IInitializer) je).getFlags();
 							if (Flags.isStatic(flags))
@@ -126,29 +126,29 @@ public class JavaElementComparator extends ViewerComparator {
 							else
 								return getMemberCategory(MembersOrderPreferenceCache.INIT_INDEX);
 						}
-					case IJavaElement.TYPE :
+					case IJavaScriptElement.TYPE :
 						return getMemberCategory(MembersOrderPreferenceCache.TYPE_INDEX);
-					case IJavaElement.PACKAGE_DECLARATION :
+					case IJavaScriptElement.PACKAGE_DECLARATION :
 						return PACKAGE_DECL;
-					case IJavaElement.IMPORT_CONTAINER :
+					case IJavaScriptElement.IMPORT_CONTAINER :
 						return IMPORT_CONTAINER;
-					case IJavaElement.IMPORT_DECLARATION :
+					case IJavaScriptElement.IMPORT_DECLARATION :
 						return IMPORT_DECLARATION;
-					case IJavaElement.PACKAGE_FRAGMENT :
+					case IJavaScriptElement.PACKAGE_FRAGMENT :
 						return PACKAGEFRAGMENT;
-					case IJavaElement.PACKAGE_FRAGMENT_ROOT :
+					case IJavaScriptElement.PACKAGE_FRAGMENT_ROOT :
 						return PACKAGEFRAGMENTROOTS;
-					case IJavaElement.JAVA_PROJECT :
+					case IJavaScriptElement.JAVASCRIPT_PROJECT :
 						return PROJECTS;
-					case IJavaElement.CLASS_FILE :
+					case IJavaScriptElement.CLASS_FILE :
 						return CLASSFILES;
-					case IJavaElement.COMPILATION_UNIT :
-						return COMPILATIONUNITS;
+					case IJavaScriptElement.JAVASCRIPT_UNIT :
+						return JAVASCRIPTUNITS;
 				}
 
-			} catch (JavaModelException e) {
+			} catch (JavaScriptModelException e) {
 				if (!e.isDoesNotExist())
-					JavaPlugin.log(e);
+					JavaScriptPlugin.log(e);
 			}
 			return JAVAELEMENTS;
 		} else if (element instanceof IFile) {
@@ -224,7 +224,7 @@ public class JavaElementComparator extends ViewerComparator {
 					if (vis != 0) {
 						return vis;
 					}
-				} catch (JavaModelException ignore) {
+				} catch (JavaScriptModelException ignore) {
 				}
 			}
 		}
@@ -237,7 +237,7 @@ public class JavaElementComparator extends ViewerComparator {
 				if (name2.length() == 0) {
 					try {
 						return getComparator().compare(((IType) e1).getSuperclassName(), ((IType) e2).getSuperclassName());
-					} catch (JavaModelException e) {
+					} catch (JavaScriptModelException e) {
 						return 0;
 					}
 				} else {
@@ -253,9 +253,9 @@ public class JavaElementComparator extends ViewerComparator {
 			return cmp;
 		}
 		
-		if (e1 instanceof IMethod) {
-			String[] params1= ((IMethod) e1).getParameterTypes();
-			String[] params2= ((IMethod) e2).getParameterTypes();
+		if (e1 instanceof IFunction) {
+			String[] params1= ((IFunction) e1).getParameterTypes();
+			String[] params2= ((IFunction) e2).getParameterTypes();
 			int len= Math.min(params1.length, params2.length);
 			for (int i = 0; i < len; i++) {
 				cmp= getComparator().compare(Signature.toString(params1[i]), Signature.toString(params2[i]));
@@ -278,7 +278,7 @@ public class JavaElementComparator extends ViewerComparator {
 			// non resolvable - return null
 			return null;
 		}
-		return JavaModelUtil.getPackageFragmentRoot((IJavaElement)element);
+		return JavaModelUtil.getPackageFragmentRoot((IJavaScriptElement)element);
 	}
 	
 	private String getNonJavaElementLabel(Viewer viewer, Object element) {
@@ -307,13 +307,13 @@ public class JavaElementComparator extends ViewerComparator {
 	private int getClassPathIndex(IPackageFragmentRoot root) {
 		try {
 			IPath rootPath= root.getPath();
-			IPackageFragmentRoot[] roots= root.getJavaProject().getPackageFragmentRoots();
+			IPackageFragmentRoot[] roots= root.getJavaScriptProject().getPackageFragmentRoots();
 			for (int i= 0; i < roots.length; i++) {
 				if (roots[i].getPath().equals(rootPath)) {
 					return i;
 				}
 			}
-		} catch (JavaModelException e) {
+		} catch (JavaScriptModelException e) {
 		}
 
 		return Integer.MAX_VALUE;
@@ -327,15 +327,15 @@ public class JavaElementComparator extends ViewerComparator {
 			(cat1 == PACKAGEFRAGMENTROOTS &&
 				cat2 == PACKAGEFRAGMENT && 
 				((IPackageFragment)e2).getParent().getResource() instanceof IProject)) {
-			IJavaProject p1= getJavaProject(e1);
+			IJavaScriptProject p1= getJavaProject(e1);
 			return p1 != null && p1.equals(getJavaProject(e2));
 		}
 		return false;
 	}
 	
-	private IJavaProject getJavaProject(Object element) {
-		if (element instanceof IJavaElement) {
-			return ((IJavaElement)element).getJavaProject();
+	private IJavaScriptProject getJavaProject(Object element) {
+		if (element instanceof IJavaScriptElement) {
+			return ((IJavaScriptElement)element).getJavaScriptProject();
 		} else if (element instanceof PackageFragmentRootContainer) {
 			return ((PackageFragmentRootContainer)element).getJavaProject();
 		}
@@ -343,8 +343,8 @@ public class JavaElementComparator extends ViewerComparator {
 	}
 	
 	private String getElementName(Object element) {
-		if (element instanceof IJavaElement) {
-			return ((IJavaElement)element).getElementName();
+		if (element instanceof IJavaScriptElement) {
+			return ((IJavaScriptElement)element).getElementName();
 		} else if (element instanceof PackageFragmentRootContainer) {
 			return ((PackageFragmentRootContainer)element).getLabel();
 		} else {

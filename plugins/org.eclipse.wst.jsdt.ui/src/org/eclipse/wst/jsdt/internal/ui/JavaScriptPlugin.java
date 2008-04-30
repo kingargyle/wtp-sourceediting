@@ -55,10 +55,10 @@ import org.eclipse.ui.texteditor.ConfigurationElementSorter;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.themes.IThemeManager;
 import org.eclipse.wst.jsdt.core.IBuffer;
-import org.eclipse.wst.jsdt.core.ICompilationUnit;
-import org.eclipse.wst.jsdt.core.JavaCore;
+import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.WorkingCopyOwner;
-import org.eclipse.wst.jsdt.core.manipulation.JavaManipulation;
+import org.eclipse.wst.jsdt.core.manipulation.JavaScriptManipulation;
 import org.eclipse.wst.jsdt.internal.corext.javadoc.JavaDocLocations;
 import org.eclipse.wst.jsdt.internal.corext.template.java.CodeTemplateContextType;
 import org.eclipse.wst.jsdt.internal.corext.template.java.JavaContextType;
@@ -86,9 +86,9 @@ import org.eclipse.wst.jsdt.internal.ui.viewsupport.ImageDescriptorRegistry;
 import org.eclipse.wst.jsdt.internal.ui.viewsupport.ProblemMarkerManager;
 import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.ClasspathAttributeConfigurationDescriptors;
 import org.eclipse.wst.jsdt.ui.IContextMenuConstants;
-import org.eclipse.wst.jsdt.ui.JavaUI;
+import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 import org.eclipse.wst.jsdt.ui.PreferenceConstants;
-import org.eclipse.wst.jsdt.ui.text.JavaTextTools;
+import org.eclipse.wst.jsdt.ui.text.JavaScriptTextTools;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -96,7 +96,7 @@ import org.osgi.framework.BundleContext;
  * access to the workbench, keeps track of elements shared by all editors and viewers
  * of the plug-in such as document providers and find-replace-dialogs.
  */
-public class JavaPlugin extends AbstractUIPlugin {
+public class JavaScriptPlugin extends AbstractUIPlugin {
 	
 	/**
 	 * The key to store customized templates. 
@@ -119,7 +119,7 @@ public class JavaPlugin extends AbstractUIPlugin {
 	 */
 	private static final String CODE_TEMPLATES_MIGRATION_KEY= "org.eclipse.wst.jsdt.ui.text.code_templates_migrated"; //$NON-NLS-1$
 	
-	private static JavaPlugin fgJavaPlugin;
+	private static JavaScriptPlugin fgJavaPlugin;
 	
 	private static LinkedHashMap fgRepeatedMessages= new LinkedHashMap(20, 0.75f, true) {
 		private static final long serialVersionUID= 1L;
@@ -165,7 +165,7 @@ public class JavaPlugin extends AbstractUIPlugin {
 	private org.eclipse.wst.jsdt.core.IBufferFactory fBufferFactory;
 	private ICompilationUnitDocumentProvider fCompilationUnitDocumentProvider;
 	private ClassFileDocumentProvider fClassFileDocumentProvider;
-	private JavaTextTools fJavaTextTools;
+	private JavaScriptTextTools fJavaTextTools;
 	private ProblemMarkerManager fProblemMarkerManager;
 	private ImageDescriptorRegistry fImageDescriptorRegistry;
 	
@@ -236,7 +236,7 @@ public class JavaPlugin extends AbstractUIPlugin {
 	 */
 	private IPropertyChangeListener fThemeListener;
 
-	public static JavaPlugin getDefault() {
+	public static JavaScriptPlugin getDefault() {
 		return fgJavaPlugin;
 	}
 	
@@ -268,7 +268,7 @@ public class JavaPlugin extends AbstractUIPlugin {
 	}
 		
 	public static String getPluginId() {
-		return JavaUI.ID_PLUGIN;
+		return JavaScriptUI.ID_PLUGIN;
 	}
 
 	public static void log(IStatus status) {
@@ -323,7 +323,7 @@ public class JavaPlugin extends AbstractUIPlugin {
 		return getDefault().internalGetImageDescriptorRegistry();
 	}
 		
-	public JavaPlugin() {
+	public JavaScriptPlugin() {
 		super();
 		fgJavaPlugin = this;
 	}
@@ -335,8 +335,8 @@ public class JavaPlugin extends AbstractUIPlugin {
 		super.start(context);
 		
 		WorkingCopyOwner.setPrimaryBufferProvider(new WorkingCopyOwner() {
-			public IBuffer createBuffer(ICompilationUnit workingCopy) {
-				ICompilationUnit original= workingCopy.getPrimary();
+			public IBuffer createBuffer(IJavaScriptUnit workingCopy) {
+				IJavaScriptUnit original= workingCopy.getPrimary();
 				IResource resource= original.getResource();
 				if (resource instanceof IFile)
 					return new DocumentAdapter(workingCopy, (IFile) resource);
@@ -353,7 +353,7 @@ public class JavaPlugin extends AbstractUIPlugin {
 		
 		// make sure is loaded too for org.eclipse.wst.jsdt.core.manipulation
 		// can be removed if JavaElementPropertyTester is moved down to jdt.core (bug 127085)
-		JavaManipulation.class.toString();
+		JavaScriptManipulation.class.toString();
 		
 		fThemeListener= new IPropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent event) {
@@ -642,9 +642,9 @@ public class JavaPlugin extends AbstractUIPlugin {
 		return fProblemMarkerManager;
 	}	
 	
-	public synchronized JavaTextTools getJavaTextTools() {
+	public synchronized JavaScriptTextTools getJavaTextTools() {
 		if (fJavaTextTools == null)
-			fJavaTextTools= new JavaTextTools(getPreferenceStore(), JavaCore.getPlugin().getPluginPreferences());
+			fJavaTextTools= new JavaScriptTextTools(getPreferenceStore(), JavaScriptCore.getPlugin().getPluginPreferences());
 		return fJavaTextTools;
 	}
 	
@@ -882,7 +882,7 @@ public class JavaPlugin extends AbstractUIPlugin {
 	public IPreferenceStore getCombinedPreferenceStore() {
 		if (fCombinedPreferenceStore == null) {
 			IPreferenceStore generalTextStore= EditorsUI.getPreferenceStore(); 
-			fCombinedPreferenceStore= new ChainedPreferenceStore(new IPreferenceStore[] { getPreferenceStore(), new PreferencesAdapter(JavaCore.getPlugin().getPluginPreferences()), generalTextStore });
+			fCombinedPreferenceStore= new ChainedPreferenceStore(new IPreferenceStore[] { getPreferenceStore(), new PreferencesAdapter(JavaScriptCore.getPlugin().getPluginPreferences()), generalTextStore });
 		}
 		return fCombinedPreferenceStore;
 	}

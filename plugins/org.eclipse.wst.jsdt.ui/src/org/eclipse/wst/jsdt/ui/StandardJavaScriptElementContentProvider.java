@@ -21,20 +21,20 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.wst.jsdt.core.IClassFile;
-import org.eclipse.wst.jsdt.core.ICompilationUnit;
+import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
 import org.eclipse.wst.jsdt.core.IJarEntryResource;
-import org.eclipse.wst.jsdt.core.IJavaElement;
-import org.eclipse.wst.jsdt.core.IJavaElementDelta;
-import org.eclipse.wst.jsdt.core.IJavaModel;
-import org.eclipse.wst.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptElementDelta;
+import org.eclipse.wst.jsdt.core.IJavaScriptModel;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.IPackageFragment;
 import org.eclipse.wst.jsdt.core.IPackageFragmentRoot;
 import org.eclipse.wst.jsdt.core.IParent;
 import org.eclipse.wst.jsdt.core.ISourceReference;
 import org.eclipse.wst.jsdt.core.IType;
 import org.eclipse.wst.jsdt.core.ITypeRoot;
-import org.eclipse.wst.jsdt.core.JavaCore;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
  
 /**
  * A base content provider for Java elements. It provides access to the
@@ -47,11 +47,11 @@ import org.eclipse.wst.jsdt.core.JavaModelException;
  * The following Java element hierarchy is surfaced by this content provider:
  * <p>
  * <pre>
-Java model (<code>IJavaModel</code>)
-   Java project (<code>IJavaProject</code>)
+Java model (<code>IJavaScriptModel</code>)
+   Java project (<code>IJavaScriptProject</code>)
       package fragment root (<code>IPackageFragmentRoot</code>)
          package fragment (<code>IPackageFragment</code>)
-            compilation unit (<code>ICompilationUnit</code>)
+            compilation unit (<code>IJavaScriptUnit</code>)
             binary class file (<code>IClassFile</code>)
  * </pre>
  * </p> 			
@@ -63,7 +63,7 @@ Java model (<code>IJavaModel</code>)
  * 
  * @since 2.0
  */
-public class StandardJavaElementContentProvider implements ITreeContentProvider, IWorkingCopyProvider {
+public class StandardJavaScriptElementContentProvider implements ITreeContentProvider, IWorkingCopyProvider {
 
 	protected static final Object[] NO_CHILDREN= new Object[0];
 	protected boolean fProvideMembers;
@@ -73,27 +73,27 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	 * Creates a new content provider. The content provider does not
 	 * provide members of compilation units or class files.
 	 */	
-	public StandardJavaElementContentProvider() {
+	public StandardJavaScriptElementContentProvider() {
 		this(false);
 	}
 	
 	/**
-	 *@deprecated Use {@link #StandardJavaElementContentProvider(boolean)} instead.
+	 *@deprecated Use {@link #StandardJavaScriptElementContentProvider(boolean)} instead.
 	 * Since 3.0 compilation unit children are always provided as working copies. The Java Model
 	 * does not support the 'original' mode anymore.
 	 */
-	public StandardJavaElementContentProvider(boolean provideMembers, boolean provideWorkingCopy) {
+	public StandardJavaScriptElementContentProvider(boolean provideMembers, boolean provideWorkingCopy) {
 		this(provideMembers);
 	}
 	
 	
 	/**
-	 * Creates a new <code>StandardJavaElementContentProvider</code>.
+	 * Creates a new <code>StandardJavaScriptElementContentProvider</code>.
 	 *
 	 * @param provideMembers if <code>true</code> members below compilation units 
 	 * and class files are provided. 
 	 */
-	public StandardJavaElementContentProvider(boolean provideMembers) {
+	public StandardJavaScriptElementContentProvider(boolean provideMembers) {
 		fProvideMembers= provideMembers;
 		fProvideWorkingCopy= provideMembers;
 	}
@@ -172,11 +172,11 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 			return NO_CHILDREN;
 			
 		try {
-			if (element instanceof IJavaModel) 
-				return getJavaProjects((IJavaModel)element);
+			if (element instanceof IJavaScriptModel) 
+				return getJavaProjects((IJavaScriptModel)element);
 			
-			if (element instanceof IJavaProject) 
-				return getPackageFragmentRoots((IJavaProject)element);
+			if (element instanceof IJavaScriptProject) 
+				return getPackageFragmentRoots((IJavaScriptProject)element);
 			
 			if (element instanceof IPackageFragmentRoot) 
 				return getPackageFragmentRootContent((IPackageFragmentRoot)element);
@@ -209,14 +209,14 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	/*
 	 * @GINO: Anonymous -- matches anonymous types on the top level
 	 */
-	protected boolean matches(IJavaElement element) {
+	protected boolean matches(IJavaScriptElement element) {
 			
-		if (element.getElementType() == IJavaElement.TYPE && (element.getParent().getElementType() == IJavaElement.COMPILATION_UNIT || element.getParent().getElementType() == IJavaElement.CLASS_FILE) ) {
+		if (element.getElementType() == IJavaScriptElement.TYPE && (element.getParent().getElementType() == IJavaScriptElement.JAVASCRIPT_UNIT || element.getParent().getElementType() == IJavaScriptElement.CLASS_FILE) ) {
 			
 			IType type = (IType)element;
 			try {
 				return type.isAnonymous();
-			} catch (JavaModelException e) {
+			} catch (JavaScriptModelException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -229,7 +229,7 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	 * @GINO: Anonymous Filter from top level
 	 *
 	 */
-	protected IJavaElement[] filter(IJavaElement[] children) {
+	protected IJavaScriptElement[] filter(IJavaScriptElement[] children) {
 		boolean initializers= false;
 		for (int i= 0; i < children.length; i++) {
 			if (matches(children[i])) {
@@ -248,7 +248,7 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 			v.addElement(children[i]);
 		}
 
-		IJavaElement[] result= new IJavaElement[v.size()];
+		IJavaScriptElement[] result= new IJavaScriptElement[v.size()];
 		v.copyInto(result);
 		return result;
 	}
@@ -259,16 +259,16 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	public boolean hasChildren(Object element) {
 		if (getProvideMembers()) {
 			// assume CUs and class files are never empty
-			if (element instanceof ICompilationUnit ||	element instanceof IClassFile) {
+			if (element instanceof IJavaScriptUnit ||	element instanceof IClassFile) {
 				try {
-					if(element instanceof ICompilationUnit ) {
-						ICompilationUnit cu = (ICompilationUnit)element;
+					if(element instanceof IJavaScriptUnit ) {
+						IJavaScriptUnit cu = (IJavaScriptUnit)element;
 						return cu.hasChildren();
 					}else if(element instanceof IClassFile) {
 						IClassFile cf = (IClassFile)element;
 						return cf.hasChildren();
 					}
-				}catch(JavaModelException ex) {
+				}catch(JavaScriptModelException ex) {
 					return false;
 				}
 				
@@ -277,14 +277,14 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 			}
 		} else {
 			// don't allow to drill down into a compilation unit or class file
-			if (element instanceof ICompilationUnit ||
+			if (element instanceof IJavaScriptUnit ||
 				element instanceof IClassFile ||
 				element instanceof IFile)
 			return false;
 		}
 			
-		if (element instanceof IJavaProject) {
-			IJavaProject jp= (IJavaProject)element;
+		if (element instanceof IJavaScriptProject) {
+			IJavaScriptProject jp= (IJavaScriptProject)element;
 			if (!jp.getProject().isOpen()) {
 				return false;
 			}	
@@ -295,7 +295,7 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 				// when we have Java children return true, else we fetch all the children
 				if (((IParent)element).hasChildren())
 					return true;
-			} catch(JavaModelException e) {
+			} catch(JavaScriptModelException e) {
 				return true;
 			}
 		}
@@ -316,30 +316,30 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	 * Evaluates all children of a given {@link IPackageFragmentRoot}. Clients can override this method.
 	 * @param root The root to evaluate the children for.
 	 * @return The children of the root
-	 * @exception JavaModelException if the package fragment root does not exist or if an
+	 * @exception JavaScriptModelException if the package fragment root does not exist or if an
 	 *      exception occurs while accessing its corresponding resource
 	 *      
 	 * @since 3.3
 	 */
-	protected Object[] getPackageFragmentRootContent(IPackageFragmentRoot root) throws JavaModelException {
-		IJavaElement[] fragments= root.getChildren();
+	protected Object[] getPackageFragmentRootContent(IPackageFragmentRoot root) throws JavaScriptModelException {
+		IJavaScriptElement[] fragments= root.getChildren();
 		if (isProjectPackageFragmentRoot(root)) {
 			return fragments;
 		}
-		Object[] nonJavaResources= root.getNonJavaResources();
+		Object[] nonJavaResources= root.getNonJavaScriptResources();
 		if (nonJavaResources == null)
 			return fragments;
 		return concatenate(fragments, nonJavaResources);
 	}
 	
 	/**
-	 * Evaluates all children of a given {@link IJavaProject}. Clients can override this method.
+	 * Evaluates all children of a given {@link IJavaScriptProject}. Clients can override this method.
 	 * @param project The Java project to evaluate the children for.
 	 * @return The children of the project. Typically these are package fragment roots but can also be other elements.
-	 * @exception JavaModelException if the Java project does not exist or if an
+	 * @exception JavaScriptModelException if the Java project does not exist or if an
 	 *      exception occurs while accessing its corresponding resource
 	 */
-	protected Object[] getPackageFragmentRoots(IJavaProject project) throws JavaModelException {
+	protected Object[] getPackageFragmentRoots(IJavaScriptProject project) throws JavaScriptModelException {
 		if (!project.getProject().isOpen())
 			return NO_CHILDREN;
 			
@@ -358,7 +358,7 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 				list.add(root);
 			} 
 		}
-		Object[] resources= project.getNonJavaResources();
+		Object[] resources= project.getNonJavaScriptResources();
 		for (int i= 0; i < resources.length; i++) {
 			list.add(resources[i]);
 		}
@@ -368,24 +368,24 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	/**
 	 * Note: This method is for internal use only. Clients should not call this method.
 	 */
-	protected Object[] getJavaProjects(IJavaModel jm) throws JavaModelException {
-		return jm.getJavaProjects();
+	protected Object[] getJavaProjects(IJavaScriptModel jm) throws JavaScriptModelException {
+		return jm.getJavaScriptProjects();
 	}
 	
 	/**
 	 * Evaluates all children of a given {@link IPackageFragment}. Clients can override this method.
 	 * @param fragment The fragment to evaluate the children for.
 	 * @return The children of the given package fragment.
-	 * @exception JavaModelException if the package fragment does not exist or if an
+	 * @exception JavaScriptModelException if the package fragment does not exist or if an
 	 *      exception occurs while accessing its corresponding resource
 	 *      
 	 * @since 3.3
 	 */
-	protected Object[] getPackageContent(IPackageFragment fragment) throws JavaModelException {
+	protected Object[] getPackageContent(IPackageFragment fragment) throws JavaScriptModelException {
 		if (fragment.getKind() == IPackageFragmentRoot.K_SOURCE) {
-			return concatenate(fragment.getCompilationUnits(), fragment.getNonJavaResources());
+			return concatenate(fragment.getJavaScriptUnits(), fragment.getNonJavaScriptResources());
 		}
-		return concatenate(fragment.getClassFiles(), fragment.getNonJavaResources());
+		return concatenate(fragment.getClassFiles(), fragment.getNonJavaScriptResources());
 	}
 	
 	/**
@@ -398,10 +398,10 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	 */
 	protected Object[] getFolderContent(IFolder folder) throws CoreException {
 		IResource[] members= folder.members();
-		IJavaProject javaProject= JavaCore.create(folder.getProject());
+		IJavaScriptProject javaProject= JavaScriptCore.create(folder.getProject());
 		if (javaProject == null || !javaProject.exists())
 			return members;
-		boolean isFolderOnClasspath = javaProject.isOnClasspath(folder);
+		boolean isFolderOnClasspath = javaProject.isOnIncludepath(folder);
 		List nonJavaResources= new ArrayList();
 		// Can be on classpath but as a member of non-java resource folder
 		for (int i= 0; i < members.length; i++) {
@@ -414,7 +414,7 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 				if (javaProject.findPackageFragmentRoot(member.getFullPath()) == null) {
 					nonJavaResources.add(member);
 				} 
-			} else if (!javaProject.isOnClasspath(member)) {
+			} else if (!javaProject.isOnIncludepath(member)) {
 				nonJavaResources.add(member);
 			}
 		}
@@ -424,17 +424,17 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	/**
 	 * Note: This method is for internal use only. Clients should not call this method.
 	 */
-	protected boolean isClassPathChange(IJavaElementDelta delta) {
+	protected boolean isClassPathChange(IJavaScriptElementDelta delta) {
 		
 		// need to test the flags only for package fragment roots
-		if (delta.getElement().getElementType() != IJavaElement.PACKAGE_FRAGMENT_ROOT)
+		if (delta.getElement().getElementType() != IJavaScriptElement.PACKAGE_FRAGMENT_ROOT)
 			return false;
 		
 		int flags= delta.getFlags();
-		return (delta.getKind() == IJavaElementDelta.CHANGED && 
-			((flags & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0) ||
-			 ((flags & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0) ||
-			 ((flags & IJavaElementDelta.F_REORDER) != 0));
+		return (delta.getKind() == IJavaScriptElementDelta.CHANGED && 
+			((flags & IJavaScriptElementDelta.F_ADDED_TO_CLASSPATH) != 0) ||
+			 ((flags & IJavaScriptElementDelta.F_REMOVED_FROM_CLASSPATH) != 0) ||
+			 ((flags & IJavaScriptElementDelta.F_REORDER) != 0));
 	}
 	
 	/**
@@ -449,10 +449,10 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	/**
 	 * Note: This method is for internal use only. Clients should not call this method.
 	 */
-	protected boolean isPackageFragmentEmpty(IJavaElement element) throws JavaModelException {
+	protected boolean isPackageFragmentEmpty(IJavaScriptElement element) throws JavaScriptModelException {
 		if (element instanceof IPackageFragment) {
 			IPackageFragment fragment= (IPackageFragment)element;
-			if (fragment.exists() && !(fragment.hasChildren() || fragment.getNonJavaResources().length > 0) && fragment.hasSubpackages()) 
+			if (fragment.exists() && !(fragment.hasChildren() || fragment.getNonJavaScriptResources().length > 0) && fragment.hasSubpackages()) 
 				return true;
 		}
 		return false;
@@ -462,7 +462,7 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 	 * Note: This method is for internal use only. Clients should not call this method.
 	 */
 	protected boolean isProjectPackageFragmentRoot(IPackageFragmentRoot root) {
-		IJavaProject javaProject= root.getJavaProject();
+		IJavaScriptProject javaProject= root.getJavaScriptProject();
 		return javaProject != null && javaProject.getPath().equals(root.getPath());
 	}
 	
@@ -476,8 +476,8 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 		if (element instanceof IResource) {
 			return ((IResource)element).exists();
 		}
-		if (element instanceof IJavaElement) {
-			return ((IJavaElement)element).exists();
+		if (element instanceof IJavaScriptElement) {
+			return ((IJavaScriptElement)element).exists();
 		}
 		return true;
 	}
@@ -490,13 +490,13 @@ public class StandardJavaElementContentProvider implements ITreeContentProvider,
 		// try to map resources to the containing package fragment
 		if (element instanceof IResource) {
 			IResource parent= ((IResource)element).getParent();
-			IJavaElement jParent= JavaCore.create(parent);
+			IJavaScriptElement jParent= JavaScriptCore.create(parent);
 			// http://bugs.eclipse.org/bugs/show_bug.cgi?id=31374
 			if (jParent != null && jParent.exists()) 
 				return jParent;
 			return parent;
-		} else if (element instanceof IJavaElement) {
-			IJavaElement parent= ((IJavaElement) element).getParent();
+		} else if (element instanceof IJavaScriptElement) {
+			IJavaScriptElement parent= ((IJavaScriptElement) element).getParent();
 			// for package fragments that are contained in a project package fragment
 			// we have to skip the package fragment root as the parent.
 			if (element instanceof IPackageFragment) {

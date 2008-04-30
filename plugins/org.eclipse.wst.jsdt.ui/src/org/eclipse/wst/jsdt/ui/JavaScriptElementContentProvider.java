@@ -19,28 +19,28 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.wst.jsdt.core.ElementChangedEvent;
 import org.eclipse.wst.jsdt.core.IClassFile;
-import org.eclipse.wst.jsdt.core.ICompilationUnit;
+import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
 import org.eclipse.wst.jsdt.core.IElementChangedListener;
-import org.eclipse.wst.jsdt.core.IJavaElement;
-import org.eclipse.wst.jsdt.core.IJavaElementDelta;
-import org.eclipse.wst.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptElementDelta;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.IPackageFragment;
 import org.eclipse.wst.jsdt.core.IPackageFragmentRoot;
-import org.eclipse.wst.jsdt.core.JavaCore;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.internal.corext.util.JavaModelUtil;
-import org.eclipse.wst.jsdt.internal.ui.JavaPlugin;
+import org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin;
  
 /**
  * A tree content provider for Java elements. It extends the 
- * StandardJavaElementContentProvider with support for listening to changes.
+ * StandardJavaScriptElementContentProvider with support for listening to changes.
  * <p>
  * This class may be instantiated; it is not intended to be subclassed.
  * </p>
- * @deprecated use the StandardJavaElementContentProvider instead
- * @see StandardJavaElementContentProvider
+ * @deprecated use the StandardJavaScriptElementContentProvider instead
+ * @see StandardJavaScriptElementContentProvider
  */
-public class JavaElementContentProvider extends StandardJavaElementContentProvider implements ITreeContentProvider, IElementChangedListener {
+public class JavaScriptElementContentProvider extends StandardJavaScriptElementContentProvider implements ITreeContentProvider, IElementChangedListener {
 	
 	/** The tree viewer */
 	protected TreeViewer fViewer;
@@ -52,7 +52,7 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 	 */
 	public void dispose() {
 		super.dispose();
-		JavaCore.removeElementChangedListener(this);
+		JavaScriptCore.removeElementChangedListener(this);
 	}
 
 	/* (non-Javadoc)
@@ -62,16 +62,16 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 		super.inputChanged(viewer, oldInput, newInput);
 		fViewer= (TreeViewer)viewer;
 		if (oldInput == null && newInput != null) {
-			JavaCore.addElementChangedListener(this); 
+			JavaScriptCore.addElementChangedListener(this); 
 		} else if (oldInput != null && newInput == null) {
-			JavaCore.removeElementChangedListener(this); 
+			JavaScriptCore.removeElementChangedListener(this); 
 		}
 		fInput= newInput;
 	}
 	/**
 	 * Creates a new content provider for Java elements.
 	 */
-	public JavaElementContentProvider() {
+	public JavaScriptElementContentProvider() {
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 	 * 
 	 * @since 2.0
 	 */
-	public JavaElementContentProvider(boolean provideMembers, boolean provideWorkingCopy) {
+	public JavaScriptElementContentProvider(boolean provideMembers, boolean provideWorkingCopy) {
 		super(provideMembers, provideWorkingCopy);
 	}
 	
@@ -95,8 +95,8 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 	public void elementChanged(final ElementChangedEvent event) {
 		try {
 			processDelta(event.getDelta());
-		} catch(JavaModelException e) {
-			JavaPlugin.log(e);
+		} catch(JavaScriptModelException e) {
+			JavaScriptPlugin.log(e);
 		}
 	}
 	
@@ -107,30 +107,30 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 	 * 
 	 * @param delta the delta to be processed
 	 * 
-	 * @throws JavaModelException if an error occurs while processing the delta
+	 * @throws JavaScriptModelException if an error occurs while processing the delta
 	 */
-	protected void processDelta(IJavaElementDelta delta) throws JavaModelException {
+	protected void processDelta(IJavaScriptElementDelta delta) throws JavaScriptModelException {
 		int kind= delta.getKind();
 		int flags= delta.getFlags();
-		IJavaElement element= delta.getElement();
+		IJavaScriptElement element= delta.getElement();
 
-		if (element instanceof ICompilationUnit) {
+		if (element instanceof IJavaScriptUnit) {
 			if (!getProvideWorkingCopy())
 				return;
 		
-			ICompilationUnit cu= (ICompilationUnit) element;
-			if (!JavaModelUtil.isPrimary(cu) || !isOnClassPath((ICompilationUnit)element)) {
+			IJavaScriptUnit cu= (IJavaScriptUnit) element;
+			if (!JavaModelUtil.isPrimary(cu) || !isOnIncludePath((IJavaScriptUnit)element)) {
 				return;
 			}
 		}
 			 
 		// handle open and closing of a solution or project
-		if (((flags & IJavaElementDelta.F_CLOSED) != 0) || ((flags & IJavaElementDelta.F_OPENED) != 0)) {			
+		if (((flags & IJavaScriptElementDelta.F_CLOSED) != 0) || ((flags & IJavaScriptElementDelta.F_OPENED) != 0)) {			
 			postRefresh(element);
 			return;
 		}
 
-		if (kind == IJavaElementDelta.REMOVED) {
+		if (kind == IJavaScriptElementDelta.REMOVED) {
 			Object parent= internalGetParent(element);			
 			postRemove(element);
 			if (parent instanceof IPackageFragment) 
@@ -144,7 +144,7 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 			return;
 		}
 
-		if (kind == IJavaElementDelta.ADDED) { 
+		if (kind == IJavaScriptElementDelta.ADDED) { 
 			Object parent= internalGetParent(element);
 			// we are filtering out empty subpackages, so we
 			// have to handle additions to them specially. 
@@ -167,23 +167,23 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 			}
 		}
 
-		if (element instanceof ICompilationUnit) {
-			if (kind == IJavaElementDelta.CHANGED) {
+		if (element instanceof IJavaScriptUnit) {
+			if (kind == IJavaScriptElementDelta.CHANGED) {
 				postRefresh(element);
 				return;
 			}
 		}
 		// we don't show the contents of a compilation or IClassFile, so don't go any deeper
-		if ((element instanceof ICompilationUnit) || (element instanceof IClassFile))
+		if ((element instanceof IJavaScriptUnit) || (element instanceof IClassFile))
 			return;
 			
 		// the contents of an external JAR has changed
-		if (element instanceof IPackageFragmentRoot && ((flags & IJavaElementDelta.F_ARCHIVE_CONTENT_CHANGED) != 0))
+		if (element instanceof IPackageFragmentRoot && ((flags & IJavaScriptElementDelta.F_ARCHIVE_CONTENT_CHANGED) != 0))
 			postRefresh(element);
 			
 		if (isClassPathChange(delta)) {
 			 // throw the towel and do a full refresh of the affected java project. 
-			postRefresh(element.getJavaProject());
+			postRefresh(element.getJavaScriptProject());
 		}
 		
 		if (delta.getResourceDeltas() != null) {
@@ -193,11 +193,11 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 			}
 		}
 		
-		IJavaElementDelta[] affectedChildren= delta.getAffectedChildren();
+		IJavaScriptElementDelta[] affectedChildren= delta.getAffectedChildren();
 		if (affectedChildren.length > 1) {
 			// a package fragment might become non empty refresh from the parent
 			if (element instanceof IPackageFragment) {
-				IJavaElement parent= (IJavaElement)internalGetParent(element);
+				IJavaScriptElement parent= (IJavaScriptElement)internalGetParent(element);
 				// 1GE8SI6: ITPJUI:WIN98 - Rename is not shown in Packages View
 				// avoid posting a refresh to an invisible parent
 				if (element.equals(fInput)) {
@@ -219,18 +219,18 @@ public class JavaElementContentProvider extends StandardJavaElementContentProvid
 		}
 	}
 
-	private boolean isOnClassPath(ICompilationUnit element) {
-		IJavaProject project= element.getJavaProject();
+	private boolean isOnIncludePath(IJavaScriptUnit element) {
+		IJavaScriptProject project= element.getJavaScriptProject();
 		if (project == null || !project.exists())
 			return false;
-		return project.isOnClasspath(element);
+		return project.isOnIncludepath(element);
 	}
 
 	
 	/*
 	 * Updates the package icon
 	 */
-	 private void updatePackageIcon(final IJavaElement element) {
+	 private void updatePackageIcon(final IJavaScriptElement element) {
 	 	postRunnable(new Runnable() {
 			public void run() {
 				// 1GF87WR: ITPUI:ALL - SWTEx + NPE closing a workbench window.

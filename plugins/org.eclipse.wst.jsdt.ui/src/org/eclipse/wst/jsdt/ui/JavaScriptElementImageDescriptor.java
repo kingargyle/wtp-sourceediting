@@ -16,11 +16,11 @@ import org.eclipse.jface.resource.CompositeImageDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.wst.jsdt.internal.ui.JavaPlugin;
+import org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin;
 import org.eclipse.wst.jsdt.internal.ui.JavaPluginImages;
 
 /**
- * A {@link JavaElementImageDescriptor} consists of a base image and several adornments. The adornments
+ * A {@link JavaScriptElementImageDescriptor} consists of a base image and several adornments. The adornments
  * are computed according to the flags either passed during creation or set via the method
  *{@link #setAdornments(int)}. 
  * 
@@ -30,7 +30,7 @@ import org.eclipse.wst.jsdt.internal.ui.JavaPluginImages;
  *
  * @since 2.0 
  */
-public class JavaElementImageDescriptor extends CompositeImageDescriptor {
+public class JavaScriptElementImageDescriptor extends CompositeImageDescriptor {
 	
 	/** Flag to render the abstract adornment. */
 	public final static int ABSTRACT= 		0x001;
@@ -86,14 +86,14 @@ public class JavaElementImageDescriptor extends CompositeImageDescriptor {
 	private Point fSize;
 
 	/**
-	 * Creates a new JavaElementImageDescriptor.
+	 * Creates a new JavaScriptElementImageDescriptor.
 	 * 
 	 * @param baseImage an image descriptor used as the base image
 	 * @param flags flags indicating which adornments are to be rendered. See {@link #setAdornments(int)}
 	 * 	for valid values.
 	 * @param size the size of the resulting image
 	 */
-	public JavaElementImageDescriptor(ImageDescriptor baseImage, int flags, Point size) {
+	public JavaScriptElementImageDescriptor(ImageDescriptor baseImage, int flags, Point size) {
 		fBaseImage= baseImage;
 		Assert.isNotNull(fBaseImage);
 		fFlags= flags;
@@ -155,10 +155,10 @@ public class JavaElementImageDescriptor extends CompositeImageDescriptor {
 	 * Method declared on Object.
 	 */
 	public boolean equals(Object object) {
-		if (object == null || !JavaElementImageDescriptor.class.equals(object.getClass()))
+		if (object == null || !JavaScriptElementImageDescriptor.class.equals(object.getClass()))
 			return false;
 			
-		JavaElementImageDescriptor other= (JavaElementImageDescriptor)object;
+		JavaScriptElementImageDescriptor other= (JavaScriptElementImageDescriptor)object;
 		return (fBaseImage.equals(other.fBaseImage) && fFlags == other.fFlags && fSize.equals(other.fSize));
 	}
 	
@@ -193,7 +193,7 @@ public class JavaElementImageDescriptor extends CompositeImageDescriptor {
 		ImageData data= descriptor.getImageData(); // see bug 51965: getImageData can return null
 		if (data == null) {
 			data= DEFAULT_IMAGE_DATA;
-			JavaPlugin.logErrorMessage("Image data not available: " + descriptor.toString()); //$NON-NLS-1$
+			JavaScriptPlugin.logErrorMessage("Image data not available: " + descriptor.toString()); //$NON-NLS-1$
 		}
 		return data;
 	}

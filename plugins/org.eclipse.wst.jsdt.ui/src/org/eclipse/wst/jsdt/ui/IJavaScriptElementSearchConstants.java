@@ -16,9 +16,9 @@ package org.eclipse.wst.jsdt.ui;
  * This interface declares constants only; it is not intended to be implemented.
  * </p>
  *
- * @see JavaUI
+ * @see JavaScriptUI
  */
-public interface IJavaElementSearchConstants {
+public interface IJavaScriptElementSearchConstants {
 
 	/** 
 	 * Search scope constant indicating that classes should be considered.

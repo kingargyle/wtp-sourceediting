@@ -22,34 +22,34 @@ import org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer;
 import org.eclipse.wst.jsdt.core.Flags;
 import org.eclipse.wst.jsdt.core.IClassFile;
 import org.eclipse.wst.jsdt.core.IJsGlobalScopeContainer;
-import org.eclipse.wst.jsdt.core.IClasspathEntry;
-import org.eclipse.wst.jsdt.core.ICompilationUnit;
+import org.eclipse.wst.jsdt.core.IIncludePathEntry;
+import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
 import org.eclipse.wst.jsdt.core.IField;
 import org.eclipse.wst.jsdt.core.IInitializer;
-import org.eclipse.wst.jsdt.core.IJavaElement;
-import org.eclipse.wst.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.ILocalVariable;
 import org.eclipse.wst.jsdt.core.IMember;
-import org.eclipse.wst.jsdt.core.IMethod;
+import org.eclipse.wst.jsdt.core.IFunction;
 import org.eclipse.wst.jsdt.core.IPackageFragment;
 import org.eclipse.wst.jsdt.core.IPackageFragmentRoot;
 import org.eclipse.wst.jsdt.core.IType;
 import org.eclipse.wst.jsdt.core.ITypeParameter;
-import org.eclipse.wst.jsdt.core.JavaCore;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.Signature;
 import org.eclipse.wst.jsdt.internal.corext.util.JavaModelUtil;
 import org.eclipse.wst.jsdt.internal.corext.util.Messages;
-import org.eclipse.wst.jsdt.internal.ui.JavaPlugin;
+import org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin;
 import org.eclipse.wst.jsdt.internal.ui.JavaUIMessages;
 import org.eclipse.wst.jsdt.internal.ui.viewsupport.StorageLabelProvider;
 
 /**
- * <code>JavaElementLabels</code> provides helper methods to render names of Java elements.
+ * <code>JavaScriptElementLabels</code> provides helper methods to render names of Java elements.
  * 
  * @since 3.1
  */
-public class JavaElementLabels {
+public class JavaScriptElementLabels {
 	
 	
 	/**
@@ -260,7 +260,7 @@ public class JavaElementLabels {
 	public final static long REFERENCED_ROOT_POST_QUALIFIED= 1L << 45; 
 	
 	/**
-	 * Specified to use the resolved information of a IType, IMethod or IField. See {@link IType#isResolved()}.
+	 * Specified to use the resolved information of a IType, IFunction or IField. See {@link IType#isResolved()}.
 	 * If resolved information is available, types will be rendered with type parameters of the instantiated type.
 	 * Resolved method render with the parameter types of the method instance.
 	 * <code>Vector&lt;String&gt;.get(String)</code>
@@ -289,7 +289,7 @@ public class JavaElementLabels {
 	 * Show category for all elements.
 	 * @since 3.2
 	 */
-	public final static long ALL_CATEGORY= new Long(JavaElementLabels.F_CATEGORY | JavaElementLabels.M_CATEGORY | JavaElementLabels.T_CATEGORY).longValue();
+	public final static long ALL_CATEGORY= new Long(JavaScriptElementLabels.F_CATEGORY | JavaScriptElementLabels.M_CATEGORY | JavaScriptElementLabels.T_CATEGORY).longValue();
 	
 	/**
 	 * Qualify all elements
@@ -356,7 +356,7 @@ public class JavaElementLabels {
 	private static int fgPkgNameChars;
 	private static int fgPkgNameLength= -1;
 
-	private JavaElementLabels() {
+	private JavaScriptElementLabels() {
 	}
 
 	private static final boolean getFlag(long flags, long flag) {
@@ -364,15 +364,15 @@ public class JavaElementLabels {
 	}
 	
 	/**
-	 * Returns the label of the given object. The object must be of type {@link IJavaElement} or adapt to {@link IWorkbenchAdapter}. The empty string is returned
+	 * Returns the label of the given object. The object must be of type {@link IJavaScriptElement} or adapt to {@link IWorkbenchAdapter}. The empty string is returned
 	 * if the element type is not known.
 	 * @param obj Object to get the label from.
 	 * @param flags The rendering flags
 	 * @return Returns the label or the empty string if the object type is not supported.
 	 */
 	public static String getTextLabel(Object obj, long flags) {
-		if (obj instanceof IJavaElement) {
-			return getElementLabel((IJavaElement) obj, flags);
+		if (obj instanceof IJavaScriptElement) {
+			return getElementLabel((IJavaScriptElement) obj, flags);
 		} else if (obj instanceof IResource) {
 			return ((IResource) obj).getName();
 		} else if (obj instanceof IStorage) {
@@ -395,7 +395,7 @@ public class JavaElementLabels {
 	 * @param flags The rendering flags.
 	 * @return the label of the Java element
 	 */
-	public static String getElementLabel(IJavaElement element, long flags) {
+	public static String getElementLabel(IJavaScriptElement element, long flags) {
 		StringBuffer buf= new StringBuffer(60);
 		getElementLabel(element, flags, buf);
 		return buf.toString();
@@ -407,11 +407,11 @@ public class JavaElementLabels {
 	 * @param flags The rendering flags.
 	 * @param buf The buffer to append the resulting label to.
 	 */
-	public static void getElementLabel(IJavaElement element, long flags, StringBuffer buf) {
+	public static void getElementLabel(IJavaScriptElement element, long flags, StringBuffer buf) {
 		int type= element.getElementType();
 		IPackageFragmentRoot root= null;
 		
-		if (type != IJavaElement.JAVA_MODEL && type != IJavaElement.JAVA_PROJECT && type != IJavaElement.PACKAGE_FRAGMENT_ROOT)
+		if (type != IJavaScriptElement.JAVASCRIPT_MODEL && type != IJavaScriptElement.JAVASCRIPT_PROJECT && type != IJavaScriptElement.PACKAGE_FRAGMENT_ROOT)
 			root= JavaModelUtil.getPackageFragmentRoot(element);
 		if (root != null && getFlag(flags, PREPEND_ROOT_PATH)) {
 			getPackageFragmentRootLabel(root, ROOT_QUALIFIED, buf);
@@ -419,40 +419,40 @@ public class JavaElementLabels {
 		}		
 		
 		switch (type) {
-			case IJavaElement.METHOD:
-				getMethodLabel((IMethod) element, flags, buf);
+			case IJavaScriptElement.METHOD:
+				getMethodLabel((IFunction) element, flags, buf);
 				break;
-			case IJavaElement.FIELD: 
+			case IJavaScriptElement.FIELD: 
 				getFieldLabel((IField) element, flags, buf);
 				break;
-			case IJavaElement.LOCAL_VARIABLE: 
+			case IJavaScriptElement.LOCAL_VARIABLE: 
 				getLocalVariableLabel((ILocalVariable) element, flags, buf);
 				break;
-			case IJavaElement.INITIALIZER:
+			case IJavaScriptElement.INITIALIZER:
 				getInitializerLabel((IInitializer) element, flags, buf);
 				break;				
-			case IJavaElement.TYPE: 
+			case IJavaScriptElement.TYPE: 
 				getTypeLabel((IType) element, flags, buf);
 				break;
-			case IJavaElement.CLASS_FILE: 
+			case IJavaScriptElement.CLASS_FILE: 
 				getClassFileLabel((IClassFile) element, flags, buf);
 				break;					
-			case IJavaElement.COMPILATION_UNIT: 
-				getCompilationUnitLabel((ICompilationUnit) element, flags, buf);
+			case IJavaScriptElement.JAVASCRIPT_UNIT: 
+				getCompilationUnitLabel((IJavaScriptUnit) element, flags, buf);
 				break;	
-			case IJavaElement.PACKAGE_FRAGMENT: 
+			case IJavaScriptElement.PACKAGE_FRAGMENT: 
 				getPackageFragmentLabel((IPackageFragment) element, flags, buf);
 				break;
-			case IJavaElement.PACKAGE_FRAGMENT_ROOT: 
+			case IJavaScriptElement.PACKAGE_FRAGMENT_ROOT: 
 				getPackageFragmentRootLabel((IPackageFragmentRoot) element, flags, buf);
 				break;
-			case IJavaElement.IMPORT_CONTAINER:
-			case IJavaElement.IMPORT_DECLARATION:
-			case IJavaElement.PACKAGE_DECLARATION:
+			case IJavaScriptElement.IMPORT_CONTAINER:
+			case IJavaScriptElement.IMPORT_DECLARATION:
+			case IJavaScriptElement.PACKAGE_DECLARATION:
 				getDeclarationLabel(element, flags, buf);
 				break;
-			case IJavaElement.JAVA_PROJECT:
-			case IJavaElement.JAVA_MODEL:
+			case IJavaScriptElement.JAVASCRIPT_PROJECT:
+			case IJavaScriptElement.JAVASCRIPT_MODEL:
 				buf.append(element.getDisplayName());
 				break;
 			default:
@@ -471,7 +471,7 @@ public class JavaElementLabels {
 	 * @param flags The rendering flags. Flags with names starting with 'M_' are considered.
 	 * @param buf The buffer to append the resulting label to.
 	 */		
-	public static void getMethodLabel(IMethod method, long flags, StringBuffer buf) {
+	public static void getMethodLabel(IFunction method, long flags, StringBuffer buf) {
 		try {
 			BindingKey resolvedKey= getFlag(flags, USE_RESOLVED) && method.isResolved() ? new BindingKey(method.getKey()) : null;
 			String resolvedSig= (resolvedKey != null) ? resolvedKey.toSignature() : null;
@@ -556,7 +556,7 @@ public class JavaElementLabels {
 								types= typesWithoutSyntheticParams;
 							} else {
 								// https://bugs.eclipse.org/bugs/show_bug.cgi?id=101029
-								// JavaPlugin.logErrorMessage("JavaElementLabels: Number of param types(" + nParams + ") != number of names(" + names.length + "): " + method.getElementName());   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+								// JavaScriptPlugin.logErrorMessage("JavaScriptElementLabels: Number of param types(" + nParams + ") != number of names(" + names.length + "): " + method.getElementName());   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 								names= null; // no names rendered
 							}
 						}
@@ -658,12 +658,12 @@ public class JavaElementLabels {
 					getFileLabel(method, T_FULLY_QUALIFIED | (flags & QUALIFIER_FLAGS), buf);
 			}
 			
-		} catch (JavaModelException e) {
-			JavaPlugin.log(e); // NotExistsException will not reach this point
+		} catch (JavaScriptModelException e) {
+			JavaScriptPlugin.log(e); // NotExistsException will not reach this point
 		}
 	}
 
-	private static void getCategoryLabel(IMember member, StringBuffer buf) throws JavaModelException {
+	private static void getCategoryLabel(IMember member, StringBuffer buf) throws JavaScriptModelException {
 		String[] categories= member.getCategories();
 		if (categories.length > 0) {
 			StringBuffer categoriesBuf= new StringBuffer(30);
@@ -744,8 +744,8 @@ public class JavaElementLabels {
 					getFileLabel(field, T_FULLY_QUALIFIED | (flags & QUALIFIER_FLAGS), buf);
 			}
 
-		} catch (JavaModelException e) {
-			JavaPlugin.log(e); // NotExistsException will not reach this point
+		} catch (JavaScriptModelException e) {
+			JavaScriptPlugin.log(e); // NotExistsException will not reach this point
 		}			
 	}
 	
@@ -897,7 +897,7 @@ public class JavaElementLabels {
 				buf.append('.');
 			}
 			int parentType= type.getParent().getElementType();
-			if (parentType == IJavaElement.METHOD || parentType == IJavaElement.FIELD || parentType == IJavaElement.INITIALIZER) { // anonymous or local
+			if (parentType == IJavaScriptElement.METHOD || parentType == IJavaScriptElement.FIELD || parentType == IJavaScriptElement.INITIALIZER) { // anonymous or local
 				getElementLabel(type.getParent(), 0, buf);
 				buf.append('.');
 			}
@@ -918,7 +918,7 @@ public class JavaElementLabels {
 					}
 					typeName= Messages.format(JavaUIMessages.JavaElementLabels_anonym_type , supertypeName); 
 				}
-			} catch (JavaModelException e) {
+			} catch (JavaScriptModelException e) {
 				//ignore
 				typeName= JavaUIMessages.JavaElementLabels_anonym; 
 			}
@@ -937,7 +937,7 @@ public class JavaElementLabels {
 			} else if (type.exists()) {
 				try {
 					getTypeParametersLabel(type.getTypeParameters(), flags, buf);
-				} catch (JavaModelException e) {
+				} catch (JavaScriptModelException e) {
 					// ignore
 				}
 			}
@@ -947,7 +947,7 @@ public class JavaElementLabels {
 		if (getFlag(flags, T_CATEGORY) && type.exists()) {
 			try {
 				getCategoryLabel(type, buf);
-			} catch (JavaModelException e) {
+			} catch (JavaScriptModelException e) {
 				// ignore
 			}
 		}
@@ -959,7 +959,7 @@ public class JavaElementLabels {
 			if (declaringType != null) {
 				getTypeLabel(declaringType, T_FULLY_QUALIFIED | (flags & QUALIFIER_FLAGS), buf);
 				int parentType= type.getParent().getElementType();
-				if (parentType == IJavaElement.METHOD || parentType == IJavaElement.FIELD || parentType == IJavaElement.INITIALIZER) { // anonymous or local
+				if (parentType == IJavaScriptElement.METHOD || parentType == IJavaScriptElement.FIELD || parentType == IJavaScriptElement.INITIALIZER) { // anonymous or local
 					buf.append('.');
 					getElementLabel(type.getParent(), 0, buf);
 				}
@@ -975,22 +975,22 @@ public class JavaElementLabels {
 	 * @param flags The rendering flags. Flags with names starting with 'D_' are considered.
 	 * @param buf The buffer to append the resulting label to.
 	 */	
-	public static void getDeclarationLabel(IJavaElement declaration, long flags, StringBuffer buf) {
+	public static void getDeclarationLabel(IJavaScriptElement declaration, long flags, StringBuffer buf) {
 		if (getFlag(flags, D_QUALIFIED)) {
-			IJavaElement openable= (IJavaElement) declaration.getOpenable();
+			IJavaScriptElement openable= (IJavaScriptElement) declaration.getOpenable();
 			if (openable != null) {
 				buf.append(getElementLabel(openable, CF_QUALIFIED | CU_QUALIFIED | (flags & QUALIFIER_FLAGS)));
 				buf.append('/');
 			}	
 		}
-		if (declaration.getElementType() == IJavaElement.IMPORT_CONTAINER) {
+		if (declaration.getElementType() == IJavaScriptElement.IMPORT_CONTAINER) {
 			buf.append(JavaUIMessages.JavaElementLabels_import_container); 
 		} else {
 			buf.append(declaration.getDisplayName());
 		}
 		// post qualification
 		if (getFlag(flags, D_POST_QUALIFIED)) {
-			IJavaElement openable= (IJavaElement) declaration.getOpenable();
+			IJavaScriptElement openable= (IJavaScriptElement) declaration.getOpenable();
 			if (openable != null) {
 				buf.append(CONCAT_STRING);
 				buf.append(getElementLabel(openable, CF_QUALIFIED | CU_QUALIFIED | (flags & QUALIFIER_FLAGS)));
@@ -1026,7 +1026,7 @@ public class JavaElementLabels {
 	 * @param flags The rendering flags. Flags with names starting with 'CU_' are considered.
 	 * @param buf The buffer to append the resulting label to.
 	 */
-	public static void getCompilationUnitLabel(ICompilationUnit cu, long flags, StringBuffer buf) {
+	public static void getCompilationUnitLabel(IJavaScriptUnit cu, long flags, StringBuffer buf) {
 		if (getFlag(flags, CU_QUALIFIED)) {
 			IPackageFragment pack= (IPackageFragment) cu.getParent();
 			if (!pack.isDefaultPackage()) {
@@ -1043,7 +1043,7 @@ public class JavaElementLabels {
 	}
 
 	public static void getFileLabel(IMember member, long flags, StringBuffer buf) {
-		ICompilationUnit compUnit=member.getCompilationUnit();
+		IJavaScriptUnit compUnit=member.getJavaScriptUnit();
 		if (compUnit!=null)
 			getCompilationUnitLabel(compUnit, flags, buf);
 		else {
@@ -1118,8 +1118,8 @@ public class JavaElementLabels {
 	
 	private static boolean getVariableLabel(IPackageFragmentRoot root, long flags, StringBuffer buf) {
 		try {
-			IClasspathEntry rawEntry= root.getRawClasspathEntry();
-			if (rawEntry != null && rawEntry.getEntryKind() == IClasspathEntry.CPE_VARIABLE) {
+			IIncludePathEntry rawEntry= root.getRawIncludepathEntry();
+			if (rawEntry != null && rawEntry.getEntryKind() == IIncludePathEntry.CPE_VARIABLE) {
 				IPath path= rawEntry.getPath().makeRelative();
 				if (getFlag(flags, REFERENCED_ROOT_POST_QUALIFIED)) {
 					int segements= path.segmentCount();
@@ -1142,8 +1142,8 @@ public class JavaElementLabels {
 					buf.append(root.getPath().makeRelative().toString());
 				return true;
 			}
-		} catch (JavaModelException e) {
-			JavaPlugin.log(e); // problems with class path
+		} catch (JavaScriptModelException e) {
+			JavaScriptPlugin.log(e); // problems with class path
 		}
 		return false;
 	}
@@ -1223,7 +1223,7 @@ public class JavaElementLabels {
 		IResource resource= root.getResource();
 		if (resource != null) {
 			IProject jarProject= resource.getProject();
-			IProject container= root.getJavaProject().getProject();
+			IProject container= root.getJavaScriptProject().getProject();
 			return !container.equals(jarProject);
 		}
 		return false;
@@ -1273,14 +1273,14 @@ public class JavaElementLabels {
 	 * @param containerPath The path of the container.
 	 * @param project The project the container is resolved in.
 	 * @return Returns the label of the classpath container
-	 * @throws JavaModelException Thrown when the resolving of the container failed.
+	 * @throws JavaScriptModelException Thrown when the resolving of the container failed.
 	 */
-	public static String getContainerEntryLabel(IPath containerPath, IJavaProject project) throws JavaModelException {
-		IJsGlobalScopeContainer container= JavaCore.getJsGlobalScopeContainer(containerPath, project);
+	public static String getContainerEntryLabel(IPath containerPath, IJavaScriptProject project) throws JavaScriptModelException {
+		IJsGlobalScopeContainer container= JavaScriptCore.getJsGlobalScopeContainer(containerPath, project);
 		if (container != null) {
 			return container.getDescription();
 		}
-		JsGlobalScopeContainerInitializer initializer= JavaCore.getJsGlobalScopeContainerInitializer(containerPath.segment(0));
+		JsGlobalScopeContainerInitializer initializer= JavaScriptCore.getJsGlobalScopeContainerInitializer(containerPath.segment(0));
 		if (initializer != null) {
 			return initializer.getDescription(containerPath, project);
 		}

@@ -23,7 +23,7 @@ package org.eclipse.wst.jsdt.ui.text;
  * @see org.eclipse.wst.jsdt.ui.text.IColorManager
  * @see org.eclipse.wst.jsdt.ui.text.IColorManagerExtension
  */
-public interface IJavaColorConstants {
+public interface IJavaScriptColorConstants {
 
 	/**
 	 * Note: This constant is for internal use only. Clients should not use this constant.

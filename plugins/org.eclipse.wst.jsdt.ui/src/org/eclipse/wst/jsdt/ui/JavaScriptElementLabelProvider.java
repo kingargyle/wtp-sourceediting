@@ -27,7 +27,7 @@ import org.eclipse.wst.jsdt.internal.ui.viewsupport.StorageLabelProvider;
  * This class may be instantiated; it is not intended to be subclassed.
  * </p>
  */
-public class JavaElementLabelProvider extends LabelProvider {
+public class JavaScriptElementLabelProvider extends LabelProvider {
 	
 	/**
 	 * Flag (bit mask) indicating that methods labels include the method return type (appended).
@@ -135,7 +135,7 @@ public class JavaElementLabelProvider extends LabelProvider {
 	 * @see #SHOW_DEFAULT
 	 * @since 2.0
 	 */
-	public JavaElementLabelProvider() {
+	public JavaScriptElementLabelProvider() {
 		this(SHOW_DEFAULT);
 	}
 
@@ -144,7 +144,7 @@ public class JavaElementLabelProvider extends LabelProvider {
 	 *
 	 * @param flags the initial options; a bitwise OR of <code>SHOW_* </code> constants
 	 */
-	public JavaElementLabelProvider(int flags) {
+	public JavaScriptElementLabelProvider(int flags) {
 		fImageLabelProvider= new JavaElementImageProvider();
 		fStorageLabelProvider= new StorageLabelProvider();
 		fFlags= flags;
@@ -189,37 +189,37 @@ public class JavaElementLabelProvider extends LabelProvider {
 	}	
 	
 	private void updateTextProviderFlags() {
-		fTextFlags= JavaElementLabels.T_TYPE_PARAMETERS;
+		fTextFlags= JavaScriptElementLabels.T_TYPE_PARAMETERS;
 		if (getFlag(SHOW_RETURN_TYPE)) {
-			fTextFlags |= JavaElementLabels.M_APP_RETURNTYPE;
+			fTextFlags |= JavaScriptElementLabels.M_APP_RETURNTYPE;
 		}
 		if (getFlag(SHOW_PARAMETERS)) {
-			fTextFlags |= JavaElementLabels.M_PARAMETER_TYPES;
+			fTextFlags |= JavaScriptElementLabels.M_PARAMETER_TYPES;
 		}		
 		if (getFlag(SHOW_CONTAINER)) {
-			fTextFlags |= JavaElementLabels.P_POST_QUALIFIED | JavaElementLabels.T_POST_QUALIFIED | JavaElementLabels.CF_POST_QUALIFIED  | JavaElementLabels.CU_POST_QUALIFIED | JavaElementLabels.M_POST_QUALIFIED | JavaElementLabels.F_POST_QUALIFIED;
+			fTextFlags |= JavaScriptElementLabels.P_POST_QUALIFIED | JavaScriptElementLabels.T_POST_QUALIFIED | JavaScriptElementLabels.CF_POST_QUALIFIED  | JavaScriptElementLabels.CU_POST_QUALIFIED | JavaScriptElementLabels.M_POST_QUALIFIED | JavaScriptElementLabels.F_POST_QUALIFIED;
 		}
 		if (getFlag(SHOW_POSTIFIX_QUALIFICATION)) {
-			fTextFlags |= (JavaElementLabels.T_POST_QUALIFIED | JavaElementLabels.CF_POST_QUALIFIED  | JavaElementLabels.CU_POST_QUALIFIED);
+			fTextFlags |= (JavaScriptElementLabels.T_POST_QUALIFIED | JavaScriptElementLabels.CF_POST_QUALIFIED  | JavaScriptElementLabels.CU_POST_QUALIFIED);
 		} else if (getFlag(SHOW_CONTAINER_QUALIFICATION)) {
-			fTextFlags |=(JavaElementLabels.T_FULLY_QUALIFIED | JavaElementLabels.CF_QUALIFIED  | JavaElementLabels.CU_QUALIFIED);
+			fTextFlags |=(JavaScriptElementLabels.T_FULLY_QUALIFIED | JavaScriptElementLabels.CF_QUALIFIED  | JavaScriptElementLabels.CU_QUALIFIED);
 		}
 		if (getFlag(SHOW_TYPE)) {
-			fTextFlags |= JavaElementLabels.F_APP_TYPE_SIGNATURE;
+			fTextFlags |= JavaScriptElementLabels.F_APP_TYPE_SIGNATURE;
 		}
 		if (getFlag(SHOW_ROOT)) {
-			fTextFlags |= JavaElementLabels.APPEND_ROOT_PATH;
+			fTextFlags |= JavaScriptElementLabels.APPEND_ROOT_PATH;
 		}			
 		if (getFlag(SHOW_VARIABLE)) {
-			fTextFlags |= JavaElementLabels.ROOT_VARIABLE;
+			fTextFlags |= JavaScriptElementLabels.ROOT_VARIABLE;
 		}
 		if (getFlag(SHOW_QUALIFIED)) {
-			fTextFlags |= (JavaElementLabels.F_FULLY_QUALIFIED | JavaElementLabels.M_FULLY_QUALIFIED | JavaElementLabels.I_FULLY_QUALIFIED 
-				| JavaElementLabels.T_FULLY_QUALIFIED | JavaElementLabels.D_QUALIFIED | JavaElementLabels.CF_QUALIFIED  | JavaElementLabels.CU_QUALIFIED);
+			fTextFlags |= (JavaScriptElementLabels.F_FULLY_QUALIFIED | JavaScriptElementLabels.M_FULLY_QUALIFIED | JavaScriptElementLabels.I_FULLY_QUALIFIED 
+				| JavaScriptElementLabels.T_FULLY_QUALIFIED | JavaScriptElementLabels.D_QUALIFIED | JavaScriptElementLabels.CF_QUALIFIED  | JavaScriptElementLabels.CU_QUALIFIED);
 		}
 		if (getFlag(SHOW_POST_QUALIFIED)) {
-			fTextFlags |= (JavaElementLabels.F_POST_QUALIFIED | JavaElementLabels.M_POST_QUALIFIED | JavaElementLabels.I_POST_QUALIFIED 
-			| JavaElementLabels.T_POST_QUALIFIED | JavaElementLabels.D_POST_QUALIFIED | JavaElementLabels.CF_POST_QUALIFIED  | JavaElementLabels.CU_POST_QUALIFIED);
+			fTextFlags |= (JavaScriptElementLabels.F_POST_QUALIFIED | JavaScriptElementLabels.M_POST_QUALIFIED | JavaScriptElementLabels.I_POST_QUALIFIED 
+			| JavaScriptElementLabels.T_POST_QUALIFIED | JavaScriptElementLabels.D_POST_QUALIFIED | JavaScriptElementLabels.CF_POST_QUALIFIED  | JavaScriptElementLabels.CU_POST_QUALIFIED);
 		}		
 	}
 
@@ -242,7 +242,7 @@ public class JavaElementLabelProvider extends LabelProvider {
 	 * @see ILabelProvider#getText
 	 */
 	public String getText(Object element) {
-		String text= JavaElementLabels.getTextLabel(element, fTextFlags);
+		String text= JavaScriptElementLabels.getTextLabel(element, fTextFlags);
 		if (text.length() > 0) {
 			return text;
 		}
