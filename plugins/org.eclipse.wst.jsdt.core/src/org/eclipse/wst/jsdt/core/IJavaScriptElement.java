@@ -26,27 +26,27 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
  * <p>
  * Methods annotated as "handle-only" do not require underlying elements to exist.
  * Methods that require underlying elements to exist throw
- * a <code>JavaModelException</code> when an underlying element is missing.
- * <code>JavaModelException.isDoesNotExist</code> can be used to recognize
+ * a <code>JavaScriptModelException</code> when an underlying element is missing.
+ * <code>JavaScriptModelException.isDoesNotExist</code> can be used to recognize
  * this common special case.
  * </p>
  * <p>
  * This interface is not intended to be implemented by clients.
  * </p>
  */
-public interface IJavaElement extends IAdaptable, ILookupScope{
+public interface IJavaScriptElement extends IAdaptable, ILookupScope{
 
 	/**
 	 * Constant representing a Java model (workspace level object).
-	 * A Java element with this type can be safely cast to {@link IJavaModel}.
+	 * A Java element with this type can be safely cast to {@link IJavaScriptModel}.
 	 */
-	int JAVA_MODEL = 1;
+	int JAVASCRIPT_MODEL = 1;
 
 	/**
 	 * Constant representing a Java project.
-	 * A Java element with this type can be safely cast to {@link IJavaProject}.
+	 * A Java element with this type can be safely cast to {@link IJavaScriptProject}.
 	 */
-	int JAVA_PROJECT = 2;
+	int JAVASCRIPT_PROJECT = 2;
 
 	/**
 	 * Constant representing a package fragment root.
@@ -62,9 +62,9 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 
 	/**
 	 * Constant representing a Java compilation unit.
-	 * A Java element with this type can be safely cast to {@link ICompilationUnit}.
+	 * A Java element with this type can be safely cast to {@link IJavaScriptUnit}.
 	 */
-	int COMPILATION_UNIT = 5;
+	int JAVASCRIPT_UNIT = 5;
 
 	/**
 	 * Constant representing a class file.
@@ -86,7 +86,7 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 
 	/**
 	 * Constant representing a method or constructor.
-	 * A Java element with this type can be safely cast to {@link IMethod}.
+	 * A Java element with this type can be safely cast to {@link IFunction}.
 	 */
 	int METHOD = 9;
 
@@ -159,7 +159,7 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 * @return the first ancestor of this Java element that has the given type, null if no such an ancestor can be found
 	 * @since 2.0
 	 */
-	IJavaElement getAncestor(int ancestorType);
+	IJavaScriptElement getAncestor(int ancestorType);
 
 	/**
 	 * <p>Returns the Javadoc as an html source if this element has an attached javadoc,
@@ -174,23 +174,23 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 * transformation or validation is done.</p>
 	 *
 	 * @param monitor the given progress monitor
-	 * @exception JavaModelException if:<ul>
+	 * @exception JavaScriptModelException if:<ul>
 	 *  <li>this element does not exist</li>
 	 *  <li>retrieving the attached javadoc fails (timed-out, invalid URL, ...)</li>
 	 *  <li>the format of the javadoc doesn't match expected standards (different anchors,...)</li>
 	 *  </ul>
 	 * @return the extracted javadoc from the attached javadoc, null if none
-	 * @see IClasspathAttribute#JAVADOC_LOCATION_ATTRIBUTE_NAME
+	 * @see IIncludePathAttribute#JSDOC_LOCATION_ATTRIBUTE_NAME
 	 * @since 3.2
 	 */
-	String getAttachedJavadoc(IProgressMonitor monitor) throws JavaModelException;
+	String getAttachedJavadoc(IProgressMonitor monitor) throws JavaScriptModelException;
 
 	/**
 	 * Returns the resource that corresponds directly to this element,
 	 * or <code>null</code> if there is no resource that corresponds to
 	 * this element.
 	 * <p>
-	 * For example, the corresponding resource for an <code>ICompilationUnit</code>
+	 * For example, the corresponding resource for an <code>IJavaScriptUnit</code>
 	 * is its underlying <code>IFile</code>. The corresponding resource for
 	 * an <code>IPackageFragment</code> that is not contained in an archive
 	 * is its underlying <code>IFolder</code>. An <code>IPackageFragment</code>
@@ -200,10 +200,10 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 * <p>
 	 *
 	 * @return the corresponding resource, or <code>null</code> if none
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 */
-	IResource getCorrespondingResource() throws JavaModelException;
+	IResource getCorrespondingResource() throws JavaScriptModelException;
 
 	/**
 	 * Returns the name of this element. This is a handle-only method.
@@ -217,8 +217,8 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 * This is a handle-only method.
 	 *
 	 * @return the kind of element; one of the constants declared in
-	 *   <code>IJavaElement</code>
-	 * @see IJavaElement
+	 *   <code>IJavaScriptElement</code>
+	 * @see IJavaScriptElement
 	 */
 	int getElementType();
 
@@ -226,10 +226,10 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 * Returns a string representation of this element handle. The format of
 	 * the string is not specified; however, the identifier is stable across
 	 * workspace sessions, and can be used to recreate this handle via the
-	 * <code>JavaCore.create(String)</code> method.
+	 * <code>JavaScriptCore.create(String)</code> method.
 	 *
 	 * @return the string handle identifier
-	 * @see JavaCore#create(java.lang.String)
+	 * @see JavaScriptCore#create(java.lang.String)
 	 */
 	String getHandleIdentifier();
 
@@ -239,19 +239,19 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 *
 	 * @return the Java model
 	 */
-	IJavaModel getJavaModel();
+	IJavaScriptModel getJavaScriptModel();
 
 	/**
 	 * Returns the Java project this element is contained in,
 	 * or <code>null</code> if this element is not contained in any Java project
-	 * (for instance, the <code>IJavaModel</code> is not contained in any Java
+	 * (for instance, the <code>IJavaScriptModel</code> is not contained in any Java
 	 * project).
 	 * This is a handle-only method.
 	 *
 	 * @return the containing Java project, or <code>null</code> if this element is
 	 *   not contained in a Java project
 	 */
-	IJavaProject getJavaProject();
+	IJavaScriptProject getJavaScriptProject();
 
 	/**
 	 * Returns the first openable parent. If this element is openable, the element
@@ -272,7 +272,7 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 *
 	 * @return the parent element, or <code>null</code> if this element has no parent
 	 */
-	IJavaElement getParent();
+	IJavaScriptElement getParent();
 
 	/**
 	 * Returns the path to the innermost resource enclosing this element.
@@ -299,7 +299,7 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 * 			element.
 	 * @since 3.0
 	 */
-	IJavaElement getPrimaryElement();
+	IJavaScriptElement getPrimaryElement();
 
 	/**
 	 * Returns the innermost resource enclosing this element.
@@ -330,10 +330,10 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 * in a resource.
 	 *
 	 * @return the underlying resource, or <code>null</code> if none
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its underlying resource
 	 */
-	IResource getUnderlyingResource() throws JavaModelException;
+	IResource getUnderlyingResource() throws JavaScriptModelException;
 
 	/**
 	 * Returns whether this Java element is read-only. An element is read-only
@@ -360,10 +360,10 @@ public interface IJavaElement extends IAdaptable, ILookupScope{
 	 * </p>
 	 *
 	 * @return <code>true</code> if the structure of this element is known
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 */// TODO (philippe) predicate shouldn't throw an exception
-	boolean isStructureKnown() throws JavaModelException;
+	boolean isStructureKnown() throws JavaScriptModelException;
 	/**
 	 * Returns a readable (non mangled) name.  In virtual elements this is derived from a JsGlobalScopeContainerInitializer
 	 *

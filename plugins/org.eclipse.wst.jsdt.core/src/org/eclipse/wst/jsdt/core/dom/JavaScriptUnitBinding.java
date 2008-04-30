@@ -18,13 +18,13 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.wst.jsdt.core.IClassFile;
-import org.eclipse.wst.jsdt.core.ICompilationUnit;
-import org.eclipse.wst.jsdt.core.IJavaElement;
-import org.eclipse.wst.jsdt.core.IJavaProject;
+import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.IPackageFragment;
 import org.eclipse.wst.jsdt.core.IPackageFragmentRoot;
 import org.eclipse.wst.jsdt.core.IType;
-import org.eclipse.wst.jsdt.core.JavaCore;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.compiler.CharOperation;
 import org.eclipse.wst.jsdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.wst.jsdt.internal.compiler.env.IDependent;
@@ -39,8 +39,8 @@ import org.eclipse.wst.jsdt.internal.core.JavaElement;
 /**
  * Internal implementation of type bindings.
  */
-class CompilationUnitBinding implements ITypeBinding {
-	private static final IMethodBinding[] NO_METHOD_BINDINGS = new IMethodBinding[0];
+class JavaScriptUnitBinding implements ITypeBinding {
+	private static final IFunctionBinding[] NO_METHOD_BINDINGS = new IFunctionBinding[0];
 
 	private static final String NO_NAME = ""; //$NON-NLS-1$
 	private static final ITypeBinding[] NO_TYPE_BINDINGS = new ITypeBinding[0];
@@ -53,7 +53,7 @@ class CompilationUnitBinding implements ITypeBinding {
 	private String key;
 	private BindingResolver resolver;
 
-	public CompilationUnitBinding(BindingResolver resolver, org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding binding) {
+	public JavaScriptUnitBinding(BindingResolver resolver, org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding binding) {
 		this.binding = binding;
 		this.resolver = resolver;
 	}
@@ -119,7 +119,7 @@ class CompilationUnitBinding implements ITypeBinding {
 	 * Returns the compilation unit for the given file name, or null if not found.
 	 * @see org.eclipse.wst.jsdt.internal.compiler.env.IDependent#getFileName()
 	 */
-	private ICompilationUnit getCompilationUnit(char[] fileName) {
+	private IJavaScriptUnit getCompilationUnit(char[] fileName) {
 		char[] slashSeparatedFileName = CharOperation.replaceOnCopy(fileName, File.separatorChar, '/');
 		int pkgEnd = CharOperation.lastIndexOf('/', slashSeparatedFileName); // pkgEnd is exclusive
 		if (pkgEnd == -1)
@@ -127,9 +127,9 @@ class CompilationUnitBinding implements ITypeBinding {
 		IPackageFragment pkg = getPackageFragment(slashSeparatedFileName, pkgEnd, -1/*no jar separator for .js files*/);
 		if (pkg == null) return null;
 		int start;
-		ICompilationUnit cu = pkg.getCompilationUnit(new String(slashSeparatedFileName, start =  pkgEnd+1, slashSeparatedFileName.length - start));
+		IJavaScriptUnit cu = pkg.getJavaScriptUnit(new String(slashSeparatedFileName, start =  pkgEnd+1, slashSeparatedFileName.length - start));
 		if (this.resolver instanceof DefaultBindingResolver) {
-			ICompilationUnit workingCopy = cu.findWorkingCopy(((DefaultBindingResolver) this.resolver).workingCopyOwner);
+			IJavaScriptUnit workingCopy = cu.findWorkingCopy(((DefaultBindingResolver) this.resolver).workingCopyOwner);
 			if (workingCopy != null)
 				return workingCopy;
 		}
@@ -170,13 +170,13 @@ class CompilationUnitBinding implements ITypeBinding {
 	/*
 	 * @see ITypeBinding#getDeclaredMethods()
 	 */
-	public IMethodBinding[] getDeclaredMethods() {
+	public IFunctionBinding[] getDeclaredMethods() {
 		try {
 				ReferenceBinding referenceBinding = (ReferenceBinding) this.binding;
 				org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding[] methods = referenceBinding.methods();
 				int length = methods.length;
 //				int removeSyntheticsCounter = 0;
-				IMethodBinding[] newMethods = new IMethodBinding[length];
+				IFunctionBinding[] newMethods = new IFunctionBinding[length];
 				for (int i = 0; i < length; i++) {
 					org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding methodBinding = methods[i];
 //					if (!shouldBeRemoved(methodBinding)) {
@@ -184,7 +184,7 @@ class CompilationUnitBinding implements ITypeBinding {
 //					}
 				}
 //				if (removeSyntheticsCounter != length) {
-//					System.arraycopy(newMethods, 0, (newMethods = new IMethodBinding[removeSyntheticsCounter]), 0, removeSyntheticsCounter);
+//					System.arraycopy(newMethods, 0, (newMethods = new IFunctionBinding[removeSyntheticsCounter]), 0, removeSyntheticsCounter);
 //				}
 				return newMethods;
 		} catch (RuntimeException e) {
@@ -215,7 +215,7 @@ class CompilationUnitBinding implements ITypeBinding {
 	/*
 	 * @see ITypeBinding#getDeclaringMethod()
 	 */
-	public IMethodBinding getDeclaringMethod() {
+	public IFunctionBinding getDeclaringMethod() {
 
 		return null;
 	}
@@ -294,7 +294,7 @@ class CompilationUnitBinding implements ITypeBinding {
 //		}
 	}
 
-	public IJavaElement getJavaElement() {
+	public IJavaScriptElement getJavaElement() {
 		JavaElement element = getUnresolvedJavaElement();
 		if (element == null)
 			return null;
@@ -319,7 +319,7 @@ class CompilationUnitBinding implements ITypeBinding {
 					ClassFile classFile = (ClassFile) getClassFile(fileName);
 					return classFile;
 				}
-				ICompilationUnit cu = getCompilationUnit(fileName);
+				IJavaScriptUnit cu = getCompilationUnit(fileName);
 				return (JavaElement)cu;
 			} else {
 				// member type
@@ -407,7 +407,7 @@ class CompilationUnitBinding implements ITypeBinding {
 	private IPackageFragment getPackageFragment(char[] fileName, int pkgEnd, int jarSeparator) {
 		if (jarSeparator != -1) {
 			String jarMemento = new String(fileName, 0, jarSeparator);
-			IPackageFragmentRoot root = (IPackageFragmentRoot) JavaCore.create(jarMemento);
+			IPackageFragmentRoot root = (IPackageFragmentRoot) JavaScriptCore.create(jarMemento);
 			if (pkgEnd == jarSeparator)
 				return root.getPackageFragment(IPackageFragment.DEFAULT_PACKAGE_NAME);
 			char[] pkgName = CharOperation.subarray(fileName, jarSeparator+1, pkgEnd);
@@ -417,15 +417,15 @@ class CompilationUnitBinding implements ITypeBinding {
 			Path path = new Path(new String(fileName, 0, pkgEnd));
 			IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 			IContainer folder = path.segmentCount() == 1 ? workspaceRoot.getProject(path.lastSegment()) : (IContainer) workspaceRoot.getFolder(path);
-			IJavaElement element = JavaCore.create(folder);
+			IJavaScriptElement element = JavaScriptCore.create(folder);
 			if (element == null) return null;
 			switch (element.getElementType()) {
-				case IJavaElement.PACKAGE_FRAGMENT:
+				case IJavaScriptElement.PACKAGE_FRAGMENT:
 					return (IPackageFragment) element;
-				case IJavaElement.PACKAGE_FRAGMENT_ROOT:
+				case IJavaScriptElement.PACKAGE_FRAGMENT_ROOT:
 					return ((IPackageFragmentRoot) element).getPackageFragment(IPackageFragment.DEFAULT_PACKAGE_NAME);
-				case IJavaElement.JAVA_PROJECT:
-					IPackageFragmentRoot root = ((IJavaProject) element).getPackageFragmentRoot(folder);
+				case IJavaScriptElement.JAVASCRIPT_PROJECT:
+					IPackageFragmentRoot root = ((IJavaScriptProject) element).getPackageFragmentRoot(folder);
 					if (root == null) return null;
 					return root.getPackageFragment(IPackageFragment.DEFAULT_PACKAGE_NAME);
 			}
@@ -669,10 +669,10 @@ class CompilationUnitBinding implements ITypeBinding {
 			// other binding missing
 			return false;
 		}
-		if (!(other instanceof CompilationUnitBinding)) {
+		if (!(other instanceof JavaScriptUnitBinding)) {
 			return false;
 		}
-		org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding otherBinding = ((CompilationUnitBinding) other).binding;
+		org.eclipse.wst.jsdt.internal.compiler.lookup.TypeBinding otherBinding = ((JavaScriptUnitBinding) other).binding;
 		// check return type
 		return BindingComparator.isEqual(this.binding, otherBinding);
 	}

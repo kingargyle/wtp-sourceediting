@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.IPath;
  *
  *	<li>Source code in the current project. In this case, the entry identifies a
  *		root folder in the current project containing package fragments and
- *		source files with one of the {@link JavaCore#getJavaLikeExtensions()
+ *		source files with one of the {@link JavaScriptCore#getJavaScriptLikeExtensions()
  *		Java-like extensions}. The root folder itself represents a default
  *		package, subfolders represent package fragments, and files with a
  *     Java-like extension (e.g. <code>.js</code> files)
@@ -57,15 +57,15 @@ import org.eclipse.core.runtime.IPath;
  *     code or associated <code>.class</code> files located in its output location.
  *     It will also automatically include any other libraries or projects that the required project's classpath
  *     refers to, iff the corresponding classpath entries are tagged as being exported
- *     ({@link IClasspathEntry#isExported}).
+ *     ({@link IIncludePathEntry#isExported}).
  *    Unless exporting some classpath entries, classpaths are not chained by default -
  *    each project must specify its own classpath in its entirety.</li>
  *
  *  <li> A path beginning in a classpath variable defined globally to the workspace.
  *		Entries of this kind are  associated with the {@link #CPE_VARIABLE} constant.
- *      Classpath variables are created using {@link JavaCore#setClasspathVariable(String, IPath, org.eclipse.core.runtime.IProgressMonitor)},
+ *      Classpath variables are created using {@link JavaScriptCore#setIncludepathVariable(String, IPath, org.eclipse.core.runtime.IProgressMonitor)},
  * 		and gets resolved, to either a project or library entry, using
- *      {@link JavaCore#getResolvedClasspathEntry(IClasspathEntry)}.
+ *      {@link JavaScriptCore#getResolvedIncludepathEntry(IIncludePathEntry)}.
  *		It is also possible to register an automatic initializer ({@link JsGlobalScopeVariableInitializer}),
  * 	which will be invoked through the extension point "org.eclipse.wst.jsdt.core.JsGlobalScopeVariableInitializer".
  * 	After resolution, a classpath variable entry may either correspond to a project or a library entry. </li>
@@ -79,17 +79,17 @@ import org.eclipse.core.runtime.IPath;
  *     container object.
  *     The container path is a formed by a first ID segment followed with extra segments,
  *     which can be used as additional hints for resolving this container reference. If no container was ever
- *     recorded for this container path onto this project (using {@link JavaCore#setJsGlobalScopeContainer},
+ *     recorded for this container path onto this project (using {@link JavaScriptCore#setJsGlobalScopeContainer},
  * 	then a {@link JsGlobalScopeContainerInitializer} will be activated if any was registered for this
  * 	container ID onto the extension point "org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer".
- * 	A classpath container entry can be resolved explicitly using {@link JavaCore#getJsGlobalScopeContainer}
+ * 	A classpath container entry can be resolved explicitly using {@link JavaScriptCore#getJsGlobalScopeContainer}
  * 	and the resulting container entries can contain any non-container entry. In particular, it may contain variable
  *     entries, which in turn needs to be resolved before being directly used.
- * 	<br> Also note that the container resolution APIs include an IJavaProject argument, so as to allow the same
+ * 	<br> Also note that the container resolution APIs include an IJavaScriptProject argument, so as to allow the same
  * 	container path to be interpreted in different ways for different projects. </li>
  * </ul>
  * </p>
- * The result of {@link IJavaProject#getResolvedClasspath} will have all entries of type
+ * The result of {@link IJavaScriptProject#getResolvedClasspath} will have all entries of type
  * {@link #CPE_VARIABLE} and {@link #CPE_CONTAINER} resolved to a set of
  * {@link #CPE_SOURCE}, {@link #CPE_LIBRARY} or {@link #CPE_PROJECT}
  * classpath entries.
@@ -102,18 +102,18 @@ import org.eclipse.core.runtime.IPath;
  * followed by the any exported entries.
  * <p>
  * This interface is not intended to be implemented by clients.
- * Classpath entries can be created via methods on {@link JavaCore}.
+ * Classpath entries can be created via methods on {@link JavaScriptCore}.
  * </p>
  *
- * @see JavaCore#newLibraryEntry(org.eclipse.core.runtime.IPath, org.eclipse.core.runtime.IPath, org.eclipse.core.runtime.IPath)
- * @see JavaCore#newProjectEntry(org.eclipse.core.runtime.IPath)
- * @see JavaCore#newSourceEntry(org.eclipse.core.runtime.IPath)
- * @see JavaCore#newVariableEntry(org.eclipse.core.runtime.IPath, org.eclipse.core.runtime.IPath, org.eclipse.core.runtime.IPath)
- * @see JavaCore#newContainerEntry(org.eclipse.core.runtime.IPath)
+ * @see JavaScriptCore#newLibraryEntry(org.eclipse.core.runtime.IPath, org.eclipse.core.runtime.IPath, org.eclipse.core.runtime.IPath)
+ * @see JavaScriptCore#newProjectEntry(org.eclipse.core.runtime.IPath)
+ * @see JavaScriptCore#newSourceEntry(org.eclipse.core.runtime.IPath)
+ * @see JavaScriptCore#newVariableEntry(org.eclipse.core.runtime.IPath, org.eclipse.core.runtime.IPath, org.eclipse.core.runtime.IPath)
+ * @see JavaScriptCore#newContainerEntry(org.eclipse.core.runtime.IPath)
  * @see JsGlobalScopeVariableInitializer
  * @see JsGlobalScopeContainerInitializer
  */
-public interface IClasspathEntry {
+public interface IIncludePathEntry {
 
 	/**
 	 * Entry kind constant describing a classpath entry identifying a
@@ -245,7 +245,7 @@ public interface IClasspathEntry {
 	 * the folder named <code>tests</code>.
 	 * </p>
 	 * <p>
-	 * Example patterns in source entries (assuming that "java" is the only {@link JavaCore#getJavaLikeExtensions() Java-like extension}):
+	 * Example patterns in source entries (assuming that "java" is the only {@link JavaScriptCore#getJavaScriptLikeExtensions() Java-like extension}):
 	 * <ul>
 	 * <li>
 	 * <code>tests/&#42;&#42;</code> (or simply <code>tests/</code>)
@@ -288,7 +288,7 @@ public interface IClasspathEntry {
 	 * @return the possibly empty list of extra classpath attributes for this classpath entry
 	 * @since 3.1
 	 */
-	IClasspathAttribute[] getExtraAttributes();
+	IIncludePathAttribute[] getExtraAttributes();
 
 	/**
 	 * Returns the set of patterns used to explicitly define resources or classes
@@ -348,7 +348,7 @@ public interface IClasspathEntry {
 	 * <p>
 	 * Source entries can optionally be associated with a specific output location.
 	 * If none is provided, the source entry will be implicitly associated with its project
-	 * default output location (see {@link IJavaProject#getOutputLocation}).
+	 * default output location (see {@link IJavaScriptProject#getOutputLocation}).
 	 * </p><p>
 	 * NOTE: A specific output location cannot coincidate with another source/library entry.
 	 * </p>
@@ -447,7 +447,7 @@ public interface IClasspathEntry {
 	 *	<p>
 	 * Note that this deprecated API doesn't handle CPE_CONTAINER entries.
 	 *
-	 * @deprecated Use {@link JavaCore#getResolvedClasspathEntry(IClasspathEntry)} instead
+	 * @deprecated Use {@link JavaScriptCore#getResolvedIncludepathEntry(IIncludePathEntry)} instead
 	 */
-	IClasspathEntry getResolvedEntry();
+	IIncludePathEntry getResolvedEntry();
 }

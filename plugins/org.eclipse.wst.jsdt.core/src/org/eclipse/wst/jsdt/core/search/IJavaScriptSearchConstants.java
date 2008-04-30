@@ -21,7 +21,7 @@ import org.eclipse.wst.jsdt.internal.core.search.processing.IJob;
  * </p>
  * @see org.eclipse.wst.jsdt.core.search.SearchEngine
  */
-public interface IJavaSearchConstants {
+public interface IJavaScriptSearchConstants {
 
 	/**
 	 * The nature of searched element or the nature

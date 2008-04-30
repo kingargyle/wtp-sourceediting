@@ -37,13 +37,13 @@ import org.eclipse.wst.jsdt.internal.core.util.Messages;
  * instantiated or subclassed by clients.
  * </p>
  */
-public final class JavaConventions {
+public final class JavaScriptConventions {
 
 	private static final char DOT= '.';
 //	private static final String PACKAGE_INFO = new String(TypeConstants.PACKAGE_INFO_NAME);
 	private static final Scanner SCANNER = new Scanner(false /*comment*/, true /*whitespace*/, false /*nls*/, ClassFileConstants.JDK1_3 /*sourceLevel*/, null/*taskTag*/, null/*taskPriorities*/, true /*taskCaseSensitive*/);
 
-	private JavaConventions() {
+	private JavaScriptConventions() {
 		// Not instantiable
 	}
 
@@ -113,7 +113,7 @@ public final class JavaConventions {
 	 * <ul>
 	 * <li> it must not be null
 	 * <li> it must be suffixed by a dot ('.') followed by one of the
-	 *       {@link JavaCore#getJavaLikeExtensions() Java-like extensions}
+	 *       {@link JavaScriptCore#getJavaScriptLikeExtensions() Java-like extensions}
 	 * <li> its prefix must be a valid identifier
 	 * <li> it must not contain any characters or substrings that are not valid
 	 *		   on the file system on which workspace root is located.
@@ -136,7 +136,7 @@ public final class JavaConventions {
 	 * <ul>
 	 * <li> it must not be null
 	 * <li> it must be suffixed by a dot ('.') followed by one of the
-	 *       {@link JavaCore#getJavaLikeExtensions() Java-like extensions}
+	 *       {@link JavaScriptCore#getJavaScriptLikeExtensions() Java-like extensions}
 	 * <li> its prefix must be a valid identifier
 	 * <li> it must not contain any characters or substrings that are not valid
 	 *		   on the file system on which workspace root is located.
@@ -152,16 +152,16 @@ public final class JavaConventions {
 	 */
 	public static IStatus validateCompilationUnitName(String name, String sourceLevel, String complianceLevel) {
 		if (name == null) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_unit_nullName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_unit_nullName, null);
 		}
 		if (!org.eclipse.wst.jsdt.internal.core.util.Util.isJavaLikeFileName(name)) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_unit_notJavaName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_unit_notJavaName, null);
 		}
 //		String identifier;
 		int index;
 		index = name.lastIndexOf('.');
 		if (index == -1) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_unit_notJavaName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_unit_notJavaName, null);
 		}
 //		identifier = name.substring(0, index);
 		// JSR-175 metadata strongly recommends "package-info.js" as the
@@ -225,15 +225,15 @@ public final class JavaConventions {
 	 */
 	public static IStatus validateClassFileName(String name, String sourceLevel, String complianceLevel) {
 		if (name == null) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_classFile_nullName, null);		}
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_classFile_nullName, null);		}
 		if (!org.eclipse.wst.jsdt.internal.compiler.util.Util.isClassFileName(name)) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_classFile_notClassFileName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_classFile_notClassFileName, null);
 		}
 //		String identifier;
 		int index;
 		index = name.lastIndexOf('.');
 		if (index == -1) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_classFile_notClassFileName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_classFile_notClassFileName, null);
 		}
 //		identifier = name.substring(0, index);
 		// JSR-175 metadata strongly recommends "package-info.js" as the
@@ -322,7 +322,7 @@ public final class JavaConventions {
 		if (scannedIdentifier(id, sourceLevel, complianceLevel) != null) {
 			return JavaModelStatus.VERIFIED_OK;
 		} else {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.bind(Messages.convention_illegalIdentifier, id), null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.bind(Messages.convention_illegalIdentifier, id), null);
 		}
 	}
 
@@ -360,13 +360,13 @@ public final class JavaConventions {
 	 */
 	public static IStatus validateImportDeclaration(String name, String sourceLevel, String complianceLevel) {
 		if (name == null || name.length() == 0) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_import_nullImport, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_import_nullImport, null);
 		}
 		if (name.charAt(name.length() - 1) == '*') {
 			if (name.charAt(name.length() - 2) == '.') {
 				return validatePackageName(name.substring(0, name.length() - 2), sourceLevel, complianceLevel);
 			} else {
-				return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_import_unqualifiedImport, null);
+				return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_import_unqualifiedImport, null);
 			}
 		}
 		return validatePackageName(name, sourceLevel, complianceLevel);
@@ -384,10 +384,10 @@ public final class JavaConventions {
 	 *		indicating why the given name is discouraged,
 	 *      otherwise a status object indicating what is wrong with
 	 *      the name
-	 * @deprecated Use {@link #validateJavaTypeName(String id, String sourceLevel, String complianceLevel)} instead
+	 * @deprecated Use {@link #validateJavaScriptTypeName(String id, String sourceLevel, String complianceLevel)} instead
 	 */
-	public static IStatus validateJavaTypeName(String name) {
-		return validateJavaTypeName(name, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
+	public static IStatus validateJavaScriptTypeName(String name) {
+		return validateJavaScriptTypeName(name, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
 	}
 
 	/**
@@ -406,13 +406,13 @@ public final class JavaConventions {
 	 *      the name
 	 * @since 3.3
 	 */
-	public static IStatus validateJavaTypeName(String name, String sourceLevel, String complianceLevel) {
+	public static IStatus validateJavaScriptTypeName(String name, String sourceLevel, String complianceLevel) {
 		if (name == null) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_type_nullName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_type_nullName, null);
 		}
 		String trimmed = name.trim();
 		if (!name.equals(trimmed)) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_type_nameWithBlanks, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_type_nameWithBlanks, null);
 		}
 		int index = name.lastIndexOf('.');
 		char[] scannedID;
@@ -436,14 +436,14 @@ public final class JavaConventions {
 				return status;
 			}
 			if (CharOperation.contains('$', scannedID)) {
-				return new Status(IStatus.WARNING, JavaCore.PLUGIN_ID, -1, Messages.convention_type_dollarName, null);
+				return new Status(IStatus.WARNING, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_type_dollarName, null);
 			}
 			if ((scannedID.length > 0 && ScannerHelper.isLowerCase(scannedID[0]))) {
-				return new Status(IStatus.WARNING, JavaCore.PLUGIN_ID, -1, Messages.convention_type_lowercaseName, null);
+				return new Status(IStatus.WARNING, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_type_lowercaseName, null);
 			}
 			return JavaModelStatus.VERIFIED_OK;
 		} else {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.bind(Messages.convention_type_invalidName, name), null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.bind(Messages.convention_type_invalidName, name), null);
 		}
 	}
 
@@ -458,10 +458,48 @@ public final class JavaConventions {
 	 * @return a status object with code <code>IStatus.OK</code> if
 	 *		the given name is valid as a method name, otherwise a status
 	 *		object indicating what is wrong with the name
-	 * @deprecated Use {@link #validateMethodName(String id, String sourceLevel, String complianceLevel)} instead
+	 * @deprecated Use {@link #validateFunctionName(String id, String sourceLevel, String complianceLevel)} instead
+	 * @deprecated Use {@link #validateFunctionName(String)} instead
 	 */
 	public static IStatus validateMethodName(String name) {
-		return validateMethodName(name, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
+		return validateFunctionName(name);
+	}
+
+	/**
+	 * Validate the given method name.
+	 * The special names "&lt;init&gt;" and "&lt;clinit&gt;" are not valid.
+	 * <p>
+	 * The syntax for a method  name is defined by Identifier
+	 * of MethodDeclarator (JLS2 8.4). For example "println".
+	 *
+	 * @param name the name of a method
+	 * @return a status object with code <code>IStatus.OK</code> if
+	 *		the given name is valid as a method name, otherwise a status
+	 *		object indicating what is wrong with the name
+	 * @deprecated Use {@link #validateFunctionName(String id, String sourceLevel, String complianceLevel)} instead
+	 */
+	public static IStatus validateFunctionName(String name) {
+		return validateFunctionName(name, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
+	}
+
+	/**
+	 * Validate the given method name for the given source and compliance levels.
+	 * The special names "&lt;init&gt;" and "&lt;clinit&gt;" are not valid.
+	 * <p>
+	 * The syntax for a method  name is defined by Identifier
+	 * of MethodDeclarator (JLS2 8.4). For example "println".
+	 *
+	 * @param name the name of a method
+	 * @param sourceLevel the source level
+	 * @param complianceLevel the compliance level
+	 * @return a status object with code <code>IStatus.OK</code> if
+	 *		the given name is valid as a method name, otherwise a status
+	 *		object indicating what is wrong with the name
+	 * @since 3.3
+	 * @deprecated Use {@link #validateFunctionName(String,String,String)} instead
+	 */
+	public static IStatus validateMethodName(String name, String sourceLevel, String complianceLevel) {
+		return validateFunctionName(name, sourceLevel, complianceLevel);
 	}
 
 	/**
@@ -479,7 +517,7 @@ public final class JavaConventions {
 	 *		object indicating what is wrong with the name
 	 * @since 3.3
 	 */
-	public static IStatus validateMethodName(String name, String sourceLevel, String complianceLevel) {
+	public static IStatus validateFunctionName(String name, String sourceLevel, String complianceLevel) {
 		return validateIdentifier(name, sourceLevel,complianceLevel);
 	}
 
@@ -526,22 +564,22 @@ public final class JavaConventions {
 	public static IStatus validatePackageName(String name, String sourceLevel, String complianceLevel) {
 
 		if (name == null) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_package_nullName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_package_nullName, null);
 		}
 		int length;
 		if ((length = name.length()) == 0) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_package_emptyName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_package_emptyName, null);
 		}
 		if (name.charAt(0) == DOT || name.charAt(length-1) == DOT) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_package_dotName, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_package_dotName, null);
 		}
 		if (CharOperation.isWhitespace(name.charAt(0)) || CharOperation.isWhitespace(name.charAt(name.length() - 1))) {
-			return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_package_nameWithBlanks, null);
+			return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_package_nameWithBlanks, null);
 		}
 		int dot = 0;
 		while (dot != -1 && dot < length-1) {
 			if ((dot = name.indexOf(DOT, dot+1)) != -1 && dot < length-1 && name.charAt(dot+1) == DOT) {
-				return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.convention_package_consecutiveDotsName, null);
+				return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_package_consecutiveDotsName, null);
 				}
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -553,7 +591,7 @@ public final class JavaConventions {
 			typeName = typeName.trim(); // grammar allows spaces
 			char[] scannedID = scannedIdentifier(typeName, sourceLevel, complianceLevel);
 			if (scannedID == null) {
-				return new Status(IStatus.ERROR, JavaCore.PLUGIN_ID, -1, Messages.bind(Messages.convention_illegalIdentifier, typeName), null);
+				return new Status(IStatus.ERROR, JavaScriptCore.PLUGIN_ID, -1, Messages.bind(Messages.convention_illegalIdentifier, typeName), null);
 			}
 			IStatus status = workspace.validateName(new String(scannedID), IResource.FOLDER);
 			if (!status.isOK()) {
@@ -561,7 +599,7 @@ public final class JavaConventions {
 			}
 			if (firstToken && scannedID.length > 0 && ScannerHelper.isUpperCase(scannedID[0])) {
 				if (warningStatus == null) {
-					warningStatus = new Status(IStatus.WARNING, JavaCore.PLUGIN_ID, -1, Messages.convention_package_uppercaseName, null);
+					warningStatus = new Status(IStatus.WARNING, JavaScriptCore.PLUGIN_ID, -1, Messages.convention_package_uppercaseName, null);
 				}
 			}
 			firstToken = false;
@@ -603,7 +641,7 @@ public final class JavaConventions {
 	 *		object indicating what is wrong with the classpath or output location
 	 * @since 2.0
 	 */
-	public static IJavaModelStatus validateClasspath(IJavaProject javaProject, IClasspathEntry[] rawClasspath, IPath projectOutputLocation) {
+	public static IJavaScriptModelStatus validateClasspath(IJavaScriptProject javaProject, IIncludePathEntry[] rawClasspath, IPath projectOutputLocation) {
 
 		return ClasspathEntry.validateClasspath(javaProject, rawClasspath, projectOutputLocation);
 	}
@@ -619,9 +657,9 @@ public final class JavaConventions {
 	 * @return a java model status describing the problem related to this classpath entry if any, a status object with code <code>IStatus.OK</code> if the entry is fine
 	 * @since 2.0
 	 */
-	public static IJavaModelStatus validateClasspathEntry(IJavaProject project, IClasspathEntry entry, boolean checkSourceAttachment){
-		IJavaModelStatus status = ClasspathEntry.validateClasspathEntry(project, entry, checkSourceAttachment, true/*recurse in container*/);
-		if (status.getCode() == IJavaModelStatusConstants.INVALID_CLASSPATH && ((ClasspathEntry) entry).isOptional())
+	public static IJavaScriptModelStatus validateClasspathEntry(IJavaScriptProject project, IIncludePathEntry entry, boolean checkSourceAttachment){
+		IJavaScriptModelStatus status = ClasspathEntry.validateClasspathEntry(project, entry, checkSourceAttachment, true/*recurse in container*/);
+		if (status.getCode() == IJavaScriptModelStatusConstants.INVALID_INCLUDEPATH && ((ClasspathEntry) entry).isOptional())
 			return JavaModelStatus.VERIFIED_OK;
 		return status;
 	}
@@ -663,25 +701,25 @@ public final class JavaConventions {
 
 	/**
 	 * Validate that all compiler options of the given project match keys and values
-	 * described in {@link JavaCore#getDefaultOptions()} method.
+	 * described in {@link JavaScriptCore#getDefaultOptions()} method.
 	 *
 	 * @param javaProject the given java project
-	 * @param inheritJavaCoreOptions inherit project options from JavaCore or not.
+	 * @param inheritJavaCoreOptions inherit project options from JavaScriptCore or not.
 	 * @return a status object with code <code>IStatus.OK</code> if all project
 	 *		compiler options are valid, otherwise a status object indicating what is wrong
 	 *		with the keys and their value.
 	 * @since 3.1
-	 * TODO (frederic) finalize for all possible options (JavaCore, DefaultCodeFormatterOptions, AssistOptions) and open to API
+	 * TODO (frederic) finalize for all possible options (JavaScriptCore, DefaultCodeFormatterOptions, AssistOptions) and open to API
 	 */
 	/*
-	public static IStatus validateCompilerOptions(IJavaProject javaProject, boolean inheritJavaCoreOptions)	  {
+	public static IStatus validateCompilerOptions(IJavaScriptProject javaProject, boolean inheritJavaCoreOptions)	  {
 		return validateCompilerOptions(javaProject.getOptions(inheritJavaCoreOptions));
 	}
 	*/
 
 	/**
 	 * Validate that all compiler options of the given project match keys and values
-	 * described in {@link JavaCore#getDefaultOptions()} method.
+	 * described in {@link JavaScriptCore#getDefaultOptions()} method.
 	 *
 	 * @param compilerOptions Map of options
 	 * @return a status object with code <code>IStatus.OK</code> if all
@@ -693,9 +731,9 @@ public final class JavaConventions {
 	public static IStatus validateCompilerOptions(Map compilerOptions)	  {
 
 		// Get current options
-		String compliance = (String) compilerOptions.get(JavaCore.COMPILER_COMPLIANCE);
-		String source = (String) compilerOptions.get(JavaCore.COMPILER_SOURCE);
-		String target = (String) compilerOptions.get(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM);
+		String compliance = (String) compilerOptions.get(JavaScriptCore.COMPILER_COMPLIANCE);
+		String source = (String) compilerOptions.get(JavaScriptCore.COMPILER_SOURCE);
+		String target = (String) compilerOptions.get(JavaScriptCore.COMPILER_CODEGEN_TARGET_PLATFORM);
 		if (compliance == null && source == null && target == null) {
 			return JavaModelStatus.VERIFIED_OK; // default is OK
 		}
@@ -705,66 +743,66 @@ public final class JavaConventions {
 
 		// Set default for compliance if necessary (not set on project and not inherited...)
 		if (compliance == null) {
-			compliance = JavaCore.getOption(JavaCore.COMPILER_COMPLIANCE);
+			compliance = JavaScriptCore.getOption(JavaScriptCore.COMPILER_COMPLIANCE);
 		}
 
 		// Verify compliance level value and set source and target default if necessary
 		long complianceLevel = 0;
 		long sourceLevel = 0;
 		long targetLevel = 0;
-		if (JavaCore.VERSION_1_3.equals(compliance)) {
+		if (JavaScriptCore.VERSION_1_3.equals(compliance)) {
 			complianceLevel = ClassFileConstants.JDK1_3;
 			if (source == null) {
-				source = JavaCore.VERSION_1_3;
+				source = JavaScriptCore.VERSION_1_3;
 				sourceLevel = ClassFileConstants.JDK1_3;
 			}
 			if (target == null) {
-				target = JavaCore.VERSION_1_1;
+				target = JavaScriptCore.VERSION_1_1;
 				targetLevel = ClassFileConstants.JDK1_1;
 			}
-		} else if (JavaCore.VERSION_1_4.equals(compliance)) {
+		} else if (JavaScriptCore.VERSION_1_4.equals(compliance)) {
 			complianceLevel = ClassFileConstants.JDK1_4;
 			if (source == null) {
-				source = JavaCore.VERSION_1_3;
+				source = JavaScriptCore.VERSION_1_3;
 				sourceLevel = ClassFileConstants.JDK1_3;
 			}
 			if (target == null) {
-				target = JavaCore.VERSION_1_2;
+				target = JavaScriptCore.VERSION_1_2;
 				targetLevel = ClassFileConstants.JDK1_2;
 			}
-		} else if (JavaCore.VERSION_1_5.equals(compliance)) {
+		} else if (JavaScriptCore.VERSION_1_5.equals(compliance)) {
 			complianceLevel = ClassFileConstants.JDK1_5;
 			if (source == null) {
-				source = JavaCore.VERSION_1_5;
+				source = JavaScriptCore.VERSION_1_5;
 				sourceLevel = ClassFileConstants.JDK1_5;
 			}
 			if (target == null) {
-				target = JavaCore.VERSION_1_5;
+				target = JavaScriptCore.VERSION_1_5;
 				targetLevel = ClassFileConstants.JDK1_5;
 			}
 		} else {
 			// compliance is not valid
-			errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.invalidCompilerOption", compliance==null?"":compliance, JavaCore.COMPILER_COMPLIANCE))); //$NON-NLS-1$ //$NON-NLS-2$
+			errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.invalidCompilerOption", compliance==null?"":compliance, JavaScriptCore.COMPILER_COMPLIANCE))); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// Verify source value and set default for target if necessary
-		 if (JavaCore.VERSION_1_4.equals(source)) {
+		 if (JavaScriptCore.VERSION_1_4.equals(source)) {
 			sourceLevel = ClassFileConstants.JDK1_4;
 			if (target == null) {
-				target = JavaCore.VERSION_1_4;
+				target = JavaScriptCore.VERSION_1_4;
 				targetLevel = ClassFileConstants.JDK1_4;
 			}
-		} else if (JavaCore.VERSION_1_5.equals(source)) {
+		} else if (JavaScriptCore.VERSION_1_5.equals(source)) {
 			sourceLevel = ClassFileConstants.JDK1_5;
 			if (target == null) {
-				target = JavaCore.VERSION_1_5;
+				target = JavaScriptCore.VERSION_1_5;
 				targetLevel = ClassFileConstants.JDK1_5;
 			}
-		} else if (JavaCore.VERSION_1_3.equals(source)) {
+		} else if (JavaScriptCore.VERSION_1_3.equals(source)) {
 			sourceLevel = ClassFileConstants.JDK1_3;
 		} else {
 			// source is not valid
-			errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.invalidCompilerOption", source==null?"":source, JavaCore.COMPILER_SOURCE))); //$NON-NLS-1$ //$NON-NLS-2$
+			errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.invalidCompilerOption", source==null?"":source, JavaScriptCore.COMPILER_SOURCE))); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// Verify target value
@@ -772,7 +810,7 @@ public final class JavaConventions {
 			 targetLevel = CompilerOptions.versionToJdkLevel(target);
 			 if (targetLevel == 0) {
 				// target is not valid
-				errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.invalidCompilerOption", target==null?"":target, JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM))); //$NON-NLS-1$ //$NON-NLS-2$
+				errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.invalidCompilerOption", target==null?"":target, JavaScriptCore.COMPILER_CODEGEN_TARGET_PLATFORM))); //$NON-NLS-1$ //$NON-NLS-2$
 			 }
 		}
 
@@ -780,24 +818,24 @@ public final class JavaConventions {
 		if (complianceLevel != 0 && sourceLevel != 0 && targetLevel != 0) {
 			// target must be 1.5 if source is 1.5
 			if (sourceLevel >= ClassFileConstants.JDK1_5 && targetLevel < ClassFileConstants.JDK1_5) {
-				errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleTargetForSource", target, JavaCore.VERSION_1_5))); //$NON-NLS-1$
+				errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleTargetForSource", target, JavaScriptCore.VERSION_1_5))); //$NON-NLS-1$
 			}
 	   		else
 		   		// target must be 1.4 if source is 1.4
 	   			if (sourceLevel >= ClassFileConstants.JDK1_4 && targetLevel < ClassFileConstants.JDK1_4) {
-					errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleTargetForSource", target, JavaCore.VERSION_1_4))); //$NON-NLS-1$
+					errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleTargetForSource", target, JavaScriptCore.VERSION_1_4))); //$NON-NLS-1$
 	   		}
 			// target cannot be greater than compliance level
 			if (complianceLevel < targetLevel){
-				errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleComplianceForTarget", compliance, JavaCore.VERSION_1_4))); //$NON-NLS-1$
+				errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleComplianceForTarget", compliance, JavaScriptCore.VERSION_1_4))); //$NON-NLS-1$
 			}
 			// compliance must be 1.5 if source is 1.5
-			if (source.equals(JavaCore.VERSION_1_5) && complianceLevel < ClassFileConstants.JDK1_5) {
-				errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleComplianceForSource", compliance, JavaCore.VERSION_1_5))); //$NON-NLS-1$
+			if (source.equals(JavaScriptCore.VERSION_1_5) && complianceLevel < ClassFileConstants.JDK1_5) {
+				errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleComplianceForSource", compliance, JavaScriptCore.VERSION_1_5))); //$NON-NLS-1$
 			} else
 				// compliance must be 1.4 if source is 1.4
-				if (source.equals(JavaCore.VERSION_1_4) && complianceLevel < ClassFileConstants.JDK1_4) {
-					errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleComplianceForSource", compliance, JavaCore.VERSION_1_4))); //$NON-NLS-1$
+				if (source.equals(JavaScriptCore.VERSION_1_4) && complianceLevel < ClassFileConstants.JDK1_4) {
+					errors.add(new JavaModelStatus(IStatus.ERROR, Util.bind("convention.compiler.incompatibleComplianceForSource", compliance, JavaScriptCore.VERSION_1_4))); //$NON-NLS-1$
 			}
 		}
 
@@ -809,7 +847,7 @@ public final class JavaConventions {
 			case 1:
 				return (IStatus) errors.get(0);
 			default:
-				IJavaModelStatus[] allStatus = new IJavaModelStatus[size];
+				IJavaScriptModelStatus[] allStatus = new IJavaScriptModelStatus[size];
 				errors.toArray(allStatus);
 				return JavaModelStatus.newMultiStatus(allStatus);
 		}

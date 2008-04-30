@@ -17,7 +17,7 @@ package org.eclipse.wst.jsdt.core;
  * This interface is not intended to be implemented by clients.
  * </p>
  */
-public interface IMethod extends IMember {
+public interface IFunction extends IMember {
 /**
  * Returns the simple name of this method.
  * For a constructor, this returns the simple name of the declaring type.
@@ -43,13 +43,13 @@ String getElementName();
  * or rich (for parameterized types). See {@link Signature} for details.
  * </p>
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  * @return the type signatures of the exceptions this method throws,
  * in the order declared in the source, an empty array if this method throws no exceptions
  * @see Signature
  */
-String[] getExceptionTypes() throws JavaModelException;
+String[] getExceptionTypes() throws JavaScriptModelException;
 
 /**
  * Returns the formal type parameter signatures for this method.
@@ -59,7 +59,7 @@ String[] getExceptionTypes() throws JavaModelException;
  * types) or resolved (for binary types). See {@link Signature} for details.
  * </p>
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  * @return the formal type parameter signatures of this method,
  * in the order declared in the source, an empty array if none
@@ -67,18 +67,18 @@ String[] getExceptionTypes() throws JavaModelException;
  * @since 3.0
  * @deprecated Use {@link #getTypeParameters()} instead
  */
-String[] getTypeParameterSignatures() throws JavaModelException;
+String[] getTypeParameterSignatures() throws JavaScriptModelException;
 /**
  * Returns the formal type parameters for this method.
  * Returns an empty array if this method has no formal type parameters.
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  * @return the formal type parameters of this method,
  * in the order declared in the source, an empty array if none
  * @since 3.1
  */
-ITypeParameter[] getTypeParameters() throws JavaModelException;
+ITypeParameter[] getTypeParameters() throws JavaScriptModelException;
 /**
  * Returns the number of parameters of this method.
  * This is a handle-only method.
@@ -107,11 +107,11 @@ String getKey();
  * would return the array <code>{"text","length"}</code>.
  * </p>
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  * @return the names of parameters in this method, an empty array if this method has no parameters
  */
-String[] getParameterNames() throws JavaModelException;
+String[] getParameterNames() throws JavaScriptModelException;
 /**
  * Returns the type signatures for the parameters of this method.
  * Returns an empty array if this method has no parameters.
@@ -141,12 +141,12 @@ String[] getParameterTypes();
  * binary, this would return <code>{"arg0", "arg1"}</code>.
  * </p>
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  * @return the names of parameters in this method, an empty array if this method has no parameters
  * @since 3.2
  */
-String[] getRawParameterNames() throws JavaModelException;
+String[] getRawParameterNames() throws JavaScriptModelException;
 /**
  * Returns the type signature of the return value of this method.
  * For constructors, this returns the signature for void.
@@ -160,12 +160,12 @@ String[] getRawParameterNames() throws JavaModelException;
  * or rich (for parameterized types). See {@link Signature} for details.
  * </p>
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  * @return the type signature of the return value of this method, void  for constructors
  * @see Signature
  */
-String getReturnType() throws JavaModelException;
+String getReturnType() throws JavaScriptModelException;
 /**
  * Returns the signature of this method. This includes the signatures for the
  * parameter types and return type, but does not include the method name,
@@ -182,11 +182,11 @@ String getReturnType() throws JavaModelException;
  * </p>
  *
  * @return the signature of this method
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  * @see Signature
  */
-String getSignature() throws JavaModelException;
+String getSignature() throws JavaScriptModelException;
 /**
  * Returns the type parameter declared in this method with the given name.
  * This is a handle-only method. The type parameter may or may not exist.
@@ -199,12 +199,12 @@ ITypeParameter getTypeParameter(String name);
 /**
  * Returns whether this method is a constructor.
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  *
  * @return true if this method is a constructor, false otherwise
  */
-boolean isConstructor() throws JavaModelException;
+boolean isConstructor() throws JavaScriptModelException;
 
 /**
  * Returns whether this method is a main method.
@@ -216,12 +216,12 @@ boolean isConstructor() throws JavaModelException;
  * <li>it defines one parameter whose type's simple name is <code>String[]</code></li>
  * </ul>
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *      exception occurs while accessing its corresponding resource.
  * @since 2.0
  * @return true if this method is a main method, false otherwise
  */
-boolean isMainMethod() throws JavaModelException;
+boolean isMainMethod() throws JavaScriptModelException;
 /**
  * Returns whether this method represents a resolved method.
  * If a method is resoved, its key contains resolved information.
@@ -245,6 +245,10 @@ boolean isResolved();
  * @see Signature#getSimpleName(char[])
  * @since 2.0
  */
-boolean isSimilar(IMethod method);
-public IMethod getMethod(String selector, String[] parameterTypeSignatures) ;
+boolean isSimilar(IFunction method);
+/**
+ * @deprecated Use {@link #getFunction(String,String[])} instead
+ */
+public IFunction getMethod(String selector, String[] parameterTypeSignatures) ;
+public IFunction getFunction(String selector, String[] parameterTypeSignatures) ;
 }

@@ -17,13 +17,13 @@ import java.util.List;
  * Method invocation expression AST node type.
  * For JLS2:
  * <pre>
- * MethodInvocation:
+ * FunctionInvocation:
  *     [ Expression <b>.</b> ] Identifier
  *         <b>(</b> [ Expression { <b>,</b> Expression } ] <b>)</b>
  * </pre>
  * For JLS3, type arguments are added:
  * <pre>
- * MethodInvocation:
+ * FunctionInvocation:
  *     [ Expression <b>.</b> ]
  *         [ <b>&lt;</b> Type { <b>,</b> Type } <b>&gt;</b> ]
  *         Identifier <b>(</b> [ Expression { <b>,</b> Expression } ] <b>)</b>
@@ -31,35 +31,35 @@ import java.util.List;
  *
  * @since 2.0
  */
-public class MethodInvocation extends Expression {
+public class FunctionInvocation extends Expression {
 
 	/**
 	 * The "expression" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor EXPRESSION_PROPERTY =
-		new ChildPropertyDescriptor(MethodInvocation.class, "expression", Expression.class, OPTIONAL, CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionInvocation.class, "expression", Expression.class, OPTIONAL, CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "typeArguments" structural property of this node type (added in JLS3 API).
 	 * @since 3.1
 	 */
 	public static final ChildListPropertyDescriptor TYPE_ARGUMENTS_PROPERTY =
-		new ChildListPropertyDescriptor(MethodInvocation.class, "typeArguments", Type.class, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildListPropertyDescriptor(FunctionInvocation.class, "typeArguments", Type.class, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "name" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor NAME_PROPERTY =
-		new ChildPropertyDescriptor(MethodInvocation.class, "name", SimpleName.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionInvocation.class, "name", SimpleName.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "arguments" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildListPropertyDescriptor ARGUMENTS_PROPERTY =
-		new ChildListPropertyDescriptor(MethodInvocation.class, "arguments", Expression.class, CYCLE_RISK); //$NON-NLS-1$
+		new ChildListPropertyDescriptor(FunctionInvocation.class, "arguments", Expression.class, CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * A list of property descriptors (element type:
@@ -79,14 +79,14 @@ public class MethodInvocation extends Expression {
 
 	static {
 		List properyList = new ArrayList(4);
-		createPropertyList(MethodInvocation.class, properyList);
+		createPropertyList(FunctionInvocation.class, properyList);
 		addProperty(EXPRESSION_PROPERTY, properyList);
 		addProperty(NAME_PROPERTY, properyList);
 		addProperty(ARGUMENTS_PROPERTY, properyList);
 		PROPERTY_DESCRIPTORS_2_0 = reapPropertyList(properyList);
 
 		properyList = new ArrayList(5);
-		createPropertyList(MethodInvocation.class, properyList);
+		createPropertyList(FunctionInvocation.class, properyList);
 		addProperty(EXPRESSION_PROPERTY, properyList);
 		addProperty(TYPE_ARGUMENTS_PROPERTY, properyList);
 		addProperty(NAME_PROPERTY, properyList);
@@ -146,7 +146,7 @@ public class MethodInvocation extends Expression {
 	 *
 	 * @param ast the AST that is to own this node
 	 */
-	MethodInvocation(AST ast) {
+	FunctionInvocation(AST ast) {
 		super(ast);
 		if (ast.apiLevel >= AST.JLS3) {
 			this.typeArguments = new ASTNode.NodeList(TYPE_ARGUMENTS_PROPERTY);
@@ -202,14 +202,14 @@ public class MethodInvocation extends Expression {
 	 * Method declared on ASTNode.
 	 */
 	final int getNodeType0() {
-		return METHOD_INVOCATION;
+		return FUNCTION_INVOCATION;
 	}
 
 	/* (omit javadoc for this method)
 	 * Method declared on ASTNode.
 	 */
 	ASTNode clone0(AST target) {
-		MethodInvocation result = new MethodInvocation(target);
+		FunctionInvocation result = new FunctionInvocation(target);
 		result.setSourceRange(this.getStartPosition(), this.getLength());
 		if (getName()!=null)
 			result.setName((SimpleName) getName().clone(target));
@@ -373,7 +373,7 @@ public class MethodInvocation extends Expression {
 	 * be resolved
 	 * @since 2.1
 	 */
-	public IMethodBinding resolveMethodBinding() {
+	public IFunctionBinding resolveMethodBinding() {
 		return this.ast.getBindingResolver().resolveMethod(this);
 	}
 

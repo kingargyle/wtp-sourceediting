@@ -17,10 +17,10 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.wst.jsdt.core.ICompilationUnit;
-import org.eclipse.wst.jsdt.core.IJavaElement;
-import org.eclipse.wst.jsdt.core.IJavaProject;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.WorkingCopyOwner;
 import org.eclipse.wst.jsdt.core.compiler.CategorizedProblem;
 import org.eclipse.wst.jsdt.core.compiler.CharOperation;
@@ -57,7 +57,7 @@ import org.eclipse.wst.jsdt.internal.core.util.BindingKeyResolver;
 import org.eclipse.wst.jsdt.internal.core.util.CommentRecorderParser;
 import org.eclipse.wst.jsdt.internal.core.util.DOMFinder;
 
-class CompilationUnitResolver extends Compiler {
+class JavaScriptUnitResolver extends Compiler {
 
 	/* A list of int */
 	static class IntArrayList {
@@ -73,7 +73,7 @@ class CompilationUnitResolver extends Compiler {
 
 	/*
 	 * The sources that were requested.
-	 * Map from file name (char[]) to ICompilationUnit.
+	 * Map from file name (char[]) to IJavaScriptUnit.
 	 */
 	HashtableOfObject requestedSources;
 
@@ -124,7 +124,7 @@ class CompilationUnitResolver extends Compiler {
 	 *      to accumulate the created problems, the compiler will gather them all and hand
 	 *      them back as part of the compilation unit result.
 	 */
-	public CompilationUnitResolver(
+	public JavaScriptUnitResolver(
 		INameEnvironment environment,
 		IErrorHandlingPolicy policy,
 		CompilerOptions compilerOptions,
@@ -144,7 +144,7 @@ class CompilationUnitResolver extends Compiler {
 		// Need to reparse the entire source of the compilation unit so as to get source positions
 		// (case of processing a source that was not known by beginToCompile (e.g. when asking to createBinding))
 		SourceTypeElementInfo sourceType = (SourceTypeElementInfo) sourceTypes[0];
-		accept((org.eclipse.wst.jsdt.internal.compiler.env.ICompilationUnit) sourceType.getHandle().getCompilationUnit(), accessRestriction);
+		accept((org.eclipse.wst.jsdt.internal.compiler.env.ICompilationUnit) sourceType.getHandle().getJavaScriptUnit(), accessRestriction);
 	}
 
 	/**
@@ -237,14 +237,14 @@ class CompilationUnitResolver extends Compiler {
 		return resolver.getBinding(compilerBinding);
 	}
 
-	public static CompilationUnit convert(CompilationUnitDeclaration compilationUnitDeclaration, char[] source, int apiLevel, Map options, boolean needToResolveBindings, WorkingCopyOwner owner, DefaultBindingResolver.BindingTables bindingTables, int flags, IProgressMonitor monitor) {
+	public static JavaScriptUnit convert(CompilationUnitDeclaration compilationUnitDeclaration, char[] source, int apiLevel, Map options, boolean needToResolveBindings, WorkingCopyOwner owner, DefaultBindingResolver.BindingTables bindingTables, int flags, IProgressMonitor monitor) {
 		BindingResolver resolver = null;
 		AST ast = AST.newAST(apiLevel);
 		ast.setDefaultNodeFlag(ASTNode.ORIGINAL);
-		CompilationUnit compilationUnit = null;
+		JavaScriptUnit compilationUnit = null;
 		ASTConverter converter = new ASTConverter(options, needToResolveBindings, monitor);
 		if (needToResolveBindings) {
-			resolver = new DefaultBindingResolver(compilationUnitDeclaration.scope, owner, bindingTables, (flags & ICompilationUnit.ENABLE_BINDINGS_RECOVERY) != 0);
+			resolver = new DefaultBindingResolver(compilationUnitDeclaration.scope, owner, bindingTables, (flags & IJavaScriptUnit.ENABLE_BINDINGS_RECOVERY) != 0);
 			ast.setFlag(flags | AST.RESOLVED_BINDINGS);
 		} else {
 			resolver = new BindingResolver();
@@ -332,7 +332,7 @@ class CompilationUnitResolver extends Compiler {
 		this.hasCompilationAborted = true;
 	}
 
-	public static void parse(ICompilationUnit[] compilationUnits, ASTRequestor astRequestor, int apiLevel, Map options, int flags, IProgressMonitor monitor) {
+	public static void parse(IJavaScriptUnit[] compilationUnits, ASTRequestor astRequestor, int apiLevel, Map options, int flags, IProgressMonitor monitor) {
 		try {
 			CompilerOptions compilerOptions = new CompilerOptions(options);
 			Parser parser = new CommentRecorderParser(
@@ -364,7 +364,7 @@ class CompilationUnitResolver extends Compiler {
 				}
 
 				// convert AST
-				CompilationUnit node = convert(compilationUnitDeclaration, parser.scanner.getSource(), apiLevel, options, false/*don't resolve binding*/, null/*no owner needed*/, null/*no binding table needed*/, flags /* flags */, monitor);
+				JavaScriptUnit node = convert(compilationUnitDeclaration, parser.scanner.getSource(), apiLevel, options, false/*don't resolve binding*/, null/*no owner needed*/, null/*no binding table needed*/, flags /* flags */, monitor);
 				node.setTypeRoot(compilationUnits[i]);
 
 				// accept AST
@@ -386,7 +386,7 @@ class CompilationUnitResolver extends Compiler {
 			throw new IllegalStateException();
 		}
 		CompilerOptions compilerOptions = new CompilerOptions(settings);
-		boolean statementsRecovery = (flags & ICompilationUnit.ENABLE_STATEMENTS_RECOVERY) != 0;
+		boolean statementsRecovery = (flags & IJavaScriptUnit.ENABLE_STATEMENTS_RECOVERY) != 0;
 		compilerOptions.performMethodsFullRecovery = statementsRecovery;
 		compilerOptions.performStatementsRecovery = statementsRecovery;
 		Parser parser = new CommentRecorderParser(
@@ -444,12 +444,12 @@ class CompilationUnitResolver extends Compiler {
 	}
 
 	public static void resolve(
-		ICompilationUnit[] compilationUnits,
+		IJavaScriptUnit[] compilationUnits,
 		String[] bindingKeys,
 		ASTRequestor requestor,
 		int apiLevel,
 		Map options,
-		IJavaProject javaProject,
+		IJavaScriptProject javaProject,
 		WorkingCopyOwner owner,
 		int flags,
 		IProgressMonitor monitor) {
@@ -463,11 +463,11 @@ class CompilationUnitResolver extends Compiler {
 			}
 			environment = new CancelableNameEnvironment(((JavaProject) javaProject), owner, monitor);
 			problemFactory = new CancelableProblemFactory(monitor);
-			CompilationUnitResolver resolver =
-				new CompilationUnitResolver(
+			JavaScriptUnitResolver resolver =
+				new JavaScriptUnitResolver(
 					environment,
 					getHandlingPolicy(),
-					getCompilerOptions(options, (flags & ICompilationUnit.ENABLE_STATEMENTS_RECOVERY) != 0),
+					getCompilerOptions(options, (flags & IJavaScriptUnit.ENABLE_STATEMENTS_RECOVERY) != 0),
 					getRequestor(),
 					problemFactory,
 					monitor);
@@ -477,7 +477,7 @@ class CompilationUnitResolver extends Compiler {
 				System.out.println(Thread.currentThread() + " TIME SPENT in NameLoopkup#seekTypesInSourcePackage: " + environment.nameLookup.timeSpentInSeekTypesInSourcePackage + "ms");  //$NON-NLS-1$ //$NON-NLS-2$
 				System.out.println(Thread.currentThread() + " TIME SPENT in NameLoopkup#seekTypesInBinaryPackage: " + environment.nameLookup.timeSpentInSeekTypesInBinaryPackage + "ms");  //$NON-NLS-1$ //$NON-NLS-2$
 			}
-		} catch (JavaModelException e) {
+		} catch (JavaScriptModelException e) {
 			// project doesn't exist -> simple parse without resolving
 			parse(compilationUnits, requestor, apiLevel, options, flags, monitor);
 		} finally {
@@ -492,26 +492,26 @@ class CompilationUnitResolver extends Compiler {
 	}
 	public static CompilationUnitDeclaration resolve(
 			org.eclipse.wst.jsdt.internal.compiler.env.ICompilationUnit sourceUnit,
-			IJavaProject javaProject,
+			IJavaScriptProject javaProject,
 			NodeSearcher nodeSearcher,
 			Map options,
 			WorkingCopyOwner owner,
 			int flags,
-			IProgressMonitor monitor) throws JavaModelException {
+			IProgressMonitor monitor) throws JavaScriptModelException {
 
 		CompilationUnitDeclaration unit = null;
 		CancelableNameEnvironment environment = null;
 		CancelableProblemFactory problemFactory = null;
-		CompilationUnitResolver resolver = null;
+		JavaScriptUnitResolver resolver = null;
 		try {
 			environment = new CancelableNameEnvironment(((JavaProject)javaProject), owner, monitor);
 			environment.setCompilationUnit(sourceUnit);
 			problemFactory = new CancelableProblemFactory(monitor);
 			resolver =
-				new CompilationUnitResolver(
+				new JavaScriptUnitResolver(
 					environment,
 					getHandlingPolicy(),
-					getCompilerOptions(options, (flags & ICompilationUnit.ENABLE_STATEMENTS_RECOVERY) != 0),
+					getCompilerOptions(options, (flags & IJavaScriptUnit.ENABLE_STATEMENTS_RECOVERY) != 0),
 					getRequestor(),
 					problemFactory,
 					monitor);
@@ -560,23 +560,23 @@ class CompilationUnitResolver extends Compiler {
 		}
 	}
 	public static IBinding[] resolve(
-		final IJavaElement[] elements,
+		final IJavaScriptElement[] elements,
 		int apiLevel,
 		Map compilerOptions,
-		IJavaProject javaProject,
+		IJavaScriptProject javaProject,
 		WorkingCopyOwner owner,
 		int flags,
 		IProgressMonitor monitor) {
 
 		final int length = elements.length;
-		final HashMap sourceElementPositions = new HashMap(); // a map from ICompilationUnit to int[] (positions in elements)
+		final HashMap sourceElementPositions = new HashMap(); // a map from IJavaScriptUnit to int[] (positions in elements)
 		int cuNumber = 0;
 		final HashtableOfObjectToInt binaryElementPositions = new HashtableOfObjectToInt(); // a map from String (binding key) to int (position in elements)
 		for (int i = 0; i < length; i++) {
-			IJavaElement element = elements[i];
+			IJavaScriptElement element = elements[i];
 			if (!(element instanceof SourceRefElement))
 				throw new IllegalStateException(element + " is not part of a compilation unit or class file"); //$NON-NLS-1$
-			Object cu = element.getAncestor(IJavaElement.COMPILATION_UNIT);
+			Object cu = element.getAncestor(IJavaScriptElement.JAVASCRIPT_UNIT);
 			if (cu != null) {
 				// source member
 				IntArrayList intList = (IntArrayList) sourceElementPositions.get(cu);
@@ -590,12 +590,12 @@ class CompilationUnitResolver extends Compiler {
 				try {
 					String key = ((BinaryMember) element).getKey(true/*open to get resolved info*/);
 					binaryElementPositions.put(key, i);
-				} catch (JavaModelException e) {
+				} catch (JavaScriptModelException e) {
 					throw new IllegalArgumentException(element + " does not exist"); //$NON-NLS-1$
 				}
 			}
 		}
-		ICompilationUnit[] cus = new ICompilationUnit[cuNumber];
+		IJavaScriptUnit[] cus = new IJavaScriptUnit[cuNumber];
 		sourceElementPositions.keySet().toArray(cus);
 
 		int bindingKeyNumber = binaryElementPositions.size();
@@ -604,7 +604,7 @@ class CompilationUnitResolver extends Compiler {
 
 		class Requestor extends ASTRequestor {
 			IBinding[] bindings = new IBinding[length];
-			public void acceptAST(ICompilationUnit source, CompilationUnit ast) {
+			public void acceptAST(IJavaScriptUnit source, JavaScriptUnit ast) {
 				// TODO (jerome) optimize to visit the AST only once
 				IntArrayList intList = (IntArrayList) sourceElementPositions.get(source);
 				for (int i = 0; i < intList.length; i++) {
@@ -613,7 +613,7 @@ class CompilationUnitResolver extends Compiler {
 					DOMFinder finder = new DOMFinder(ast, element, true/*resolve binding*/);
 					try {
 						finder.search();
-					} catch (JavaModelException e) {
+					} catch (JavaScriptModelException e) {
 						throw new IllegalArgumentException(element + " does not exist"); //$NON-NLS-1$
 					}
 					this.bindings[index] = finder.foundBinding;
@@ -670,7 +670,7 @@ class CompilationUnitResolver extends Compiler {
 		}
 	}
 
-	private void resolve(ICompilationUnit[] compilationUnits, String[] bindingKeys, ASTRequestor astRequestor, int apiLevel, Map compilerOptions, WorkingCopyOwner owner, int flags) {
+	private void resolve(IJavaScriptUnit[] compilationUnits, String[] bindingKeys, ASTRequestor astRequestor, int apiLevel, Map compilerOptions, WorkingCopyOwner owner, int flags) {
 
 		// temporararily connect ourselves to the ASTResolver - must disconnect when done
 		astRequestor.compilationUnitResolver = this;
@@ -700,7 +700,7 @@ class CompilationUnitResolver extends Compiler {
 
 					// requested AST
 					char[] fileName = unit.compilationResult.getFileName();
-					ICompilationUnit source = (ICompilationUnit) this.requestedSources.get(fileName);
+					IJavaScriptUnit source = (IJavaScriptUnit) this.requestedSources.get(fileName);
 					if (source != null) {
 						// convert AST
 						CompilationResult compilationResult = unit.compilationResult;
@@ -710,10 +710,10 @@ class CompilationUnitResolver extends Compiler {
 						ast.setFlag(flags | AST.RESOLVED_BINDINGS);
 						ast.setDefaultNodeFlag(ASTNode.ORIGINAL);
 						ASTConverter converter = new ASTConverter(compilerOptions, true/*need to resolve bindings*/, this.monitor);
-						BindingResolver resolver = new DefaultBindingResolver(unit.scope, owner, this.bindingTables, (flags & ICompilationUnit.ENABLE_BINDINGS_RECOVERY) != 0);
+						BindingResolver resolver = new DefaultBindingResolver(unit.scope, owner, this.bindingTables, (flags & IJavaScriptUnit.ENABLE_BINDINGS_RECOVERY) != 0);
 						ast.setBindingResolver(resolver);
 						converter.setAST(ast);
-						CompilationUnit compilationUnit = converter.convert(unit, contents);
+						JavaScriptUnit compilationUnit = converter.convert(unit, contents);
 						compilationUnit.setTypeRoot(source);
 						compilationUnit.setLineEndTable(compilationResult.getLineSeparatorPositions());
 						ast.setDefaultNodeFlag(0);
@@ -750,7 +750,7 @@ class CompilationUnitResolver extends Compiler {
 			}
 
 			// remaining binding keys
-			DefaultBindingResolver resolver = new DefaultBindingResolver(this.lookupEnvironment, owner, this.bindingTables, (flags & ICompilationUnit.ENABLE_BINDINGS_RECOVERY) != 0);
+			DefaultBindingResolver resolver = new DefaultBindingResolver(this.lookupEnvironment, owner, this.bindingTables, (flags & IJavaScriptUnit.ENABLE_BINDINGS_RECOVERY) != 0);
 			Object[] keys = this.requestedKeys.valueTable;
 			for (int j = 0, keysLength = keys.length; j < keysLength; j++) {
 				BindingKeyResolver keyResolver = (BindingKeyResolver) keys[j];

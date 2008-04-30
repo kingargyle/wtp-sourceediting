@@ -27,10 +27,10 @@ import org.eclipse.wst.jsdt.internal.core.JavaModelStatus;
  * there is generally no need for clients to create instances.
  * </p>
  *
- * @see IJavaModelStatus
- * @see IJavaModelStatusConstants
+ * @see IJavaScriptModelStatus
+ * @see IJavaScriptModelStatusConstants
  */
-public class JavaModelException extends CoreException {
+public class JavaScriptModelException extends CoreException {
 
 	private static final long serialVersionUID = -760398656505871287L; // backward compatible
 
@@ -42,21 +42,21 @@ public class JavaModelException extends CoreException {
  *
  * @param e the <code>Throwable</code>
  * @param code one of the Java-specific status codes declared in
- *   <code>IJavaModelStatusConstants</code>
- * @see IJavaModelStatusConstants
+ *   <code>IJavaScriptModelStatusConstants</code>
+ * @see IJavaScriptModelStatusConstants
  * @see org.eclipse.core.runtime.IStatus#ERROR
  */
-public JavaModelException(Throwable e, int code) {
+public JavaScriptModelException(Throwable e, int code) {
 	this(new JavaModelStatus(code, e));
 }
 /**
  * Creates a Java model exception for the given <code>CoreException</code>.
  * Equivalent to
- * <code>JavaModelException(exception,IJavaModelStatusConstants.CORE_EXCEPTION</code>.
+ * <code>JavaScriptModelException(exception,IJavaScriptModelStatusConstants.CORE_EXCEPTION</code>.
  *
  * @param exception the <code>CoreException</code>
  */
-public JavaModelException(CoreException exception) {
+public JavaScriptModelException(CoreException exception) {
 	super(exception.getStatus());
 	this.nestedCoreException = exception;
 }
@@ -65,7 +65,7 @@ public JavaModelException(CoreException exception) {
  *
  * @param status the Java-specific status object
  */
-public JavaModelException(IJavaModelStatus status) {
+public JavaScriptModelException(IJavaScriptModelStatus status) {
 	super(status);
 }
 /**
@@ -83,14 +83,14 @@ public Throwable getException() {
 }
 /**
  * Returns the Java model status object for this exception.
- * Equivalent to <code>(IJavaModelStatus) getStatus()</code>.
+ * Equivalent to <code>(IJavaScriptModelStatus) getStatus()</code>.
  *
  * @return a status object
  */
-public IJavaModelStatus getJavaModelStatus() {
+public IJavaScriptModelStatus getJavaScriptModelStatus() {
 	IStatus status = this.getStatus();
-	if (status instanceof IJavaModelStatus) {
-		return (IJavaModelStatus)status;
+	if (status instanceof IJavaScriptModelStatus) {
+		return (IJavaScriptModelStatus)status;
 	} else {
 		// A regular IStatus is created only in the case of a CoreException.
 		// See bug 13492 Should handle JavaModelExceptions that contains CoreException more gracefully
@@ -100,18 +100,18 @@ public IJavaModelStatus getJavaModelStatus() {
 /**
  * Returns whether this exception indicates that a Java model element does not
  * exist. Such exceptions have a status with a code of
- * <code>IJavaModelStatusConstants.ELEMENT_DOES_NOT_EXIST</code> or
- * <code>IJavaModelStatusConstants.ELEMENT_NOT_ON_CLASSPATH</code>.
+ * <code>IJavaScriptModelStatusConstants.ELEMENT_DOES_NOT_EXIST</code> or
+ * <code>IJavaScriptModelStatusConstants.ELEMENT_NOT_ON_CLASSPATH</code>.
  * This is a convenience method.
  *
  * @return <code>true</code> if this exception indicates that a Java model
  *   element does not exist
- * @see IJavaModelStatus#isDoesNotExist()
- * @see IJavaModelStatusConstants#ELEMENT_DOES_NOT_EXIST
- * @see IJavaModelStatusConstants#ELEMENT_NOT_ON_CLASSPATH
+ * @see IJavaScriptModelStatus#isDoesNotExist()
+ * @see IJavaScriptModelStatusConstants#ELEMENT_DOES_NOT_EXIST
+ * @see IJavaScriptModelStatusConstants#ELEMENT_NOT_ON_CLASSPATH
  */
 public boolean isDoesNotExist() {
-	IJavaModelStatus javaModelStatus = getJavaModelStatus();
+	IJavaScriptModelStatus javaModelStatus = getJavaScriptModelStatus();
 	return javaModelStatus != null && javaModelStatus.isDoesNotExist();
 }
 

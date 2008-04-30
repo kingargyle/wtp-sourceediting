@@ -14,14 +14,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 
 /**
- * Represents a container of methods and fields/vars (either an <code>ICompilationUnit</code>
+ * Represents a container of methods and fields/vars (either an <code>IJavaScriptUnit</code>
  * or an <code>IType</code>).
  *
  * <p>
  * This interface is not intended to be implemented by clients.
  * </p>
  *
- * @see ICompilationUnit Note that methods {@link #findPrimaryType()} and {@link #getElementAt(int)}
+ * @see IJavaScriptUnit Note that methods {@link #findPrimaryType()} and {@link #getElementAt(int)}
  * 	were already implemented in this interface respectively since version 3.0 and version 1.0.
  * @see IClassFile Note that method {@link #getWorkingCopy(WorkingCopyOwner, IProgressMonitor)}
  * 	was already implemented in this interface since version 3.0.
@@ -34,7 +34,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * </p>
 
  */
-public interface IMethodContainer  {
+public interface IFunctionContainer  {
 
 
 /**
@@ -52,11 +52,11 @@ IField getField(String name);
  * in which they appear in the source, otherwise, the results are
  * in no particular order.  For binary types, this includes synthetic fields.
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
  *		exception occurs while accessing its corresponding resource.
  * @return the fields declared by this type
  */
-IField[] getFields() throws JavaModelException;
+IField[] getFields() throws JavaScriptModelException;
 
 /**
  * Returns the method with the specified name and parameter types
@@ -73,8 +73,26 @@ IField[] getFields() throws JavaModelException;
  * @param name the given name
  * @param parameterTypeSignatures the given parameter types
  * @return the method with the specified name and parameter types in this type
+ * @deprecated Use {@link #getFunction(String,String[])} instead
  */
-IMethod getMethod(String name, String[] parameterTypeSignatures);
+IFunction getMethod(String name, String[] parameterTypeSignatures);
+/**
+ * Returns the method with the specified name and parameter types
+ * in this type (for example, <code>"foo", {"I", "QString;"}</code>).
+ * To get the handle for a constructor, the name specified must be the
+ * simple name of the enclosing type.
+ * This is a handle-only method.  The method may or may not be present.
+ * <p>
+ * The type signatures may be either unresolved (for source types)
+ * or resolved (for binary types), and either basic (for basic types)
+ * or rich (for parameterized types). See {@link Signature} for details.
+ * </p>
+ *
+ * @param name the given name
+ * @param parameterTypeSignatures the given parameter types
+ * @return the method with the specified name and parameter types in this type
+ */
+IFunction getFunction(String name, String[] parameterTypeSignatures);
 
 /**
  * Returns the methods and constructors declared by this type.
@@ -84,11 +102,25 @@ IMethod getMethod(String name, String[] parameterTypeSignatures);
  * in which they appear in the source, otherwise, the results are
  * in no particular order.
  *
- * @exception JavaModelException if this element does not exist or if an
+ * @exception JavaScriptModelException if this element does not exist or if an
+ *		exception occurs while accessing its corresponding resource.
+ * @return the methods and constructors declared by this type
+ * @deprecated Use {@link #getFunctions()} instead
+ */
+IFunction[] getMethods() throws JavaScriptModelException;
+/**
+ * Returns the methods and constructors declared by this type.
+ * For binary types, this may include the special <code>&lt;clinit&gt</code>; method
+ * and synthetic methods.
+ * If this is a source type, the results are listed in the order
+ * in which they appear in the source, otherwise, the results are
+ * in no particular order.
+ *
+ * @exception JavaScriptModelException if this element does not exist or if an
  *		exception occurs while accessing its corresponding resource.
  * @return the methods and constructors declared by this type
  */
-IMethod[] getMethods() throws JavaModelException;
+IFunction[] getFunctions() throws JavaScriptModelException;
 
 IType getType(String name);
 

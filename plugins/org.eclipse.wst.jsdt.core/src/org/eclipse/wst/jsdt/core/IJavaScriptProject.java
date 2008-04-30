@@ -8,8 +8,8 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *     IBM Corporation - added getOption(String, boolean), getOptions(boolean) and setOptions(Map)
- *     IBM Corporation - deprecated getPackageFragmentRoots(IClasspathEntry) and
- *                               added findPackageFragmentRoots(IClasspathEntry)
+ *     IBM Corporation - deprecated getPackageFragmentRoots(IIncludePathEntry) and
+ *                               added findPackageFragmentRoots(IIncludePathEntry)
  *     IBM Corporation - added isOnClasspath(IResource)
  *     IBM Corporation - added setOption(String, String)
  *     IBM Corporation - added forceClasspathReload(IProgressMonitor)
@@ -49,13 +49,13 @@ import org.eclipse.wst.jsdt.core.eval.IEvaluationContext;
  * <p>
  * This interface is not intended to be implemented by clients. An instance
  * of one of these handles can be created via
- * <code>JavaCore.create(project)</code>.
+ * <code>JavaScriptCore.create(project)</code>.
  * </p>
  *
- * @see JavaCore#create(org.eclipse.core.resources.IProject)
- * @see IClasspathEntry
+ * @see JavaScriptCore#create(org.eclipse.core.resources.IProject)
+ * @see IIncludePathEntry
  */
-public interface IJavaProject extends IParent, IJavaElement, IOpenable {
+public interface IJavaScriptProject extends IParent, IJavaScriptElement, IOpenable {
 
 	/* returns the projects scope file */
 	IFile getJSDTScopeFile();
@@ -69,7 +69,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @return the decoded classpath entry, or <code>null</code> if unable to decode it
 	 * @since 3.2
 	 */
-	IClasspathEntry decodeClasspathEntry(String encodedEntry);
+	IIncludePathEntry decodeIncludepathEntry(String encodedEntry);
 
 	/**
 	 * Encodes the given classpath entry into a string in the context of this project.
@@ -78,57 +78,57 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @return the encoded classpath entry
 	 * @since 3.2
 	 */
-	String encodeClasspathEntry(IClasspathEntry classpathEntry);
+	String encodeIncludepathEntry(IIncludePathEntry classpathEntry);
 
 	/**
-	 * Returns the <code>IJavaElement</code> corresponding to the given
+	 * Returns the <code>IJavaScriptElement</code> corresponding to the given
 	 * classpath-relative path, or <code>null</code> if no such
-	 * <code>IJavaElement</code> is found. The result is one of an
-	 * <code>ICompilationUnit</code>, <code>IClassFile</code>, or
+	 * <code>IJavaScriptElement</code> is found. The result is one of an
+	 * <code>IJavaScriptUnit</code>, <code>IClassFile</code>, or
 	 * <code>IPackageFragment</code>.
 	 * <p>
 	 * When looking for a package fragment, there might be several potential
 	 * matches; only one of them is returned.
 	 *
 	 * <p>For example, the path "java/lang/Object.js", would result in the
-	 * <code>ICompilationUnit</code> or <code>IClassFile</code> corresponding to
+	 * <code>IJavaScriptUnit</code> or <code>IClassFile</code> corresponding to
 	 * "java.lang.Object". The path "java/lang" would result in the
 	 * <code>IPackageFragment</code> for "java.lang".
 	 * @param path the given classpath-relative path
-	 * @exception JavaModelException if the given path is <code>null</code>
+	 * @exception JavaScriptModelException if the given path is <code>null</code>
 	 *  or absolute
-	 * @return the <code>IJavaElement</code> corresponding to the given
+	 * @return the <code>IJavaScriptElement</code> corresponding to the given
 	 * classpath-relative path, or <code>null</code> if no such
-	 * <code>IJavaElement</code> is found
+	 * <code>IJavaScriptElement</code> is found
 	 */
-	IJavaElement findElement(IPath path) throws JavaModelException;
+	IJavaScriptElement findElement(IPath path) throws JavaScriptModelException;
 
 	/**
-	 * Returns the <code>IJavaElement</code> corresponding to the given
+	 * Returns the <code>IJavaScriptElement</code> corresponding to the given
 	 * classpath-relative path, or <code>null</code> if no such
-	 * <code>IJavaElement</code> is found. The result is one of an
-	 * <code>ICompilationUnit</code>, <code>IClassFile</code>, or
-	 * <code>IPackageFragment</code>. If it is an <code>ICompilationUnit</code>,
+	 * <code>IJavaScriptElement</code> is found. The result is one of an
+	 * <code>IJavaScriptUnit</code>, <code>IClassFile</code>, or
+	 * <code>IPackageFragment</code>. If it is an <code>IJavaScriptUnit</code>,
 	 * its owner is the given owner.
 	 * <p>
 	 * When looking for a package fragment, there might be several potential
 	 * matches; only one of them is returned.
 	 *
 	 * <p>For example, the path "java/lang/Object.js", would result in the
-	 * <code>ICompilationUnit</code> or <code>IClassFile</code> corresponding to
+	 * <code>IJavaScriptUnit</code> or <code>IClassFile</code> corresponding to
 	 * "java.lang.Object". The path "java/lang" would result in the
 	 * <code>IPackageFragment</code> for "java.lang".
 	 * @param path the given classpath-relative path
 	 * @param owner the owner of the returned compilation unit, ignored if it is
 	 *   not a compilation unit.
-	 * @exception JavaModelException if the given path is <code>null</code>
+	 * @exception JavaScriptModelException if the given path is <code>null</code>
 	 *  or absolute
-	 * @return the <code>IJavaElement</code> corresponding to the given
+	 * @return the <code>IJavaScriptElement</code> corresponding to the given
 	 * classpath-relative path, or <code>null</code> if no such
-	 * <code>IJavaElement</code> is found
+	 * <code>IJavaScriptElement</code> is found
 	 * @since 3.0
 	 */
-	IJavaElement findElement(IPath path, WorkingCopyOwner owner) throws JavaModelException;
+	IJavaScriptElement findElement(IPath path, WorkingCopyOwner owner) throws JavaScriptModelException;
 
 	/**
 	 * Returns the first existing package fragment on this project's classpath
@@ -138,13 +138,13 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * 	- internal to the workbench: "/Project/src"
 	 *  - external to the workbench: "c:/jdk/classes.zip/java/lang"
 	 * @param path the given absolute path
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first existing package fragment on this project's classpath
 	 * whose path matches the given (absolute) path, or <code>null</code> if none
 	 * exist
 	 */
-	IPackageFragment findPackageFragment(IPath path) throws JavaModelException;
+	IPackageFragment findPackageFragment(IPath path) throws JavaScriptModelException;
 
 	/**
 	 * Returns the existing package fragment root on this project's classpath
@@ -154,14 +154,14 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *	- internal to the workbench: "/Compiler/src"
 	 *	- external to the workbench: "c:/jdk/classes.zip"
 	 * @param path the given absolute path
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the existing package fragment root on this project's classpath
 	 * whose path matches the given (absolute) path, or <code>null</code> if
 	 * one does not exist
 	 */
 	IPackageFragmentRoot findPackageFragmentRoot(IPath path)
-		throws JavaModelException;
+		throws JavaScriptModelException;
 	/**
 	 * Returns the existing package fragment roots identified by the given entry.
 	 * Note that a classpath entry that refers to another project may
@@ -180,7 +180,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @see IJsGlobalScopeContainer
 	 * @since 2.1
 	 */
-	IPackageFragmentRoot[] findPackageFragmentRoots(IClasspathEntry entry);
+	IPackageFragmentRoot[] findPackageFragmentRoots(IIncludePathEntry entry);
 	/**
 	 * Returns the first type found following this project's classpath
 	 * with the given fully qualified name or <code>null</code> if none is found.
@@ -194,14 +194,14 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * To find secondary types use {@link #findType(String, IProgressMonitor)} instead.
 	 *
 	 * @param fullyQualifiedName the given fully qualified name
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first type found following this project's classpath
 	 * with the given fully qualified name or <code>null</code> if none is found
 	 * @see IType#getFullyQualifiedName(char)
 	 * @since 2.0
 	 */
-	IType findType(String fullyQualifiedName) throws JavaModelException;
+	IType findType(String fullyQualifiedName) throws JavaScriptModelException;
 	/**
 	 * Same functionality as {@link #findType(String)} but also look for secondary
 	 * types if given name does not match a compilation unit name.
@@ -209,14 +209,14 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param fullyQualifiedName the given fully qualified name
 	 * @param progressMonitor the progress monitor to report progress to,
 	 * 	or <code>null</code> if no progress monitor is provided
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first type found following this project's classpath
 	 * with the given fully qualified name or <code>null</code> if none is found
 	 * @see IType#getFullyQualifiedName(char)
 	 * @since 3.2
 	 */
-	IType findType(String fullyQualifiedName, IProgressMonitor progressMonitor) throws JavaModelException;
+	IType findType(String fullyQualifiedName, IProgressMonitor progressMonitor) throws JavaScriptModelException;
 	/**
 	 * Returns the first type found following this project's classpath
 	 * with the given fully qualified name or <code>null</code> if none is found.
@@ -234,14 +234,14 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @param fullyQualifiedName the given fully qualified name
 	 * @param owner the owner of the returned type's compilation unit
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first type found following this project's classpath
 	 * with the given fully qualified name or <code>null</code> if none is found
 	 * @see IType#getFullyQualifiedName(char)
 	 * @since 3.0
 	 */
-	IType findType(String fullyQualifiedName, WorkingCopyOwner owner) throws JavaModelException;
+	IType findType(String fullyQualifiedName, WorkingCopyOwner owner) throws JavaScriptModelException;
 	/**
 	 * Same functionality as {@link #findType(String, WorkingCopyOwner)}
 	 * but also look for secondary types if given name does not match
@@ -251,14 +251,14 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param owner the owner of the returned type's compilation unit
 	 * @param progressMonitor the progress monitor to report progress to,
 	 * 	or <code>null</code> if no progress monitor is provided
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first type found following this project's classpath
 	 * with the given fully qualified name or <code>null</code> if none is found
 	 * @see IType#getFullyQualifiedName(char)
 	 * @since 3.2
 	 */
-	IType findType(String fullyQualifiedName, WorkingCopyOwner owner, IProgressMonitor progressMonitor) throws JavaModelException;
+	IType findType(String fullyQualifiedName, WorkingCopyOwner owner, IProgressMonitor progressMonitor) throws JavaScriptModelException;
 	/**
 	 * Returns the first type found following this project's classpath
 	 * with the given package name and type qualified name
@@ -276,7 +276,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @param packageName the given package name
 	 * @param typeQualifiedName the given type qualified name
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first type found following this project's classpath
 	 * with the given package name and type qualified name
@@ -284,7 +284,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @see IType#getTypeQualifiedName(char)
 	 * @since 2.0
 	 */
-	IType findType(String packageName, String typeQualifiedName) throws JavaModelException;
+	IType findType(String packageName, String typeQualifiedName) throws JavaScriptModelException;
 	/**
 	 * Same functionality as {@link #findType(String, String)} but also look for
 	 * secondary types if given name does not match a compilation unit name.
@@ -293,14 +293,14 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param typeQualifiedName the given type qualified name
 	 * @param progressMonitor the progress monitor to report progress to,
 	 * 	or <code>null</code> if no progress monitor is provided
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first type found following this project's classpath
 	 * with the given fully qualified name or <code>null</code> if none is found
 	 * @see IType#getFullyQualifiedName(char)
 	 * @since 3.2
 	 */
-	IType findType(String packageName, String typeQualifiedName, IProgressMonitor progressMonitor) throws JavaModelException;
+	IType findType(String packageName, String typeQualifiedName, IProgressMonitor progressMonitor) throws JavaScriptModelException;
 	/**
 	 * Returns the first type found following this project's classpath
 	 * with the given package name and type qualified name
@@ -321,7 +321,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param packageName the given package name
 	 * @param typeQualifiedName the given type qualified name
 	 * @param owner the owner of the returned type's compilation unit
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first type found following this project's classpath
 	 * with the given package name and type qualified name
@@ -329,7 +329,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @see IType#getTypeQualifiedName(char)
 	 * @since 3.0
 	 */
-	IType findType(String packageName, String typeQualifiedName, WorkingCopyOwner owner) throws JavaModelException;
+	IType findType(String packageName, String typeQualifiedName, WorkingCopyOwner owner) throws JavaScriptModelException;
 	/**
 	 * Same functionality as {@link #findType(String, String, WorkingCopyOwner)}
 	 * but also look for secondary types if given name does not match a compilation unit name.
@@ -339,14 +339,14 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param owner the owner of the returned type's compilation unit
 	 * @param progressMonitor the progress monitor to report progress to,
 	 * 	or <code>null</code> if no progress monitor is provided
-	 * @exception JavaModelException if this project does not exist or if an
+	 * @exception JavaScriptModelException if this project does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @return the first type found following this project's classpath
 	 * with the given fully qualified name or <code>null</code> if none is found
 	 * @see IType#getFullyQualifiedName(char)
 	 * @since 3.2
 	 */
-	IType findType(String packageName, String typeQualifiedName, WorkingCopyOwner owner, IProgressMonitor progressMonitor) throws JavaModelException;
+	IType findType(String packageName, String typeQualifiedName, WorkingCopyOwner owner, IProgressMonitor progressMonitor) throws JavaScriptModelException;
 
 	/**
 	 * Returns all of the existing package fragment roots that exist
@@ -354,10 +354,10 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @return all of the existing package fragment roots that exist
 	 * on the classpath
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 */
-	IPackageFragmentRoot[] getAllPackageFragmentRoots() throws JavaModelException;
+	IPackageFragmentRoot[] getAllPackageFragmentRoots() throws JavaScriptModelException;
 
 	/**
 	 * Returns an array of non-Java resources directly contained in this project.
@@ -374,38 +374,38 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @return an array of non-Java resources (<code>IFile</code>s and/or
 	 *              <code>IFolder</code>s) directly contained in this project
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 */
-	Object[] getNonJavaResources() throws JavaModelException;
+	Object[] getNonJavaScriptResources() throws JavaScriptModelException;
 
 	/**
 	 * Helper method for returning one option value only. Equivalent to <code>(String)this.getOptions(inheritJavaCoreOptions).get(optionName)</code>
 	 * Note that it may answer <code>null</code> if this option does not exist, or if there is no custom value for it.
 	 * <p>
-	 * For a complete description of the configurable options, see <code>JavaCore#getDefaultOptions</code>.
+	 * For a complete description of the configurable options, see <code>JavaScriptCore#getDefaultOptions</code>.
 	 * </p>
 	 *
 	 * @param optionName the name of an option
-	 * @param inheritJavaCoreOptions - boolean indicating whether JavaCore options should be inherited as well
+	 * @param inheritJavaCoreOptions - boolean indicating whether JavaScriptCore options should be inherited as well
 	 * @return the String value of a given option
-	 * @see JavaCore#getDefaultOptions()
+	 * @see JavaScriptCore#getDefaultOptions()
 	 * @since 2.1
 	 */
 	String getOption(String optionName, boolean inheritJavaCoreOptions);
 
 	/**
 	 * Returns the table of the current custom options for this project. Projects remember their custom options,
-	 * in other words, only the options different from the the JavaCore global options for the workspace.
-	 * A boolean argument allows to directly merge the project options with global ones from <code>JavaCore</code>.
+	 * in other words, only the options different from the the JavaScriptCore global options for the workspace.
+	 * A boolean argument allows to directly merge the project options with global ones from <code>JavaScriptCore</code>.
 	 * <p>
-	 * For a complete description of the configurable options, see <code>JavaCore#getDefaultOptions</code>.
+	 * For a complete description of the configurable options, see <code>JavaScriptCore#getDefaultOptions</code>.
 	 * </p>
 	 *
-	 * @param inheritJavaCoreOptions - boolean indicating whether JavaCore options should be inherited as well
+	 * @param inheritJavaCoreOptions - boolean indicating whether JavaScriptCore options should be inherited as well
 	 * @return table of current settings of all options
 	 *   (key type: <code>String</code>; value type: <code>String</code>)
-	 * @see JavaCore#getDefaultOptions()
+	 * @see JavaScriptCore#getDefaultOptions()
 	 * @since 2.1
 	 */
 	Map getOptions(boolean inheritJavaCoreOptions);
@@ -426,11 +426,11 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * </p>
 	 *
 	 * @return the workspace-relative absolute path of the default output folder
-	 * @exception JavaModelException if this element does not exist
+	 * @exception JavaScriptModelException if this element does not exist
 	 * @see #setOutputLocation(org.eclipse.core.runtime.IPath, IProgressMonitor)
-	 * @see IClasspathEntry#getOutputLocation()
+	 * @see IIncludePathEntry#getOutputLocation()
 	 */
-	IPath getOutputLocation() throws JavaModelException;
+	IPath getOutputLocation() throws JavaScriptModelException;
 
 	/**
 	 * Returns a package fragment root for the JAR at the specified file system path.
@@ -466,10 +466,10 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @return all of the  package fragment roots contained in this
 	 * project, identified on this project's resolved classpath
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 */
-	IPackageFragmentRoot[] getPackageFragmentRoots() throws JavaModelException;
+	IPackageFragmentRoot[] getPackageFragmentRoots() throws JavaScriptModelException;
 
 	/**
 	 * Returns the existing package fragment roots identified by the given entry.
@@ -487,9 +487,9 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param entry the given entry
 	 * @return the existing package fragment roots identified by the given entry
 	 * @see IJsGlobalScopeContainer
-	 * @deprecated Use {@link IJavaProject#findPackageFragmentRoots(IClasspathEntry)} instead
+	 * @deprecated Use {@link IJavaScriptProject#findPackageFragmentRoots(IIncludePathEntry)} instead
 	 */
-	IPackageFragmentRoot[] getPackageFragmentRoots(IClasspathEntry entry);
+	IPackageFragmentRoot[] getPackageFragmentRoots(IIncludePathEntry entry);
 
 	/**
 	 * Returns all package fragments in all package fragment roots contained
@@ -500,16 +500,16 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @return all package fragments in all package fragment roots contained
 	 * in this project
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 */
-	IPackageFragment[] getPackageFragments() throws JavaModelException;
+	IPackageFragment[] getPackageFragments() throws JavaScriptModelException;
 
 	/**
-	 * Returns the <code>IProject</code> on which this <code>IJavaProject</code>
+	 * Returns the <code>IProject</code> on which this <code>IJavaScriptProject</code>
 	 * was created. This is handle-only method.
 	 *
-	 * @return the <code>IProject</code> on which this <code>IJavaProject</code>
+	 * @return the <code>IProject</code> on which this <code>IJavaScriptProject</code>
 	 * was created
 	 */
 	IProject getProject();
@@ -522,7 +522,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * variable and classpath container entries can be resolved using the
 	 * helper method <code>getResolvedClasspath</code>; classpath variable
 	 * entries also can be resolved individually using
-	 * <code>JavaCore#getClasspathVariable</code>).
+	 * <code>JavaScriptCore#getClasspathVariable</code>).
 	 * <p>
 	 * Both classpath containers and classpath variables provides a level of
 	 * indirection that can make the <code>.classpath</code> file stable across
@@ -540,11 +540,11 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * </p>
 	 *
 	 * @return the raw classpath for the project, as a list of classpath entries
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
-	 * @see IClasspathEntry
+	 * @see IIncludePathEntry
 	 */
-	IClasspathEntry[] getRawClasspath() throws JavaModelException;
+	IIncludePathEntry[] getRawIncludepath() throws JavaScriptModelException;
 
 	/**
 	 * Returns the names of the projects that are directly required by this
@@ -554,10 +554,10 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @return the names of the projects that are directly required by this
 	 * project in classpath order
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 */
-	String[] getRequiredProjectNames() throws JavaModelException;
+	String[] getRequiredProjectNames() throws JavaScriptModelException;
 
 	/**
 	 * This is a helper method returning the resolved classpath for the project
@@ -577,22 +577,22 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * variables and unresolvable classpath containers should be silently
 	 * ignored, and that the resulting list should consist only of the
 	 * entries that could be successfully resolved; <code>false</code> indicates
-	 * that a <code>JavaModelException</code> should be thrown for the first
+	 * that a <code>JavaScriptModelException</code> should be thrown for the first
 	 * unresolved variable or container
 	 * @return the resolved classpath for the project as a list of simple
 	 * classpath entries, where all classpath variable and container entries
 	 * have been resolved and substituted with their final target entries
-	 * @exception JavaModelException in one of the corresponding situation:
+	 * @exception JavaScriptModelException in one of the corresponding situation:
 	 * <ul>
 	 *    <li>this element does not exist</li>
 	 *    <li>an exception occurs while accessing its corresponding resource</li>
 	 *    <li>a classpath variable or classpath container was not resolvable
 	 *    and <code>ignoreUnresolvedEntry</code> is <code>false</code>.</li>
 	 * </ul>
-	 * @see IClasspathEntry
+	 * @see IIncludePathEntry
 	 */
-	IClasspathEntry[] getResolvedClasspath(boolean ignoreUnresolvedEntry)
-	     throws JavaModelException;
+	IIncludePathEntry[] getResolvedIncludepath(boolean ignoreUnresolvedEntry)
+	     throws JavaScriptModelException;
 
 	/**
 	 * Returns whether this project has been built at least once and thus whether it has a build state.
@@ -610,7 +610,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param entries the given classpath entries
 	 * @return true if the given classpath entries would result in a cycle, false otherwise
 	 */
-	boolean hasClasspathCycle(IClasspathEntry[] entries);
+	boolean hasIncludepathCycle(IIncludePathEntry[] entries);
 	/**
 	 * Returns whether the given element is on the classpath of this project,
 	 * that is, referenced from a classpath entry and not explicitly excluded
@@ -619,11 +619,11 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param element the given element
 	 * @return <code>true</code> if the given element is on the classpath of
 	 * this project, <code>false</code> otherwise
-	 * @see IClasspathEntry#getInclusionPatterns()
-	 * @see IClasspathEntry#getExclusionPatterns()
+	 * @see IIncludePathEntry#getInclusionPatterns()
+	 * @see IIncludePathEntry#getExclusionPatterns()
 	 * @since 2.0
 	 */
-	boolean isOnClasspath(IJavaElement element);
+	boolean isOnIncludepath(IJavaScriptElement element);
 	/**
 	 * Returns whether the given resource is on the classpath of this project,
 	 * that is, referenced from a classpath entry and not explicitly excluded
@@ -632,11 +632,11 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param resource the given resource
 	 * @return <code>true</code> if the given resource is on the classpath of
 	 * this project, <code>false</code> otherwise
-	 * @see IClasspathEntry#getInclusionPatterns()
-	 * @see IClasspathEntry#getExclusionPatterns()
+	 * @see IIncludePathEntry#getInclusionPatterns()
+	 * @see IIncludePathEntry#getExclusionPatterns()
 	 * @since 2.1
 	 */
-	boolean isOnClasspath(IResource resource);
+	boolean isOnIncludepath(IResource resource);
 
 	/**
 	 * Creates a new evaluation context.
@@ -650,14 +650,14 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @param monitor the given progress monitor
 	 * @param region the given region
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @exception IllegalArgumentException if region is <code>null</code>
 	 * @return a type hierarchy for all types in the given
 	 * region, considering subtypes within that region
 	 */
 	ITypeHierarchy newTypeHierarchy(IRegion region, IProgressMonitor monitor)
-		throws JavaModelException;
+		throws JavaScriptModelException;
 
 	/**
 	 * Creates and returns a type hierarchy for all types in the given
@@ -673,7 +673,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param monitor the given progress monitor
 	 * @param region the given region
 	 * @param owner the owner of working copies that take precedence over their original compilation units
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 * @exception IllegalArgumentException if region is <code>null</code>
 	 * @return a type hierarchy for all types in the given
@@ -681,7 +681,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @since 3.0
 	 */
 	ITypeHierarchy newTypeHierarchy(IRegion region, WorkingCopyOwner owner, IProgressMonitor monitor)
-		throws JavaModelException;
+		throws JavaScriptModelException;
 
 	/**
 	 * Creates and returns a type hierarchy for the given type considering
@@ -691,7 +691,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param region the given region
 	 * @param monitor the given monitor
 	 *
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 *
 	 * @exception IllegalArgumentException if type or region is <code>null</code>
@@ -702,7 +702,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 		IType type,
 		IRegion region,
 		IProgressMonitor monitor)
-		throws JavaModelException;
+		throws JavaScriptModelException;
 
 	/**
 	 * Creates and returns a type hierarchy for the given type considering
@@ -720,7 +720,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param monitor the given monitor
 	 * @param owner the owner of working copies that take precedence over their original compilation units
 	 *
-	 * @exception JavaModelException if this element does not exist or if an
+	 * @exception JavaScriptModelException if this element does not exist or if an
 	 *		exception occurs while accessing its corresponding resource
 	 *
 	 * @exception IllegalArgumentException if type or region is <code>null</code>
@@ -733,7 +733,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 		IRegion region,
 		WorkingCopyOwner owner,
 		IProgressMonitor monitor)
-		throws JavaModelException;
+		throws JavaScriptModelException;
 
 	/**
 	 * Returns the default output location for the project as defined by its <code>.classpath</code> file from disk, or <code>null</code>
@@ -786,7 +786,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * Classpath variable and classpath container entries can be resolved using
 	 * the helper method <code>getResolvedClasspath</code>; classpath variable
 	 * entries also can be resolved individually using
-	 * <code>JavaCore#getClasspathVariable</code>).
+	 * <code>JavaScriptCore#getClasspathVariable</code>).
 	 * </p>
 	 * <p>
 	 * Note that no check is performed whether the project has the Java nature
@@ -804,21 +804,21 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *
 	 * @return the raw classpath from disk for the project, as a list of
 	 * classpath entries
-	 * @see #getRawClasspath()
-	 * @see IClasspathEntry
+	 * @see #getRawIncludepath()
+	 * @see IIncludePathEntry
 	 * @since 3.0
 	 */
-	IClasspathEntry[] readRawClasspath();
+	IIncludePathEntry[] readRawIncludepath();
 
 	/**
 	 * Helper method for setting one option value only. Equivalent to <code>Map options = this.getOptions(false); map.put(optionName, optionValue); this.setOptions(map)</code>
 	 * <p>
-	 * For a complete description of the configurable options, see <code>JavaCore#getDefaultOptions</code>.
+	 * For a complete description of the configurable options, see <code>JavaScriptCore#getDefaultOptions</code>.
 	 * </p>
 	 *
 	 * @param optionName the name of an option
 	 * @param optionValue the value of the option to set
-	 * @see JavaCore#getDefaultOptions()
+	 * @see JavaScriptCore#getDefaultOptions()
 	 * @since 3.0
 	 */
 	void setOption(String optionName, String optionValue);
@@ -828,12 +828,12 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * are remembered; all previous option settings are forgotten, including ones not explicitly
 	 * mentioned.
 	 * <p>
-	 * For a complete description of the configurable options, see <code>JavaCore#getDefaultOptions</code>.
+	 * For a complete description of the configurable options, see <code>JavaScriptCore#getDefaultOptions</code>.
 	 * </p>
 	 *
 	 * @param newOptions the new options (key type: <code>String</code>; value type: <code>String</code>),
-	 *   or <code>null</code> to flush all custom options (clients will automatically get the global JavaCore options).
-	 * @see JavaCore#getDefaultOptions()
+	 *   or <code>null</code> to flush all custom options (clients will automatically get the global JavaScriptCore options).
+	 * @see JavaScriptCore#getDefaultOptions()
 	 * @since 2.1
 	 */
 	void setOptions(Map newOptions);
@@ -857,7 +857,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * folder
 	 * @param monitor the progress monitor
 	 *
-	 * @exception JavaModelException if the classpath could not be set. Reasons include:
+	 * @exception JavaScriptModelException if the classpath could not be set. Reasons include:
 	 * <ul>
 	 *  <li> This Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
 	 *  <li> The path refers to a location not contained in this project (<code>PATH_OUTSIDE_PROJECT</code>)
@@ -866,17 +866,17 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *  <li> The output location is being modified during resource change event notification (CORE_EXCEPTION)
 	 * </ul>
 	 * @see #getOutputLocation()
-     * @see IClasspathEntry#getOutputLocation()
+     * @see IIncludePathEntry#getOutputLocation()
 	 */
 	void setOutputLocation(IPath path, IProgressMonitor monitor)
-		throws JavaModelException;
+		throws JavaScriptModelException;
 
 	/**
 	 * Sets both the classpath of this project and its default output
 	 * location at once. The classpath is defined using a list of classpath
 	 * entries. In particular such a classpath may contain classpath variable entries.
-	 * Classpath variable entries can be resolved individually ({@link JavaCore#getClasspathVariable(String)}),
-	 * or the full classpath can be resolved at once using the helper method {@link #getResolvedClasspath(boolean)}.
+	 * Classpath variable entries can be resolved individually ({@link JavaScriptCore#getIncludepathVariable(String)}),
+	 * or the full classpath can be resolved at once using the helper method {@link #getResolvedIncludepath(boolean)}.
 	 * <p>
 	 * A classpath variable provides an indirection level for better sharing a classpath. As an example, it allows
 	 * a classpath to no longer refer directly to external JARs located in some user specific location. The classpath
@@ -892,7 +892,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * </p><p>
 	 * If a cycle is detected while setting this classpath (and if resources can be modified), an error marker will be added
 	 * to the project closing the cycle.
-	 * To avoid this problem, use {@link #hasClasspathCycle(IClasspathEntry[])}
+	 * To avoid this problem, use {@link #hasIncludepathCycle(IIncludePathEntry[])}
 	 * before setting the classpath.
 	 * <p>
 	 * This operation acquires a lock on the workspace's root.
@@ -901,21 +901,21 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param outputLocation the default output location
 	 * @param canModifyResources whether resources should be written to disk if needed
 	 * @param monitor the given progress monitor
-	 * @exception JavaModelException if the classpath could not be set. Reasons include:
+	 * @exception JavaScriptModelException if the classpath could not be set. Reasons include:
 	 * <ul>
 	 * <li> This Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
 	 * <li> The classpath is being modified during resource change event notification (CORE_EXCEPTION)
-	 * <li> The classpath failed the validation check as defined by {@link JavaConventions#validateClasspath(IJavaProject, IClasspathEntry[], IPath)}
+	 * <li> The classpath failed the validation check as defined by {@link JavaScriptConventions#validateClasspath(IJavaScriptProject, IIncludePathEntry[], IPath)}
 	 * </ul>
-	 * @see IClasspathEntry
+	 * @see IIncludePathEntry
 	 * @since 3.2
 	 */
-	void setRawClasspath(IClasspathEntry[] entries, IPath outputLocation, boolean canModifyResources, IProgressMonitor monitor) throws JavaModelException;
+	void setRawIncludepath(IIncludePathEntry[] entries, IPath outputLocation, boolean canModifyResources, IProgressMonitor monitor) throws JavaScriptModelException;
 
 	/**
 	 * Sets the classpath of this project using a list of classpath entries. In particular such a classpath may contain
-	 * classpath variable entries. Classpath variable entries can be resolved individually ({@link JavaCore#getClasspathVariable(String)}),
-	 * or the full classpath can be resolved at once using the helper method {@link #getResolvedClasspath(boolean)}.
+	 * classpath variable entries. Classpath variable entries can be resolved individually ({@link JavaScriptCore#getIncludepathVariable(String)}),
+	 * or the full classpath can be resolved at once using the helper method {@link #getResolvedIncludepath(boolean)}.
 	 * <p>
 	 * A classpath variable provides an indirection level for better sharing a classpath. As an example, it allows
 	 * a classpath to no longer refer directly to external JARs located in some user specific location. The classpath
@@ -931,7 +931,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * </p><p>
 	 * If a cycle is detected while setting this classpath (and if resources can be modified), an error marker will be added
 	 * to the project closing the cycle.
-	 * To avoid this problem, use {@link #hasClasspathCycle(IClasspathEntry[])}
+	 * To avoid this problem, use {@link #hasIncludepathCycle(IIncludePathEntry[])}
 	 * before setting the classpath.
 	 * <p>
 	 * This operation acquires a lock on the workspace's root.
@@ -939,21 +939,21 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param entries a list of classpath entries
 	 * @param canModifyResources whether resources should be written to disk if needed
 	 * @param monitor the given progress monitor
-	 * @exception JavaModelException if the classpath could not be set. Reasons include:
+	 * @exception JavaScriptModelException if the classpath could not be set. Reasons include:
 	 * <ul>
 	 * <li> This Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
 	 * <li> The classpath is being modified during resource change event notification (CORE_EXCEPTION)
-	 * <li> The classpath failed the validation check as defined by {@link JavaConventions#validateClasspath(IJavaProject, IClasspathEntry[], IPath)}
+	 * <li> The classpath failed the validation check as defined by {@link JavaScriptConventions#validateClasspath(IJavaScriptProject, IIncludePathEntry[], IPath)}
 	 * </ul>
-	 * @see IClasspathEntry
+	 * @see IIncludePathEntry
 	 * @since 3.2
 	 */
-	void setRawClasspath(IClasspathEntry[] entries, boolean canModifyResources, IProgressMonitor monitor) throws JavaModelException;
+	void setRawIncludepath(IIncludePathEntry[] entries, boolean canModifyResources, IProgressMonitor monitor) throws JavaScriptModelException;
 
 	/**
 	 * Sets the classpath of this project using a list of classpath entries. In particular such a classpath may contain
-	 * classpath variable entries. Classpath variable entries can be resolved individually ({@link JavaCore#getClasspathVariable(String)}),
-	 * or the full classpath can be resolved at once using the helper method {@link #getResolvedClasspath(boolean)}.
+	 * classpath variable entries. Classpath variable entries can be resolved individually ({@link JavaScriptCore#getIncludepathVariable(String)}),
+	 * or the full classpath can be resolved at once using the helper method {@link #getResolvedIncludepath(boolean)}.
 	 * <p>
 	 * A classpath variable provides an indirection level for better sharing a classpath. As an example, it allows
 	 * a classpath to no longer refer directly to external JARs located in some user specific location. The classpath
@@ -965,32 +965,32 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * <p>
 	 * If a cycle is detected while setting this classpath, an error marker will be added
 	 * to the project closing the cycle.
-	 * To avoid this problem, use {@link #hasClasspathCycle(IClasspathEntry[])}
+	 * To avoid this problem, use {@link #hasIncludepathCycle(IIncludePathEntry[])}
 	 * before setting the classpath.
 	 * <p>
 	 * This operation acquires a lock on the workspace's root.
 	 *
 	 * @param entries a list of classpath entries
 	 * @param monitor the given progress monitor
-	 * @exception JavaModelException if the classpath could not be set. Reasons include:
+	 * @exception JavaScriptModelException if the classpath could not be set. Reasons include:
 	 * <ul>
 	 * <li> This Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
 	 * <li> The classpath is being modified during resource change event notification (CORE_EXCEPTION)
-	 * <li> The classpath failed the validation check as defined by {@link JavaConventions#validateClasspath(IJavaProject, IClasspathEntry[], IPath)}
+	 * <li> The classpath failed the validation check as defined by {@link JavaScriptConventions#validateClasspath(IJavaScriptProject, IIncludePathEntry[], IPath)}
 	 * </ul>
-	 * @see IClasspathEntry
+	 * @see IIncludePathEntry
 	 */
-	void setRawClasspath(IClasspathEntry[] entries, IProgressMonitor monitor)
-		throws JavaModelException;
+	void setRawIncludepath(IIncludePathEntry[] entries, IProgressMonitor monitor)
+		throws JavaScriptModelException;
 
 	/**
 	 * Sets the both the classpath of this project and its default output
 	 * location at once. The classpath is defined using a list of classpath
 	 * entries. In particular, such a classpath may contain classpath variable
 	 * entries. Classpath variable entries can be resolved individually (see
-	 * ({@link JavaCore#getClasspathVariable(String)}), or the full classpath can be
+	 * ({@link JavaScriptCore#getIncludepathVariable(String)}), or the full classpath can be
 	 * resolved at once using the helper method
-	 * {@link #getResolvedClasspath(boolean)}.
+	 * {@link #getResolvedIncludepath(boolean)}.
 	 * <p>
 	 * A classpath variable provides an indirection level for better sharing a
 	 * classpath. As an example, it allows a classpath to no longer refer
@@ -1006,7 +1006,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * <p>
 	 * If a cycle is detected while setting this classpath, an error marker will
 	 * be added to the project closing the cycle. To avoid this problem, use
-	 * {@link #hasClasspathCycle(IClasspathEntry[])} before setting
+	 * {@link #hasIncludepathCycle(IIncludePathEntry[])} before setting
 	 * the classpath.
 	 * </p>
 	 * <p>
@@ -1016,7 +1016,7 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 * @param entries a list of classpath entries
 	 * @param monitor the progress monitor
 	 * @param outputLocation the default output location
-	 * @exception JavaModelException if the classpath could not be set. Reasons
+	 * @exception JavaScriptModelException if the classpath could not be set. Reasons
 	 * include:
 	 * <ul>
 	 * <li> This Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
@@ -1028,12 +1028,12 @@ public interface IJavaProject extends IParent, IJavaElement, IOpenable {
 	 *  <li>The output location path is nested inside a package fragment root of this project (<code>INVALID_PATH</code>)
 	 * <li> The classpath is being modified during resource change event notification (CORE_EXCEPTION)
 	 * </ul>
-	 * @see IClasspathEntry
+	 * @see IIncludePathEntry
 	 * @since 2.0
 	 */
-	void setRawClasspath(IClasspathEntry[] entries, IPath outputLocation, IProgressMonitor monitor)
-		throws JavaModelException;
+	void setRawIncludepath(IIncludePathEntry[] entries, IPath outputLocation, IProgressMonitor monitor)
+		throws JavaScriptModelException;
 	
-	ITypeRoot findTypeRoot(String fullyQualifiedName) throws JavaModelException;
+	ITypeRoot findTypeRoot(String fullyQualifiedName) throws JavaScriptModelException;
 
 }

@@ -12,24 +12,24 @@
 package org.eclipse.wst.jsdt.core;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.wst.jsdt.core.dom.CompilationUnit;
+import org.eclipse.wst.jsdt.core.dom.JavaScriptUnit;
 
 
 /**
  * Represents an entire Java compilation unit (source file with one of the
- * {@link JavaCore#getJavaLikeExtensions() Java-like extensions}).
+ * {@link JavaScriptCore#getJavaScriptLikeExtensions() Java-like extensions}).
  * Compilation unit elements need to be opened before they can be navigated or manipulated.
  * The children are of type {@link IPackageDeclaration},
  * {@link IImportContainer}, and {@link IType},
  * and appear in the order in which they are declared in the source.
  * If a source file cannot be parsed, its structure remains unknown.
- * Use {@link IJavaElement#isStructureKnown} to determine whether this is
+ * Use {@link IJavaScriptElement#isStructureKnown} to determine whether this is
  * the case.
  * <p>
  * This interface is not intended to be implemented by clients.
  * </p>
  */
-public interface ICompilationUnit extends ITypeRoot, IWorkingCopy, ISourceManipulation {
+public interface IJavaScriptUnit extends ITypeRoot, IWorkingCopy, ISourceManipulation {
 /**
  * Constant indicating that a reconcile operation should not return an AST.
  * @since 3.0
@@ -86,7 +86,7 @@ public static final int ENABLE_BINDINGS_RECOVERY = 0x04;
  * 	that the client is not interested in problems.
  * @param monitor a progress monitor used to report progress while opening this compilation unit
  * 	or <code>null</code> if no progress should be reported
- * @throws JavaModelException if this compilation unit could not become a working copy.
+ * @throws JavaScriptModelException if this compilation unit could not become a working copy.
  * @see #discardWorkingCopy()
  * @since 3.0
   *
@@ -94,7 +94,7 @@ public static final int ENABLE_BINDINGS_RECOVERY = 0x04;
  * 	Note that if this deprecated method is used, problems will be reported to the given problem requestor
  * 	as well as the problem requestor returned by the working copy owner (if not null).
 */
-void becomeWorkingCopy(IProblemRequestor problemRequestor, IProgressMonitor monitor) throws JavaModelException;
+void becomeWorkingCopy(IProblemRequestor problemRequestor, IProgressMonitor monitor) throws JavaScriptModelException;
 /**
  * Changes this compilation unit handle into a working copy. A new {@link IBuffer} is
  * created using this compilation unit handle's owner. Uses the primary owner if none was
@@ -115,11 +115,11 @@ void becomeWorkingCopy(IProblemRequestor problemRequestor, IProgressMonitor moni
  *
  * @param monitor a progress monitor used to report progress while opening this compilation unit
  * 	or <code>null</code> if no progress should be reported
- * @throws JavaModelException if this compilation unit could not become a working copy.
+ * @throws JavaScriptModelException if this compilation unit could not become a working copy.
  * @see #discardWorkingCopy()
  * @since 3.3
  */
-void becomeWorkingCopy(IProgressMonitor monitor) throws JavaModelException;
+void becomeWorkingCopy(IProgressMonitor monitor) throws JavaScriptModelException;
 /**
  * Commits the contents of this working copy to its underlying resource.
  *
@@ -130,7 +130,7 @@ void becomeWorkingCopy(IProgressMonitor monitor) throws JavaModelException;
  * <li> <code>true</code> - in this case the contents of this working copy are applied to
  * 	the underlying resource even though this working copy was created before
  *		a subsequent change in the resource</li>
- * <li> <code>false</code> - in this case a {@link JavaModelException} is thrown</li>
+ * <li> <code>false</code> - in this case a {@link JavaScriptModelException} is thrown</li>
  * </ul>
  * <p>
  * Since 2.1, a working copy can be created on a not-yet existing compilation
@@ -140,7 +140,7 @@ void becomeWorkingCopy(IProgressMonitor monitor) throws JavaModelException;
  * @param force a flag to handle the cases when the contents of the original resource have changed
  * since this working copy was created
  * @param monitor the given progress monitor
- * @throws JavaModelException if this working copy could not commit. Reasons include:
+ * @throws JavaScriptModelException if this working copy could not commit. Reasons include:
  * <ul>
  * <li> A {@link org.eclipse.core.runtime.CoreException} occurred while updating an underlying resource
  * <li> This element is not a working copy (INVALID_ELEMENT_TYPES)
@@ -148,7 +148,7 @@ void becomeWorkingCopy(IProgressMonitor monitor) throws JavaModelException;
  * </ul>
  * @since 3.0
  */
-void commitWorkingCopy(boolean force, IProgressMonitor monitor) throws JavaModelException;
+void commitWorkingCopy(boolean force, IProgressMonitor monitor) throws JavaScriptModelException;
 /**
  * Creates and returns an non-static import declaration in this compilation unit
  * with the given name. This method is equivalent to
@@ -161,16 +161,16 @@ void commitWorkingCopy(boolean force, IProgressMonitor monitor) throws JavaModel
  * @param monitor the progress monitor to notify
  * @return the newly inserted import declaration (or the previously existing one in case attempting to create a duplicate)
  *
- * @throws JavaModelException if the element could not be created. Reasons include:
+ * @throws JavaScriptModelException if the element could not be created. Reasons include:
  * <ul>
  * <li> This Java element does not exist or the specified sibling does not exist (ELEMENT_DOES_NOT_EXIST)</li>
  * <li> A {@link org.eclipse.core.runtime.CoreException} occurred while updating an underlying resource
  * <li> The specified sibling is not a child of this compilation unit (INVALID_SIBLING)
  * <li> The name is not a valid import name (INVALID_NAME)
  * </ul>
- * @see #createImport(String, IJavaElement, int, IProgressMonitor)
+ * @see #createImport(String, IJavaScriptElement, int, IProgressMonitor)
  */
-IImportDeclaration createImport(String name, IJavaElement sibling, IProgressMonitor monitor) throws JavaModelException;
+IImportDeclaration createImport(String name, IJavaScriptElement sibling, IProgressMonitor monitor) throws JavaScriptModelException;
 
 /**
  * Creates and returns an import declaration in this compilation unit
@@ -204,7 +204,7 @@ IImportDeclaration createImport(String name, IJavaElement sibling, IProgressMoni
  * @param monitor the progress monitor to notify
  * @return the newly inserted import declaration (or the previously existing one in case attempting to create a duplicate)
  *
- * @throws JavaModelException if the element could not be created. Reasons include:
+ * @throws JavaScriptModelException if the element could not be created. Reasons include:
  * <ul>
  * <li> This Java element does not exist or the specified sibling does not exist (ELEMENT_DOES_NOT_EXIST)</li>
  * <li> A {@link org.eclipse.core.runtime.CoreException} occurred while updating an underlying resource
@@ -214,7 +214,7 @@ IImportDeclaration createImport(String name, IJavaElement sibling, IProgressMoni
  * @see Flags
  * @since 3.0
  */
-IImportDeclaration createImport(String name, IJavaElement sibling, int flags, IProgressMonitor monitor) throws JavaModelException;
+IImportDeclaration createImport(String name, IJavaScriptElement sibling, int flags, IProgressMonitor monitor) throws JavaScriptModelException;
 
 /**
  * Creates and returns a package declaration in this compilation unit
@@ -227,14 +227,14 @@ IImportDeclaration createImport(String name, IJavaElement sibling, int flags, IP
  * @param monitor the progress monitor to notify
  * @return the newly inserted package declaration (or the previously existing one in case attempting to create a duplicate)
  *
- * @throws JavaModelException if the element could not be created. Reasons include:
+ * @throws JavaScriptModelException if the element could not be created. Reasons include:
  * <ul>
  * <li>This Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
  * <li> A {@link org.eclipse.core.runtime.CoreException} occurred while updating an underlying resource
  * <li> The name is not a valid package name (INVALID_NAME)
  * </ul>
  */
- IPackageDeclaration createPackageDeclaration(String name, IProgressMonitor monitor) throws JavaModelException;
+ IPackageDeclaration createPackageDeclaration(String name, IProgressMonitor monitor) throws JavaScriptModelException;
 /**
  * Creates and returns a type in this compilation unit with the
  * given contents. If this compilation unit does not exist, one
@@ -248,7 +248,7 @@ IImportDeclaration createImport(String name, IJavaElement sibling, int flags, IP
  * The value of the <code>force</code> parameter effects the resolution of
  * such a conflict:<ul>
  * <li> <code>true</code> - in this case the type is created with the new contents</li>
- * <li> <code>false</code> - in this case a {@link JavaModelException} is thrown</li>
+ * <li> <code>false</code> - in this case a {@link JavaScriptModelException} is thrown</li>
  * </ul>
  *
  * @param contents the source contents of the type declaration to add.
@@ -258,7 +258,7 @@ IImportDeclaration createImport(String name, IJavaElement sibling, int flags, IP
  * @param monitor the progress monitor to notify
  * @return the newly inserted type
  *
- * @throws JavaModelException if the element could not be created. Reasons include:
+ * @throws JavaScriptModelException if the element could not be created. Reasons include:
  * <ul>
  * <li>The specified sibling element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
  * <li> A {@link org.eclipse.core.runtime.CoreException} occurred while updating an underlying resource
@@ -267,13 +267,13 @@ IImportDeclaration createImport(String name, IJavaElement sibling, int flags, IP
  * <li> There was a naming collision with an existing type (NAME_COLLISION)
  * </ul>
  */
-IType createType(String contents, IJavaElement sibling, boolean force, IProgressMonitor monitor) throws JavaModelException;
+IType createType(String contents, IJavaScriptElement sibling, boolean force, IProgressMonitor monitor) throws JavaScriptModelException;
 
-IField createField(String contents, IJavaElement sibling, boolean force, IProgressMonitor monitor)
-throws JavaModelException;
+IField createField(String contents, IJavaScriptElement sibling, boolean force, IProgressMonitor monitor)
+throws JavaScriptModelException;
 
-IMethod createMethod(String contents, IJavaElement sibling, boolean force, IProgressMonitor monitor)
-throws JavaModelException;
+IFunction createMethod(String contents, IJavaScriptElement sibling, boolean force, IProgressMonitor monitor)
+throws JavaScriptModelException;
 
 /**
  * Changes this compilation unit in working copy mode back to its original mode.
@@ -286,11 +286,11 @@ throws JavaModelException;
  * many times before it switches back to the original mode.
  * </p>
  *
- * @throws JavaModelException if this working copy could not return in its original mode.
+ * @throws JavaScriptModelException if this working copy could not return in its original mode.
  * @see #becomeWorkingCopy(IProblemRequestor, IProgressMonitor)
  * @since 3.0
  */
-void discardWorkingCopy() throws JavaModelException;
+void discardWorkingCopy() throws JavaScriptModelException;
 /**
  * Finds the elements in this compilation unit that correspond to
  * the given element.
@@ -310,7 +310,7 @@ void discardWorkingCopy() throws JavaModelException;
  * @return the found elements in this compilation unit that correspond to the given element
  * @since 3.0
  */
-IJavaElement[] findElements(IJavaElement element);
+IJavaScriptElement[] findElements(IJavaScriptElement element);
 /**
  * Finds the working copy for this compilation unit, given a {@link WorkingCopyOwner}.
  * If no working copy has been created for this compilation unit associated with this
@@ -323,7 +323,7 @@ IJavaElement[] findElements(IJavaElement element);
  * @see WorkingCopyOwner
  * @since 3.0
  */
-ICompilationUnit findWorkingCopy(WorkingCopyOwner owner);
+IJavaScriptUnit findWorkingCopy(WorkingCopyOwner owner);
 /**
  * Returns all types declared in this compilation unit in the order
  * in which they appear in the source.
@@ -331,10 +331,10 @@ ICompilationUnit findWorkingCopy(WorkingCopyOwner owner);
  * It does NOT include local types (types defined in methods).
  *
  * @return the array of top-level and member types defined in a compilation unit, in declaration order.
- * @throws JavaModelException if this element does not exist or if an
+ * @throws JavaScriptModelException if this element does not exist or if an
  *		exception occurs while accessing its corresponding resource
  */
-IType[] getAllTypes() throws JavaModelException;
+IType[] getAllTypes() throws JavaScriptModelException;
 /**
  * Returns the first import declaration in this compilation unit with the given name.
  * This is a handle-only method. The import declaration may or may not exist. This
@@ -362,10 +362,10 @@ IImportContainer getImportContainer();
  * accessed from a compilation unit's import container.
  *
  * @return the import declarations in this compilation unit
- * @throws JavaModelException if this element does not exist or if an
+ * @throws JavaScriptModelException if this element does not exist or if an
  *		exception occurs while accessing its corresponding resource
  */
-IImportDeclaration[] getImports() throws JavaModelException;
+IImportDeclaration[] getImports() throws JavaScriptModelException;
 /**
  * Returns the primary compilation unit (whose owner is the primary owner)
  * this working copy was created from, or this compilation unit if this a primary
@@ -378,7 +378,7 @@ IImportDeclaration[] getImports() throws JavaModelException;
  * or this compilation unit if it is primary
  * @since 3.0
  */
-ICompilationUnit getPrimary();
+IJavaScriptUnit getPrimary();
 /**
  * Returns the working copy owner of this working copy.
  * Returns null if it is not a working copy or if it has no owner.
@@ -403,19 +403,19 @@ IPackageDeclaration getPackageDeclaration(String name);
  *
  * @return an array of package declaration (normally of size one)
  *
- * @throws JavaModelException if this element does not exist or if an
+ * @throws JavaScriptModelException if this element does not exist or if an
  *		exception occurs while accessing its corresponding resource
  */
-IPackageDeclaration[] getPackageDeclarations() throws JavaModelException;
+IPackageDeclaration[] getPackageDeclarations() throws JavaScriptModelException;
 /**
  * Returns the top-level types declared in this compilation unit
  * in the order in which they appear in the source.
  *
  * @return the top-level types declared in this compilation unit
- * @throws JavaModelException if this element does not exist or if an
+ * @throws JavaScriptModelException if this element does not exist or if an
  *		exception occurs while accessing its corresponding resource
  */
-IType[] getTypes() throws JavaModelException;
+IType[] getTypes() throws JavaScriptModelException;
 /**
  * Returns a new working copy of this compilation unit if it is a primary compilation unit,
  * or this compilation unit if it is already a non-primary working copy.
@@ -424,7 +424,7 @@ IType[] getTypes() throws JavaModelException;
  * {@link #getWorkingCopy(WorkingCopyOwner, IProblemRequestor, IProgressMonitor)}
  * should be used instead.
  * </p><p>
- * When the working copy instance is created, an ADDED IJavaElementDelta is
+ * When the working copy instance is created, an ADDED IJavaScriptElementDelta is
  * reported on this working copy.
  * </p><p>
  * Once done with the working copy, users of this method must discard it using
@@ -436,13 +436,13 @@ IType[] getTypes() throws JavaModelException;
  * </p>
  * @param monitor a progress monitor used to report progress while opening this compilation unit
  *                 or <code>null</code> if no progress should be reported
- * @throws JavaModelException if the contents of this element can
+ * @throws JavaScriptModelException if the contents of this element can
  *   not be determined.
  * @return a new working copy of this element if this element is not
  * a working copy, or this element if this element is already a working copy
  * @since 3.0
  */
-ICompilationUnit getWorkingCopy(IProgressMonitor monitor) throws JavaModelException;
+IJavaScriptUnit getWorkingCopy(IProgressMonitor monitor) throws JavaScriptModelException;
 /**
  * Returns a shared working copy on this compilation unit using the given working copy owner to create
  * the buffer, or this compilation unit if it is already a non-primary working copy.
@@ -464,7 +464,7 @@ ICompilationUnit getWorkingCopy(IProgressMonitor monitor) throws JavaModelExcept
  * The buffer will be automatically initialized with the original's compilation unit content
  * upon creation.
  * <p>
- * When the shared working copy instance is created, an ADDED IJavaElementDelta is reported on this
+ * When the shared working copy instance is created, an ADDED IJavaScriptElementDelta is reported on this
  * working copy.
  * </p><p>
  * Since 2.1, a working copy can be created on a not-yet existing compilation
@@ -478,7 +478,7 @@ ICompilationUnit getWorkingCopy(IProgressMonitor monitor) throws JavaModelExcept
  * 	that the client is not interested in problems.
  * @param monitor a progress monitor used to report progress while opening this compilation unit
  *                 or <code>null</code> if no progress should be reported
- * @throws JavaModelException if the contents of this element can
+ * @throws JavaScriptModelException if the contents of this element can
  *   not be determined.
  * @return a new working copy of this element using the given factory to create
  * the buffer, or this element if this element is already a working copy
@@ -487,7 +487,7 @@ ICompilationUnit getWorkingCopy(IProgressMonitor monitor) throws JavaModelExcept
  * 	Note that if this deprecated method is used, problems will be reported on the passed problem requester
  * 	as well as on the problem requestor returned by the working copy owner (if not null).
 */
-ICompilationUnit getWorkingCopy(WorkingCopyOwner owner, IProblemRequestor problemRequestor, IProgressMonitor monitor) throws JavaModelException;
+IJavaScriptUnit getWorkingCopy(WorkingCopyOwner owner, IProblemRequestor problemRequestor, IProgressMonitor monitor) throws JavaScriptModelException;
 /**
  * Returns whether the resource of this working copy has changed since the
  * inception of this working copy.
@@ -559,14 +559,14 @@ boolean isWorkingCopy();
  * @return the compilation unit AST or <code>null</code> if not requested,
  *    or if the requested level of AST API is not supported,
  *    or if the working copy was consistent
- * @throws JavaModelException if the contents of the original element
+ * @throws JavaScriptModelException if the contents of the original element
  *		cannot be accessed. Reasons include:
  * <ul>
  * <li> The original Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
  * </ul>
  * @since 3.0
  */
-CompilationUnit reconcile(int astLevel, boolean forceProblemDetection, WorkingCopyOwner owner, IProgressMonitor monitor) throws JavaModelException;
+JavaScriptUnit reconcile(int astLevel, boolean forceProblemDetection, WorkingCopyOwner owner, IProgressMonitor monitor) throws JavaScriptModelException;
 
 /**
  * Reconciles the contents of this working copy, sends out a Java delta
@@ -624,14 +624,14 @@ CompilationUnit reconcile(int astLevel, boolean forceProblemDetection, WorkingCo
  * @return the compilation unit AST or <code>null</code> if not requested,
  *    or if the requested level of AST API is not supported,
  *    or if the working copy was consistent
- * @throws JavaModelException if the contents of the original element
+ * @throws JavaScriptModelException if the contents of the original element
  *		cannot be accessed. Reasons include:
  * <ul>
  * <li> The original Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
  * </ul>
  * @since 3.2
  */
-CompilationUnit reconcile(int astLevel, boolean forceProblemDetection, boolean enableStatementsRecovery, WorkingCopyOwner owner, IProgressMonitor monitor) throws JavaModelException;
+JavaScriptUnit reconcile(int astLevel, boolean forceProblemDetection, boolean enableStatementsRecovery, WorkingCopyOwner owner, IProgressMonitor monitor) throws JavaScriptModelException;
 
 /**
  * Reconciles the contents of this working copy, sends out a Java delta
@@ -696,7 +696,7 @@ CompilationUnit reconcile(int astLevel, boolean forceProblemDetection, boolean e
  * @return the compilation unit AST or <code>null</code> if not requested,
  *    or if the requested level of AST API is not supported,
  *    or if the working copy was consistent
- * @throws JavaModelException if the contents of the original element
+ * @throws JavaScriptModelException if the contents of the original element
  *		cannot be accessed. Reasons include:
  * <ul>
  * <li> The original Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
@@ -706,7 +706,7 @@ CompilationUnit reconcile(int astLevel, boolean forceProblemDetection, boolean e
  * @see #ENABLE_STATEMENTS_RECOVERY
  * @since 3.3
  */
-CompilationUnit reconcile(int astLevel, int reconcileFlags, WorkingCopyOwner owner, IProgressMonitor monitor) throws JavaModelException;
+JavaScriptUnit reconcile(int astLevel, int reconcileFlags, WorkingCopyOwner owner, IProgressMonitor monitor) throws JavaScriptModelException;
 
 /**
  * Restores the contents of this working copy to the current contents of
@@ -716,15 +716,19 @@ CompilationUnit reconcile(int astLevel, int reconcileFlags, WorkingCopyOwner own
  * <p>Note: This is the inverse of committing the content of the
  * working copy to the original element with {@link #commitWorkingCopy(boolean, IProgressMonitor)}.
  *
- * @throws JavaModelException if the contents of the original element
+ * @throws JavaScriptModelException if the contents of the original element
  *		cannot be accessed.  Reasons include:
  * <ul>
  * <li> The original Java element does not exist (ELEMENT_DOES_NOT_EXIST)</li>
  * </ul>
  * @since 3.0
  */
-void restore() throws JavaModelException;
-IMethod[] findMethods(IMethod method);
+void restore() throws JavaScriptModelException;
+/**
+ * @deprecated Use {@link #findFunctions(IFunction)} instead
+ */
+IFunction[] findMethods(IFunction method);
+IFunction[] findFunctions(IFunction method);
 
 
 

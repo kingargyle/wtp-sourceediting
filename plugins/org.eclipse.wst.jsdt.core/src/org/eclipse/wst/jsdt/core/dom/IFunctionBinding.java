@@ -34,7 +34,7 @@ package org.eclipse.wst.jsdt.core.dom;
  * @see ITypeBinding#getDeclaredMethods()
  * @since 2.0
  */
-public interface IMethodBinding extends IBinding {
+public interface IFunctionBinding extends IBinding {
 
 	/**
 	 * Returns whether this binding is for a constructor or a method.
@@ -270,7 +270,7 @@ public interface IMethodBinding extends IBinding {
 	 * @return the method binding
 	 * @since 3.1
 	 */
-	public IMethodBinding getMethodDeclaration();
+	public IFunctionBinding getMethodDeclaration();
 
 	/**
 	 * Returns whether this method binding represents an instance of
@@ -297,7 +297,7 @@ public interface IMethodBinding extends IBinding {
 	 * @return <code>true</code> if this method's signature is a subsignature of the given method
 	 * @since 3.1
 	 */
-	public boolean isSubsignature(IMethodBinding otherMethod);
+	public boolean isSubsignature(IFunctionBinding otherMethod);
 
 	/**
 	 * Returns whether this is a variable arity method.
@@ -321,5 +321,5 @@ public interface IMethodBinding extends IBinding {
 	 * and <code>false</code> otherwise
 	 * @since 3.1
 	 */
-	public boolean overrides(IMethodBinding method);
+	public boolean overrides(IFunctionBinding method);
 }

@@ -14,11 +14,11 @@ package org.eclipse.wst.jsdt.core.dom;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.eclipse.wst.jsdt.core.IJavaElement;
-import org.eclipse.wst.jsdt.core.IMethod;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
+import org.eclipse.wst.jsdt.core.IFunction;
 import org.eclipse.wst.jsdt.core.IType;
 import org.eclipse.wst.jsdt.core.ITypeRoot;
-import org.eclipse.wst.jsdt.core.JavaModelException;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.Signature;
 import org.eclipse.wst.jsdt.core.compiler.CharOperation;
 import org.eclipse.wst.jsdt.internal.compiler.lookup.ExtraCompilerModifiers;
@@ -37,7 +37,7 @@ import org.eclipse.wst.jsdt.internal.core.util.Util;
 /**
  * Internal implementation of method bindings.
  */
-class MethodBinding implements IMethodBinding {
+class FunctionBinding implements IFunctionBinding {
 
 	private static final int VALID_MODIFIERS = Modifier.PUBLIC | Modifier.PROTECTED | Modifier.PRIVATE |
 		Modifier.ABSTRACT | Modifier.STATIC | Modifier.FINAL | Modifier.SYNCHRONIZED | Modifier.NATIVE |
@@ -56,7 +56,7 @@ class MethodBinding implements IMethodBinding {
 	private IAnnotationBinding[] annotations;
 	private IAnnotationBinding[] parameterAnnotations;
 
-	MethodBinding(BindingResolver resolver, org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding binding) {
+	FunctionBinding(BindingResolver resolver, org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding binding) {
 		this.resolver = resolver;
 		this.binding = binding;
 	}
@@ -66,14 +66,14 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see IMethodBinding#isConstructor()
+	 * @see IFunctionBinding#isConstructor()
 	 */
 	public boolean isConstructor() {
 		return this.binding.isConstructor();
 	}
 
 	/**
-	 * @see IMethodBinding#isDefaultConstructor()
+	 * @see IFunctionBinding#isDefaultConstructor()
 	 * @since 3.0
 	 */
 	public boolean isDefaultConstructor() {
@@ -126,7 +126,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see IMethodBinding#getDeclaringClass()
+	 * @see IFunctionBinding#getDeclaringClass()
 	 */
 	public ITypeBinding getDeclaringClass() {
 		if (this.declaringClass == null) {
@@ -156,7 +156,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see IMethodBinding#getParameterTypes()
+	 * @see IFunctionBinding#getParameterTypes()
 	 */
 	public ITypeBinding[] getParameterTypes() {
 		if (this.parameterTypes != null) {
@@ -190,7 +190,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see IMethodBinding#getReturnType()
+	 * @see IFunctionBinding#getReturnType()
 	 */
 	public ITypeBinding getReturnType() {
 		if (this.returnType == null) {
@@ -206,7 +206,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see IMethodBinding#getExceptionTypes()
+	 * @see IFunctionBinding#getExceptionTypes()
 	 */
 	public ITypeBinding[] getExceptionTypes() {
 		if (this.exceptionTypes != null) {
@@ -228,7 +228,7 @@ class MethodBinding implements IMethodBinding {
 		return this.exceptionTypes = exTypes;
 	}
 
-	public IJavaElement getJavaElement() {
+	public IJavaScriptElement getJavaElement() {
 		JavaElement element = getUnresolvedJavaElement();
 		if (element == null)
 			return null;
@@ -236,7 +236,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	private JavaElement getUnresolvedJavaElement() {
-		IJavaElement declaringElement = getDeclaringClass().getJavaElement();
+		IJavaScriptElement declaringElement = getDeclaringClass().getJavaElement();
 		if (declaringElement == null) return null;
 		if (!(this.resolver instanceof DefaultBindingResolver)) return null;
 		ASTNode node = (ASTNode) ((DefaultBindingResolver) this.resolver).bindingsToAstNodes.get(this);
@@ -250,9 +250,9 @@ class MethodBinding implements IMethodBinding {
 		else if (declaringElement instanceof IType )
 			declaringType=(IType)declaringElement;
 //		IType declaringType=(IType)declaringElement;
-		if (node != null && declaringElement.getParent().getElementType() != IJavaElement.CLASS_FILE) {
-			if (node instanceof MethodDeclaration) {
-				MethodDeclaration methodDeclaration = (MethodDeclaration) node;
+		if (node != null && declaringElement.getParent().getElementType() != IJavaScriptElement.CLASS_FILE) {
+			if (node instanceof FunctionDeclaration) {
+				FunctionDeclaration methodDeclaration = (FunctionDeclaration) node;
 				ArrayList parameterSignatures = new ArrayList();
 				Iterator iterator = methodDeclaration.parameters().iterator();
 				while (iterator.hasNext()) {
@@ -272,13 +272,13 @@ class MethodBinding implements IMethodBinding {
 				String[] parameters = new String[parameterCount];
 				parameterSignatures.toArray(parameters);
 				if (typeRoot!=null)
-					return (JavaElement) typeRoot.getMethod(getName(), parameters);
+					return (JavaElement) typeRoot.getFunction(getName(), parameters);
 				else
-					return (JavaElement) declaringType.getMethod(getName(), parameters);
+					return (JavaElement) declaringType.getFunction(getName(), parameters);
 			} else {
 				// annotation type member declaration
 				AnnotationTypeMemberDeclaration typeMemberDeclaration = (AnnotationTypeMemberDeclaration) node;
-				return (JavaElement) declaringType.getMethod(typeMemberDeclaration.getName().getIdentifier(), CharOperation.NO_STRINGS); // annotation type members don't have parameters
+				return (JavaElement) declaringType.getFunction(typeMemberDeclaration.getName().getIdentifier(), CharOperation.NO_STRINGS); // annotation type members don't have parameters
 			}
 		} else {
 			// case of method not in the created AST, or a binary method
@@ -296,17 +296,17 @@ class MethodBinding implements IMethodBinding {
 			for (int i = 0;  i < length; i++) {
 				parameterSignatures[declaringIndex + i] = new String(parameters[i].genericTypeSignature()).replace('/', '.');
 			}
-			IMethod result = declaringType.getMethod(selector, parameterSignatures);
+			IFunction result = declaringType.getFunction(selector, parameterSignatures);
 			if (isBinary)
 				return (JavaElement) result;
-			IMethod[] methods = null;
+			IFunction[] methods = null;
 			try {
-				methods = declaringType.getMethods();
-			} catch (JavaModelException e) {
+				methods = declaringType.getFunctions();
+			} catch (JavaScriptModelException e) {
 				// declaring type doesn't exist
 				return null;
 			}
-			IMethod[] candidates = Member.findMethods(result, methods);
+			IFunction[] candidates = Member.findMethods(result, methods);
 			if (candidates == null || candidates.length == 0)
 				return null;
 			return (JavaElement) candidates[0];
@@ -348,7 +348,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see org.eclipse.wst.jsdt.core.dom.IMethodBinding#isVarargs()
+	 * @see org.eclipse.wst.jsdt.core.dom.IFunctionBinding#isVarargs()
 	 * @since 3.1
 	 */
 	public boolean isVarargs() {
@@ -378,15 +378,15 @@ class MethodBinding implements IMethodBinding {
 			// other binding missing
 			return false;
 		}
-		if (!(other instanceof MethodBinding)) {
+		if (!(other instanceof FunctionBinding)) {
 			return false;
 		}
-		org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding otherBinding = ((MethodBinding) other).binding;
+		org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding otherBinding = ((FunctionBinding) other).binding;
 		return BindingComparator.isEqual(this.binding, otherBinding);
 	}
 
 	/**
-	 * @see org.eclipse.wst.jsdt.core.dom.IMethodBinding#getTypeParameters()
+	 * @see org.eclipse.wst.jsdt.core.dom.IFunctionBinding#getTypeParameters()
 	 */
 	public ITypeBinding[] getTypeParameters() {
 		if (this.typeParameters != null) {
@@ -409,7 +409,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see org.eclipse.wst.jsdt.core.dom.IMethodBinding#isGenericMethod()
+	 * @see org.eclipse.wst.jsdt.core.dom.IFunctionBinding#isGenericMethod()
 	 * @since 3.1
 	 */
 	public boolean isGenericMethod() {
@@ -422,7 +422,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see org.eclipse.wst.jsdt.core.dom.IMethodBinding#getTypeArguments()
+	 * @see org.eclipse.wst.jsdt.core.dom.IFunctionBinding#getTypeArguments()
 	 */
 	public ITypeBinding[] getTypeArguments() {
 		if (this.typeArguments != null) {
@@ -449,7 +449,7 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see org.eclipse.wst.jsdt.core.dom.IMethodBinding#isParameterizedMethod()
+	 * @see org.eclipse.wst.jsdt.core.dom.IFunctionBinding#isParameterizedMethod()
 	 */
 	public boolean isParameterizedMethod() {
 		return (this.binding instanceof ParameterizedGenericMethodBinding)
@@ -457,16 +457,16 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see org.eclipse.wst.jsdt.core.dom.IMethodBinding#isRawMethod()
+	 * @see org.eclipse.wst.jsdt.core.dom.IFunctionBinding#isRawMethod()
 	 */
 	public boolean isRawMethod() {
 		return (this.binding instanceof ParameterizedGenericMethodBinding)
 			&& ((ParameterizedGenericMethodBinding) this.binding).isRaw;
 	}
 
-	public boolean isSubsignature(IMethodBinding otherMethod) {
+	public boolean isSubsignature(IFunctionBinding otherMethod) {
 		try {
-			org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding other = ((MethodBinding) otherMethod).binding;
+			org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding other = ((FunctionBinding) otherMethod).binding;
 			if (!CharOperation.equals(this.binding.selector, other.selector))
 				return false;
 			return this.binding.areParameterErasuresEqual(other) && this.binding.areTypeVariableErasuresEqual(other);
@@ -478,18 +478,18 @@ class MethodBinding implements IMethodBinding {
 	}
 
 	/**
-	 * @see org.eclipse.wst.jsdt.core.dom.IMethodBinding#getMethodDeclaration()
+	 * @see org.eclipse.wst.jsdt.core.dom.IFunctionBinding#getMethodDeclaration()
 	 */
-	public IMethodBinding getMethodDeclaration() {
+	public IFunctionBinding getMethodDeclaration() {
 		return this.resolver.getMethodBinding(this.binding.original());
 	}
 
 	/**
-	 * @see IMethodBinding#overrides(IMethodBinding)
+	 * @see IFunctionBinding#overrides(IFunctionBinding)
 	 */
-	public boolean overrides(IMethodBinding overridenMethod) {
+	public boolean overrides(IFunctionBinding overridenMethod) {
 		try {
-			org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding overridenCompilerBinding = ((MethodBinding) overridenMethod).binding;
+			org.eclipse.wst.jsdt.internal.compiler.lookup.MethodBinding overridenCompilerBinding = ((FunctionBinding) overridenMethod).binding;
 			if (this.binding == overridenCompilerBinding)
 				return false;
 			char[] selector = this.binding.selector;

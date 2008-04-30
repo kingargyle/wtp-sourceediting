@@ -16,39 +16,39 @@ import java.util.List;
 
 /**
  * AST node for a method or constructor reference within a doc comment
- * ({@link Javadoc}). The principal uses of these are in "@see" and "@link"
+ * ({@link JSdoc}). The principal uses of these are in "@see" and "@link"
  * tag elements, for references to method and constructor members.
  * <pre>
- * MethodRef:
+ * FunctionRef:
  *     [ Name ] <b>#</b> Identifier
- *         <b>(</b> [ MethodRefParameter | { <b>,</b> MethodRefParameter } ] <b>)</b>
+ *         <b>(</b> [ FunctionRefParameter | { <b>,</b> FunctionRefParameter } ] <b>)</b>
  * </pre>
  *
- * @see Javadoc
+ * @see JSdoc
  * @since 3.0
  */
-public class MethodRef extends ASTNode implements IDocElement {
+public class FunctionRef extends ASTNode implements IDocElement {
 
 	/**
 	 * The "qualifier" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor QUALIFIER_PROPERTY =
-		new ChildPropertyDescriptor(MethodRef.class, "qualifier", Name.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionRef.class, "qualifier", Name.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "name" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor NAME_PROPERTY =
-		new ChildPropertyDescriptor(MethodRef.class, "name", SimpleName.class, MANDATORY, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionRef.class, "name", SimpleName.class, MANDATORY, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "parameters" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildListPropertyDescriptor PARAMETERS_PROPERTY =
-		new ChildListPropertyDescriptor(MethodRef.class, "parameters", MethodRefParameter.class, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildListPropertyDescriptor(FunctionRef.class, "parameters", FunctionRefParameter.class, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * A list of property descriptors (element type:
@@ -59,7 +59,7 @@ public class MethodRef extends ASTNode implements IDocElement {
 
 	static {
 		List properyList = new ArrayList(4);
-		createPropertyList(MethodRef.class, properyList);
+		createPropertyList(FunctionRef.class, properyList);
 		addProperty(QUALIFIER_PROPERTY, properyList);
 		addProperty(NAME_PROPERTY, properyList);
 		addProperty(PARAMETERS_PROPERTY, properyList);
@@ -92,7 +92,7 @@ public class MethodRef extends ASTNode implements IDocElement {
 
 	/**
 	 * The parameter declarations
-	 * (element type: <code>MethodRefParameter</code>).
+	 * (element type: <code>FunctionRefParameter</code>).
 	 * Defaults to an empty list.
 	 */
 	private ASTNode.NodeList parameters =
@@ -112,7 +112,7 @@ public class MethodRef extends ASTNode implements IDocElement {
 	 *
 	 * @param ast the AST that is to own this node
 	 */
-	MethodRef(AST ast) {
+	FunctionRef(AST ast) {
 		super(ast);
 	}
 
@@ -162,14 +162,14 @@ public class MethodRef extends ASTNode implements IDocElement {
 	 * Method declared on ASTNode.
 	 */
 	final int getNodeType0() {
-		return METHOD_REF;
+		return FUNCTION_REF;
 	}
 
 	/* (omit javadoc for this method)
 	 * Method declared on ASTNode.
 	 */
 	ASTNode clone0(AST target) {
-		MethodRef result = new MethodRef(target);
+		FunctionRef result = new FunctionRef(target);
 		result.setSourceRange(this.getStartPosition(), this.getLength());
 		result.setQualifier((Name) ASTNode.copySubtree(target, getQualifier()));
 		result.setName((SimpleName) ASTNode.copySubtree(target, getName()));
@@ -274,7 +274,7 @@ public class MethodRef extends ASTNode implements IDocElement {
 	 * method reference.
 	 *
 	 * @return the live list of method parameter references
-	 *    (element type: <code>MethodRefParameter</code>)
+	 *    (element type: <code>FunctionRefParameter</code>)
 	 */
 	public List parameters() {
 		return this.parameters;

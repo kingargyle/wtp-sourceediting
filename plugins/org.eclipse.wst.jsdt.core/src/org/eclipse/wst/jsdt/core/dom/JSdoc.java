@@ -27,7 +27,7 @@ import org.eclipse.wst.jsdt.internal.compiler.parser.TerminalTokens;
  *
  * @since 2.0
  */
-public class Javadoc extends Comment {
+public class JSdoc extends Comment {
 
 	/**
 	 * The "comment" structural property of this node type (JLS2 API only).
@@ -35,14 +35,14 @@ public class Javadoc extends Comment {
 	 * @deprecated Replaced by {@link #TAGS_PROPERTY} in the JLS3 API.
 	 */
 	public static final SimplePropertyDescriptor COMMENT_PROPERTY =
-		new SimplePropertyDescriptor(Javadoc.class, "comment", String.class, MANDATORY); //$NON-NLS-1$
+		new SimplePropertyDescriptor(JSdoc.class, "comment", String.class, MANDATORY); //$NON-NLS-1$
 
 	/**
 	 * The "tags" structural property of this node type.
 	 * @since 3.1
 	 */
 	public static final ChildListPropertyDescriptor TAGS_PROPERTY =
-		new ChildListPropertyDescriptor(Javadoc.class, "tags", TagElement.class, CYCLE_RISK); //$NON-NLS-1$
+		new ChildListPropertyDescriptor(JSdoc.class, "tags", TagElement.class, CYCLE_RISK); //$NON-NLS-1$
 
 
 	/**
@@ -63,13 +63,13 @@ public class Javadoc extends Comment {
 
 	static {
 		List properyList = new ArrayList(3);
-		createPropertyList(Javadoc.class, properyList);
+		createPropertyList(JSdoc.class, properyList);
 		addProperty(COMMENT_PROPERTY, properyList);
 		addProperty(TAGS_PROPERTY, properyList);
 		PROPERTY_DESCRIPTORS_2_0 = reapPropertyList(properyList);
 
 		properyList = new ArrayList(2);
-		createPropertyList(Javadoc.class, properyList);
+		createPropertyList(JSdoc.class, properyList);
 		addProperty(TAGS_PROPERTY, properyList);
 		PROPERTY_DESCRIPTORS_3_0 = reapPropertyList(properyList);
 	}
@@ -127,7 +127,7 @@ public class Javadoc extends Comment {
 	 *
 	 * @param ast the AST that is to own this node
 	 */
-	Javadoc(AST ast) {
+	JSdoc(AST ast) {
 		super(ast);
 	}
 
@@ -169,14 +169,14 @@ public class Javadoc extends Comment {
 	 * Method declared on ASTNode.
 	 */
 	final int getNodeType0() {
-		return JAVADOC;
+		return JSDOC;
 	}
 
 	/* (omit javadoc for this method)
 	 * Method declared on ASTNode.
 	 */
 	ASTNode clone0(AST target) {
-		Javadoc result = new Javadoc(target);
+		JSdoc result = new JSdoc(target);
 		result.setSourceRange(this.getStartPosition(), this.getLength());
 		if (this.ast.apiLevel == AST.JLS2_INTERNAL) {
 			result.setComment(getComment());

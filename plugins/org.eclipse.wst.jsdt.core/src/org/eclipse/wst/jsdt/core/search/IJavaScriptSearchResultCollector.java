@@ -13,10 +13,10 @@ package org.eclipse.wst.jsdt.core.search;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.wst.jsdt.core.IJavaElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
 
 /**
- * A <code>IJavaSearchResultCollector</code> collects search results from a <code>search</code>
+ * A <code>IJavaScriptSearchResultCollector</code> collects search results from a <code>search</code>
  * query to a <code>SearchEngine</code>. Clients must implement this interface and pass
  * an instance to the <code>search(...)</code> methods. When a search starts, the <code>aboutToStart()</code>
  * method is called, then 0 or more call to <code>accept(...)</code> are done, finally the
@@ -30,7 +30,7 @@ import org.eclipse.wst.jsdt.core.IJavaElement;
  * The order of the results is unspecified. Clients must not rely on this order to display results,
  * but they should sort these results (for example, in syntactical order).
  * <p>
- * The <code>IJavaSearchResultCollector</code> is also used to provide a progress monitor to the
+ * The <code>IJavaScriptSearchResultCollector</code> is also used to provide a progress monitor to the
  * <code>SearchEngine</code>.
  * </p>
  * <p>
@@ -41,7 +41,7 @@ import org.eclipse.wst.jsdt.core.IJavaElement;
  * @deprecated Since 3.0, the class
  * {@link org.eclipse.wst.jsdt.core.search.SearchRequestor} replaces this interface.
  */
-public interface IJavaSearchResultCollector {
+public interface IJavaScriptSearchResultCollector {
 	/**
 	 * The search result corresponds exactly to the search pattern.
 	 *
@@ -84,7 +84,7 @@ public void accept(
 	IResource resource,
 	int start,
 	int end,
-	IJavaElement enclosingElement,
+	IJavaScriptElement enclosingElement,
 	int accuracy)
 	throws CoreException;
 /**

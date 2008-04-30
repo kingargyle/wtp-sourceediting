@@ -19,7 +19,7 @@ import java.util.List;
  * is the union of a method declaration and a constructor declaration.
  * For JLS2:
  * <pre>
- * MethodDeclaration:
+ * FunctionDeclaration:
  *    [ Javadoc ] { Modifier } ( Type | <b>void</b> ) Identifier <b>(</b>
  *        [ FormalParameter
  * 		     { <b>,</b> FormalParameter } ] <b>)</b> {<b>[</b> <b>]</b> }
@@ -33,7 +33,7 @@ import java.util.List;
  * For JLS3, type parameters and reified modifiers
  * (and annotations) were added:
  * <pre>
- * MethodDeclaration:
+ * FunctionDeclaration:
  *    [ Javadoc ] { ExtendedModifier }
  *		  [ <b>&lt;</b> TypeParameter { <b>,</b> TypeParameter } <b>&gt;</b> ]
  *        ( Type | <b>void</b> ) Identifier <b>(</b>
@@ -62,91 +62,91 @@ import java.util.List;
  *
  * @since 2.0
  */
-public class MethodDeclaration extends BodyDeclaration {
+public class FunctionDeclaration extends BodyDeclaration {
 
 	/**
 	 * The "javadoc" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor JAVADOC_PROPERTY =
-		internalJavadocPropertyFactory(MethodDeclaration.class);
+		internalJavadocPropertyFactory(FunctionDeclaration.class);
 
 	/**
 	 * The "modifiers" structural property of this node type (JLS2 API only).
 	 * @since 3.0
 	 */
 	public static final SimplePropertyDescriptor MODIFIERS_PROPERTY =
-		internalModifiersPropertyFactory(MethodDeclaration.class);
+		internalModifiersPropertyFactory(FunctionDeclaration.class);
 
 	/**
 	 * The "modifiers" structural property of this node type (added in JLS3 API).
 	 * @since 3.1
 	 */
 	public static final ChildListPropertyDescriptor MODIFIERS2_PROPERTY =
-		internalModifiers2PropertyFactory(MethodDeclaration.class);
+		internalModifiers2PropertyFactory(FunctionDeclaration.class);
 
 	/**
 	 * The "constructor" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final SimplePropertyDescriptor CONSTRUCTOR_PROPERTY =
-		new SimplePropertyDescriptor(MethodDeclaration.class, "constructor", boolean.class, MANDATORY); //$NON-NLS-1$
+		new SimplePropertyDescriptor(FunctionDeclaration.class, "constructor", boolean.class, MANDATORY); //$NON-NLS-1$
 
 	/**
 	 * The "name" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor NAME_PROPERTY =
-		new ChildPropertyDescriptor(MethodDeclaration.class, "name", SimpleName.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionDeclaration.class, "name", SimpleName.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "returnType" structural property of this node type (JLS2 API only).
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor RETURN_TYPE_PROPERTY =
-		new ChildPropertyDescriptor(MethodDeclaration.class, "returnType", Type.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionDeclaration.class, "returnType", Type.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "returnType2" structural property of this node type (added in JLS3 API).
 	 * @since 3.1
 	 */
 	public static final ChildPropertyDescriptor RETURN_TYPE2_PROPERTY =
-		new ChildPropertyDescriptor(MethodDeclaration.class, "returnType2", Type.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionDeclaration.class, "returnType2", Type.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "extraDimensions" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final SimplePropertyDescriptor EXTRA_DIMENSIONS_PROPERTY =
-		new SimplePropertyDescriptor(MethodDeclaration.class, "extraDimensions", int.class, MANDATORY); //$NON-NLS-1$
+		new SimplePropertyDescriptor(FunctionDeclaration.class, "extraDimensions", int.class, MANDATORY); //$NON-NLS-1$
 
 	/**
 	 * The "typeParameters" structural property of this node type (added in JLS3 API).
 	 * @since 3.1
 	 */
 	public static final ChildListPropertyDescriptor TYPE_PARAMETERS_PROPERTY =
-		new ChildListPropertyDescriptor(MethodDeclaration.class, "typeParameters", TypeParameter.class, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildListPropertyDescriptor(FunctionDeclaration.class, "typeParameters", TypeParameter.class, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "parameters" structural property of this node type).
 	 * @since 3.0
 	 */
 	public static final ChildListPropertyDescriptor PARAMETERS_PROPERTY =
-		new ChildListPropertyDescriptor(MethodDeclaration.class, "parameters", SingleVariableDeclaration.class, CYCLE_RISK); //$NON-NLS-1$
+		new ChildListPropertyDescriptor(FunctionDeclaration.class, "parameters", SingleVariableDeclaration.class, CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "thrownExceptions" structural property of this node type).
 	 * @since 3.0
 	 */
 	public static final ChildListPropertyDescriptor THROWN_EXCEPTIONS_PROPERTY =
-		new ChildListPropertyDescriptor(MethodDeclaration.class, "thrownExceptions", Name.class, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildListPropertyDescriptor(FunctionDeclaration.class, "thrownExceptions", Name.class, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "body" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor BODY_PROPERTY =
-		new ChildPropertyDescriptor(MethodDeclaration.class, "body", Block.class, OPTIONAL, CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionDeclaration.class, "body", Block.class, OPTIONAL, CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * A list of property descriptors (element type:
@@ -166,7 +166,7 @@ public class MethodDeclaration extends BodyDeclaration {
 
 	static {
 		List propertyList = new ArrayList(10);
-		createPropertyList(MethodDeclaration.class, propertyList);
+		createPropertyList(FunctionDeclaration.class, propertyList);
 		addProperty(JAVADOC_PROPERTY, propertyList);
 		addProperty(MODIFIERS_PROPERTY, propertyList);
 		addProperty(CONSTRUCTOR_PROPERTY, propertyList);
@@ -179,7 +179,7 @@ public class MethodDeclaration extends BodyDeclaration {
 		PROPERTY_DESCRIPTORS_2_0 = reapPropertyList(propertyList);
 
 		propertyList = new ArrayList(11);
-		createPropertyList(MethodDeclaration.class, propertyList);
+		createPropertyList(FunctionDeclaration.class, propertyList);
 		addProperty(JAVADOC_PROPERTY, propertyList);
 		addProperty(MODIFIERS2_PROPERTY, propertyList);
 		addProperty(CONSTRUCTOR_PROPERTY, propertyList);
@@ -288,7 +288,7 @@ public class MethodDeclaration extends BodyDeclaration {
 	 *
 	 * @param ast the AST that is to own this node
 	 */
-	MethodDeclaration(AST ast) {
+	FunctionDeclaration(AST ast) {
 		super(ast);
 		if (ast.apiLevel >= AST.JLS3) {
 			this.typeParameters = new ASTNode.NodeList(TYPE_PARAMETERS_PROPERTY);
@@ -351,7 +351,7 @@ public class MethodDeclaration extends BodyDeclaration {
 			if (get) {
 				return getJavadoc();
 			} else {
-				setJavadoc((Javadoc) child);
+				setJavadoc((JSdoc) child);
 				return null;
 			}
 		}
@@ -436,17 +436,17 @@ public class MethodDeclaration extends BodyDeclaration {
 	 * Method declared on ASTNode.
 	 */
 	final int getNodeType0() {
-		return METHOD_DECLARATION;
+		return FUNCTION_DECLARATION;
 	}
 
 	/* (omit javadoc for this method)
 	 * Method declared on ASTNode.
 	 */
 	ASTNode clone0(AST target) {
-		MethodDeclaration result = new MethodDeclaration(target);
+		FunctionDeclaration result = new FunctionDeclaration(target);
 		result.setSourceRange(this.getStartPosition(), this.getLength());
 		result.setJavadoc(
-			(Javadoc) ASTNode.copySubtree(target, getJavadoc()));
+			(JSdoc) ASTNode.copySubtree(target, getJavadoc()));
 		if (this.ast.apiLevel == AST.JLS2_INTERNAL) {
 			result.internalSetModifiers(getModifiers());
 			result.setReturnType(
@@ -858,7 +858,7 @@ public class MethodDeclaration extends BodyDeclaration {
 	 * </ul>
 	 */
 	public void setBody(Block body) {
-		// a MethodDeclaration may occur in a Block - must check cycles
+		// a FunctionDeclaration may occur in a Block - must check cycles
 		ASTNode oldChild = this.optionalBody;
 		preReplaceChild(oldChild, body, BODY_PROPERTY);
 		this.optionalBody = body;
@@ -876,7 +876,7 @@ public class MethodDeclaration extends BodyDeclaration {
 	 * @return the binding, or <code>null</code> if the binding cannot be
 	 *    resolved
 	 */
-	public IMethodBinding resolveBinding() {
+	public IFunctionBinding resolveBinding() {
 		return this.ast.getBindingResolver().resolveMethod(this);
 	}
 

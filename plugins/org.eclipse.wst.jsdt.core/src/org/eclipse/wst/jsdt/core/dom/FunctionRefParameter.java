@@ -15,16 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * AST node for a parameter within a method reference ({@link MethodRef}).
- * These nodes only occur within doc comments ({@link Javadoc}).
+ * AST node for a parameter within a method reference ({@link FunctionRef}).
+ * These nodes only occur within doc comments ({@link JSdoc}).
  * For JLS2:
  * <pre>
- * MethodRefParameter:
+ * FunctionRefParameter:
  * 		Type [ Identifier ]
  * </pre>
  * For JLS3, the variable arity indicator was added:
  * <pre>
- * MethodRefParameter:
+ * FunctionRefParameter:
  * 		Type [ <b>...</b> ] [ Identifier ]
  * </pre>
  * <p>
@@ -35,31 +35,31 @@ import java.util.List;
  * that the Javadoc spec is wrong in this case.
  * </p>
  *
- * @see Javadoc
+ * @see JSdoc
  * @since 3.0
  */
-public class MethodRefParameter extends ASTNode {
+public class FunctionRefParameter extends ASTNode {
 
 	/**
 	 * The "type" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor TYPE_PROPERTY =
-		new ChildPropertyDescriptor(MethodRefParameter.class, "type", Type.class, MANDATORY, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionRefParameter.class, "type", Type.class, MANDATORY, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * The "varargs" structural property of this node type (added in JLS3 API).
 	 * @since 3.1
 	 */
 	public static final SimplePropertyDescriptor VARARGS_PROPERTY =
-		new SimplePropertyDescriptor(MethodRefParameter.class, "varargs", boolean.class, MANDATORY); //$NON-NLS-1$
+		new SimplePropertyDescriptor(FunctionRefParameter.class, "varargs", boolean.class, MANDATORY); //$NON-NLS-1$
 
 	/**
 	 * The "name" structural property of this node type.
 	 * @since 3.0
 	 */
 	public static final ChildPropertyDescriptor NAME_PROPERTY =
-		new ChildPropertyDescriptor(MethodRefParameter.class, "name", SimpleName.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
+		new ChildPropertyDescriptor(FunctionRefParameter.class, "name", SimpleName.class, OPTIONAL, NO_CYCLE_RISK); //$NON-NLS-1$
 
 	/**
 	 * A list of property descriptors (element type:
@@ -79,13 +79,13 @@ public class MethodRefParameter extends ASTNode {
 
 	static {
 		List properyList = new ArrayList(3);
-		createPropertyList(MethodRefParameter.class, properyList);
+		createPropertyList(FunctionRefParameter.class, properyList);
 		addProperty(TYPE_PROPERTY, properyList);
 		addProperty(NAME_PROPERTY, properyList);
 		PROPERTY_DESCRIPTORS_2_0 = reapPropertyList(properyList);
 
 		properyList = new ArrayList(3);
-		createPropertyList(MethodRefParameter.class, properyList);
+		createPropertyList(FunctionRefParameter.class, properyList);
 		addProperty(TYPE_PROPERTY, properyList);
 		addProperty(VARARGS_PROPERTY, properyList);
 		addProperty(NAME_PROPERTY, properyList);
@@ -139,7 +139,7 @@ public class MethodRefParameter extends ASTNode {
 	 *
 	 * @param ast the AST that is to own this node
 	 */
-	MethodRefParameter(AST ast) {
+	FunctionRefParameter(AST ast) {
 		super(ast);
 	}
 
@@ -194,14 +194,14 @@ public class MethodRefParameter extends ASTNode {
 	 * Method declared on ASTNode.
 	 */
 	final int getNodeType0() {
-		return METHOD_REF_PARAMETER;
+		return FUNCTION_REF_PARAMETER;
 	}
 
 	/* (omit javadoc for this method)
 	 * Method declared on ASTNode.
 	 */
 	ASTNode clone0(AST target) {
-		MethodRefParameter result = new MethodRefParameter(target);
+		FunctionRefParameter result = new FunctionRefParameter(target);
 		result.setSourceRange(this.getStartPosition(), this.getLength());
 		result.setType((Type) ASTNode.copySubtree(target, getType()));
 		if (this.ast.apiLevel >= AST.JLS3) {
@@ -279,7 +279,7 @@ public class MethodRefParameter extends ASTNode {
 	 * Note that the binding for the type <code>Foo</code>in the vararg method
 	 * reference <code>#fun(Foo...)</code> is always for the type as
 	 * written; i.e., the type binding for <code>Foo</code>. However, if you
-	 * navigate from the MethodRef to its method binding to the
+	 * navigate from the FunctionRef to its method binding to the
 	 * type binding for its last parameter, the type binding for the vararg
 	 * parameter is always an array type (i.e., <code>Foo[]</code>) reflecting
 	 * the way vararg methods get compiled.

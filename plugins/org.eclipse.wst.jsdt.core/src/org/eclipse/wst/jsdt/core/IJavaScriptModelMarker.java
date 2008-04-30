@@ -17,7 +17,7 @@ package org.eclipse.wst.jsdt.core;
  * or extended.
  * </p>
  */
-public interface IJavaModelMarker {
+public interface IJavaScriptModelMarker {
 
 	/**
 	 * Java model problem marker type (value
@@ -25,7 +25,7 @@ public interface IJavaModelMarker {
 	 * recognize those markers in the workspace that flag problems detected by
 	 * the Java tooling during compilation.
 	 */
-	String JAVA_MODEL_PROBLEM_MARKER = JavaCore.PLUGIN_ID + ".problem"; //$NON-NLS-1$
+	String JAVASCRIPT_MODEL_PROBLEM_MARKER = JavaScriptCore.PLUGIN_ID + ".problem"; //$NON-NLS-1$
 
 	/**
 	 * Java model transient problem marker type (value
@@ -41,7 +41,7 @@ public interface IJavaModelMarker {
 	 * @see org.eclipse.wst.jsdt.core.eval.ICodeSnippetRequestor#acceptProblem(org.eclipse.core.resources.IMarker,String,
 	 *      int)
 	 */
-	String TRANSIENT_PROBLEM = JavaCore.PLUGIN_ID + ".transient_problem"; //$NON-NLS-1$
+	String TRANSIENT_PROBLEM = JavaScriptCore.PLUGIN_ID + ".transient_problem"; //$NON-NLS-1$
 
 	/**
 	 * Java model task marker type (value
@@ -49,12 +49,12 @@ public interface IJavaModelMarker {
 	 * recognize task markers in the workspace that correspond to tasks
 	 * specified in Java source comments and detected during compilation (for
 	 * example, 'TO-DO: ...'). Tasks are identified by a task tag, which can be
-	 * customized through <code>JavaCore</code> option
+	 * customized through <code>JavaScriptCore</code> option
 	 * <code>"org.eclipse.wst.jsdt.core.compiler.taskTag"</code>.
 	 *
 	 * @since 2.1
 	 */
-	String TASK_MARKER = JavaCore.PLUGIN_ID + ".task"; //$NON-NLS-1$
+	String TASK_MARKER = JavaScriptCore.PLUGIN_ID + ".task"; //$NON-NLS-1$
 
 	/**
 	 * Id marker attribute (value <code>"arguments"</code>). Arguments are
@@ -96,7 +96,7 @@ public interface IJavaModelMarker {
 	 * used to recognize those markers in the workspace that flag problems
 	 * detected by the Java tooling during classpath setting.
 	 */
-	String BUILDPATH_PROBLEM_MARKER = JavaCore.PLUGIN_ID
+	String BUILDPATH_PROBLEM_MARKER = JavaScriptCore.PLUGIN_ID
 			+ ".buildpath_problem"; //$NON-NLS-1$
 
 	/**
@@ -106,5 +106,5 @@ public interface IJavaModelMarker {
 	 *
 	 * @since 2.0
 	 */
-	String CLASSPATH_FILE_FORMAT = "classpathFileFormat"; //$NON-NLS-1$
+	String INCLUDEPATH_FILE_FORMAT = "classpathFileFormat"; //$NON-NLS-1$
 }
