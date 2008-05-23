@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>org.eclipse.wst.jsdt.jsp.feature</name>
-	<comment></comment>
+	<comment>This HEAD version has been deleted since no longer used. The last version used was tagged with v2008050700-final in case it needs to be restored.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.pde.FeatureBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.pde.FeatureNature</nature>
 	</natures>
 </projectDescription>
