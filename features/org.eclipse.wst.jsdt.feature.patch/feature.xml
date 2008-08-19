@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.wst.jsdt.feature.patch"
+      label="%featureName"
+      version="1.0.1.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.wst.jsdt.feature" version="1.0.1.v200807220139-6-5BcMAAwArNMJWHI" patch="true"/>
+   </requires>
+
+</feature>
