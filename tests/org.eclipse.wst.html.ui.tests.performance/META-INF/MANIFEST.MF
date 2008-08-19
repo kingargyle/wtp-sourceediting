@@ -19,5 +19,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.test,
  org.eclipse.test.performance,
  org.eclipse.wst.sse.core
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.4
