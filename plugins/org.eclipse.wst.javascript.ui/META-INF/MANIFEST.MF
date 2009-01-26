@@ -19,6 +19,8 @@ Export-Package: org.eclipse.wst.javascript.ui.internal.actions;x-friends:="org.e
  org.eclipse.wst.javascript.ui.internal.editor;x-friends:="org.eclipse.wst.html.ui",
  org.eclipse.wst.javascript.ui.internal.views.contentoutline;x-friends:="org.eclipse.wst.html.ui",
  org.eclipse.wst.javascript.ui.internal.wizard;x-friends:="org.eclipse.wst.html.ui"
+Import-Package: com.ibm.icu.util; version="3.8",
+ com.ibm.icu.text; version="3.8"
 Require-Bundle: org.eclipse.debug.ui;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.ide;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.views;bundle-version="[3.2.0,4.0.0)",
@@ -31,7 +33,6 @@ Require-Bundle: org.eclipse.debug.ui;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.ide;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.wst.xml.core;bundle-version="[1.1.0,1.2.0)",
- com.ibm.icu;bundle-version="[3.4.4,4.0.0)",
  org.eclipse.wst.common.project.facet.core;bundle-version="[1.1.0,2.0.0)";resolution:=optional,
  org.eclipse.wst.common.modulecore;bundle-version="[1.1.0,1.2.0)";resolution:=optional
 Eclipse-LazyStart: true
