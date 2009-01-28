@@ -25,7 +25,6 @@ import org.eclipse.wst.css.core.text.ICSSPartitions;
 import org.eclipse.wst.css.ui.internal.style.LineStyleProviderForEmbeddedCSS;
 import org.eclipse.wst.html.core.text.IHTMLPartitions;
 import org.eclipse.wst.html.ui.internal.style.LineStyleProviderForHTML;
-import org.eclipse.wst.javascript.ui.internal.common.style.LineStyleProviderForJavaScript;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
@@ -247,10 +246,6 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 			highlighter.addProvider(IHTMLPartitions.HTML_COMMENT, htmlLineStyleProvider);
 			highlighter.addProvider(IHTMLPartitions.HTML_DECLARATION, htmlLineStyleProvider);
 
-			// HTML JavaScript
-			LineStyleProvider jsLineStyleProvider = new LineStyleProviderForJavaScript();
-			highlighter.addProvider(IHTMLPartitions.SCRIPT, jsLineStyleProvider);
-
 			// CSS
 			LineStyleProvider cssLineStyleProvider = new LineStyleProviderForEmbeddedCSS();
 			highlighter.addProvider(ICSSPartitions.STYLE, cssLineStyleProvider);
@@ -262,10 +257,6 @@ public class TestHighlighterPerformance extends PerformanceTestCase {
 			highlighter.addProvider(IJSPPartitions.JSP_DIRECTIVE, jspLineStyleProvider);
 			highlighter.addProvider(IJSPPartitions.JSP_CONTENT_DELIMITER, jspLineStyleProvider);
 
-			// JSP Java or JSP JavaScript
-			// highlighter.addProvider(IJSPPartitions.ST_JSP_CONTENT_JAVA,
-			// new LineStyleProviderForJava());
-			highlighter.addProvider(IJSPPartitions.JSP_CONTENT_JAVASCRIPT, new LineStyleProviderForJavaScript());
 		}
 
 		return highlighter;

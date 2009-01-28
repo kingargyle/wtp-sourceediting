@@ -31,7 +31,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.ui.ide,
  org.eclipse.jdt.core,
- org.eclipse.wst.javascript.ui,
  org.eclipse.wst.common.tests.performance,
  com.ibm.icu,
  org.eclipse.wst.xml.ui
