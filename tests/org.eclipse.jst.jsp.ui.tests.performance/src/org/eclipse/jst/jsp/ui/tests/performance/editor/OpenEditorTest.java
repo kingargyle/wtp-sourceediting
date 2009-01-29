@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -120,7 +121,7 @@ public class OpenEditorTest extends PerformanceTestCase {
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
 				try {
-					Platform.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
+					Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
 				}
 				catch (InterruptedException e) {
 					// 

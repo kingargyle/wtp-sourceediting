@@ -34,6 +34,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
@@ -313,7 +314,7 @@ public class ProjectUnzipUtility {
 	}
 
 	public void initJavaProject(String projName) throws CoreException {
-		Platform.getJobManager().beginRule(ResourcesPlugin.getWorkspace().getRoot(), new NullProgressMonitor());
+		Job.getJobManager().beginRule(ResourcesPlugin.getWorkspace().getRoot(), new NullProgressMonitor());
 		// resynch
 		refreshWorkspace();
 		// change prereqs to get this functionality back in
@@ -335,7 +336,7 @@ public class ProjectUnzipUtility {
 			natures.add(JavaCore.NATURE_ID);
 		desc.setNatureIds((String[]) natures.toArray(new String[0]));
 		proj.setDescription(desc, new NullProgressMonitor());
-		Platform.getJobManager().endRule(ResourcesPlugin.getWorkspace().getRoot());
+		Job.getJobManager().endRule(ResourcesPlugin.getWorkspace().getRoot());
 	}
 
 	private void createProject(IProject project, IPath locationPath, IProgressMonitor monitor) throws CoreException {
