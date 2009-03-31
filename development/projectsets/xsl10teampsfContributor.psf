@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+  <provider id="org.eclipse.team.cvs.core.cvsnature">
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xml.xpath.core,org.eclipse.wst.xml.xpath.core"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/tests/org.eclipse.wst.xml.xpath.core.tests,org.eclipse.wst.xml.xpath.core.tests"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xml.xpath.ui,org.eclipse.wst.xml.xpath.ui"/>
+	<project
+ 	  reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xml.xpath2.processor,org.eclipse.wst.xml.xpath2.processor" />
+ 	<project
+ 	  reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/tests/org.eclipse.wst.xml.xpath2.processor.tests,org.eclipse.wst.xml.xpath2.processor.tests" />      
+ 	        
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl,org.eclipse.wst.xsl"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.core,org.eclipse.wst.xsl.core"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/tests/org.eclipse.wst.xsl.core.tests,org.eclipse.wst.xsl.core.tests"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.debug.ui,org.eclipse.wst.xsl.debug.ui"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/docs/org.eclipse.wst.xsl.doc,org.eclipse.wst.xsl.doc"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/features/org.eclipse.wst.xsl.feature,org.eclipse.wst.xsl.feature"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.jaxp.debug,org.eclipse.wst.xsl.jaxp.debug"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.jaxp.debug.ui,org.eclipse.wst.xsl.jaxp.debug.ui"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.jaxp.launching,org.eclipse.wst.xsl.jaxp.launching"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.launching,org.eclipse.wst.xsl.launching"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/tests/org.eclipse.wst.xsl.launching.tests,org.eclipse.wst.xsl.launching.tests"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.saxon,org.eclipse.wst.xsl.saxon"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/docs/org.eclipse.wst.xsl.sdk.documentation,org.eclipse.wst.xsl.sdk.documentation"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/tests/org.eclipse.wst.xsl.tests,org.eclipse.wst.xsl.tests"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.ui,org.eclipse.wst.xsl.ui"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/tests/org.eclipse.wst.xsl.ui.tests,org.eclipse.wst.xsl.ui.tests"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/plugins/org.eclipse.wst.xsl.xalan,org.eclipse.wst.xsl.xalan"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/features/org.eclipse.wst.xsl_sdk.feature,org.eclipse.wst.xsl_sdk.feature"/>
+    <project
+      reference="1.0,:pserver:dev.eclipse.org:/cvsroot/webtools,sourceediting/features/org.eclipse.wst.xsl_tests.feature,org.eclipse.wst.xsl_tests.feature"/>
+  </provider>
+</psf>
