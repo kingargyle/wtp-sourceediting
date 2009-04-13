@@ -1,0 +1,42 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional.document</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional.document</strong></font><br>
+               Class IDOMAttr</h2><br><hr><pre>public class <strong>IDOMAttr</strong>
+extends </pre>This interface provides extensions to corresponding DOM interface to enable
+ functions for source editing and incremental parsing.<p></p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public ITextRegion</code></td><td width="" align="left"><code><a href="#method_getEqualRegion">getEqualRegion</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Get's the region in attribute representing the '=' sign. May or may not
+ have whitespace surrounding it.</td></tr><tr valign="top"><td width="20%" align="right"><code>public int</code></td><td width="" align="left"><code><a href="#method_getNameRegionEndOffset">getNameRegionEndOffset</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the source location of the end of the attribute name, including
+ whitespace.</td></tr><tr valign="top"><td width="20%" align="right"><code>public int</code></td><td width="" align="left"><code><a href="#method_getNameRegionStartOffset">getNameRegionStartOffset</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the source location of the start of the attribute name.</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getNameRegionText">getNameRegionText</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the text associated with the attribute name.</td></tr><tr valign="top"><td width="20%" align="right"><code>public int</code></td><td width="" align="left"><code><a href="#method_getNameRegionTextEndOffset">getNameRegionTextEndOffset</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the source location of the end of the attribute name, excluding
+ whitespace.</td></tr><tr valign="top"><td width="20%" align="right"><code>public int</code></td><td width="" align="left"><code><a href="#method_getValueRegionStartOffset">getValueRegionStartOffset</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the source location of the start of the attribute value.</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getValueRegionText">getValueRegionText</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the text associated with the attribute value.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_hasNameOnly">hasNameOnly</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Check if Attr has only name but not equal sign nor value.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_hasNestedValue">hasNestedValue</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Check if Attr has a nested value (such as a JSP expression).</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isGlobalAttr">isGlobalAttr</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if attribute is defined globally for document. Returns
+ false if attribute is preceeded by a prefix (whether valid name space
+ or not). Returns true if its owning element is a global element.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isXMLAttr">isXMLAttr</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if is xml attr
+ 
+ ISSUE: need to figure out how to specify this one in a meaningful way.</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_getEqualRegion">getEqualRegion</a></h2><p><code>public ITextRegion <strong>getEqualRegion</strong>()</code></p><p>Get's the region in attribute representing the '=' sign. May or may not
+ have whitespace surrounding it.</p><h3>Returns</h3><p><code>ITextRegion</code> - ITextRegion - the region representing the equals sign, or null          if their is no equals sign.</p><hr><h2><a name="method_getNameRegionEndOffset">getNameRegionEndOffset</a></h2><p><code>public int <strong>getNameRegionEndOffset</strong>()</code></p><p>Gets the source location of the end of the attribute name, including
+ whitespace.</p><h3>Returns</h3><p><code>int</code> - int - the source location of the end of the attribute name,          including whitespace.</p><hr><h2><a name="method_getNameRegionStartOffset">getNameRegionStartOffset</a></h2><p><code>public int <strong>getNameRegionStartOffset</strong>()</code></p><p>Gets the source location of the start of the attribute name.</p><h3>Returns</h3><p><code>int</code> - int - the source location of the start of the attribute name.</p><hr><h2><a name="method_getNameRegionText">getNameRegionText</a></h2><p><code>public java.lang.String <strong>getNameRegionText</strong>()</code></p><p>Gets the text associated with the attribute name.</p><h3>Returns</h3><p><code>java.lang.String</code> - String - the text associated with the attribute name.</p><hr><h2><a name="method_getNameRegionTextEndOffset">getNameRegionTextEndOffset</a></h2><p><code>public int <strong>getNameRegionTextEndOffset</strong>()</code></p><p>Gets the source location of the end of the attribute name, excluding
+ whitespace.</p><h3>Returns</h3><p><code>int</code> - int - returns the source location of the end of the attribute          name, excluding whitespace.</p><hr><h2><a name="method_getValueRegionStartOffset">getValueRegionStartOffset</a></h2><p><code>public int <strong>getValueRegionStartOffset</strong>()</code></p><p>Gets the source location of the start of the attribute value.</p><h3>Returns</h3><p><code>int</code> - int - returns the source location of the start of the attribute          value.    ISSUE: need to better spec interaction with quote marks</p><hr><h2><a name="method_getValueRegionText">getValueRegionText</a></h2><p><code>public java.lang.String <strong>getValueRegionText</strong>()</code></p><p>Gets the text associated with the attribute value.</p><h3>Returns</h3><p><code>java.lang.String</code> - String - returns the text associated with the attribute value.</p><hr><h2><a name="method_hasNameOnly">hasNameOnly</a></h2><p><code>public boolean <strong>hasNameOnly</strong>()</code></p><p>Check if Attr has only name but not equal sign nor value.</p><h3>Returns</h3><p><code>boolean</code> - true if has only name but not equal sign nor value.</p><hr><h2><a name="method_hasNestedValue">hasNestedValue</a></h2><p><code>public boolean <strong>hasNestedValue</strong>()</code></p><p>Check if Attr has a nested value (such as a JSP expression).</p><h3>Returns</h3><p><code>boolean</code> - true if contains a nested value, false otherwise.</p><hr><h2><a name="method_isGlobalAttr">isGlobalAttr</a></h2><p><code>public boolean <strong>isGlobalAttr</strong>()</code></p><p>Returns true if attribute is defined globally for document. Returns
+ false if attribute is preceeded by a prefix (whether valid name space
+ or not). Returns true if its owning element is a global element.</p><h3>Returns</h3><p><code>boolean</code> - true if attribute is defined globally for document. Returns          false if attribute is preceeded by a prefix (whether valid name          space or not). Returns true if its owning element is a global          element.</p><hr><h2><a name="method_isXMLAttr">isXMLAttr</a></h2><p><code>public boolean <strong>isXMLAttr</strong>()</code></p><p>Returns true if is xml attr
+ 
+ ISSUE: need to figure out how to specify this one in a meaningful way.</p><h3>Returns</h3><p><code>boolean</code> - boolean - returns true if is xml attr</p><hr></body></html>

@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>XML Catalog Contributions Extension Point</title>
+<style type="text/css">
+@import url("../../book.css");
+</style>
+<style type="text/css">
+@import url("../../schema.css");
+</style>
+</HEAD>
+<BODY>
+<H1 style="text-align: center">XML Catalog Contributions Extension
+Point</H1>
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Identifier:</h6>
+org.eclipse.wst.xml.core.catalogContributions
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Since:</h6>
+1.0
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">Description:</h6>
+This extension point allows to specify entries for XML Catalog. Catalog
+entries have format specified in
+<a
+	href="http://www.oasis-open.org/committees/download.php/14041/xml-catalogs.html">http://www.oasis-open.org/committees/entity/spec.html</a>
+. Each catalog extension consists of a single catalogContribution
+element.
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
+<p></p>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a>
+(<a href="#e.catalogContribution">catalogContribution</a>)&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST extension</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA
+#IMPLIED</p>
+<p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>
+&gt;
+<ul class="ConfigMarkupAttlistDesc">
+	<li><b>point</b> - a fully qualified identifier of the target
+	extension point</li>
+	<li><b>id</b> - an optional identifier of the extension instance</li>
+	<li><b>name</b> - an optional name of the extension instance</li>
+</ul>
+<br>
+<p class="code SchemaDtd">&lt;!ELEMENT <a
+	name="e.catalogContribution">catalogContribution</a> (<a
+	href="#e.public">public</a>* , <a href="#e.system">system</a>* , <a
+	href="#e.uri">uri</a>* , <a href="#e.nextCatalog">nextCatalog</a>*)&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST catalogContribution</p>
+<p class="code SchemaDtdAttlist">id&nbsp;CDATA #IMPLIED</p>
+&gt;
+<p></p>
+<p></p>
+<p class="ConfigMarkupElementDesc">The catalogContribution element
+may have id, and it is just a container for the contributed catalog
+entries.</p>
+<br>
+<ul class="ConfigMarkupAttlistDesc">
+	<li><b>id</b> - Id of the catalog to which entries will be added.
+	Could be "default", and if ommited, entries are added to the default
+	workspace catalog.</li>
+</ul>
+<br>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.public">public</a>
+EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST public</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA
+#IMPLIED</p>
+<p class="code SchemaDtdAttlist">publicId&nbsp;CDATA #REQUIRED</p>
+<p class="code SchemaDtdAttlist">uri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA
+#REQUIRED</p>
+<p class="code SchemaDtdAttlist">webURL&nbsp;&nbsp;&nbsp;CDATA
+#IMPLIED</p>
+&gt;
+<p></p>
+<p></p>
+<p class="ConfigMarkupElementDesc">The public element associates a
+URI reference with the public identitier portion of an external
+identifier.</p>
+<br>
+<ul class="ConfigMarkupAttlistDesc">
+	<li><b>id</b> - Id of the element, optional.</li>
+	<li><b>publicId</b> - The public identifier portion of an external
+	identifier.</li>
+	<li><b>uri</b> - The value of the uri attribute could be relative
+	to the plugin.xml file, use platform:/ or file:/ protocols.</li>
+	<li><b>webURL</b> - Alternative Web address for the public ID</li>
+</ul>
+<br>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.system">system</a>
+EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST system</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA
+#IMPLIED</p>
+<p class="code SchemaDtdAttlist">systemId&nbsp;CDATA #REQUIRED</p>
+<p class="code SchemaDtdAttlist">uri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA
+#REQUIRED</p>
+&gt;
+<p></p>
+<p></p>
+<p class="ConfigMarkupElementDesc">The system elements associates a
+URI reference with the system identifier of an external identifier</p>
+<br>
+<ul class="ConfigMarkupAttlistDesc">
+	<li><b>id</b> - Id of the element, optional.</li>
+	<li><b>systemId</b> - The system identifier portion of an external
+	identifier.</li>
+	<li><b>uri</b> - The value of the uri attribute could be relative
+	to the plugin.xml file, use platform:/ or file:/ protocols.</li>
+</ul>
+<br>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.uri">uri</a>
+EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST uri</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p>
+<p class="code SchemaDtdAttlist">uri&nbsp;&nbsp;CDATA #REQUIRED</p>
+<p class="code SchemaDtdAttlist">name&nbsp;CDATA #REQUIRED</p>
+&gt;
+<p></p>
+<p></p>
+<p class="ConfigMarkupElementDesc">The uri element associates a URI
+reference with the a URI reference that is not part of an external
+identifier.</p>
+<br>
+<ul class="ConfigMarkupAttlistDesc">
+	<li><b>id</b> - Id of the element, optional.</li>
+	<li><b>uri</b> - The value of the uri attribute could be relative
+	to the plugin.xml file, use platform:/ or file:/ protocols.</li>
+	<li><b>name</b> - A URI reference that is not part of an external
+	identitier.</li>
+</ul>
+<br>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.nextCatalog">nextCatalog</a>
+EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST nextCatalog</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA
+#IMPLIED</p>
+<p class="code SchemaDtdAttlist">catalog&nbsp;CDATA #REQUIRED</p>
+&gt;
+<p></p>
+<p></p>
+<p class="ConfigMarkupElementDesc">The nextCatalog elements indicate
+additional catalog entry file(s) to be considered during the process of
+resolution.</p>
+<br>
+<ul class="ConfigMarkupAttlistDesc">
+	<li><b>id</b> - Id of the element, optional.</li>
+	<li><b>catalog</b> - The value of the uri attribute could be
+	relative to the plugin.xml file, use platform:/ or file:/ protocols.</li>
+</ul>
+<br>
+<h6 class="CaptionFigColumn SchemaHeader">Examples:</h6>
+<pre class="Example"><span class="code SchemaTag">
+   &lt;extension 
+         point=</span><span class="code SchemaCstring">&quot;org.eclipse.wst.xml.core.catalogContributions&quot;</span><span
+	class="code SchemaTag">&gt;
+      &lt;catalogContribution&gt; 
+         &lt;system 
+               systemId=</span><span class="code SchemaCstring">&quot;http://schemas.xmlsoap.org/wsdl/&quot;</span><span
+	class="code SchemaTag">
+               uri=</span><span class="code SchemaCstring">&quot;data/xsd/wsdl.xml&quot;</span><span
+	class="code SchemaTag"> &gt; 
+            &lt;property 
+                  name=</span><span class="code SchemaCstring">&quot;webURL&quot;</span><span
+	class="code SchemaTag">
+                  value=</span><span class="code SchemaCstring">&quot;http://schemas.xmlsoap.org/wsdl/&quot;</span><span
+	class="code SchemaTag">/&gt;
+         &lt;/system&gt;
+         &lt;uri
+               name=</span><span class="code SchemaCstring">&quot;http://schemas.xmlsoap.org/wsdl/soap/&quot;</span><span
+	class="code SchemaTag"> 
+               uri=</span><span class="code SchemaCstring">&quot;data/xsd/soap.xsd&quot;</span><span
+	class="code SchemaTag">/&gt; 
+         &lt;public
+               publicId=</span><span class="code SchemaCstring">&quot;http://www.w3.org/1999/XSL/Transform&quot;</span><span
+	class="code SchemaTag">
+               uri=</span><span class="code SchemaCstring">&quot;data/xsd/XSLSchema.xsd&quot;</span><span
+	class="code SchemaTag">&gt;
+         &lt;/public&gt;
+         &lt;nextCatalog
+               id=</span><span class="code SchemaCstring">&quot;nestedCatalog&quot;</span><span
+	class="code SchemaTag"> 
+               catalog=</span><span class="code SchemaCstring">&quot;data/catalog1.xml&quot;</span><span
+	class="code SchemaTag">/&gt; 
+      &lt;/catalogContribution&gt; 
+   &lt;/extension&gt;
+</span></pre>
+<p></p>
+
+<br>
+<p class="note SchemaCopyright">Copyright (c) 2005 IBM Corporation
+and others.<br>
+All rights reserved. This program and the accompanying materials are
+made available under the terms of the Eclipse Public License v1.0 which
+accompanies this distribution, and is available at <a
+	href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>
+
+</p>
+</BODY>
+</HTML>

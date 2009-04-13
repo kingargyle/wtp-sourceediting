@@ -1,0 +1,126 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional.document</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional.document</strong></font><br>
+               Class IDOMText</h2><br><hr><pre>public class <strong>IDOMText</strong>
+extends </pre>This interface provides extensions to corresponding DOM interface to enable
+ functions for source editing and incremental parsing.<p></p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_appendText">appendText</a>(org.w3c.dom.Text text)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT API - can be eliminated or moved to ltk level
+ 
+ Appends the content of the text node</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getWholeText">getWholeText</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT YET IMPLEMTENTED but exists here interface in preparation for DOM3
+ 
+ Returns all text of <code>Text</code> nodes logically-adjacent text
+ nodes to this node, concatenated in document order. <br>
+ For instance, in the example below <code>wholeText</code> on the
+ <code>Text</code> node that contains "bar" returns "barfoo", while on
+ the <code>Text</code> node that contains "foo" it returns "barfoo".</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isElementContentWhitespace">isElementContentWhitespace</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if is entirely white space.
+ 
+ This is intened to be better performing that all clients getting the
+ source, and checking themselves.
+ 
+ ISSUE: need to clarify if implementation is pure to "white space" as
+ per DOM spec? Here is the DOM spec:
+ 
+ Returns whether this text node contains <a
+ href='http://www.w3.org/TR/2004/REC-xml-infoset-20040204#infoitem.character'>
+ element content whitespace</a>, often abusively called "ignorable
+ whitespace". The text node is determined to contain whitespace in
+ element content during the load of the document or if validation occurs
+ while using <code>Document.normalizeDocument()</code>.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isInvalid">isInvalid</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT API - can be eliminated or moved to ltk level
+ 
+ Returns true if is not valid.</td></tr><tr valign="top"><td width="20%" align="right"><code>public org.w3c.dom.Text</code></td><td width="" align="left"><code><a href="#method_replaceWholeText">replaceWholeText</a>(java.lang.String content)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT YET IMPLEMTENTED but exists here interface in preparation for DOM3
+ 
+ Replaces the text of the current node and all logically-adjacent text
+ nodes with the specified text. All logically-adjacent text nodes are
+ removed including the current node unless it was the recipient of the
+ replacement text. <br>
+ This method returns the node which received the replacement text. The
+ returned node is:
+ <ul>
+ <li><code>null</code>, when the replacement text is the empty
+ string; </li>
+ <li>the current node, except when the current node is read-only; </li>
+ <li> a new <code>Text</code> node of the same type (
+ <code>Text</code> or <code>CDATASection</code>) as the current
+ node inserted at the location of the replacement. </li>
+ </ul>
+ <br>
+ For instance, in the above example calling
+ <code>replaceWholeText</code> on the <code>Text</code> node that
+ contains "bar" with "yo" in argument results in the following: <br>
+ Where the nodes to be removed are read-only descendants of an
+ <code>EntityReference</code>, the <code>EntityReference</code>
+ must be removed instead of the read-only nodes. If any
+ <code>EntityReference</code> to be removed has descendants that are
+ not <code>EntityReference</code>, <code>Text</code>, or
+ <code>CDATASection</code> nodes, the <code>replaceWholeText</code>
+ method must fail before performing any modification of the document,
+ raising a <code>DOMException</code> with the code
+ <code>NO_MODIFICATION_ALLOWED_ERR</code>. <br>
+ For instance, in the example below calling
+ <code>replaceWholeText</code> on the <code>Text</code> node that
+ contains "bar" fails, because the <code>EntityReference</code> node
+ "ent" contains an <code>Element</code> node which cannot be removed.</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_appendText">appendText</a></h2><p><code>public void <strong>appendText</strong>(org.w3c.dom.Text text)</code></p><p>NOT API - can be eliminated or moved to ltk level
+ 
+ Appends the content of the text node</p><h3>Parameters</h3><p><code>text</code> - -             the Text to append.</p><hr><h2><a name="method_getWholeText">getWholeText</a></h2><p><code>public java.lang.String <strong>getWholeText</strong>()</code></p><p>NOT YET IMPLEMTENTED but exists here interface in preparation for DOM3
+ 
+ Returns all text of <code>Text</code> nodes logically-adjacent text
+ nodes to this node, concatenated in document order. <br>
+ For instance, in the example below <code>wholeText</code> on the
+ <code>Text</code> node that contains "bar" returns "barfoo", while on
+ the <code>Text</code> node that contains "foo" it returns "barfoo".</p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_isElementContentWhitespace">isElementContentWhitespace</a></h2><p><code>public boolean <strong>isElementContentWhitespace</strong>()</code></p><p>Returns true if is entirely white space.
+ 
+ This is intened to be better performing that all clients getting the
+ source, and checking themselves.
+ 
+ ISSUE: need to clarify if implementation is pure to "white space" as
+ per DOM spec? Here is the DOM spec:
+ 
+ Returns whether this text node contains <a
+ href='http://www.w3.org/TR/2004/REC-xml-infoset-20040204#infoitem.character'>
+ element content whitespace</a>, often abusively called "ignorable
+ whitespace". The text node is determined to contain whitespace in
+ element content during the load of the document or if validation occurs
+ while using <code>Document.normalizeDocument()</code>.</p><h3>Returns</h3><p><code>boolean</code> - true if is entirely white space.</p><hr><h2><a name="method_isInvalid">isInvalid</a></h2><p><code>public boolean <strong>isInvalid</strong>()</code></p><p>NOT API - can be eliminated or moved to ltk level
+ 
+ Returns true if is not valid.</p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_replaceWholeText">replaceWholeText</a></h2><p><code>public org.w3c.dom.Text <strong>replaceWholeText</strong>(java.lang.String content)</code></p><p>NOT YET IMPLEMTENTED but exists here interface in preparation for DOM3
+ 
+ Replaces the text of the current node and all logically-adjacent text
+ nodes with the specified text. All logically-adjacent text nodes are
+ removed including the current node unless it was the recipient of the
+ replacement text. <br>
+ This method returns the node which received the replacement text. The
+ returned node is:
+ <ul>
+ <li><code>null</code>, when the replacement text is the empty
+ string; </li>
+ <li>the current node, except when the current node is read-only; </li>
+ <li> a new <code>Text</code> node of the same type (
+ <code>Text</code> or <code>CDATASection</code>) as the current
+ node inserted at the location of the replacement. </li>
+ </ul>
+ <br>
+ For instance, in the above example calling
+ <code>replaceWholeText</code> on the <code>Text</code> node that
+ contains "bar" with "yo" in argument results in the following: <br>
+ Where the nodes to be removed are read-only descendants of an
+ <code>EntityReference</code>, the <code>EntityReference</code>
+ must be removed instead of the read-only nodes. If any
+ <code>EntityReference</code> to be removed has descendants that are
+ not <code>EntityReference</code>, <code>Text</code>, or
+ <code>CDATASection</code> nodes, the <code>replaceWholeText</code>
+ method must fail before performing any modification of the document,
+ raising a <code>DOMException</code> with the code
+ <code>NO_MODIFICATION_ALLOWED_ERR</code>. <br>
+ For instance, in the example below calling
+ <code>replaceWholeText</code> on the <code>Text</code> node that
+ contains "bar" fails, because the <code>EntityReference</code> node
+ "ent" contains an <code>Element</code> node which cannot be removed.<h3>Parameters</h3><p><code>content</code> - The content of the replacing <code>Text</code> node.</p><h3>Returns</h3><p><code>org.w3c.dom.Text</code> - The <code>Text</code> node created with the specified          content.</p><h3>Throws:</h3><p><code>org.w3c.dom.DOMException - NO_MODIFICATION_ALLOWED_ERR: Raised if one of the                 <code>Text</code> nodes being replaced is readonly.</code></p><hr></body></html>

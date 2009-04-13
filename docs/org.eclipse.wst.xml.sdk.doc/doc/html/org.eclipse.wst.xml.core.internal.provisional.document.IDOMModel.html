@@ -1,0 +1,30 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional.document</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional.document</strong></font><br>
+               Class IDOMModel</h2><br><hr><pre>public class <strong>IDOMModel</strong>
+extends </pre>Provides means to get the XMLModel form of IStrucutredModel. Not to be
+ implemented or extended by clients.<p></p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument</code></td><td width="" align="left"><code><a href="#method_getDocument">getDocument</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns the DOM Document.</td></tr><tr valign="top"><td width="20%" align="right"><code>public org.eclipse.wst.xml.core.internal.provisional.document.ISourceGenerator</code></td><td width="" align="left"><code><a href="#method_getGenerator">getGenerator</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns an source generator appropriate for this model.</td></tr><tr valign="top"><td width="20%" align="right"><code>public XMLModelNotifier</code></td><td width="" align="left"><code><a href="#method_getModelNotifier">getModelNotifier</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT CLIENT API
+ 
+ Returns an XMLModelNotifier. Clients should not use.
+ 
+ ISSUE: should be "internalized".</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setModelNotifier">setModelNotifier</a>(XMLModelNotifier notifier)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT CLIENT API
+
+ Sets the model notifier Clients should not use.
+ 
+ ISSUE: need to review with legacy clients.</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_getDocument">getDocument</a></h2><p><code>public org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument <strong>getDocument</strong>()</code></p><p>Returns the DOM Document.</p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument</code> - the DOM Document.</p><hr><h2><a name="method_getGenerator">getGenerator</a></h2><p><code>public org.eclipse.wst.xml.core.internal.provisional.document.ISourceGenerator <strong>getGenerator</strong>()</code></p><p>Returns an source generator appropriate for this model.</p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.provisional.document.ISourceGenerator</code> - the source generator</p><hr><h2><a name="method_getModelNotifier">getModelNotifier</a></h2><p><code>public XMLModelNotifier <strong>getModelNotifier</strong>()</code></p><p>NOT CLIENT API
+ 
+ Returns an XMLModelNotifier. Clients should not use.
+ 
+ ISSUE: should be "internalized".</p><h3>Returns</h3><p><code>XMLModelNotifier</code></p><hr><h2><a name="method_setModelNotifier">setModelNotifier</a></h2><p><code>public void <strong>setModelNotifier</strong>(XMLModelNotifier notifier)</code></p><p>NOT CLIENT API
+
+ Sets the model notifier Clients should not use.
+ 
+ ISSUE: need to review with legacy clients.</p><h3>Parameters</h3><p><code>notifier</code></p><hr></body></html>

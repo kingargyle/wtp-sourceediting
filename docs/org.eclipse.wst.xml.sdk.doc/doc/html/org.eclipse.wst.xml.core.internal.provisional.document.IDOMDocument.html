@@ -1,0 +1,48 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional.document</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional.document</strong></font><br>
+               Class IDOMDocument</h2><br><hr><pre>public class <strong>IDOMDocument</strong>
+extends </pre>This interface enables creation of DOCTYPE declaration and some DOM Level 2
+ interfaces. May be referenced but not implemented by clients.<p></p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public org.w3c.dom.Element</code></td><td width="" align="left"><code><a href="#method_createCommentElement">createCommentElement</a>(java.lang.String tagName
+         ,
+      boolean isJSPTag)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               create comment element. tagName must be registered as comment element
+ name in plugin.xml</td></tr><tr valign="top"><td width="20%" align="right"><code>public org.w3c.dom.DocumentType</code></td><td width="" align="left"><code><a href="#method_createDoctype">createDoctype</a>(java.lang.String name)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Creates a DocumentType node
+ 
+ ISSUE: I believe this 'name' is the one specific in doctype extension,
+ need to verify.</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getDocumentTypeId">getDocumentTypeId</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns the DocumentType ID. Unlike the standard DOM approach of
+ "getDocumentType().getPublicId()", this method returns the id even if
+ implicit.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isJSPDocument">isJSPDocument</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT API ... needs to be removed/changed
+ 
+ ISSUE: need to specify</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isJSPType">isJSPType</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT API ... needs to be removed/changed
+ 
+ ISSUE: need to specify</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isXMLType">isXMLType</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT API ... may removed/changed
+ 
+ ISSUE: need to specify -- currently used to denote an HTML DOM document
+ is XHTML</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_createCommentElement">createCommentElement</a></h2><p><code>public org.w3c.dom.Element <strong>createCommentElement</strong>(java.lang.String tagName
+         ,
+      boolean isJSPTag)</code></p><p>create comment element. tagName must be registered as comment element
+ name in plugin.xml</p><h3>Parameters</h3><p><code>tagName</code> - the element name</p><p><code>isJSPTag</code> - true if the element is JSP style comment (&lt;%-- ...             --%&gt;)</p><h3>Returns</h3><p><code>org.w3c.dom.Element</code> - Element element instance</p><h3>Throws:</h3><p><code>org.w3c.dom.DOMException - thrown if the element name is registered as comment element</code></p><hr><h2><a name="method_createDoctype">createDoctype</a></h2><p><code>public org.w3c.dom.DocumentType <strong>createDoctype</strong>(java.lang.String name)</code></p><p>Creates a DocumentType node
+ 
+ ISSUE: I believe this 'name' is the one specific in doctype extension,
+ need to verify.</p><h3>Parameters</h3><p><code>name</code> - -             name of the doctype</p><h3>Returns</h3><p><code>org.w3c.dom.DocumentType</code> - DocumentType - returns a document type node.</p><hr><h2><a name="method_getDocumentTypeId">getDocumentTypeId</a></h2><p><code>public java.lang.String <strong>getDocumentTypeId</strong>()</code></p><p>Returns the DocumentType ID. Unlike the standard DOM approach of
+ "getDocumentType().getPublicId()", this method returns the id even if
+ implicit.</p><h3>Returns</h3><p><code>java.lang.String</code> - the DocumentType ID</p><hr><h2><a name="method_isJSPDocument">isJSPDocument</a></h2><p><code>public boolean <strong>isJSPDocument</strong>()</code></p><p>NOT API ... needs to be removed/changed
+ 
+ ISSUE: need to specify</p><h3>Returns</h3><p><code>boolean</code> - true if is JSPDocument</p><hr><h2><a name="method_isJSPType">isJSPType</a></h2><p><code>public boolean <strong>isJSPType</strong>()</code></p><p>NOT API ... needs to be removed/changed
+ 
+ ISSUE: need to specify</p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_isXMLType">isXMLType</a></h2><p><code>public boolean <strong>isXMLType</strong>()</code></p><p>NOT API ... may removed/changed
+ 
+ ISSUE: need to specify -- currently used to denote an HTML DOM document
+ is XHTML</p><h3>Returns</h3><p><code>boolean</code></p><hr></body></html>

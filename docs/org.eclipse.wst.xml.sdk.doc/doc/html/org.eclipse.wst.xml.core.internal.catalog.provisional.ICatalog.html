@@ -1,0 +1,103 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.catalog.provisional</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.catalog.provisional</strong></font><br>
+               Class ICatalog</h2><br><hr><pre>public class <strong>ICatalog</strong>
+extends </pre>A representation of the model object '<em><b>Catalog</b></em>'.
+ 
+ <p>
+ This interface is not intended to be implemented by clients.
+ </p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_addCatalogElement">addCatalogElement</a>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogElement element)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Adds catalog element to the collection of the catalog elements.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_addEntriesFromCatalog">addEntriesFromCatalog</a>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalog catalog)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               This method copies all catalog entries from source catalog to this one.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_addListener">addListener</a>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogListener listener)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Adds a listener of the catalog events</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_clear">clear</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Removes all the elements from this catalog.</td></tr><tr valign="top"><td width="20%" align="right"><code>public org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogElement</code></td><td width="" align="left"><code><a href="#method_createCatalogElement">createCatalogElement</a>(int type)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns new catalog element with the specified type. If the type is one
+ of ELEMENT_TYPE, the result entry will have corresponding interface.</td></tr><tr valign="top"><td width="20%" align="right"><code>public org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogEntry[]</code></td><td width="" align="left"><code><a href="#method_getCatalogEntries">getCatalogEntries</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns an array of catalog elements of type ICatalogElement.TYPE_ENTRY</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getId">getId</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns catalog id string</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getLocation">getLocation</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public org.eclipse.wst.xml.core.internal.catalog.provisional.INextCatalog[]</code></td><td width="" align="left"><code><a href="#method_getNextCatalogs">getNextCatalogs</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns an array of catalog elements of type
+ ICatalogElement.TYPE_DELEGATE</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_removeCatalogElement">removeCatalogElement</a>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogElement element)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Removes catalog element from the collection of the catalog elements.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_removeListener">removeListener</a>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogListener listener)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Removes a listener of the catalog events</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_resolvePublic">resolvePublic</a>(java.lang.String publicId
+         ,
+      java.lang.String systemId)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Return the applicable PUBLIC or SYSTEM identifier.
+ 
+ <p>
+ This method searches the Catalog and returns the system identifier
+ specified for the given system or public identifiers. If no appropriate
+ PUBLIC or SYSTEM entry is found in the Catalog, null is returned.
+ </p></td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_resolveSystem">resolveSystem</a>(java.lang.String systemId)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Return the applicable SYSTEM system identifier.
+ 
+ <p>
+ If a SYSTEM entry exists in the Catalog for the system ID specified,
+ return the mapped value.
+ </p>
+ 
+ <p>
+ On Windows-based operating systems, the comparison between the system
+ identifier provided and the SYSTEM entries in the Catalog is
+ case-insensitive.
+ </p></td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_resolveURI">resolveURI</a>(java.lang.String uri)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Return the applicable URI.
+ 
+ <p>
+ If a URI entry exists in the Catalog for the URI specified, return the
+ mapped value.
+ </p>
+ 
+ <p>
+ URI comparison is case sensitive.
+ </p></td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_save">save</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setId">setId</a>(java.lang.String id)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Sets catalog id string</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setLocation">setLocation</a>(java.lang.String location)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_addCatalogElement">addCatalogElement</a></h2><p><code>public void <strong>addCatalogElement</strong>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogElement element)</code></p><p>Adds catalog element to the collection of the catalog elements.</p><h3>Parameters</h3><p><code>element</code> - -             catalog element</p><hr><h2><a name="method_addEntriesFromCatalog">addEntriesFromCatalog</a></h2><p><code>public void <strong>addEntriesFromCatalog</strong>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalog catalog)</code></p><p>This method copies all catalog entries from source catalog to this one.</p><h3>Parameters</h3><p><code>catalog</code> - -             source catalog</p><hr><h2><a name="method_addListener">addListener</a></h2><p><code>public void <strong>addListener</strong>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogListener listener)</code></p><p>Adds a listener of the catalog events</p><h3>Parameters</h3><p><code>listener</code> - -             listener of the catalog events</p><hr><h2><a name="method_clear">clear</a></h2><p><code>public void <strong>clear</strong>()</code></p><p>Removes all the elements from this catalog.</p><hr><h2><a name="method_createCatalogElement">createCatalogElement</a></h2><p><code>public org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogElement <strong>createCatalogElement</strong>(int type)</code></p><p>Returns new catalog element with the specified type. If the type is one
+ of ELEMENT_TYPE, the result entry will have corresponding interface.</p><h3>Parameters</h3><p><code>type</code></p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogElement</code></p><hr><h2><a name="method_getCatalogEntries">getCatalogEntries</a></h2><p><code>public org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogEntry[] <strong>getCatalogEntries</strong>()</code></p><p>Returns an array of catalog elements of type ICatalogElement.TYPE_ENTRY</p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogEntry[]</code> - an array of catalog elements</p><hr><h2><a name="method_getId">getId</a></h2><p><code>public java.lang.String <strong>getId</strong>()</code></p><p>Returns catalog id string</p><h3>Returns</h3><p><code>java.lang.String</code> - catalog id string</p><hr><h2><a name="method_getLocation">getLocation</a></h2><p><code>public java.lang.String <strong>getLocation</strong>()</code></p><p></p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_getNextCatalogs">getNextCatalogs</a></h2><p><code>public org.eclipse.wst.xml.core.internal.catalog.provisional.INextCatalog[] <strong>getNextCatalogs</strong>()</code></p><p>Returns an array of catalog elements of type
+ ICatalogElement.TYPE_DELEGATE</p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.catalog.provisional.INextCatalog[]</code> - an array of catalog elements</p><hr><h2><a name="method_removeCatalogElement">removeCatalogElement</a></h2><p><code>public void <strong>removeCatalogElement</strong>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogElement element)</code></p><p>Removes catalog element from the collection of the catalog elements.</p><h3>Parameters</h3><p><code>element</code> - -             catalog element</p><hr><h2><a name="method_removeListener">removeListener</a></h2><p><code>public void <strong>removeListener</strong>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalogListener listener)</code></p><p>Removes a listener of the catalog events</p><h3>Parameters</h3><p><code>listener</code> - -             listener of the catalog events</p><hr><h2><a name="method_resolvePublic">resolvePublic</a></h2><p><code>public java.lang.String <strong>resolvePublic</strong>(java.lang.String publicId
+         ,
+      java.lang.String systemId)</code></p><p>Return the applicable PUBLIC or SYSTEM identifier.
+ 
+ <p>
+ This method searches the Catalog and returns the system identifier
+ specified for the given system or public identifiers. If no appropriate
+ PUBLIC or SYSTEM entry is found in the Catalog, null is returned.
+ </p><h3>Parameters</h3><p><code>publicId</code> - The public identifier to locate in the catalog. Public             identifiers are normalized before comparison.</p><p><code>systemId</code> - The nominal system identifier for the entity in question (as             provided in the source document).</p><h3>Returns</h3><p><code>java.lang.String</code> - The system identifier to use. Note that the nominal system          identifier is not returned if a match is not found in the          catalog, instead null is returned to indicate that no match was          found.</p><h3>Throws:</h3><p><code>java.net.MalformedURLException - The formal system identifier of a subordinate catalog cannot              be turned into a valid URL.</code></p><p><code>java.io.IOException - Error reading subordinate catalog file.</code></p><hr><h2><a name="method_resolveSystem">resolveSystem</a></h2><p><code>public java.lang.String <strong>resolveSystem</strong>(java.lang.String systemId)</code></p><p>Return the applicable SYSTEM system identifier.
+ 
+ <p>
+ If a SYSTEM entry exists in the Catalog for the system ID specified,
+ return the mapped value.
+ </p>
+ 
+ <p>
+ On Windows-based operating systems, the comparison between the system
+ identifier provided and the SYSTEM entries in the Catalog is
+ case-insensitive.
+ </p><h3>Parameters</h3><p><code>systemId</code> - The system ID to locate in the catalog.</p><h3>Returns</h3><p><code>java.lang.String</code> - The resolved system identifier.</p><h3>Throws:</h3><p><code>java.net.MalformedURLException - The formal system identifier of a subordinate catalog cannot              be turned into a valid URL.</code></p><p><code>java.io.IOException - Error reading subordinate catalog file.</code></p><hr><h2><a name="method_resolveURI">resolveURI</a></h2><p><code>public java.lang.String <strong>resolveURI</strong>(java.lang.String uri)</code></p><p>Return the applicable URI.
+ 
+ <p>
+ If a URI entry exists in the Catalog for the URI specified, return the
+ mapped value.
+ </p>
+ 
+ <p>
+ URI comparison is case sensitive.
+ </p><h3>Parameters</h3><p><code>uri</code> - The URI to locate in the catalog.</p><h3>Returns</h3><p><code>java.lang.String</code> - The resolved URI.</p><h3>Throws:</h3><p><code>java.net.MalformedURLException - The system identifier of a subordinate catalog cannot be              turned into a valid URL.</code></p><p><code>java.io.IOException - Error reading subordinate catalog file.</code></p><hr><h2><a name="method_save">save</a></h2><p><code>public void <strong>save</strong>()</code></p><p></p><h3>Throws:</h3><p><code>java.io.IOException</code></p><hr><h2><a name="method_setId">setId</a></h2><p><code>public void <strong>setId</strong>(java.lang.String id)</code></p><p>Sets catalog id string</p><h3>Parameters</h3><p><code>id</code></p><hr><h2><a name="method_setLocation">setLocation</a></h2><p><code>public void <strong>setLocation</strong>(java.lang.String location)</code></p><p></p><h3>Parameters</h3><p><code>location</code></p><hr></body></html>

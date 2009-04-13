@@ -1,0 +1,18 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional</strong></font><br>
+               Class NameValidator</h2><br><hr><pre>public class <strong>NameValidator</strong>
+extends java.lang.Object</pre>This class provides consistent way to pre-check if a string is a valid XML
+ name, before, for example, trying to actually create an Element with it.
+ Attempting to create an Element with an invalid name will throw the appropriate
+ DOM Exception, but often clients want to check the validiting of a name
+ such as based on some user input, long in advance of actually making 
+ the DOM call. And, natually, want to give the user feedback in a more 
+ timely fashion.
+ 
+ ISSUE: is "endns:" really valid xml name? I think not, but this method
+ (currently) says it is.<p></p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public static boolean</code></td><td width="" align="left"><code><a href="#method_isValid">isValid</a>(java.lang.String name)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if <code>name</code> is valid XML name according to XML
+ 1.0 rules, false otherwise.</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_isValid">isValid</a></h2><p><code>public boolean <strong>isValid</strong>(java.lang.String name)</code></p><p>Returns true if <code>name</code> is valid XML name according to XML
+ 1.0 rules, false otherwise.</p><h3>Parameters</h3><p><code>name</code> - name is the string to test</p><h3>Returns</h3><p><code>boolean</code> - true if valid name according to XML 1.0 rules, false otherwise.</p><hr></body></html>

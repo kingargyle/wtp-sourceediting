@@ -1,0 +1,27 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional.document</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional.document</strong></font><br>
+               Class IDOMImplementation</h2><br><hr><pre>public class <strong>IDOMImplementation</strong>
+extends </pre><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.Object</code></td><td width="" align="left"><code><a href="#method_getFeature">getFeature</a>(java.lang.String feature
+         ,
+      java.lang.String version)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED. This is defined here in preparation of DOM 3.
+ 
+ This method returns a specialized object which implements the
+ specialized APIs of the specified feature and version, as specified in .
+ The specialized object may also be obtained by using binding-specific
+ casting methods but is not necessarily expected to, as discussed in .
+ This method also allow the implementation to provide specialized
+ objects which do not support the <code>DOMImplementation</code>
+ interface.</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_getFeature">getFeature</a></h2><p><code>public java.lang.Object <strong>getFeature</strong>(java.lang.String feature
+         ,
+      java.lang.String version)</code></p><p>NOT IMPLEMENTED. This is defined here in preparation of DOM 3.
+ 
+ This method returns a specialized object which implements the
+ specialized APIs of the specified feature and version, as specified in .
+ The specialized object may also be obtained by using binding-specific
+ casting methods but is not necessarily expected to, as discussed in .
+ This method also allow the implementation to provide specialized
+ objects which do not support the <code>DOMImplementation</code>
+ interface.</p><h3>Parameters</h3><p><code>feature</code> - The name of the feature requested. Note that any plus sign             "+" prepended to the name of the feature will be ignored             since it is not significant in the context of this method.</p><p><code>version</code> - This is the version number of the feature to test.</p><h3>Returns</h3><p><code>java.lang.Object</code> - Returns an object which implements the specialized APIs of the          specified feature and version, if any, or <code>null</code>          if there is no object which implements interfaces associated          with that feature. If the <code>DOMObject</code> returned by          this method implements the <code>DOMImplementation</code>          interface, it must delegate to the primary core          <code>DOMImplementation</code> and not return results          inconsistent with the primary core          <code>DOMImplementation</code> such as          <code>hasFeature</code>, <code>getFeature</code>, etc.</p><hr></body></html>

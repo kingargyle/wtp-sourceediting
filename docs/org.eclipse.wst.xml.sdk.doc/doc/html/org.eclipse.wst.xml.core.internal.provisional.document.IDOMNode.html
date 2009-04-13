@@ -1,0 +1,157 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional.document</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional.document</strong></font><br>
+               Class IDOMNode</h2><br><hr><pre>public class <strong>IDOMNode</strong>
+extends </pre>This interface describes the extended functionality of our source-oriented
+ DOM. First, our nodes extend the w3c Node interface, IndexedRegion, and
+ INodeNotifier. Plus, has the extra methods called out here.
+ 
+ ISSUE: the 'read-only' API should be broken out in their own interface<p></p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public short</code></td><td width="" align="left"><code><a href="#method_compareDocumentPosition">compareDocumentPosition</a>(org.w3c.dom.Node other)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getBaseURI">getBaseURI</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public IStructuredDocumentRegion</code></td><td width="" align="left"><code><a href="#method_getEndStructuredDocumentRegion">getEndStructuredDocumentRegion</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the last structured document region of this node.
+ 
+ ISSUE: need to resolve getEnd/getLast confusion.</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.Object</code></td><td width="" align="left"><code><a href="#method_getFeature">getFeature</a>(java.lang.String feature
+         ,
+      java.lang.String version)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public IStructuredDocumentRegion</code></td><td width="" align="left"><code><a href="#method_getFirstStructuredDocumentRegion">getFirstStructuredDocumentRegion</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the first structured document region of this node.
+ 
+ ISSUE: need to resolve getFirst/getStart confusion</td></tr><tr valign="top"><td width="20%" align="right"><code>public IStructuredDocumentRegion</code></td><td width="" align="left"><code><a href="#method_getLastStructuredDocumentRegion">getLastStructuredDocumentRegion</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the last structured document region of this node.
+ 
+ ISSUE: need to resolve getEnd/getLast confusion.</td></tr><tr valign="top"><td width="20%" align="right"><code>public org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel</code></td><td width="" align="left"><code><a href="#method_getModel">getModel</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns the model associated with this node. Returns null if not part
+ of an active model.</td></tr><tr valign="top"><td width="20%" align="right"><code>public ITextRegion</code></td><td width="" align="left"><code><a href="#method_getNameRegion">getNameRegion</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Get's the region representing the name of this node
+ 
+ ISSUE: only implemented/used at attribute and DTDNodes -- should move.</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getSource">getSource</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns the literal source representing this node in source document.
+ 
+ ISSUE: need to fix implementation to match.</td></tr><tr valign="top"><td width="20%" align="right"><code>public IStructuredDocumentRegion</code></td><td width="" align="left"><code><a href="#method_getStartStructuredDocumentRegion">getStartStructuredDocumentRegion</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Gets the first structured document region of this node.
+ 
+ ISSUE: need to resolve getFirst/getStart confusion</td></tr><tr valign="top"><td width="20%" align="right"><code>public IStructuredDocument</code></td><td width="" align="left"><code><a href="#method_getStructuredDocument">getStructuredDocument</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns the structured document that underlies this node's model.
+ 
+ Returns null if this node is not actively part of a source document. In
+ contrast, in the pure DOM world, "owning document" is not null even
+ after a node is deleted from the DOM.
+ 
+ ISSUE: we need to fix our implementation to match this spec.</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getTextContent">getTextContent</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.Object</code></td><td width="" align="left"><code><a href="#method_getUserData">getUserData</a>(java.lang.String key)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public ITextRegion</code></td><td width="" align="left"><code><a href="#method_getValueRegion">getValueRegion</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Get's the region representing the value of this node if only one
+ ITextRegion, null otherwise.
+ 
+ ISSUE: only implemented/used at attribute level, move "down".</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getValueSource">getValueSource</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns a string representing the source of this node, but with
+ character enties converted (e.g. &lt; is converted to '<').
+ 
+ ISSUE: need to better spec extent of this conversion, we may not know
+ all character entities.
+ 
+ ISSUE: need to fix implementation to match spec.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isChildEditable">isChildEditable</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Used to know read-only state of children.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isClosed">isClosed</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if tag is closed in source.
+ 
+ In our source orient DOM we sometimes end a Node without it being
+ explicitly closed in source.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isContainer">isContainer</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if this node can contain children.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isDataEditable">isDataEditable</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Used to know read-only state of data.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isDefaultNamespace">isDefaultNamespace</a>(java.lang.String namespaceURI)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isEqualNode">isEqualNode</a>(org.w3c.dom.Node arg)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isId">isId</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isSameNode">isSameNode</a>(org.w3c.dom.Node other)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_lookupNamespaceURI">lookupNamespaceURI</a>(java.lang.String prefix)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_lookupPrefix">lookupPrefix</a>(java.lang.String namespaceURI)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setChildEditable">setChildEditable</a>(boolean editable)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Set's readonly state of children</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setDataEditable">setDataEditable</a>(boolean editable)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Set's readonly state of data</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setEditable">setEditable</a>(boolean editable
+         ,
+      boolean deep)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Sets readonly state of data
+ 
+ faster approach to set read-only state.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setSource">setSource</a>(java.lang.String source)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Sets the specified raw source to the Text node. Throws
+ InvalidCharacterException when the specified raw source includes
+ invalid characters, such as, ' <', '>' and '&'. Valid character
+ entities, such as, "&amp;lt;", are accepted.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setTextContent">setTextContent</a>(java.lang.String textContent)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setValueSource">setValueSource</a>(java.lang.String source)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Sets the specified raw source to the Text or Attr node's value. When
+ the specified raw source includes invalid characters, such as, ' <',
+ '>' and '&', converts them. Valid character entities, such as,
+ "&amp;lt;", are accepted.</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_compareDocumentPosition">compareDocumentPosition</a></h2><p><code>public short <strong>compareDocumentPosition</strong>(org.w3c.dom.Node other)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>other</code></p><h3>Returns</h3><p><code>short</code></p><h3>Throws:</h3><p><code>org.w3c.dom.DOMException</code></p><hr><h2><a name="method_getBaseURI">getBaseURI</a></h2><p><code>public java.lang.String <strong>getBaseURI</strong>()</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_getEndStructuredDocumentRegion">getEndStructuredDocumentRegion</a></h2><p><code>public IStructuredDocumentRegion <strong>getEndStructuredDocumentRegion</strong>()</code></p><p>Gets the last structured document region of this node.
+ 
+ ISSUE: need to resolve getEnd/getLast confusion.</p><h3>Returns</h3><p><code>IStructuredDocumentRegion</code> - IStructuredDocumentRegion - returns the last structured          document region associated with</p><hr><h2><a name="method_getFeature">getFeature</a></h2><p><code>public java.lang.Object <strong>getFeature</strong>(java.lang.String feature
+         ,
+      java.lang.String version)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>feature</code></p><p><code>version</code></p><h3>Returns</h3><p><code>java.lang.Object</code></p><hr><h2><a name="method_getFirstStructuredDocumentRegion">getFirstStructuredDocumentRegion</a></h2><p><code>public IStructuredDocumentRegion <strong>getFirstStructuredDocumentRegion</strong>()</code></p><p>Gets the first structured document region of this node.
+ 
+ ISSUE: need to resolve getFirst/getStart confusion</p><h3>Returns</h3><p><code>IStructuredDocumentRegion</code> - the first structured document region of this node.</p><hr><h2><a name="method_getLastStructuredDocumentRegion">getLastStructuredDocumentRegion</a></h2><p><code>public IStructuredDocumentRegion <strong>getLastStructuredDocumentRegion</strong>()</code></p><p>Gets the last structured document region of this node.
+ 
+ ISSUE: need to resolve getEnd/getLast confusion.</p><h3>Returns</h3><p><code>IStructuredDocumentRegion</code> - IStructuredDocumentRegion - returns the last structured          document region associated with</p><hr><h2><a name="method_getModel">getModel</a></h2><p><code>public org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel <strong>getModel</strong>()</code></p><p>Returns the model associated with this node. Returns null if not part
+ of an active model.</p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel</code> - IDOMModel - returns the IDOMModel this node is part of.</p><hr><h2><a name="method_getNameRegion">getNameRegion</a></h2><p><code>public ITextRegion <strong>getNameRegion</strong>()</code></p><p>Get's the region representing the name of this node
+ 
+ ISSUE: only implemented/used at attribute and DTDNodes -- should move.</p><h3>Returns</h3><p><code>ITextRegion</code> - ITextRegion - returns the ITextRegion associated with this          Node.</p><hr><h2><a name="method_getSource">getSource</a></h2><p><code>public java.lang.String <strong>getSource</strong>()</code></p><p>Returns the literal source representing this node in source document.
+ 
+ ISSUE: need to fix implementation to match.</p><h3>Returns</h3><p><code>java.lang.String</code> - the literal source representing this node in source document.</p><hr><h2><a name="method_getStartStructuredDocumentRegion">getStartStructuredDocumentRegion</a></h2><p><code>public IStructuredDocumentRegion <strong>getStartStructuredDocumentRegion</strong>()</code></p><p>Gets the first structured document region of this node.
+ 
+ ISSUE: need to resolve getFirst/getStart confusion</p><h3>Returns</h3><p><code>IStructuredDocumentRegion</code> - the first structured document region of this node.</p><hr><h2><a name="method_getStructuredDocument">getStructuredDocument</a></h2><p><code>public IStructuredDocument <strong>getStructuredDocument</strong>()</code></p><p>Returns the structured document that underlies this node's model.
+ 
+ Returns null if this node is not actively part of a source document. In
+ contrast, in the pure DOM world, "owning document" is not null even
+ after a node is deleted from the DOM.
+ 
+ ISSUE: we need to fix our implementation to match this spec.</p><h3>Returns</h3><p><code>IStructuredDocument</code> - the structured document.</p><hr><h2><a name="method_getTextContent">getTextContent</a></h2><p><code>public java.lang.String <strong>getTextContent</strong>()</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Returns</h3><p><code>java.lang.String</code></p><h3>Throws:</h3><p><code>org.w3c.dom.DOMException</code></p><hr><h2><a name="method_getUserData">getUserData</a></h2><p><code>public java.lang.Object <strong>getUserData</strong>(java.lang.String key)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>key</code></p><h3>Returns</h3><p><code>java.lang.Object</code></p><hr><h2><a name="method_getValueRegion">getValueRegion</a></h2><p><code>public ITextRegion <strong>getValueRegion</strong>()</code></p><p>Get's the region representing the value of this node if only one
+ ITextRegion, null otherwise.
+ 
+ ISSUE: only implemented/used at attribute level, move "down".</p><h3>Returns</h3><p><code>ITextRegion</code> - ITextRegion - returns the ITextRegion associated with this          Node.</p><hr><h2><a name="method_getValueSource">getValueSource</a></h2><p><code>public java.lang.String <strong>getValueSource</strong>()</code></p><p>Returns a string representing the source of this node, but with
+ character enties converted (e.g. &lt; is converted to '<').
+ 
+ ISSUE: need to better spec extent of this conversion, we may not know
+ all character entities.
+ 
+ ISSUE: need to fix implementation to match spec.</p><h3>Returns</h3><p><code>java.lang.String</code> - String - get's the source of this Node.</p><hr><h2><a name="method_isChildEditable">isChildEditable</a></h2><p><code>public boolean <strong>isChildEditable</strong>()</code></p><p>Used to know read-only state of children.</p><h3>Returns</h3><p><code>boolean</code> - boolean Whether children of the element can be appended or          removed.</p><hr><h2><a name="method_isClosed">isClosed</a></h2><p><code>public boolean <strong>isClosed</strong>()</code></p><p>Returns true if tag is closed in source.
+ 
+ In our source orient DOM we sometimes end a Node without it being
+ explicitly closed in source.</p><h3>Returns</h3><p><code>boolean</code> - boolean - true if node is closed</p><hr><h2><a name="method_isContainer">isContainer</a></h2><p><code>public boolean <strong>isContainer</strong>()</code></p><p>Returns true if this node can contain children.</p><h3>Returns</h3><p><code>boolean</code> - boolean - true if this node can contain children.</p><hr><h2><a name="method_isDataEditable">isDataEditable</a></h2><p><code>public boolean <strong>isDataEditable</strong>()</code></p><p>Used to know read-only state of data.</p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_isDefaultNamespace">isDefaultNamespace</a></h2><p><code>public boolean <strong>isDefaultNamespace</strong>(java.lang.String namespaceURI)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>namespaceURI</code></p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_isEqualNode">isEqualNode</a></h2><p><code>public boolean <strong>isEqualNode</strong>(org.w3c.dom.Node arg)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>arg</code></p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_isId">isId</a></h2><p><code>public boolean <strong>isId</strong>()</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_isSameNode">isSameNode</a></h2><p><code>public boolean <strong>isSameNode</strong>(org.w3c.dom.Node other)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>other</code></p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_lookupNamespaceURI">lookupNamespaceURI</a></h2><p><code>public java.lang.String <strong>lookupNamespaceURI</strong>(java.lang.String prefix)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>prefix</code></p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_lookupPrefix">lookupPrefix</a></h2><p><code>public java.lang.String <strong>lookupPrefix</strong>(java.lang.String namespaceURI)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>namespaceURI</code></p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_setChildEditable">setChildEditable</a></h2><p><code>public void <strong>setChildEditable</strong>(boolean editable)</code></p><p>Set's readonly state of children</p><h3>Parameters</h3><p><code>editable</code></p><hr><h2><a name="method_setDataEditable">setDataEditable</a></h2><p><code>public void <strong>setDataEditable</strong>(boolean editable)</code></p><p>Set's readonly state of data</p><h3>Parameters</h3><p><code>editable</code></p><hr><h2><a name="method_setEditable">setEditable</a></h2><p><code>public void <strong>setEditable</strong>(boolean editable
+         ,
+      boolean deep)</code></p><p>Sets readonly state of data
+ 
+ faster approach to set read-only state.</p><h3>Parameters</h3><p><code>editable</code></p><p><code>deep</code></p><hr><h2><a name="method_setSource">setSource</a></h2><p><code>public void <strong>setSource</strong>(java.lang.String source)</code></p><p>Sets the specified raw source to the Text node. Throws
+ InvalidCharacterException when the specified raw source includes
+ invalid characters, such as, ' <', '>' and '&'. Valid character
+ entities, such as, "&amp;lt;", are accepted.</p><h3>Parameters</h3><p><code>source</code></p><h3>Throws:</h3><p><code>InvalidCharacterException</code></p><hr><h2><a name="method_setTextContent">setTextContent</a></h2><p><code>public void <strong>setTextContent</strong>(java.lang.String textContent)</code></p><p>NOT IMPLEMENTED, is defined here in preparation of DOM Level 3</p><h3>Parameters</h3><p><code>textContent</code></p><h3>Throws:</h3><p><code>org.w3c.dom.DOMException</code></p><hr><h2><a name="method_setValueSource">setValueSource</a></h2><p><code>public void <strong>setValueSource</strong>(java.lang.String source)</code></p><p>Sets the specified raw source to the Text or Attr node's value. When
+ the specified raw source includes invalid characters, such as, ' <',
+ '>' and '&', converts them. Valid character entities, such as,
+ "&amp;lt;", are accepted.</p><h3>Parameters</h3><p><code>source</code></p><hr></body></html>

@@ -1,0 +1,185 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional.format</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional.format</strong></font><br>
+               Class NodeFormatter</h2><br><hr><pre>public class <strong>NodeFormatter</strong>
+extends java.lang.Object</pre><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Field Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>protected static  java.lang.String</code></td><td width="80%" align="left"><code><a href="#field_EMPTY_STRING">EMPTY_STRING</a></code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected IStructuredFormatContraints</code></td><td width="80%" align="left"><code><a href="#field_fFormatContraints">fFormatContraints</a></code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected IStructuredFormatPreferences</code></td><td width="80%" align="left"><code><a href="#field_fFormatPreferences">fFormatPreferences</a></code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected IProgressMonitor</code></td><td width="80%" align="left"><code><a href="#field_fProgressMonitor">fProgressMonitor</a></code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr></table><br><table width="100%" border="1"><tr bgcolor="#CCCCFF"><td width="100%"><h2>Constructor Summary</h2></td></tr><tr><td><code><strong><a href="#con_NodeFormatter">NodeFormatter</a></strong>()</code></td></tr></table><br><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>protected boolean</code></td><td width="" align="left"><code><a href="#method_firstStructuredDocumentRegionContainsLineDelimiters">firstStructuredDocumentRegionContainsLineDelimiters</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_format">format</a>(org.w3c.dom.Node node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_format">format</a>(org.w3c.dom.Node node
+         ,
+      IStructuredFormatContraints formatContraints)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_formatIndentationAfterNode">formatIndentationAfterNode</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredFormatContraints formatContraints)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_formatIndentationBeforeNode">formatIndentationBeforeNode</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredFormatContraints formatContraints)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_formatNode">formatNode</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredFormatContraints formatContraints)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_formatTrailingText">formatTrailingText</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredFormatContraints formatContraints)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               This method will compute the correct indentation after this node
+ depending on the indentations of its sibling nodes and parent node. Not
+ needed anymore?</td></tr><tr valign="top"><td width="20%" align="right"><code>protected org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode</code></td><td width="" align="left"><code><a href="#method_getDeepestChildNode">getDeepestChildNode</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public IStructuredFormatContraints</code></td><td width="" align="left"><code><a href="#method_getFormatContraints">getFormatContraints</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public IStructuredFormatPreferences</code></td><td width="" align="left"><code><a href="#method_getFormatPreferences">getFormatPreferences</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected IStructuredFormatter</code></td><td width="" align="left"><code><a href="#method_getFormatter">getFormatter</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected int</code></td><td width="" align="left"><code><a href="#method_getIndentationLength">getIndentationLength</a>(java.lang.String indent)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected Preferences</code></td><td width="" align="left"><code><a href="#method_getModelPreferences">getModelPreferences</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected java.lang.String</code></td><td width="" align="left"><code><a href="#method_getNodeIndent">getNodeIndent</a>(org.w3c.dom.Node node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               This method will find the indentation for this node. It will search
+ backwards starting from the beginning of the node until a character
+ other than a space or a tab is found. If this node is null or it's a
+ document node or it's a first level node (node's parent is a document
+ node) the default empty string will be returned as the indentation.</td></tr><tr valign="top"><td width="20%" align="right"><code>protected java.lang.String</code></td><td width="" align="left"><code><a href="#method_getNodeName">getNodeName</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected java.lang.String</code></td><td width="" align="left"><code><a href="#method_getNodeText">getNodeText</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode</code></td><td width="" align="left"><code><a href="#method_getParentIndentNode">getParentIndentNode</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected java.lang.String</code></td><td width="" align="left"><code><a href="#method_getSiblingIndent">getSiblingIndent</a>(org.w3c.dom.Node node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               This method will find the indentation for a node sibling to this node.
+ It will try to find a sibling node before this node first. If there is
+ no sibling node before this node, it will try to find a sibling node
+ after this node. If still not found, we will check if this node is
+ already indented from its parent. If yes, this node's indentation will
+ be used. Otherwise, the parent node's indentation plus one indentation
+ will be used. If this node is null or it's a document node or it's a
+ first level node (node's parent is a document node) the default empty
+ string will be returned as the indentation.</td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_insertAfterNode">insertAfterNode</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      java.lang.String string)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_insertBeforeNode">insertBeforeNode</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      java.lang.String string)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isAdapterForType">isAdapterForType</a>(java.lang.Object type)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Allowing the INodeAdapter to compare itself against the type allows it
+ to return true in more than one case.</td></tr><tr valign="top"><td width="20%" align="right"><code>protected boolean</code></td><td width="" align="left"><code><a href="#method_isEndTagMissing">isEndTagMissing</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected boolean</code></td><td width="" align="left"><code><a href="#method_nodeHasSiblings">nodeHasSiblings</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_notifyChanged">notifyChanged</a>(org.eclipse.wst.sse.core.internal.provisional.INodeNotifier notifier
+         ,
+      int eventType
+         ,
+      java.lang.Object changedFeature
+         ,
+      java.lang.Object oldValue
+         ,
+      java.lang.Object newValue
+         ,
+      int pos)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Node changed. No format should be performed automatically.</td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_removeRegionSpaces">removeRegionSpaces</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredDocumentRegion flatNode
+         ,
+      ITextRegion region)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_replace">replace</a>(IStructuredDocument structuredDocument
+         ,
+      int offset
+         ,
+      int length
+         ,
+      java.lang.String string)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               This method will replace the string at offset and length with a new
+ string. If the string to be replaced is the same as the new string, the
+ string will not be replaced.</td></tr><tr valign="top"><td width="20%" align="right"><code>protected void</code></td><td width="" align="left"><code><a href="#method_replaceNodeValue">replaceNodeValue</a>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      java.lang.String string)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               This method will replace the node value with a new string. If the node
+ value to be replaced is the same as the new string, the node value will
+ not be replaced.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setFormatPreferences">setFormatPreferences</a>(IStructuredFormatPreferences formatPreferences)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setProgressMonitor">setProgressMonitor</a>(IProgressMonitor monitor)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Field Detail
+               </h2></td></tr></table><h2><a name="field_EMPTY_STRING">EMPTY_STRING</a></h2><p><code>protected static  java.lang.String <strong>EMPTY_STRING</strong></code></p><hr><h2><a name="field_fFormatContraints">fFormatContraints</a></h2><p><code>protected IStructuredFormatContraints <strong>fFormatContraints</strong></code></p><hr><h2><a name="field_fFormatPreferences">fFormatPreferences</a></h2><p><code>protected IStructuredFormatPreferences <strong>fFormatPreferences</strong></code></p><hr><h2><a name="field_fProgressMonitor">fProgressMonitor</a></h2><p><code>protected IProgressMonitor <strong>fProgressMonitor</strong></code></p><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Constructor Detail
+               </h2></td></tr></table><h2><a name="con_NodeFormatter">NodeFormatter</a></h2><p><code>public <strong>NodeFormatter</strong>()</code></p><p></p><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_firstStructuredDocumentRegionContainsLineDelimiters">firstStructuredDocumentRegionContainsLineDelimiters</a></h2><p><code>protected boolean <strong>firstStructuredDocumentRegionContainsLineDelimiters</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_format">format</a></h2><p><code>public void <strong>format</strong>(org.w3c.dom.Node node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><hr><h2><a name="method_format">format</a></h2><p><code>public void <strong>format</strong>(org.w3c.dom.Node node
+         ,
+      IStructuredFormatContraints formatContraints)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><p><code>formatContraints</code></p><hr><h2><a name="method_formatIndentationAfterNode">formatIndentationAfterNode</a></h2><p><code>protected void <strong>formatIndentationAfterNode</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredFormatContraints formatContraints)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><p><code>formatContraints</code></p><hr><h2><a name="method_formatIndentationBeforeNode">formatIndentationBeforeNode</a></h2><p><code>protected void <strong>formatIndentationBeforeNode</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredFormatContraints formatContraints)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><p><code>formatContraints</code></p><hr><h2><a name="method_formatNode">formatNode</a></h2><p><code>protected void <strong>formatNode</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredFormatContraints formatContraints)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><p><code>formatContraints</code></p><hr><h2><a name="method_formatTrailingText">formatTrailingText</a></h2><p><code>protected void <strong>formatTrailingText</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredFormatContraints formatContraints)</code></p><p>This method will compute the correct indentation after this node
+ depending on the indentations of its sibling nodes and parent node. Not
+ needed anymore?</p><h3>Parameters</h3><p><code>node</code></p><p><code>formatContraints</code></p><hr><h2><a name="method_getDeepestChildNode">getDeepestChildNode</a></h2><p><code>protected org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode <strong>getDeepestChildNode</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode</code></p><hr><h2><a name="method_getFormatContraints">getFormatContraints</a></h2><p><code>public IStructuredFormatContraints <strong>getFormatContraints</strong>()</code></p><p></p><h3>Returns</h3><p><code>IStructuredFormatContraints</code></p><hr><h2><a name="method_getFormatPreferences">getFormatPreferences</a></h2><p><code>public IStructuredFormatPreferences <strong>getFormatPreferences</strong>()</code></p><p></p><h3>Returns</h3><p><code>IStructuredFormatPreferences</code></p><hr><h2><a name="method_getFormatter">getFormatter</a></h2><p><code>protected IStructuredFormatter <strong>getFormatter</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>IStructuredFormatter</code></p><hr><h2><a name="method_getIndentationLength">getIndentationLength</a></h2><p><code>protected int <strong>getIndentationLength</strong>(java.lang.String indent)</code></p><p></p><h3>Parameters</h3><p><code>indent</code></p><h3>Returns</h3><p><code>int</code></p><hr><h2><a name="method_getModelPreferences">getModelPreferences</a></h2><p><code>protected Preferences <strong>getModelPreferences</strong>()</code></p><p></p><h3>Returns</h3><p><code>Preferences</code></p><hr><h2><a name="method_getNodeIndent">getNodeIndent</a></h2><p><code>protected java.lang.String <strong>getNodeIndent</strong>(org.w3c.dom.Node node)</code></p><p>This method will find the indentation for this node. It will search
+ backwards starting from the beginning of the node until a character
+ other than a space or a tab is found. If this node is null or it's a
+ document node or it's a first level node (node's parent is a document
+ node) the default empty string will be returned as the indentation.</p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_getNodeName">getNodeName</a></h2><p><code>protected java.lang.String <strong>getNodeName</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_getNodeText">getNodeText</a></h2><p><code>protected java.lang.String <strong>getNodeText</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_getParentIndentNode">getParentIndentNode</a></h2><p><code>protected org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode <strong>getParentIndentNode</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode</code></p><hr><h2><a name="method_getSiblingIndent">getSiblingIndent</a></h2><p><code>protected java.lang.String <strong>getSiblingIndent</strong>(org.w3c.dom.Node node)</code></p><p>This method will find the indentation for a node sibling to this node.
+ It will try to find a sibling node before this node first. If there is
+ no sibling node before this node, it will try to find a sibling node
+ after this node. If still not found, we will check if this node is
+ already indented from its parent. If yes, this node's indentation will
+ be used. Otherwise, the parent node's indentation plus one indentation
+ will be used. If this node is null or it's a document node or it's a
+ first level node (node's parent is a document node) the default empty
+ string will be returned as the indentation.</p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>java.lang.String</code></p><hr><h2><a name="method_insertAfterNode">insertAfterNode</a></h2><p><code>protected void <strong>insertAfterNode</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      java.lang.String string)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><p><code>string</code></p><hr><h2><a name="method_insertBeforeNode">insertBeforeNode</a></h2><p><code>protected void <strong>insertBeforeNode</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      java.lang.String string)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><p><code>string</code></p><hr><h2><a name="method_isAdapterForType">isAdapterForType</a></h2><p><code>public boolean <strong>isAdapterForType</strong>(java.lang.Object type)</code></p><p>Allowing the INodeAdapter to compare itself against the type allows it
+ to return true in more than one case.</p><h3>Parameters</h3><p><code>type</code></p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_isEndTagMissing">isEndTagMissing</a></h2><p><code>protected boolean <strong>isEndTagMissing</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_nodeHasSiblings">nodeHasSiblings</a></h2><p><code>protected boolean <strong>nodeHasSiblings</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><h3>Returns</h3><p><code>boolean</code></p><hr><h2><a name="method_notifyChanged">notifyChanged</a></h2><p><code>public void <strong>notifyChanged</strong>(org.eclipse.wst.sse.core.internal.provisional.INodeNotifier notifier
+         ,
+      int eventType
+         ,
+      java.lang.Object changedFeature
+         ,
+      java.lang.Object oldValue
+         ,
+      java.lang.Object newValue
+         ,
+      int pos)</code></p><p>Node changed. No format should be performed automatically.</p><h3>Parameters</h3><p><code>notifier</code></p><p><code>eventType</code></p><p><code>changedFeature</code></p><p><code>oldValue</code></p><p><code>newValue</code></p><p><code>pos</code></p><hr><h2><a name="method_removeRegionSpaces">removeRegionSpaces</a></h2><p><code>protected void <strong>removeRegionSpaces</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      IStructuredDocumentRegion flatNode
+         ,
+      ITextRegion region)</code></p><p></p><h3>Parameters</h3><p><code>node</code></p><p><code>flatNode</code></p><p><code>region</code></p><hr><h2><a name="method_replace">replace</a></h2><p><code>protected void <strong>replace</strong>(IStructuredDocument structuredDocument
+         ,
+      int offset
+         ,
+      int length
+         ,
+      java.lang.String string)</code></p><p>This method will replace the string at offset and length with a new
+ string. If the string to be replaced is the same as the new string, the
+ string will not be replaced.</p><h3>Parameters</h3><p><code>structuredDocument</code></p><p><code>offset</code></p><p><code>length</code></p><p><code>string</code></p><hr><h2><a name="method_replaceNodeValue">replaceNodeValue</a></h2><p><code>protected void <strong>replaceNodeValue</strong>(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode node
+         ,
+      java.lang.String string)</code></p><p>This method will replace the node value with a new string. If the node
+ value to be replaced is the same as the new string, the node value will
+ not be replaced.</p><h3>Parameters</h3><p><code>node</code></p><p><code>string</code></p><hr><h2><a name="method_setFormatPreferences">setFormatPreferences</a></h2><p><code>public void <strong>setFormatPreferences</strong>(IStructuredFormatPreferences formatPreferences)</code></p><p></p><h3>Parameters</h3><p><code>formatPreferences</code></p><hr><h2><a name="method_setProgressMonitor">setProgressMonitor</a></h2><p><code>public void <strong>setProgressMonitor</strong>(IProgressMonitor monitor)</code></p><p></p><h3>Parameters</h3><p><code>monitor</code></p><hr></body></html>

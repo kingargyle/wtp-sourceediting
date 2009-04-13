@@ -1,0 +1,33 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.catalog.provisional</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.catalog.provisional</strong></font><br>
+               Class ICatalogElement</h2><br><hr><pre>public class <strong>ICatalogElement</strong>
+extends </pre><p>
+ This interface is not intended to be implemented by clients.
+ </p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Field Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public static  int</code></td><td width="80%" align="left"><code><a href="#field_TYPE_ENTRY">TYPE_ENTRY</a></code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               The PUBLIC, URI or SYSTEM Catalog Entry.</td></tr><tr valign="top"><td width="20%" align="right"><code>public static  int</code></td><td width="80%" align="left"><code><a href="#field_TYPE_NEXT_CATALOG">TYPE_NEXT_CATALOG</a></code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               The NEXT_CATALOG Catalog Entry type.</td></tr></table><br><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String[]</code></td><td width="" align="left"><code><a href="#method_getAttributes">getAttributes</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns an array of attribute names for any dynamic attributes that may exist</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getAttributeValue">getAttributeValue</a>(java.lang.String name)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns the value of the attribute with specified name.</td></tr><tr valign="top"><td width="20%" align="right"><code>public java.lang.String</code></td><td width="" align="left"><code><a href="#method_getId">getId</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns element's id string</td></tr><tr valign="top"><td width="20%" align="right"><code>public org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalog</code></td><td width="" align="left"><code><a href="#method_getOwnerCatalog">getOwnerCatalog</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr><tr valign="top"><td width="20%" align="right"><code>public int</code></td><td width="" align="left"><code><a href="#method_getType">getType</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns the value of the '<em><b>Type</b></em>' attribute.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setAttributeValue">setAttributeValue</a>(java.lang.String name
+         ,
+      java.lang.String value)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Sets the value of the named attribute.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setId">setId</a>(java.lang.String id)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Sets element's id string</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setOwnerCatalog">setOwnerCatalog</a>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalog catalog)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               </td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Field Detail
+               </h2></td></tr></table><h2><a name="field_TYPE_ENTRY">TYPE_ENTRY</a></h2><p><code>public static  int <strong>TYPE_ENTRY</strong></code></p><table><tr><td>The PUBLIC, URI or SYSTEM Catalog Entry.</td></tr></table><hr><h2><a name="field_TYPE_NEXT_CATALOG">TYPE_NEXT_CATALOG</a></h2><p><code>public static  int <strong>TYPE_NEXT_CATALOG</strong></code></p><table><tr><td>The NEXT_CATALOG Catalog Entry type.</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_getAttributes">getAttributes</a></h2><p><code>public java.lang.String[] <strong>getAttributes</strong>()</code></p><p>Returns an array of attribute names for any dynamic attributes that may exist</p><h3>Returns</h3><p><code>java.lang.String[]</code> - array of attribute names</p><hr><h2><a name="method_getAttributeValue">getAttributeValue</a></h2><p><code>public java.lang.String <strong>getAttributeValue</strong>(java.lang.String name)</code></p><p>Returns the value of the attribute with specified name.</p><h3>Parameters</h3><p><code>name</code></p><h3>Returns</h3><p><code>java.lang.String</code> - the value of the attribute with specified name.</p><hr><h2><a name="method_getId">getId</a></h2><p><code>public java.lang.String <strong>getId</strong>()</code></p><p>Returns element's id string</p><h3>Returns</h3><p><code>java.lang.String</code> - element's id string</p><hr><h2><a name="method_getOwnerCatalog">getOwnerCatalog</a></h2><p><code>public org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalog <strong>getOwnerCatalog</strong>()</code></p><p></p><h3>Returns</h3><p><code>org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalog</code></p><hr><h2><a name="method_getType">getType</a></h2><p><code>public int <strong>getType</strong>()</code></p><p>Returns the value of the '<em><b>Type</b></em>' attribute.</p><h3>Returns</h3><p><code>int</code> - the value of the '<em>Type</em>' attribute.</p><hr><h2><a name="method_setAttributeValue">setAttributeValue</a></h2><p><code>public void <strong>setAttributeValue</strong>(java.lang.String name
+         ,
+      java.lang.String value)</code></p><p>Sets the value of the named attribute.</p><h3>Parameters</h3><p><code>name</code> - the name of the attribute that will be set</p><p><code>value</code> - the new value of the named attribute.</p><hr><h2><a name="method_setId">setId</a></h2><p><code>public void <strong>setId</strong>(java.lang.String id)</code></p><p>Sets element's id string</p><h3>Parameters</h3><p><code>id</code></p><hr><h2><a name="method_setOwnerCatalog">setOwnerCatalog</a></h2><p><code>public void <strong>setOwnerCatalog</strong>(org.eclipse.wst.xml.core.internal.catalog.provisional.ICatalog catalog)</code></p><p></p><h3>Parameters</h3><p><code>catalog</code></p><hr></body></html>

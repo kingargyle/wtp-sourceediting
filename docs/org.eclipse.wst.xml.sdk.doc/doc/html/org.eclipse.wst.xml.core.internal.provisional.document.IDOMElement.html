@@ -1,0 +1,134 @@
+<html><body><p><font size="+1"><strong>Package org.eclipse.wst.xml.core.internal.provisional.document</strong></font></p><hr><h2><font size="-1"><strong>org.eclipse.wst.xml.core.internal.provisional.document</strong></font><br>
+               Class IDOMElement</h2><br><hr><pre>public class <strong>IDOMElement</strong>
+extends </pre>This interface provides extensions to corresponding DOM interface to enable
+ functions for source editing and incremental parsing.<p></p><hr><table width="100%" border="1"><tr cols="2" bgcolor="#CCCCFF"><td colspan="2" width="100%"><h2>Method Summary</h2></td></tr><tr valign="top"><td width="20%" align="right"><code>public int</code></td><td width="" align="left"><code><a href="#method_getEndStartOffset">getEndStartOffset</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Retuns the start offset of the end tag.
+ 
+ ISSUE: need to sort out need for this</td></tr><tr valign="top"><td width="20%" align="right"><code>public int</code></td><td width="" align="left"><code><a href="#method_getStartEndOffset">getStartEndOffset</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns the end offset of the
+ 
+ ISSUE: need to sort out need for this</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_hasEndTag">hasEndTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if has an end tag.
+ 
+ In our source-oriented DOM, sometimes Elements are "ended", even
+ without an explicit end tag in the source.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_hasStartTag">hasStartTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               returns true if has a start tag.
+ 
+ In our source-oriented DOM, a lone end tag will cause a node to be
+ created in the tree, unlike well-formed-only DOMs.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isCommentTag">isCommentTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               returns true if this element is a comment element</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isEmptyTag">isEmptyTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               isEmptyTag method</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isEndTag">isEndTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if floating end tag.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isGlobalTag">isGlobalTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true for "global tag" (basically, without prefix)</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isImplicitTag">isImplicitTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true for no start and the end tags in source.
+ 
+ Provided for some very special cases when, for example, and HTML tag is
+ assumed in an HTML document that does not have a literal HTML tag.
+ 
+ ISSUE: check with clients to see if still needed</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isJSPTag">isJSPTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               isJSPTag method</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isStartTagClosed">isStartTagClosed</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               Returns true if start tag is closed.</td></tr><tr valign="top"><td width="20%" align="right"><code>public boolean</code></td><td width="" align="left"><code><a href="#method_isXMLTag">isXMLTag</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               returns true if is xml tag
+ 
+ ISSUE: need to spec this better.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_notifyEndTagChanged">notifyEndTagChanged</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT CLIENT API
+ 
+ notifyEndTagChanged</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_notifyStartTagChanged">notifyStartTagChanged</a>()</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT CLIENT API
+ 
+ notifyStartTagChanged</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setCommentTag">setCommentTag</a>(boolean isCommentTag)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT CLIENT API
+ 
+ Signify that this tag is a comment
+ 
+ For use only by parsers.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setEmptyTag">setEmptyTag</a>(boolean isEmptyTag)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT CLIENT API
+ 
+ Signify that this tag is an empty tag
+ 
+ For use only by parsers</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setIdAttribute">setIdAttribute</a>(java.lang.String name
+         ,
+      boolean isId)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED. Is defined here in preparation for DOM 3.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setIdAttributeNode">setIdAttributeNode</a>(org.w3c.dom.Attr idAttr
+         ,
+      boolean isId)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED. Is defined here in preparation for DOM 3.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setIdAttributeNS">setIdAttributeNS</a>(java.lang.String namespaceURI
+         ,
+      java.lang.String localName
+         ,
+      boolean isId)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT IMPLEMENTED. Is defined here in preparation for DOM 3.</td></tr><tr valign="top"><td width="20%" align="right"><code>public void</code></td><td width="" align="left"><code><a href="#method_setJSPTag">setJSPTag</a>(boolean isJSPTag)</code><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               NOT CLIENT API
+ 
+ Signify that this tag is a JSP tag
+ 
+ For use only by parsers
+ 
+ ISSUE: I have had one non-parsing client who has had to use this ...
+ need to check</td></tr></table><hr><table cols="2" width="100%" border="1"><tr colspan="2" width="100%" bgcolor="#CCCCFF" align="left"><td><h2>
+                  Methods Detail
+               </h2></td></tr></table><h2><a name="method_getEndStartOffset">getEndStartOffset</a></h2><p><code>public int <strong>getEndStartOffset</strong>()</code></p><p>Retuns the start offset of the end tag.
+ 
+ ISSUE: need to sort out need for this</p><h3>Returns</h3><p><code>int</code> - int - the start offset of the end tag.</p><hr><h2><a name="method_getStartEndOffset">getStartEndOffset</a></h2><p><code>public int <strong>getStartEndOffset</strong>()</code></p><p>Returns the end offset of the
+ 
+ ISSUE: need to sort out need for this</p><h3>Returns</h3><p><code>int</code> - int - the end offset of the start tag.</p><hr><h2><a name="method_hasEndTag">hasEndTag</a></h2><p><code>public boolean <strong>hasEndTag</strong>()</code></p><p>Returns true if has an end tag.
+ 
+ In our source-oriented DOM, sometimes Elements are "ended", even
+ without an explicit end tag in the source.</p><h3>Returns</h3><p><code>boolean</code> - true if has an end tag.</p><hr><h2><a name="method_hasStartTag">hasStartTag</a></h2><p><code>public boolean <strong>hasStartTag</strong>()</code></p><p>returns true if has a start tag.
+ 
+ In our source-oriented DOM, a lone end tag will cause a node to be
+ created in the tree, unlike well-formed-only DOMs.</p><h3>Returns</h3><p><code>boolean</code> - true if has a start tag.</p><hr><h2><a name="method_isCommentTag">isCommentTag</a></h2><p><code>public boolean <strong>isCommentTag</strong>()</code></p><p>returns true if this element is a comment element</p><h3>Returns</h3><p><code>boolean</code> - true if this element is a comment element</p><hr><h2><a name="method_isEmptyTag">isEmptyTag</a></h2><p><code>public boolean <strong>isEmptyTag</strong>()</code></p><p>isEmptyTag method</p><h3>Returns</h3><p><code>boolean</code> - boolean - true if is empty tag, false otherwise</p><hr><h2><a name="method_isEndTag">isEndTag</a></h2><p><code>public boolean <strong>isEndTag</strong>()</code></p><p>Returns true if floating end tag.</p><h3>Returns</h3><p><code>boolean</code> - true if floating end tag.</p><hr><h2><a name="method_isGlobalTag">isGlobalTag</a></h2><p><code>public boolean <strong>isGlobalTag</strong>()</code></p><p>Returns true for "global tag" (basically, without prefix)</p><h3>Returns</h3><p><code>boolean</code> - true for "global tag" (basically, without prefix)</p><hr><h2><a name="method_isImplicitTag">isImplicitTag</a></h2><p><code>public boolean <strong>isImplicitTag</strong>()</code></p><p>Returns true for no start and the end tags in source.
+ 
+ Provided for some very special cases when, for example, and HTML tag is
+ assumed in an HTML document that does not have a literal HTML tag.
+ 
+ ISSUE: check with clients to see if still needed</p><h3>Returns</h3><p><code>boolean</code> - true or no start and the end tags in source.</p><hr><h2><a name="method_isJSPTag">isJSPTag</a></h2><p><code>public boolean <strong>isJSPTag</strong>()</code></p><p>isJSPTag method</p><h3>Returns</h3><p><code>boolean</code> - boolean    ISSUE: change to isContainerLanguageTag(String type);</p><hr><h2><a name="method_isStartTagClosed">isStartTagClosed</a></h2><p><code>public boolean <strong>isStartTagClosed</strong>()</code></p><p>Returns true if start tag is closed.</p><h3>Returns</h3><p><code>boolean</code> - true if start tag is closed.</p><hr><h2><a name="method_isXMLTag">isXMLTag</a></h2><p><code>public boolean <strong>isXMLTag</strong>()</code></p><p>returns true if is xml tag
+ 
+ ISSUE: need to spec this better.</p><h3>Returns</h3><p><code>boolean</code> - true if is xml tag</p><hr><h2><a name="method_notifyEndTagChanged">notifyEndTagChanged</a></h2><p><code>public void <strong>notifyEndTagChanged</strong>()</code></p><p>NOT CLIENT API
+ 
+ notifyEndTagChanged</p><hr><h2><a name="method_notifyStartTagChanged">notifyStartTagChanged</a></h2><p><code>public void <strong>notifyStartTagChanged</strong>()</code></p><p>NOT CLIENT API
+ 
+ notifyStartTagChanged</p><hr><h2><a name="method_setCommentTag">setCommentTag</a></h2><p><code>public void <strong>setCommentTag</strong>(boolean isCommentTag)</code></p><p>NOT CLIENT API
+ 
+ Signify that this tag is a comment
+ 
+ For use only by parsers.</p><h3>Parameters</h3><p><code>isCommentTag</code></p><hr><h2><a name="method_setEmptyTag">setEmptyTag</a></h2><p><code>public void <strong>setEmptyTag</strong>(boolean isEmptyTag)</code></p><p>NOT CLIENT API
+ 
+ Signify that this tag is an empty tag
+ 
+ For use only by parsers</p><h3>Parameters</h3><p><code>isEmptyTag</code></p><hr><h2><a name="method_setIdAttribute">setIdAttribute</a></h2><p><code>public void <strong>setIdAttribute</strong>(java.lang.String name
+         ,
+      boolean isId)</code></p><p>NOT IMPLEMENTED. Is defined here in preparation for DOM 3.</p><h3>Parameters</h3><p><code>name</code></p><p><code>isId</code></p><hr><h2><a name="method_setIdAttributeNode">setIdAttributeNode</a></h2><p><code>public void <strong>setIdAttributeNode</strong>(org.w3c.dom.Attr idAttr
+         ,
+      boolean isId)</code></p><p>NOT IMPLEMENTED. Is defined here in preparation for DOM 3.</p><h3>Parameters</h3><p><code>idAttr</code></p><p><code>isId</code></p><h3>Throws:</h3><p><code>org.w3c.dom.DOMException</code></p><hr><h2><a name="method_setIdAttributeNS">setIdAttributeNS</a></h2><p><code>public void <strong>setIdAttributeNS</strong>(java.lang.String namespaceURI
+         ,
+      java.lang.String localName
+         ,
+      boolean isId)</code></p><p>NOT IMPLEMENTED. Is defined here in preparation for DOM 3.</p><h3>Parameters</h3><p><code>namespaceURI</code></p><p><code>localName</code></p><p><code>isId</code></p><hr><h2><a name="method_setJSPTag">setJSPTag</a></h2><p><code>public void <strong>setJSPTag</strong>(boolean isJSPTag)</code></p><p>NOT CLIENT API
+ 
+ Signify that this tag is a JSP tag
+ 
+ For use only by parsers
+ 
+ ISSUE: I have had one non-parsing client who has had to use this ...
+ need to check</p><h3>Parameters</h3><p><code>isJSPTag</code></p><hr></body></html>
