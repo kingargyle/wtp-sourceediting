@@ -67,4 +67,9 @@
          <topic href="doc/html/org.eclipse.wst.xml.ui.views.properties.XMLPropertySheetConfiguration.html" label="org.eclipse.wst.xml.ui.views.properties.XMLPropertySheetConfiguration"/>
       </topic>
    </topic>
+   <topic label="Extension Points">
+         <topic href="doc/html/extension_point/org_eclipse_wst_xml_core_catalogContributions.html" label="org.eclipse.wst.xml.core.catalogContributions"/>
+         <topic href="doc/html/extension_point/org_eclipse_wst_xml_core_errorCustomizer.html" label="org.eclipse.wst.xml.core.errorCustomizer"/>
+         <topic href="doc/html/extension_point/org_eclipse_wst_xml_ui_catalogFileType.html" label="org.eclipse.wst.xml.ui.catalogFileType"/>
+   </topic>
 </toc>
