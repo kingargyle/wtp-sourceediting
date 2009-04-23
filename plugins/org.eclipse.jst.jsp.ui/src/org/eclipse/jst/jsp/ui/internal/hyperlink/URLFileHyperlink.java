@@ -24,6 +24,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.wst.sse.core.internal.util.JarUtilities;
 
 /**
  * Hyperlink for URLs (opens in read-only mode)
@@ -94,7 +95,7 @@ class URLFileHyperlink implements IHyperlink {
 		public InputStream getContents() throws CoreException {
 			InputStream stream = null;
 			try {
-				stream = fURL.openStream();
+				stream = JarUtilities.getInputStream(fURL);
 			}
 			catch (Exception e) {
 				throw new CoreException(new Status(IStatus.ERROR, JSPUIPlugin.getDefault().getBundle().getSymbolicName(), IStatus.ERROR, fURL.toString(), e));
@@ -147,7 +148,10 @@ class URLFileHyperlink implements IHyperlink {
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlink#getHyperlinkText()
 	 */
 	public String getHyperlinkText() {
-		return NLS.bind(JSPUIMessages.Open, fURL.toString());
+		String path = fURL.getPath();
+		if (path.length() > 0)
+			return NLS.bind(JSPUIMessages.Open, new Path(path).lastSegment());
+		return NLS.bind(JSPUIMessages.TLDHyperlink_hyperlinkText, fURL.toString());
 	}
 
 	/*
