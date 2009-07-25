@@ -1,4 +1,6 @@
 # Sample script to invoke the test code
+# for bug 284441 (Error: could not match input in HTML Tokenizer)
+# https://bugs.eclipse.org/bugs/show_bug.cgi?id=284441
 
 export JAVA_HOME=/shared/webtools/apps/ibm-java-ppc-605
 
