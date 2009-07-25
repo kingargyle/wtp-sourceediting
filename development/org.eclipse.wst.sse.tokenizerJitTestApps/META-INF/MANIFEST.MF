@@ -5,10 +5,10 @@ Bundle-SymbolicName: org.eclipse.wst.sse.tokenizerJitTestApps;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.jst.jsp.core;bundle-version="1.2.300",
- org.eclipse.wst.sse.core;bundle-version="1.1.500",
- org.eclipse.wst.html.core;bundle-version="1.1.400",
- org.eclipse.wst.css.core;bundle-version="1.1.400"
+ org.eclipse.jst.jsp.core,
+ org.eclipse.wst.sse.core,
+ org.eclipse.wst.html.core,
+ org.eclipse.wst.css.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.wst.sse.tokenizerjittestApps
