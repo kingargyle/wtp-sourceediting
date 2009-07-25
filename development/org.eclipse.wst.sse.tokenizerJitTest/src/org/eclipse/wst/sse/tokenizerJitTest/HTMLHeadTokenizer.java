@@ -233,7 +233,7 @@ public class HTMLHeadTokenizer {
 			hasMore = false;
 			result = createToken(HTMLHeadTokenizerConstants.UNDEFINED, yychar, yytext());
 			while(yy_advance() != YYEOF) {}
-			// modified for bug 284441 do we can capture how many files scanned
+			// modified for bug 284441 so we can capture how many files scanned
 			throw e;
 			//return result;
 		}
