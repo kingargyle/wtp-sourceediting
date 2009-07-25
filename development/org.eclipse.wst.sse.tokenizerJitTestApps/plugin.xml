@@ -3,7 +3,7 @@
 <plugin>
    <extension
          id="jspTokenizerTest"
-         name="JSP Tokenizer Tests"
+         name="%extension.name"
          point="org.eclipse.core.runtime.applications">
       <application> 
          <run class="org.eclipse.wst.sse.tokenizerjittestApps.JSPTokenizerTesterForDirectory" /> 
@@ -11,7 +11,7 @@
    </extension>
    <extension
          id="htmlHeadTokenizerTest"
-         name="HTML HEAD Tokenizer Tests"
+         name="%extension.name.0"
          point="org.eclipse.core.runtime.applications">
       <application> 
          <run class="org.eclipse.wst.sse.tokenizerjittestApps.HTMLHEADTokenizerTesterForDirectory" /> 
