@@ -9,7 +9,7 @@ export JAVA_HOME=/shared/webtools/apps/ibm-java-ppc-605
 # You can use almost any directory, as long as there are thousands of files, 
 # that can be accessed for read. 
 
-# reduce optimization level 
+# reduce optimization level for bug 284441
 #export IBM_JAVA_OPTIONS=-Xjit:"{org/eclipse/wst/sse/tokenizerJitTest/IntStack;)V|org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.*}(optLevel=scorching)"
 
 # eclude methods
