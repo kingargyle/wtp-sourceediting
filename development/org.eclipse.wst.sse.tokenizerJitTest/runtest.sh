@@ -10,12 +10,15 @@ export JAVA_HOME=/shared/webtools/apps/ibm-java-ppc-605
 # that can be accessed for read. 
 
 # reduce optimization level for bug 284441
-#export IBM_JAVA_OPTIONS=-Xjit:"{org/eclipse/wst/sse/tokenizerJitTest/IntStack;)V|org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.*}(optLevel=scorching)"
+#export IBM_JAVA_OPTIONS=-Xjit:"{org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.*}(optLevel=scorching)"
 
 # eclude methods
-#export IBM_JAVA_OPTIONS=-Xjit:exclude="{com/ibm/ISecurityLocalObjectBaseL13Impl/CSIServerRI.send_exception(Lorg/eclipse/wst/sse/tokenizerJitTest/IntStack;)V|org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.*}"
+export IBM_JAVA_OPTIONS=-Xjit:exclude="{org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;}"
+
+# exclude methods for "real" tokenizer
+#-Xjit:verbose={compileStart|compileEnd},vlog=filename.log,count=0,exclude={org/eclipse/wst/html/core/internal/contenttype/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;}
 
 #capture log
-#export IBM_JAVA_OPTIONS=-Xjit:verbose="{compileStart|compileEnd},vlog=filename.log,exclude={com/ibm/ISecurityLocalObjectBaseL13Impl/CSIServerRI.send_exception(Lorg/eclipse/wst/sse/tokenizerJitTest/IntStack;)V|org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.*}"
+#export IBM_JAVA_OPTIONS=-Xjit:verbose="{compileStart|compileEnd},vlog=filename.log,exclude={-Xjit:verbose={compileStart|compileEnd},vlog=filename.log,count=0,exclude="{org/eclipse/wst/html/core/internal/contenttype/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;}"
 
 ${JAVA_HOME}/jre/bin/java -jar testTokenizerJIT.jar $HOME
