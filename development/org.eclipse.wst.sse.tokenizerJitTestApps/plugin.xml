@@ -57,4 +57,12 @@
          <run class="org.eclipse.wst.sse.tokenizerjittestApps.CSSTokenizerTesterForDirectory" /> 
       </application>         
    </extension>  
+   <extension
+         id="jspedCSSTokenizerTest"
+         name="%extension.name.jspedCSS"
+         point="org.eclipse.core.runtime.applications">
+      <application> 
+         <run class="org.eclipse.wst.sse.tokenizerjittestApps.JSPedCSSTokenizerTesterForDirectory" /> 
+      </application>         
+   </extension>    
 </plugin>
