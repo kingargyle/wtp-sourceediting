@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 import org.eclipse.jst.jsp.core.internal.parser.internal.JSPTokenizer;
+import org.eclipse.wst.css.core.internal.parser.CSSTokenizer;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 
 /**
@@ -25,14 +26,14 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
  * @author davidw
  * 
  */
-public class JSPTokenizerTesterForDirectory extends TokenizerTesterForDirectory {
+public class CSSTokenizerTesterForDirectory extends TokenizerTesterForDirectory {
 
-	static final String tokenizerName = "JSPTokenizer";
+	static final String tokenizerName = "CSSTokenizer";
 
 	@Override
 	protected void doTest(final Reader reader) throws IOException {
 
-		final JSPTokenizer tokenizer = new JSPTokenizer(reader);
+		final CSSTokenizer tokenizer = new CSSTokenizer(reader);
 		scanThroughFile(tokenizer);
 	}
 
@@ -41,7 +42,7 @@ public class JSPTokenizerTesterForDirectory extends TokenizerTesterForDirectory 
 		return tokenizerName;
 	}
 
-	private void scanThroughFile(final JSPTokenizer tokenizer) throws IOException {
+	private void scanThroughFile(final CSSTokenizer tokenizer) throws IOException {
 		ITextRegion token = null;
 		do {
 			token = tokenizer.getNextToken();

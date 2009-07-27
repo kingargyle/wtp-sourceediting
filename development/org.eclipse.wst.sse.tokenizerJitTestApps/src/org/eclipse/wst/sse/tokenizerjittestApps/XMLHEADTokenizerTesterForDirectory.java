@@ -15,8 +15,9 @@ package org.eclipse.wst.sse.tokenizerjittestApps;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.eclipse.jst.jsp.core.internal.parser.internal.JSPTokenizer;
-import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
+import org.eclipse.wst.xml.core.internal.contenttype.HeadParserToken;
+import org.eclipse.wst.xml.core.internal.contenttype.XMLHeadTokenizer;
+
 
 /**
  * This class was based on a JUnit test, HTMLHeadTokenizerTester, and then
@@ -25,14 +26,14 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
  * @author davidw
  * 
  */
-public class JSPTokenizerTesterForDirectory extends TokenizerTesterForDirectory {
+public class XMLHEADTokenizerTesterForDirectory extends TokenizerTesterForDirectory {
 
-	static final String tokenizerName = "JSPTokenizer";
+	static final String tokenizerName = "XMLHEADTokenizer";
 
 	@Override
 	protected void doTest(final Reader reader) throws IOException {
 
-		final JSPTokenizer tokenizer = new JSPTokenizer(reader);
+		final XMLHeadTokenizer tokenizer = new XMLHeadTokenizer(reader);
 		scanThroughFile(tokenizer);
 	}
 
@@ -41,15 +42,16 @@ public class JSPTokenizerTesterForDirectory extends TokenizerTesterForDirectory 
 		return tokenizerName;
 	}
 
-	private void scanThroughFile(final JSPTokenizer tokenizer) throws IOException {
-		ITextRegion token = null;
+	private void scanThroughFile(final XMLHeadTokenizer tokenizer) throws IOException {
+		HeadParserToken token = null;
 		do {
 			token = tokenizer.getNextToken();
 			if (DEBUG) {
 				System.out.println(token);
 			}
 		}
-		while (!tokenizer.isEOF());
-
+		while (tokenizer.hasMoreTokens());
 	}
+
+
 }
