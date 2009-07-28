@@ -62,6 +62,7 @@ public class HTMLHeadTokenizerTesterForDirectory {
 
 	private final boolean DEBUG = false;
 	private final static int MAX_FILES = 50000;
+	private final static int MAX_EXCEPTIONS = 50;
 	// provide generic, platform independent default directory
 	private final static String defaultDirName = "/";
 	private final static int TIME_PRINT_INTERVAL = 2000;
@@ -69,6 +70,7 @@ public class HTMLHeadTokenizerTesterForDirectory {
 	private int nFilesScanned;
 
 	private int previousPrintedScannedFiles;
+	private int nExceptions;
 
 	private boolean checkMaxFiles(boolean printTime) {
 		if (printTime && (previousPrintedScannedFiles != nFilesScanned) && ((nFilesScanned % TIME_PRINT_INTERVAL) == 0)) {
@@ -83,7 +85,7 @@ public class HTMLHeadTokenizerTesterForDirectory {
 			// twice if no change.
 			previousPrintedScannedFiles = nFilesScanned;
 		}
-		return (nFilesScanned >= MAX_FILES);
+		return (nFilesScanned >= MAX_FILES) || (nExceptions >= MAX_EXCEPTIONS);
 	}
 
 	private void doTestDir(File dir) {
@@ -123,6 +125,7 @@ public class HTMLHeadTokenizerTesterForDirectory {
 			System.out.println("Error: " + e.getMessage());
 			System.out.println("   filename: " + file.getAbsolutePath());
 			System.out.println("   number of files checked: " + nFilesScanned);
+			nExceptions++;
 		}
 	}
 
