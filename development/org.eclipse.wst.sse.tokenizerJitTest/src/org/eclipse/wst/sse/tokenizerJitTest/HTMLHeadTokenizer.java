@@ -1978,7 +1978,8 @@ public class HTMLHeadTokenizer {
               { hasMore = false; return EncodingParserConstants.EOF; }
           } 
           else {
-            yy_ScanError(YY_NO_MATCH);
+            //yy_ScanError(YY_NO_MATCH);
+        	  throw new RuntimeException("Impossible 'no match' error");
           }
       }
     }
