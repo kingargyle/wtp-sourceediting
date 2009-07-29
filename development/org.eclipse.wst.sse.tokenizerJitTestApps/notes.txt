@@ -1,0 +1,18 @@
+# exclude methods for "real" tokenizer
+#-Xjit:verbose={compileStart|compileEnd},vlog=filename.log,count=0,exclude={org/eclipse/wst/html/core/internal/contenttype/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;}
+
+
+org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;
+
+
+
+-Xjit:count=1,verbose={compileStart|compileEnd},vlog=D:\temp\jitverbose.log
+
+
+-Xjit:exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;}
+
+-Xjit:exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;}
+
+-Xjit:exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.hugeswitch()V}
+
+-Xjit:count=1,verbose={compileStart|compileEnd},vlog=D:\temp\jitverbose.log,exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.hugeswitch()V},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.forNextCase0()V},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.forNextCase1()V},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.forNextCase2()V},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.forNextCase3()V}
