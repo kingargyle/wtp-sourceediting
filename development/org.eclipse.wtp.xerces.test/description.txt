@@ -1,0 +1,9 @@
+This test bundle was created to have a simplified way to investigate interaction of 
+JREs and Xerces bundle. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=283721
+
+It is written as an Eclpse App, which just does a simple test of a content type. 
+
+While loading all the content type describers, to parse a file, a Classcast is thrown in some cases, 
+but not others, all depending on the way the SAXParserFactory is created. 
+
+

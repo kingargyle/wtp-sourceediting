@@ -60,6 +60,18 @@ public final class XMLRootHandler extends DefaultHandler implements LexicalHandl
 	}
 
 
+
+	private static final int OSGI_SERVICE = 11;
+	private static final int DIRECT_INSTANTIATION = 12;
+	private static final int SERVICE_WITH_CONTEXT_CLASSLOADER = 13;
+	// set to one of the above
+	private int FACTORY_CREATION_METHOD = 11;
+
+	private static final int DIRECT_CREATION = 101;
+	private static final int CREATE_VIA_CONTEXT_CLASSLOADER = 102;
+	private int PARSER_CREATION_METHOD = 102;
+
+
 	/**
 	 * Should we check the root element?
 	 */
@@ -86,6 +98,7 @@ public final class XMLRootHandler extends DefaultHandler implements LexicalHandl
 
 	private String versionFound = null;
 
+
 	public XMLRootHandler(boolean checkRoot) {
 		this.checkRoot = checkRoot;
 	}
@@ -97,52 +110,6 @@ public final class XMLRootHandler extends DefaultHandler implements LexicalHandl
 	 */
 	public final void comment(final char[] ch, final int start, final int length) {
 		// Not interested.
-	}
-
-	/**
-	 * Creates a new SAX parser for use within this instance.
-	 * 
-	 * @return The newly created parser.
-	 * 
-	 * @throws ParserConfigurationException
-	 *             If a parser of the given configuration cannot be created.
-	 * @throws SAXException
-	 *             If something in general goes wrong when creating the
-	 *             parser.
-	 * @throws SAXNotRecognizedException
-	 *             If the <code>XMLReader</code> does not recognize the
-	 *             lexical handler configuration option.
-	 * @throws SAXNotSupportedException
-	 *             If the <code>XMLReader</code> does not support the lexical
-	 *             handler configuration option.
-	 */
-	private final SAXParser createParser(SAXParserFactory parserFactory) throws ParserConfigurationException, SAXException, SAXNotRecognizedException, SAXNotSupportedException {
-		// Initialize the parser.
-		SAXParser parser = null;
-		System.out.println("SAXParserFactory class: " + parserFactory.getClass());
-		System.out.println("SAXParserFactory classloader: " + parserFactory.getClass().getClassLoader());
-		try {
-			parser = parserFactory.newSAXParser();
-		}
-		catch (ClassCastException e) {
-			System.out.println(e);
-		}
-		final XMLReader reader = parser.getXMLReader();
-		reader.setProperty("http://xml.org/sax/properties/lexical-handler", this); //$NON-NLS-1$
-		// disable DTD validation (bug 63625)
-		try {
-			// be sure validation is "off" or the feature to ignore DTD's will
-			// not apply
-			reader.setFeature("http://xml.org/sax/features/validation", false); //$NON-NLS-1$
-			reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false); //$NON-NLS-1$
-		}
-		catch (SAXNotRecognizedException e) {
-			// not a big deal if the parser does not recognize the features
-		}
-		catch (SAXNotSupportedException e) {
-			// not a big deal if the parser does not support the features
-		}
-		return parser;
 	}
 
 	/*
@@ -193,26 +160,57 @@ public final class XMLRootHandler extends DefaultHandler implements LexicalHandl
 
 
 	public boolean parseContents(InputSource contents) throws IOException, ParserConfigurationException, SAXException {
+		boolean result = false;
 		// Parse the file into we have what we need (or an error occurs).
 		SAXParser parser = null;
 		SAXParserFactory factory = null;
-		try {
-			//factory = WTPTestXercesPlugin.instance().getFactoryWithDirectInstantiation();
-			//factory = WTPTestXercesPlugin.instance().getFactoryWithOSGiService();
-			factory = WTPTestXercesPlugin.instance().getFactoryWithThreadContextClassloader();
-			if (factory == null)
-				return false;
-			parser = createParser(factory);
-			// to support external entities specified as relative URIs (see
-			// bug 63298)
-			contents.setSystemId("/"); //$NON-NLS-1$
-			parser.parse(contents, this);
-		}
-		catch (StopParsingException e) {
-			// Abort the parsing normally. Fall through...
+
+		switch (FACTORY_CREATION_METHOD) {
+			case OSGI_SERVICE :
+				factory = WTPTestXercesPlugin.instance().getFactoryWithOSGiService();
+				break;
+			case DIRECT_INSTANTIATION :
+				factory = WTPTestXercesPlugin.instance().getFactoryWithDirectInstantiation();
+				break;
+			case SERVICE_WITH_CONTEXT_CLASSLOADER :
+				factory = WTPTestXercesPlugin.instance().getFactoryWithThreadContextClassloader();
+				break;
+			default :
+				throw new IllegalArgumentException("Program Error: invalid value provided for Factory Creation Method");
 		}
 
-		return true;
+
+		if (factory == null) {
+			result = false;
+		}
+		else {
+
+			System.out.println("SAXParserFactory class: " + factory.getClass());
+			System.out.println("SAXParserFactory classloader: " + factory.getClass().getClassLoader());
+
+			try {
+				parser = factory.newSAXParser();
+			}
+			catch (ClassCastException e) {
+				// catch and print class cast for test
+				System.out.println("test Failed");
+				System.out.println(e);
+			}
+
+			if (parser != null) {
+				try {
+					parser.parse(contents, this);
+					// if we parse anything, just say true for this test
+					result = true;
+				}
+				catch (StopParsingException e) {
+					// Abort the parsing normally. Fall through...
+				}
+			}
+		}
+
+
+		return result;
 	}
 
 	/*
