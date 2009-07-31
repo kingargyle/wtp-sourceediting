@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+
+	
+	
+	<!-- ***** Eclipse core extensions ***** -->
+	
+	<extension
+		point="org.eclipse.core.contenttype.contentTypes">
+		
+		<!-- persistence.xml version 1.0 content type -->
+  		<content-type
+			id="org.eclipse.wtp.xerces.test.persistence"
+			name="%content-type.name.1"
+			base-type="org.eclipse.core.runtime.xml"
+			file-names="test.xml">
+			<describer
+				class="org.eclipse.wtp.xerces.test.XMLRootElementVersionContentDescriber">
+				<parameter 
+					name="element" 
+					value="{http://java.sun.com/xml/ns/persistence}persistence:1.0"/>
+			</describer>
+		</content-type>
+		
+		
+	</extension>
+ <extension
+       id="testxmlcontenttype"
+       point="org.eclipse.core.runtime.applications" >
+    <application 
+          cardinality="singleton-global"
+          thread="main"
+          visible="true">
+          <run class="org.eclipse.wtp.xerces.test.TestXMLContentType" />
+    </application>
+ </extension>
+	
+	
+	
+</plugin>
