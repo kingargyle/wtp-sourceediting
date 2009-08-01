@@ -33,6 +33,12 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 
 	public Object start(IApplicationContext context) throws Exception {
 		applicationResult = null;
+		doTests();
+
+		return applicationResult;
+	}
+
+	public void doTests() throws ParserConfigurationException, SAXException {
 		boolean testOk = false;
 		String testName = null;
 
@@ -81,8 +87,6 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 		System.out.println("\n     Do test: " + testName + "\n");
 		testOk = testGetParser(DIRECT_INSTANTIATION);
 		handleTestResult(testOk, testName);
-
-		return applicationResult;
 	}
 
 	private void handleTestResult(boolean testOk, String testName) {
