@@ -1,0 +1,2 @@
+This test bundle is meant to be ran with the test bundle with similar name, org.eclipse.wtp.xerces.test. 
+See the fuller description there. 
