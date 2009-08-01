@@ -14,8 +14,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.wtp.xerces.test2.TestXMLContentType2;
+import org.eclipse.wtp.xerces.test2.WTPTestXercesPlugin2;
+import org.osgi.framework.Bundle;
 import org.xml.sax.SAXException;
 
 public class TestXMLContentType implements IApplication { // extends TestCase
@@ -34,7 +38,8 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 	public Object start(IApplicationContext context) throws Exception {
 		applicationResult = null;
 		doTests();
-
+		TestXMLContentType2 otherBundleTester = new TestXMLContentType2 (); 
+		otherBundleTester.doTests();
 		return applicationResult;
 	}
 
