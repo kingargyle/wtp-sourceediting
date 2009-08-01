@@ -23,6 +23,8 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 	private static final int OSGI_SERVICE = 11;
 	private static final int DIRECT_INSTANTIATION = 12;
 	private static final int SERVICE_WITH_CONTEXT_CLASSLOADER = 13;
+	private static final boolean DO_FAILING_ORDER = true;
+	private Boolean applicationResult;
 
 
 	public TestXMLContentType() {
@@ -30,18 +32,15 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 	}
 
 	public Object start(IApplicationContext context) throws Exception {
-		Object result = null;
+		applicationResult = null;
 		boolean testOk = false;
+		String testName = null;
 
+		testName = "DIRECT_INSTANTIATION";
+		System.out.println("\n     Do test: " + testName + "\n");
 		testOk = testGetParser(DIRECT_INSTANTIATION);
-		if (testOk) {
-			System.out.println("\nTest OK");
-			result = IApplication.EXIT_OK;
-		}
-		else {
-			System.out.println("\nTest Failed");
-			result = new Boolean(false);
-		}
+		handleTestResult(testOk, testName);
+
 		/*
 		 * Note: SERVICE_WITH_CONTEXT_CLASSLOADER and OSGI_SERVICE are order
 		 * sensitive.
@@ -52,38 +51,59 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 		 * Both tests pass if SERVICE_WITH_CONTEXT_CLASSLOADER method used
 		 * first (registers a xerces bundle version of factory).
 		 * 
-		 * The DIRECT_INSTANTIATION method seems to always work. 
+		 * The DIRECT_INSTANTIATION method seems to always work.
 		 */
-		testOk = testGetParser(SERVICE_WITH_CONTEXT_CLASSLOADER);
-		if (testOk) {
-			System.out.println("\nTest OK");
-			result = IApplication.EXIT_OK;
+		if (DO_FAILING_ORDER) {
+			System.out.println("\n  Doing failing order tests. \n");
+			testName = "OSGI_SERVICE";
+			System.out.println("\n     Do test: " + testName + "\n");
+			testOk = testGetParser(OSGI_SERVICE);
+			handleTestResult(testOk, testName);
+
+			testName = "SERVICE_WITH_CONTEXT_CLASSLOADER";
+			System.out.println("\n       Do test: " + testName + "\n");
+			testOk = testGetParser(SERVICE_WITH_CONTEXT_CLASSLOADER);
+			handleTestResult(testOk, testName);
 		}
 		else {
-			System.out.println("\nTest Failed");
-			result = new Boolean(false);
+			System.out.println("\n Doing successful order tests. \n");
+			testName = "SERVICE_WITH_CONTEXT_CLASSLOADER";
+			System.out.println("\n       Do test: " + testName + "\n");
+			testOk = testGetParser(SERVICE_WITH_CONTEXT_CLASSLOADER);
+			handleTestResult(testOk, testName);
+
+			testName = "OSGI_SERVICE";
+			System.out.println("\n     Do test: " + testName + "\n");
+			testOk = testGetParser(OSGI_SERVICE);
+			handleTestResult(testOk, testName);
 		}
-		testOk = testGetParser(OSGI_SERVICE);
-		if (testOk) {
-			System.out.println("\nTest OK");
-			result = IApplication.EXIT_OK;
-		}
-		else {
-			System.out.println("\nTest Failed");
-			result = new Boolean(false);
-		}
+		testName = "DIRECT_INSTANTIATION";
+		System.out.println("\n     Do test: " + testName + "\n");
 		testOk = testGetParser(DIRECT_INSTANTIATION);
-		if (testOk) {
-			System.out.println("\nTest OK");
-			result = IApplication.EXIT_OK;
-		}
-		else {
-			System.out.println("\nTest Failed");
-			result = new Boolean(false);
-		}
-		return result;
+		handleTestResult(testOk, testName);
+
+		return applicationResult;
 	}
 
+	private void handleTestResult(boolean testOk, String testName) {
+		/*
+		 * always set application result if its null, but do not change to
+		 * true, if it is already false.
+		 */
+		if (applicationResult == null) {
+			applicationResult = new Boolean(testOk);
+		}
+		else if (!testOk) {
+			applicationResult = new Boolean(false);
+		}
+
+		if (testOk) {
+			System.out.println("\n     Test OK: " + testName + "\n");
+		}
+		else {
+			System.out.println("\n     Test Failed: " + testName + "\n");
+		}
+	}
 
 	public void stop() {
 		// no need to do any thing
