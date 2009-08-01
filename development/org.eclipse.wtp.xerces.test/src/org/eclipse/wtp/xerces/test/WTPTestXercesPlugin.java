@@ -57,23 +57,12 @@ public class WTPTestXercesPlugin extends Plugin {
 	}
 
 
-	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		INSTANCE = this;
-	}
+	public SAXParserFactory getFactoryWithDirectInstantiation() {
+		SAXParserFactory theFactory = null;
 
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		try {
-			if (parserTracker != null) {
-				parserTracker.close();
-				parserTracker = null;
-			}
-		}
-		finally {
-			super.stop(context);
-		}
+		theFactory = SAXParserFactory.newInstance();
+
+		return theFactory;
 	}
 
 	public SAXParserFactory getFactoryWithOSGiService() {
@@ -87,16 +76,6 @@ public class WTPTestXercesPlugin extends Plugin {
 		return theFactory;
 	}
 
-
-	public SAXParserFactory getFactoryWithDirectInstantiation() {
-		SAXParserFactory theFactory = null;
-
-		theFactory = SAXParserFactory.newInstance();
-
-		return theFactory;
-	}
-
-
 	public SAXParserFactory getFactoryWithThreadContextClassloader() {
 		SAXParserFactory theFactory = null;
 		/*
@@ -106,7 +85,7 @@ public class WTPTestXercesPlugin extends Plugin {
 		 * (https://bugs.eclipse.org/bugs/show_bug.cgi?id=283721)
 		 */
 
-		ClassLoader savedClassLoader = Thread.currentThread().getContextClassLoader();
+		final ClassLoader savedClassLoader = Thread.currentThread().getContextClassLoader();
 		try {
 			Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
 			if (parserTracker == null) {
@@ -122,5 +101,26 @@ public class WTPTestXercesPlugin extends Plugin {
 
 
 		return theFactory;
+	}
+
+
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		INSTANCE = this;
+	}
+
+
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		try {
+			if (parserTracker != null) {
+				parserTracker.close();
+				parserTracker = null;
+			}
+		}
+		finally {
+			super.stop(context);
+		}
 	}
 }
