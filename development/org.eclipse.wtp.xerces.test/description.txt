@@ -1,9 +1,34 @@
 This test bundle was created to have a simplified way to investigate interaction of 
-JREs and Xerces bundle. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=283721
+JREs and Xerces bundle. See also https://bugs.eclipse.org/bugs/show_bug.cgi?id=283721
 
-It is written as an Eclpse App, which just does a simple test of a content type. 
+It is written as an Eclpse App, which gets several methods to get a SAXParserFactory, 
+and subsequently gets a parser from that Factory. 
 
-While loading all the content type describers, to parse a file, a Classcast is thrown in some cases, 
-but not others, all depending on the way the SAXParserFactory is created. 
+This is normally straightforward and everything works fine, BUT, when using some JREs
+(such as IBM's JRE) and also having the xerces bundle on the classpath, then there 
+are some cases where classcast exceptions are thrown. 
 
+The tests show that 
 
+Using direct instantiation, seems to work fine. Namely, SAXParserFactory.newInstance(). 
+
+Using the oft recommended context class loader seems to work fine, if and only if called first, 
+in that bundle. 
+
+Trying to use the OSGI service to get the SAX Factory will fail, as it returns 
+one from the JRE, but the bundle is using classes from the xerces bundle. 
+
+Presumably when the context classloader is set, and none yet exist in the registry, 
+then apparently, xerces finds the correct 
+factory to return, and must create and store in the service registry, specific to that 
+bundle context. 
+
+The  context classloader technique will fail, if the OSGi service method has already 
+been called. 
+
+A second, basically identical bundle is used to re-run the tests from another bundle context. 
+This shows that even if tests fail in the first bundle (that is, wrong factory has been 
+put in the registry) that the second bundles tests can still succeed, as long as it's own 
+order of tests is correct. 
+
+ 
