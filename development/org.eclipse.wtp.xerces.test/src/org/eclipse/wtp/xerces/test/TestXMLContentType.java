@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.wtp.xerces.test;
 
+import java.util.Map;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -27,7 +29,8 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 	private static final int OSGI_SERVICE = 11;
 	private static final int DIRECT_INSTANTIATION = 12;
 	private static final int SERVICE_WITH_CONTEXT_CLASSLOADER = 13;
-	private static final boolean DO_FAILING_ORDER = true;
+	private static final String TCCLParam = "-useTCCL";
+	private boolean USE_TCCL_DEFAULT = false;
 	private Boolean applicationResult;
 
 
@@ -37,13 +40,25 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 
 	public Object start(IApplicationContext context) throws Exception {
 		applicationResult = null;
-		doTests();
-		TestXMLContentType2 otherBundleTester = new TestXMLContentType2 (); 
-		otherBundleTester.doTests();
+		boolean use_tccl = checkArgs(context);
+		applicationResult = doTests(use_tccl);
 		return applicationResult;
 	}
 
-	public void doTests() throws ParserConfigurationException, SAXException {
+	private boolean checkArgs(IApplicationContext context) {
+		boolean result = USE_TCCL_DEFAULT;
+		Map argmap = context.getArguments();
+		String[] args = (String[]) argmap.get("application.args");
+		for (int i = 0; i < args.length; i++) {
+			if (TCCLParam.equals(args[i])) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+
+	public Boolean doTests(boolean useTcclTest) throws ParserConfigurationException, SAXException {
 		boolean testOk = false;
 		String testName = null;
 
@@ -54,44 +69,30 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 
 		/*
 		 * Note: SERVICE_WITH_CONTEXT_CLASSLOADER and OSGI_SERVICE are order
-		 * sensitive.
+		 * sensitive. Only one is ran per invocation.
 		 * 
-		 * Both tests fail if OSGI_SERVICE method used first (registers a
-		 * "base class loader" version of factory for all time.
-		 * 
-		 * Both tests pass if SERVICE_WITH_CONTEXT_CLASSLOADER method used
-		 * first (registers a xerces bundle version of factory).
+		 * Do "failing" method by default. Use the -useTCCL to show works ok
+		 * with TCCL.
 		 * 
 		 * The DIRECT_INSTANTIATION method seems to always work.
 		 */
-		if (DO_FAILING_ORDER) {
-			System.out.println("\n  Doing failing order tests. \n");
-			testName = "OSGI_SERVICE";
-			System.out.println("\n     Do test: " + testName + "\n");
-			testOk = testGetParser(OSGI_SERVICE);
-			handleTestResult(testOk, testName);
-
-			testName = "SERVICE_WITH_CONTEXT_CLASSLOADER";
+		if (useTcclTest) {
+			testName = "OSGI_SERVICE_WITH_THREAD_CONTEXT_CLASSLOADER";
 			System.out.println("\n       Do test: " + testName + "\n");
 			testOk = testGetParser(SERVICE_WITH_CONTEXT_CLASSLOADER);
 			handleTestResult(testOk, testName);
 		}
 		else {
-			System.out.println("\n Doing successful order tests. \n");
-			testName = "SERVICE_WITH_CONTEXT_CLASSLOADER";
-			System.out.println("\n       Do test: " + testName + "\n");
-			testOk = testGetParser(SERVICE_WITH_CONTEXT_CLASSLOADER);
-			handleTestResult(testOk, testName);
-
-			testName = "OSGI_SERVICE";
+			System.out.println("\n  Doing failing order tests. \n");
+			testName = "OSGI_SERVICE_WITHOUT_THREAD_CONTEXT_CLASSLOADER";
 			System.out.println("\n     Do test: " + testName + "\n");
 			testOk = testGetParser(OSGI_SERVICE);
 			handleTestResult(testOk, testName);
+
+
 		}
-		testName = "DIRECT_INSTANTIATION";
-		System.out.println("\n     Do test: " + testName + "\n");
-		testOk = testGetParser(DIRECT_INSTANTIATION);
-		handleTestResult(testOk, testName);
+
+		return testOk;
 	}
 
 	private void handleTestResult(boolean testOk, String testName) {
