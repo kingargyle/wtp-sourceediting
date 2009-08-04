@@ -11,28 +11,28 @@ package org.eclipse.wtp.xerces.test;
 
 import javax.xml.parsers.SAXParserFactory;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Plugin;
+import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * Test Plugin, originally from JPT.
- * 
+ * Test Bundle
  */
 
-public class WTPTestXercesPlugin extends Plugin {
+public class WTPTestXercesPlugin implements BundleActivator {
 
 
 
 	private ServiceTracker parserTracker;
+
+	private BundleContext bundleConext;
 
 	// ********** singleton **********
 
 	private static WTPTestXercesPlugin INSTANCE;
 
 	/**
-	 * Return the singleton JPT plug-in.
+	 * Return this singleton
 	 */
 	public static WTPTestXercesPlugin instance() {
 		return INSTANCE;
@@ -41,16 +41,6 @@ public class WTPTestXercesPlugin extends Plugin {
 
 	// ********** public static methods **********
 
-
-	/**
-	 * Log the specified status.
-	 */
-	public static void log(IStatus status) {
-		INSTANCE.getLog().log(status);
-	}
-
-
-	// ********** plug-in implementation **********
 
 	public WTPTestXercesPlugin() {
 		super();
@@ -68,7 +58,7 @@ public class WTPTestXercesPlugin extends Plugin {
 	public SAXParserFactory getFactoryWithOSGiService() {
 		SAXParserFactory theFactory = null;
 		if (parserTracker == null) {
-			parserTracker = new ServiceTracker(getBundle().getBundleContext(), "javax.xml.parsers.SAXParserFactory", null);
+			parserTracker = new ServiceTracker(bundleConext, "javax.xml.parsers.SAXParserFactory", null);
 
 			parserTracker.open(true);
 		}
@@ -89,7 +79,7 @@ public class WTPTestXercesPlugin extends Plugin {
 		try {
 			Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
 			if (parserTracker == null) {
-				parserTracker = new ServiceTracker(getBundle().getBundleContext(), "javax.xml.parsers.SAXParserFactory", null);
+				parserTracker = new ServiceTracker(bundleConext, "javax.xml.parsers.SAXParserFactory", null);
 
 				parserTracker.open(true);
 			}
@@ -104,23 +94,16 @@ public class WTPTestXercesPlugin extends Plugin {
 	}
 
 
-	@Override
 	public void start(BundleContext context) throws Exception {
-		super.start(context);
+		bundleConext = context;
 		INSTANCE = this;
 	}
 
 
-	@Override
 	public void stop(BundleContext context) throws Exception {
-		try {
-			if (parserTracker != null) {
-				parserTracker.close();
-				parserTracker = null;
-			}
-		}
-		finally {
-			super.stop(context);
+		if (parserTracker != null) {
+			parserTracker.close();
+			parserTracker = null;
 		}
 	}
 }

@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
 <plugin>
-
-
-	
- <extension
-       id="testxmlcontenttype"
-       point="org.eclipse.core.runtime.applications" >
-    <application 
-          cardinality="singleton-global"
-          thread="main"
-          visible="true">
-          <run class="org.eclipse.wtp.xerces.test.TestXMLContentType" />
-    </application>
- </extension>
-	
-	
-	
+    <extension
+        id="testxmlcontenttype"
+        point="org.eclipse.core.runtime.applications">
+        <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+            <run
+                class="org.eclipse.wtp.xerces.test.TestXMLContentType"/>
+        </application>
+    </extension>
 </plugin>
