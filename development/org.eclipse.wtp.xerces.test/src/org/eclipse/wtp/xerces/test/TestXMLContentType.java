@@ -79,7 +79,6 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 			handleTestResult(testOk, testName);
 		}
 		else {
-			System.out.println("\n  Doing failing order tests. \n");
 			testName = "OSGI_SERVICE_WITHOUT_THREAD_CONTEXT_CLASSLOADER";
 			System.out.println("\n     Do test: " + testName + "\n");
 			testOk = testGetParser(OSGI_SERVICE);

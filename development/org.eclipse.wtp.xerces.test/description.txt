@@ -25,10 +25,3 @@ bundle context.
 
 The  context classloader technique will fail, if the OSGi service method has already 
 been called. 
-
-A second, basically identical bundle is used to re-run the tests from another bundle context. 
-This shows that even if tests fail in the first bundle (that is, wrong factory has been 
-put in the registry) that the second bundles tests can still succeed, as long as it's own 
-order of tests is correct. 
-
- 
