@@ -12,8 +12,8 @@ package org.eclipse.wtp.xerces.test;
 
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.eclipse.equinox.app.IApplication;
@@ -60,7 +60,9 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 
 		testName = "DIRECT_INSTANTIATION";
 		System.out.println("\n     Do test: " + testName + "\n");
-		testOk = testGetParser(DIRECT_INSTANTIATION);
+		testOk = testGetParser(DIRECT_INSTANTIATION, true);
+		handleTestResult(testOk, testName);
+		testOk = testGetParser(DIRECT_INSTANTIATION, false);
 		handleTestResult(testOk, testName);
 
 		/*
@@ -75,16 +77,18 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 		if (useTcclTest) {
 			testName = "OSGI_SERVICE_WITH_THREAD_CONTEXT_CLASSLOADER";
 			System.out.println("\n       Do test: " + testName + "\n");
-			testOk = testGetParser(SERVICE_WITH_CONTEXT_CLASSLOADER);
+			testOk = testGetParser(SERVICE_WITH_CONTEXT_CLASSLOADER, true);
+			handleTestResult(testOk, testName);
+			testOk = testGetParser(SERVICE_WITH_CONTEXT_CLASSLOADER, false);
 			handleTestResult(testOk, testName);
 		}
 		else {
 			testName = "OSGI_SERVICE_WITHOUT_THREAD_CONTEXT_CLASSLOADER";
 			System.out.println("\n     Do test: " + testName + "\n");
-			testOk = testGetParser(OSGI_SERVICE);
+			testOk = testGetParser(OSGI_SERVICE, true);
 			handleTestResult(testOk, testName);
-
-
+			testOk = testGetParser(OSGI_SERVICE, false);
+			handleTestResult(testOk, testName);
 		}
 
 		return testOk;
@@ -114,21 +118,21 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 		// no need to do any thing
 	}
 
-	public boolean testGetParser(int factoryMethod) throws ParserConfigurationException, SAXException {
+	public boolean testGetParser(int factoryMethod, boolean sax) throws ParserConfigurationException, SAXException {
 		boolean result = false;
 
-		SAXParser parser = null;
-		SAXParserFactory factory = null;
+		Object parser = null;
+		Object factory = null;
 
 		switch (factoryMethod) {
 			case OSGI_SERVICE :
-				factory = WTPTestXercesPlugin.instance().getFactoryWithOSGiService();
+				factory = WTPTestXercesPlugin.instance().getFactoryWithOSGiService(sax);
 				break;
 			case DIRECT_INSTANTIATION :
-				factory = WTPTestXercesPlugin.instance().getFactoryWithDirectInstantiation();
+				factory = WTPTestXercesPlugin.instance().getFactoryWithDirectInstantiation(sax);
 				break;
 			case SERVICE_WITH_CONTEXT_CLASSLOADER :
-				factory = WTPTestXercesPlugin.instance().getFactoryWithThreadContextClassloader();
+				factory = WTPTestXercesPlugin.instance().getFactoryWithThreadContextClassloader(sax);
 				break;
 			default :
 				throw new IllegalArgumentException("Program Error: invalid value provided for Factory Creation Method");
@@ -140,12 +144,14 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 		}
 		else {
 
-			System.out.println("SAXParserFactory class: " + factory.getClass());
-			System.out.println("SAXParserFactory classloader: " + factory.getClass().getClassLoader());
+			System.out.println("ParserFactory class: " + factory.getClass());
+			System.out.println("ParserFactory classloader: " + factory.getClass().getClassLoader());
 
 			try {
-				parser = factory.newSAXParser();
+				parser = sax ? ((SAXParserFactory) factory).newSAXParser() : ((DocumentBuilderFactory) factory).newDocumentBuilder();
 				// if we get a parser, just say true for this test
+				System.out.println("Parser class: " + parser.getClass());
+				System.out.println("Parser classloader: " + parser.getClass().getClassLoader());
 				result = true;
 			}
 			catch (final ClassCastException e) {

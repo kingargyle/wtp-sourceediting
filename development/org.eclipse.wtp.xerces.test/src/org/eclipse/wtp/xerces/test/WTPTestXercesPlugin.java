@@ -9,11 +9,12 @@
  ******************************************************************************/
 package org.eclipse.wtp.xerces.test;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.framework.ServiceReference;
 
 /**
  * Test Bundle
@@ -21,11 +22,7 @@ import org.osgi.util.tracker.ServiceTracker;
 
 public class WTPTestXercesPlugin implements BundleActivator {
 
-
-
-	private ServiceTracker parserTracker;
-
-	private BundleContext bundleConext;
+	private BundleContext bundleContext;
 
 	// ********** singleton **********
 
@@ -47,27 +44,22 @@ public class WTPTestXercesPlugin implements BundleActivator {
 	}
 
 
-	public SAXParserFactory getFactoryWithDirectInstantiation() {
-		SAXParserFactory theFactory = null;
-
-		theFactory = SAXParserFactory.newInstance();
-
-		return theFactory;
+	public Object getFactoryWithDirectInstantiation(boolean sax) {
+		return sax ? SAXParserFactory.newInstance() : DocumentBuilderFactory.newInstance();
 	}
 
-	public SAXParserFactory getFactoryWithOSGiService() {
-		SAXParserFactory theFactory = null;
-		if (parserTracker == null) {
-			parserTracker = new ServiceTracker(bundleConext, "javax.xml.parsers.SAXParserFactory", null);
-
-			parserTracker.open(true);
+	public Object getFactoryWithOSGiService(boolean sax) {
+		String serviceClazz = sax ? SAXParserFactory.class.getName() : DocumentBuilderFactory.class.getName();
+		ServiceReference ref = bundleContext.getServiceReference(serviceClazz);
+		try {
+			return ref == null ? null : bundleContext.getService(ref);
+		} finally {
+			if (ref != null)
+				bundleContext.ungetService(ref);
 		}
-		theFactory = (SAXParserFactory) parserTracker.getService();
-		return theFactory;
 	}
 
-	public SAXParserFactory getFactoryWithThreadContextClassloader() {
-		SAXParserFactory theFactory = null;
+	public Object getFactoryWithThreadContextClassloader(boolean sax) {
 		/*
 		 * set context class loader while factories instantiate classes (for
 		 * minimal time) so proper classes, and classloaders, are used in IBM
@@ -78,32 +70,21 @@ public class WTPTestXercesPlugin implements BundleActivator {
 		final ClassLoader savedClassLoader = Thread.currentThread().getContextClassLoader();
 		try {
 			Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
-			if (parserTracker == null) {
-				parserTracker = new ServiceTracker(bundleConext, "javax.xml.parsers.SAXParserFactory", null);
-
-				parserTracker.open(true);
-			}
-			theFactory = (SAXParserFactory) parserTracker.getService();
+			return getFactoryWithOSGiService(sax);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(savedClassLoader);
 		}
-
-
-		return theFactory;
 	}
 
 
 	public void start(BundleContext context) throws Exception {
-		bundleConext = context;
+		bundleContext = context;
 		INSTANCE = this;
 	}
 
 
 	public void stop(BundleContext context) throws Exception {
-		if (parserTracker != null) {
-			parserTracker.close();
-			parserTracker = null;
-		}
+		// nothing
 	}
 }
