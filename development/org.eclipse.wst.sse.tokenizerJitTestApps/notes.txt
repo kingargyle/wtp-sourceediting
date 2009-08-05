@@ -16,3 +16,6 @@ org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.primGetNextToken()Ljava/l
 -Xjit:exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.hugeswitch()V}
 
 -Xjit:count=1,verbose={compileStart|compileEnd},vlog=D:\temp\jitverbose.log,exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.hugeswitch()V},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.forNextCase0()V},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.forNextCase1()V},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.forNextCase2()V},exclude={org/eclipse/wst/sse/tokenizerJitTest/HTMLHeadTokenizer.forNextCase3()V}
+
+
+-Xjit:{org/eclipse/wst/html/core/internal/contenttype/HTMLHeadTokenizer.primGetNextToken()Ljava/lang/String;}(disableLookahead),{org/eclipse/jst/jsp/core/internal/parser/internal/JSPTokenizer.primGetNextToken()Ljava/lang/String;}(disableLookahead)
