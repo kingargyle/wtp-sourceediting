@@ -12,10 +12,9 @@ package org.eclipse.wst.sse.tokenizerjittestApps;
  *******************************************************************************/
 
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 import java.util.Date;
 import java.util.Map;
 
@@ -30,6 +29,14 @@ import org.eclipse.equinox.app.IApplicationContext;
  * 
  */
 public abstract class TokenizerTesterForDirectory implements IApplication {
+
+	protected Boolean DEBUG = false;
+	private static String sillyString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n" + "<geronimo-plugin xmlns=\"http://geronimo.apache.org/xml/ns/plugins-1.3\" xmlns:ns2=\"http://geronimo.apache.org/xml/ns/attributes-1.2\">\r\n" + "    <name>Geronimo Plugins, Client :: Client</name>\r\n" + "    <category>Geronimo Core</category>\r\n" + "    <description>Client plugin</description>\r\n" + "    <url>http://geronimo.apache.org/</url>\r\n" + "    <author>The Apache Geronimo development community</author>\r\n" + "    <license osi-approved=\"true\">The Apache Software License, Version 2.0</license>\r\n" + "    <plugin-artifact>\r\n" + "        <module-id>\r\n" + "            <groupId>org.apache.geronimo.configs</groupId>\r\n" + "            <artifactId>client</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>car</type>\r\n" + "        </module-id>\r\n" + "        <geronimo-version>2.1</geronimo-version>\r\n"
+				+ "        <jvm-version>1.5</jvm-version>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n" + "            <artifactId>client-system</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>car</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n" + "            <artifactId>jee-specs</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>car</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n" + "            <artifactId>geronimo-core</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n"
+				+ "            <artifactId>geronimo-interceptor</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n" + "            <artifactId>geronimo-naming</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n" + "            <artifactId>geronimo-j2ee</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n" + "            <artifactId>geronimo-management</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n"
+				+ "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n" + "            <artifactId>geronimo-security</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.framework</groupId>\r\n" + "            <artifactId>geronimo-crypto</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.modules</groupId>\r\n" + "            <artifactId>geronimo-client</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.geronimo.modules</groupId>\r\n"
+				+ "            <artifactId>geronimo-openejb</artifactId>\r\n" + "            <version>2.1</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.xbean</groupId>\r\n" + "            <artifactId>xbean-reflect</artifactId>\r\n" + "            <version>3.3</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <dependency>\r\n" + "            <groupId>org.apache.xbean</groupId>\r\n" + "            <artifactId>xbean-naming</artifactId>\r\n" + "            <version>3.3</version>\r\n" + "            <type>jar</type>\r\n" + "        </dependency>\r\n" + "        <source-repository>~/.m2/repository/</source-repository>\r\n" + "        <source-repository>http://repo1.maven.org/maven2/</source-repository>\r\n" + "        <source-repository>http://people.apache.org/repo/m2-snapshot-repository/</source-repository>\r\n"
+				+ "        <source-repository>http://people.apache.org/repo/m2-incubating-repository/</source-repository>\r\n" + "        <config-xml-content load=\"false\"/>\r\n" + "        <artifact-alias server=\"client\" key=\"org.apache.geronimo.configs/j2ee-server//car\">org.apache.geronimo.configs/client/2.1/car</artifact-alias>\r\n" + "        <artifact-alias server=\"client\" key=\"org.apache.geronimo.configs/j2ee-server/2.1/car\">org.apache.geronimo.configs/client/2.1/car</artifact-alias>\r\n" + "    </plugin-artifact>\r\n" + "</geronimo-plugin>\r\n" + "";
 
 	private static double round(double val, final int places) {
 		final long factor = (long) Math.pow(10, places);
@@ -46,36 +53,30 @@ public abstract class TokenizerTesterForDirectory implements IApplication {
 		return (double) tmp / factor;
 	}
 
-	protected boolean DEBUG = false;
-	private boolean DEBUG_FILES = false;
-	private int MAX_FILES = 50000;
-	// provide generic, platform independent default directory
-	private final static String defaultDirName = "/";
-
+	private int MAX_SCANS = 50000;
+	
 	private int TIME_PRINT_INTERVAL = 10000;
 	private long startTime;
-	private int nFilesScanned;
+	private int nScans;
 	private int totalErrors;
-	private int nFilesScannedTotal;
+	private int nScansTotal;
 	private int totalErrorsTotal;
 
-	private int previousPrintedScannedFiles;
+	private int previousPrintedScans;
 
-	private boolean checkMaxFiles(final boolean printTime) {
-		if (printTime && previousPrintedScannedFiles != nFilesScanned && nFilesScanned % TIME_PRINT_INTERVAL == 0) {
+	private boolean checkMaxScans(final boolean printTime) {
+		if (printTime && previousPrintedScans != nScans && nScans % TIME_PRINT_INTERVAL == 0) {
 			final String elapsedTime = computeElapsedTime();
 			System.out.println();
-			System.out.println("               " + "Progress: number of files scanned: " + nFilesScanned);
+			System.out.println("               " + "Progress: number of scans: " + nScans);
 			System.out.println("               " + "  elapsed time: " + elapsedTime);
 			System.out.flush();
 			/*
-			 * occasionally, due to ignoring file IO Errors, this method is
-			 * called twice where nFilesScanned has not incremented. No need
-			 * to print info twice if no change.
+			 * No need to print info twice if no change.
 			 */
-			previousPrintedScannedFiles = nFilesScanned;
+			previousPrintedScans = nScans;
 		}
-		return nFilesScanned >= MAX_FILES;
+		return nScans >= MAX_SCANS;
 	}
 
 	private String computeElapsedTime() {
@@ -93,10 +94,10 @@ public abstract class TokenizerTesterForDirectory implements IApplication {
 		return result;
 	}
 
-	private void doFinallyClose(final Reader fileReader) {
-		if (fileReader != null) {
+	private void doFinallyClose(final Reader reader) {
+		if (reader != null) {
 			try {
-				fileReader.close();
+				reader.close();
 			}
 			catch (final IOException e1) {
 				// ignore
@@ -106,69 +107,51 @@ public abstract class TokenizerTesterForDirectory implements IApplication {
 
 	abstract protected void doTest(Reader reader) throws Exception;
 
-	private void doTestDir(final File dir) {
+	private void doTestDir() {
 
-		final String[] children = dir.list();
-		if (children != null) {
-			for (int i = 0; i < children.length; i++) {
-				final File file = new File(dir, children[i]);
-				if (file.isDirectory()) {
-					/*
-					 * ignore .metadata directories, for more accurate
-					 * simulation of validating or indexing a workspace.
-					 */
-					if (!file.getName().endsWith(".metadata")) {
-						doTestDir(file);
-					}
-				}
-				else {
-					if (DEBUG_FILES) {
-						System.out.println("file: " + file.getAbsolutePath());
-					}
-					doTestFile(file);
-				}
-				if (checkMaxFiles(true)) {
-					break;
-				}
+		while (true) {
+
+			doTestScan();
+
+			if (checkMaxScans(true)) {
+				break;
 			}
 		}
-
 	}
 
-	private void doTestFile(final File file) {
+	private void doTestScan() {
 
-		Reader fileReader = null;
+		Reader reader = null;
 		try {
-			fileReader = new FileReader(file);
-			doTest(fileReader);
+			reader = new StringReader(sillyString);
+			doTest(reader);
 			/* Do not increment counter, if exception thrown during scan */
-			nFilesScanned++;
+			nScans++;
 		}
 		catch (final IOException e) {
 			/*
-			 * ignore IOException, since for directories in general, there can
-			 * be lots of errors based on "access denied", etc.
+			 * should be none for string reader
 			 */
 		}
 		catch (final Exception e) {
-			handleTestException(file, fileReader, e);
+			handleTestException(reader, e);
 		}
 		finally {
-			doFinallyClose(fileReader);
+			doFinallyClose(reader);
 		}
 	}
 
-	private String[] getDirectoryToScan(final IApplicationContext context) {
-		String[] dirNames = null;
-		final Map args = context.getArguments();
-		final String[] applicationArgs = (String[]) args.get("application.args");
+	private String[] getArguments(final IApplicationContext context) {
+		String[] args = null;
+		final Map argMap = context.getArguments();
+		final String[] applicationArgs = (String[]) argMap.get("application.args");
 		if (applicationArgs != null && applicationArgs.length > 0) {
-			dirNames = applicationArgs;
+			args = applicationArgs;
 		}
 		else {
-			dirNames = new String[]{defaultDirName};
+			args = new String[]{};
 		}
-		return dirNames;
+		return args;
 	}
 
 	abstract protected String getTokenizerName();
@@ -181,32 +164,28 @@ public abstract class TokenizerTesterForDirectory implements IApplication {
 		System.out.println("     program ended via interuption");
 	}
 
-	private void handleTestException(final File file, final Reader fileReader, final Exception e) {
+	private void handleTestException(final Reader reader, final Exception e) {
 		System.out.println("Exception during scan: " + e.getMessage());
-		System.out.println("   filename: " + file.getAbsolutePath());
-		System.out.println("   number of files checked: " + nFilesScanned);
+		System.out.println("   number of scans: " + nScans);
 		System.out.println("   total (cumlative) errors: " + ++totalErrors);
-		doFinallyClose(fileReader);
+		doFinallyClose(reader);
 	}
 
 	private String[] initialAppActions(final IApplicationContext context, final String tokenizerName) {
-		final String[] dirNames = getDirectoryToScan(context);
-		for (int i = 0; i < dirNames.length; i++) {
-			String dirName = dirNames[i];
-		}
+		final String[] args = getArguments(context);
 		startTime = System.currentTimeMillis();
-		return dirNames;
+		return args;
 	}
 
 	private void printHeader(final String[] dirNames, final String tokenizerName) {
 		System.out.println();
-		System.out.println("     Running " + tokenizerName + " scan on all files in the follow directories ");
+		System.out.println("     Running " + tokenizerName + " scan repeatedly on same string");
 		for (int i = 0; i < dirNames.length; i++) {
 			String dirName = dirNames[i];
 			System.out.println("               " + dirName);
 		}
 
-		System.out.println("          " + "for a maximum number of files, in each directory: " + MAX_FILES);
+		System.out.println("          " + "for a maximum number of scans: " + MAX_SCANS);
 		System.out.println();
 		String version = System.getProperty("java.fullversion");
 		if (version == null) {
@@ -226,63 +205,45 @@ public abstract class TokenizerTesterForDirectory implements IApplication {
 		final String tokenizerName = getTokenizerName();
 		final String dirNames[] = initialAppActions(context, tokenizerName);
 		printHeader(dirNames, tokenizerName);
-		try {
-			for (int i = 0; i < dirNames.length; i++) {
-				String dirName = dirNames[i];
-				printDirHeader(dirName);
-				nFilesScanned = 0;
-				totalErrors = 0;
-				testAllFilesInDirectory(dirName);
-				printDirTail();
-	            nFilesScannedTotal += nFilesScanned;
-	            totalErrorsTotal += totalErrors;
-			}
-			printTail();
-		}
-		catch (final InterruptedException e) {
-			handleInterrupt();
-		}
-		catch (final Exception e) {
-			handleException(e);
-		}
-		return IApplication.EXIT_OK;
-	}
 
-	private void printDirHeader(String dirName) {
-		System.out.println("     Current Directory: " + dirName);
-		
+		nScans = 0;
+		totalErrors = 0;
+		testRepeatedScans();
+		printDirTail();
+		nScansTotal += nScans;
+		totalErrorsTotal += totalErrors;
+
+		printTail();
+
+
+		return IApplication.EXIT_OK;
 	}
 
 	public void stop() {
 		// nothing to clean up
 	}
 
-	private void testAllFilesInDirectory(final String directoryName) throws Exception {
-		final File filedir = new File(directoryName);
+	private void testRepeatedScans() throws Exception {
 
 
-		if (filedir.isDirectory()) {
-			doTestDir(filedir);
+		doTestDir();
 
-		}
-		else {
-			throw new Exception("     Test program error: the supplied directory is not a directory: " + directoryName);
-		}
 
 	}
 
 	private void printTail() {
 		System.out.println();
-		System.out.println("     Total Test Complete. Number of scanned files: " + nFilesScannedTotal);
+		System.out.println("     Total Test Complete. Number of total scans : " + nScansTotal);
 		System.out.println("     Total Errors: " + totalErrorsTotal);
 	}
+
 	private void printDirTail() {
 		System.out.println();
-		if (checkMaxFiles(false)) {
-			System.out.println("     Test Complete. Maximum files scanned: " + nFilesScanned);
+		if (checkMaxScans(false)) {
+			System.out.println("     Test Complete. Reached maximum scans: " + nScans);
 		}
 		else {
-			System.out.println("     Test Complete. Number of scanned files: " + nFilesScanned);
+			System.out.println("     Test Complete. Number of scans: " + nScans);
 		}
 		System.out.println("     Total Errors: " + totalErrors);
 	}
