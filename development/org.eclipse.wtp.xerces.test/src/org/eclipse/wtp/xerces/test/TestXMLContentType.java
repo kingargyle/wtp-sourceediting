@@ -25,6 +25,7 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 	private static final int OSGI_SERVICE = 11;
 	private static final int DIRECT_INSTANTIATION = 12;
 	private static final int SERVICE_WITH_CONTEXT_CLASSLOADER = 13;
+	private static final int OSGI_SERVICE_BASE_CLASSLOADER = 14;
 	private static final String TCCLParam = "-useTCCL";
 	private boolean USE_TCCL_DEFAULT = false;
 	private Boolean applicationResult;
@@ -83,12 +84,22 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 			handleTestResult(testOk, testName);
 		}
 		else {
-			testName = "OSGI_SERVICE_WITHOUT_THREAD_CONTEXT_CLASSLOADER";
-			System.out.println("\n     Do test: " + testName + "\n");
-			testOk = testGetParser(OSGI_SERVICE, true);
-			handleTestResult(testOk, testName);
-			testOk = testGetParser(OSGI_SERVICE, false);
-			handleTestResult(testOk, testName);
+			if (new Boolean(false)) {
+				testName = "OSGI_SERVICE_WITHOUT_THREAD_CONTEXT_CLASSLOADER";
+				System.out.println("\n     Do test: " + testName + "\n");
+				testOk = testGetParser(OSGI_SERVICE, true);
+				handleTestResult(testOk, testName);
+				testOk = testGetParser(OSGI_SERVICE, false);
+				handleTestResult(testOk, testName);
+			}
+			else {
+				testName = "OSGI_SERVICE_BASE_CLASSLOADER";
+				System.out.println("\n     Do test: " + testName + "\n");
+				testOk = testGetParser(OSGI_SERVICE_BASE_CLASSLOADER, true);
+				handleTestResult(testOk, testName);
+				testOk = testGetParser(OSGI_SERVICE_BASE_CLASSLOADER, false);
+				handleTestResult(testOk, testName);
+			}
 		}
 
 		return testOk;
@@ -126,6 +137,7 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 
 		switch (factoryMethod) {
 			case OSGI_SERVICE :
+			case OSGI_SERVICE_BASE_CLASSLOADER :
 				factory = WTPTestXercesPlugin.instance().getFactoryWithOSGiService(sax);
 				break;
 			case DIRECT_INSTANTIATION :
@@ -148,7 +160,19 @@ public class TestXMLContentType implements IApplication { // extends TestCase
 			System.out.println("ParserFactory classloader: " + factory.getClass().getClassLoader());
 
 			try {
-				parser = sax ? ((SAXParserFactory) factory).newSAXParser() : ((DocumentBuilderFactory) factory).newDocumentBuilder();
+				if (OSGI_SERVICE_BASE_CLASSLOADER == factoryMethod) {
+					ClassLoader saveClassLoader = Thread.currentThread().getContextClassLoader();
+					try {
+						Thread.currentThread().setContextClassLoader(factory.getClass().getClassLoader());
+						parser = sax ? ((SAXParserFactory) factory).newSAXParser() : ((DocumentBuilderFactory) factory).newDocumentBuilder();
+					}
+					finally {
+						Thread.currentThread().setContextClassLoader(saveClassLoader);
+					}
+				}
+				else {
+					parser = sax ? ((SAXParserFactory) factory).newSAXParser() : ((DocumentBuilderFactory) factory).newDocumentBuilder();
+				}
 				// if we get a parser, just say true for this test
 				System.out.println("Parser class: " + parser.getClass());
 				System.out.println("Parser classloader: " + parser.getClass().getClassLoader());
