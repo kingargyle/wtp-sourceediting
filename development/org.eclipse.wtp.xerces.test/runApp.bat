@@ -8,7 +8,7 @@ REM This invoction, with no arguments, uses the direct instantiation method, plu
     eclipsec -debug -consolelog -nosplash -data ./testworkspace -application org.eclipse.wtp.xerces.test.testxmlcontenttype -vm %JAVA_HOME%/jre/bin/java 
 
 REM uncomment following line to show it works ok if TCCL is used
-REM eclipsec -debug -consolelog -nosplash -data ./testworkspace -application org.eclipse.wtp.xerces.test.testxmlcontenttype -vm %JAVA_HOME%/jre/bin/java -useTCCL
+REM eclipsec -debug -consolelog -nosplash -data ./testworkspace -application org.eclipse.wtp.xerces.test.testxmlclassloading -vm %JAVA_HOME%/jre/bin/java -useTCCL
 
 pause 
 

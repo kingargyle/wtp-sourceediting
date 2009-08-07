@@ -2,14 +2,14 @@
 <?eclipse version="3.0"?>
 <plugin>
     <extension
-        id="testxmlcontenttype"
+        id="testxmlclassloading"
         point="org.eclipse.core.runtime.applications">
         <application
             cardinality="singleton-global"
             thread="main"
             visible="true">
             <run
-                class="org.eclipse.wtp.xerces.test.TestXMLContentType"/>
+                class="org.eclipse.wtp.xerces.test.TestXercesClassloading"/>
         </application>
     </extension>
 </plugin>

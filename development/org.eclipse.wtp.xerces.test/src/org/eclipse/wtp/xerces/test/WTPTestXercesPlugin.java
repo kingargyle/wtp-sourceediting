@@ -26,13 +26,13 @@ public class WTPTestXercesPlugin implements BundleActivator {
 
 	// ********** singleton **********
 
-	private static WTPTestXercesPlugin INSTANCE;
+	private static WTPTestXercesPlugin bundleInstance;
 
 	/**
 	 * Return this singleton
 	 */
 	public static WTPTestXercesPlugin instance() {
-		return INSTANCE;
+		return bundleInstance;
 	}
 
 
@@ -45,7 +45,10 @@ public class WTPTestXercesPlugin implements BundleActivator {
 
 
 	public Object getFactoryWithDirectInstantiation(boolean sax) {
-		return sax ? SAXParserFactory.newInstance() : DocumentBuilderFactory.newInstance();
+		if (sax)
+			return SAXParserFactory.newInstance();
+		else
+			return DocumentBuilderFactory.newInstance();
 	}
 
 	public Object getFactoryWithOSGiService(boolean sax) {
@@ -80,7 +83,7 @@ public class WTPTestXercesPlugin implements BundleActivator {
 
 	public void start(BundleContext context) throws Exception {
 		bundleContext = context;
-		INSTANCE = this;
+		bundleInstance = this;
 	}
 
 
