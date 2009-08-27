@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.wst.xml.ui.tests.performance
-Bundle-Version: 1.0.200.qualifier
+Bundle-Version: 1.0.300.qualifier
 Bundle-ClassPath: xmluiperformance.jar
 Bundle-Activator: org.eclipse.wst.xml.ui.tests.performance.XMLUIPerformancePlugin
 Bundle-Vendor: %Bundle-Vendor.0

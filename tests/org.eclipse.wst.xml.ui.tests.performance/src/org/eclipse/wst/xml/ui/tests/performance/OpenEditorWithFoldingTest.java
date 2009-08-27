@@ -16,7 +16,7 @@ import org.eclipse.test.performance.Dimension;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
-import org.eclipse.wst.sse.ui.internal.projection.IStructuredTextFoldingProvider;
+import org.eclipse.wst.sse.ui.internal.projection.AbstractStructuredFoldingStrategy;
 import org.eclipse.wst.sse.ui.internal.provisional.preferences.CommonEditorPreferenceNames;
 
 public class OpenEditorWithFoldingTest extends BasicEditorTest {
@@ -31,7 +31,7 @@ public class OpenEditorWithFoldingTest extends BasicEditorTest {
 	protected void tearDown() throws Exception {
 		// deliberately turn off folding preference again (just in cases)
 		IPreferenceStore store = SSEUIPlugin.getDefault().getPreferenceStore();
-		store.setValue(IStructuredTextFoldingProvider.FOLDING_ENABLED, false);
+		store.setValue(AbstractStructuredFoldingStrategy.FOLDING_ENABLED, false);
 		super.tearDown();
 	}
 
@@ -43,7 +43,7 @@ public class OpenEditorWithFoldingTest extends BasicEditorTest {
 		// turn off reconciling
 		store.setValue(CommonEditorPreferenceNames.EVALUATE_TEMPORARY_PROBLEMS, false);
 		// turn on folding
-		store.setValue(IStructuredTextFoldingProvider.FOLDING_ENABLED, true);
+		store.setValue(AbstractStructuredFoldingStrategy.FOLDING_ENABLED, true);
 
 		IPreferenceStore editorsStore = EditorsUI.getPreferenceStore();
 		// turn off quick diff
@@ -82,7 +82,7 @@ public class OpenEditorWithFoldingTest extends BasicEditorTest {
 		IPreferenceStore store = SSEUIPlugin.getDefault().getPreferenceStore();
 
 		// turn on folding
-		store.setValue(IStructuredTextFoldingProvider.FOLDING_ENABLED, foldingEnabled);
+		store.setValue(AbstractStructuredFoldingStrategy.FOLDING_ENABLED, foldingEnabled);
 
 
 
