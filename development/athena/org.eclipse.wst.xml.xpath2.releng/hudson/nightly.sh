@@ -11,12 +11,12 @@ echo "[`date +%Y/%m/%d\ %H:%M`] Hudson job ${JOBNAME} build #${BUILD_NUMBER} (${
 # BEGIN CONFIGURATION
 
 buildTimestamp="`date +%Y%m%d%H%M`"
-projectid="tools.gef"
-version="3.5.0"
+projectid="webtools.xpath2"
+version="1.1.0"
 
 # leave blank to use assumed values (which may be wrong!)
-projRelengRoot='-projRelengRoot :pserver:anonymous@dev.eclipse.org:/cvsroot/technology'
-projRelengPath='-projRelengPath org.eclipse.dash/athena/org.eclipse.dash.commonbuilder/org.eclipse.gef.releng'
+projRelengRoot='-projRelengRoot :pserver:anonymous@dev.eclipse.org:/cvsroot/webtools'
+projRelengPath='-projRelengPath sourceediting/development/athena/org.eclipse.wst.xml.xpath2.releng'
 
 # where should we look for pre-checked out project sources for org.eclipse.dash.common.releng and org.eclipse.releng.basebuilder ?
 cvsProjectBaseDir=/opt/public/cbi/build # build.eclipse.org
