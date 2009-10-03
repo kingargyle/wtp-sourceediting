@@ -4,7 +4,7 @@
 
 feature@org.eclipse.wst.xml.xpath2.processor.feature=v200909232026,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.xml.xpath2.processor.feature
 feature@org.eclipse.wst.xml.xpath2.processor.sdk.feature=v200908270203,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.xml.xpath2.processor.sdk.feature
-feature@org.eclipse.wst.xml.xpath2.processor_tests.feature=v200908270203,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.xml.xpath2.processor_tests.feature
+feature@org.eclipse.wst.xml.xpath2.processor_tests.feature=v200910030103,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.xml.xpath2.processor_tests.feature
 
 plugin@org.eclipse.wst.xml.xpath2.processor=v200909251749,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xml.xpath2.processor
 plugin@org.eclipse.wst.xml.xpath2.processor.tests=v200909251749,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xml.xpath2.processor.tests
