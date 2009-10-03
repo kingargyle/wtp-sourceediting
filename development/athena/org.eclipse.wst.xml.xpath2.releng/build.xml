@@ -1,6 +1,7 @@
 <project default="run" name="org.eclipse.wst.xml.xpath2.releng/build.xml - Run a PsychoPath build using the Athena CBI">
 	<target name="run">
 		<!-- load properties and set timestamp for the build -->
+		<property name="WORKSPACE" location="../../../../"/>
 		<property file="build.properties" />
 		<tstamp>
 			<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
