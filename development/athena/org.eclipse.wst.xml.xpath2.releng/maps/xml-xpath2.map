@@ -12,4 +12,7 @@ plugin@org.eclipse.wst.xml.xpath2=v200908190047,:pserver:anonymous@dev.eclipse.o
 plugin@org.eclipse.wst.xml.xpath2.processor.sdk.doc=v200908270203,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/docs/org.eclipse.wst.xml.xpath2.processor.sdk.doc
 plugin@org.eclipse.wst.xml.xpath2.processor.doc.user=v200909020054,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/docs/org.eclipse.wst.xml.xpath2.processor.doc.user
 
+plugin@org.eclipse.test=v20080313,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+fragment@org.eclipse.ant.optional.junit=v20070202,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+
 !**************
