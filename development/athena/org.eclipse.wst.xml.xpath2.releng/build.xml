@@ -2,14 +2,14 @@
 	<target name="run">
 		<!-- load properties and set timestamp for the build -->
 		<property name="WORKSPACE" location="../../../../"/>
+		<property environment="env"/>
 		<property file="build.properties" />
 		<tstamp>
 			<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
 		</tstamp>
-<!--		
 		<property name="forceContextQualifier" value="v${buildTimestamp}" />
 		<property name="fetchTag" value="HEAD" />
--->
+		
 		<!-- calculate workspaceDir as parent of this folder, the project's .releng folder (relengBuilderDir) -->
 		<property name="relengBuilderDir" value="${basedir}" />
 		<dirname file="${relengBuilderDir}" property="workspaceDir" />
