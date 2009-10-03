@@ -6,10 +6,10 @@
 		<tstamp>
 			<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
 		</tstamp>
-		
+<!--		
 		<property name="forceContextQualifier" value="v${buildTimestamp}" />
 		<property name="fetchTag" value="HEAD" />
-
+-->
 		<!-- calculate workspaceDir as parent of this folder, the project's .releng folder (relengBuilderDir) -->
 		<property name="relengBuilderDir" value="${basedir}" />
 		<dirname file="${relengBuilderDir}" property="workspaceDir" />
