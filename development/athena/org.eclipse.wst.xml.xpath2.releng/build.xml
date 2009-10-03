@@ -29,6 +29,9 @@
 		<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}" />
 
 		<delete dir="${writableBuildRoot}"/>
+		<echo message="Workspace: ${WORKSPACE}"/>
+		<echo message="Writable Build Root: ${writableBuildRoot}"/>
+		<mkdir dir="${writableBuildRoot}"/>
 		<!-- invoke a new Eclipse process and launch the build from the common.releng folder -->
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
