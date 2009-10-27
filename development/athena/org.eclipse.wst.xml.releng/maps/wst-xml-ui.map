@@ -1,0 +1,10 @@
+!*************** wst-xml.map
+! This map file is for the WTP 3.2 release
+! These bundles are currently being developed and released from the HEAD branch
+
+plugin@org.eclipse.wst.dtd.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.dtd.ui
+plugin@org.eclipse.wst.sse.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.sse.ui
+plugin@org.eclipse.wst.xml.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xml.ui
+plugin@org.eclipse.wst.xsd.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsd.ui
+
+!*************** 
