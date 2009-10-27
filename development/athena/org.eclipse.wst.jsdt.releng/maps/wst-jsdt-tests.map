@@ -10,4 +10,6 @@ plugin@org.eclipse.wst.jsdt.web.ui.tests=HEAD,:pserver:anonymous@dev.eclipse.org
 
 feature@org.eclipse.wst.jsdt_tests.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.jsdt_tests.feature
 
+plugin@org.eclipse.test=v20080313,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+fragment@org.eclipse.ant.optional.junit=v20070202,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
 !***************
