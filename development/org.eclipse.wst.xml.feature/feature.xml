@@ -39,21 +39,14 @@
          unpack="false"/>
 
    <plugin
-         id="javax.xml"
+         id="org.eclipse.wst.dtd.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.wst.xml.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.xerces"
+         id="org.eclipse.wst.dtd.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
