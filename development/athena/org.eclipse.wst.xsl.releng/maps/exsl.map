@@ -1,0 +1,10 @@
+!*************** xsl.map
+! This map file is for the WTP 3.2 release
+! These bundles are currently being developed and released from the HEAD branch
+
+plugin@org.eclipse.wst.xsl.exslt.core=v200909252337,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl.exslt.core
+plugin@org.eclipse.wst.xsl.exslt.core.tests=v200909252337,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsl.exslt.core.tests
+plugin@org.eclipse.wst.xsl.exslt.ui=v200909292343,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl.exslt.ui
+plugin@org.eclipse.wst.xsl.exslt.ui.tests=v200909292343,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsl.exslt.ui.tests
+
+!***************
