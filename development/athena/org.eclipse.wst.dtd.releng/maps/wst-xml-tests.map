@@ -20,5 +20,8 @@ plugin@org.eclipse.wst.xsd.validation.tests=HEAD,:pserver:anonymous@dev.eclipse.
 plugin@org.eclipse.wst.xsd.tests.performance=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsd.tests.performance
 plugin@org.eclipse.wst.xsd.core.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsd.core.tests
 plugin@org.eclipse.wst.xsd.ui.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsd.ui.tests
+plugin@org.eclipse.wst.common.tests.preformance=HEAD;:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,common/tests/org.eclipse.wst.common.tests.performance
+plugin@org.eclipse.test=v20080313,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+fragment@org.eclipse.ant.optional.junit=v20070202,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
 
 !***************
