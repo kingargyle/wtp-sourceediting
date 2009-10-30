@@ -8,5 +8,6 @@ feature@org.eclipse.wst.xml_tests.feature=HEAD,:pserver:anonymous@dev.eclipse.or
 feature@org.eclipse.wst.xml_ui.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.xml_ui.feature
 feature@org.eclipse.wst.xml_userdoc.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.xml_userdoc.feature
 feature@org.eclipse.wst.xml.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/development/org.eclipse.wst.xml.feature
+feature@org.eclipse.wst.xml.tests.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/development/org.eclipse.wst.xml.tests.feature
 
 !*************** 
