@@ -28,7 +28,12 @@
 		-->
 		<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}" />
 
-		<delete dir="${writableBuildRoot}" />
+		<delete>
+			<fileset dir="${buildDir}">
+			    <exclude name="3rdPartyJars/*"/>
+				<exclude name="downaloads/*"/>
+			</fileset>
+		</delete>
 		<echo message="Workspace: ${WORKSPACE}"/>
 		<echo message="Writable Build Root: ${writableBuildRoot}"/>
 		<mkdir dir="${writableBuildRoot}"/>
