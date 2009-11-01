@@ -36,5 +36,14 @@
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
 		<delete dir="${buildDir}/eclipse" failonerror="false" />
+		<delete dir="${buildDir}/testing" failonerror="false" />
+		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
+		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
+		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
+		<delete>
+			<fileset dir="${writableBuildRoot}">
+				<includes name="*AllFeatures*, *Master* "/>
+			</fileset>
+		</delete>
 	</target>
 </project>
