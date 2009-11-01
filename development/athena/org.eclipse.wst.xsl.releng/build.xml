@@ -28,7 +28,6 @@
 		-->
 		<property name="buildDir" value="${writableBuildRoot}/athena" />
 
-		<delete dir="${writableBuildRoot}/N200910312136" failonerror="false"/>
 		<delete dir="${buildDir}" failonerror="false"/>
 		<echo message="Workspace: ${WORKSPACE}"/>
 		<echo message="Writable Build Root: ${writableBuildRoot}"/>
