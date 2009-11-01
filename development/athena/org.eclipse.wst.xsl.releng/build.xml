@@ -26,14 +26,10 @@
 			${writableBuildRoot}/${topprojectName}/${projectName}/downloads/drops/${version}/${buildType}${buildTimestamp} or
 			${writableBuildRoot}/${topprojectName}/${projectName}/${subprojectName}/downloads/drops/${version}/${buildType}${buildTimestamp}
 		-->
-		<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}" />
+		<property name="buildDir" value="${writableBuildRoot}/athena" />
 
-		<delete>
-			<fileset dir="${writableBuildRoot}">
-			    <exclude name="3rdPartyJars/*"/>
-				<exclude name="downloads/*"/>
-			</fileset>
-		</delete>
+		<delete dir="${writableBuildRoot}/N200910312136" failonerror="false"/>
+		<delete dir="${buildDir}"/>
 		<echo message="Workspace: ${WORKSPACE}"/>
 		<echo message="Writable Build Root: ${writableBuildRoot}"/>
 		<mkdir dir="${writableBuildRoot}"/>
