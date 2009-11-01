@@ -29,7 +29,7 @@
 		<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}" />
 
 		<delete>
-			<fileset dir="${writableBuildRoot">
+			<fileset dir="${writableBuildRoot}">
 			    <exclude name="3rdPartyJars/*"/>
 				<exclude name="downloads/*"/>
 			</fileset>
