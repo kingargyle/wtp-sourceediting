@@ -1,4 +1,17 @@
 <project default="run" name="org.eclipse.wst.xml.xpath2.releng/build.xml - Run a PsychoPath build using the Athena CBI">
+	<target name="extraClean">
+		<echoproperties/>
+		<tstamp/>
+		<echo msg="${TSTAMP}"/>
+		<apply executable="rm">
+            <arg value="-rf"/>
+            <dirset dir="${buildDir}">
+            	<include name="eclipse"/>
+            </dirset>
+        </apply>
+		<tstamp/>
+		<echo msg="${TSTAMP}"/>
+	</target>
 	<target name="run">
 		<!-- load properties and set timestamp for the build -->
 		<property name="WORKSPACE" location="../../../../"/>
@@ -35,5 +48,6 @@
 		<!-- invoke a new Eclipse process and launch the build from the common.releng folder -->
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
+		<antcall target="extraClean"/>
 	</target>
 </project>
