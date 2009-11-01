@@ -2,7 +2,7 @@
 	<target name="extraClean">
 		<echoproperties/>
 		<tstamp/>
-		<echo msg="${TSTAMP}"/>
+		<echo message="${TSTAMP}"/>
 		<apply executable="rm">
             <arg value="-rf"/>
             <dirset dir="${buildDir}">
@@ -10,7 +10,20 @@
             </dirset>
         </apply>
 		<tstamp/>
-		<echo msg="${TSTAMP}"/>
+		<echo message="${TSTAMP}"/>
+	</target>
+	<target name="init">
+		<tstamp/>
+		<echo message="${TSTAMP}"/>
+		<apply executable="rm">
+            <arg value="-rf"/>
+            <dirset dir="${writableBuildRoot}">
+            	<include name="**"/>
+            </dirset>
+        </apply>
+		<tstamp/>
+		<echo message="${TSTAMP}"/>
+		
 	</target>
 	<target name="run">
 		<!-- load properties and set timestamp for the build -->
@@ -41,7 +54,7 @@
 		-->
 		<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}" />
 
-		<delete dir="${writableBuildRoot}"/>
+		<antcall target="init"/>
 		<echo message="Workspace: ${WORKSPACE}"/>
 		<echo message="Writable Build Root: ${writableBuildRoot}"/>
 		<mkdir dir="${writableBuildRoot}"/>
