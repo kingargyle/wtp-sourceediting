@@ -42,7 +42,7 @@
 		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
 		<delete>
 			<fileset dir="${writableBuildRoot}">
-				<includes name="*AllFeatures*, *Master* "/>
+				<include name="*AllFeatures*, *Master* "/>
 			</fileset>
 		</delete>
 	</target>
