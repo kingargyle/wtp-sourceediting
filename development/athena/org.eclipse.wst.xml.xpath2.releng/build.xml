@@ -25,7 +25,7 @@
 		${writableBuildRoot}/${topprojectName}/${projectName}/downloads/drops/${version}/${buildType}${buildTimestamp} or
 		${writableBuildRoot}/${topprojectName}/${projectName}/${subprojectName}/downloads/drops/${version}/${buildType}${buildTimestamp}
 	-->
-	<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}" />
+	<property name="buildDir" value="${writableBuildRoot}/athena" />
 	
 	<target name="init">
 		<delete dir="${buildDir}" failonerror="false"/>
