@@ -45,10 +45,10 @@
 		<delete dir="${buildDir}/eclipse" failonerror="false" />
 		<delete dir="${buildDir}/testing" failonerror="false" />
 		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
-		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
-		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
+		<delete dir="${buildDir}/testresults/consolelogs" failonerror="false"/>
+		<delete dir="${buildDir}/testresults/html" failonerror="false"/>
 		<delete>
-			<fileset dir="${buildDir}}">
+			<fileset dir="${buildDir}">
 				<include name="*AllFeatures*.zip*"/>
 				<include name="*Master*.zip*"/>
 			</fileset>
