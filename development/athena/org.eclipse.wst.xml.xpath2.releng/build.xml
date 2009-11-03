@@ -48,8 +48,9 @@
 		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
 		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
 		<delete>
-			<fileset dir="${writableBuildRoot}">
-				<include name="*AllFeatures*.zip, *Master*.zip "/>
+			<fileset dir="${buildDir}}">
+				<include name="*AllFeatures*.zip*"/>
+				<include name="*Master*.zip*"/>
 			</fileset>
 		</delete>
 	</target>	
