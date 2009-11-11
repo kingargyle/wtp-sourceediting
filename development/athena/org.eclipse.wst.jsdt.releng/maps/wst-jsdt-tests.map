@@ -5,10 +5,7 @@
 plugin@org.eclipse.wst.jsdt.core.tests.compiler=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.jsdt.core.tests.compiler
 plugin@org.eclipse.wst.jsdt.core.tests.model=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.jsdt.core.tests.model
 plugin@org.eclipse.wst.jsdt.ui.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.jsdt.ui.tests
-plugin@org.eclipse.wst.jsdt.web.core.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.jsdt.web.core.tests
-plugin@org.eclipse.wst.jsdt.web.ui.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.jsdt.web.ui.tests
 
-feature@org.eclipse.wst.jsdt_tests.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.jsdt_tests.feature
 feature@org.eclipse.wst.jsdt.tests.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/development/org.eclipse.wst.jsdt.tests.feature
 
 plugin@org.eclipse.test=v20080313,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
