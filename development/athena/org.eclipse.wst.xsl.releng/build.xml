@@ -32,27 +32,33 @@
 	</target>
 
 	<target name="run" depends="init">
-		<delete dir="${buildDir}" failonerror="false"/>
 		<echo message="Workspace: ${WORKSPACE}"/>
 		<echo message="Writable Build Root: ${writableBuildRoot}"/>
 		<mkdir dir="${writableBuildRoot}"/>
 		<!-- invoke a new Eclipse process and launch the build from the common.releng folder -->
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
-		<antcall target="cleanUp"/>
+		<cleanUpBuild/>
 	</target>
 	
-	<target name="cleanUp">
-		<delete dir="${buildDir}/eclipse" failonerror="false" />
-		<delete dir="${buildDir}/testing" failonerror="false" />
-		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
-		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
-		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
-		<delete>
-			<fileset dir="${buildDir}">
-				<include name="*AllFeatures*.zip*"/>
-				<include name="*Master*.zip*"/>
-			</fileset>
-		</delete>
-	</target>
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: cleanUpBuild          
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="cleanUpBuild">
+        <sequential>
+    		<delete dir="${buildDir}/eclipse" failonerror="false" />
+    		<delete dir="${buildDir}/testing" failonerror="false" />
+    		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
+    		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
+    		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
+    		<delete>
+    			<fileset dir="${buildDir}">
+    				<include name="*AllFeatures*.zip*"/>
+    				<include name="*Master*.zip*"/>
+    			</fileset>
+    		</delete>
+            
+        </sequential>
+    </macrodef>
+
 </project>
