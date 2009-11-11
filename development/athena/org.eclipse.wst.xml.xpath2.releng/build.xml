@@ -38,20 +38,25 @@
 		<!-- invoke a new Eclipse process and launch the build from the common.releng folder -->
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
-		<antcall target="cleanUp" inheritall="true"/>
+		<cleanUpBuild/>
 	</target>
 	
-	<target name="cleanUp">
-		<delete dir="${buildDir}/eclipse" failonerror="false" />
-		<delete dir="${buildDir}/testing" failonerror="false" />
-		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
-		<delete dir="${buildDir}/testresults/consolelogs" failonerror="false"/>
-		<delete dir="${buildDir}/testresults/html" failonerror="false"/>
-		<delete>
-			<fileset dir="${buildDir}">
-				<include name="*AllFeatures*.zip*"/>
-				<include name="*Master*.zip*"/>
-			</fileset>
-		</delete>
-	</target>	
+	
+    <macrodef name="cleanUpBuild">
+        <sequential>
+    		<delete dir="${buildDir}/eclipse" failonerror="false" />
+    		<delete dir="${buildDir}/testing" failonerror="false" />
+    		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
+    		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
+    		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
+    		<delete>
+    			<fileset dir="${buildDir}">
+    				<include name="*AllFeatures*.zip*"/>
+    				<include name="*Master*.zip*"/>
+    			</fileset>
+    		</delete>
+            
+        </sequential>
+    </macrodef>
+	
 </project>
