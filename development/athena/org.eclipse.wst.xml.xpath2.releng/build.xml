@@ -80,15 +80,21 @@
     		</fileset>
     	</unzip>
     	
+    	
     	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
-    		<classpath location="${writableBuildRoot}/3rdPartyJars/findbugs/lib"/>
+    		<classpath>
+	    	   <path>
+	    	      <fileset dir="${writableBuildRoot}/3rdPartyJars/findbugs/findbugs-1.3.9/lib" includes="*.jar"/>
+	    	    </path>
+    		</classpath>
     	</taskdef>
     	
-    	 <findbugs home="${writableBuildRoot}/3rdPartyJars/findbugs"
+    	 <findbugs home="${writableBuildRoot}/3rdPartyJars/findbugs/findbugs-1.3.9/lib"
     	              output="xml"
     	              outputFile="${writableBuildRoot}/athena/fb-xpath20processor.xml" >
     	      <class location="${writableBuildRoot}/athena/findbugsclasses"/>
     	 </findbugs>
+    	 <delete dir="${writableBuildRoot}/3rdPartyJars/findbugsclasses"/>
     </target>
 	
 </project>
