@@ -39,7 +39,7 @@
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
 		<cleanUpBuild/>
-		<antcall target="findbugs"/>
+		<antcall target="findbugs" inheritall="true"/>
 	</target>
 
     <macrodef name="cleanUpBuild">
@@ -63,12 +63,12 @@
           target: default              
          ================================= -->
     <target name="findbugs" description="Run a find bugs analysis based on a ZIP file contents.">
-    	<get src="http://downloads.sourceforge.net/project/findbugs/findbugs/1.3.9/findbugs-1.3.9.zip?use_mirror=voxel" dest="${writeableBuildRoot}/downloads/findbugs.zip"/>
-    	<unzip src="${writeableBuildRoot}/downloads/findbugs.zip" dest="${writeableBuildRoot}/3rdPartyJars/findbugs"/>
-    	<get src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" dest="${writeableBuildRoot}/eclipse.zip"/>
+    	<get src="http://downloads.sourceforge.net/project/findbugs/findbugs/1.3.9/findbugs-1.3.9.zip?use_mirror=voxel" dest="${writableBuildRoot}/downloads/findbugs.zip"/>
+    	<unzip src="${writableBuildRoot}/downloads/findbugs.zip" dest="${writableBuildRoot}/3rdPartyJars/findbugs"/>
+    	<get src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" dest="${writableBuildRoot}/eclipse.zip"/>
         
     	<mkdir dir="${writableBuildRoot}/athena/findbugs"/>
-    	<unzip src="${writeableBuildRoot}/eclipse.zip" dest="${writableBuildRoot}/athena/findbugs/">
+    	<unzip src="${writableBuildRoot}/eclipse.zip" dest="${writableBuildRoot}/athena/findbugs/">
     		<patternset>
     			<include name="eclipse/plugins/org.eclipse.wst.xml.xpath2.processor*.jar"/>
     		</patternset>
@@ -80,10 +80,10 @@
     	</unzip>
     	
     	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
-    		<classpath location="${writeableBuildRoot}/3rdPartyJars/findbugs/lib"/>
+    		<classpath location="${writableBuildRoot}/3rdPartyJars/findbugs/lib"/>
     	</taskdef>
     	
-    	 <findbugs home="${writeableBuildRoot}/3rdPartyJars/findbugs"
+    	 <findbugs home="${writableBuildRoot}/3rdPartyJars/findbugs"
     	              output="xml"
     	              outputFile="${writableBuildRoot}/athena/fb-xpath20processor.xml" >
     	      <class location="${writableBuildRoot}/athena/findbugsclasses"/>
