@@ -1,0 +1,59 @@
+<project xmlns:au="antlib:org.apache.ant.antunit" xmlns="antlib:org.apache.tools.ant" default="run">
+
+	<property name="relengCommonBuilderDir" location="../../" />
+	<taskdef uri="antlib:org.apache.ant.antunit" resource="org/apache/ant/antunit/antlib.xml">
+		<classpath>
+			<pathelement location="${relengCommonBuilderDir}/lib/ant-antunit.jar" />
+			<pathelement location="../lib/ant-antunit.jar" />
+			<pathelement location="./lib/ant-antunit.jar" />
+		</classpath>
+	</taskdef>
+	
+	<import file="findbugs.xml"/>
+
+	<!-- is called prior to the test -->
+	<target name="setUp">
+	    <property name="writableBuildRoot" location="build"/>
+		<property name="sdkzipUrl" value="https://build.eclipse.org/hudson/job/cbi-wtp-wst.xsl.psychopath/128/artifact/build/athena/"/>
+		<property name="zipPrefix" value="wst-xpath2-psychopath"/>
+		<property name="buildType" value="N"/>
+	    <property name="buildTimestamp" value="200912041353"/>
+	</target>
+
+	<!-- is called after the test, even if that caused an error -->
+	<target name="tearDown">
+		<delete file="${writableBuildRoot}/downloads/findbugs.zip"/>
+		<delete dir="${writableBuildRoot}/3rdPartyJars/findbugs"/>
+		<delete dir="${writableBuildRoot}/athena/findbugsclasses"/>		
+	</target>
+
+	<target name="testGetFindBugs">
+		<getFindBugs downloadDir="${writableBuildRoot}/downloads" destDir="${writableBuildRoot}/3rdPartyJars/findbugs"/>
+		<au:assertFileExists file="${writableBuildRoot}/downloads/findbugs.zip" message="Did not find findbugs.zip"/>
+		<au:assertFileExists file="${writableBuildRoot}/3rdPartyJars/findbugs/findbugs-1.3.9/lib/findbugs.jar"/>
+	</target>
+	
+	<target name="testExtractJarsForAnlaysis">
+		<extractJarsForAnalysis src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" refid="xpathjars"/>
+		<au:assertFileExists file="${writableBuildRoot}/athena/findbugsclasses/META-INF/MANIFEST.MF"/>
+	</target>
+	
+	<!-- test the MacroDef for downloading Files -->
+	<target name="testFindBugs">
+		<patternset id="xpathjars">
+			<include name="eclipse/plugins/org.eclipse.wst.xml.xpath2.processor*.jar"/>
+		</patternset>
+		<getFindBugs downloadDir="${writableBuildRoot}/downloads" destDir="${writableBuildRoot}/3rdPartyJars/findbugs"/>
+		<extractJarsForAnalysis src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" refid="xpathjars"/>
+		<findBugs outputfile="${writableBuildRoot}/athena/fb-xpath20processor.xml"/>
+		<au:assertFileExists file="${writableBuildRoot}/athena/fb-xpath20processor.xml"/>
+	</target>
+	
+	<target name="run">
+		<au:antunit>
+			<fileset dir="${basedir}" includes="*.test.xml" excludes="*AllTaskTests.test.xml" />
+			<au:plainlistener />
+		</au:antunit>
+	</target>
+
+</project>
