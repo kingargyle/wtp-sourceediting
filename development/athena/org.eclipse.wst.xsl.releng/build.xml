@@ -49,6 +49,7 @@
     <target name="findbugs" description="Run a find bugs analysis based on a ZIP file contents.">
 		<patternset id="xsljars">
 			<include name="eclipse/plugins/*.jar"/>
+			<exclude name="**/plugins/org.apache*.jar"/>
 		</patternset>
 		<getFindBugs downloadDir="${writableBuildRoot}/downloads" destDir="${writableBuildRoot}/3rdPartyJars/findbugs"/>
 		<extractJarsForAnalysis src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" refid="xsljars"/>
