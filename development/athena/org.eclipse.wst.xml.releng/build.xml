@@ -60,11 +60,14 @@
 	</target>	
 	
     <target name="findbugs" description="Run a find bugs analysis based on a ZIP file contents.">
-		<patternset id="xpathjars">
-			<include name="eclipse/plugins/org.eclipse.wst.xml.core.*.jar, eclipse/plugins/org.eclipse.wst.xml.ui.*.jar. eclipse/plugins/org.eclipse.wst.sse.ui.*.jar, eclipse/plugins/org.eclipse.wst.sse.core.*.jar"/>
+		<patternset id="xmljars">
+			<include name="eclipse/plugins/org.eclipse.wst.xml.core.*.jar"/>
+			<include name="eclipse/plugins/org.eclipse.wst.xml.ui.*.jar"/>
+			<include name="eclipse/plugins/org.eclipse.wst.sse.ui.*.jar"/>
+			<include name="eclipse/plugins/org.eclipse.wst.sse.core.*.jar"/>
 		</patternset>
 		<getFindBugs downloadDir="${writableBuildRoot}/downloads" destDir="${writableBuildRoot}/3rdPartyJars/findbugs"/>
-		<extractJarsForAnalysis src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" refid="xpathjars"/>
+		<extractJarsForAnalysis src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" refid="xmljars"/>
 		<findBugs outputfile="${writableBuildRoot}/athena/fb-xml.xml"/>
     </target>
 </project>
