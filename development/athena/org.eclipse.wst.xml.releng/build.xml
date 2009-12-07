@@ -11,7 +11,7 @@
 	
 	<!-- calculate workspaceDir as parent of this folder, the project's .releng folder (relengBuilderDir) -->
 	<property name="relengBuilderDir" value="${basedir}" />
-	<property name="sdkzipUrl" value="https://build.eclipse.org/hudson/job/cbi-wtp-wst.xsl.psychopath/ws/build/athena/"/>
+	<property name="sdkzipUrl" value="https://build.eclipse.org/hudson/job/cbi-wtp-wst.xml/ws/build/athena/"/>
 
 	<import file="findbugs.xml"/>
 	<dirname file="${relengBuilderDir}" property="workspaceDir" />
