@@ -11,6 +11,10 @@
 	
 	<!-- calculate workspaceDir as parent of this folder, the project's .releng folder (relengBuilderDir) -->
 	<property name="relengBuilderDir" value="${basedir}" />
+	<property name="sdkzipUrl" value="https://build.eclipse.org/hudson/job/cbi-wtp-wst.jsdt/ws/build/athena/"/>
+	
+	<import file="findbugs.xml"/>
+	
 	<dirname file="${relengBuilderDir}" property="workspaceDir" />
 
 	<!-- 
@@ -40,6 +44,15 @@
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
 		<buildCleanUp/>
 	</target>
+	
+    <target name="findbugs" description="Run a find bugs analysis based on a ZIP file contents.">
+		<patternset id="jsdtjars">
+			<include name="eclipse/plugins/*.jar"/>
+		</patternset>
+		<getFindBugs downloadDir="${writableBuildRoot}/downloads" destDir="${writableBuildRoot}/3rdPartyJars/findbugs"/>
+		<extractJarsForAnalysis src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" refid="jsdtjars"/>
+		<findBugs outputfile="${writableBuildRoot}/athena/fb-jsdt.xml"/>
+    </target>
 	
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: name          
