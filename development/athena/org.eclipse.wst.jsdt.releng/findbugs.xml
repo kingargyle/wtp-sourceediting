@@ -41,7 +41,8 @@
 	    	
 	    	 <findbugs home="${writableBuildRoot}/3rdPartyJars/findbugs/findbugs-1.3.9/lib"
 	    	              output="xml"
-	    	              outputFile="@{outputfile}" >
+	    	              outputFile="@{outputfile}"
+	    	 	          timeout="1200000">
 	    	      <class location="${writableBuildRoot}/athena/findbugsclasses"/>
 	    	 </findbugs>
 		</sequential>
