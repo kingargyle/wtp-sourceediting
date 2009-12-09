@@ -48,7 +48,7 @@
 	
     <target name="findbugs" description="Run a find bugs analysis based on a ZIP file contents.">
 		<patternset id="jsdtjars">
-			<include name="eclipse/plugins/*jsdt.core.*.jar"/>
+			<include name="**/plugins/*core*.jar"/>
 		</patternset>
 		<getFindBugs downloadDir="${writableBuildRoot}/downloads" destDir="${writableBuildRoot}/3rdPartyJars/findbugs"/>
 		<extractJarsForAnalysis src="${sdkzipUrl}${zipPrefix}-SDK-${buildType}${buildTimestamp}.zip" refid="jsdtjars"/>
@@ -65,6 +65,7 @@
     		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
     		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
     		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
+        	<delete file="${buildDir}/../eclipse.zip" failonerror="false"/>
     		<delete>
     			<fileset dir="${buildDir}">
     				<include name="*AllFeatures*.zip*"/>
