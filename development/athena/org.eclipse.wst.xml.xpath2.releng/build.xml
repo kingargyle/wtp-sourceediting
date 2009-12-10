@@ -12,6 +12,7 @@
 	<!-- calculate workspaceDir as parent of this folder, the project's .releng folder (relengBuilderDir) -->
 	<property name="relengBuilderDir" value="${basedir}" />
 	<import file="findbugs.xml"/>
+	<import file="pmd.xml"/>
 	<dirname file="${relengBuilderDir}" property="workspaceDir" />
 
 	<!-- 
@@ -42,6 +43,7 @@
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
 		<antcall target="findbugs" inheritall="true"/>
 		<cleanUpBuild/>
+		<antcall target="duplicateCode" inheritall="true"/>
 	</target>
 
     <macrodef name="cleanUpBuild">
@@ -75,4 +77,8 @@
 		<findBugs outputfile="${writableBuildRoot}/athena/fb-xpath20processor.xml"/>
     </target>
 	
+	<target name="duplicateCode" description="Run PMD duplicate code analysis">
+		<getPMD downloadDir="${writableBuildRoot}/downloads" destDir="${writableBuildRoot}/3rdPartyJars/pmd"/>
+		<cpd outputfile="${writableBuildRoot}/athena/cpd-xpath20processor.xml" srcdir="${WORKSPACE}"/>
+	</target>
 </project>
