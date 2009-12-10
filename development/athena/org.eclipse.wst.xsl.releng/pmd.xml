@@ -24,6 +24,7 @@
 		    <cpd minimumTokenCount="100" format="xml" outputFile="@{outputfile}">
 		        <fileset dir="@{srcdir}">
 		            <include name="**/*.java"/>
+		        	<exclude name="**/tests/**/*.java"/>
 		        </fileset>
 		    </cpd>
 		</sequential>
