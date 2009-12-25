@@ -9,6 +9,7 @@ feature@org.eclipse.wst.xsl_tests.feature=v200909300040,:pserver:anonymous@dev.e
 plugin@org.eclipse.wst.xml.xpath.ui=v200908232049,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xml.xpath.ui
 plugin@org.eclipse.wst.xml.xpath.core=v200904240436,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xml.xpath.core
 plugin@org.eclipse.wst.xml.xpath.core.tests=v200908120331,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xml.xpath.core.tests
+plugin@org.eclipse.wst.xml.xpath.ui.tests=v200908120331,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xml.xpath.ui.tests
 
 plugin@org.eclipse.wst.xsl=v200905250058,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl
 plugin@org.eclipse.wst.xsl.core=v200910082139,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl.core
