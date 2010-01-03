@@ -11,6 +11,7 @@ plugin@org.eclipse.wst.xml.xpath.core=v200904240436,:pserver:anonymous@dev.eclip
 plugin@org.eclipse.wst.xml.xpath.core.tests=v200908120331,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xml.xpath.core.tests
 plugin@org.eclipse.wst.xml.xpath.ui.tests=v200908120331,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xml.xpath.ui.tests
 
+
 plugin@org.eclipse.wst.xsl=v200905250058,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl
 plugin@org.eclipse.wst.xsl.core=v200910082139,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl.core
 plugin@org.eclipse.wst.xsl.ui=v200910152141,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl.ui
@@ -18,6 +19,7 @@ plugin@org.eclipse.wst.xsl.debug.ui=v200906231448,:pserver:anonymous@dev.eclipse
 plugin@org.eclipse.wst.xsl.launching=v200906231448,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl.launching
 plugin@org.eclipse.wst.xsl.xalan=v200904240436,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.xsl.xalan
 plugin@org.eclipse.wst.xsl.launching.tests=v200904290249,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsl.launching.tests
+plugin@org.eclipse.wst.xsl.jaxp.debug.test=v200904290249,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsl.jaxp.debug.test
 plugin@org.eclipse.wst.xsl.tests=v200909300109,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsl.tests
 plugin@org.eclipse.wst.xsl.doc=v200905071815,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/docs/org.eclipse.wst.xsl.doc
 plugin@org.eclipse.wst.xsl.ui.tests=v200909292343,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsl.ui.tests
