@@ -10,7 +10,7 @@ Bundle-Localization: plugin
 Export-Package: org.eclipse.wst.html.ui.tests.performance,
  org.eclipse.wst.html.ui.tests.performance.scalability
 Require-Bundle: org.eclipse.core.runtime,
- org.junit;bundle-version="[3.8.0,4.0.0)",
+ org.junit;bundle-version=3.8.2,
  org.eclipse.wst.html.ui,
  org.eclipse.ui,
  org.eclipse.core.resources,
