@@ -25,6 +25,9 @@
 		        <fileset dir="@{srcdir}">
 		            <include name="**/*.java"/>
 		        	<exclude name="**/tests/**/*.java"/>
+		        	<exclude name="**/internal/XPathCup.java"/>
+		        	<exclude name="**/internal/XPathSym.java"/>
+		        	<exclude name="**/internal/sym.java"/>
 		        </fileset>
 		    </cpd>
 		</sequential>
