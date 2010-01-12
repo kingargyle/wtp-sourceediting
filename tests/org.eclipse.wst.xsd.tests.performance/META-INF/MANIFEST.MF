@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.wst.xsd.tests.performance
-Bundle-Version: 1.0.300.qualifier
+Bundle-Version: 1.0.400.qualifier
 Bundle-ClassPath: xsdperformance.jar
 Bundle-Localization: plugin
 Require-Bundle: org.junit;bundle-version=3.8.2,
@@ -20,6 +20,5 @@ Require-Bundle: org.junit;bundle-version=3.8.2,
  org.eclipse.wst.validation
 Export-Package: org.eclipse.wst.xsd.tests.performance,
  org.eclipse.wst.xsd.tests.performance.scalability
-Eclipse-LazyStart: false
 Bundle-Activator: org.eclipse.wst.xsd.tests.performance.XSDPerformancePlugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.4
