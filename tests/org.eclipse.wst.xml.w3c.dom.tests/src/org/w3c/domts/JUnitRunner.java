@@ -210,20 +210,4 @@ public class JUnitRunner {
     }
   }
 
-
-
-  public static void main (String[] args) {
-    //
-    //   SwingUI Test Runner needs -noloading attribute
-    //       or there will be problems loading test case
-    String[] withNoLoading = new String[args.length+1];
-    for(int i = 0; i < args.length; i++) {
-        withNoLoading[i+1] = args[i];
-    }
-    withNoLoading[0] = "-noloading";
-
-    junit.swingui.TestRunner.main(withNoLoading);
-  }
-
-
 }
