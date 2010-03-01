@@ -2,17 +2,21 @@
 ! This map file is for the WTP 3.2 release
 ! These bundles are currently being developed and released from the HEAD branch
 
-plugin@org.eclipse.wst.jsdt.doc=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/docs/org.eclipse.wst.jsdt.doc
-plugin@org.eclipse.wst.jsdt.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.core
-plugin@org.eclipse.wst.jsdt.manipulation=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.manipulation
-plugin@org.eclipse.wst.jsdt.support.firefox=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.support.firefox
-plugin@org.eclipse.wst.jsdt.support.ie=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.support.ie
-plugin@org.eclipse.wst.jsdt.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.ui
+plugin@org.eclipse.wst.jsdt.doc=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/docs/org.eclipse.wst.jsdt.doc
+plugin@org.eclipse.wst.jsdt.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.core
+plugin@org.eclipse.wst.jsdt.debug.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.debug.core
+plugin@org.eclipse.wst.jsdt.debug.rhino=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.debug.rhino
+plugin@org.eclipse.wst.jsdt.debug.rhino.debugger=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.debug.rhino.debugger
+plugin@org.eclipse.wst.jsdt.debug.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.debug.ui
+plugin@org.eclipse.wst.jsdt.manipulation=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.manipulation
+plugin@org.eclipse.wst.jsdt.support.firefox=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.support.firefox
+plugin@org.eclipse.wst.jsdt.support.ie=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.support.ie
+plugin@org.eclipse.wst.jsdt.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/plugins/org.eclipse.wst.jsdt.ui
 plugin@org.eclipse.wst.jsdt.web.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.web.core
 plugin@org.eclipse.wst.jsdt.web.support.jsp=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.web.support.jsp
 plugin@org.eclipse.wst.jsdt.web.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.web.ui
 
-feature@org.eclipse.wst.jsdt.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.jsdt.feature
-feature@org.eclipse.wst.jsdt_sdk.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.jsdt_sdk.feature
+feature@org.eclipse.wst.jsdt.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/features/org.eclipse.wst.jsdt.feature
+feature@org.eclipse.wst.jsdt_sdk.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,jsdt/features/org.eclipse.wst.jsdt_sdk.feature
 
 !***************
