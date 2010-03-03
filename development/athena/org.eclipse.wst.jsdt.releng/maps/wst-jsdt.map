@@ -15,6 +15,7 @@ plugin@org.eclipse.wst.jsdt.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/
 plugin@org.eclipse.wst.jsdt.web.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.web.core
 plugin@org.eclipse.wst.jsdt.web.support.jsp=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.web.support.jsp
 plugin@org.eclipse.wst.jsdt.web.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/plugins/org.eclipse.wst.jsdt.web.ui
+plugin@org.mozilla.javascript,1.7.2=v200909291707,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,,org.eclipse.orbit/org.mozilla.javascript
 
 feature@org.eclipse.wst.jsdt.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,org.eclipse.jsdt/features/org.eclipse.wst.jsdt.feature
 feature@org.eclipse.wst.jsdt_sdk.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,org.eclipse.jsdt/features/org.eclipse.wst.jsdt_sdk.feature
