@@ -44,7 +44,9 @@
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
 		<antcall target="findbugs" inheritall="true"/>
 		<antcall target="cleanUp" inheritall="true"/>
+	<!--
 		<antcall target="duplicateCode" inheritall="true"/>
+		-->
 	</target>
 	
 	<target name="duplicateCode" description="Run PMD duplicate code analysis">
