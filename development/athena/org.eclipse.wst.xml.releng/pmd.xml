@@ -5,7 +5,7 @@
 		<attribute name="destDir"/>
 		<sequential>
 			<mkdir dir="@{downloadDir}"/>
-	    	<get src="http://downloads.sourceforge.net/project/pmd/pmd/4.2.5/pmd-bin-4.2.5.zip?use_mirror=softlayer" dest="@{downloadDir}/pmd.zip" usetimestamp="true"/>
+	    	<get src="http://downloads.sourceforge.net/project/pmd/pmd/4.2.5/pmd-bin-4.2.5.zip?use_mirror=cdnetworks-us-1" dest="@{downloadDir}/pmd.zip" usetimestamp="true"/>
 	    	<unzip src="${writableBuildRoot}/downloads/pmd.zip" dest="@{destDir}"/>
 		</sequential>
 	</macrodef>
