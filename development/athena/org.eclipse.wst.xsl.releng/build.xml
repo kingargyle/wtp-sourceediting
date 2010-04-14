@@ -44,8 +44,8 @@
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
 		<antcall target="findbugs" inheritall="true"/>
-		<cleanUpBuild/>
 		<antcall target="duplicateCode" inheritall="true"/>
+		<cleanUpBuild/>
 	</target>
 	
     <target name="findbugs" description="Run a find bugs analysis based on a ZIP file contents.">
@@ -74,13 +74,17 @@
     		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
     		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
     		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
+    		<delete dir="${buildDir}/findbugsclasses" failonerror="false"/>
+        	<delete dir="${buildDir}/findbugs" failonerror="false"/>
     		<delete>
     			<fileset dir="${buildDir}">
     				<include name="*AllFeatures*.zip*"/>
     				<include name="*Master*.zip*"/>
     			</fileset>
+    			<fileset dir="${buildDir}/..">
+    				<include name="eclipse.zip"/>
+    			</fileset>
     		</delete>
-            
         </sequential>
     </macrodef>
 
