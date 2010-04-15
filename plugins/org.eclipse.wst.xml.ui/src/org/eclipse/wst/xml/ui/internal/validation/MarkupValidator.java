@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2008 IBM Corporation and others.
+ * Copyright (c) 2001, 2010 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -58,13 +58,19 @@ import org.eclipse.wst.validation.internal.provisional.core.IValidationContext;
 import org.eclipse.wst.validation.internal.provisional.core.IValidator;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
+import org.eclipse.wst.xml.core.internal.validation.ProblemIDsXML;
 import org.eclipse.wst.xml.ui.internal.Logger;
 import org.eclipse.wst.xml.ui.internal.XMLUIMessages;
-import org.eclipse.wst.xml.ui.internal.correction.ProblemIDsXML;
 import org.w3c.dom.Node;
 
 /**
  * Basic XML syntax checking step.
+ * @deprecated No longer used as the source validator for XML documents. Instead {@link DelegatingSourceValidatorForXML}
+ * is the source validator, and the markup validation is done as a step in {@link XMLValidator} by {@link org.eclipse.wst.xml.core.internal.validation.MarkupValidator}.
+ * 
+ *  @see org.eclipse.wst.xml.core.internal.validation.MarkupValidator
+ *  @see DelegatingSourceValidatorForXML
+ *  @see XMLValidator
  */
 public class MarkupValidator extends AbstractValidator implements IValidator, ISourceValidator {
 	private String DQUOTE = "\""; //$NON-NLS-1$
