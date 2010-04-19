@@ -44,7 +44,7 @@
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
 		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
 		<antcall target="findbugs" inheritall="true"/>
-		<antcall target="duplicateCode" inheritall="true"/>
+<!--		<antcall target="duplicateCode" inheritall="true"/> -->
 		<cleanUpBuild/>
 	</target>
 	
