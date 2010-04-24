@@ -70,10 +70,10 @@
     <macrodef name="cleanUpBuild">
         <sequential>
     		<delete dir="${buildDir}/eclipse" failonerror="false" />
-<!--    		<delete dir="${buildDir}/testing" failonerror="false" /> -->
+    		<delete dir="${buildDir}/testing" failonerror="false" />
     		<delete dir="${buildDir}/compilelogs" failonerror="false"/>
-<!--    		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/> -->
-<!--    		<delete dir="${buildDir}/testResults/html" failonerror="false"/> -->
+    		<delete dir="${buildDir}/testResults/consolelogs" failonerror="false"/>
+    		<delete dir="${buildDir}/testResults/html" failonerror="false"/>
     		<delete dir="${buildDir}/findbugsclasses" failonerror="false"/>
         	<delete dir="${buildDir}/findbugs" failonerror="false"/>
     		<delete>
