@@ -38,9 +38,9 @@
 	<modules>
 		<module>../plugins/org.eclipse.wst.xml.xpath2</module>
 		<module>../plugins/org.eclipse.wst.xml.xpath2.processor</module>
-		<module>../plugins/org.eclipse.wst.xml.xpath2.processor.doc.user</module>
+		<module>../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>
 		<module>../features/org.eclipse.wst.xml.xpath2.processor.feature</module>
-		<module>../documentation/org.eclipse.wst.xml.xpath2.processor.sdk.doc</module>
+		<module>../docs/org.eclipse.wst.xml.xpath2.processor.sdk.doc</module>
 <!--		<module>../features/org.eclipse.wst.xml.xpath2.processor.sdk.feature</module>-->
 		<module>../tests/org.eclipse.wst.xml.xpath2.processor.tests</module>
 		<!--
