@@ -36,18 +36,18 @@
 
 
 	<modules>
-		<module>../../plugins/org.eclipse.wst.xml.xpath2</module>
-<!--		<module>../../plugins/org.eclipse.wst.xml.xpath2.processor</module>-->
-<!--		<module>../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>-->
-<!--		<module>../../features/org.eclipse.wst.xml.xpath2.processor.feature</module>-->
-<!--		<module>../../docs/org.eclipse.wst.xml.xpath2.processor.sdk.doc</module>-->
-<!--		<module>../features/org.eclipse.wst.xml.xpath2.processor.sdk.feature</module>-->
-<!--		<module>../../tests/org.eclipse.wst.xml.xpath2.processor.tests</module>-->
+		<module>../../../plugins/org.eclipse.wst.xml.xpath2</module>
+<!--		<module>../../../plugins/org.eclipse.wst.xml.xpath2.processor</module>-->
+<!--		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>-->
+<!--		<module>../../../features/org.eclipse.wst.xml.xpath2.processor.feature</module>-->
+<!--		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.sdk.doc</module>-->
+<!--		<module>../../../features/org.eclipse.wst.xml.xpath2.processor.sdk.feature</module>-->
+<!--		<module>../../../tests/org.eclipse.wst.xml.xpath2.processor.tests</module>-->
 		<!--
 		<module>org.eclipse.wst.xml.xpath2.processor_tests.feature</module>
 		-->
-<!--		<module>../../org.eclipse.wst.xml.xpath2.processor.site</module>-->
-<!--		<module>../../tests/org.w3c.xqts.testsuite</module>-->
+<!--		<module>../../../org.eclipse.wst.xml.xpath2.processor.site</module>-->
+<!--		<module>../../../tests/org.w3c.xqts.testsuite</module>-->
 	</modules>
 
 	<repositories>
