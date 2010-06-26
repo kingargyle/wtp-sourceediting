@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
+	<groupId>org.eclipse.wst.xml.xpath2</groupId>
+	<artifactId>org.eclipse.wst.xml.xpath2-parent</artifactId>
+	<version>1.1.001-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>PsychoPath XPath 2.0 Processor: Parent</name>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License v1.0</name>
+			<comments>
+       All rights reserved.
+
+       This program and the accompanying materials are made
+       available under the terms of the Eclipse Public License v1.0
+       which accompanies this distribution, and is available at
+       http://www.eclipse.org/legal/epl-v10.htm
+      </comments>
+		</license>
+	</licenses>
+
+	<properties>
+		<tycho-version>0.8.0</tycho-version>
+		<eclipse-site>http://download.eclipse.org/releases/helios</eclipse-site>
+		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20100114021427/updateSite</orbit-site>
+	</properties>
+
+
+	<modules>
+		<module>../plugins/org.eclipse.wst.xml.xpath2</module>
+		<module>../plugins/org.eclipse.wst.xml.xpath2.processor</module>
+		<module>../plugins/org.eclipse.wst.xml.xpath2.processor.doc.user</module>
+		<module>../features/org.eclipse.wst.xml.xpath2.processor.feature</module>
+		<module>../documentation/org.eclipse.wst.xml.xpath2.processor.sdk.doc</module>
+<!--		<module>../features/org.eclipse.wst.xml.xpath2.processor.sdk.feature</module>-->
+		<module>../tests/org.eclipse.wst.xml.xpath2.processor.tests</module>
+		<!--
+		<module>org.eclipse.wst.xml.xpath2.processor_tests.feature</module>
+		-->
+		<module>../org.eclipse.wst.xml.xpath2.processor.site</module>
+		<module>../tests/org.w3c.xqts.testsuite</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>helios</id>
+			<layout>p2</layout>
+			<url>${eclipse-site}</url>
+		</repository>
+		<repository>
+			<id>orbit</id>
+			<layout>p2</layout>
+			<url>${orbit-site}</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonatype.tycho</groupId>
+					<artifactId>maven-osgi-compiler-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4.1</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>	
+
+</project>
