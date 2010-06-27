@@ -41,7 +41,7 @@
 		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>
 		<module>../../../features/org.eclipse.wst.xml.xpath2.processor.feature</module>
 		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.sdk.doc</module>
-		<module>../org.eclipse.wst.xml.xpath2.processor.site</module>
+		<module>../../org.eclipse.wst.xml.xpath2.processor.site</module>
 <!--		<module>../../../features/org.eclipse.wst.xml.xpath2.processor.sdk.feature</module>-->
 		<module>../../../tests/org.eclipse.wst.xml.xpath2.processor.tests</module>
 		<!--
