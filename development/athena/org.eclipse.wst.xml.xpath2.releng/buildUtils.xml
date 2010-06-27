@@ -38,7 +38,7 @@
 
 		<mkdir dir="findbugs" />
 		<copy todir="findbugs">
-			<fileset dir="..">
+			<fileset dir="../../../">
 				<include name="**/org.eclipse.*/**/*-SNAPSHOT.jar" />
 			</fileset>
 		</copy>
@@ -65,7 +65,7 @@
 			</classpath>
 		</taskdef>
 		<cpd minimumTokenCount="100" format="xml" outputFile="dry-report.xml">
-			<fileset dir="../../plugins">
+			<fileset dir="../../../plugins">
 				<include name="**/org.eclipse.*/**/*.java" />
 				<exclude name="**/*test/**/*.java"/>
 			</fileset>
