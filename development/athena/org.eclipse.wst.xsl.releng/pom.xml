@@ -14,18 +14,18 @@
 		<psychopath-site>https://hudson.eclipse.org/hudson/view/WTP/job/cbi-wtp-wst.xsl.psychopath/lastSuccessfulBuild/artifact/sourceediting/development/org.eclipse.wst.xml.xpath2.processor.site/target/site/site.xml</psychopath-site>
 	</properties>
 
- 	<modules>
-		<module>../../../../plugins/org.eclipse.wst.xsl.core</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.ui</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.debug.ui</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.exslt.core</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.exslt.ui</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.jaxp.debug</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.jaxp.debug.ui</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.jaxp.launching</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.launching</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.saxon</module>
-		<module>../../../../plugins/org.eclipse.wst.xsl.xalan</module>
+<!-- 	<modules>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.core</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.ui</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.debug.ui</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.exslt.core</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.exslt.ui</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.jaxp.debug</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.jaxp.debug.ui</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.jaxp.launching</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.launching</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.saxon</module>-->
+<!--		<module>../../../plugins/org.eclipse.wst.xsl.xalan</module>-->
 		
 		
 <!--		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>-->
@@ -34,7 +34,7 @@
 <!--		<module>../../org.eclipse.wst.xml.xpath2.processor.site</module>-->
 <!--		<module>../../../tests/org.eclipse.wst.xml.xpath2.processor.tests</module>-->
 <!--		<module>../../../tests/org.w3c.xqts.testsuite</module>-->
-	</modules>
+<!--	</modules>-->
 
 	<build>
 		<plugins>
