@@ -15,17 +15,17 @@
 	</properties>
 
  	<modules>
-		<module>../../../plugins/org.eclipse.wst.xsl.core</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.ui</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.debug.ui</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.exslt.core</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.exslt.ui</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.jaxp.debug</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.jaxp.debug.ui</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.jaxp.launching</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.launching</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.saxon</module>
-		<module>../../../plugins/org.eclipse.wst.xsl.xalan</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.core</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.ui</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.debug.ui</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.exslt.core</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.exslt.ui</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.jaxp.debug</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.jaxp.debug.ui</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.jaxp.launching</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.launching</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.saxon</module>
+		<module>../../../../plugins/org.eclipse.wst.xsl.xalan</module>
 		
 		
 <!--		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>-->
