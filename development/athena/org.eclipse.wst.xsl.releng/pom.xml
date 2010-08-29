@@ -30,6 +30,7 @@
         <module>../../../tests/org.eclipse.wst.xsl.exslt.core.tests</module>
         <module>../../../tests/org.eclipse.wst.xsl.ui.tests</module>
         <module>../../../tests/org.eclipse.wst.xsl.exslt.ui.tests</module>
+        <module>../../../tests/org.eclipse.wst.xsl.jaxp.debug.tests</module>
 		
 <!--		
 		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>
