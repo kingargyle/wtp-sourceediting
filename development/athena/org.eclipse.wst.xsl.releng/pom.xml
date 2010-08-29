@@ -26,22 +26,15 @@
 		<module>../../../plugins/org.eclipse.wst.xsl.launching</module>
 		<module>../../../plugins/org.eclipse.wst.xsl.saxon</module>
 		<module>../../../plugins/org.eclipse.wst.xsl.xalan</module>
+        <module>../../../features/org.eclipse.wst.xsl.feature</module>
+        <module>../../org.eclipse.wst.xsl.repository</module>
         <module>../../../tests/org.eclipse.wst.xsl.core.tests</module>
         <module>../../../tests/org.eclipse.wst.xsl.exslt.core.tests</module>
         <module>../../../tests/org.eclipse.wst.xsl.ui.tests</module>
         <module>../../../tests/org.eclipse.wst.xsl.exslt.ui.tests</module>
         <module>../../../tests/org.eclipse.wst.xsl.jaxp.debug.test</module>
         <module>../../../tests/org.eclipse.wst.xsl.launching.tests</module>
-        <module>../../../features/org.eclipse.wst.xsl.feature</module>
 		
-<!--		
-		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>
-		<module>../../../features/org.eclipse.wst.xml.xpath2.processor.feature</module>
-		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.sdk.doc</module>
-		<module>../../org.eclipse.wst.xml.xpath2.processor.site</module>
-		<module>../../../tests/org.eclipse.wst.xml.xpath2.processor.tests</module>
-		<module>../../../tests/org.w3c.xqts.testsuite</module>
--->
 	</modules>
 
 	<build>
