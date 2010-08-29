@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.wst.xsl.feature_1.2.0.qualifier.jar" id="org.eclipse.wst.xsl.feature" version="1.2.0.qualifier">
+      <category name="new_category_1"/>
+   </feature>
+   <category-def name="new_category_1" label="XSL Tools"/>
+</site>
