@@ -32,6 +32,7 @@
         <module>../../../tests/org.eclipse.wst.xsl.exslt.ui.tests</module>
         <module>../../../tests/org.eclipse.wst.xsl.jaxp.debug.test</module>
         <module>../../../tests/org.eclipse.wst.xsl.launching.tests</module>
+        <module>../../../features/org.eclipse.wst.xsl.feature</module>
 		
 <!--		
 		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>
