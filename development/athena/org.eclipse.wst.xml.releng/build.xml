@@ -50,7 +50,7 @@
 		<echo message="Writable Build Root: ${writableBuildRoot}"/>
 		<mkdir dir="${writableBuildRoot}"/>
 		<!-- invoke a new Eclipse process and launch the build from the common.releng folder -->
-		<property name="relengCommonBuilderDir" value="${workspaceDir}/development/athena/tools/org.eclipse.dash.common.releng" />
+		<property name="relengCommonBuilderDir" value="${workspaceDir}/sourceediting/development/athena/tools/org.eclipse.dash.common.releng" />
 		<!-- <ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" /> -->
 		<ant antfile="${relengCommonBuilderDir}/build.xml" />		
 		<antcall target="findbugs" inheritall="true"/>
