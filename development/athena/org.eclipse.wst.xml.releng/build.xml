@@ -1,17 +1,25 @@
 <project default="run" name="org.eclipse.wst.xml.xpath2.releng/build.xml - Run a PsychoPath build using the Athena CBI">
 	<!-- load properties and set timestamp for the build -->
-	<property name="WORKSPACE" location="../../../../"/>
-	<property environment="env"/>
+	<property environment="env" />
+		<property name="WORKSPACE" location="${env.WORKSPACE}" />
+
+		<ant antfile="bootstrap.xml" target="init">
+			<property name="basebuilderTag" value="r35x_v20090811" />
+				<property name="commonrelengTag" value="HEAD" />
+			<property name="ANTCONTRIB_VERSION" value="1.0b2" />
+			<property name="ANT4ECLIPSE_VERSION" value="1.0.0.M3" />
+			<property name="build.properties" value="build.properties" />
+		</ant>
+
 	
-	<property file="build.properties" />
 	<tstamp>
 		<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
 	</tstamp>
 	<property name="forceContextQualifier" value="v${buildTimestamp}" />
 	<property name="fetchTag" value="HEAD" />
-	
-	<!-- calculate workspaceDir as parent of this folder, the project's .releng folder (relengBuilderDir) -->
-	<property name="relengBuilderDir" value="${basedir}" />
+	<property name="build.properties" value="build.properties" />
+	<property file="${build.properties}" />
+
 	<property name="sdkzipUrl" value="https://build.eclipse.org/hudson/job/cbi-wtp-wst.xml/ws/build/athena/"/>
 
 	<import file="findbugs.xml"/>
@@ -33,14 +41,7 @@
 	<property name="buildDir" value="${writableBuildRoot}/athena" />
 	
 	<target name="init">
-		<delete dir="${buildDir}" failonerror="false"/>
-		<ant antfile="bootstrap.xml" target="init">
-			<property name="basebuilderTag" value="r35x_v20090811" />
-			<property name="commonrelengTag" value="HEAD" />
-			<property name="ANTCONTRIB_VERSION" value="1.0b2" />
-			<property name="ANT4ECLIPSE_VERSION" value="1.0.0.M3" />
-			<property name="build.properties" value="build.properties" />
-		</ant>
+<!--		<delete dir="${buildDir}" failonerror="false"/> -->
 				
 	</target>
 
