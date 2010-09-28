@@ -1,29 +1,42 @@
 <project default="run" name="org.eclipse.wst.xml.xpath2.releng/build.xml - Run a PsychoPath build using the Athena CBI">
 	<!-- load properties and set timestamp for the build -->
+
 	<property environment="env" />
-		<property name="WORKSPACE" location="${env.WORKSPACE}" />
+	<property name="WORKSPACE" location="${env.WORKSPACE}" />
 
-		<ant antfile="bootstrap.xml" target="init">
-			<property name="basebuilderTag" value="r35x_v20090811" />
-				<property name="commonrelengTag" value="HEAD" />
-			<property name="ANTCONTRIB_VERSION" value="1.0b2" />
-			<property name="ANT4ECLIPSE_VERSION" value="1.0.0.M3" />
-			<property name="build.properties" value="build.properties" />
-		</ant>
+	<ant antfile="bootstrap.xml" target="init">
+		<property name="basebuilderTag" value="r35x_v20090811" />
+		<property name="commonrelengTag" value="HEAD" />
+		<property name="ANTCONTRIB_VERSION" value="1.0b2" />
+		<property name="ANT4ECLIPSE_VERSION" value="1.0.0.M3" />
+		<property name="build.properties" value="build.properties" />
+	</ant>
 
-	
+	<!-- FIXME if required: Set a valid path to JAVA_HOME, if Eclipse's ${java.home}/../bin/javac cannot be found -->
+	<condition property="JAVA_HOME" value="${java.home}" else="${java.home}/..">
+		<available file="${java.home}/bin/javac" type="file" />
+	</condition>
+
+	<!-- FIXME if required: if not using this type of qualifier, comment next 4 lines -->
 	<tstamp>
 		<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
 	</tstamp>
-	<property name="forceContextQualifier" value="v${buildTimestamp}" />
-	<property name="fetchTag" value="HEAD" />
+
+	<!-- 1. To build from sources using information in the ./maps/*.map files, comment these next two properties
+				 2. Or, to build from sources in the workspace, use these properties. You can also use absolute paths if needed.
+			-->
+	<!-- <property name="localSourceCheckoutDir" value="${basedir}/.." />
+			<property name="relengBuilderDir" value="${basedir}" /> -->
+
 	<property name="build.properties" value="build.properties" />
 	<property file="${build.properties}" />
 
-	<property name="sdkzipUrl" value="https://build.eclipse.org/hudson/job/cbi-wtp-wst.xml/ws/build/athena/"/>
+	<property name="forceContextQualifier" value="v${buildTimestamp}" />
+	<property name="fetchTag" value="HEAD" />
 
-	<import file="findbugs.xml"/>
-	<import file="pmd.xml"/>
+	<!-- calculate workspaceDir as parent of this folder, the project's .releng folder (relengBuilderDir) -->
+	<import file="findbugs.xml" />
+	<import file="pmd.xml" />
 	<dirname file="${relengBuilderDir}" property="workspaceDir" />
 
 	<!-- 
@@ -39,22 +52,25 @@
 		${writableBuildRoot}/${topprojectName}/${projectName}/${subprojectName}/downloads/drops/${version}/${buildType}${buildTimestamp}
 	-->
 	<property name="buildDir" value="${writableBuildRoot}/athena" />
-	
+
 	<target name="init">
-<!--		<delete dir="${buildDir}" failonerror="false"/> -->
-				
+		<delete dir="${buildDir}" failonerror="false" />
 	</target>
 
 	<target name="run" depends="init">
-		<echo message="Workspace: ${WORKSPACE}"/>
-		<echo message="Writable Build Root: ${writableBuildRoot}"/>
-		<mkdir dir="${writableBuildRoot}"/>
+		<echo message="Workspace: ${WORKSPACE}" />
+		<echo message="Writable Build Root: ${writableBuildRoot}" />
+		<mkdir dir="${writableBuildRoot}" />
 		<!-- invoke a new Eclipse process and launch the build from the common.releng folder -->
-		<property name="relengCommonBuilderDir" value="${workspaceDir}/../tools/org.eclipse.dash.common.releng" />
-		<!-- <ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" /> -->
-		<ant antfile="${relengCommonBuilderDir}/build.xml" />		
-		<antcall target="findbugs" inheritall="true"/>
-		<antcall target="cleanUp" inheritall="true"/>
+		<!--<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />-->
+
+		<condition property="JAVA_HOME" value="${java.home}" else="${java.home}/..">
+			<available file="${java.home}/bin/javac" type="file" />
+		</condition>
+
+		<!-- <ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />-->
+		<ant antfile="${relengCommonBuilderDir}/build.xml" />
+
 	<!--
 		<antcall target="duplicateCode" inheritall="true"/>
 		-->
