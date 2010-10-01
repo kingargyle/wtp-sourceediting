@@ -23,7 +23,7 @@
 	</target>
 
 	<target name="findbugs.init" depends="init" unless="findBugsAvailable">
-		<get src="http://downloads.sourceforge.net/project/findbugs/findbugs/1.3.9/findbugs-1.3.9.zip" dest="${downloadDir}/findbugs.zip" />
+		<get src="http://sourceforge.net/projects/findbugs/files/findbugs/1.3.9/findbugs-1.3.9.zip/download" dest="${downloadDir}/findbugs.zip" />
 		<unzip src="${downloadDir}/findbugs.zip" dest="${libs}" />
 	</target>
 
