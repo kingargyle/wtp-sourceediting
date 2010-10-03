@@ -54,23 +54,6 @@
       </repository>
    </repositories>
    
-   <reporting>
-      <plugins>
-         <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>findbugs-maven-plugin</artifactId>
-            <version>0.0.0</version>
-            <configuration>
-               <findbugsXmlOutput>true</findbugsXmlOutput>
-               <!-- Optional directory to put findbugs xdoc xml report -->
-               <xmlOutputDirectory>target/site</xmlOutputDirectory>
-               <fork>true</fork>
-               <maxHeap>1024</maxHeap>
-            </configuration>
-         </plugin>
-      </plugins>
-   </reporting>   
-
    <build>
       <plugins>
          <plugin>
