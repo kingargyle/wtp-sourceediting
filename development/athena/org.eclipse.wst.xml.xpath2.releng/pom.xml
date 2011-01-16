@@ -25,6 +25,7 @@
 
 	<properties>
 		<tycho-version>0.10.0</tycho-version>
+		<findbugs-version>2.3.2-SNAPSHOT</findbugs-version>
 		<eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20100114021427/updateSite</orbit-site>
 	</properties>
@@ -101,7 +102,7 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>findbugs-maven-plugin</artifactId>
-						<version>2.3.1</version>
+						<version>${findbugs-version}</version>
 						<configuration>
 							<findbugsXmlOutput>true</findbugsXmlOutput>
 							<failOnError>false</failOnError>
