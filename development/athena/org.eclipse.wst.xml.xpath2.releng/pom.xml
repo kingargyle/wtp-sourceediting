@@ -53,6 +53,14 @@
 			<layout>p2</layout>
 			<url>${orbit-site}</url>
 		</repository>
+		<repository>
+			<id>codehause-snapsht</id>
+			<layout>default</layout>
+			<url>http://snapshots.repository.codehaus.org/</url>
+			<snapshots>
+			   <enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 
 	<build>
