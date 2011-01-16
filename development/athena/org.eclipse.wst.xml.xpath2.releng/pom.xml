@@ -53,15 +53,21 @@
 			<layout>p2</layout>
 			<url>${orbit-site}</url>
 		</repository>
-		<repository>
-			<id>codehause-snapsht</id>
-			<layout>default</layout>
-			<url>http://snapshots.repository.codehaus.org/</url>
-			<snapshots>
-			   <enabled>true</enabled>
-			</snapshots>
-		</repository>
 	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>findbugs-snapshots</id>
+			<name>Findbugs snapshot repository</name>
+			<url>http://snapshots.repository.codehaus.org/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<build>
 		<plugins>
