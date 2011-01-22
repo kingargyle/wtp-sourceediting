@@ -9,8 +9,8 @@
     <name>XSL Tools Releng</name>
 
 	<properties>
-		<tycho-version>0.10.0</tycho-version>
-		<eclipse-site>http://download.eclipse.org/releases/helios</eclipse-site>
+		<tycho-version>0.11.0-SNAPSHOT</tycho-version>
+		<eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20100114021427/updateSite</orbit-site>
 		<psychopath-site>https://hudson.eclipse.org/hudson/view/WTP/job/cbi-wtp-wst.xsl.psychopath/lastSuccessfulBuild/artifact/sourceediting/development/org.eclipse.wst.xml.xpath2.processor.site/target/site</psychopath-site>
 	</properties>
@@ -96,4 +96,76 @@
 		</repository>
 -->		
 	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>findbugs-snapshots</id>
+			<name>Findbugs snapshot repository</name>
+			<url>http://snapshots.repository.codehaus.org/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>sonatype</id>
+			<name>Sonatype snapshot repository</name>
+			<url>https://repository.sonatype.org/content/groups/forge/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<profiles>
+		<profile>
+			<id>findbugs</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>findbugs-maven-plugin</artifactId>
+						<version>${findbugs-version}</version>
+						<configuration>
+							<findbugsXmlOutput>true</findbugsXmlOutput>
+							<failOnError>false</failOnError>
+							
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>2.5</version>
+						<configuration>
+							<sourceEncoding>utf-8</sourceEncoding>
+							<minimumTokens>100</minimumTokens>
+							<targetJdk>1.5</targetJdk>
+							<format>xml</format>
+							<failOnViolation>false</failOnViolation>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>cpd-check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>	
+		
 </project>
