@@ -120,6 +120,7 @@
 						<configuration>
 							<findbugsXmlOutput>true</findbugsXmlOutput>
 							<failOnError>false</failOnError>
+							
 						</configuration>
 						<executions>
 							<execution>
