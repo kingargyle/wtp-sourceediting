@@ -9,7 +9,7 @@
     <name>XSL Tools Releng</name>
 
 	<properties>
-		<tycho-version>0.11.0-SNAPSHOT</tycho-version>
+		<tycho-version>0.10.0</tycho-version>
 		<eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
 		<findbugs-version>2.3.2-SNAPSHOT</findbugs-version>
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20100114021427/updateSite</orbit-site>
