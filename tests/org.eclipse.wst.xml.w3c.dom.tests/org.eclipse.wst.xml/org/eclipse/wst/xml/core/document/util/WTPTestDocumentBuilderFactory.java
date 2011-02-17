@@ -29,17 +29,22 @@ package org.eclipse.wst.xml.core.document.util;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.wst.common.uriresolver.internal.util.URIHelper;
 import org.eclipse.wst.sse.core.StructuredModelManager;
-import org.eclipse.wst.sse.core.internal.document.IDocumentLoader;
-import org.eclipse.wst.sse.core.internal.encoding.EncodingRule;
 import org.eclipse.wst.sse.core.internal.provisional.IModelLoader;
-import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
+import org.eclipse.wst.sse.core.internal.util.URIResolver;
+import org.eclipse.wst.sse.core.internal.util.Utilities;
 import org.eclipse.wst.xml.core.internal.document.DOMModelImpl;
-import org.eclipse.wst.xml.core.internal.encoding.XMLDocumentLoader;
 import org.eclipse.wst.xml.core.internal.modelhandler.ModelHandlerForXML;
-import org.eclipse.wst.xml.core.internal.modelhandler.XMLModelLoader;
 import org.eclipse.wst.xml.core.internal.provisional.contenttype.ContentTypeIdForXML;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.DOMImplementation;
@@ -48,7 +53,6 @@ import org.w3c.domts.DOMTestDocumentBuilderFactory;
 import org.w3c.domts.DOMTestIncompatibleException;
 import org.w3c.domts.DOMTestLoadException;
 import org.w3c.domts.DocumentBuilderSetting;
-import org.eclipse.wst.sse.core.internal.util.Utilities;
 
 /**
  *   This class implements the generic parser builder
@@ -57,6 +61,73 @@ import org.eclipse.wst.sse.core.internal.util.Utilities;
  */
 public class WTPTestDocumentBuilderFactory
     extends DOMTestDocumentBuilderFactory {
+	
+	/**
+	 * A URIResolver instance of models built on java.io.Files.  Copied from {@link org.eclipse.wst.sse.core.internal.FileBufferModelManager.ExternalURIResolver}
+	 */
+	static class ExternalURIResolver implements URIResolver {
+		IPath fLocation;
+
+		ExternalURIResolver(IPath location) {
+			fLocation = location;
+		}
+
+		public String getFileBaseLocation() {
+			if (fLocation == null)
+				return null;
+			else
+				return fLocation.toString();
+		}
+
+		public String getLocationByURI(String uri) {
+			return getLocationByURI(uri, getFileBaseLocation(), false);
+		}
+
+		public String getLocationByURI(String uri, boolean resolveCrossProjectLinks) {
+			return getLocationByURI(uri, getFileBaseLocation(), resolveCrossProjectLinks);
+		}
+
+		public String getLocationByURI(String uri, String baseReference) {
+			return getLocationByURI(uri, baseReference, false);
+		}
+
+		public String getLocationByURI(String uri, String baseReference, boolean resolveCrossProjectLinks) {
+			// ignore resolveCrossProjectLinks value
+			if (uri == null)
+				return null;
+			if (uri.startsWith("file:")) { //$NON-NLS-1$
+				try {
+					URL url = new URL(uri);
+					return url.getFile();
+				}
+				catch (MalformedURLException e) {
+				}
+			}
+			return URIHelper.normalize(uri, baseReference, Path.ROOT.toString());
+		}
+
+		public IProject getProject() {
+			return null;
+		}
+
+		public IContainer getRootLocation() {
+			return ResourcesPlugin.getWorkspace().getRoot();
+		}
+
+		public InputStream getURIStream(String uri) {
+			return null;
+		}
+
+		public void setFileBaseLocation(String newLocation) {
+			if (newLocation != null)
+				fLocation = new Path(newLocation);
+			else
+				fLocation = null;
+		}
+
+		public void setProject(IProject newProject) {
+		}
+	}
 
   private final DOMImplementation domImpl;
 
@@ -97,7 +168,8 @@ public class WTPTestDocumentBuilderFactory
 	
 	try {
 
-		model = (IDOMModel) StructuredModelManager.getModelManager().createUnManagedStructuredModelFor(ContentTypeIdForXML.ContentTypeID_XML);
+		model = (IDOMModel) StructuredModelManager.getModelManager().createUnManagedStructuredModelFor(ContentTypeIdForXML.ContentTypeID_XML, new ExternalURIResolver(new Path(url.getPath())));
+		model.setBaseLocation(url.getPath());
 
 	    FileInputStream file = new FileInputStream(url.getPath());
 	    InputStream inputStream = Utilities.getMarkSupportedStream(file);
@@ -105,7 +177,7 @@ public class WTPTestDocumentBuilderFactory
 //		IDocumentLoader loader = xmlModelHandler.getDocumentLoader();
 //		document = (IStructuredDocument)loader.createNewStructuredDocument("/home/dcarver/test.xml", inputStream, EncodingRule.FORCE_DEFAULT);
 		IModelLoader xmlModelLoader = xmlModelHandler.getModelLoader();
-		xmlModelLoader.load(inputStream, model, null);
+		xmlModelLoader.load(url.getPath(), inputStream, model, null, null);
 
 	}
 	catch (IOException e) {
