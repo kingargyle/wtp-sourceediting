@@ -33,6 +33,7 @@
 
 	<modules>
 		<module>../../../plugins/org.eclipse.wst.xml.xpath2</module>
+		<module>../../../plugins/org.eclipse.wst.xml.xpath2.wtptypes</module>
 		<module>../../../plugins/org.eclipse.wst.xml.xpath2.processor</module>
 		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.doc.user</module>
 		<module>../../../features/org.eclipse.wst.xml.xpath2.processor.feature</module>
