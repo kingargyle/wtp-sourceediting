@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <!-- If you want to deploy content (SNAPSHOT or RELEASE) to the 
+       Nexus instance at http://maven.eclipse.org/nexus/
+       You'll need an account, and then you can enable this section.
+  -->
+  
+  <!-- 
+    We need a servers section with userid or SSH keys enabled in order to deploy.
+  
+   -->
+
+  <profiles>
+    <profile>
+      <id>eclipse</id>
+
+      <pluginRepositories>
+        <pluginRepository>
+          <id>eclipse-releases</id>
+          <name>Eclipse Maven Release Repository</name>
+          <url>http://maven.eclipse.org/nexus/content/repositories/releases</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+          <id>eclipse-snapshots</id>
+          <name>Eclipse Maven Snapshots Repository</name>
+          <url>http://maven.eclipse.org/nexus/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>interval:30</updatePolicy>
+            <checksumPolicy>warn</checksumPolicy>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+
+      <repositories>
+        <repository>
+          <id>eclipse-releases</id>
+          <name>Eclipse Maven Release Repository</name>
+          <url>http://maven.eclipse.org/nexus/content/repositories/releases</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>eclipse-snapshots</id>
+          <name>Eclipse Maven Snapshots Repository</name>
+          <url>http://maven.eclipse.org/nexus/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>interval:30</updatePolicy>
+            <checksumPolicy>warn</checksumPolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>eclipse</activeProfile>
+  </activeProfiles>
+
+  <mirrors>
+    <mirror>
+      <id>eclipse</id>
+      <mirrorOf>central</mirrorOf>
+      <url>http://maven.eclipse.org/nexus/content/groups/public</url>
+    </mirror>
+  </mirrors>
+
+</settings>
