@@ -81,6 +81,11 @@
 		</pluginManagement>
 	</build>
 	<repositories>
+ 		<repository>
+			<id>webtools</id>
+			<url>${webtools-site}</url>
+			<layout>p2</layout>
+		</repository>	
 		<repository>
 			<id>indigo</id>
 			<url>${eclipse-site}</url>
@@ -91,11 +96,6 @@
 			<url>${orbit-site}</url>
 			<layout>p2</layout>
 		</repository>
- 		<repository>
-			<id>webtools</id>
-			<url>${webtools-site}</url>
-			<layout>p2</layout>
-		</repository>	
 	</repositories>
 	
 	<pluginRepositories>
