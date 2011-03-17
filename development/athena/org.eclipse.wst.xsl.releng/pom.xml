@@ -11,6 +11,7 @@
 	<properties>
 		<tycho-version>0.10.0</tycho-version>
 		<eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
+		<webtools-site>http://download.eclipse.org/webtools/milestones/</webtools-site>
 		<findbugs-version>2.3.2-SNAPSHOT</findbugs-version>
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20100114021427/updateSite</orbit-site>
 		<psychopath-site>https://hudson.eclipse.org/hudson/view/WTP/job/cbi-wtp-wst.xsl.psychopath/lastSuccessfulBuild/artifact/sourceediting/development/org.eclipse.wst.xml.xpath2.processor.site/target/site</psychopath-site>
@@ -81,7 +82,7 @@
 	</build>
 	<repositories>
 		<repository>
-			<id>helios</id>
+			<id>indigo</id>
 			<url>${eclipse-site}</url>
 			<layout>p2</layout>
 		</repository>
@@ -90,12 +91,11 @@
 			<url>${orbit-site}</url>
 			<layout>p2</layout>
 		</repository>
-<!-- 		<repository>
-			<id>psychopath-processor</id>
-			<url>${psychopath-site}</url>
+ 		<repository>
+			<id>webtools</id>
+			<url>${webtools-site}</url>
 			<layout>p2</layout>
-		</repository>
--->		
+		</repository>	
 	</repositories>
 	
 	<pluginRepositories>
