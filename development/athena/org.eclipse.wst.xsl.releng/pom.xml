@@ -11,7 +11,7 @@
 	<properties>
 		<tycho-version>0.10.0</tycho-version>
 		<eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
-		<webtools-site>http://download.eclipse.org/webtools/milestones/</webtools-site>
+		<webtools-site>http://download.eclipse.org/webtools/repository/indigo/</webtools-site>
 		<findbugs-version>2.3.2-SNAPSHOT</findbugs-version>
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20100114021427/updateSite</orbit-site>
 		<psychopath-site>https://hudson.eclipse.org/hudson/view/WTP/job/cbi-wtp-wst.xsl.psychopath/lastSuccessfulBuild/artifact/sourceediting/development/org.eclipse.wst.xml.xpath2.processor.site/target/site</psychopath-site>

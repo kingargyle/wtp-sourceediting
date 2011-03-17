@@ -68,7 +68,7 @@
     <mirror>
       <id>eclipse</id>
       <mirrorOf>central</mirrorOf>
-      <url>http://maven.eclipse.org/nexus/content/shadows/central-m1/</url>
+      <url>http://maven.eclipse.org/nexus/content/repositories/central/</url>
     </mirror>
   </mirrors>
 
