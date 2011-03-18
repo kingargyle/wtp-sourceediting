@@ -24,7 +24,7 @@
 	</licenses>
 
 	<properties>
-		<tycho-version>0.10.0</tycho-version>
+		<tycho-version>0.11.0-SNAPSHOT</tycho-version>
 		<findbugs-version>2.3.2-SNAPSHOT</findbugs-version>
 		<eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20100114021427/updateSite</orbit-site>
@@ -40,6 +40,7 @@
 		<module>../../../docs/org.eclipse.wst.xml.xpath2.processor.sdk.doc</module>
 		<module>../../org.eclipse.wst.xml.xpath2.processor.site</module>
 		<module>../../../tests/org.eclipse.wst.xml.xpath2.processor.tests</module>
+		<module>../../../tests/org.eclipse.wst.xml.xpath2.wtptypes.tests</module>
 		<module>../../../tests/org.w3c.xqts.testsuite</module>
 	</modules>
 
@@ -68,6 +69,19 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
+		
+		<pluginRepository>
+			<id>sonatype-snapshots</id>
+			<name>Sonatype snapshot repository</name>
+			<url>https://repository.sonatype.org/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>		
+		
 	</pluginRepositories>
 
 	<build>
