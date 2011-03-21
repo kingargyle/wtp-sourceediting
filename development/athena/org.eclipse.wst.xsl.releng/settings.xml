@@ -4,7 +4,7 @@
 		<mirror>
 			<!--This sends everything else to /public -->
 			<id>eclipse</id>
-			<mirrorOf>central</mirrorOf>
+			<mirrorOf>*</mirrorOf>
 			<url>http://maven.eclipse.org/nexus/content/groups/central/</url>
 		</mirror>
 	</mirrors>
