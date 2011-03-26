@@ -14,15 +14,17 @@ package org.eclipse.wst.xml.xpath2.api;
 import org.w3c.dom.Node;
 
 /**
+ * This is a compiled pattern (which is a simpler version of an expression, used to match in XSLT files, etc.)
+ *
  * @noimplement This interface is not intended to be implemented by clients.
  * @since 2.0
  */
-public interface XPath2PatternSet {
+public interface XPath2Pattern {
+	/**
+	 * @return The object passed in my the caller when the patten was created.
+	 */
+	Object getUserData();
 	
-	XPath2Pattern compilePattern(StaticContext context, String pattern, String mode, int priority, Object userData);
-	void removePattern(XPath2Pattern pattern);
-	
-	void clear();
-	
-	Match match(DynamicContext dc, Node context);
+	boolean matches(DynamicContext dc, Node context);
+
 }

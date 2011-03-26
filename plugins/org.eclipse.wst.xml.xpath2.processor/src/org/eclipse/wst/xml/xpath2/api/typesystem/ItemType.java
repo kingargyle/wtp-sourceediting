@@ -9,20 +9,20 @@
  *     Jesper Moller - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wst.xml.xpath2.api;
-
-import org.w3c.dom.Node;
+package org.eclipse.wst.xml.xpath2.api.typesystem;
 
 /**
- * @noimplement This interface is not intended to be implemented by clients.
  * @since 2.0
  */
-public interface XPath2PatternSet {
+public interface ItemType {
 	
-	XPath2Pattern compilePattern(StaticContext context, String pattern, String mode, int priority, Object userData);
-	void removePattern(XPath2Pattern pattern);
+	public int getOccurrence();
 	
-	void clear();
-	
-	Match match(DynamicContext dc, Node context);
+	public final static int OCCURRENCE_OPTIONAL = 0;
+	public final static int OCCURRENCE_ONE = 1;
+	public final static int OCCURRENCE_NONE_OR_MANY = 2;
+	public final static int OCCURRENCE_ONE_OR_MANY = 3;
+
+	public final static int ALWAYS_ONE_MASK = 0x01;
+	public final static int MAYBE_MANY_MASK = 0x02;
 }

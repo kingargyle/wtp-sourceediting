@@ -11,18 +11,24 @@
 
 package org.eclipse.wst.xml.xpath2.api;
 
-import org.w3c.dom.Node;
-
 /**
- * @noimplement This interface is not intended to be implemented by clients.
+ * A match found by the XPath2 pattern matcher
+ * 
+ * * @noimplement This interface is not intended to be implemented by clients.
  * @since 2.0
+ *
  */
-public interface XPath2PatternSet {
+
+public interface Match {
+	/**
+	 * @return The number of matching patterns on the input.
+	 */
+	int getMatchingCount();
 	
-	XPath2Pattern compilePattern(StaticContext context, String pattern, String mode, int priority, Object userData);
-	void removePattern(XPath2Pattern pattern);
-	
-	void clear();
-	
-	Match match(DynamicContext dc, Node context);
+	/**
+	 * Returns the XPath2 pattern which best matched the input (considering mode and priority)
+	 * 
+	 * @return Pattern which was the best match.
+	 */
+	XPath2Pattern getBestMatch();
 }

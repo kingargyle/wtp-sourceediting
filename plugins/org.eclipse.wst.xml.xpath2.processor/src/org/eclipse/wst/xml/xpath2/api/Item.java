@@ -11,18 +11,21 @@
 
 package org.eclipse.wst.xml.xpath2.api;
 
-import org.w3c.dom.Node;
+import org.eclipse.wst.xml.xpath2.api.typesystem.ItemType;
 
 /**
- * @noimplement This interface is not intended to be implemented by clients.
+ * A match found by the XPath2 pattern matcher
+ * 
+ * * @noimplement This interface is not intended to be implemented by clients.
  * @since 2.0
+ *
  */
-public interface XPath2PatternSet {
+
+public interface Item {
+	/**
+	 * @return The number of matching patterns on the input.
+	 */
+	ItemType getItemType();
 	
-	XPath2Pattern compilePattern(StaticContext context, String pattern, String mode, int priority, Object userData);
-	void removePattern(XPath2Pattern pattern);
-	
-	void clear();
-	
-	Match match(DynamicContext dc, Node context);
+	Object getNativeValue();
 }
