@@ -11,18 +11,29 @@
 
 package org.eclipse.wst.xml.xpath2.api.typesystem;
 
+import javax.xml.namespace.QName;
+
 /**
  * @since 2.0
  */
-public interface ItemType {
+public interface NodeItemType extends ItemType {
+	/**
+	 * For attribute and element types, return whether the name
+	 * part of the type test is a wildcard.
+	 * 
+	 * @return Wildcard test?
+	 */
+	boolean isWildcard();
 	
-	public short getOccurrence();
-	
-	public final static short OCCURRENCE_OPTIONAL = 0;
-	public final static short OCCURRENCE_ONE = 1;
-	public final static short OCCURRENCE_NONE_OR_MANY = 2;
-	public final static short OCCURRENCE_ONE_OR_MANY = 3;
+	/**
+	 * @return name of the item type, if applicable, otherwise null
+	 */
+	QName getName();
 
-	public final static short ALWAYS_ONE_MASK = 0x01;
-	public final static short MAYBE_MANY_MASK = 0x02;
+	/**
+	 * Node type as per list in org.w3c.dom.Node
+	 * 
+	 * @return The DOM node type
+	 */
+	short getNodeType();
 }
