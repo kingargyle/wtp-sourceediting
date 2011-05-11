@@ -21,10 +21,6 @@
          id="org.eclipse.wst.xsl_debug"
          version="0.0.0"/>
 
-   <includes
-         id="org.eclipse.jdt"
-         version="0.0.0"/>
-
    <plugin
          id="org.eclipse.wst.xsl.jaxp.debug"
          download-size="0"
