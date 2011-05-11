@@ -38,7 +38,9 @@
         <module>../../../tests/org.eclipse.wst.xsl.exslt.ui.tests</module>
         <module>../../../tests/org.eclipse.wst.xsl.jaxp.debug.test</module>
         <module>../../../tests/org.eclipse.wst.xsl.launching.tests</module>
-		
+        <module>../../../features/org.eclipse.wst.xsl_jaxp.feature</module>
+        <module>../../../features/org.eclipse.wst.xsl_debug.feature</module>
+        <module>../../../features/org.eclipse.wst.xsl_edit.feature</module>		
 	</modules>
 
 	<build>
