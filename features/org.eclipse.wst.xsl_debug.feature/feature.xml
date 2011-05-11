@@ -18,6 +18,10 @@
       [Enter License Description here.]
    </license>
 
+   <includes
+         id="org.eclipse.wst.xsl_edit.feature"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.wst.xsl.debug.ui"
          download-size="0"
