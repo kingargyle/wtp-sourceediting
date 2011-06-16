@@ -25,6 +25,8 @@
       <module>org.eclipse.wst.xsl.saxon</module>
       <module>org.eclipse.wst.xsl.ui</module>
       <module>org.eclipse.wst.xsl.xalan</module>
+      <module>org.eclipse.wst.sse.core</module>
+      <module>org.eclipse.wst.sse.ui</module>
    </modules>
 </project>
 
