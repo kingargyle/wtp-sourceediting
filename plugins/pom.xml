@@ -14,6 +14,17 @@
       <module>org.eclipse.wst.xml.xpath2.processor</module>
       <module>org.eclipse.wst.xml.xpath2</module>
       <module>org.eclipse.wst.xsl</module>
+      <module>org.eclipse.wst.xsl.core</module>
+      <module>org.eclipse.wst.xsl.debug.ui</module>
+      <module>org.eclipse.wst.xsl.exslt.core</module>
+      <module>org.eclipse.wst.xsl.exslt.ui</module>
+      <module>org.eclipse.wst.xsl.jaxp.debug</module>
+      <module>org.eclipse.wst.xsl.jaxp.debug.ui</module>
+      <module>org.eclipse.wst.xsl.jaxp.launching</module>
+      <module>org.eclipse.wst.xsl.launching</module>
+      <module>org.eclipse.wst.xsl.saxon</module>
+      <module>org.eclipse.wst.xsl.ui</module>
+      <module>org.eclipse.wst.xsl.xalan</module>
    </modules>
 </project>
 

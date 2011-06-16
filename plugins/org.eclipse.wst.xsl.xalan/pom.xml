@@ -8,12 +8,11 @@
 	<version>1.0.100-SNAPSHOT</version>
 	<name>XSLT Xalan Plugin</name>
 
-	<parent>
-		<groupId>org.eclipse.wst.xsl</groupId>
-		<artifactId>org.eclipse.wst.xsl-parent</artifactId>
-		<version>1.2.0-SNAPSHOT</version>
-		<relativePath>../../development/athena/org.eclipse.wst.xsl.releng</relativePath>
-	</parent>
+   <parent>
+      <groupId>org.eclipse.wst</groupId>
+      <artifactId>sourcediting-plugin-parent</artifactId>
+      <version>3.4.0-SNAPSHOT</version>
+   </parent>
 
    <build>
       <sourceDirectory>src-debugger</sourceDirectory>
