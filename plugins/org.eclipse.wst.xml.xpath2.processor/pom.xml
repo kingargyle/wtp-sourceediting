@@ -8,11 +8,9 @@
    <name>PsychoPath XPath 2.0 Processor</name>
 
    <parent>
-      <groupId>org.eclipse.wst.xml.xpath2</groupId>
-      <artifactId>org.eclipse.wst.xml.xpath2-parent</artifactId>
-      <version>2.0.0-SNAPSHOT</version>
-      <relativePath>../../development/athena/org.eclipse.wst.xml.xpath2.releng
-      </relativePath>
+      <groupId>org.eclipse.wst</groupId>
+      <artifactId>sourcediting-plugin-parent</artifactId>
+      <version>3.4.0-SNAPSHOT</version>
    </parent>
 
    <build>
@@ -27,23 +25,17 @@
          </plugins>
       </pluginManagement>
       <plugins>
-	      <plugin>
-	        <groupId>org.sonatype.tycho</groupId>
-	        <artifactId>maven-osgi-compiler-plugin</artifactId>
-	        <version>${tycho-version}</version>
-	        <configuration>
-	          <compilerId>jdt</compilerId>
-	          <usePdeSourceRoots>true</usePdeSourceRoots>
-	          <source>1.5</source>
-	          <target>jsr14</target>
-	        </configuration>
-	      </plugin>
-
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.7</version>
-         </plugin>
+           <plugin>
+               <groupId>org.eclipse.tycho</groupId>
+               <artifactId>tycho-compiler-plugin</artifactId>
+               <version>${tycho-version}</version>
+               <configuration>
+                  <compilerId>jdt</compilerId>
+                  <usePdeSourceRoots>true</usePdeSourceRoots>
+                  <source>1.5</source>
+                  <target>jsr14</target>
+                </configuration>
+            </plugin>
       </plugins>
    </build>
 </project>
