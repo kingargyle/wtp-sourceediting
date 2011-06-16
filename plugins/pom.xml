@@ -13,6 +13,7 @@
    <modules>
       <module>org.eclipse.wst.xml.xpath2.processor</module>
       <module>org.eclipse.wst.xml.xpath2</module>
+      <module>org.eclipse.wst.xsl</module>
    </modules>
 </project>
 

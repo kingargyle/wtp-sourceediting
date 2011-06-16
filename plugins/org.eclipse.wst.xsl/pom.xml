@@ -9,10 +9,9 @@
    <name>XSL Tools Branding Plugin</name>
 
    <parent>
-      <groupId>org.eclipse.wst.xsl</groupId>
-      <artifactId>org.eclipse.wst.xsl-parent</artifactId>
-      <version>1.2.0-SNAPSHOT</version>
-      <relativePath>../../development/athena/org.eclipse.wst.xsl.releng</relativePath>
+      <groupId>org.eclipse.wst</groupId>
+      <artifactId>sourcediting-plugin-parent</artifactId>
+      <version>3.4.0-SNAPSHOT</version>
    </parent>
-
+ 
 </project>
