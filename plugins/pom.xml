@@ -12,6 +12,7 @@
    <packaging>pom</packaging>
    <modules>
       <module>org.eclipse.wst.xml.xpath2.processor</module>
+      <module>org.eclipse.wst.xml.xpath2</module>
    </modules>
 </project>
 
