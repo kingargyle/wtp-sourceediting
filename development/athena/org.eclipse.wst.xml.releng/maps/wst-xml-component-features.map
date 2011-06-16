@@ -1,5 +1,5 @@
 !*************** wst-xml-component-features.map
-! This map file is for the WTP 3.2 release
+! This map file is for the WTP 3.3 release
 ! These bundles are currently being developed and released from the HEAD branch
 
 feature@org.eclipse.wst.xml_core.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/features/org.eclipse.wst.xml_core.feature

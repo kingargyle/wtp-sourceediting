@@ -1,5 +1,5 @@
 !*************** wst-xml-tests.map
-! This map file is for the WTP 3.2 release
+! This map file is for the WTP 3.3 release
 ! These bundles are currently being developed and released from the HEAD branch
 
 plugin@org.eclipse.wst.sse.core.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.sse.core.tests
@@ -21,7 +21,7 @@ plugin@org.eclipse.wst.xsd.tests.performance=HEAD,:pserver:anonymous@dev.eclipse
 plugin@org.eclipse.wst.xsd.core.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsd.core.tests
 plugin@org.eclipse.wst.xsd.ui.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,sourceediting/tests/org.eclipse.wst.xsd.ui.tests
 plugin@org.eclipse.wst.common.tests.preformance=HEAD;:pserver:anonymous@dev.eclipse.org:/cvsroot/webtools,,common/tests/org.eclipse.wst.common.tests.performance
-plugin@org.eclipse.test=v20080313,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
-fragment@org.eclipse.ant.optional.junit=v20070202,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+plugin@org.eclipse.test=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+fragment@org.eclipse.ant.optional.junit=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
 
 !***************
