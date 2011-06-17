@@ -34,7 +34,6 @@
       <module>org.eclipse.wst.xml.xpath.core</module>
       <module>org.eclipse.wst.xml.xpath.ui</module>
       <module>org.eclipse.wst.xsd.core</module>
-      <module>org.eclipse.wst.xsd.ui</module>
    </modules>
 </project>
 
