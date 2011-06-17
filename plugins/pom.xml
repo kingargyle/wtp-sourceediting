@@ -38,6 +38,9 @@
       <module>org.eclipse.wst.css.ui</module>
       <module>org.eclipse.wst.html.core</module>
       <module>org.eclipse.wst.html.ui</module>
+      <module>org.eclipse.jst.jsp.core</module>
+      <module>org.eclipse.jst.jsp.ui</module>
+      <module>org.eclipse.jst.standard.schemas</module>
    </modules>
 </project>
 
