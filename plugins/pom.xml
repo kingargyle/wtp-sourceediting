@@ -27,6 +27,8 @@
       <module>org.eclipse.wst.xsl.xalan</module>
       <module>org.eclipse.wst.sse.core</module>
       <module>org.eclipse.wst.sse.ui</module>
+      <module>org.eclipse.wst.dtd.core</module>
+      <module>org.eclipse.wst.dtd.ui</module>
    </modules>
 </project>
 
