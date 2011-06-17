@@ -31,6 +31,8 @@
       <module>org.eclipse.wst.dtd.ui</module>
       <module>org.eclipse.wst.xml.core</module>
       <module>org.eclipse.wst.xml.ui</module>
+      <module>org.eclipse.wst.xml.xpath.core</module>
+      <module>org.eclipse.wst.xml.xpath.ui</module>
    </modules>
 </project>
 

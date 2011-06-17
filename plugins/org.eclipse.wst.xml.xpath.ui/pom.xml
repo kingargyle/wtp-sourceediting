@@ -3,10 +3,10 @@
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.eclipse.wst.xsl</groupId>
-   <artifactId>org.eclipse.wst.dtd.core</artifactId>
+   <artifactId>org.eclipse.wst.xpath.ui</artifactId>
    <packaging>eclipse-plugin</packaging>
-   <version>1.1.501-SNAPSHOT</version>
-   <name>DTD Core Plugin</name>
+   <version>1.1.100-SNAPSHOT</version>
+   <name>XPath Core Plugin</name>
 
    <parent>
       <groupId>org.eclipse.wst</groupId>
