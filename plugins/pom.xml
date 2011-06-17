@@ -36,6 +36,8 @@
       <module>org.eclipse.wst.xsd.core</module>
       <module>org.eclipse.wst.css.core</module>
       <module>org.eclipse.wst.css.ui</module>
+      <module>org.eclipse.wst.html.core</module>
+      <module>org.eclipse.wst.html.ui</module>
    </modules>
 </project>
 
