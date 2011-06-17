@@ -41,6 +41,7 @@
       <module>org.eclipse.jst.jsp.core</module>
       <module>org.eclipse.jst.jsp.ui</module>
       <module>org.eclipse.jst.standard.schemas</module>
+      <module>org.eclipse.wst.standard.schemas</module>
    </modules>
 </project>
 
